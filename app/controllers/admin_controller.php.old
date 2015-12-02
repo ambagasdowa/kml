@@ -1,0 +1,17 @@
+<?php
+class AdminController extends AppController {
+
+	var $name = 'Admin';
+	var $uses = null;
+	
+	
+	function beforeFilter() {
+// 		parent::beforeFilter();
+// 		$this->Auth->allow(array('*'));
+	}
+	
+	function acl() {
+
+	}
+}
+?>

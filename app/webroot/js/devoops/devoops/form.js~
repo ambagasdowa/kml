@@ -1,0 +1,133 @@
+
+		require(['jquery','owl' ,'bootstrap'], function($) {
+			$(document).ready(function () {
+
+
+				$("#login-button").click(function(event){
+						event.preventDefault();
+					
+					$('form').fadeOut(500);
+					$('.form_wrapper').addClass('form-success');
+				});
+				
+				/*
+				Reference: http://jsfiddle.net/BB3JK/47/
+				*/
+				// form workaround
+				$('#select').each(function(){
+					var $this = $(this), numberOfOptions = $(this).children('option').length;
+				
+					$this.addClass('select-hidden'); 
+					$this.wrap('<div class="select"></div>');
+					$this.after('<div class="select-styled"></div>');
+
+					var $styledSelect = $this.next('div.select-styled');
+					$styledSelect.text($this.children('option').eq(0).text());
+				
+					var $list = $('<ul />', {
+						'class': 'select-options'
+					}).insertAfter($styledSelect);
+				
+					for (var i = 0; i < numberOfOptions; i++) {
+						$('<li />', {
+							text: $this.children('option').eq(i).text(),
+							rel: $this.children('option').eq(i).val()
+						}).appendTo($list);
+					}
+				
+					var $listItems = $list.children('li');
+				
+					$styledSelect.click(function(e) {
+						e.stopPropagation();
+						$('div.select-styled.active').each(function(){
+							$(this).removeClass('active').next('ul.select-options').hide();
+						});
+						$(this).toggleClass('active').next('ul.select-options').toggle();
+					});
+				
+					$listItems.click(function(e) {
+						e.stopPropagation();
+						$styledSelect.text($(this).text()).removeClass('active');
+						$this.val($(this).attr('rel'));
+						$list.hide();
+						//console.log($this.val());
+					});
+				
+					$(document).click(function() {
+						$styledSelect.removeClass('active');
+						$list.hide();
+					});
+
+				});
+				
+				// calendar
+				$.datepicker.regional['es'] = {
+						closeText: 'Cerrar',
+						prevText: '<Ant',
+						nextText: 'Sig>',
+						currentText: 'Hoy',
+						monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+						monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+						dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+						dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+						dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+						weekHeader: 'Sm',
+						dateFormat: 'dd/mm/yy',
+						firstDay: 1,
+						isRTL: false,
+						showMonthAfterYear: false,
+						yearSuffix: ''
+				};
+				$.datepicker.setDefaults($.datepicker.regional['es']);
+			// start the datepicker
+
+				$(function () {
+						$('#calendar_create').datepicker({showButtonPanel: true});
+				});
+				
+				//calendar
+				
+				// form input type file
+
+				// form input type file
+				
+// 				pdf resize proto
+// 					work width this at proper time for resize the pdf
+// 						$(window).resize(function() {
+// 							if(this.resizeTO) clearTimeout(this.resizeTO);
+// 							this.resizeTO = setTimeout(function() {
+// 								$(this).trigger('resizeEnd');
+// 							}, 500);
+// 						});
+// 
+// 						$(window).bind('resizeEnd', function() {
+// 							$("#width").text($(this).width());
+// 							$("#height").text($(this).height());
+// 							alert($(this).width()+'x'+$(this).height());
+// 						});
+// 					work width this at proper time for resize the pdf
+				
+// 				Carousel Menu
+					$('.owl-carousel').owlCarousel({
+						loop:true,
+						margin:10,
+						nav:true,
+						navClass:["owl-preview left carousel-control","owl-nextslide right carousel-control"],
+						navText:['<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>','<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>'],
+						responsive:{
+							0:{
+								items:1
+							},
+							600:{
+								items:3
+							},
+							1000:{
+								items:5
+							}
+						}
+					})
+// 				Carousel Menu
+				
+			});
+		});
+

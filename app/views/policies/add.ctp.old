@@ -1,0 +1,31 @@
+<div class="policies form">
+<?php echo $this->Form->create('Policy',array('enctype' => 'multipart/form-data'));?>
+	<fieldset>
+		<legend><?php __('Add Policy'); ?></legend>
+	<?php
+		echo $this->Form->input('user_id');
+		echo $this->Form->input('group_id');
+// 		echo $this->Form->input('empresa_id');
+// 		echo $this->Form->input('policies_path');
+		echo $this->Form->input('name');
+		echo $this->Form->input('description');
+		echo $this->Form->input('create');
+		echo $this->Form->input('status');
+// 		echo $this->Form->create('modelname', array('enctype' => 'multipart/form-data'));
+		echo $this->Form->file('upload', array('type'=>'file'));
+// 		$this->Form->end(__('Submit')); 
+	?>
+	</fieldset>
+<?php echo $this->Form->end(__('Enviar', true));?>
+</div>
+<div class="actions">
+	<h3><?php __('Actions'); ?></h3>
+	<ul>
+
+		<li><?php echo $this->Html->link(__('Ver Politicas', true), array('action' => 'index'));?></li>
+<!-- 		<li><?php echo $this->Html->link(__('List Users', true), array('controller' => 'users', 'action' => 'index')); ?> </li> -->
+<!-- 		<li><?php echo $this->Html->link(__('New User', true), array('controller' => 'users', 'action' => 'add')); ?> </li> -->
+<!-- 		<li><?php echo $this->Html->link(__('List Groups', true), array('controller' => 'groups', 'action' => 'index')); ?> </li> -->
+<!-- 		<li><?php echo $this->Html->link(__('New Group', true), array('controller' => 'groups', 'action' => 'add')); ?> </li> -->
+	</ul>
+</div>

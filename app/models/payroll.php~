@@ -1,0 +1,46 @@
+<?php
+	class Payroll extends AppModel {
+		var $name = 'Payroll';
+		var $useDbConfig = 'payroll';
+		var $useTable = 'getPayroll';
+		var $primaryKey = 'cvetra';
+		
+		
+		
+		function getPayrollByCompany($cvecia=null,$cveare=null,$cvepue=null,$cvetra=null) {
+			// find payroll
+			  if (!empty($cvecia) OR isset($cvecia)) {
+				$conditions['Payroll.cvecia'] = $cvecia; // the company
+			} if (!empty($cveare) OR isset($cveare)) {
+				$conditions['Payroll.cveare'] = $cveare; // the area
+			} if(!empty($cvepue) OR isset($cvepue)) {
+				$conditions['Payroll.cvepue'] = $cvepue; // the section or "Puesto"
+			} if(!empty($cvetra) OR isset($cvetra)) {
+				$conditions['Payroll.cvetra'] = $cvetra; // the section or "Puesto"
+			}
+			if(empty($conditions)) {
+				$conditions = null;
+			}
+// 				$conditions['Payroll.cvecia'] = $id_empresa;
+				$getPayroll = $this->find('all',array('conditions'=>$conditions));
+				return(($getPayroll));
+		}
+		
+	 /**
+	 * @package name <updatePayroll> this must change
+	 * @congif build a script code to call datepicker
+	 * @usage pretends update the payroll
+	 * @param=>none <void>
+	 * NOTE  this function is far away to be complete but for the purpose is ok
+	 */
+	 
+		function updatePayroll() {
+			
+// 			App::import('model','MssqlTraficoRenglonViajeTbk');
+// 			$TraficoRenglonViaje = new MssqlTraficoRenglonViajeTbk();
+// 			$getTraficoRenglonViaje = $TraficoRenglonViaje->find('all',array('conditions'=>$conditionsTraficoRenglonViaje,'fields'=>$fieldsTraficoRenglonViaje));
+			return null;
+			
+		}//end updatePayroll
+	}
+?>

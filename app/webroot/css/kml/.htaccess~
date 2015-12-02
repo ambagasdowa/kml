@@ -1,0 +1,534 @@
+<?php
+    header("Content-type: text/css; charset: UTF-8");
+	$brandColor = "#990000";
+	$linkColor = "#555555";
+	$CDNURL = "http://cdn.blahblah.net";
+?>
+/* set the body color */
+
+body {
+
+  font-family: Arial, sans-serif;
+  color: #024457;
+  background: #f2f2f2;
+}
+
+/* set the body color */
+
+/**== LOGIN SECTION ==**/
+@import "bourbon";
+
+/*body {
+	background: #eee !important;
+}*/
+
+.wrapper {	
+  margin-top: 80px;
+  margin-bottom: 80px;
+/*   background: #eee !important; */
+}
+
+.form-signin {
+				max-width: 380px;
+				padding: 15px 35px 45px;
+				margin: 0 auto;
+				background-color: #fff;
+				border: 1px solid rgba(0,0,0,0.1);  
+
+				.form-signin-heading,
+					.checkbox {
+					margin-bottom: 30px;
+					}
+
+					.checkbox {
+					font-weight: normal;
+					}
+
+					.form-control {
+					position: relative;
+					font-size: 16px;
+					height: auto;
+					padding: 10px;
+						@include box-sizing(border-box);
+
+						&:focus {
+						z-index: 2;
+						}
+					}
+
+					input[type="text"] {
+					margin-bottom: -1px;
+					border-bottom-left-radius: 0;
+					border-bottom-right-radius: 0;
+					}
+
+					input[type="password"] {
+					margin-bottom: 20px;
+					border-top-left-radius: 0;
+					border-top-right-radius: 0;
+					}
+}
+/**== LOGIN SECTION ==**/
+
+/**== POSTS SECTION ==**/
+@import url(http://fonts.googleapis.com/css?family=Oswald|Roboto:400);
+@import url(http://weloveiconfonts.com/api/?family=brandico);
+
+
+/* brandico */
+[class*="brandico-"]:before {
+  font-family: 'brandico', sans-serif;
+  font-size: 1.5em;
+  transition: .5s color;
+}
+.brandico-facebook:hover {
+  color: #3b5998;
+}
+.brandico-twitter-bird:hover {
+  color: #00acee;
+}
+.brandico-tumblr:hover {
+  color: #34526f;
+}
+.brandico-linkedin:hover {
+  color: #0e76a8;
+}
+#_postCenter {
+  margin: .5em 20%;
+  color: #0a0a0a;
+}
+#_postHeader {
+  font-family: "Oswald";
+  text-transform: uppercase;
+}
+#_postHeader h1 {
+  font-size: 2em;
+  border-bottom: .2em solid;
+}
+#_postHeader p {
+  font-size: 1.3em;
+}
+#_postContent {
+  font-family: "Roboto";
+}
+#_postShare {
+  border-top: .2em solid;
+}
+#_postShare p {
+  font-family: "Oswald";
+  font-size: 1.4em;
+  text-transform: uppercase;
+}
+#_postShare a {
+  text-decoration: none;
+  color: #0a0a0a;
+}
+/**== POSTS SECTION ==**/
+/**== ADD SECTION ==**/
+
+/**== ADD SECTION ==**/
+
+
+
+/* FIX SECTIONS */
+
+/* sparkline fix tooltip */
+/* this happend when you add bootstrap css */
+.jqstooltip {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+}
+
+/* sparkline fix tooltip */
+
+/* background with icon  */
+.image-bg-fluid-height,
+.image-bg-fixed-height {
+text-align: center;
+-webkit-background-size: cover;
+-moz-background-size: cover;
+background-size: cover;
+-o-background-size: cover;
+}
+
+.img-center {
+margin: 0 auto;
+}
+
+
+@media(max-width:768px) {
+section {
+padding-top: 25px;
+padding-bottom: 25px;
+}
+.section-heading {
+font-size: 2em;
+}
+}
+/* background with icon  */
+
+/* DEVOOPS SECTION */
+/* checkbox from devoops theme */
+.radio, .checkbox, .radio-inline, .checkbox-inline {
+  position: relative; padding-left: 20px;
+}
+.radio label, .checkbox label, .radio-inline label, .checkbox-inline label {
+  font-weight: normal;
+  cursor: pointer;
+  padding-left: 8px;
+  -webkit-transition: 1s;
+  -moz-transition: 1s;
+  -o-transition: 1s;
+  transition: 1s;
+}
+.radio + .radio, .checkbox + .checkbox {
+  margin-top: 10px;
+}
+.checkbox input[type=checkbox], .checkbox-inline input[type=checkbox], .radio input[type=radio], .radio-inline input[type=radio] {
+  position: absolute;
+  clip: rect(0, 0, 0, 0);
+}
+.checkbox i, .checkbox-inline i, .radio i, .radio-inline i {
+  cursor: pointer;
+  position: absolute;
+  left: 0;
+  top: 0;
+  font-size: 24px;
+  -webkit-transition: 1s;
+  -moz-transition: 1s;
+  -o-transition: 1s;
+  transition: 1s;
+}
+.checkbox i.small, .checkbox-inline i.small, .radio i.small, .radio-inline i.small {
+  font-size: 18px;
+  top:2px;
+}
+.checkbox input[type=checkbox]:checked + i:before, .checkbox-inline input[type=checkbox]:checked + i:before {
+  content:"\f046";
+}
+.radio input[type=radio]:checked + i:before, .radio-inline input[type=radio]:checked + i:before {
+  content:"\f192";
+}
+.toggle-switch {
+  position: relative;
+  width: 60px;
+}
+.toggle-switch input {
+  display: none;
+}
+.toggle-switch label {
+  display: block;
+  overflow: hidden;
+  cursor: pointer;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+}
+.toggle-switch-inner {
+  width: 200%;
+  margin-left: -100%;
+  -webkit-transition: margin 0.3s ease-in 0s;
+  -moz-transition: margin 0.3s ease-in 0s;
+  -o-transition: margin 0.3s ease-in 0s;
+  transition: margin 0.3s ease-in 0s;
+}
+.toggle-switch-inner:before, .toggle-switch-inner:after {
+  float: left;
+  width: 50%;
+  height: 20px;
+  padding: 0;
+  line-height: 20px;
+  font-size: 12px;
+  text-shadow: 1px 1px 1px #FFFFFF;
+  color:#929292;
+  background-color: #F5F5F5;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, .05);
+}
+.toggle-switch-inner:before {
+  content: "ON";
+  padding-left: 15px;
+  -webkit-border-radius: 20px 0 0 20px;
+  -moz-border-radius: 20px 0 0 20px;
+  border-radius: 20px 0 0 20px;
+}
+.toggle-switch-inner:after {
+  content: "OFF";
+  padding-right: 15px;
+  text-align: right;
+  -webkit-border-radius: 0 20px 20px 0;
+  -moz-border-radius: 0 20px 20px 0;
+  border-radius: 0 20px 20px 0;
+}
+.toggle-switch-switch {
+  width: 20px;
+  margin: 0;
+  border: 2px solid #d8d8d8;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-radius: 20px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 40px;
+  color: #f8f8f8;
+  line-height: 1em;
+  text-shadow: 0 0px 1px #ADADAD;
+  text-align: center;
+  -webkit-transition: all 0.3s ease-in 0s;
+  -moz-transition: all 0.3s ease-in 0s;
+  -o-transition: all 0.3s ease-in 0s;
+  transition: all 0.3s ease-in 0s;
+  background-color: #f0f0f0;
+  background-image: -webkit-linear-gradient(top, #f0f0f0, #dfdfdf);
+  background-image:    -moz-linear-gradient(top, #f0f0f0, #dfdfdf);
+  background-image:     -ms-linear-gradient(top, #f0f0f0, #dfdfdf);
+  background-image:      -o-linear-gradient(top, #f0f0f0, #dfdfdf);
+  background-image:         linear-gradient(to bottom, #f0f0f0, #dfdfdf);
+}
+.toggle-switch input:checked + .toggle-switch-inner {
+  margin-left: 0;
+}
+.toggle-switch input:checked + .toggle-switch-inner + .toggle-switch-switch {
+  right: 0px; 
+}
+.toggle-switch-danger input:checked + .toggle-switch-inner + .toggle-switch-switch {
+  border:2px solid #D15E5E;
+  background: #D15E5E;
+}
+.toggle-switch-warning input:checked + .toggle-switch-inner + .toggle-switch-switch {
+  border:2px solid #DFD271;
+  background: #DFD271;
+}
+.toggle-switch-info input:checked + .toggle-switch-inner + .toggle-switch-switch {
+  border:2px solid #7BC5D3;
+  background: #7BC5D3;
+}
+.toggle-switch-success input:checked + .toggle-switch-inner + .toggle-switch-switch {
+  border:2px solid #63CC9E;
+  background: #63CC9E;
+}
+.toggle-switch-primary input:checked + .toggle-switch-inner + .toggle-switch-switch {
+  border:2px solid #6AA6D6;
+  background: #6AA6D6;
+}
+/*  file button section */
+.qq-upload-button {
+  float:right;
+  margin:20px 15px 0 0;
+}
+
+.btn {
+/*  border: 1px solid transparent;
+  border-bottom: 3px solid transparent;*/
+/*  text-decoration: none;
+  cursor: pointer;
+  font-family: "Lucida Grande","Lucida Sans","Lucida Sans Unicode","Segoe UI",Verdana,sans-serif;
+  display: inline-block;
+  vertical-align: top;
+  position: relative;*/
+/*   font-size: 12px; */
+/*   font-weight: bold; */
+/*  text-align: center;
+  line-height: 24px;
+  margin: 0 0 10px 0;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  outline: none !important;*/
+}
+.btn-success{
+  background-color: #45837A;
+  color: #f8f8f8;
+  border-color: #34786E;
+}
+
+
+.btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .open .dropdown-toggle.btn-success {
+color: #fff;
+background-color: #3D776E;
+border-color: #34786E;
+}
+/* checkbox from devoops theme */
+
+
+/* tables the holy tables */
+/*
+
+RESPONSTABLE 2.0 by jordyvanraaij
+  Designed mobile first!
+
+If you like this solution, you might also want to check out the 1.0 version:
+  https://gist.github.com/jordyvanraaij/9069194
+
+*/
+.responstable {
+/*   margin: 1em 0; */
+/*   width: 100%; */
+  overflow: hidden;
+  background: #FFF;
+  color: #024457;
+  border-radius: 8px;
+  border: 1px solid #167F92;
+}
+.responstable tr {
+  border: 1px solid #D9E4E6;
+}
+.responstable tr:nth-child(odd) {
+  background-color: #EAF3F3;
+}
+.responstable th {
+  display: none;
+  border: 1px solid #FFF;
+  background-color: #167F92;
+  color: #FFF;
+/*   padding: 1em; */
+}
+.responstable th:first-child {
+  display: table-cell;
+/*   text-align: center; */
+}
+.responstable th a {
+	color:#fff;
+}
+.responstable th:nth-child(2) {
+  display: table-cell;
+}
+.responstable th:nth-child(2) span {
+  display: none;
+}
+.responstable th:nth-child(2):after {
+  content: attr(data-th);
+}
+@media (min-width: 480px) {
+  .responstable th:nth-child(2) span {
+    display: block;
+  }
+  .responstable th:nth-child(2):after {
+    display: none;
+  }
+}
+.responstable td {
+  display: block;
+  word-wrap: break-word;
+/*   max-width: 7em; */
+}
+.responstable td:first-child {
+  display: table-cell;
+/*   text-align: center; */
+  border-right: 1px solid #D9E4E6;
+}
+@media (min-width: 480px) {
+  .responstable td {
+    border: 1px solid #D9E4E6;
+  }
+}
+.responstable th, .responstable td {
+  text-align: left;
+  margin: .5em 1em;
+}
+@media (min-width: 480px) {
+  .responstable th, .responstable td {
+    display: table-cell;
+    padding: 1em;
+  }
+}
+
+
+.selected {
+  background: #4790d4;
+  background: linear-gradient( rgba(71, 144, 212, .65), rgba(71, 144, 212, 1) );
+  color: #f7f7f7;
+  border-top: 1px solid #5fa4db;
+  border-bottom: 1px solid #387abf;
+}
+/* tables the holy tables */
+
+/* Jquery-ui section */
+#ui-datepicker-div {
+  background: rgba(0, 0, 0, 0.7) !important;
+  border:0;
+}
+#ui-datepicker-div .ui-widget-header {
+  background: rgba(0, 0, 0, 0.2);
+  border: 0;
+  border-bottom: 1px solid #686868;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  color: #f8f8f8;
+  padding: 1px 0;
+}
+#ui-datepicker-div.ui-widget-content {
+  color:#f8f8f8 !important;
+}
+#ui-datepicker-div .ui-state-default, #ui-datepicker-div .ui-widget-content .ui-state-default, #ui-datepicker-div .ui-widget-header .ui-state-default {
+  background: none;
+  border:0;
+  color:#f8f8f8;
+  text-align: center;
+}
+#ui-datepicker-div .ui-state-hover, #ui-datepicker-div.ui-widget-content .ui-state-hover, #ui-datepicker-div .ui-widget-header .ui-state-hover, #ui-datepicker-div .ui-state-focus, #ui-datepicker-div.ui-widget-content .ui-state-focus, #ui-datepicker-div .ui-widget-header .ui-state-focus,
+#ui-datepicker-div .ui-state-highlight, #ui-datepicker-div.ui-widget-content .ui-state-highlight, #ui-datepicker-div .ui-widget-header .ui-state-highlight {
+  background: rgba(0, 0, 0, 0.3) !important;
+  border:0;
+  top:2px;
+}
+#ui-datepicker-div .ui-datepicker-group {
+  border-left: 1px solid #686868;
+}
+#ui-datepicker-div .ui-datepicker-group:first-child {
+  border-left:0;
+}
+#ui-datepicker-div .ui-datepicker-buttonpane {
+  margin: 0;
+}
+#ui-datepicker-div .ui-datepicker-group table {
+  margin:0 auto !important;
+}
+.ui-datepicker .ui-datepicker-prev {
+  left: 2px !important;
+  cursor: pointer;
+}
+.ui-datepicker .ui-datepicker-next {
+  right: 2px !important;
+  cursor: pointer;
+}
+.ui-icon-circle-triangle-w {
+/*   background: url(../../../img/devoops/devoops/ui-left.png) 0 0 no-repeat !important; */
+  background: url( "<?php echo WWW_ROOT.'img/devoops/devoops/ui-left.png' ?>" ) 0 0 no-repeat !important;
+}
+.ui-icon-circle-triangle-e {
+  background: url(../../../img/devoops/devoops/ui-right.png) 0 0 no-repeat !important;
+}
+.ui-icon-circle-arrow-s {
+  background: url(../../../img/devoops/devoops/ui-accordion-down.png) 0 0 no-repeat !important;
+}
+.ui-icon-circle-arrow-e {
+  background: url(../../../img/devoops/devoops/ui-accordion-right.png) 0 0 no-repeat !important;
+}
+#ui-datepicker-div .ui-slider-horizontal {
+  background: rgba(0, 0, 0, 0.5);
+  height: 4px;
+  border: 0;
+}
+#ui-datepicker-div .ui-slider-horizontal .ui-slider-handle {
+  background: #D8D8D8 !important;
+  border: 1px solid #f8f8f8;
+  height: 8px;
+  width: 8px;
+  top:-2px;
+  margin-left: -4px;
+  outline: none;
+  cursor: pointer;
+}
+/* Jquery-ui section */

@@ -1,0 +1,189 @@
+drop database if exists `portal_user_menu`; 
+create database `portal_user_menu`;
+use `portal_user_menu`;
+
+grant usage on portal_user_menu.* to portal_user_menu@localhost identified by '@portal_user_menu#';
+grant select, insert, update, delete, drop, alter, create temporary tables on portal_user_menu.* to portal_user_menu@localhost;
+flush privileges;
+
+-----------------------------------------------------------------------------------------------------
+--                                    Building Menus section                                       --
+-----------------------------------------------------------------------------------------------------
+
+-- catalog for the controllers
+-- build the menu access
+
+drop table if exists `app_links`;
+create table `app_links`(
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `link_name` varchar(250) null,
+  `view_description` text null,
+  `create` timestamp DEFAULT current_timestamp,
+  `modified` DATETIME,
+  `status` enum('Active','Inactive') NOT NULL default 'Active',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+
+-- this approach belongs to the views of the controller
+drop table if exists `app_sublinks`;
+create table `app_sublinks`(
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `app_links_id` int(11) unsigned not null,
+  `app_sublinks_name` varchar(150) null,
+  `app_sublinks_description` text null,
+  `create` timestamp DEFAULT current_timestamp,
+  `modified` DATETIME,
+  `status` enum('Active','Inactive') NOT NULL default 'Active',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+-----------------------------------------------------------------------------------------------------
+--                                 Configuration menus section                                     --
+-----------------------------------------------------------------------------------------------------
+
+-- Link menu definition set the menu for a unique group--
+-- this set who is to be ; set the default for root
+drop table if exists `link_menu_name`;
+create table `link_menu_name`(
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `groups_id` int(11) unsigned not null,
+  `link_menu_name` varchar(150) null,
+  `link_menu_description` text null,
+  `create` timestamp DEFAULT current_timestamp,
+  `modified` DATETIME,
+  `status` enum('Active','Inactive') NOT NULL default 'Active',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+LOCK TABLES `link_menu_name` WRITE;
+/*!40000 ALTER TABLE `link_menu_name` DISABLE KEYS */;
+INSERT INTO `link_menu_name` VALUES 
+							(1,1,'*','all granted',NOW(),null,'ACTIVE'),
+							(2,3,'Policies','Policies menu',NOW(),null,'ACTIVE');
+/*!40000 ALTER TABLE `link_menu_name` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+-- define the top struct of the menu and set the permisions too --
+-- add definition peer group so any group has is menu and the default must be the less permissive menu--
+drop table if exists `link_menu_builds`;
+create table `link_menu_builds`(
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+--   `groups_id` int(11) unsigned not null,
+  `link_menu_name_id` unsigned not null,
+  `app_links_id` unsigned null,
+  `link_name` varchar(150) null,
+  `link_name_description` text null,
+  `create` timestamp DEFAULT current_timestamp,
+  `modified` DATETIME,
+  `status` enum('Active','Inactive') NOT NULL default 'Active',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+LOCK TABLES `link_menu_builds` WRITE;
+/*!40000 ALTER TABLE `link_menu_builds` DISABLE KEYS */;
+INSERT INTO `link_menu_builds` VALUES 
+							(1,'char','strings',NOW(),null,'ACTIVE'),
+							(2,'int','integer',NOW(),null,'ACTIVE'),
+							(3,'date','datetime',NOW(),null,'ACTIVE'),
+							(4,'varchar','varchar',NOW(),null,'ACTIVE');
+/*!40000 ALTER TABLE `link_menu_builds` ENABLE KEYS */;
+UNLOCK TABLES;
+
+-- Define the group were belongs the menu
+-- maybe is as the definition of the menu
+drop table if exists `link_groups`;
+create table `link_groups`(
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `users_id` int(11) unsigned not null,
+  `groups_id` int(11) unsigned not null,
+  `link_builds_id` int(11) unsigned not null,
+  `link_name` varchar(150) null,
+  `field_description` text null,
+  `create` timestamp DEFAULT current_timestamp,
+  `modified` DATETIME,
+  `status` enum('Active','Inactive') NOT NULL default 'Active',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+LOCK TABLES `link_groups` WRITE;
+/*!40000 ALTER TABLE `link_groups` DISABLE KEYS */;
+INSERT INTO `link_groups` VALUES 
+							(1,'char','strings',NOW(),null,'ACTIVE'),
+							(2,'int','integer',NOW(),null,'ACTIVE'),
+							(3,'date','datetime',NOW(),null,'ACTIVE'),
+							(4,'varchar','varchar',NOW(),null,'ACTIVE');
+/*!40000 ALTER TABLE `link_groups` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+-- define the order of the link 
+-- maybe can convert the type with code
+drop table if exists `link_orders`;
+create table `link_orders`(
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `field_names` varchar(150) null,
+  `field_description` text null,
+  `create` timestamp DEFAULT current_timestamp,
+  `modified` DATETIME,
+  `status` enum('Active','Inactive') NOT NULL default 'Active',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+LOCK TABLES `link_orders` WRITE;
+/*!40000 ALTER TABLE `link_orders` DISABLE KEYS */;
+INSERT INTO `link_orders` VALUES 
+							(1,'char','strings',NOW(),null,'ACTIVE'),
+							(2,'int','integer',NOW(),null,'ACTIVE'),
+							(3,'date','datetime',NOW(),null,'ACTIVE'),
+							(4,'varchar','varchar',NOW(),null,'ACTIVE');
+/*!40000 ALTER TABLE `link_orders` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+drop table if exists `field_names`;
+create table `field_names`(
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `link_orders_id` int(11) unsigned not null,
+  `field_names` varchar(150) null,
+  `field_description` text null,
+  `create` timestamp DEFAULT current_timestamp,
+  `modified` DATETIME,
+  `status` enum('Active','Inactive') NOT NULL default 'Active',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+-- examples
+LOCK TABLES `field_names` WRITE;
+/*!40000 ALTER TABLE `field_names` DISABLE KEYS */;
+INSERT INTO `field_names` VALUES 
+							(1,2,'local ip','computer local ip',NOW(),null,'ACTIVE'),
+							(2,2,'external ip','external computer id',NOW(),null,'ACTIVE'),
+							(3,2,'extension','caller id extension',NOW(),null,'ACTIVE'),
+							(4,1,'computer model','varchar',NOW(),null,'ACTIVE');
+/*!40000 ALTER TABLE `field_names` ENABLE KEYS */;
+UNLOCK TABLES;
+
+-- in the code can use the field type for select the column into going to work in this case only need manipulate this two 
+-- tables link_orders and field_data , can construct an cakephp schema shell script
+drop table if exists `field_datas`;
+create table `field_datas`(
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `field_names_id` int(11) unsigned NOT NULL,
+  `user_id` int(11) unsigned NOT NULL,
+  `group_id` int(11) unsigned NOT NULL,
+  `data` varchar(255)  null ,
+  `data_char` char(200)  null ,
+  `data_int` int(11) unsigned null,
+  `data_var` varchar(255) null ,
+  `data_text` text null ,
+  `data_float` double null ,
+  `data_bool` tinyint(1) null ,
+  `create` timestamp DEFAULT current_timestamp,
+  `modified` DATETIME,
+  `status` enum('Active','Inactive') NOT NULL default 'Active',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+

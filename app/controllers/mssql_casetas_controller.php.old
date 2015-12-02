@@ -1,0 +1,23 @@
+<?php
+	class MssqlCasetasController extends AppController {
+	var $name = 'MssqlCasetas';
+	var $components = array('RequestHandler','Session');
+	var $helpers = array('Html','Form','Ajax','Javascript');
+	var $uses = null;
+		
+	function beforeFilter() {
+		parent::beforeFilter();
+		$this->Auth->allowedActions = array('index', 'view');
+	}
+	
+	function index(){
+		$this->LoadModel('MssqlCasetas');
+		debug($this->MssqlCasetas->find('all'));
+	}// end index
+	
+	function view() {
+		return null;
+	}
+		
+	} // end Class
+?>

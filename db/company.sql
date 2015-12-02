@@ -1,0 +1,31 @@
+drop database if exists `portal_company`;
+create database `portal_company`;
+use `portal_company`;
+
+grant usage on portal_company.* to portal_company@localhost identified by '@portal_company#';
+grant select, insert, update, delete, drop, alter, create temporary tables on portal_company.* to portal_company@localhost;
+flush privileges;
+
+drop table if exists `company`;
+create table `company`(
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) unsigned NOT NULL,
+  `group_id` int(11) unsigned NOT NULL,
+  `name` varchar(150) null,
+  `description` text null,
+  `create` timestamp DEFAULT current_timestamp,
+  `modified` DATETIME,
+  `status` enum('Active','Inactive') NOT NULL default 'Active',
+  `nom_id` int(11) unsigned NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `company`
+--
+
+INSERT INTO `company` (`id`, `user_id`, `group_id`, `name`, `description`, `create`, `modified`, `status`, `nom_id`) VALUES
+(1, 3, 1, 'TBK', 'Transportes Bonampak S.A de C.V', '0000-00-00 00:00:00', '2015-08-24 13:04:21', 'Active', 2),
+(2, 3, 1, 'ATM', 'Autotransportes Macuspana S.A. de C.V.', '0000-00-00 00:00:00', '2015-08-24 13:06:12', 'Active', 3),
+(3, 3, 1, 'TEISA', 'Transportadora Especializada S.A. de C.V.', '0000-00-00 00:00:00', '2015-08-24 13:07:03', 'Active', 1),
+(4, 3, 1, 'GST', 'Grupo Servicios de Transporte S.A. de C.V.', '0000-00-00 00:00:00', '2015-08-24 13:07:44', 'Active', 4);

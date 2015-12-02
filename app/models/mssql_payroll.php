@@ -1,0 +1,45 @@
+<?php
+	class MssqlPayroll extends AppModel {
+		var $name = 'MssqlPayroll';
+		var $useDbConfig = 'mssql_payroll';
+		var $useTable = 'getPayroll';
+		var $primaryKey = 'cvetra';
+		
+
+		function getPayrollByCompany($cvecia=null,$cveare=null,$cvepue=null,$cvetra=null) {
+			// find payroll
+			  if (!empty($cvecia) OR isset($cvecia)) {
+				$conditions['MssqlPayroll.cvecia'] = $cvecia; // the company
+			} if (!empty($cveare) OR isset($cveare)) {
+				$conditions['MssqlPayroll.cveare'] = $cveare; // the area
+			} if(!empty($cvepue) OR isset($cvepue)) {
+				$conditions['MssqlPayroll.cvepue'] = $cvepue; // the section or "Puesto"
+			} if(!empty($cvetra) OR isset($cvetra)) {
+				$conditions['MssqlPayroll.cvetra'] = $cvetra; // the section or "Puesto"
+			}
+			if(empty($conditions)) {
+				$conditions = null;
+			}
+// 				$conditions['MssqlPayroll.cvecia'] = $id_empresa;
+				$getMssqlPayroll = $this->find('all',array('conditions'=>$conditions));
+				return(($getMssqlPayroll));
+		}
+		
+	 /**
+	 * @package name <updateMssqlPayroll> this must change
+	 * @congif build a script code to call datepicker
+	 * @usage pretends update the payroll
+	 * @param=>none <void>
+	 * NOTE  this function is far away to be complete but for the purpose is ok
+	 */
+	 
+		function updatePayroll() {
+			
+// 			App::import('model','MssqlTraficoRenglonViajeTbk');
+// 			$TraficoRenglonViaje = new MssqlTraficoRenglonViajeTbk();
+// 			$getTraficoRenglonViaje = $TraficoRenglonViaje->find('all',array('conditions'=>$conditionsTraficoRenglonViaje,'fields'=>$fieldsTraficoRenglonViaje));
+			return null;
+			
+		}//end updateMssqlPayroll
+	}
+?>

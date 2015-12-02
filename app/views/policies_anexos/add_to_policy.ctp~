@@ -1,0 +1,5 @@
+<?php var_dump($policies_types);?>
+
+		<?php
+				echo $this->element('policies/'.$anexos_url,array('policies_types'=>$policies_types));
+		?>

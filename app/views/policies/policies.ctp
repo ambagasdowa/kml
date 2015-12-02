@@ -1,0 +1,142 @@
+<style>
+@media print {
+  html, body {
+    display: none!important; /* hide whole page */
+  }
+}
+</style>
+
+<?php 
+		// paths for files.pdf
+	   $url=array(
+					base64_encode('files/policies/ibm.pdf'),
+					base64_encode('files/policies/dataMining.pdf'),
+					base64_encode('files/policies/languaje_c.pdf')
+	   );
+?>
+
+
+  <!-- In production, only one script (pdf.js) is necessary -->
+  <!-- In production, change the content of PDFJS.workerSrc below -->
+<script language=JavaScript>
+<!--
+//Disable right mouse click Script
+//By Maximus (maximus@nsimail.com) w/ mods by DynamicDrive
+//For full source code, visit http://www.dynamicdrive.com
+var message="No se Autoriza la Impresion de este Documento";
+
+///////////////////////////////////
+	function clickIE4(){
+		if (event.button==2){
+		alert(message);
+		return false;
+		}
+	}
+
+	function clickNS4(e){
+		if (document.layers||document.getElementById&&!document.all){
+			if (e.which==2||e.which==3){
+			alert(message);
+			return false;
+			}
+		}
+	}
+
+	if (document.layers){
+	document.captureEvents(Event.MOUSEDOWN);
+	document.onmousedown=clickNS4;
+	}else if (document.all&&!document.getElementById){
+	document.onmousedown=clickIE4;
+	}
+	document.oncontextmenu=new Function("alert(message);return false")
+// --> 
+</script>
+
+<script>
+    PDFJS.workerSrc = 'js/pdf.js/src/worker_loader.js';
+	'use strict';
+</script>
+
+
+
+
+<div class="row-fluid">
+<!-- <div class="row"> -->
+	<div class="col-xs-6 col-sm-2">
+			<ul id="tabbed" class="nav nav-pills nav-stacked">
+				<li role="presentation" class="active">
+					<a href="#casa" id="casa-tab" data-toggle="tab">
+						Home
+					</a>
+				</li>
+				<li role="presentation">
+					<a href="#perfil" id="perfil-tab" data-toggle="tab">
+						Profile
+					</a>
+				</li>
+			</ul>
+	</div>
+	
+	<div class="col-xs-6 col-sm-10">
+		<div id="tabbedContent" class='tab-content'>
+			<div class="tab-pane fade in active" id="casa">
+				<?php echo $this->element('gst_aviso'); ?>
+				<p>
+					<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modalPoliciesA">
+						Politicas Grupo Sistemas
+					</button>
+				</p>
+				<?php echo $this->element('gst_modal_policies'); ?>
+			</div>
+			
+			<div  class="tab-pane fade" id="perfil">
+				<?php echo $this->element('gst_aviso'); ?>
+					<p>	
+						<button type="button" class="btn btn-default" data-toggle="modal" data-target="#modalPoliciesB">
+							Politicas Group Corporativo
+						</button>
+					</p>
+					
+<!-- 				modal -->
+					<div class="modal fade" id="modalPoliciesB" tabindex="-1" role="dialog" aria-labelledby="modalPolit">
+					<div class="modal-dialog modal-lg" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title" id="modalPoliciesB">Policies</h4>
+							</div>
+							<div class="modal-body">
+										<div style="text-align:center;">
+										<canvas id="policiesB" style="border:1px solid black"></canvas>
+										</div>
+										<div style="text-align:center;">
+										<span>Page: <span id="pageNum"></span> / <span id="pageCount"></span></span>
+										</div>
+										<div>
+										<a href="javascript:" id="next-page"  rel="next" style="float: right">Siguiente &rsaquo;</a>
+										<a href="javascript:" id="prev-page"  rel="prev">&lsaquo; Anterior</a>
+											&nbsp; &nbsp;
+										</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							</div>
+						</div>
+					</div>
+					</div>
+<!-- 					modal -->
+			</div>
+		</div>
+	</div>
+  <!-- Optional: clear the XS cols if their content doesn't match in height -->
+  <div class="clearfix visible-xs-block"></div>
+<!--   <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div> -->
+</div>
+
+		<!-- for legacy browsers add compatibility.js -->
+		<!--<script src="../js/pdf.js/compatibility.js"></script>-->
+		<!-- <script src="../js/pdf.js/src/pdf.js"></script> -->
+    <script>
+		renderPdf(1.4,"<?php e($url['0']);?>",'the-canvas','page_num','prev','next','page_count');
+		renderPdf(1.4,"<?php e($url['1']);?>",'policiesB','pageNum','prev-page','next-page','pageCount');
+	</script>
