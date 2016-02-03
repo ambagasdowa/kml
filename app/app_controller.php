@@ -33,13 +33,13 @@
  */
 
 class AppController extends Controller {
-    var $components = array('Acl', 'Auth', 'Session','ControllerList');
+    var $components = array('Acl', 'Auth', 'Session','ControllerList','DebugKit.Toolbar');
     var $helpers = array('Html', 'Form', 'Session');
-	var $uses = array('Company'); //Company must change for root_menu
-    
-    
+    var $uses = array('Company'); //Company must change for root_menu
+
+
 	/** @GST <SECTION>*/
-	
+
     /** NOTE <GST check payroll users >*/
     function checkExternalDb ($model=null,$data=null,$check=null) {
 
@@ -80,14 +80,16 @@ class AppController extends Controller {
 						if(!$this->User->save($user['User'])){
 							$this->Auth->loginError = "Ha ocurrido un error al generar su usuario , por favor comuniquelo con el departamento de Sistemas o intentelo de nuevo mas tarde";
 						} else {
-							
+
 							/** NOTE <add directory for this user> */
 							$username = $user['User']['username'];
 							if (!empty($username)) {
 							$directory = WWW_ROOT.'files'.DS.'users'.DS.$username.DS;
 								if ( !is_dir($directory) ) {
-									if (!mkdir($directory.'shares'.DS, 0777, true)) {
-										die('Failed to create folders...');
+									foreach (createDirs() as $indx => $dir_name) {
+										if(!mkdir($directory.$dir_name.DS, 0777, true)) {
+											die('the dir '.$dir_name.' could not be create');
+										}
 									}
 								}
 							}
@@ -168,10 +170,15 @@ class AppController extends Controller {
 			}
 		}
 		$this->set(compact('setMenu'));
+// 		debug($menu);
+// 		debug($submenu);
+// 		debug($setMenu);
 	}
 	/** NOTE <GST build Menu's' options>*/
 	
-
+	/** NOTE <GST build M-r's report>*/
+		// 	...
+	/** NOTE <GST build M-r's report>*/
 	
 
 /** @CORE <SECTION>*/
@@ -179,7 +186,7 @@ class AppController extends Controller {
 /** NOTE <CORE builtin functions>*/
 
 
-	function extendsUsersMenu () {
+	function extendsUsersMenu() {
 		debug($this->ControllerList->get());
 		
 		$controller = $this->ControllerList->get();
@@ -194,15 +201,15 @@ class AppController extends Controller {
 
 	function setSmb () {
 		// procedure
-		$smb_directory = WWW_ROOT.'files'.DS.'users'.DS.$this->Auth->user('username').DS;
-		var_dump($smb_directory);
-		if ( !is_dir($smb_directory) ) {
+// 		$smb_directory = WWW_ROOT.'files'.DS.'users'.DS.$this->Auth->user('username').DS;
+// 		var_dump($smb_directory);
+// 		if ( !is_dir($smb_directory) ) {
 // 			$check_permissions = ;
-			var_dump ('check_permissions');
-		} else {
-			var_dump ('mount granted');
-			exec("") ;
-		}
+// 			var_dump ('check_permissions');
+// 		} else {
+// 			var_dump ('mount granted');
+// 			exec("") ;
+// 		}
 
 // 		for mounting the last_access example
 
@@ -216,8 +223,9 @@ class AppController extends Controller {
 // 		adduser "user"
 // 		smbpassw -a "user"
 // 		sudo /etc/init.d/smbd restart
-
+		return null;
 	}
+	/** NOTE <Define dirs>**/
 
 
 /** NOTE <CORE builtin functions>*/
@@ -231,18 +239,30 @@ class AppController extends Controller {
             $this->User->saveField('last_access', date('Y-m-d H:i:s'));
             $this->User->saveField('last_user_agent', $_SERVER['HTTP_USER_AGENT']);
             $this->User->saveField('last_ip', $_SERVER['REMOTE_ADDR']);
+
             /**Set Counter*/
 
 			/** NOTE <add directory to an user if not exits>*/
 			if ($this->Auth->user('username')) {
 			$directory = WWW_ROOT.'files'.DS.'users'.DS.$this->Auth->user('username').DS;
-				if ( !is_dir($directory.'shares'.DS) ) {
-					if (!mkdir($directory.'shares'.DS, 0777, true)) {
-						die('Failed to create folders...');
+
+				if ( !is_dir($directory) ) {
+						foreach ( createDirs() as $indx => $dir_name) {
+							if(!mkdir($directory.$dir_name.DS, 0777, true)) {
+								die('the dir '.$dir_name.' could not be create');
+							}
+						}
+				} else {
+					foreach ( createDirs() as $indx => $dir_name) {
+						if(!is_dir($directory.$dir_name.DS)){
+							if(!mkdir($directory.$dir_name.DS, 0777, true)) {
+								die('the dir '.$dir_name.' could not be create');
+							}
+						}
 					}
 				}
 			} //End add directory
-			
+
 			/** NOTE <add mount points for samba => setSmb('mount|umount|create','username')>*/
 // 			$this->setSmb('mount');
         }
@@ -286,7 +306,8 @@ class AppController extends Controller {
 		if(isset($this->Auth->user()['User']['languaje'])) {
 				$languaje = $this->Auth->user()['User']['languaje'];
 		} else {
-			$languaje = 'es';
+// 			$languaje = 'es';
+			$languaje = 'en';
 		}
 		$this->set('languaje',$languaje);
 		// set the images paths this can be static and in db a default value ... or not??
@@ -294,8 +315,8 @@ class AppController extends Controller {
 		if(isset($this->Auth->user()['User']['portal'])) {
 				$portalUrl = $this->Auth->user()['User']['portal'];
 		} else {
-			$portalUrl = 'gst';
-// 			$portalUrl = 'portal';
+// 			$portalUrl = 'gst';
+			$portalUrl = 'portal';
 		}
 		$this->set('portalUrl',$portalUrl);
 
@@ -361,6 +382,7 @@ class AppController extends Controller {
 // 
 // 		$this->Auth->mapActions(array('register' => 'create', 'add' => 'create'));
 // 		exit();
+// 		debug($_SESSION);
     }
 
 	/**

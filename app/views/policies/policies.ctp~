@@ -9,9 +9,9 @@
 <?php 
 		// paths for files.pdf
 	   $url=array(
-					base64_encode('../files/policies/ibm.pdf'),
-					base64_encode('../files/policies/dataMining.pdf'),
-					base64_encode('../files/policies/languaje_c.pdf')
+					base64_encode('files/policies/ibm.pdf'),
+					base64_encode('files/policies/dataMining.pdf'),
+					base64_encode('files/policies/languaje_c.pdf')
 	   );
 ?>
 
@@ -53,7 +53,7 @@ var message="No se Autoriza la Impresion de este Documento";
 </script>
 
 <script>
-    PDFJS.workerSrc = '../js/pdf.js/src/worker_loader.js';
+    PDFJS.workerSrc = 'js/pdf.js/src/worker_loader.js';
 	'use strict';
 </script>
 

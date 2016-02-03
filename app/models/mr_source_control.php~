@@ -1,0 +1,7 @@
+<?php
+class MrSourceControl extends AppModel {
+	var $name = 'MrSourceControl';
+	var $useDbConfig = 'mssql_sistemas';
+	var $displayField = 'source_company';
+	var $virtualFields = array('source_config' => "MrSourceConfig.source_company, ' + ', MrSourceConfig._description");
+}

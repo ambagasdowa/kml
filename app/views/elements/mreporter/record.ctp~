@@ -1,0 +1,9 @@
+ 
+<?php
+	var_dump($check);
+	if ($check === '0') {
+		echo $this->Form->input('SubAccount',array('placeholder'=>'SubAccount','class'=>'input'));
+	} else {
+		echo $this->Form->file('upload', array('type'=>'file','class'=>'input','label'=>false));
+	}
+?>

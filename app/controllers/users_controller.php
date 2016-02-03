@@ -27,7 +27,6 @@ class UsersController extends AppController {
 		
 		$this->User->recursive = 0;
 		$this->set('users', $this->paginate());
-		
 		$this->LoadModel('Company');
 		$company = $this->Company->find('list',array('fields'=>array('nom_id','name')));
 		$this->set(compact('company'));
@@ -54,8 +53,10 @@ class UsersController extends AppController {
 				if (!empty($this->data['User']['username'])) {
 				$directory = WWW_ROOT.'files'.DS.'users'.DS.$this->data['User']['username'].DS;
 					if ( !is_dir($directory) ) {
-						if (!mkdir($directory.'shares'.DS, 0777, true)) {
-							die('Failed to create folders...');
+						foreach (createDirs() as $indx => $dir_name) {
+							if(!mkdir($directory.$dir_name.DS, 0777, true)) {
+								die('the dir '.$dir_name.' could not be create');
+							}
 						}
 					}
 				}

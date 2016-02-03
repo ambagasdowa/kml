@@ -49,10 +49,10 @@
  *
  */
 
-// require_once("appConfig.php");
+require_once("appConfig.php");
 
 //source to acl pluging
-// require_once(APP . DS . 'plugins' . DS . 'acl' . DS . 'config' . DS . 'bootstrap.php');
+//require_once(APP . DS . 'plugins' . DS . 'acl' . DS . 'config' . DS . 'bootstrap.php');
 
-// what encodong have
+// what encoding have
 // echo mb_internal_encoding();

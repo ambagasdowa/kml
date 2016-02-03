@@ -108,6 +108,7 @@
 /** NOTE @begin->devoops */
 $theme = 'devoops/';
 $default = 'kml/';
+$core = 'core/';
 
 /** NOTE prototype **/
 e($this->Html->script($theme.'prototype/prototype'));
@@ -116,6 +117,7 @@ e($this->Html->script($theme.'scriptaculous/scriptaculous.js?load=effects'));
 
 /** @css */
 e($this->Html->css($theme.'bootstrap/bootstrap', 'stylesheet'));
+e($this->Html->css($core.'bootstrap_addons', 'stylesheet'));
 e($this->Html->css($theme.'bootstrap/carousel', 'stylesheet'));
 e($this->Html->css($theme.'bootstrap/dashboard', 'stylesheet'));
 e($this->Html->css($theme.'bootstrap/sticky-footer-navbar', 'stylesheet'));
@@ -133,7 +135,8 @@ e($this->Html->css($theme.'morris/morris', 'stylesheet'));
 //carousel OWL
 e($this->Html->css($theme.'owl/owl.carousel', 'stylesheet'));
 
-
+/** @quick_filter js*/
+e($this->Html->script($theme.'filter/quick_filter'));
 
 // e($this->Html->script($theme.'raphael/raphael-min'));
 // e($this->Html->script($theme.'morris/morris'));
@@ -151,6 +154,10 @@ e($this->Html->css($theme.'owl/owl.carousel', 'stylesheet'));
 // e($this->Html->script($theme.'datatables/jquery.dataTables'));
 // e($this->Html->script($theme.'flot/jquery.flot'));
 // e($this->Html->script($theme.'fullcalendar/fullcalendar'));
+
+/** @filemanager */
+// e($this->Html->script($theme.'filemanager/js/unifiedfm'));
+
 
 /** @css @pdf*/
 // e($this->Html->css('pdf.js/viewer'));
@@ -191,9 +198,12 @@ require.config({
 		'sparkline': "<?php e($this->webroot.'js/devoops/sparkline/jquery.sparkline.min');?>",
 		'raphael': "<?php e($this->webroot.'js/devoops/raphael/raphael-min');?>",
 		'morris': "<?php e($this->webroot.'js/devoops/morris/morris');?>",
+// 		'unifiedfm': "<?php e($this->webroot.'js/devoops/filemanager/js/unifiedfm');?>",
+		'isotope':"<?php e($this->webroot.'js/devoops/isotope/isotope.pkgd');?>",
 		'jquery-ui': "<?php e($this->webroot.'js/devoops/jquery-ui/jquery-ui');?>",
 		'waypoints': "<?php e($this->webroot.'js/devoops/waypoints/jquery.waypoints.min');?>",
 		'owl': "<?php e($this->webroot.'js/devoops/owl/owl.carousel.min');?>"
+
     },
     shim: {
         'bootstrap': ['jquery']
@@ -289,24 +299,10 @@ if (Prototype.BrowserFeatures.ElementExtensions) {
 
 			<!-- Modal the better way to call this is with a element -->
 			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<div class="modal-dialog">
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-							<h4 class="modal-title" id="myModalLabel"><?php e(languaje($languaje)['rootModalTitle']);?></h4>
-						</div>
-						<div class="modal-body">
-							<?php e(languaje($languaje)['rootModalMessage']);?>
-							<?php isset($rfc) ? e($rfc) : null ; ?>
-						</div>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-danger" data-dismiss="modal"><?php e(languaje($languaje)['rootModalButton']);?></button>
-					<!--         <button type="button" class="btn btn-primary">Save changes</button> -->
-						</div>
-					</div>
-				</div>
+				<?php e($this->element('root_modal',array('test'=>$_SESSION['Auth']['User']['root_modal'])));?>
 			</div>
 			<!-- end modal -->
+			
 			<!-- initialize tooltip -->
 			<script>
 					require(['jquery','owl' ,'bootstrap'], function($) {

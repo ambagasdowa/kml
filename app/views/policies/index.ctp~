@@ -2,10 +2,21 @@
 // 	debug($this->params);
 ?>
 
+<style>
+	.policie_link{
+		color:black;
+	}
+</style>
 <?php echo $this->Session->flash();?>
     <div class="container-fluid">
-      <div class="row">
 
+
+		
+    <div class="row">
+
+	<?php if (isset($_SESSION['Auth']['User'])) {?>
+	<?php 	if (checkAdmin($_SESSION['Auth']['User']['group_id'])) {?>
+		
         <div class="col-md-offset-1 col-sm-11 col-md-11">
           <ul class="list-group list-inline">
 			<li class="list-group-item">
@@ -19,26 +30,34 @@
 			<li class="list-group-item"><?php echo $this->Html->link(__('New Anexo', true), array('controller' => 'policies_anexos', 'action' => 'add')); ?> </li>
 			<li class="list-group-item"><?php echo $this->Html->link(__('List Policies Filters', true), array('controller' => 'policies_filters', 'action' => 'index')); ?> </li>
 			<li class="list-group-item"><?php echo $this->Html->link(__('New Filter', true), array('controller' => 'policies_filters', 'action' => 'add')); ?> </li>
-          </ul>
+		</ul>
         </div>
         
-        <div class="col-sm-9 col-sm-offset-2 col-md-10 col-md-offset-1 main">
-          <h1 class="page-header"><?php __('Policies');?></h1>
-          <div class="table-responsive">
-          
+	<?php }?>
+	<?php 	}?>
+
+
+       <div class="col-sm-9 col-sm-offset-2 col-md-10 col-md-offset-1 main">
+          <h1 class="page-header"><?php __('Políticas');?></h1>
+
+          <div class="col-md-7"></div>
+          <div class="col-md-5"><?php echo $this->element('policies/search_policie');?></div>
+          <div class="col-md-12">&nbsp;</div>
+			<div class="table-responsive">
 				<table class="table table-bordered table-hover table-striped responstable">
 				<thead>
 					<tr>
-													<th><?php echo $this->Paginator->sort('id');?></th>
+													
 										<?php if (isset($_SESSION['Auth']['User'])) {?>
 										<?php 	if (checkAdmin($_SESSION['Auth']['User']['group_id'])) {?>
+													<th><?php echo $this->Paginator->sort('id');?></th>
 													<th><?php echo $this->Paginator->sort('user_id');?></th>
 													<th><?php echo $this->Paginator->sort('group_id');?></th>
 													<th><?php echo $this->Paginator->sort('Documento','policies_type');?></th>
 													<th><?php echo $this->Paginator->sort('policies_path');?></th>
 										<?php 	}?>
 										<?php }?>
-													<th><?php echo $this->Paginator->sort('name');?></th>
+													<th><?php echo $this->Paginator->sort('nombre de la política');?></th>
 <!-- 													<th><?php echo $this->Paginator->sort('description');?></th> -->
 										<?php if (isset($_SESSION['Auth']['User'])) {?>
 										<?php 	if (checkAdmin($_SESSION['Auth']['User']['group_id'])) {?>
@@ -49,14 +68,11 @@
 										<?php }?>
 
 											<?php if (isset($_SESSION['Auth']['User'])) {?>
-											<?php 	if (checkAdmin($_SESSION['Auth']['User']['group_id'])) {
-														$span = 'colspan="3"';
-													} else {
-														$span = '';
-													}
-											 ?>
+											<?php 	if (checkAdmin($_SESSION['Auth']['User']['group_id'])) { ?>
+													<th class="actions" colspan="2"><?php __('Actions');?></th>
 											<?php }?>
-													<th class="actions" <?php e($span);?>><?php __('Actions');?></th>
+											<?php }?>
+													
 							
 					</tr>
 				</thead>
@@ -69,9 +85,10 @@
 					}
 				?>
 	<tr<?php echo $class;?>>
-		<td><?php echo $policy['Policy']['id']; ?>&nbsp;</td>
+		
 		<?php if (isset($_SESSION['Auth']['User'])) {?>
 		<?php 	if (checkAdmin($_SESSION['Auth']['User']['group_id'])) {?>
+		<td><?php echo $policy['Policy']['id']; ?>&nbsp;</td>
 		<td>
 			<?php echo $this->Html->link($policy['User']['id'], array('controller' => 'users', 'action' => 'view', $policy['User']['id'])); ?>
 		</td>
@@ -82,7 +99,9 @@
 		<td><?php echo $policy['Policy']['policies_path']; ?>&nbsp;</td>
 		<?php 	}?>
 		<?php }?>
-		<td><?php echo $policy['Policy']['name']; ?>&nbsp;</td>
+		<td>
+			<?php echo $this->Html->link(__($policy['Policy']['name'], true), array('action' => 'view','id' => $policy['Policy']['id'],'type'=>$policy['Policy']['policies_type']),array('class'=>'policie_link','alt'=>__($policy['Policy']['name'], true),'title'=>__($policy['Policy']['name'], true))); ?>&nbsp;
+		</td>
 <!-- 		<td><?php echo $policy['Policy']['description']; ?>&nbsp;</td> -->
 		<?php if (isset($_SESSION['Auth']['User'])) {?>
 		<?php 	if (checkAdmin($_SESSION['Auth']['User']['group_id'])) {?>
@@ -91,9 +110,6 @@
 		<td><?php echo $policy['Policy']['status']; ?>&nbsp;</td>
 		<?php 	}?>
 		<?php }?>
-		<td class="actions">
-			<?php echo $this->Html->link(__('Ver', true), array('action' => 'view','id' => $policy['Policy']['id'],'type'=>$policy['Policy']['policies_type'] )); ?>
-		</td>
 		<?php if (isset($_SESSION['Auth']['User'])) {?>
 		<?php 	if (checkAdmin($_SESSION['Auth']['User']['group_id'])) {?>
 		<td class="actions">

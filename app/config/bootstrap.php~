@@ -54,5 +54,16 @@ require_once("appConfig.php");
 //source to acl pluging
 require_once(APP . DS . 'plugins' . DS . 'acl' . DS . 'config' . DS . 'bootstrap.php');
 
+
+//adding search pluging from cakeDC
+// require_once(APP . DS . 'plugins' . DS . 'Search' );
+App::build(
+			array(
+					'plugins' => array(APP . DS . 'plugins' . DS . 'Search')
+				 )
+);
+// CakePlugin::load('Search');
+
+
 // what encoding have
 // echo mb_internal_encoding();

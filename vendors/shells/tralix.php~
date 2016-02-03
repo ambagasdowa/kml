@@ -1,0 +1,95 @@
+<?php
+class TralixShell extends Shell {
+          var $uses = array(
+			  'Company',
+			  'Tralix'
+			);
+
+	function corp(){
+      $conditions['Company.status'] = 'Active';
+      $corp = $this->Company->find('list',array('fields'=>array('id','name'),'conditions'=>$conditions));
+      return $corp;
+	}
+
+    function main(){
+
+	$CurrentYear = date('Y');
+	$idx=1;
+	$baseUrl = "/tmp/";
+	$corporate = $this->corp();
+	pr($corporate);exit();
+	// Clear the whole database
+	$this->Tralix->query('TRUNCATE tralix;');
+	system('DISPLAY = :0');
+	
+	foreach($corporate as $key => $value){
+	
+	// Define the connection data for each enterprise from database 1= Bonampak ,2 = ATM and 3 = Tespecializada
+	// TODO make this with an db relation 
+		if($key == '1'){
+			$connection = 'pylenium.py';
+		}if($key == '2'){
+			$connection = 'pyleniumatm.py';
+		}if($key == '3'){
+			$connection = 'pyleniumtei.py';
+		}
+	
+
+		$id_empresa = $key;
+		$this->out('Extracting data from tralix webpage of '.$value);
+		if($id_empresa == '1'){
+			system("python ../../files/scripts/pylenium.py");
+		}if($id_empresa == '2'){
+			system("python ../../files/scripts/pyleniumatm.py");
+		}if($id_empresa == '3'){
+			system("python ../../files/scripts/pyleniumtei.py");
+		}
+
+		system("sed -e 's/^[ \|]*//g' ".$baseUrl."file.back > ".$baseUrl."file.back.white");
+		$file = fopen($baseUrl."file.back.white", "r") or exit("Error opening file!");
+		//read line by line and wirte into file at end of the script
+		$counter = 0;
+		$row = null;
+			while($linea = fgets($file)) {
+				if(feof($file)){ 
+				break;
+			}else{
+				if($counter % 2 == 0){ // the line is pair
+					$linea = substr( $linea, 0, -1 );
+				}
+				$row .= str_replace('Sin Serie','SinSerie',ltrim(trim($linea,'UUID:')) );
+				  // add trim Sin Serie mod
+	//example UUID: FD1867A1-62C7-59C7-2488-F289D6E39DF9 14/02/2013 Sin Serie / 1 CAP821208LQ3 Enviado Sin imprimir
+			}
+			  $counter +=1 ;
+			}
+		fclose($file);
+/**
+ * @Make the maths for the extraction;
+ **/
+	$row = ltrim($row);
+	$row = rtrim($row);
+	
+	$explote = explode("\n",$row);
+
+	foreach($explote as $idx => $text){
+	  $treat[] = explode(' ',$text);
+	}
+
+	foreach($treat as $index => $empresaInfo){
+// 	  //debug ok, fix the for the debug
+	  $data[$value][$index]['Tralix']['uuid'] = $empresaInfo['0'];
+	  $data[$value][$index]['Tralix']['id_empresa'] = $id_empresa;
+	  $data[$value][$index]['Tralix']['fecha'] = date('Y-m-d',strtotime(str_replace('/','-',$empresaInfo['6']))); // jajaja!
+	  $data[$value][$index]['Tralix']['rfc'] = $empresaInfo['10'];
+	  $data[$value][$index]['Tralix']['claveFactura'] = $empresaInfo['7'] . $empresaInfo['8'] . $empresaInfo['9'];
+	  $data[$value][$index]['Tralix']['status'] = $empresaInfo['11'];
+	}
+
+	  $this->Tralix->saveAll($data[$value]);
+	  $this->out(pr($data));
+
+	} // End foreach $corporate
+    } // End main() like the ancient times of the all migthy C
+    
+} // End Class Programs

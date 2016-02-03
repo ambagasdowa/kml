@@ -1,6 +1,7 @@
 <?php
 class Caseta extends AppModel {
 	var $name = 'Caseta';
-	var $useDbConfig = 'mssql_casetas';
+	var $useDbConfig = 'mssql_sistemas';
 	var $primaryKey = 'id';
 }
+?>

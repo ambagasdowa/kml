@@ -1,0 +1,2 @@
+<?php debug($check);?>
+<?php echo $this->element('mreporter/record',array('check'=>$check)); ?>

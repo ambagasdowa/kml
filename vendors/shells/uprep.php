@@ -1,0 +1,174 @@
+<?php
+  class UprepShell extends Shell{
+	var $uses = array(
+					  'MrSourceConfig',
+					  'MrSourceKey',
+					  'BusinessUnit',
+					  'User'
+	  );
+	/**
+	* @package name <Update Reporter MR tables> this must change
+	* @congif build a script code to call datepicker
+	* @usage
+	* @param=>run <string | run the updater manually >
+	* NOTE  this function is far away to be complete but for the purpose is ok
+	*/
+	 
+	function arg_read( $conditions = null ) {
+		if(!empty($conditions)){
+			$_period = $conditions['MrSourceConfig.period'];
+			$_source_company = $conditions['MrSourceConfig.source_company'];
+			$_key = $conditions['MrSourceConfig._key'];
+
+			$result = $this->MrSourceConfig->find('count',array('conditions'=>$conditions));
+		}
+		$this->out("Total de registros encontrados para {$_source_company} para el periodo {$_period} \n y el tipo de costo {$_key} es de {$result}"."\n");
+		return true;
+	}//read()
+
+	function arg_run( $conditions = null ) {
+		/**running*/
+		if (!empty($conditions)){
+			$_period = $conditions['MrSourceConfig.period'];
+			$_source_company = $conditions['MrSourceConfig.source_company'];
+			$_key = $conditions['MrSourceConfig._key'];
+		}
+			if(!$this->MrSourceConfig->query("exec sistemas.dbo.setDataMr N'{$_period}', N'|', N'{$_source_company}',N'{$_key}';")){
+				$this->out('an error as occurr executing the procedure sistemas.dbo.setDataMr'."\n");
+			} else {
+				$this->out('update of te database is ok'."\n");
+			}
+		return true;
+	}//run()
+
+	function arg_all($offsetMonth = null, $last_period = null){
+		//search the last period in configs 
+		if (ctype_alnum($offsetMonth) and substr($offsetMonth,0,1) === 'n') {
+			var_dump('negative '.substr($offsetMonth,1));
+			$offsetMonth = str_replace('n','-',$offsetMonth);
+		} else if( is_numeric($offsetMonth) and ($offsetMonth) >= 0 ) {
+			$offsetMonth = substr($offsetMonth,0,2);
+		} else if($offsetMonth === null) {
+			$offsetMonth = '0';
+		}
+
+		if (empty($last_period)) {
+			$last_period = current(current(current($this->MrSourceConfig->query("select distinct top(1) period from sistemas.dbo.mr_source_configs order by period DESC"))));
+		}
+		// set the update for all companies
+		$sub_num = abs($offsetMonth);
+
+		$year = substr($last_period,0,4);
+		$month = substr($last_period,-2,2);
+		$now = date("Y-m", mktime(0, 0, 0, $month, 1, $year));
+
+		if ( $sub_num != 0 ) {
+			$calculate_date[0] = str_replace('-','',$now);
+			$date = new DateTime($now);
+
+			if(is_numeric($offsetMonth)){
+				if( $offsetMonth > 0 ){
+					//if positive
+					foreach(range(1,$sub_num) as $subextract){
+						$date->add(new DateInterval("P1M"));
+						$calculate_date[] = $date->format('Ym');
+						$this->out($date->format('Ym'));
+						$this->out($subextract);
+					}
+				} else {
+					// of course negative in deed all minor than zero
+					foreach(range(1,$sub_num) as $subextract){
+						$date->sub(new DateInterval("P1M"));
+						$calculate_date[] = $date->format('Ym');
+						$this->out($date->format('Ym'));
+						$this->out($subextract);
+					}
+				}
+			}
+		} else {
+			$calculate_date[0] = $last_period;
+		}
+
+		$_period = implode('|',array_reverse($calculate_date));
+		$_source_company = implode('|',$this->BusinessUnit->find('list'));
+		$_key = implode('|',$this->MrSourceKey->find('list',array('fields'=>array('id','_key'))));
+
+		var_dump($_period);
+		var_dump($_source_company);
+		var_dump($_key);
+		
+		$this->out("with the period $_period \n");
+		$this->out("with companies $_source_company \n");
+		$this->out("with type of $_key \n");
+		$this->out('all is running ...');
+		$this->_stop();
+		if(!$this->MrSourceConfig->query("exec sistemas.dbo.setDataMr N'{$_period}', N'|', N'{$_source_company}',N'{$_key}';")){
+			$this->out('an error as occurr executing the procedure sistemas.dbo.setDataMr for all companies'."\n");
+// 			set the logs
+		} else {
+			$this->out('update of the database is ok'."\n");
+		}
+		return true;
+	}
+	
+	function main(){
+// 	  $this->_stop();
+		if (!($this->args)) {
+         $this->err(__("Usage :  uprep read 201512 TBKORI OF
+						\n define the period , the company and the type of cost 
+						\n the actions are read , run and all ...
+						\n if you want update a determinated period and company 
+						\n example: uprep run 201512 TBKORI OF
+						\n if you need to know how many records are register for this company
+						\n example : uprep read 201512 TBKORI OF
+						\n without arguments show this
+						\n example uprep all", true));
+		} else {
+
+			$this->out('total of parameters => '. count($this->args) ."\n");
+			if (count($this->args) < 4 AND $this->args[0] != 'all') {
+				$this->hr();
+				$this->err(__('Debe indicar todos los parametros periodo , compania y tipo '."\n".' de reporte definido por _key',true));
+				$this->hr();
+				$this->_stop();
+			}
+			foreach ($this->args as $idx => $argument) {
+				if ($idx > 0) {
+					if(ctype_digit($argument) and strlen($argument) === 6 ){
+						$conditions['MrSourceConfig.period'] = $argument;
+					} else if (ctype_alpha($argument) and strlen($argument) === 6) {
+						$conditions['MrSourceConfig.source_company'] = $argument;
+					} else if (ctype_alpha($argument) and strlen($argument) === 2 and !is_numeric($argument)) {
+						$conditions['MrSourceConfig._key'] = $argument;
+					} else if ( (is_numeric($argument) OR ctype_alnum($argument) ) and (strlen($argument) > 0 AND strlen($argument) < 4)) {
+						$period_lenght = $argument;
+					}
+				}
+			}
+
+			if ( $this->args[0] === 'read' ) {
+				$this->arg_read($conditions);
+			} else if ( $this->args[0] === 'run' ) {
+				$this->arg_run($conditions);
+			} else if ( $this->args[0] === 'all' ) {
+				if ( isset($period_lenght) ) {
+					$this->arg_all($period_lenght);
+				} else {
+					$this->arg_all();
+				}
+			} else {
+				$this->hr();
+				$this->out('the fists paramenter must be and action like run or read');
+				$this->hr();
+			}
+		}
+
+		$this->hr();
+		$this->out('exit');
+		$this->hr();
+		$this->_stop();
+	}// end main
+
+
+  }//End OperacionesShell
+?>

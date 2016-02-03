@@ -1,3 +1,4 @@
+<?php //policies index?>
 <style>
 @media print {
   html, body {

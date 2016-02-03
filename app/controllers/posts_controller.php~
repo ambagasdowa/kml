@@ -3,12 +3,46 @@ class PostsController extends AppController {
 
 	var $name = 'Posts';
 
+	var $components = array('Search.Prg');
+/**
+ * Fields to preset in search forms.
+ *
+ * @var array $presetVars
+ * @see Search.PrgComponent 
+ * @access public
+ */
+ 
+ // JW - Field names and type of search defined in plugin documentation.
+ // JW - these are based on the search form field names. Type value as a more or less standard search. 
+	var $presetVars = array( 
+		array('field' => 'title', 'type' => 'value'),
+// 		array('field' => 'body', 'type' => 'value'),
+	);
+/**
+ * Before filter callback
+ * Pass the correct Ticket data to the view where needed
+ * 
+ * @return void
+ * @access public
+ */
+
+ // JW - Callbacks for data loading the add.ctp based on the model __construct() (see model for details).
+
 	function beforeFilter() {
+		
 		parent::beforeFilter();
 		$this->Auth->allowedActions = array('index', 'view');
 	}
 	
 	function index() {
+		
+		$this->Prg->commonProcess();
+		
+		$this->paginate = array(
+			'conditions' => $this->Post->parseCriteria($this->passedArgs),
+			'limit' => '2'
+		);
+		
 		$this->Post->recursive = 0;
 		$this->set('posts', $this->paginate());
 	}

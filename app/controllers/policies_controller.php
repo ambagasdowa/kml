@@ -2,10 +2,13 @@
 class PoliciesController extends AppController {
 
 	var $name = 'Policies';
-	var $components = array('RequestHandler','Session');
+	var $components = array('RequestHandler','Session','Search.Prg');
 	var $helpers = array('Html','Form','Ajax','Javascript');
-	var $uses = array('Policy','PoliciesFilter','Group');
+	var $uses = array('Policy','PoliciesFilter','Group','User');
 
+	var $presetVars = array( 
+		array('field' => 'name', 'type' => 'value'),
+	);
 
 	function beforeFilter() {
 		parent::beforeFilter();
@@ -18,11 +21,26 @@ class PoliciesController extends AppController {
 // 		}
 // 	}
 
+	function index(){
+		$this->Prg->commonProcess();
 
-	
-	function index() {
+		if(checkAdmin($_SESSION['Auth']['User']['group_id']) !== TRUE) {
+			$this->paginate['conditions'] = array_merge($this->Policy->parseCriteria($this->passedArgs),array('Policy.status'=>'Active'));
+		} else {
+			$this->paginate['conditions'] = $this->Policy->parseCriteria($this->passedArgs);
+		}
+
+		$this->LoadModel('PoliciesType');
+		$policies_type = $this->PoliciesType->find('list');
+		$this->set(compact('policies_type'));
 		
-// 		pr();
+		$this->Policy->recursive = 0;
+		$this->set('policies', $this->paginate());
+	}
+	
+	function __index() {
+
+// 		debug($this->paginate);
 // 		$conditions = ''
 // 		debug($this->Auth);
 // 		$id_company = $_SESSION['Auth']['User']['group_id'];
@@ -36,7 +54,6 @@ class PoliciesController extends AppController {
 // 		$payroll = $this->Payroll->find('all');
 // 		
 // 		var_dump($this->Payroll->getPayrollByCompany($cvecia,$cveare,$cvepue,$cvetra));
-		
 		
 		
 // 		App::import('Core', 'HttpSocket');
@@ -70,7 +87,9 @@ class PoliciesController extends AppController {
 		
 		// set the var conditions for all policies
 		if (empty($conditions) OR !isset($conditions)) {
-			$conditions = null;
+// 			$conditions = null;
+			$this->Prg->commonProcess();
+			$conditions = $this->Policy->parseCriteria($this->passedArgs);
 		}
 		$this->paginate = array(
 			'conditions' => $conditions,
@@ -172,6 +191,8 @@ class PoliciesController extends AppController {
 // 		}
 // 		$this->set('policies', $this->Policy->read(null, $id));
 // 		exit();
+// 		debug($_SESSION['Auth']['User']['id']);
+
 	}
 	
 	// temporary upload

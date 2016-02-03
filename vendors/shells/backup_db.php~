@@ -196,15 +196,6 @@
 
 	function main(){
 
-		
-		exec('7za t /tmp/firm.7z',$out);
-		if($out === ' '){
-			$this->out(var_dump($out['5']));
-		}
-// 		$this->out(var_dump($out['5']));
-		$this->_stop();
-		
-		
 		if (!($this->args)) {
 		  $this->help();
 		  $this->err(__('Usage :Testing the err stuff', true));

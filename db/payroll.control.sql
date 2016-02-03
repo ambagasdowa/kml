@@ -115,6 +115,7 @@ create table `catalog_datas`(
   `catalog_fields_id` int(11) unsigned not null,
   `catalog_data` varchar(250) null,
   `catalog_data_description` text null,
+  `catalog_data_taken` boolean not null default FALSE,
   `create` timestamp DEFAULT current_timestamp,
   `modified` DATETIME,
   `status` enum('Active','Inactive') NOT NULL default 'Active',

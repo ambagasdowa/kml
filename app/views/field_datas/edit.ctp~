@@ -10,16 +10,6 @@
 		}
 
 ?>
-<style>
-
-    select optgroup{
-/*     background:#000 !important; */
-    color:#666 !important;
-/*     font-style:normal; */
-/*     font-weight:normal; */
-    }
-
-</style>
 
 <!--     <div class="container-fluid"> -->
 <!--       <div class="row"> -->

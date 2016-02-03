@@ -1,0 +1,1 @@
+<?php echo $this->element('mreporter/record',array('check'=>$check)); ?>

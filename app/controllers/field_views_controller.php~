@@ -4,6 +4,68 @@ class FieldViewsController extends AppController {
 	var $name = 'FieldViews';
 
 	function index() {
+		
+		
+		App::import('Core', 'HttpSocket');
+		
+		$HttpSocketPr = new HttpSocket();
+// 		$results = $HttpSocketPr->get('https://www.google.com.mx/search', 'q=php');
+		$HttpSocketPr->get('http://anonymouse.org/cgi-bin/anon-www.cgi/http://187.141.67.234/projections/users/login');
+// 		returns html for Google's search results for the query "cakephp"
+		if(!empty($HttpSocketPr->response['cookies']['CAKEPHP']['path']) and $HttpSocketPr->response['cookies']['CAKEPHP']['path'] === '/projections'){
+			debug($HttpSocketPr->response['cookies']);
+			var_dump('Projections External site is OK');
+		} else {
+			var_dump('Projections External site is Down');
+		}
+		
+		
+		$HttpSocketGst = new HttpSocket();
+		$HttpSocketGst->get('http://anonymouse.org/cgi-bin/anon-www.cgi/http://187.141.67.234/gst/users/login');
+		if(!empty($HttpSocketGst->response['cookies']['CAKEPHP']['path']) and $HttpSocketGst->response['cookies']['CAKEPHP']['path'] === '/gst'){
+			debug($HttpSocketGst->response['cookies']);
+			var_dump('Gst External site is OK');
+		} else {
+			var_dump('Gst External site is Down');
+		}
+		
+// 		$HttpSocketFm = new HttpSocket();
+// 		$HttpSocketFm->get('http://localhost/smb/class/filemanager/filemanager.php');
+// 
+// 		$this->set('fm',$HttpSocketFm->response['body']);
+		
+		
+		App::import('Vendor', 'filemanager', array('file' => 'filemanager'.DS.'class'.DS.'FileManager.php'));
+
+		$user = 'ambagasdowa';
+// 	$user = 'jesus.mendozab';
+	
+	$FileManager = new FileManager();
+// 	debug($FileManager);
+
+		$app = basename(ROOT);
+		$path = "{$_SERVER['REQUEST_SCHEME']}://{$_SERVER['HTTP_HOST']}/{$app}/files/users/";
+		$directory = WWW_ROOT.'files'.DS.'users'.DS;
+		$scanned_directory = array_diff(scandir($directory), array('..', '.'));
+		$dir_paths = array_values($scanned_directory);
+
+		// 		debug($path);
+	
+	
+	if ($user === 'ambagasdowa') {
+		$FileManager->rootDir = $directory;
+		$FileManager->defaultDir = 'ambagasdowa';
+// 		$FileManager->fmWebPath = $path;
+	} else {
+		$FileManager->rootDir = '/home/ambagasdowa/web/kml/app/webroot/files/users/'.$user;
+		$FileManager->defaultDir = 'Documents';
+	}
+
+// 	print $FileManager->create();
+		$fm = $FileManager->create();
+
+// 		debug($fm);
+		$this->set('fm',$fm);
 		$this->FieldView->recursive = 0;
 		$this->set('fieldViews', $this->paginate());
 	}
@@ -26,7 +88,7 @@ class FieldViewsController extends AppController {
 				$this->Session->setFlash(__('The field view could not be saved. Please, try again.', true));
 			}
 		}
-		$viewTypes = $this->ViewType->find('list');
+		$viewTypes = $this->FieldView->ViewType->find('list');
 		$this->set(compact('viewTypes'));
 	}
 

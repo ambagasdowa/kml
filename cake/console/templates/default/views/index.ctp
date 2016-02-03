@@ -33,20 +33,23 @@
 						foreach ($data as $alias => $details) {
 							if ($details['controller'] != $this->name && !in_array($details['controller'], $done)) {
 								echo "\t\t<li class=\"list-group-item\"><?php echo \$this->Html->link(__('List " . Inflector::humanize($details['controller']) . "', true), array('controller' => '{$details['controller']}', 'action' => 'index')); ?> </li>\n";
-								echo "\t\t<li class=\"list-group-item\"><?php echo \$this->Html->link(__('New " . Inflector::humanize(Inflector::underscore($alias)) . "', true), array('controller' => '{$details['controller']}', 'action' => 'add')); ?> </li>\n";
+								echo "\t\t<li class=\"list-group-item\"><?php echo \$this->Html->link(__('New " . Inflector::humanize(Inflector::underscore($alias)) . "', true), array('controller' => '{$details['controller']}', 'action' => 'add')); ?> \n</li>\n";
 								$done[] = $details['controller'];
 							}
 						}
 					}
 				?>
+			<li>
+				<input type="search" class="light-table-filter form-control " data-table="order-table" placeholder="Filter">
+			</li>
           </ul>
         </div>
         
         <div class="col-sm-9 col-sm-offset-2 col-md-10 col-md-offset-1 main">
           <h1 class="page-header"><?php echo "<?php __('{$pluralHumanName}');?>";?></h1>
           <div class="table-responsive">
-          
-				<table class="table table-bordered table-hover table-striped responstable">
+			<span class="filter-container">
+				<table class="order-table table table-bordered table-hover table-striped responstable">
 				<thead>
 					<tr>
 						<?php  foreach ($fields as $field):?>
@@ -96,6 +99,7 @@
 				echo "<?php endforeach; ?>\n";
 				?>
 				</table>
+			</span> <!--class="filter-container"-->
 				<p>
 					<?php 
 						echo "<?php

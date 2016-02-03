@@ -34,7 +34,7 @@
 <!-- dinamyc menu for gst -->
 		<?php if (isset($_SESSION['Auth']['User'])) {?>
 			<?php if (isset($setMenu)) {?>
-			<ul class="nav navbar-nav navbar-left"><?php debug($setMenu);?>
+			<ul class="nav navbar-nav navbar-left"><?php //debug($setMenu);?>
 					<?php foreach($setMenu as $idRootMenu => $subMenu) {?>
 				
 			<!--<ul class="nav navbar-nav">-->
@@ -203,6 +203,7 @@
 										</li>
 										
 										<li class="divider"></li>
+										
 										<?php 	}?>
 										<?php }?>
 										
@@ -224,12 +225,57 @@
 <!-- 										975 medidor + 100 tiras + 25 lancetas //120 -->
 
 <!-- 										735 medidor + 100 tiras farmalisto-->
-
+										
 										<li>
 											<a href="<?php e($this->webroot.'BusinessUnits');?>" class="ajax-link">
 												<i class="fa fa-cog"></i>
 												<span>BusinessUnits</span>
 											</a>
+										</li>
+										
+										<li>
+											<a href="<?php e($this->webroot.'Posts/');?>" class="ajax-link">
+												<i class="fa fa-cog"></i>
+												<span>Notes</span>
+											</a>
+										</li>
+										
+										<li>
+											<a href="<?php e($this->webroot.'FieldDatas'.DS.'');?>" class="ajax-link">
+												<i class="fa fa-list-alt"></i>
+												<span><?php e('Control de Usuario');?></span>
+											</a>
+										</li>
+										
+										<li class="dropdown-submenu">
+											<a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>Tralix Options</span></a>
+												<ul class="dropdown-menu">
+													<li><a tabindex="-1" href="<?php e($this->webroot.'Tralixes');?>"><i class="fa fa-cog"></i>&nbsp;<span>view</span></a></li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'Tralixes/add');?>"><i class="fa fa-cog"></i>&nbsp;<span>edition</span></a></li>
+												</ul>
+										</li>
+										
+										<li class="dropdown-submenu">
+											<a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>Financial Reporting</span></a>
+												<ul class="dropdown-menu">
+													<li><a tabindex="-1" href="<?php e($this->webroot.'MrSourceControls');?>"><i class="fa fa-cog"></i>&nbsp;<span>Reporter Configuration</span></a></li>
+													<li><a href="<?php e($this->webroot.'MrSourceKeys/index');?>"><i class="fa fa-cog"></i>&nbsp;<span>Reporter Keys</span></a>
+													</li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'MrSourceConfigs');?>"><i class="fa fa-cog"></i>&nbsp;<span>Reporter Periods</span></a></li>
+													
+													<li><a href="<?php e($this->webroot.'MrSourceAccounts/add');?>"><i class="fa fa-cog"></i>&nbsp;<span>Reporter Account</span></a>
+													</li>
+													<li><a href="<?php e($this->webroot.'MrSourceReports/index');?>"><i class="fa fa-cog"></i>&nbsp;<span>Reporter Reports</span></a>
+													</li>
+													<li class="dropdown-submenu">
+														<a href="#">More..</a>
+															<ul class="dropdown-menu">
+																<li><a href="#">3rd level</a></li>
+																<li><a href="#">3rd level</a></li>
+															</ul>
+													</li>
+													
+												</ul>
 										</li>
 										
 										<li class="divider"></li>
@@ -341,6 +387,7 @@
 <!-- 										login option -->
 										<?php if (isset($_SESSION['Auth']['User'])) {?>
 
+
 										<li>
 											<a href="<?php e($this->webroot."Users/edit_password/{$_SESSION['Auth']['User']['id']}/");?>" class="ajax-link">
 												<i class="fa fa-cog"></i>
@@ -367,7 +414,7 @@
     </nav>
     
 
-    <!--         <ul class="nav navbar-nav navbar-right"> -->
+<!--         <ul class="nav navbar-nav navbar-right">  -->
 <!--         <ul class="collapse nav navbar-nav nav-collapse" role="search" id="nav-collapse4"> -->
 
 <!--             <li><a href="#">Dashboard</a></li> -->
@@ -376,7 +423,7 @@
 <!-- 			<li> -->
 <!-- 			<a href="#" class="helplink" data-toggle="modal" data-target="#myModal">Ayuda</a> -->
 <!-- 			</li> -->
-<!--         </ul> -->
+<!--         </ul>  -->
 
 </header>
 

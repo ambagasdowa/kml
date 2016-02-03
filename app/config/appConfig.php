@@ -257,6 +257,201 @@
 		return $htmlMotor;
 	}
 	
+	 /**
+	 * @package name <encrypt> this must change
+	 * @congif build a script code to call datepicker
+	 * @usage
+	 * @param=>userAgent <string | set the string of "HTTP_USER_AGENT" >
+	 * NOTE  this function is far away to be complete but for the purpose is ok
+	 */
+	function dEncrypt($decrypted_encrypt, $password, $salt , $mode) {
+		
+		if ($mode === 'encrypt') {
+			
+			$decrypted = $decrypted_encrypt;
+			// Build a 256-bit $key which is a SHA256 hash of $salt and $password.
+			$key = hash('SHA256', $salt . $password, true);
+			// Build $iv and $iv_base64.  We use a block size of 128 bits (AES compliant) and CBC mode.  (Note: ECB mode is inadequate as IV is not used.)
+			srand(); $iv = mcrypt_create_iv(mcrypt_get_iv_size(MCRYPT_RIJNDAEL_128, MCRYPT_MODE_CBC), MCRYPT_RAND);
+			if (strlen($iv_base64 = rtrim(base64_encode($iv), '=')) != 22) return false;
+			// Encrypt $decrypted and an MD5 of $decrypted using $key.  MD5 is fine to use here because it's just to verify successful decryption.
+			$encrypted = base64_encode(mcrypt_encrypt(MCRYPT_RIJNDAEL_128, $key, $decrypted . md5($decrypted), MCRYPT_MODE_CBC, $iv));
+			// We're done!
+			return $iv_base64 . $encrypted;
+		} else if ($mode === 'decrypt'){
+			
+			$encrypted = $decrypted_encrypt;
+			// Build a 256-bit $key which is a SHA256 hash of $salt and $password.
+			$key = hash('SHA256', $salt . $password, true);
+			// Retrieve $iv which is the first 22 characters plus ==, base64_decoded.
+			$iv = base64_decode(substr($encrypted, 0, 22) . '==');
+			// Remove $iv from $encrypted.
+			$encrypted = substr($encrypted, 22);
+			// Decrypt the data.  rtrim won't corrupt the data because the last 32 characters are the md5 hash; thus any \0 character has to be padding.
+			$decrypted = rtrim(mcrypt_decrypt(MCRYPT_RIJNDAEL_128, $key, base64_decode($encrypted), MCRYPT_MODE_CBC, $iv), "\0\4");
+			// Retrieve $hash which is the last 32 characters of $decrypted.
+			$hash = substr($decrypted, -32);
+			// Remove the last 32 characters from $decrypted.
+			$decrypted = substr($decrypted, 0, -32);
+			// Integrity check.  If this fails, either the data is corrupted, or the password/salt was incorrect.
+			if (md5($decrypted) != $hash) return false;
+			// Yay!
+			return $decrypted;
+		} else {
+			return null;
+		}
+	}
+
+	 /**
+	 * @package name <removeBOM> this must change
+	 * @congif build a script code to call datepicker
+	 * @usage
+	 * @param=>userAgent <string | When you read the file back in using fopen, the BOM will also be there. To remove it, I also wrote the following function: >
+	 * NOTE  this function is far away to be complete but for the purpose is ok
+	 */
+	function removeBOM($str=""){
+			if(substr($str, 0,3) == pack("CCC",0xef,0xbb,0xbf)) {
+					$str=substr($str, 3);
+			}
+			return $str;
+	}
+
+	/**
+	* @package name <negative> this must change
+	* @congif build a script code to call datepicker
+	* @usage
+	* @param=>userAgent <integer | checks if a number is negative else return false: >
+	* @return <BOOLEAN>
+	* NOTE  this function is far away to be complete but for the purpose is ok
+	*/
+	function negative($data = null) {
+		if(is_numeric($data)){
+			return (min(1, max(-1, $data)) === -1) ?  TRUE : FALSE ;
+		} else {
+			return null;
+		}
+	}
+	
+	 /**
+	 * @package name <map_utf8> this must change
+	 * @congif build a script code to call datepicker
+	 * @usage
+	 * @param=>userAgent <string | convert an array to utf8  >
+	 * NOTE  this function is far away to be complete but for the purpose is ok
+	 */
+	function map_utf8($results) {
+
+		foreach ($results as $key => $value) {
+				$result[utf8_encode($key)] = $value;
+		}
+
+		return $result;
+	}
+	
+	 /**
+	 * @package name <cp1252_to_utf8> this must change
+	 * @congif build a script code to call datepicker
+	 * @usage
+	 * @param=>userAgent <string |  Here's some code that addresses the issue that Steven describes in the previous comment; >
+	 * NOTE  this function is far away to be complete but for the purpose is ok
+	 */
+
+	function cp1252_to_utf8($str) {
+		/* This structure encodes the difference between ISO-8859-1 and Windows-1252,
+		as a map from the UTF-8 encoding of some ISO-8859-1 control characters to
+		the UTF-8 encoding of the non-control characters that Windows-1252 places
+		at the equivalent code points. */
+
+		$cp1252_map = array(
+			"\xc2\x80" => "\xe2\x82\xac", /* EURO SIGN */
+			"\xc2\x82" => "\xe2\x80\x9a", /* SINGLE LOW-9 QUOTATION MARK */
+			"\xc2\x83" => "\xc6\x92",     /* LATIN SMALL LETTER F WITH HOOK */
+			"\xc2\x84" => "\xe2\x80\x9e", /* DOUBLE LOW-9 QUOTATION MARK */
+			"\xc2\x85" => "\xe2\x80\xa6", /* HORIZONTAL ELLIPSIS */
+			"\xc2\x86" => "\xe2\x80\xa0", /* DAGGER */
+			"\xc2\x87" => "\xe2\x80\xa1", /* DOUBLE DAGGER */
+			"\xc2\x88" => "\xcb\x86",     /* MODIFIER LETTER CIRCUMFLEX ACCENT */
+			"\xc2\x89" => "\xe2\x80\xb0", /* PER MILLE SIGN */
+			"\xc2\x8a" => "\xc5\xa0",     /* LATIN CAPITAL LETTER S WITH CARON */
+			"\xc2\x8b" => "\xe2\x80\xb9", /* SINGLE LEFT-POINTING ANGLE QUOTATION */
+			"\xc2\x8c" => "\xc5\x92",     /* LATIN CAPITAL LIGATURE OE */
+			"\xc2\x8e" => "\xc5\xbd",     /* LATIN CAPITAL LETTER Z WITH CARON */
+			"\xc2\x91" => "\xe2\x80\x98", /* LEFT SINGLE QUOTATION MARK */
+			"\xc2\x92" => "\xe2\x80\x99", /* RIGHT SINGLE QUOTATION MARK */
+			"\xc2\x93" => "\xe2\x80\x9c", /* LEFT DOUBLE QUOTATION MARK */
+			"\xc2\x94" => "\xe2\x80\x9d", /* RIGHT DOUBLE QUOTATION MARK */
+			"\xc2\x95" => "\xe2\x80\xa2", /* BULLET */
+			"\xc2\x96" => "\xe2\x80\x93", /* EN DASH */
+			"\xc2\x97" => "\xe2\x80\x94", /* EM DASH */
+
+			"\xc2\x98" => "\xcb\x9c",     /* SMALL TILDE */
+			"\xc2\x99" => "\xe2\x84\xa2", /* TRADE MARK SIGN */
+			"\xc2\x9a" => "\xc5\xa1",     /* LATIN SMALL LETTER S WITH CARON */
+			"\xc2\x9b" => "\xe2\x80\xba", /* SINGLE RIGHT-POINTING ANGLE QUOTATION*/
+			"\xc2\x9c" => "\xc5\x93",     /* LATIN SMALL LIGATURE OE */
+			"\xc2\x9e" => "\xc5\xbe",     /* LATIN SMALL LETTER Z WITH CARON */
+			"\xc2\x9f" => "\xc5\xb8"      /* LATIN CAPITAL LETTER Y WITH DIAERESIS*/
+		);
+		
+			return  strtr(utf8_encode($str), $cp1252_map);
+	}
+	
+	/** NOTE <Define dirs>**/
+	function createDirs() {
+		return array(
+						'1'=>'shares',
+						'2'=>'Desktop',
+						'3'=>'Documents'
+			
+		);
+	}
+	
+	
+	// ggarciaa at gmail dot com (04-July-2007 01:57)
+	// I needed to empty a directory, but keeping it
+	// so I slightly modified the contribution from
+	// stefano at takys dot it (28-Dec-2005 11:57)
+	// A short but powerfull recursive function
+	// that works also if the dirs contain hidden files
+	//
+	// $dir = the target directory
+	// $DeleteMe = if true delete also $dir, if false leave it alone
+
+	function SureRemoveDir($dir, $DeleteMe) {
+		if(!$dh = @opendir($dir)) return;
+		while (false !== ($obj = readdir($dh))) {
+			if($obj=='.' || $obj=='..') continue;
+			if (!@unlink($dir.'/'.$obj)) SureRemoveDir($dir.'/'.$obj, true);
+		}
+
+		closedir($dh);
+		if ($DeleteMe){
+			@rmdir($dir);
+		}
+	}
+	
+	 /**
+	 * @package name <GeraHash> this must change
+	 * @congif build a script code to call datepicker
+	 * @usage
+	 * @param=>userAgent <string | set the string of "HTTP_USER_AGENT" >
+	 * NOTE  this function is far away to be complete but for the purpose is ok
+	 */
+	 
+	function GeraHash($qtd){
+	//Under the string $Caracteres you write all the characters you want to be used to randomly generate the code.
+	$Caracteres = 'ABCDEFGHIJKLMOPQRSTUVXWYZ0123456789';
+	$QuantidadeCaracteres = strlen($Caracteres);
+	$QuantidadeCaracteres--;
+
+	$Hash=NULL;
+		for($x=1;$x<=$qtd;$x++){
+			$Posicao = rand(0,$QuantidadeCaracteres);
+			$Hash .= substr($Caracteres,$Posicao,1);
+		}
+
+	return $Hash;
+	} 
 	/**
 	* Replace language-specific characters by ASCII-equivalents.
 	* @param string $s

@@ -135,16 +135,16 @@
 						$date = new DateTime(date('Y-m-d'));
 						$date->sub(new DateInterval($afterDay));
 						$calculateDate =  $date->format('Y-m-d');
-						$this->out('calculating Date for making of the backup must be less than => ' . $calculateDate);
+						$this->out('calculating Date for making of the delete must be less than => ' . $calculateDate);
 
 					if(file_exists($urlBasename.$path)){
-					
+
 							$dirName = strtolower(date('F_Y ',filemtime($urlBasename.$path)));
 							$this->out( 'building dir '.$dirName.' if not exists');
 							$buildDirName = $output_dir.$dirName;
 							exec('mkdir -p '.$buildDirName);
 							
-						if (date('Y-m-d',filemtime($urlBasename.$path)) < $calculateDate) {
+// 						if (date('Y-m-d',filemtime($urlBasename.$path)) < $calculateDate) {
 
 							$this->out('---------------- the date is ok --------------');
 
@@ -171,7 +171,7 @@
 							exec('7za '.$lzm_command.' -t7z -m0=lzma -mx=9 -mfb=64 -md=32m -ms=on '.trim($buildDirName).DS.pathinfo($path)['filename'].'.7z'.' '.$urlBasename.$path,$outexec);
 							$this->out($outexec);
 
-
+						if (date('Y-m-d',filemtime($urlBasename.$path)) < $calculateDate) {
 							if($test === true){
 								$this->hr();
 								$this->out(' simulating the deleteing of the file ');

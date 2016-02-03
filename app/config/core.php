@@ -125,6 +125,7 @@
  *
  */
 	Configure::write('Session.save', 'php');
+// 	Configure::write('Session.save', 'cake');
 
 /**
  * The model name to be used for the session model.

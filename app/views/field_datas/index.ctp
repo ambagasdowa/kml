@@ -1,12 +1,49 @@
 <?php //index?>
 <?php //debug($fieldDatas Index view);?>
 
+     <script type="text/javascript">
+      // File Picker modification for FCK Editor v2.0 - www.fckeditor.net
+     // by: Pete Forde <pete@unspace.ca> @ Unspace Interactive
+     <?php //echo "$path"?>
+     var urlobj;
+// 	<?php echo "var url_path = '$path';\n"?>
+
+// 	 <?php echo "'$path'\n"?>
+     function BrowseServer(obj,url_path)
+     {
+          urlobj = obj;
+          OpenServerBrowser(
+          url_path,
+          screen.width * 0.7,
+          screen.height * 0.7 ) ;
+     }
+
+     function OpenServerBrowser( url, width, height )
+     {
+          var iLeft = (screen.width - width) / 2 ;
+          var iTop = (screen.height - height) / 2 ;
+          var sOptions = "toolbar=no,status=no,resizable=yes,dependent=yes,titlebar=no,menubar=no,scrollbars=yes" ;
+          sOptions += ",width=" + width ;
+          sOptions += ",height=" + height ;
+          sOptions += ",left=" + iLeft ;
+          sOptions += ",top=" + iTop ;
+          var oWindow = window.open( url, "BrowseWindow", sOptions ) ;
+     }
+
+     function SetUrl( url, width, height, alt )
+     {
+          document.getElementById(urlobj).value = url ;
+          oWindow = null;
+     }
+     </script>
+
     <div class="container-fluid">
       <div class="row">
 
         <div class="col-md-offset-1 col-sm-11 col-md-11">
           <ul class="list-group list-inline">
-			<li class="list-group-item"><?php echo $this->Html->link(__('New Field Data', true), array('action' => 'add')); ?>	</li>
+<!-- 			<li class="list-group-item"><?php echo $this->Html->link(__('Filemanager', true), array('action' => 'add')); ?>	</li> -->
+			<li class="list-group-item"><span class="text-primary pointer" onclick="BrowseServer('id_of_the_target_input',<?php e("'$path'");?>);">Administrador de Archivos</span></li>
 			<li class="list-group-item"><?php echo $this->Html->link(__('List Field Names', true), array('controller' => 'field_names', 'action' => 'index')); ?> </li>
 			<li class="list-group-item"><?php echo $this->Html->link(__('New Field Names', true), array('controller' => 'field_names', 'action' => 'add')); ?> </li>
 			<li class="list-group-item"><?php echo $this->Html->link(__('List Users', true), array('controller' => 'users', 'action' => 'index')); ?> </li>
@@ -94,7 +131,6 @@
 				<div class="panel-heading">
 					<h3 class="panel-title">
 						<?php e($fieldDataUser[$index_field]['name'].' '.$fieldDataUser[$index_field]['last_name']);?> &nbsp;
-						
 						<span class="pull-right">
 						
 							<span class="label label-company">
@@ -123,11 +159,11 @@
 								}
 								?>
 							</span> &nbsp;
-							<span id="button_show_<?php e($index_field);?>" class="label label-success pointer">more ... &#9660;</span> &nbsp;
+							<span id="button_show_<?php e($index_field);?>" class="label label-success pointer"><?php ($_SESSION['Auth']['User']['id']!=$fieldDataContent['id'])?e('more ...&nbsp;<i class="fa fa-caret-down"></i>'):e('less ...&nbsp;<i class="fa fa-caret-up"></i>') ?> </span> &nbsp;
 						</span>
 					</h3>
 				</div>
-				<span id="show_panel_<?php e($index_field);?>" class="show_panel_content" >
+				<span id="show_panel_<?php e($index_field);?>" class="<?php ($_SESSION['Auth']['User']['id']!=$fieldDataContent['id'])?e("show_panel_content"):e("")?>" >
 					<div class="panel-body"> 
 
 						<table class="table table-bordered table-hover table-striped responstable">

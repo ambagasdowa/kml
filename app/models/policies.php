@@ -4,6 +4,12 @@ class Policies extends AppModel {
 	var $useDbConfig = 'policie';
 	var $useTable = 'policies';
 	var $primaryKey = 'id';
+	
+// JW - Behavior initiated from plugin. 
+	var $actsAs = array('Search.Searchable');
+	var $filterArgs = array(array('name' => 'name', 'type' => 'query', 'method' => 'filterTitle'));
+	
+	
 	var $validate = array(
 		'user_id' => array(
 			'numeric' => array(
@@ -61,4 +67,23 @@ class Policies extends AppModel {
 // 			'order' => ''
 // 		)
 	);
+	
+
+// JW - method as decalred in $filterArgs to process the free form search.
+	function filterTitle($data, $field = null) {
+		
+		debug($data);
+		if (empty($data['name'])) {
+			return array();
+		}
+		$search = '%' . $data['name'] . '%';
+		return array(
+			'OR'  => array(
+				$this->alias . '.name LIKE' => $search,
+				$this->alias . '.description LIKE' => $search,
+			));
+	}
+	
+	
+	
 }

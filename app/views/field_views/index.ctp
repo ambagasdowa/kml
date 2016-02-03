@@ -1,8 +1,9 @@
 
     <div class="container-fluid">
-      <div class="row">
 
+      <div class="row">
         <div class="col-md-offset-1 col-sm-11 col-md-11">
+
           <ul class="list-group list-inline">
 			<li class="list-group-item">
 				<?php echo $this->Html->link(__('New Field View', true), array('action' => 'add')); ?>			</li>
@@ -64,21 +65,20 @@
 						echo $this->Paginator->counter(array(
 						'format' => __('Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%', true)
 						));
-						?>				</p>
+					?>
+				</p>
 
-				<ul class="pagination">
-							<?php 
-	
-							echo $this->Paginator->prev( '«' ,array('tag'=>'li'),null, array('aria-hidden'=>'true','class' => 'disabled','tag'=>'li')); 
-						
-	?>							<?php 
-	
-							echo $this->Paginator->numbers(array('separator' => null,'tag'=>'li'));
-						
-	?>						<?php 
-	
-							echo $this->Paginator->next( '»' , array('tag'=>'li'), null, array('aria-hidden'=>'true','class' => 'disabled','tag'=>'li'));
-	?>				</ul>
+	<ul class="pagination">
+		<?php 
+			echo $this->Paginator->prev( '«' ,array('tag'=>'li'),null, array('aria-hidden'=>'true','class' => 'disabled','tag'=>'li')); 
+		?>
+		<?php 
+			echo $this->Paginator->numbers(array('separator' => null,'tag'=>'li'));
+		?>
+		<?php 
+			echo $this->Paginator->next( '»' , array('tag'=>'li'), null, array('aria-hidden'=>'true','class' => 'disabled','tag'=>'li'));
+		?>
+	</ul>
           </div>
         </div> <!--main-->
       </div> <!--row-->

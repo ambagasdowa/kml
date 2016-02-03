@@ -75,6 +75,7 @@
 		echo $this->Form->input('fecha_a',array('type'=>'hidden','placeholder'=>'fecha_a','class'=>null));
 		echo $this->Form->input('time_a',array('type'=>'hidden','placeholder'=>'time_a','class'=>null));
 		echo $this->Form->input('key_num_4',array('type'=>'hidden','placeholder'=>'key_num_4','class'=>null));
+		echo $this->Form->input('key_num_5',array('type'=>'hidden','placeholder'=>'key_num_5','class'=>null));
 		echo $this->Form->input('alpha_location',array('type'=>'hidden','placeholder'=>'alpha_location','class'=>null));
 		echo $this->Form->input('alpha_location_1',array('type'=>'hidden','placeholder'=>'alpha_location_1','class'=>null));
 		echo $this->Form->input('float_data',array('type'=>'hidden','placeholder'=>'float_data','class'=>null));

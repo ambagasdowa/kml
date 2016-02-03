@@ -94,4 +94,34 @@ class Policy extends AppModel {
 			'insertQuery' => ''
 		)
 	);
+	
+// JW - Behavior initiated from plugin. 
+	var $actsAs = array('Search.Searchable');
+	var $filterArgs = array(array('name' => 'name', 'type' => 'query', 'method' => 'filterTitle'));
+	
+// JW - method as decalred in $filterArgs to process the free form search.
+	function filterTitle($data, $field = null) {
+		
+// 		debug($this->alias);
+		if (empty($data['name'])) {
+			return array();
+		}
+		if(checkAdmin($_SESSION['Auth']['User']['group_id']) !== TRUE){
+			$status = array($this->alias . '.status' => 'Active');
+		}else{
+			$status = array($this->alias . '.status' => array('Active','Inactive'));
+		}
+// 		debug($status);
+		$search = '%' . $data['name'] . '%';
+		return array(
+				'AND' => array (
+					$status
+				),
+				'OR'  => array(
+					$this->alias . '.name LIKE' => $search,
+					$this->alias . '.description LIKE' => $search,
+				)
+			);
+	}
+	
 }

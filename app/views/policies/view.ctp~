@@ -397,15 +397,17 @@ var message="No se Autoriza la Impresion de este Documento";
 
 
 <div id="dashboard-header" class="row">
-	<div class="col-xs-12 col-sm-4 col-md-5">
-<!--		<ol class="breadcrumb">
-			<li><a href="#">Home</a></li>
-			<li><a href="#">Library</a></li>
-			<li class="active">Data</li>
-		</ol>-->
-		<h4>Documento / <?php e(ucfirst($type));?></h4>
+	<div class="col-xs-12 col-sm-4 col-md-3">
+<!-- 		<ol class="breadcrumb"> -->
+<!-- 			<li><a href="#">Home</a></li> -->
+<!-- 			<li><a href="#">Library</a></li> -->
+<!-- 			<li class="active">Data</li> -->
+			<?php echo $this->element('policies/search_policie');?>
+<!-- 		</ol> -->
+<!-- 		<h4>Documento / <?php e(ucfirst($type));?></h4> -->
 	</div>
 </div>
+
 <div class="row-fluid hidden-print">
 <!-- <div class="row"> -->
 	<div id="dashboard_links" class="col-xs-6 col-sm-2 pull-right">
@@ -536,8 +538,9 @@ var message="No se Autoriza la Impresion de este Documento";
 	<?php //var_dump($type);?>
 		<h3><?php __('Opciones'); ?></h3>
 			<ul class="list-group list-inline">
-				<li class="list-group-item"><?php echo $this->Html->link(__('Listar '.$type, true), array('action' => 'index')); ?></li>
+<!-- 				<li class="list-group-item"><?php echo $this->Html->link(__('Listar '.$type, true), array('action' => 'index')); ?></li> -->
 <!-- 				<button onclick="setFs()">Full Screen</button> -->
+
 			</ul>
 		</div>
 </div>

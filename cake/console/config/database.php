@@ -96,6 +96,16 @@ class DATABASE_CONFIG {
 		'encoding' => 'utf8'
 	);
 	
+	var $portal_company = array(
+		'driver' => 'mysql',
+		'persistent' => true,
+		'host' => 'localhost',
+		'login' => 'portal_company',
+		'password' => '@portal_company#',
+		'database' => 'portal_company',
+		'encoding' => 'utf8'
+	);
+	
 	//then can add the non-essential data of the app
 	var $policie = array(
 		'driver' => 'mysql',
@@ -105,6 +115,17 @@ class DATABASE_CONFIG {
 		'password' => '@policies#',
 		'database' => 'policies',
 		'encoding' => 'utf8'
+	);
+	
+	var $tralix = array(
+		'driver' => 'mysql',
+		'persistent' => false,
+		'host' => 'localhost',
+		'login' => 'tralix',
+		'password' => '@tralix#',
+		'database' => 'tralix',
+		'prefix' => '',
+		'encoding' => 'utf8',
 	);
 	
 	//this is and must be non-sessential connection to mssql
@@ -129,7 +150,7 @@ class DATABASE_CONFIG {
 	// concilation => concilation fo iave 
 /** WARNING starting mssql connections **/
 /** NOTE get the database and write to it */
-	var $mssql_casetas = array( // connect to remote mssql server
+	var $mssql_sistemas = array( // connect to remote mssql server
 		'driver' => 'mssql',
 		'persistent' => false,
 		'host' => 'IntegraDb',
@@ -137,9 +158,9 @@ class DATABASE_CONFIG {
 		'password' => 'lis',
 		'database' => 'sistemas',
 		'prefix' => '',
- 		'encoding' => 'ISO-8859-1',
+// 		'encoding' => 'ISO-8859-1',
 // 		'encoding' => 'Latin1',
-// 		'encoding' => 'utf8',
+		'encoding' => 'utf8',
 	    'port' => '1433'
 	);
 	

@@ -19,6 +19,19 @@ src: url('webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
 		<div id="_postHeader">
 			<h1><?php __('Posts');?></h1>
 		</div>
+		
+		<div class="filter">
+			<?php
+				echo $this->Form->create('Post', array(
+														'url' => array_merge(array('action' => 'index'), $this->params['pass'])
+													   )
+										);
+				echo $this->Form->input('title', array('div' => false, 'empty' => true)); // empty creates blank option.
+	// 			echo $this->Form->input('status', array('div' => false, 'empty' => true)); // disable div output.
+				echo $this->Form->submit(__('Search', true), array('div' => false));
+				echo $this->Form->end();
+			?>
+		</div>
 
 		<div id="_postContent">
 			<table  cellpadding="0" cellspacing="0">
