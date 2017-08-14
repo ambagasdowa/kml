@@ -1,5 +1,7 @@
 <?php
 	// policies
+	$evaluate = false;
+	$requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere') );
 ?>
 <!--<style>
 @media print {

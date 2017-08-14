@@ -69,6 +69,12 @@
 							<i class="fa fa-square-o"></i>
 						</label>
 					</div>
+					<div class="checkbox"><span><kbd> Some Check </kbd>&nbsp;</span>
+						<label>
+							<input type="checkbox" name="data[MrSourceAccount][some_check]">
+							<i class="fa fa-square-o"></i>
+						</label>
+					</div>
 				<?php
 
 // 					echo $this->Form->input('MrSourceAccount._key',

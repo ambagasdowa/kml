@@ -1,5 +1,10 @@
 <?php $public === true ? ($user_id = $_SESSION['Auth']['User']['id']) : ($user_id = null) ; ?>
 
+<?php 
+	// NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal
+	$evaluate = false;
+	$requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere') );
+?>
 
 	<!-- Carousel
     ================================================== -->
@@ -31,7 +36,8 @@
 					  ),
 							array(
 									'controller'=>'Policies',
-									'action'=>'view'
+									'action'=>'view',
+									'type:1/subtype:1'
 // 							  		$user_id
 							) ,
 							array('escape' => false),
@@ -64,7 +70,8 @@
 					  ),
 							array(
 									'controller'=>'Policies',
-									'action'=>'view'
+									'action'=>'view',
+									'type:1/subtype:1'
 // 							  		$user_id
 							) ,
 							array('escape' => false),
@@ -97,7 +104,8 @@
 					  ),
 							array(
 									'controller'=>'Policies',
-									'action'=>'view'
+									'action'=>'view',
+									'type:1/subtype:1'
 // 							  		$user_id
 							) ,
 							array('escape' => false),
@@ -130,8 +138,9 @@
 					  ),
 							array(
 									'controller'=>'Policies',
-									'action'=>'view'
+									'action'=>'view',
 // 							  		$user_id
+									'type:1/subtype:1'
 							) ,
 							array('escape' => false),
 							null
@@ -155,4 +164,6 @@
         <span class="sr-only">Next</span>
       </a>
     </div><!-- /.carousel -->
+
+<span><?php echo $this->element('helpdesk/help');?></span>
 

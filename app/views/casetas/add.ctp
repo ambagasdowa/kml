@@ -1,3 +1,10 @@
+<?php
+	// NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal
+	$evaluate = false;
+	$requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere') );
+?>
+
+
 <?php //debug($_SESSION);?>
 		<style>
 /* 		Navigation buttons section */
@@ -40,7 +47,7 @@
       <div class="col-md-offset-1 col-sm-11 col-md-11">
 			<ul class="list-group list-inline">
 				<li>
-					<?php echo $this->Html->link(__('Ver Registros', true), array('action' => 'index'),array('class'=>'btn btn-success viewlink'));?>
+					<?php echo $this->Html->link(__('Ver Conciliaciones', true), array('action' => 'index/page:1/sort:id/direction:asc'),array('class'=>'btn btn-success viewlink'));?>
 				</li>
 				<li>
 					<a href="<?php e($this->webroot)?>" class="btn btn-danger cancellink">Cancelar</a>
@@ -97,6 +104,22 @@
 
 // 					}
 
+			
+// 		pr($unidades);
+			
+		if ($_SESSION['Auth']['User']['group_id'] == 6) {
+
+			e('<h2>'.ucwords(current($unidades)).'</h2>');
+
+			echo $this->Form->input(
+							'Caseta._area',
+								array(	
+										'class'=>'form-control',
+										'type'=>'hidden',
+										'value'=>key($unidades)
+									)
+			     );
+		} else {
 			echo $this->Form->input('Caseta._area',
 												array(	
 // 														'id'=>'select',
@@ -105,10 +128,11 @@
 // 														'data-size'=>"2",
 // 														'style'=>'width:350px;',
 														'type'=>'select',
+														'empty'=>'Seleccionar',
 														'options'=>$unidades
 													)
 									);
-
+		}
 // 			e($ajax->observeField('CasetasArea',
 // 							array('url'=>array('controller'=>'Casetas',
 // 												'action'=>'getAreas',
@@ -126,7 +150,7 @@
 // 							 echo $this->element('casetas/get_areas');
 						?>
 					</div>--> <!--end seraf-->
-
+		
 	<?php
 					echo $this->Form->file('upload', array('type'=>'file','label'=>false,'class'=>'input'));
 // 					e('</span>');
@@ -134,6 +158,8 @@
 	<!-- 					</table> -->
 <!-- 				</div>  -->
           <!--end table response-->
+
+          <p>&nbsp;</p>
 					<?php echo $this->Form->input('status',array('type'=>'hidden','class'=>'form-control','value'=>'Active'))?>
 					<?php echo $this->Form->end(__('Enviar', true));?>
 			</div>
@@ -142,20 +168,20 @@
       <!--</div>--> <!--row-->
     <!--</div>--> <!--container fluid-->
 
+    
+    <!--<span id="button_show_0" class="label label-success pointer">more ...&nbsp;<i class="fa fa-caret-down"></i> </span>
+    <br />
+    <span id="show_panel_0" class="show_panel_content" > <p>TODO </p> </span>-->
+    
 <script>
 
-					require(['jquery', 'bootstrap'], function($) {
-						$(document).ready(function () {
-							
-							$('.selectpicker').selectpicker(
-								{
-									style: 'btn-info',
-									size: 4
-								}
-							);
-							
-						});//end document.ready
-					});//end require
+// 			var divTag = document.getElementById('button_show_0');
+// 			var panel_show = document.getElementById('show_panel_0');
+// 			$(document).ready(function(){
+// 				$(divTag).click(function(){
+// 					$(panel_show).toggle(['slow']);
+// 				});
+// 			});
 
 </script>
 

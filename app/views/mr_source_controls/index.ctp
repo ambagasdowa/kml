@@ -1,4 +1,9 @@
 <?php
+	// NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal
+	$evaluate = true;
+	$requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere') );
+	
+	
 	echo $ajax->form(array('type' => 'post',
 		'options' => array(
 			'model'=>'MrSourceControl',
@@ -267,9 +272,11 @@
 			<span id="loading" style="display:none;" ><i class="fa fa-spinner fa-pulse fa-4x"></i></span>
 
 			<?php $_SESSION['Auth']['User']['root_modal'] = '<i class="fa fa-spinner fa-pulse fa-4x"></i>';?>
-			<a href="#" class="btn btn-success" data-toggle="modal" data-target="#myModal">Ayuda</a>
-
-
+			
+			<!-- Button trigger modal -->
+			<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">
+			Ayuda
+			</button>
         </div> <!--main-->
       </div> <!--row-->
     </div> <!--container fluid-->
@@ -315,12 +322,28 @@
 	</script>
 
 	<script>
-			require(['isotope','jquery'], function($) {
-				$(document).ready(function () {
-					
-
-				});//end document.ready
-			});//end require
-
-			
+// 			require(['isotope','jquery'], function($) {
+// 				$(document).ready(function () {
+// 					
+// 
+// 				});//end document.ready
+// 			});//end require
 	</script>
+
+				<!-- Modal -->
+<!-- 				<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"> -->
+					<!--<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+								<h4 class="modal-title" id="myModalLabel">Modal title</h4>
+							</div>
+							<div class="modal-body">buoodyy</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+								<button type="button" class="btn btn-primary">Save changes</button>
+							</div>
+						</div>
+					</div>-->
+<!-- 				</div> -->
+				<!-- Modal -->

@@ -18,7 +18,7 @@
 				-o-transition-duration: 300ms;
 				-o-transition-property: height;
 				-o-transition-timing-function: ease;
-			
+
 			}
 			.outer_customize .h2{
 				color: #fff;
@@ -51,7 +51,7 @@
 			.outer_customize .up{
 				background-position: left top;
 			}
-			
+
 	/* 		this link is fixed againts the lenght of the content */
 /*			.fixed-link {
 				position: fixed;
@@ -60,19 +60,20 @@
 				cursor: pointer;
 				z-index:150;
 			}*/
-			
+
 	/* 		footer content */
 			.footer_app{
 				margin-top:20px;
 			}
 		</style>
-		
+
 <!-- 		<a class="fixed-link btn btn-primary" href="<?php e($this->webroot)?>">Inicio</a> -->
 
-		<footer class="footer">
-			<div class="container">
+		<!-- <footer class="footer"> -->
+		<footer>
+			<div class="container_footer">
 				<div id="customize" class="outer_customize">
-				
+
 					<div class="h2">
 						<a class="a_link" onclick="opend()" href="javascript:void(0);">
 							<span id="icodir" class="dispview up"></span>
@@ -83,7 +84,7 @@
 	<!--     testing -->
 					<div class="label">
 						<div class="running-text">
-							
+
 							<?php //echo date('Y-m-s');?>
 							<?php //var_dump($_SESSION['Auth']['User']['alert']);?>
 							<?php //if(!empty($_SESSION['Auth']['User']['alert'])) {?>
@@ -97,7 +98,7 @@
 <!-- 									</div> -->
 <!-- 								</span> -->
 							<?php //}?>
-							
+
 <!--							<ul class="date-top">
 								<li class="entypo-calendar" style="margin-right:5px"></li>
 								<li >Wed,  24 June 2015</li>
@@ -111,19 +112,19 @@
 								<li class="sec">45</li>
 								<li class="meridiem">PM</li>
 							</ul>-->
-							
+
 						</div>
 					</div>
 	<!--         testing -->
-					
+
 				</div>
 			</div>
 		</footer>
-		
-		<div class="help">
+
+		<!-- <div class="help">
 			<a href="#" class="btn btn-danger helplink" data-toggle="modal" data-target="#myModal"><i class="fa fa-question"></i></a>
-		</div>
-		
+		</div> -->
+
 		<script>
 			var el = document.getElementById("customize");
 			var ic = document.getElementById('icodir');

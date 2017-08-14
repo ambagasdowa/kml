@@ -1,5 +1,10 @@
 <?php $public === true ? ($user_id = $_SESSION['Auth']['User']['id']) : ($user_id = null) ; ?>
 
+<?php 
+	// NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal
+	$evaluate = false;
+	$requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere') );
+?>
 
 	<!-- Carousel
     ================================================== -->
@@ -12,6 +17,7 @@
         <li data-target="#carouselKml" data-slide-to="3"></li>
       </ol>
       <div class="carousel-inner" role="listbox">
+      
         <div class="item active">
           <img class="first-slide img-responsive" src="img/backgrounds/<?php e(imgPaths($portalUrl)['landingImgBg']);?>" alt="first-slide">
           <div class="container">
@@ -30,7 +36,8 @@
 					  ),
 							array(
 									'controller'=>'Policies',
-									'action'=>'view'
+									'action'=>'view',
+									'type:1/subtype:1'
 // 							  		$user_id
 							) ,
 							array('escape' => false),
@@ -44,6 +51,7 @@
             </div>
           </div>
         </div>
+        
         <div class="item">
           <img class="second-slide img-responsive" src="img/backgrounds/<?php e(imgPaths($portalUrl)['landingImgBg']);?>" alt="Second slide">
           <div class="container">
@@ -62,7 +70,8 @@
 					  ),
 							array(
 									'controller'=>'Policies',
-									'action'=>'view'
+									'action'=>'view',
+									'type:1/subtype:1'
 // 							  		$user_id
 							) ,
 							array('escape' => false),
@@ -76,6 +85,7 @@
             </div>
           </div>
         </div>
+        
         <div class="item">
           <img class="third-slide img-responsive" src="img/backgrounds/<?php e(imgPaths($portalUrl)['landingImgBg']);?>" alt="Third slide">
           <div class="container">
@@ -94,7 +104,8 @@
 					  ),
 							array(
 									'controller'=>'Policies',
-									'action'=>'view'
+									'action'=>'view',
+									'type:1/subtype:1'
 // 							  		$user_id
 							) ,
 							array('escape' => false),
@@ -108,6 +119,7 @@
             </div>
           </div>
         </div>
+        
         <div class="item">
           <img class="fourth-slide img-responsive" src="img/backgrounds/<?php e(imgPaths($portalUrl)['landingImgBg']);?>" alt="Fourth slide">
           <div class="container">
@@ -126,8 +138,9 @@
 					  ),
 							array(
 									'controller'=>'Policies',
-									'action'=>'view'
+									'action'=>'view',
 // 							  		$user_id
+									'type:1/subtype:1'
 							) ,
 							array('escape' => false),
 							null
@@ -152,3 +165,4 @@
       </a>
     </div><!-- /.carousel -->
 
+<span><?php echo $this->element('casetas/help_manual');?></span>

@@ -15,10 +15,10 @@
 	/**
 	 * @package name <setNameDefinitions> set languaje of the app
 	 * @use edit as you need
-	 * 
+	 *
 	 */
-	// some title in root modal alert 
-		
+	// some title in root modal alert
+
 		function languaje($langChart=null) {
 			$lang = array('en','es','jp','ru','it','fr');//examples
 				// set the default Languaje
@@ -56,7 +56,7 @@
 									'navMenuC'=>'Politicas',
 									'navMenuD'=>'Descargas',
 									'navMenuE'=>'Salir',
-									'navMenuF'=>'Anexos de las Politicas',
+									'navMenuF'=>'Anexos',
 									'navMenuG'=>'Manuales'
 					);
 
@@ -91,11 +91,11 @@
 									'navMenuC'=>'Policies',
 									'navMenuD'=>'Downloads',
 									'navMenuE'=>'Logout',
-									'navMenuF'=>'PoliciesAnexos',
+									'navMenuF'=>'Anexos',
 									'navMenuG'=>'Manuals'
 						);
 				}
-			
+
 			return $languaje;
 		}
 	/**
@@ -110,7 +110,7 @@
 	 * @param=>unset <bool if you want remove the first pointer>
 	 * NOTE  array('model'=>array('field','value'));
 	 */
-	
+
 	function imgPaths($appName=null) {
 		$apps = array('gst','kml','portal','radiobases');//examples
 		if ($appName === 'gst') {
@@ -136,7 +136,7 @@
 	}
 	/**
 	 * @package name <checkAdmin>
-	 * @definition checks the level-group of the user 
+	 * @definition checks the level-group of the user
 	 * @usage isql model connection with mssql
 	 * @param=>arrayString <array | string>
 	 * @param=>string <array | string>
@@ -146,19 +146,19 @@
 	 * NOTE  array('model'=>array('field','value'));
 	 */
 	function checkAdmin ($id_group=null) {
-		
+
 		  if($id_group === '1' OR $id_group === '7' ) {
 			return true;
 		} else {
 			return false;
 		}
 	}
-	
+
 
 
 	/**
 	 * @package name <checkUser>
-	 * @definition checks the level-group of the user 
+	 * @definition checks the level-group of the user
 	 * @usage isql model connection with mssql
 	 * @param=>arrayString <array | string>
 	 * @param=>string <array | string>
@@ -167,20 +167,27 @@
 	 * @param=>unset <bool if you want remove the first pointer>
 	 * NOTE  array('model'=>array('field','value'));
 	 */
+	 //NOTE which groups in that module gorup xx and module_name
 	function checkUser ($id_group=null,$group=null) {
-		
-		if ( ((int)$id_group === 6 OR (int)$id_group === 1 OR (int)$id_group === 7) and $group === 'Casetas') {
+
+		if ( ( (int)$id_group === 8 OR (int)$id_group === 6 OR (int)$id_group === 1 OR (int)$id_group === 7) and $group === 'Casetas') {
 			return true;
 		} else if (( (int)$id_group === 5 OR (int)$id_group === 1  OR (int)$id_group === 7) and $group === 'PoliciesAnexos') {
+			return true;
+		} else if (( (int)$id_group === 4 OR (int)$id_group === 1  OR (int)$id_group === 7) and $group === 'Secure') {
+			return true;
+		} else if (((int)$id_group === 9 OR (int)$id_group === 1 OR (int)$id_group === 7) and $group === 'Providers') {
+			return true;
+		} else if (( (int)$id_group === 8 OR (int)$id_group === 10 OR (int)$id_group === 1 OR (int)$id_group === 7) and $group === 'Ingresos') {
 			return true;
 		} else {
 			return false;
 		}
 	}
-	
+
 	/**
 	 * @package name <checkSuperUser>
-	 * @definition checks the level-group of the user 
+	 * @definition checks the level-group of the user
 	 * @usage isql model connection with mssql
 	 * @param=>arrayString <array | string>
 	 * @param=>string <array | string>
@@ -190,8 +197,8 @@
 	 * NOTE  array('model'=>array('field','value'));
 	 */
 	function checkSuperUser ($id_group=null,$number_id=null,$superUser=null) {
-		
-		$root=array('9000000','9000002','4000003');
+
+		$root=array('9000000','9000001','9000002','4000003','90000100');
 // 		var_dump(in_array($number_id,$root));
 // 		var_dump((int)$id_group);
 // 		var_dump((bool)$superUser);
@@ -201,7 +208,7 @@
 			return false;
 		}
 	}
-	
+
 	 /**
 	 * @package name <checkBrowser> this must change
 	 * @congif build a script code to call datepicker
@@ -209,9 +216,9 @@
 	 * @param=>userAgent <string | set the string of "HTTP_USER_AGENT" >
 	 * NOTE  this function is far away to be complete but for the purpose is ok
 	 */
-		
+
 	function checkBrowser($userAgent=null,$userAgentHaystack=null,$crop=null){
-		
+
 		if($userAgentHaystack === true){
 			$userAgentHaystack = array('Firefox','Trident','konqueror','Presto','Chrome','Apple','Webkit','w3m');
 		}else{
@@ -233,10 +240,10 @@
 
 		  }
 		}
-		
+
 		return false;
 	}//End of checkBrowser
-	
+
 	 /**
 	 * @package name <htmlMotor> this must change
 	 * @congif build a script code to call datepicker
@@ -244,7 +251,7 @@
 	 * @param=>userAgent <string | set the string of "HTTP_USER_AGENT" >
 	 * NOTE  this function is far away to be complete but for the purpose is ok
 	 */
-		
+
 	function htmlMotor () {
 		$htmlMotor = array(
 							'fa fa-chrome'=>'Chrome',
@@ -256,7 +263,7 @@
 		);
 		return $htmlMotor;
 	}
-	
+
 	 /**
 	 * @package name <encrypt> this must change
 	 * @congif build a script code to call datepicker
@@ -265,9 +272,9 @@
 	 * NOTE  this function is far away to be complete but for the purpose is ok
 	 */
 	function dEncrypt($decrypted_encrypt, $password, $salt , $mode) {
-		
+
 		if ($mode === 'encrypt') {
-			
+
 			$decrypted = $decrypted_encrypt;
 			// Build a 256-bit $key which is a SHA256 hash of $salt and $password.
 			$key = hash('SHA256', $salt . $password, true);
@@ -279,7 +286,7 @@
 			// We're done!
 			return $iv_base64 . $encrypted;
 		} else if ($mode === 'decrypt'){
-			
+
 			$encrypted = $decrypted_encrypt;
 			// Build a 256-bit $key which is a SHA256 hash of $salt and $password.
 			$key = hash('SHA256', $salt . $password, true);
@@ -331,7 +338,7 @@
 			return null;
 		}
 	}
-	
+
 	 /**
 	 * @package name <map_utf8> this must change
 	 * @congif build a script code to call datepicker
@@ -347,7 +354,7 @@
 
 		return $result;
 	}
-	
+
 	 /**
 	 * @package name <cp1252_to_utf8> this must change
 	 * @congif build a script code to call datepicker
@@ -392,21 +399,21 @@
 			"\xc2\x9e" => "\xc5\xbe",     /* LATIN SMALL LETTER Z WITH CARON */
 			"\xc2\x9f" => "\xc5\xb8"      /* LATIN CAPITAL LETTER Y WITH DIAERESIS*/
 		);
-		
+
 			return  strtr(utf8_encode($str), $cp1252_map);
 	}
-	
+
 	/** NOTE <Define dirs>**/
 	function createDirs() {
 		return array(
 						'1'=>'shares',
 						'2'=>'Desktop',
 						'3'=>'Documents'
-			
+
 		);
 	}
-	
-	
+
+
 	// ggarciaa at gmail dot com (04-July-2007 01:57)
 	// I needed to empty a directory, but keeping it
 	// so I slightly modified the contribution from
@@ -429,7 +436,7 @@
 			@rmdir($dir);
 		}
 	}
-	
+
 	 /**
 	 * @package name <GeraHash> this must change
 	 * @congif build a script code to call datepicker
@@ -437,7 +444,7 @@
 	 * @param=>userAgent <string | set the string of "HTTP_USER_AGENT" >
 	 * NOTE  this function is far away to be complete but for the purpose is ok
 	 */
-	 
+
 	function GeraHash($qtd){
 	//Under the string $Caracteres you write all the characters you want to be used to randomly generate the code.
 	$Caracteres = 'ABCDEFGHIJKLMOPQRSTUVXWYZ0123456789';
@@ -451,7 +458,7 @@
 		}
 
 	return $Hash;
-	} 
+	}
 	/**
 	* Replace language-specific characters by ASCII-equivalents.
 	* @param string $s
@@ -502,8 +509,8 @@
 		);
     return strtr($string, $replace);
 	}
-	
-	
+
+
 	function replace ($string) {
 		$_convertTable = array(
 			'&amp;' => 'and',   '@' => 'at',    '©' => 'c', '®' => 'r', 'À' => 'a',
@@ -562,7 +569,270 @@
 		);
 		return strtr($string, $_convertTable);
 	}
-	
-	
+
+
+
+	 /**
+	 * @package name <cp1252_to_utf8> this must change
+	 * @congif build a script code to call datepicker
+	 * @usage
+	 * @param=>userAgent <string |  Here's some code that addresses the issue that Steven describes in the previous comment; >
+	 * NOTE  this function is far away to be complete but for the purpose is ok
+	 */
+
+
+      function GetNationalMexicanHolidays($year=null){
+
+		  $HolyMonth['sub']['AshesWednesday']= 'P46D';
+		  $HolyMonth['sub']['PalmSunday']= 'P7D';
+		  $HolyMonth['sub']['HolyThursday']= 'P3D';
+		  $HolyMonth['sub']['GoodFriday']= 'P2D';
+		  $HolyMonth['sub']['SaturdayOfGlory']= 'P1D';
+		  $HolyMonth['add']['AscentionOfMigthyLord']= 'P39D';
+		  $HolyMonth['add']['Pentecostes']= 'P49D';
+		  $HolyMonth['add']['HolynessTrinity']= 'P56D';
+		  $HolyMonth['add']['CorpusChristi']= 'P60D';
+
+        if (is_array($year) == true) {
+
+		  foreach ($year as $id_yr => $cyear) {
+
+            $GetEaster[$cyear] = get_easter_datetime($cyear)->format('Y-m-d');
+
+            foreach($HolyMonth['sub'] as $DayCeleb => $celebration ){
+                $date = new DateTime($GetEaster[$cyear]);
+                $date->sub(new DateInterval($celebration));
+                $BeforeEaster[$cyear][$DayCeleb] = $date->format('Y-m-d');
+            }
+
+            foreach($HolyMonth['add'] as $DayCeleb => $celebration){
+                $date = new DateTime($GetEaster[$cyear]);
+                $date->add(new DateInterval($celebration));
+                $AfterEaster[$cyear][$DayCeleb] = $date->format('Y-m-d');
+            }
+
+            $MxBankHolidays[$cyear] = array(
+                        'NewYearsDay' => $cyear.'-01-01',
+                        'BattleOfPuebla' => ''.date('Y-m-d',strtotime('first Monday of February'.$cyear)),
+                        'JuarezBirthday' => ''.date('Y-m-d',strtotime('third Monday of March'.$cyear)),
+                        'LabourDay' => $cyear.'-05-01',
+                        'IndependenceDay' => $cyear.'-09-16',
+                        'MexicanRevolution' => ''.date('Y-m-d',strtotime('third Monday of November'.$cyear)),
+                        'Christmas' => $cyear.'-12-25'
+            );
+
+            $MxMexicanHolidays[$cyear] = array(
+                        'HolyThursday' => $BeforeEaster[$cyear]['HolyThursday'],// Holy Thursday
+                        'GoodFriday' => $BeforeEaster[$cyear]['GoodFriday'], // Good Friday
+                        'HolySaturday' => $BeforeEaster[$cyear]['SaturdayOfGlory'], // Holy Saturday
+                        'AllSoulsDay' => $cyear.'-11-02', // All Souls'Day
+                        'OurLadyOfGuadalupe' => $cyear.'-12-12' // Our Lady of Guadalupe
+            );
+
+            $MexicanoHolidays[$cyear]['holiday'] = $MxBankHolidays[$cyear];
+            $MexicanoHolidays[$cyear]['holiday']['GoodFriday'] = $BeforeEaster[$cyear]['GoodFriday'];
+            $MexicanoHolidays[$cyear]['holiday']['SaturdayOfGlory'] = $BeforeEaster[$cyear]['SaturdayOfGlory'];
+            $MexicanoHolidays[$cyear]['holiday']['AllSoulsDay'] = $MxMexicanHolidays[$cyear]['AllSoulsDay'];
+            $MexicanoHolidays[$cyear]['mexican'] = $MxMexicanHolidays[$cyear];
+            $MexicanoHolidays[$cyear]['easter'] = $GetEaster[$cyear];
+            $MexicanoHolidays[$cyear]['holymonth'] = $HolyMonth;
+            $MexicanoHolidays[$cyear]['beforeeaster'] = $BeforeEaster[$cyear];
+            $MexicanoHolidays[$cyear]['aftereaster'] = $AfterEaster[$cyear];
+		  }
+
+		  return $MexicanoHolidays;
+
+        } else {
+
+		  $GetEaster = get_easter_datetime($year)->format('Y-m-d');
+
+		  foreach($HolyMonth['sub'] as $DayCeleb => $celebration ){
+			$date = new DateTime($GetEaster);
+			$date->sub(new DateInterval($celebration));
+			$BeforeEaster[$DayCeleb] = $date->format('Y-m-d');
+		  }foreach($HolyMonth['add'] as $DayCeleb => $celebration){
+			$date = new DateTime($GetEaster);
+			$date->add(new DateInterval($celebration));
+			$AfterEaster[$DayCeleb] = $date->format('Y-m-d');
+		  }
+
+		  $MxBankHolidays = array(
+					'NewYearsDay' => $year.'-01-01',
+					'BattleOfPuebla' => ''.date('Y-m-d',strtotime('first Monday of February'.$year)),
+					'JuarezBirthday' => ''.date('Y-m-d',strtotime('third Monday of March'.$year)),
+					'LabourDay' => $year.'-05-01',
+					'IndependenceDay' => $year.'-09-16',
+					'MexicanRevolution' => ''.date('Y-m-d',strtotime('third Monday of November'.$year)),
+					'Christmas' => $year.'-12-25'
+		  );
+
+
+		  $MxMexicanHolidays = array(
+					'HolyThursday' => $BeforeEaster['HolyThursday'],// Holy Thursday
+					'GoodFriday' => $BeforeEaster['GoodFriday'], // Good Friday
+					'HolySaturday' => $BeforeEaster['SaturdayOfGlory'], // Holy Saturday
+					'AllSoulsDay' => $year.'-11-02', // All Souls'Day
+					'OurLadyOfGuadalupe' => $year.'-12-12' // Our Lady of Guadalupe
+		  );
+
+		  $MexicanoHolidays['holiday'] = $MxBankHolidays;
+		  $MexicanoHolidays['holiday']['GoodFriday'] = $BeforeEaster['GoodFriday'];
+		  $MexicanoHolidays['holiday']['SaturdayOfGlory'] = $BeforeEaster['SaturdayOfGlory'];
+		  $MexicanoHolidays['holiday']['AllSoulsDay'] = $MxMexicanHolidays['AllSoulsDay'];
+		  $MexicanoHolidays['mexican'] = $MxMexicanHolidays;
+		  $MexicanoHolidays['easter'] = $GetEaster;
+		  $MexicanoHolidays['holymonth'] = $HolyMonth;
+		  $MexicanoHolidays['beforeeaster'] = $BeforeEaster;
+		  $MexicanoHolidays['aftereaster'] = $AfterEaster;
+
+		  return $MexicanoHolidays;
+        }
+
+      } //end GetNationalMexicanHolidays
+
+	 /**
+	 * @package name <cp1252_to_utf8> this must change
+	 * @congif build a script code to call datepicker
+	 * @usage
+	 * @param=>userAgent <string |  Here's some code that addresses the issue that Steven describes in the previous comment; >
+	 * NOTE  this function is far away to be complete but for the purpose is ok
+	 */
+
+      function get_easter_datetime($year=null){
+		  $base = new DateTime("$year-03-21");
+		  $days = easter_days($year);
+		return $base->add(new DateInterval("P{$days}D"));
+      }
+
+	 /**
+	 * @package name <cp1252_to_utf8> this must change
+	 * @congif build a script code to call datepicker
+	 * @usage
+	 * @param=>userAgent <string |  Here's some code that addresses the issue that Steven describes in the previous comment; >
+	 * NOTE  this function is far away to be complete but for the purpose is ok
+	 */
+
+      function GetWorkingDays($MexicanoHolidays=null,$debug=null,$return=null,$saturday=null){
+
+      $detailWorkingDays = array();
+
+      foreach ($MexicanoHolidays as $cyear => $holiday) {
+
+        if($debug){
+            debug($cyear);
+            debug($holiday['holiday']);
+        }
+
+		$holidays = $holiday['holiday'];
+// 		$holidays = $MexicanoHolidays[$cyear]['holiday'];
+		$work = 0;
+		$nowork = 0;
+
+		$startDate = $cyear.'-'.'01'.'-'.'01';
+		$endDate = $cyear.'-'.'12'.'-'.'31';
+
+		$dayx = strtotime($startDate);
+		$endx = strtotime($endDate);
+
+		if($debug){
+            var_dump($startDate);
+            var_dump($endDate);
+            var_dump($return);
+            var_dump($saturday);
+
+            debug('daysx => '.$startDate.' => ' .$dayx);
+            debug('endx => '.$endDate.' => ' .$endx);
+        }
+		if (!empty($saturday) and $saturday == true) {
+			$daysOfWeekend = 5;
+		} else {
+			$daysOfWeekend = 6;
+		}
+
+		if($debug){
+		  echo '<h1>get_working_days</h1>';
+		  echo 'startDate: '.date('r',strtotime( $startDate)).'<br>';
+		  echo 'endDate: '.date('r',strtotime( $endDate)).'<br>';
+		  echo '<p>Go to work...'.$cyear.'</p>';
+		}
+
+		  while($dayx <= $endx){
+			$day = date('N',$dayx);
+			$date = date('Y-m-d',$dayx);
+		  if($debug) {
+			echo '<br />'.date('r',$dayx).' ';
+		  }
+
+            $new_month = new DateTime($date);
+            $nmonth = date_format($new_month, 'm');
+
+		  if($day > $daysOfWeekend || in_array($date,$holidays)){
+			$detailWorkingDays[$cyear][$nmonth]['list'][$date] = false;
+			$nowork++;
+			/** ALERT add the logic for build the day */
+			  if($debug){
+				if($day > $daysOfWeekend) {
+					echo '<span style="background-color:#34aa8d;display:inline;">weekend</span>';
+					$detailWorkingDays[$cyear][$nmonth]['weekend'][$date] = false;
+				} else {
+					echo '<span style="background-color:#a66f55;display:inline;">holiday</span>';
+					$detailWorkingDays[$cyear][$nmonth]['holiday'][$date] = false;
+					if($date) {
+						$get_holiday = array_keys($holidays,$date);
+							foreach($get_holiday as $key => $desc) {
+								echo '=><span style="background-color:#5a91a2;display:inline;">'.$desc.'</span>';
+							}
+					}
+				}
+			  }
+		  } else {
+			  /** ALERT add if no holiday or weekend*/
+			  $work++;
+			  $detailWorkingDays[$cyear][$nmonth]['laboral'][$date] = true;
+			  $detailWorkingDays[$cyear][$nmonth]['list'][$date] = true;
+		  }
+			$dayx = strtotime($date.' +1 day');
+		}
+
+		  $working[$cyear]['nowork'] = $nowork;
+		  $working[$cyear]['work'] = $work;
+
+		if($debug) {
+		  echo '<p>No work: '.$working[$cyear]['nowork'].'<br>';
+		  echo 'Work: '.$working[$cyear]['work'].'<br>';
+		  echo 'Work + no work: '.($working[$cyear]['nowork']+$working[$cyear]['work']).'<br>';
+		  echo 'All seconds / seconds in a day: '.floatval(strtotime($endDate)-strtotime($startDate))/floatval(24*60*60);
+		  echo '</p>';
+		}
+
+      }
+
+		if( !empty($return) ) {
+			return $detailWorkingDays;
+		} else {
+			return $working;
+		}
+
+	} // GetWorkingDays end's
+
+    function months_es () {
+
+            $months = array (
+                                1   =>  'enero',
+                                2   =>  'febrero',
+                                3   =>  'marzo',
+                                4   =>  'abril',
+                                5   =>  'mayo',
+                                6   =>  'junio',
+                                7   =>  'julio',
+                                8   =>  'agosto',
+                                9   =>  'septiembre',
+                                10  =>  'octubre',
+                                11  =>  'noviembre',
+                                12  =>  'diciembre'
+                             ) ;
+
+        return $months;
+    }
 
 ?>

@@ -2,6 +2,11 @@
 <!--     <div class="container-fluid"> -->
 <!--       <div class="row"> -->
 <!-- <center> -->
+<?php
+	// NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal
+	$evaluate = true;
+	$requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere') );
+?>
       <?php 	echo $this->Session->flash();?>
 		<div class="col-md-offset-1 col-sm-11 col-md-11">
 			<ul class="list-group list-inline">

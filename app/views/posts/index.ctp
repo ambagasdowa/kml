@@ -1,3 +1,8 @@
+<?php
+    // NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal.
+    $evaluate = false;
+    $requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere') );
+?>
 <style>
 @import url(http://fonts.googleapis.com/css?family=Oswald|Roboto:400);
 @import url(http://weloveiconfonts.com/api/?family=brandico);
@@ -13,6 +18,22 @@ src: url('webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
 </style>
 <!--MariaDB [projections]> select id,username,email,id_empresa,level,status,id_theme,last_access from users where year(`last_access`)=year(now()) and month(`last_access`)=month(now()) and day(`last_access`) = day(now());-->
 
+
+		<div class="filter">
+			<?php
+				echo $this->Form->create('Post', array(
+														'url' => array_merge(array('action' => 'index'), $this->params['pass'])
+													   )
+										);
+				echo $this->Form->input('title', array('div' => false, 'empty' => true,'class'=>"input")); // empty creates blank option.
+	// 			echo $this->Form->input('status', array('div' => false, 'empty' => true)); // disable div output.
+				echo $this->Form->submit(__('Search', true), array('div' => false));
+				echo $this->Form->end();
+			?>
+		</div>
+
+
+
 <div id="_postCenter">
 	<article>
 	
@@ -20,30 +41,18 @@ src: url('webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
 			<h1><?php __('Posts');?></h1>
 		</div>
 		
-		<div class="filter">
-			<?php
-				echo $this->Form->create('Post', array(
-														'url' => array_merge(array('action' => 'index'), $this->params['pass'])
-													   )
-										);
-				echo $this->Form->input('title', array('div' => false, 'empty' => true)); // empty creates blank option.
-	// 			echo $this->Form->input('status', array('div' => false, 'empty' => true)); // disable div output.
-				echo $this->Form->submit(__('Search', true), array('div' => false));
-				echo $this->Form->end();
-			?>
-		</div>
 
 		<div id="_postContent">
 			<table  cellpadding="0" cellspacing="0">
 			<tr>
-					<th><?php echo $this->Paginator->sort('id');?></th>
-					<th><?php echo $this->Paginator->sort('user_id');?></th>
+<!-- 					<th><?php echo $this->Paginator->sort('id');?></th> -->
+<!-- 					<th><?php echo $this->Paginator->sort('user_id');?></th> -->
 					<th><?php echo $this->Paginator->sort('title');?></th>
 					<th><?php echo $this->Paginator->sort('body');?></th>
-					<th><?php echo $this->Paginator->sort('created');?></th>
-					<th><?php echo $this->Paginator->sort('modified');?></th>
-					<th><?php echo $this->Paginator->sort('status');?></th>
-					<th><?php echo $this->Paginator->sort('current_date_time');?></th>
+<!-- 					<th><?php echo $this->Paginator->sort('created');?></th> -->
+<!-- 					<th><?php echo $this->Paginator->sort('modified');?></th> -->
+<!-- 					<th><?php echo $this->Paginator->sort('status');?></th> -->
+<!-- 					<th><?php echo $this->Paginator->sort('current_date_time');?></th> -->
 					<th class="actions"><?php __('Actions');?></th>
 			</tr>
 			<?php
@@ -55,16 +64,16 @@ src: url('webfont.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
 				}
 			?>
 			<tr<?php echo $class;?>>
-				<td><?php echo $post['Post']['id']; ?>&nbsp;</td>
-				<td>
+<!-- 				<td><?php echo $post['Post']['id']; ?>&nbsp;</td> -->
+<!--				<td>
 					<?php echo $this->Html->link($post['User']['id'], array('controller' => 'users', 'action' => 'view', $post['User']['id'])); ?>
-				</td>
+				</td>-->
 				<td><?php echo $post['Post']['title']; ?>&nbsp;</td>
 				<td><?php echo $post['Post']['body']; ?>&nbsp;</td>
-				<td><?php echo $post['Post']['created']; ?>&nbsp;</td>
-				<td><?php echo $post['Post']['modified']; ?>&nbsp;</td>
-				<td><?php echo $post['Post']['status']; ?>&nbsp;</td>
-				<td><?php echo $post['Post']['current_date_time']; ?>&nbsp;</td>
+<!-- 				<td><?php echo $post['Post']['created']; ?>&nbsp;</td> -->
+<!-- 				<td><?php echo $post['Post']['modified']; ?>&nbsp;</td> -->
+<!-- 				<td><?php echo $post['Post']['status']; ?>&nbsp;</td> -->
+<!-- 				<td><?php echo $post['Post']['current_date_time']; ?>&nbsp;</td> -->
 				<td class="actions">
 					<?php echo $this->Html->link(__('View', true), array('action' => 'view', $post['Post']['id'])); ?>
 					<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $post['Post']['id'])); ?>

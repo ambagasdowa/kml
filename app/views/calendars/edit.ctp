@@ -1,31 +1,46 @@
-<div class="calendars form">
-<?php echo $this->Form->create('Calendar');?>
-	<fieldset>
-		<legend><?php __('Edit Calendar'); ?></legend>
-	<?php
-		echo $this->Form->input('id');
-		echo $this->Form->input('title');
-		echo $this->Form->input('allday');
-		echo $this->Form->input('editable');
-		echo $this->Form->input('start');
-		echo $this->Form->input('end');
-		echo $this->Form->input('url');
-		echo $this->Form->input('constraint');
-		echo $this->Form->input('color');
-		echo $this->Form->input('rendering');
-		echo $this->Form->input('overlap');
-		echo $this->Form->input('description');
-		echo $this->Form->input('create');
-		echo $this->Form->input('status');
-	?>
-	</fieldset>
-<?php echo $this->Form->end(__('Submit', true));?>
-</div>
-<div class="actions">
-	<h3><?php __('Actions'); ?></h3>
-	<ul>
+<?php //EDIT ?>
+	<div id="dialog" style="color:black;width:620px;">
 
-		<li><?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $this->Form->value('Calendar.id')), null, sprintf(__('Are you sure you want to delete # %s?', true), $this->Form->value('Calendar.id'))); ?></li>
-		<li><?php echo $this->Html->link(__('List Calendars', true), array('action' => 'index'));?></li>
-	</ul>
-</div>
+			<div class="modal-body">
+				<?php echo $this->Form->create('Calendar');?>
+					<fieldset>
+						<legend><?php __('Edit Calendar'); ?></legend>
+					<?php
+						echo $this->Form->input('id',array('class'=>'form-control'));
+						echo $this->Form->input('title',array('class'=>'form-control'));
+					?>
+					<div class="checkbox">
+						<label>Allday
+						<input type="checkbox" name="data[Calendar][allday]" <?php ($this->data['Calendar']['allday']) ? e('checked') : e(''); ?>>
+						<i class="fa fa-square-o"></i>
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>Editable
+						<input type="checkbox" name="data[Calendar][editable]" <?php $this->data['Calendar']['editable'] ? e('checked') : e('');?>>
+						<i class="fa fa-square-o"></i>
+						</label>
+					</div>
+
+					<?php
+// 								echo $this->Form->input('allday',array('class'=>'form-control'));
+// 								echo $this->Form->input('editable',array('class'=>'form-control'));
+						echo $this->Form->input('url',array('class'=>'form-control'));
+						echo $this->Form->input('constraint',array('class'=>'form-control'));
+						echo $this->Form->text('color',array('type'=>'color','value'=>$this->data['Calendar']['color'],'onchange'=>"clickColor(0, -1, -1, 5)",'class'=>'form-control'));
+						echo $this->Form->input('rendering',array('class'=>'form-control'));
+						echo $this->Form->input('overlap',array('class'=>'form-control'));
+						echo $this->Form->input('description',array('class'=>'form-control'));
+// 								echo $this->Form->input('create');
+// 								echo $this->Form->input('status');
+					?>
+					</fieldset>
+
+					<div>&nbsp;</div>
+					<div class="form-group pull-right">
+						<?php echo $this->Form->end(array('div'=>false,'class'=>'btn btn-success'));?>
+<!-- 								<button type="button" class="btn btn-warning" data-dismiss="modal">Close</button> -->
+					</div>
+
+			</div>
+	</div>

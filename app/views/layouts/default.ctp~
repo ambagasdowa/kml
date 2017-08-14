@@ -38,15 +38,22 @@
 <title><?php echo $title_for_layout?></title>
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
 <!-- Include external files and scripts here (See HTML helper for more info.) -->
+<script type="text/javascript">
+	var webroot = '<?php echo $this->webroot; ?>';
+// 	var wr = '<?=$this->webroot?>';
+</script>
 <?php echo $scripts_for_layout ?>
+<?php //var_dump($scripts_for_layout);?>
 
 <?php setlocale(LC_MONETARY, 'es_MX'); ?>
 
 <?php /** NOTE amybe this can be replaced */
 /** @theme->path */
 ?>
-
+<!--entonces , quiere decir que lo tengo con resolver con el banco ? 
+si necesito apoyo de su parte para aclarar esta situacion , los contactaria por este medio ?-->
 <?php
+/** ALERT fix for load just wen needed*/
 /** TEST for @pdf.js minimal */
 // 	e($this->Html->css('pdf.js/viewer'));
 
@@ -61,58 +68,34 @@
 //   Needed for handgrab
   /** NOTE for @pdf.js */
   e($this->Html->script("pdf.js/grab_to_pan"));
-
-/** NOTE @from full pdf.js viewer */
-// 	e($this->Html->script("pdf.js/compatibility"));
-// 	e($this->Html->script("pdf.js/external/webL10n/l10n"));
-
-// 	e($this->Html->script("pdf.js/ui_utils"));
-//     e($this->Html->script("pdf.js/default_preferences"));
-//     e($this->Html->script("pdf.js/preferences"));
-//     e($this->Html->script("pdf.js/download_manager"));
-//     e($this->Html->script("pdf.js/view_history"));
-//     e($this->Html->script("pdf.js/pdf_rendering_queue"));
-//     e($this->Html->script("pdf.js/pdf_page_view"));
-//     e($this->Html->script("pdf.js/text_layer_builder"));
-//     e($this->Html->script("pdf.js/annotations_layer_builder"));
-//     e($this->Html->script("pdf.js/pdf_viewer"));
-//     e($this->Html->script("pdf.js/thumbnail_view"));
-//     e($this->Html->script("pdf.js/document_outline_view"));
-//     e($this->Html->script("pdf.js/document_attachments_view"));
-//     e($this->Html->script("pdf.js/pdf_find_bar"));
-//     e($this->Html->script("pdf.js/pdf_find_controller"));
-//     e($this->Html->script("pdf.js/pdf_history"));
-//     e($this->Html->script("pdf.js/secondary_toolbar"));
-//     e($this->Html->script("pdf.js/presentation_mode"));
-//     e($this->Html->script("pdf.js/grab_to_pan"));
-//     e($this->Html->script("pdf.js/hand_tool"));
-//     e($this->Html->script("pdf.js/overlay_manager"));
-//     e($this->Html->script("pdf.js/password_prompt"));
-//     e($this->Html->script("pdf.js/document_properties"));
-
-//     e($this->Html->script("pdf.js/debugger"));
-//     e($this->Html->script("pdf.js/viewer"));
-
-
-
-  /** TEST render pdf for embed **/
+ /** TEST render pdf for embed **/
      e($this->Html->script("gst/pdfRender"));
      e($this->Html->script("gst/pan2grab"));
      e($this->Html->script("gst/pdfFullScreen"));
-     
+
+
   /** @php.js*/
   e($this->Html->script("root/php.js/base64_encode"));
   e($this->Html->script("root/php.js/base64_decode"));
 
-      
-/** NOTE @begin->devoops */
-$theme = 'devoops/';
-$default = 'kml/';
-$core = 'core/';
 
-/** NOTE prototype **/
-e($this->Html->script($theme.'prototype/prototype'));
-e($this->Html->script($theme.'scriptaculous/scriptaculous.js?load=effects'));
+/** NOTE @begin->devoops */
+$theme = 'devoops'.DS;
+$default = 'kml'.DS;
+$core = 'core'.DS;
+
+/** NOTE @prototype **/
+// e($this->Html->script($theme.'prototype/prototype'));
+// e($this->Html->script($theme.'scriptaculous/scriptaculous.js?load=effects'));
+/** @require*/
+// e($this->Html->script($theme.'require/require'));
+
+	// NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal
+// 	$evaluate = true;
+// 	$requiere_params = array('theme'=>$theme,'default'=>$default,'core'=>$core);
+// 	$requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere') );
+
+
 
 
 /** @css */
@@ -136,7 +119,7 @@ e($this->Html->css($theme.'morris/morris', 'stylesheet'));
 e($this->Html->css($theme.'owl/owl.carousel', 'stylesheet'));
 
 /** @quick_filter js*/
-e($this->Html->script($theme.'filter/quick_filter'));
+// e($this->Html->script($theme.'filter/quick_filter'));
 
 // e($this->Html->script($theme.'raphael/raphael-min'));
 // e($this->Html->script($theme.'morris/morris'));
@@ -174,8 +157,7 @@ e($this->Html->css($default.'style'));
 // e($this->Html->script($theme.'bootstrap/bootstrap'));
 
 
-/** @require*/
-e($this->Html->script($theme.'require/require'));
+
 // e($this->Html->script($theme.'devoops/devoops'));
 ?>
 
@@ -190,55 +172,62 @@ e($this->Html->script($theme.'require/require'));
 	/** ALERT @build this function with php and set the libs with an array **/
 ?>
 <script>
-require.config({
-    baseUrl: './',
-    paths: {
-		'jquery': "<?php e($this->webroot.'js/devoops/jquery/jquery.min');?>",
-        'bootstrap': "<?php e($this->webroot.'js/devoops/bootstrap/bootstrap.min');?>",
-		'sparkline': "<?php e($this->webroot.'js/devoops/sparkline/jquery.sparkline.min');?>",
-		'raphael': "<?php e($this->webroot.'js/devoops/raphael/raphael-min');?>",
-		'morris': "<?php e($this->webroot.'js/devoops/morris/morris');?>",
-// 		'unifiedfm': "<?php e($this->webroot.'js/devoops/filemanager/js/unifiedfm');?>",
-		'isotope':"<?php e($this->webroot.'js/devoops/isotope/isotope.pkgd');?>",
-		'jquery-ui': "<?php e($this->webroot.'js/devoops/jquery-ui/jquery-ui');?>",
-		'waypoints': "<?php e($this->webroot.'js/devoops/waypoints/jquery.waypoints.min');?>",
-		'owl': "<?php e($this->webroot.'js/devoops/owl/owl.carousel.min');?>"
-
-    },
-    shim: {
-        'bootstrap': ['jquery']
-    },
-    map: {
-        '*': {
-            'jquery': 'jQueryNoConflict'
-        },
-        'jQueryNoConflict': {
-            'jquery': 'jquery'
-        }
-    }
-});
-define('jQueryNoConflict', ['jquery'], function ($) {
-    return $.noConflict();
-});
-if (Prototype.BrowserFeatures.ElementExtensions) {
-    require(['jquery', 'bootstrap'], function ($) {
-        // Fix incompatibilities between BootStrap and Prototype
-        var disablePrototypeJS = function (method, pluginsToDisable) {
-                var handler = function (event) {  
-                    event.target[method] = undefined;
-                    setTimeout(function () {
-                        delete event.target[method];
-                    }, 0);
-                };
-                pluginsToDisable.each(function (plugin) { 
-                    $(window).on(method + '.bs.' + plugin, handler); 
-                });
-            },
-            pluginsToDisable = ['collapse', 'dropdown', 'modal', 'tooltip', 'popover', 'tab'];
-        disablePrototypeJS('show', pluginsToDisable);
-        disablePrototypeJS('hide', pluginsToDisable);
-    });
-}
+// require.config({
+//     baseUrl: './',
+//     paths: {
+// 		'jquery': "<?php e($this->webroot.'js/devoops/jquery/jquery.min');?>",
+// 		'bootstrap': "<?php e($this->webroot.'js/devoops/bootstrap/bootstrap.min');?>",
+// 		'sparkline': "<?php e($this->webroot.'js/devoops/sparkline/jquery.sparkline.min');?>",
+// 		'raphael': "<?php e($this->webroot.'js/devoops/raphael/raphael-min');?>",
+// 		'morris': "<?php e($this->webroot.'js/devoops/morris/morris');?>",
+// 		'fancybox': "<?php e($this->webroot.'js/devoops/fancybox/jquery.fancybox.pack');?>",
+// 		'isotope':"<?php e($this->webroot.'js/devoops/isotope/isotope.pkgd');?>",
+// 		'jquery-ui': "<?php e($this->webroot.'js/devoops/jquery-ui/jquery-ui');?>",
+// 		'waypoints': "<?php e($this->webroot.'js/devoops/waypoints/jquery.waypoints.min');?>",
+// 		'moment': "<?php e($this->webroot.'js/devoops/moment/moment.min');?>",
+// 		'fullcalendar': "<?php e($this->webroot.'js/devoops/fullcalendar/fullcalendar.min');?>",
+// 		'owl': "<?php e($this->webroot.'js/devoops/owl/owl.carousel.min');?>"
+// 
+//     },
+//     shim: {
+//         'bootstrap': ['jquery']
+//     },
+//     map: {
+//         '*': {
+//             'jquery': 'jQueryNoConflict'
+//         },
+//         'jQueryNoConflict': {
+//             'jquery': 'jquery'
+//         }
+//     }
+// });
+// define('jQueryNoConflict', ['jquery'], function ($) {
+//     return $.noConflict();
+// });
+// 
+// // define('jQueryNoConflict',['jquery'], function (JQuery) {
+// //     return JQuery.noConflict( true );
+// // });
+// 
+// if (Prototype.BrowserFeatures.ElementExtensions) {
+//     require(['jquery', 'bootstrap'], function ($) {
+//         // Fix incompatibilities between BootStrap and Prototype
+//         var disablePrototypeJS = function (method, pluginsToDisable) {
+//                 var handler = function (event) {  
+//                     event.target[method] = undefined;
+//                     setTimeout(function () {
+//                         delete event.target[method];
+//                     }, 0);
+//                 };
+//                 pluginsToDisable.each(function (plugin) { 
+//                     $(window).on(method + '.bs.' + plugin, handler); 
+//                 });
+//             },
+//             pluginsToDisable = ['collapse', 'dropdown', 'modal', 'tooltip', 'popover', 'tab'];
+//         disablePrototypeJS('show', pluginsToDisable);
+//         disablePrototypeJS('hide', pluginsToDisable);
+//     });
+// }
 </script>
 
 <?php
@@ -296,16 +285,16 @@ if (Prototype.BrowserFeatures.ElementExtensions) {
 
 	
 			<?php //echo $this->element('sql_dump'); ?>
-
+			<?php /** ALERT @MODAL */?>
 			<!-- Modal the better way to call this is with a element -->
-			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-				<?php e($this->element('root_modal',array('test'=>$_SESSION['Auth']['User']['root_modal'])));?>
-			</div>
+<!-- 			<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true"> -->
+				<?php //e($this->element('root_modal',array('test'=>$_SESSION['Auth']['User']['root_modal'])));?>
+<!-- 			</div> -->
 			<!-- end modal -->
-			
+			<?php /** ALERT @MODAL */?>
 			<!-- initialize tooltip -->
 			<script>
-					require(['jquery','owl' ,'bootstrap'], function($) {
+					require(['jquery','bootstrap'], function($) {
 						$(document).ready(function () {
 							$('#home').tooltip()
 						});//end document.ready
@@ -318,3 +307,4 @@ if (Prototype.BrowserFeatures.ElementExtensions) {
 <?php e($this->Html->script($theme.'devoops/form')); // form workaround and select too?>
 </body>
 </html> 
+<?php //echo $this->Js->writeBuffer(); ?>

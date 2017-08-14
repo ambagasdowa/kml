@@ -1,4 +1,23 @@
 <?php
+	echo "<?php\n/**\n
+		* \n
+		* PHP versions 4 and 5 \n
+		* \n
+		* kml : Kamila Software \n
+		* Licensed under The MIT License  \n
+		* Redistributions of files must retain the above copyright notice. \n
+		* \n
+		* @copyright     Jesus Baizabal \n
+		* @link          http://baizabal.xyz \n
+		* @mail	     baizabal.jesus@gmail.com \n
+		* @package       cake \n
+		* @subpackage    cake.cake.console.libs.templates.views \n
+		* @since         CakePHP(tm) v 1.2.0.5234 \n
+		* @license       MIT License (http://www.opensource.org/licenses/mit-license.php) \n
+		*/" ."\n?>";
+?>
+
+<?php
 /**
  * Model template file.
  *

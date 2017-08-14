@@ -17,6 +17,7 @@
  * @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
  */
 ?>
+
 <div class="<?php echo $pluralVar;?> view">
 <h2><?php echo "<?php  __('{$singularHumanName}');?>";?></h2>
 	<dl><?php echo "<?php \$i = 0; \$class = ' class=\"altrow\"';?>\n";?>

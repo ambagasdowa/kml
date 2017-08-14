@@ -3,7 +3,8 @@ class PostsController extends AppController {
 
 	var $name = 'Posts';
 
-	var $components = array('Search.Prg');
+	var $components = array('RequestHandler','Session','Search.Prg');
+	var $helpers = array('Html','Form','Ajax','Javascript','Js');
 /**
  * Fields to preset in search forms.
  *

@@ -13,7 +13,6 @@ class MrSourceControlsController extends AppController {
 		$this->set('mrSourceControls', $this->paginate());
 		
 		$this->LoadModel('MrSourceAccount');
-// 		debug($this->MrSourceAccount->monitor_accounts());
 	}
 
 	function add_period ($set_array,$period,$period_name) {
@@ -46,15 +45,16 @@ class MrSourceControlsController extends AppController {
 // 							calculate the month snmp_counter
 							$ranges[$id_mr_source_control]['from']['0'] = $ranges[$id_mr_source_control]['from']['1'];
 							$ranges[$id_mr_source_control]['to']['0'] = $ranges[$id_mr_source_control]['to']['1'];
+							
 							$ranges[$id_mr_source_control]['from']['1'] = '01';
 							$ranges[$id_mr_source_control]['to']['1'] = '01';
 
-// 							debug($ranges);
+// 							var_dump($ranges);
 							$source_from = implode('/',$ranges[$id_mr_source_control]['from']);
 							$source_to = implode('/',$ranges[$id_mr_source_control]['to']);
 // 							debug($source_from);
 // 							debug($source_to);
-							
+// 							exit();
 							$date_to = new DateTime($source_to);
 // 							$date_to->add(new DateInterval('P1M'));
 							$DateTo =  $date_to->format('Ym');
@@ -77,7 +77,6 @@ class MrSourceControlsController extends AppController {
 							$date_ranges[$id_mr_source_control][] = $DateFrom;
 							
 							for ($i = 0 ; $i < $mounth_counter ; $i++) {
-
 								$date_from->add(new DateInterval('P1M'));
 								$newDate = $date_from->format('Ym');
 								$date_ranges[$id_mr_source_control][] = $newDate;
@@ -86,6 +85,13 @@ class MrSourceControlsController extends AppController {
 
 							
 						} else if (!empty($source_data['from']) and empty($source_data['to'])) {
+
+							$ranges[$id_mr_source_control]['from'] = explode('/',$source_data['from']);
+// 							calculate the month snmp_counter
+							$ranges[$id_mr_source_control]['from']['0'] = $ranges[$id_mr_source_control]['from']['1'];
+							$ranges[$id_mr_source_control]['from']['1'] = '01';
+							$source_data['from'] = implode('/',$ranges[$id_mr_source_control]['from']);
+							
 							$date_from = new DateTime($source_data['from']);
 							$source_date =  $date_from->format('Ym');
 							$date_ranges[$id_mr_source_control][] = $source_date;

@@ -1,24 +1,30 @@
 <?php //Login?>
 <!-- <h2>Login</h2> -->
+<?php
+	// NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal
+	$evaluate = false;
+	$requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere') );
+?>
 
 <div class="body">
 
   <div class="form_wrapper">
 	<div class="container">
 		<?php echo $this->Session->flash('auth');?>
-		
-		<div >
-			<?php 
-				echo $html->image("backgrounds/gst/gst.png",
-							array("width"=>145,
-								"height"=>60,
-							)
-					);
-			?>
+
+		<div class="log_in">
+				<div >
+					<?php
+						echo $html->image("backgrounds/gst/gst.png",
+									array("width"=>145,
+										"height"=>60,
+									)
+							);
+					?>
+				</div>
+
+				<h2 class="form-signin-heading"><?php e(languaje($languaje)['loginTitle']);?></h2>
 		</div>
-		
-		<h2 class="form-signin-heading"><?php e(languaje($languaje)['loginTitle']);?></h2>
-      
 		<?php echo $this->Form->create('User', array('url' => array('controller' => 'users', 'action' =>'login'),
 										'class'=>'form')
 									);
@@ -62,4 +68,3 @@
   </div>
 
   </div>
-  

@@ -1,4 +1,28 @@
+<?php
+		/**
+		*
+		* PHP versions 4 and 5
+		*
+		* kml : Kamila Software
+		* Licensed under The MIT License
+		* Redistributions of files must retain the above copyright notice.
+		*
+		* @copyright     Jesus Baizabal
+		* @link          http://baizabal.xyz
+		* @mail	     baizabal.jesus@gmail.com
+		* @package       cake
+		* @subpackage    cake.cake.console.libs.templates.views
+		* @since         CakePHP(tm) v 1.2.0.5234
+		* @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
+		*/
+		?>
 
+		<?php
+		// SecureCalendar index
+			// NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal.
+			$evaluate = false;
+			$requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere') );
+		?>
     <div class="container-fluid">
       <div class="row">
 
@@ -8,7 +32,7 @@
 				<?php echo $this->Html->link(__('New Policies Anexo', true), array('action' => 'add')); ?>			</li>
 				          </ul>
         </div>
-        
+
         <div class="col-sm-9 col-sm-offset-2 col-md-10 col-md-offset-1 main">
           <h1 class="page-header"><?php __('Policies Anexos');?></h1>
           <div class="table-responsive">
@@ -32,7 +56,7 @@
 											<?php 	}?>
 											<?php }?>
 											<?php if (isset($_SESSION['Auth']['User'])) {?>
-											<?php 	if (checkAdmin($_SESSION['Auth']['User']['group_id'])) {
+											<?php 	if (checkAdmin($_SESSION['Auth']['User']['group_id']) or checkUser($_SESSION['Auth']['User']['group_id'],'PoliciesAnexos')) {
 														$span = 'colspan="3"';
 													} else {
 														$span = '';
@@ -40,7 +64,7 @@
 											 ?>
 											<?php }?>
 													<th class="actions" <?php e($span);?>><?php __('Actions');?></th>
-							
+
 					</tr>
 				</thead>
 				<?php
@@ -72,9 +96,9 @@
 		<td class="actions">
 			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $policiesAnexo['PoliciesAnexo']['id'])); ?>
 		</td>
-		
+
 		<?php if (isset($_SESSION['Auth']['User'])) {?>
-		<?php 	if (checkAdmin($_SESSION['Auth']['User']['group_id'])) {?>
+		<?php 	if (checkAdmin($_SESSION['Auth']['User']['group_id']) or checkUser($_SESSION['Auth']['User']['group_id'],'PoliciesAnexos')) {?>
 		<td class="actions">
 			<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $policiesAnexo['PoliciesAnexo']['id'])); ?>
 		</td>
@@ -95,13 +119,13 @@
 				</p>
 
 				<ul class="pagination">
-						<?php 
-							echo $this->Paginator->prev( '«' ,array('tag'=>'li'),null, array('aria-hidden'=>'true','class' => 'disabled','tag'=>'li')); 
+						<?php
+							echo $this->Paginator->prev( '«' ,array('tag'=>'li'),null, array('aria-hidden'=>'true','class' => 'disabled','tag'=>'li'));
 						?>
-						<?php 
+						<?php
 							echo $this->Paginator->numbers(array('separator' => null,'tag'=>'li'));
 						?>
-						<?php 
+						<?php
 							echo $this->Paginator->next( '»' , array('tag'=>'li'), null, array('aria-hidden'=>'true','class' => 'disabled','tag'=>'li'));
 						?>
 				</ul>
@@ -109,9 +133,3 @@
         </div> <!--main-->
       </div> <!--row-->
     </div> <!--container fluid-->
-
-
-
-
-
-

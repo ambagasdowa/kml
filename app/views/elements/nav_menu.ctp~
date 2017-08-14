@@ -119,7 +119,7 @@
 			<?php if (isset($_SESSION['Auth']['User'])) {?>
 			<?php 	if (checkSuperUser($_SESSION['Auth']['User']['group_id'],$_SESSION['Auth']['User']['number_id'],$_SESSION['Auth']['User']['super_user'])) {?>
 								<li class="hidden-xs">
-									<a href="<?php e($this->webroot.'admin/acl/aros');?>" class="modal-link">
+									<a href="<?php e($this->webroot.'admin/acl/aros');?>" class="modal_link">
 										<i class="fa fa-user-secret"></i>
 <!-- 										<span class="badge"><i class="fa fa-user-secret"></i></span> -->
 									</a>
@@ -248,6 +248,75 @@
 										</li>
 										
 										<li class="dropdown-submenu">
+											<a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>Secure Section</span></a>
+												<ul class="dropdown-menu">
+													<li><a tabindex="-1" href="<?php e($this->webroot.'SecureTopics');?>"><i class="fa fa-cog"></i>&nbsp;<span>Topics</span></a>
+													</li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'SecureTopicsTypes');?>"><i class="fa fa-cog"></i>&nbsp;<span>TopicsTypes</span></a>
+													</li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'SecureGpoChiefs');?>"><i class="fa fa-cog"></i>&nbsp;<span>SecureGpoChiefs</span></a>
+													</li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'SecureGos');?>"><i class="fa fa-cog"></i>&nbsp;<span>SecureGoes</span></a>
+													</li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'SecureStructures');?>"><i class="fa fa-cog"></i>&nbsp;<span>SecureStructures</span></a>
+													</li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'SecureCalendars');?>"><i class="fa fa-cog"></i>&nbsp;<span>SecureCalendars</span></a>
+													</li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'SecurePresenters');?>"><i class="fa fa-cog"></i>&nbsp;<span>SecurePresenters</span></a>
+													</li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'SecureControlUsers');?>"><i class="fa fa-cog"></i>&nbsp;<span>SecureControlUsers</span></a>
+													</li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'ViewGetPayrolls');?>"><i class="fa fa-cog"></i>&nbsp;<span>ViewGetPayrolls</span></a>
+													</li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'SecureControlUsers');?>"><i class="fa fa-cog"></i>&nbsp;<span>SecureControlUsers</span></a>
+													</li>
+												</ul>
+										</li>
+										<li class="dropdown-submenu">
+											<a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>Casetas</span></a>
+												<ul class="dropdown-menu">
+													<li><a tabindex="-1" href="<?php e($this->webroot.'CasetasViews/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>MainView</span></a>
+													</li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'Casetas/add');?>"><i class="fa fa-cog"></i>&nbsp;<span>Importar Archivo</span></a>
+													</li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'Casetas/CasetasControlUsers/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>ControlUser</span></a>
+													</li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'Casetas/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>Dashboard</span></a>
+													</li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'CasetasViewResumes/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>Resume</span></a>
+													</li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'CasetasViewResumeStands/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>Resume by stand</span></a>
+													</li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'CasetasHistoricalConciliations/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>history</span></a>
+													</li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'CasetasParents');?>"><i class="fa fa-cog"></i>&nbsp;<span>Parents</span></a>
+													</li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'CasetasStandings');?>"><i class="fa fa-cog"></i>&nbsp;<span>Standings</span></a>
+													</li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'CasetasCorporations');?>"><i class="fa fa-cog"></i>&nbsp;<span>Corporations</span></a>
+													</li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'CasetasUnits');?>"><i class="fa fa-cog"></i>&nbsp;<span>Units</span></a>
+													</li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'CasetasControlsEvents');?>"><i class="fa fa-cog"></i>&nbsp;<span>ControlsEvents</span></a>
+													</li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'CasetasControlsFiles');?>"><i class="fa fa-cog"></i>&nbsp;<span>ControlsFiles</span></a>
+													</li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'CasetasEvents');?>"><i class="fa fa-cog"></i>&nbsp;<span>Events</span></a>
+													</li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'CasetasPendings');?>"><i class="fa fa-cog"></i>&nbsp;<span>Pendings</span></a>
+													</li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'CasetasConciliations');?>"><i class="fa fa-cog"></i>&nbsp;<span>Conciliations</span></a>
+													</li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'CasetasNotConciliations');?>"><i class="fa fa-cog"></i>&nbsp;<span>NotConciliations</span></a>
+													</li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'CasetasLogs');?>"><i class="fa fa-cog"></i>&nbsp;<span>Logs</span></a>
+													</li>
+												</ul>
+										</li>
+										
+
+										
+										<li class="dropdown-submenu">
 											<a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>Tralix Options</span></a>
 												<ul class="dropdown-menu">
 													<li><a tabindex="-1" href="<?php e($this->webroot.'Tralixes');?>"><i class="fa fa-cog"></i>&nbsp;<span>view</span></a></li>
@@ -258,6 +327,7 @@
 										<li class="dropdown-submenu">
 											<a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>Financial Reporting</span></a>
 												<ul class="dropdown-menu">
+													<li><a tabindex="-1" href="<?php e($this->webroot.'MrSourceMains/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>Reporter Main</span></a></li>
 													<li><a tabindex="-1" href="<?php e($this->webroot.'MrSourceControls');?>"><i class="fa fa-cog"></i>&nbsp;<span>Reporter Configuration</span></a></li>
 													<li><a href="<?php e($this->webroot.'MrSourceKeys/index');?>"><i class="fa fa-cog"></i>&nbsp;<span>Reporter Keys</span></a>
 													</li>
@@ -279,6 +349,7 @@
 										</li>
 										
 										<li class="divider"></li>
+
 										<?php 	}?>
 										<?php }?>
 <!-- 										automagic hir -->
@@ -286,11 +357,29 @@
 										<?php if (isset($_SESSION['Auth']['User'])) {?>
 										<?php 	if (checkUser($_SESSION['Auth']['User']['group_id'],'Casetas')) {?>
 
-										<li>
-											<a href="<?php e($this->webroot.'Casetas/add');?>" class="ajax-link">
-												<i class="fa fa-truck"></i>
-												<span>Casetas</span>
-											</a>
+										<li class="dropdown-submenu">
+											<a tabindex="-1" href="#"><i class="fa fa-truck"></i>&nbsp;<span>Casetas</span></a>
+												<ul class="dropdown-menu">
+													<li><a tabindex="-1" href="<?php e($this->webroot.'Casetas/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-list-alt"></i>&nbsp;<span> Inicio </span></a>
+													</li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'Casetas/add');?>"><i class="fa fa-upload"></i>&nbsp;<span> Importar Archivo</span></a>
+													</li>
+												</ul>
+										</li>
+										
+										<li class="divider"></li>
+										<?php 	}?>
+										<?php }?>
+<!-- 										secure -->
+										<?php if (isset($_SESSION['Auth']['User'])) {?>
+										<?php 	if (checkUser($_SESSION['Auth']['User']['group_id'],'Secure')) {?>
+
+										<li class="dropdown-submenu">
+											<a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>SecureApps</span></a>
+												<ul class="dropdown-menu">
+													<li><a tabindex="-1" href="<?php e($this->webroot.'SecureCalendars');?>"><i class="fa fa-cog"></i>&nbsp;<span>SecureCourses</span></a>
+													</li>
+												</ul>
 										</li>
 									
 										<li class="divider"></li>
@@ -301,54 +390,61 @@
 										<?php if (isset($_SESSION['Auth']['User'])) {?>
 										<?php 	if (checkUser($_SESSION['Auth']['User']['group_id'],'PoliciesAnexos')) {?>
 											
-										<li>
-											<a href="<?php e($this->webroot.'Policies');?>" class="ajax-link">
-												<i class="fa fa-cog"></i>
-												<span>Policies</span>
-											</a>
-										</li>
 											
-										<li>
-											<a href="<?php e($this->webroot.'PoliciesAnexos');?>" class="ajax-link">
-												<i class="fa fa-cog"></i>
-												<span><?php e(languaje($languaje)['navMenuF']);?></span>
-											</a>
+										<li class="dropdown-submenu">
+											<a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>Policies</span></a>
+												<ul class="dropdown-menu">
+													<li>
+														<a href="<?php e($this->webroot.'Policies');?>" class="ajax-link">
+															<i class="fa fa-cog"></i>
+															<span>Policies</span>
+														</a>
+													</li>
+														
+													<li>
+														<a href="<?php e($this->webroot.'PoliciesAnexos');?>" class="ajax-link">
+															<i class="fa fa-cog"></i>
+															<span><?php e(languaje($languaje)['navMenuF']);?></span>
+														</a>
+													</li>
+													
+													<li>
+														<a href="<?php e($this->webroot.'PoliciesFilters');?>" class="ajax-link">
+															<i class="fa fa-cog"></i>
+															<span>Policies Filters</span>
+														</a>
+													</li>
+													
+													<li>
+														<a href="<?php e($this->webroot.'PoliciesFormats');?>" class="ajax-link">
+															<i class="fa fa-cog"></i>
+															<span>PoliciesFormats</span>
+														</a>
+													</li>
+													
+													<li>
+														<a href="<?php e($this->webroot.'PoliciesTypes');?>" class="ajax-link">
+															<i class="fa fa-cog"></i>
+															<span>PoliciesTypes</span>
+														</a>
+													</li>
+													
+													<li>
+														<a href="<?php e($this->webroot.'PoliciesSubtypes');?>" class="ajax-link">
+															<i class="fa fa-cog"></i>
+															<span>PoliciesSubTypes</span>
+														</a>
+													</li>
+													
+													<li>
+														<a href="<?php e($this->webroot.'PoliciesSubtypesDefinitions');?>" class="ajax-link">
+															<i class="fa fa-cog"></i>
+															<span>PoliciesSubTypesDefinitions</span>
+														</a>
+													</li>
+												</ul>
 										</li>
-										
-										<li>
-											<a href="<?php e($this->webroot.'PoliciesFilters');?>" class="ajax-link">
-												<i class="fa fa-cog"></i>
-												<span>Policies Filters</span>
-											</a>
-										</li>
-										
-										<li>
-											<a href="<?php e($this->webroot.'PoliciesFormats');?>" class="ajax-link">
-												<i class="fa fa-cog"></i>
-												<span>PoliciesFormats</span>
-											</a>
-										</li>
-										
-										<li>
-											<a href="<?php e($this->webroot.'PoliciesTypes');?>" class="ajax-link">
-												<i class="fa fa-cog"></i>
-												<span>PoliciesTypes</span>
-											</a>
-										</li>
-										
-										<li>
-											<a href="<?php e($this->webroot.'PoliciesSubtypes');?>" class="ajax-link">
-												<i class="fa fa-cog"></i>
-												<span>PoliciesSubTypes</span>
-											</a>
-										</li>
-										
-										<li>
-											<a href="<?php e($this->webroot.'PoliciesSubtypesDefinitions');?>" class="ajax-link">
-												<i class="fa fa-cog"></i>
-												<span>PoliciesSubTypesDefinitions</span>
-											</a>
-										</li>
+
 										
 										<li class="divider"></li>
 										

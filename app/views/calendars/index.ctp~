@@ -1,23 +1,7 @@
 <?php
-		//try this 
-// 		echo $this->Html->script('jquery/jquery.min'); // Include jQuery library
-// 		echo $this->Html->script('bootstrap/bootstrap.min'); // Include bootstrap library
-// 		echo $this->Html->script('devoops/fullcalendar/moment.min'); // Include fullcalendar library		
-// 		echo $this->Html->script('devoops/fullcalendar/fullcalendar.min'); // Include fullcalendar library
-		/** @php.js*/
-// 		e($this->Html->script("php.js/base64_encode")); //php.js 
-// 		e($this->Html->script("php.js/base64_decode")); //php.js 
-		// Or this
-// 		e( $javascript->link('jquery/jquery.min'));
-// 		e( $javascript->link('bootstrap/bootstrap.min'));
-// 		e( $javascript->link('fullcalendar/moment.min'));
-// 		e( $javascript->link('fullcalendar/fullcalendar.min'));
-
-// 		echo $this->Html->css('bootstrap/bootstrap');
-		echo $this->Html->css('devoops/fullcalendar/fullcalendar');
-
-// 		echo $this->Html->meta('icon');
-// 		echo $this->Html->css('cake.generic');
+// Calendar index
+	$evaluate = true;
+	$requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere') );
 ?>
 
 <style>
@@ -25,8 +9,8 @@
 	body {
 		margin: 40px 10px;
 		padding: 0;
-		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
-		font-size: 14px;
+/* 		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif; */
+/* 		font-size: 14px; */
 	}
 
 	#calendar {
@@ -36,6 +20,11 @@
 	}
 
 </style>
+<!--				<b>Successful Response (should be blank):</b>
+				<div id="success"></div>
+				<b>Error Response:</b>
+				<div id="error"></div>-->
+
 
 <div id="calendar"></div>
 
@@ -93,14 +82,17 @@
 <?php endforeach; ?>
 	</table>
 	<p>
-	<?php
-	echo $this->Paginator->counter(array(
-	'format' => __('Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%', true)
-	));
-	?>	</p>
-
-	<div id="eventdata"></div>
+		<?php
+		echo $this->Paginator->counter(array(
+		'format' => __('Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%', true)
+		));
+		?>
+	</p>
 	
+
+		<div id="eventdata"></div>
+		
+
 	<div class="paging">
 		<?php echo $this->Paginator->prev('<< ' . __('previous', true), array(), null, array('class'=>'disabled'));?>
 	 | 	<?php echo $this->Paginator->numbers();?>
@@ -109,20 +101,26 @@
 	</div>
 </div>
 <div class="actions">
-	<h3><?php __('Actions'); ?></h3>
+	<h3><?php __('Actions'); ?> <?php echo Dispatcher::baseUrl();?></h3>
 	<ul>
 		<li><?php echo $this->Html->link(__('New Calendar', true), array('action' => 'add')); ?></li>
 	</ul>
 </div>
 
+
+
 <script type="text/javascript">
 	// <!&#91;CDATA&#91;
-require(['jquery','bootstrap','moment','fullcalendar'], function($) {
+require(['jquery','moment','bootstrap','fullcalendar','fancybox'], function($) {
 	$(document).ready(function () {
+		
+// 		$('#calendar').fullCalendar('render');
 		
 		$('#calendar').fullCalendar({
 // 			aspectRatio: 3.55,
 // 			defaultView: 'agendaWeek',
+// 			loading: $('#calendar').fullCalendar('render');
+			
 			header: {
 				left: 'prev,next today',
 				center: 'title',
@@ -131,33 +129,71 @@ require(['jquery','bootstrap','moment','fullcalendar'], function($) {
 			eventLimit: true, // allow "more" link when too many events
 // 			businessHours: true, // display business hours
 // 			editable: true,
+			slotDuration: '00:30:00', 
 			droppable: true, // this allows things to be dropped onto the calendar
 			events: "<?php echo Dispatcher::baseUrl();?>/Calendars/feed",
 			dayClick: function(date,jsEvent,view) {
-				$("#eventdata").show();
-				$("#eventdata").load("<?php echo Dispatcher::baseUrl();?>/calendars/add/false/"+ moment(date.format()).format('DD/MM/YYYY/HH/m') );
+					
+				urlData = "<?php echo Dispatcher::baseUrl();?>/Calendars/add/false/"+ moment(date.format()).format('DD/MM/YYYY/HH/m');
+				
+// 				$("#eventdata").show(); //for the animation
+// 				$("#eventdata").load(urlData);
+
+// 					function( response, status, xhr ) {
+// 						if ( status == "error" ) {
+// 							var msg = "Sorry but there was an error: ";
+// 							$( "#error" ).html( msg + xhr.status + " " + xhr.statusText );
+// 						} else {
+// 							var msg = "success ";
+// 							$( "#success" ).html( msg + xhr.status + " " + xhr.statusText );
+// 						}
+// 					}
+				if (urlData) {
+					$.fancybox({
+						'type': 'ajax',
+						'href': urlData,
+						'autoScale': false,
+						'autoDimensions': false
+					})
+					return false;
+				}
+
 				// change the day's background color just for fun
 // 				$(this).css('background-color', '#29AAB1');
 			},
 
 			/* Fire the edit stuff*/
 			eventClick: function(calEvent, jsEvent, view) {
-				$("#eventdata").show();
-				$("#eventdata").load( "<?php echo Dispatcher::baseUrl();?>/calendars/Edit/" + calEvent.id);
+// 				$("#eventdata").show();
+// 				$("#eventdata").load( "<?php echo Dispatcher::baseUrl();?>/Calendars/edit/" + calEvent.id);
+				urlData = "<?php echo Dispatcher::baseUrl();?>/Calendars/edit/" + calEvent.id;
+				if (urlData) {
+					$.fancybox({
+						'type': 'ajax',
+						'href': urlData,
+						'autoScale': true,
+						'autoDimensions': false
+					})
+					return false;
+				}
 			},
 			
 			eventDrop: function(event,delta,revertFunc,jsEvent,ui,view) {
 				console.log(delta);
 				var data_ = base64_encode(JSON.stringify([{id:event.id,days:delta._days,months:delta._months,milisecs:delta._milliseconds,view_type:view.type}]));
-				$.post("<?php echo Dispatcher::baseUrl();?>/calendars/dropsize/id:" + event.id + "/" + data_ + "/");
+				$.post("<?php echo Dispatcher::baseUrl();?>/Calendars/dropsize/id:" + event.id + "/" + data_ + "/");
 			},
 
 			eventResize: function(event,delta,revertFunc,jsEvent,ui,view) {
 				console.log(delta);
 				var data_ = base64_encode(JSON.stringify([{id:event.id,days:delta._days,months:delta._months,milisecs:delta._milliseconds,view_type:view.type,resize:true}]));
-				$.post("<?php echo Dispatcher::baseUrl();?>/calendars/dropsize/id:" + event.id + "/" + data_ + "/");
-			}
+				$.post("<?php echo Dispatcher::baseUrl();?>/Calendars/dropsize/id:" + event.id + "/" + data_ + "/");
+			},
+			
+			render: true
 		});
+		
+		$("#calendar").fullCalendar('render');
 		
 		$('#eventdata').hide();
 	});
@@ -167,3 +203,23 @@ require(['jquery','bootstrap','moment','fullcalendar'], function($) {
 
 
 
+<script>
+// 	require(['jquery','bootstrap','fancybox'], function($) {
+// 		$(document).ready(function() {
+// 			$.fancybox.open([{
+// 				href: '#inline1',
+// 				title:'Formula'
+// 			}],{
+// 				padding : 0,
+// 				openEffect  : 'elastic',
+// 				closeBtn: true
+// 			});
+// 		});
+// 	});//end require
+</script>
+
+
+<!--Hola , buena tarde , acabo de enviar el detalle de la transferencia en un archivo pdf en el enlace que usted me proporciono.
+si el deposito no se encuentra en su base de datos es porque aun lo tiene el banco ? 
+sin embargo en el detalle del movimiento se refleja la orden como liquidada y entiendo que es cuando la transferencia ya se ha realizado ? le envio el detalle como le menciono anteriormente , si requiere mas datos hagamelo saber 
+Saludos.-->

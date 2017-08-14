@@ -19,6 +19,7 @@ class MrSourceAccountsController extends AppController {
 		);
 		$this->MrSourceAccount->recursive = 0;
 		$this->set('mrSourceAccounts', $this->paginate());
+		
 	}
 
 	function view($id = null) {
@@ -154,7 +155,7 @@ class MrSourceAccountsController extends AppController {
 				$src_ctrl = $this->MrSourceControl->findById($this->data['MrSourceAccount']['source_company_id']);
 			}
 
-			/** NOTE <if source_replace is checked the delete and add the new records otherwise just add>*/
+			/** NOTE <if source_replace is checked then delete and add the new records otherwise just add>*/
 			if(isset($this->data['MrSourceAccount']['source_replace'])){
 				$account_company = $bussinessUnit[$this->data['MrSourceAccount']['company']];
 // 				debug($this->MrSourceAccount->find('count',array('conditions'=>array('MrSourceAccount.mr_source_controls_id'=>$src_ctrl['MrSourceControl']['id'],'MrSourceAccount._key'=>$src_ctrl['MrSourceControl']['_key'],'MrSourceAccount.company'=>$account_company))));
@@ -278,7 +279,8 @@ class MrSourceAccountsController extends AppController {
 					if (substr($line,0,1) === '"') {
 						$line = utf8_encode(str_replace('"', '', $line));
 					}
-					$string_replaced =  str_replace('-','',str_split($line,35)[0]);
+// 					$string_replaced =  str_replace('-','',str_split($line,35)[0]);
+					$string_replaced =  str_replace('-','',str_split($line,24)[0]);
 					
 				/** NOTE <search for the account but ask if you want this (just for performance) > */
 
@@ -292,6 +294,9 @@ class MrSourceAccountsController extends AppController {
 
 						$are_you_there = $this->MrSourceAccount->find('count',array('conditions'=>$conditions_some_check));
 						if (!$are_you_there) {
+							/** ALERT @new <approach>*/
+							$accounts_index[] = $string_replaced;
+							/** ALERT @new <approach>*/
 							$account_build['SubAccount'] = $string_replaced;
 							$account_build['company'] = $this->data['MrSourceAccount']['company'];
 							$account_build['source_company'] = $this->data['MrSourceAccount']['source_company'];
@@ -303,6 +308,9 @@ class MrSourceAccountsController extends AppController {
 					} else {
 					
 					/** NOTE <search for the account but ask if you want this (just for performance) > */
+						/** ALERT @new <approach>*/
+						$accounts_index[] = $string_replaced;
+						/** ALERT @new <approach>*/
 						$account_build['SubAccount'] = $string_replaced;
 						$account_build['company'] = $this->data['MrSourceAccount']['company'];
 						$account_build['source_company'] = $this->data['MrSourceAccount']['source_company'];
@@ -316,8 +324,41 @@ class MrSourceAccountsController extends AppController {
 			} // end foreach line
 
 				debug($accounts_menu);
+// ALERT new behavior
+				debug($accounts_index);
 
+// 					$account_build['SubAccount'] = $string_replaced;
+					$account_builder['company'] = $this->data['MrSourceAccount']['company'];
+					$account_builder['source_company'] = $this->data['MrSourceAccount']['source_company'];
+					$account_builder['mr_source_controls_id'] = $this->data['MrSourceAccount']['mr_source_controls_id'];
+					$account_builder['_key'] = $this->data['MrSourceAccount']['_key'];
+					$account_builder['_status'] = $this->data['MrSourceAccount']['_status'];;
+					
+				/** NOTE @DEBUG <check for duplicates> */
+				$accounts_end = array_unique($accounts_index);
+				debug($accounts_end);
+				e('accounts_ => ' .count($accounts_index));
+				e('accounts_end => ' .count($accounts_end));
+
+				$accounts = array_values($accounts_end);
+// 				debug($accounts);
+// 				$accounts_ = null;
+				foreach($accounts as $index_account => $account){
+					$accounts_['MrSourceAccount'][$index_account]['SubAccount'] = trim($account);
+					$accounts_['MrSourceAccount'][$index_account]['company'] = trim($account_builder['company']);
+					$accounts_['MrSourceAccount'][$index_account]['source_company'] = trim($account_builder['source_company']);
+					$accounts_['MrSourceAccount'][$index_account]['mr_source_controls_id'] = trim($account_builder['mr_source_controls_id']);
+					$accounts_['MrSourceAccount'][$index_account]['_key'] = trim($account_builder['_key']);
+					$accounts_['MrSourceAccount'][$index_account]['_status'] = trim($account_builder['_status']);
+				}
+				
+			$accounts_menu = $accounts_;
+			debug($accounts_);
+
+// ALERT new behavior
+// 				debug($accounts_menu);
 // 			exit();
+			
 			if($this->MrSourceAccount->saveAll($accounts_menu['MrSourceAccount'])) {
 				$this->Session->setFlash(__('<div class="alert alert-success alert-dismissible fade in" role="alert">
 						<button type="button" class="close" data-dismiss="alert" aria-label="Close">

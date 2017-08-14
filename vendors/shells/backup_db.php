@@ -170,6 +170,10 @@
 							
 							exec('7za '.$lzm_command.' -t7z -m0=lzma -mx=9 -mfb=64 -md=32m -ms=on '.trim($buildDirName).DS.pathinfo($path)['filename'].'.7z'.' '.$urlBasename.$path,$outexec);
 							$this->out($outexec);
+							/** sync the file with external server */
+//                             exec('/usr/bin/sshpass -p \'@effeta#\' rsync -axP --bwlimit=400k '.trim($buildDirName).DS.pathinfo($path)['filename'].'.7z'.' ambagasdowa@5.189.189.146:/media/pool/back/',$out_cmd);
+
+                            $this->out($out_cmd);
 
 						if (date('Y-m-d',filemtime($urlBasename.$path)) < $calculateDate) {
 							if($test === true){

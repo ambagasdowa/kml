@@ -7,35 +7,9 @@
 
         <div class="col-md-offset-1 col-sm-11 col-md-11">
 			<ul class="list-group list-inline">
-
 				<li>
 					<?php echo $this->Html->link(__('List Document', true), array('action' => 'index') ,array('class'=>'btn btn-default list-group-item'));?>
 				</li>
-				<li>
-					<?php echo $this->Html->link(__('List Users', true), array('controller' => 'users', 'action' => 'index'),array('class'=>'btn btn-default list-group-item')); ?>
-				</li>
-				<li>
-					<?php echo $this->Html->link(__('New User', true), array('controller' => 'users', 'action' => 'add'),array('class'=>'btn btn-default list-group-item')); ?>
-				</li>
-				<li>
-					<?php echo $this->Html->link(__('List Groups', true), array('controller' => 'groups', 'action' => 'index'),array('class'=>'btn btn-default list-group-item')); ?>
-				</li>
-				<li>
-					<?php echo $this->Html->link(__('New Group', true), array('controller' => 'groups', 'action' => 'add'),array('class'=>'btn btn-default list-group-item')); ?>
-				</li>
-				<li>
-					<?php echo $this->Html->link(__('List Document Anexos', true), array('controller' => 'policies_anexos', 'action' => 'index'),array('class'=>'btn btn-default list-group-item')); ?>
-				</li>
-				<li>
-					<?php echo $this->Html->link(__('New Anexo', true), array('controller' => 'policies_anexos', 'action' => 'add'),array('class'=>'btn btn-default list-group-item')); ?>
-				</li>
-				<li>
-					<?php echo $this->Html->link(__('List Document Filters', true), array('controller' => 'policies_filters', 'action' => 'index'),array('class'=>'btn btn-default list-group-item')); ?>
-				</li>
-				<li>
-					<?php echo $this->Html->link(__('New Filter', true), array('controller' => 'policies_filters', 'action' => 'add'),array('class'=>'btn btn-default list-group-item')); ?>
-				</li>
-
 			</ul>
         </div>
       </div>
@@ -47,9 +21,10 @@
 		  <h2 class="form-signin-heading"><span>Agregar Documento</span></h2>
           <?php echo $this->Form->create('Policy',array('enctype' => 'multipart/form-data','class'=>'form'));?>
 
+
 		<?php
-			echo $this->Form->input('user_id',array('class'=>'form-control','label'=>false,'tag'=>'p'));
-			echo $this->Form->input('group_id',array('class'=>'form-control','label'=>false));
+			echo $this->Form->input('user_id',array('type'=>'hidden','value'=>$_SESSION['Auth']['User']['id'],'class'=>'form-control','label'=>false,'tag'=>'p'));
+			echo $this->Form->input('group_id',array('type'=>'hidden','value'=>$_SESSION['Auth']['User']['group_id'],'class'=>'form-control','label'=>false));
 			echo $this->Form->input('name',array('type'=>'text','class'=>'input','label'=>false,'placeholder'=>'Nombre del Documento'));
 			echo $this->Form->input('description',array('type'=>'textarea','class'=>'placeholder','label'=>false,'placeholder'=>'Descripcion del Documento','rows'=>'5','cols'=>'82'));
 // 								e('<span id="createPolicy" class="btn btn-default btn-file form_control">Upload');
@@ -67,9 +42,9 @@
 
 
         </div> <!--container-->
-        
+
 	</div>
-		
+
     <script>
 							/*-------------------------------------------
 								Function for jQuery-UI page (ui_jquery-ui.html)
@@ -83,7 +58,7 @@
 											label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
 											input.trigger('fileselect', [numFiles, label]);
 										});
-										
+
 										$('.btn-file :file').on('fileselect', function(event, numFiles, label) {
 											console.log(numFiles);
 											console.log(label);

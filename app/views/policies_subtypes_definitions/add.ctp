@@ -1,4 +1,28 @@
+<?php
+		/**
+		*
+		* PHP versions 4 and 5
+		*
+		* kml : Kamila Software
+		* Licensed under The MIT License
+		* Redistributions of files must retain the above copyright notice.
+		*
+		* @copyright     Jesus Baizabal
+		* @link          http://baizabal.xyz
+		* @mail	     baizabal.jesus@gmail.com
+		* @package       cake
+		* @subpackage    cake.cake.console.libs.templates.views
+		* @since         CakePHP(tm) v 1.2.0.5234
+		* @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
+		*/
+		?>
 
+		<?php
+		// SecureCalendar index
+			// NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal.
+			$evaluate = false;
+			$requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere') );
+		?>
 <!--     <div class="container-fluid"> -->
 <!--       <div class="row"> -->
 <!-- <center> -->
@@ -6,7 +30,7 @@
       <div class="col-md-offset-1 col-sm-11 col-md-11">
 			<ul class="list-group list-inline">
 				<li>
-					<?php echo $this->Html->link(__('List Policies Subtypes Definitions', true), array('action' => 'index'),array('class'=>'btn btn-default list-group-item'));?>
+					<?php echo $this->Html->link(__('Ver Clasificaciones', true), array('action' => 'index'),array('class'=>'btn btn-default list-group-item'));?>
 				</li>
 			</ul>
         </div>
@@ -17,10 +41,10 @@
 		<i class="fa fa-file-o fa-2x"></i>
 		  <h2 class="form-signin-heading">
 			<span>
-				 <?php __('Add Policies Subtypes Definition'); ?>
+				 <?php __('Agregar Clasificación'); ?>
 			</span>
 		</h2>
-		
+
           <?php echo $this->Form->create('PoliciesSubtypesDefinition',array('enctype' => 'multipart/form-data','class'=>'form'));?>
 			<div class="policiesSubtypesDefinitions form">
 
@@ -28,20 +52,20 @@
 <!-- 				<div class="table-responsive"> -->
 <!-- 					<table class="table table-bordered table-hover table-striped responstable"> -->
 							<?php
-				echo $this->Form->input('name',array('placeholder'=>'name','class'=>'input','placeholder'=>'Name of the Subtype','label'=>false));
+				echo $this->Form->input('name',array('class'=>'input','placeholder'=>'Nombre de la Clasificación','label'=>false));
 // 		echo $this->Form->input('description',array('placeholder'=>'description','class'=>'input'));
 
 											if(checkBrowser($_SERVER['HTTP_USER_AGENT'],true) === TRUE) {
-													echo $this->Form->input('create',
-														array(	
-																'type' => 'text',
-																'label'=>false,
-																'class'=>'input',
-																'placeholder'=>'Seleccione una fecha',
-																'id'=>'calendar_create',
-																'value'=>''
-														)
-												);
+												// 	echo $this->Form->input('create',
+												// 		array(
+												// 				'type' => 'text',
+												// 				'label'=>false,
+												// 				'class'=>'input',
+												// 				'placeholder'=>'Seleccione una fecha',
+												// 				'id'=>'calendar_create',
+												// 				'value'=>''
+												// 		)
+												// );
 						?>
 							<script>
 							/*-------------------------------------------
@@ -49,7 +73,7 @@
 							---------------------------------------------*/
 								require(['jquery','jquery-ui','bootstrap'], function($) {
 									$(document).ready(function () {
-									
+
 									// Define the Spanish languaje
 										$.datepicker.regional['es'] = {
 										closeText: 'Cerrar',
@@ -86,7 +110,7 @@
 // 											label = input.val().replace(/\/g, '/').replace(/.*\//, '');
 // 											input.trigger('fileselect', [numFiles, label]);
 // 										});
-// 										
+//
 // 										$('.btn-file :file').on('fileselect', function(event, numFiles, label) {
 // 											console.log(numFiles);
 // 											console.log(label);
@@ -98,33 +122,34 @@
 						<?php
 											} else {
 
-													echo $this->Form->text('create',
-																	array('type' => 'date',
-																	'label'=>false,
-																	'class'=>'form-control',
-																	'value'=>date('Y-m-d'),
-																	'dateFormat' => 'DMY',
-																	'min' => '2010-08-14',
-// 																	'max' => '2036-12-31',
-																	'separator'=>'/',
-																	'placeholder'=>'Buscar registro => Ingresa Fecha en formato (yy-mm-dd) (alt+shift+b)'
-																	)
-														);
+// 													echo $this->Form->text('create',
+// 																	array('type' => 'date',
+// 																	'label'=>false,
+// 																	'class'=>'form-control',
+// 																	'value'=>date('Y-m-d'),
+// 																	'dateFormat' => 'DMY',
+// 																	'min' => '2010-08-14',
+// // 																	'max' => '2036-12-31',
+// 																	'separator'=>'/',
+// 																	'placeholder'=>'Buscar registro => Ingresa Fecha en formato (yy-mm-dd) (alt+shift+b)'
+// 																	)
+// 														);
 											}
-											
+
 													echo $this->Form->input('status',
 														array(
-																'type'=>'select',
-																'options'=>array('Active'=>'Active','Inactive'=>'Inactive'),
+																'type'=>'hidden',
+                                'value'=>'Active',
+																// 'options'=>array('Active'=>'Active','Inactive'=>'Inactive'),
 																'class'=>'form-control',
 																'label'=>false,
 																'placeholder'=>'Status'
 															 )
 											    );
 	?>
-						<?php 	
+						<?php
 // 						echo $this->Form->input('name',array('type'=>'text','label'=>false,'placeholder'=>'Nombre de la politica'));
-						echo $this->Form->input('description',array('type'=>'textarea','class'=>'placeholder','label'=>false,'placeholder'=>'Descripcion de la politica','rows'=>'5','cols'=>'82'));
+						echo $this->Form->input('description',array('type'=>'textarea','class'=>'placeholder','label'=>false,'placeholder'=>'Nombre del Sub-Menu','rows'=>'5','cols'=>'82'));
 // 						e('<span id="fieldActionExample" class="btn btn-default btn-file form_control">Upload');
 // 							echo $this->Form->file('upload', array('type'=>'file','label'=>false));
 // 						e('</span>');
@@ -138,10 +163,3 @@
         <!--</div>--> <!--main-->
       <!--</div>--> <!--row-->
     <!--</div>--> <!--container fluid-->
-
-    
-
-
-
-
-

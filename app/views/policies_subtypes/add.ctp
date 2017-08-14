@@ -1,4 +1,28 @@
+<?php
+		/**
+		*
+		* PHP versions 4 and 5
+		*
+		* kml : Kamila Software
+		* Licensed under The MIT License
+		* Redistributions of files must retain the above copyright notice.
+		*
+		* @copyright     Jesus Baizabal
+		* @link          http://baizabal.xyz
+		* @mail	     baizabal.jesus@gmail.com
+		* @package       cake
+		* @subpackage    cake.cake.console.libs.templates.views
+		* @since         CakePHP(tm) v 1.2.0.5234
+		* @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
+		*/
+		?>
 
+		<?php
+		// SecureCalendar index
+			// NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal.
+			$evaluate = false;
+			$requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere') );
+		?>
 <!--     <div class="container-fluid"> -->
 <!--       <div class="row"> -->
 <!-- <center> -->
@@ -6,14 +30,12 @@
 			<ul class="list-group list-inline">
 
 				<li>
-					<?php echo $this->Html->link(__('List Policies Subtypes', true), array('action' => 'index'),array('class'=>'btn btn-default list-group-item'));?>
+					<?php echo $this->Html->link(__('List Hooks', true), array('action' => 'index'),array('class'=>'btn btn-default list-group-item'));?>
 				</li>
 				<li>
-					<?php echo $this->Html->link(__('List Policies Types', true), array('controller' => 'policies_types', 'action' => 'index'),array('class'=>'btn btn-default list-group-item')); ?>
+					<?php echo $this->Html->link(__('List Clasifications', true), array('controller' => 'policies_types', 'action' => 'index'),array('class'=>'btn btn-default list-group-item')); ?>
 				</li>
-				<li>
-					<?php echo $this->Html->link(__('New Policies Type', true), array('controller' => 'policies_types', 'action' => 'add'),array('class'=>'btn btn-default list-group-item')); ?>
-				</li>
+
 
 			</ul>
         </div>
@@ -24,10 +46,10 @@
 		<i class="fa fa-file-o fa-2x"></i>
 		  <h2 class="form-signin-heading">
 			<span>
-					 <?php __('Add Policies Subtype'); ?>
+					 <?php __('Add a Hook'); ?>
 			</span>
 		</h2>
-		
+
           <?php echo $this->Form->create('PoliciesSubtype',array('enctype' => 'multipart/form-data','class'=>'form'));?>
 			<div class="policiesSubtypes form">
 
@@ -48,49 +70,49 @@
 								);
 // 		echo $this->Form->input('description',array('placeholder'=>'description','class'=>'input'));
 
-											if(checkBrowser($_SERVER['HTTP_USER_AGENT'],true) === TRUE) {
-													echo $this->Form->input('create',
-														array(	
-																'type' => 'text',
-																'label'=>false,
-																'class'=>'input',
-																'placeholder'=>'Seleccione una fecha',
-																'id'=>'calendar_create',
-																'value'=>''
-														)
-												);
+											// if(checkBrowser($_SERVER['HTTP_USER_AGENT'],true) === TRUE) {
+											// 		echo $this->Form->input('create',
+											// 			array(
+											// 					'type' => 'text',
+											// 					'label'=>false,
+											// 					'class'=>'input',
+											// 					'placeholder'=>'Seleccione una fecha',
+											// 					'id'=>'calendar_create',
+											// 					'value'=>''
+											// 			)
+											// 	);
 						?>
 							<script>
 							/*-------------------------------------------
 								Function for jQuery-UI page (ui_jquery-ui.html)
 							---------------------------------------------*/
-								require(['jquery','jquery-ui','bootstrap'], function($) {
-									$(document).ready(function () {
-									
+								// require(['jquery','jquery-ui','bootstrap'], function($) {
+								// 	$(document).ready(function () {
+
 									// Define the Spanish languaje
-										$.datepicker.regional['es'] = {
-										closeText: 'Cerrar',
-										prevText: '<Ant',
-										nextText: 'Sig>',
-										currentText: 'Hoy',
-										monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-										monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
-										dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-										dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
-										dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
-										weekHeader: 'Sm',
-										dateFormat: 'dd/mm/yy',
-										firstDay: 1,
-										isRTL: false,
-										showMonthAfterYear: false,
-										yearSuffix: ''
-										};
-										$.datepicker.setDefaults($.datepicker.regional['es']);
+										// $.datepicker.regional['es'] = {
+										// closeText: 'Cerrar',
+										// prevText: '<Ant',
+										// nextText: 'Sig>',
+										// currentText: 'Hoy',
+										// monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+										// monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+										// dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+										// dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+										// dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+										// weekHeader: 'Sm',
+										// dateFormat: 'dd/mm/yy',
+										// firstDay: 1,
+										// isRTL: false,
+										// showMonthAfterYear: false,
+										// yearSuffix: ''
+										// };
+										// $.datepicker.setDefaults($.datepicker.regional['es']);
 										// start the datepicker
 
-										$(function () {
-												$('#calendar_create').datepicker({showButtonPanel: true});
-										});
+										// $(function () {
+										// 		$('#calendar_create').datepicker({showButtonPanel: true});
+										// });
 
 // 										$('#calendar_create').datepicker({
 // 																showButtonPanel: true
@@ -103,36 +125,37 @@
 // 											label = input.val().replace(/\/g, '/').replace(/.*\//, '');
 // 											input.trigger('fileselect', [numFiles, label]);
 // 										});
-// 										
+//
 // 										$('.btn-file :file').on('fileselect', function(event, numFiles, label) {
 // 											console.log(numFiles);
 // 											console.log(label);
 // 											document.getElementById('create.{ucfirst(add)}').innerHTML = label;
 // 										});
-									});
-								});
+								// 	});
+								// });
 							</script>
 						<?php
-											} else {
+											// } else {
 
-													echo $this->Form->text('create',
-																	array('type' => 'date',
-																	'label'=>false,
-																	'class'=>'form-control',
-																	'value'=>date('Y-m-d'),
-																	'dateFormat' => 'DMY',
-																	'min' => '2010-08-14',
-// 																	'max' => '2036-12-31',
-																	'separator'=>'/',
-																	'placeholder'=>'Buscar registro => Ingresa Fecha en formato (yy-mm-dd) (alt+shift+b)'
-																	)
-														);
-											}
-											
+// 													echo $this->Form->text('create',
+// 																	array('type' => 'date',
+// 																	'label'=>false,
+// 																	'class'=>'form-control',
+// 																	'value'=>date('Y-m-d'),
+// 																	'dateFormat' => 'DMY',
+// 																	'min' => '2010-08-14',
+// // 																	'max' => '2036-12-31',
+// 																	'separator'=>'/',
+// 																	'placeholder'=>'Buscar registro => Ingresa Fecha en formato (yy-mm-dd) (alt+shift+b)'
+// 																	)
+// 														);
+											// }
+
 													echo $this->Form->input('status',
 														array(
-																'type'=>'select',
-																'options'=>array('Active'=>'Active','Inactive'=>'Inactive'),
+																'type'=>'hidden',
+																// 'options'=>array('Active'=>'Active','Inactive'=>'Inactive'),
+                                'value'=>'Active',
 																'class'=>'form-control',
 																'label'=>false,
 																'placeholder'=>'Status'
@@ -140,7 +163,7 @@
 											    );
 	?>
 						<?php 	//echo $this->Form->input('name',array('type'=>'text','label'=>false,'placeholder'=>'Name of the Subtype'));
-									echo $this->Form->input('description',array('type'=>'textarea','class'=>'placeholder','label'=>false,'placeholder'=>'Subtype description','rows'=>'5','cols'=>'80'));
+									echo $this->Form->input('description',array('type'=>'textarea','class'=>'placeholder','label'=>false,'placeholder'=>'Hook description','rows'=>'5','cols'=>'80'));
 // 								e('<span id="fieldActionExample" class="btn btn-default btn-file form_control">Upload');
 // 									echo $this->Form->file('upload', array('type'=>'file','label'=>false));
 // 								e('</span>');
@@ -153,10 +176,3 @@
         <!--</div>--> <!--main-->
       <!--</div>--> <!--row-->
     <!--</div>--> <!--container fluid-->
-
-    
-
-
-
-
-

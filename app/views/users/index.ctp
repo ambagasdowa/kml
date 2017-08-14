@@ -1,3 +1,8 @@
+<?php
+	// NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal
+	$evaluate = false;
+	$requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere') );
+?>
 <?php //users?>
     <div class="container-fluid">
       <div class="row">
@@ -161,3 +166,14 @@
         </div> <!--main-->
       </div> <!--row-->
     </div> <!--container fluid-->
+    
+    <script>
+	$(document).ready(function () {
+		$(function () {
+			$("table").stickyTableHeaders({fixedOffset: 22,marginTop: 22});
+		});
+		/*! Copyright (c) 2011 by Jonas Mosbech - https://github.com/jmosbech/StickyTableHeaders
+			MIT license info: https://github.com/jmosbech/StickyTableHeaders/blob/master/license.txt */
+
+	});
+    </script>

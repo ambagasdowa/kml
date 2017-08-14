@@ -1,5 +1,12 @@
 <?php //index?>
 <?php //debug($fieldDatas Index view);?>
+<?php
+	// NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal
+	$evaluate = true;
+	$requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere') );
+	// NOTE @I dont see prototype over hir
+?>
+
 
      <script type="text/javascript">
       // File Picker modification for FCK Editor v2.0 - www.fckeditor.net

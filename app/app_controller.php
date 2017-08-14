@@ -174,6 +174,7 @@ class AppController extends Controller {
 // 		debug($submenu);
 // 		debug($setMenu);
 	}
+	
 	/** NOTE <GST build Menu's' options>*/
 	
 	/** NOTE <GST build M-r's report>*/
@@ -265,17 +266,23 @@ class AppController extends Controller {
 
 			/** NOTE <add mount points for samba => setSmb('mount|umount|create','username')>*/
 // 			$this->setSmb('mount');
+
+		/** NOTE This is gst so you can remove */
+			$conditonsCnpy['Company.nom_id'] = $_SESSION['Auth']['User']['company_id'];
+			$cpny_id = $this->Company->find('list',array('conditions'=>$conditonsCnpy));
+			$_SESSION['Auth']['User']['casetas_company'] = key($cpny_id);
+		/** NOTE This is gst so you can remove */
         }
     }
 
 
     function beforeFilter() {
         //Configure AuthComponent
-        $this->Auth->authorize = 'actions';
-        $this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
-        $this->Auth->logoutRedirect = array('controller' => 'users', 'action' => 'login');
-//         $this->Auth->loginRedirect = array('controller' => 'somController', 'action' => 'someAction');
-        $this->Auth->actionPath = 'controllers/';
+		$this->Auth->authorize = 'actions';
+		$this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');
+		$this->Auth->logoutRedirect = array('controller' => 'users', 'action' => 'login');
+//         	$this->Auth->loginRedirect = array('controller' => 'somController', 'action' => 'someAction');
+		$this->Auth->actionPath = 'controllers/';
 		$this->Auth->allowedActions = array('display');
 		$this->Auth->loginError = "<strong>Error</strong> en el inicio de Sesi&oacute;n : revise su nombre de <strong>usuario</strong> o <strong>contrase&ntilde;a</strong>";
 		$this->Auth->authError = "El Acceso a este sitio esta <strong>restringido</strong>";
@@ -306,8 +313,8 @@ class AppController extends Controller {
 		if(isset($this->Auth->user()['User']['languaje'])) {
 				$languaje = $this->Auth->user()['User']['languaje'];
 		} else {
-// 			$languaje = 'es';
-			$languaje = 'en';
+			$languaje = 'es';
+// 			$languaje = 'en';
 		}
 		$this->set('languaje',$languaje);
 		// set the images paths this can be static and in db a default value ... or not??
@@ -315,8 +322,8 @@ class AppController extends Controller {
 		if(isset($this->Auth->user()['User']['portal'])) {
 				$portalUrl = $this->Auth->user()['User']['portal'];
 		} else {
-// 			$portalUrl = 'gst';
-			$portalUrl = 'portal';
+			$portalUrl = 'gst';
+// 			$portalUrl = 'portal';
 		}
 		$this->set('portalUrl',$portalUrl);
 
@@ -327,6 +334,7 @@ class AppController extends Controller {
 		} else {
 				$this->set('public', false);
 		}
+
 
 		// extra check for Gst Payroll if user isn't in the local Db then create and return the new $this->data instead old for proper login
 		// this only if gst because need connect to mssql server
@@ -352,10 +360,17 @@ class AppController extends Controller {
 // 			set the documents type and buid the nav menu
 			$documents = $this->getDocuments();
 			$documents ? $this->set('documents',$documents) : $this->set('documents',null);
-			$this->Auth->loginRedirect = array('controller' => 'Policies', 'action' => 'view','type'=>'1','subtype'=>'1');
+			
+			if (isset($this->Auth->user()['User']) && $this->Auth->user()['User']['group_id'] == 3) {
+				$this->Auth->loginRedirect = array('controller' => 'Policies', 'action' => 'view','type'=>'1','subtype'=>'1');
+			}
 			$this->buildMenu();
-		} /** <GST> */// End gst options 
+		} /** <GST> */ // End gst options 
 		
+
+// 		$this->extendsUsersMenu();
+
+
 // 		exit();
 
 // 		$this->extendsUsersMenu();
@@ -366,9 +381,8 @@ class AppController extends Controller {
 		if (isset($_SESSION['Auth']['User']['alert'])) {
 			unset($_SESSION['Auth']['User']['alert']);
 		}
-		
-		
-// 		debug($this->password('VIVR761111354'));
+// 
+
 // 			debug($this->Auth->hashPasswords($delta));
 // 			debug($this->Auth->password($data['User']['password']));
 
@@ -435,7 +449,10 @@ class AppController extends Controller {
 		);
 		return strtr($string, $replace);
 	}
-    
+
+	
+		
+
 /**
  * Reconstruye el Acl basado en los controladores actuales de la aplicación.
  *

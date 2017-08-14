@@ -6,8 +6,8 @@
 @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300);
 body {
   background: #50a3a2;
-  background: -webkit-linear-gradient(top left, #999 0%, #fff 100%);
-  background: linear-gradient(to bottom right, #999 0%, #fff 100%);
+  background: -webkit-linear-gradient(top left, #777 0%, #fff 100%);
+  background: linear-gradient(to bottom right, #777 0%, #fff 100%);
 }
 body {
   font-family: 'Source Sans Pro', sans-serif;
@@ -125,7 +125,31 @@ form input, .form_control ,select{
   margin: 0 auto 2px auto !important;
   width:100% !important;
   font-size:15px !important;
+/*    background: #50a3a2;  */
+/*   background: -webkit-linear-gradient(top left, #999 0%, #ddd 100%); */
+/*   background: linear-gradient(to bottom right, #999 0%, #ddd 100%); */
+/*   font-weight:700;  */
 }
+
+textarea{
+  background: #50a3a2; 
+  background: -webkit-linear-gradient(top left, #999 0%, #ddd 100%);
+  background: linear-gradient(to bottom right, #999 0%, #ddd 100%);
+  font-weight:700; 
+}
+
+/*Opacity for label*/
+/*label{
+
+	-khtml-opacity:.10; 
+	-moz-opacity:.10; 
+	-ms-filter:”alpha(opacity=10)”;
+	filter:alpha(opacity=10);
+	filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0.1);
+	opacity:.10; 
+}*/
+
+
 
 /* fix for the file upload field */
 .form_control:hover {
@@ -1156,3 +1180,10 @@ Follow me on Twitter @maridlcrmn
 			}
 			
 /** HELP BUTTON */
+
+
+/** DATEPICKER OVER FANCYBOX */
+#ui-datepicker-div{
+    z-index: 8802 !important;
+}
+/** DATEPICKER OVER FANCYBOX */

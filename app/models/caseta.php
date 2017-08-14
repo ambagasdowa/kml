@@ -3,5 +3,6 @@
 		var $name = 'Caseta';
 		var $useDbConfig = 'mssql_sistemas';
 		var $primaryKey = 'id';
+
 	}
 ?>

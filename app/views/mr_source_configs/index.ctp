@@ -1,4 +1,8 @@
-
+<?php
+	// NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal
+	$evaluate = true;
+	$requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere') );
+?>
     <div class="container-fluid">
       <div class="row">
 
@@ -16,13 +20,13 @@
 				<table class="table table-bordered table-hover table-striped responstable">
 				<thead>
 					<tr>
-													<th><?php echo $this->Paginator->sort('id');?></th>
-													<th><?php echo $this->Paginator->sort('SubAccount');?></th>
-													<th><?php echo $this->Paginator->sort('company');?></th>
-													<th><?php echo $this->Paginator->sort('period');?></th>
-													<th><?php echo $this->Paginator->sort('_key');?></th>
-													<th><?php echo $this->Paginator->sort('_status');?></th>
-													<th class="actions" colspan="3"><?php __('Actions');?></th>
+						<th><?php echo $this->Paginator->sort('id');?></th>
+						<th><?php echo $this->Paginator->sort('SubAccount');?></th>
+						<th><?php echo $this->Paginator->sort('company');?></th>
+						<th><?php echo $this->Paginator->sort('period');?></th>
+						<th><?php echo $this->Paginator->sort('_key');?></th>
+						<th><?php echo $this->Paginator->sort('_status');?></th>
+						<th class="actions" colspan="3"><?php __('Actions');?></th>
 							
 					</tr>
 				</thead>

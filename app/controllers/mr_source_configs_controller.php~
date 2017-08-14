@@ -209,8 +209,10 @@ class MrSourceConfigsController extends AppController {
 					if (substr($line,0,1) === '"') {
 						$line = utf8_encode(str_replace('"', '', $line));
 					}
-					$string_replaced =  str_replace('-','',str_split($line,35)[0]);
+// 					$string_replaced =  str_replace('-','',str_split($line,35)[0]);
+					$string_replaced =  str_replace('-','',str_split($line,24)[0]);
 					
+					$accounts_index[] = $string_replaced;
 					$account_build['SubAccount'] = $string_replaced;
 					$account_build['company'] = $this->data['MrSourceConfig']['company'];
 					$account_build['source_company'] = $this->data['MrSourceConfig']['source_company'];
@@ -221,9 +223,42 @@ class MrSourceConfigsController extends AppController {
 					
 				}
 			} // end foreach line
+			// old behavior
+			debug($accounts_menu);
+			
+			// ALERT new behavior
+				debug($accounts_index);
 
-				debug($accounts_menu);
+// 					$account_build['SubAccount'] = $string_replaced;
+					$account_builder['company'] = $this->data['MrSourceConfig']['company'];
+					$account_builder['source_company'] = $this->data['MrSourceConfig']['source_company'];
+					$account_builder['period'] = $this->data['MrSourceConfig']['period'];
+					$account_builder['_key'] = $this->data['MrSourceConfig']['_key'];
+					$account_builder['_status'] = $this->data['MrSourceConfig']['_status'];
+					
+				/** NOTE @DEBUG <check for duplicates> */
+				$accounts_end = array_unique($accounts_index);
+				debug($accounts_end);
+				e('accounts_ => ' .count($accounts_index));
+				e('accounts_end => ' .count($accounts_end));
 
+				$accounts = array_values($accounts_end);
+// 				debug($accounts);
+// 				$accounts_ = null;
+				foreach($accounts as $index_account => $account){
+					$accounts_[$index_account]['MrSourceConfig']['SubAccount'] = trim($account);
+					$accounts_[$index_account]['MrSourceConfig']['company'] = trim($account_builder['company']);
+					$accounts_[$index_account]['MrSourceConfig']['source_company'] = trim($account_builder['source_company']);
+					$accounts_[$index_account]['MrSourceConfig']['period'] = trim($account_builder['period']);
+					$accounts_[$index_account]['MrSourceConfig']['_key'] = trim($account_builder['_key']);
+					$accounts_[$index_account]['MrSourceConfig']['_status'] = trim($account_builder['_status']);
+				}
+				
+			$accounts_menu['MrSourceConfig'] = $accounts_;
+			debug($accounts_);
+// 			exit();
+			// ALERT new behavior
+			
 			if($this->MrSourceConfig->saveAll($accounts_menu['MrSourceConfig'])) {
 
 			/** NOTE <mssql_procedure re-build the mr_source_account and set a proper msg to inform on success >*/

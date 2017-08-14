@@ -107,6 +107,16 @@ class DATABASE_CONFIG {
 	);
 	
 	//then can add the non-essential data of the app
+	var $portal_secure = array(
+		'driver' => 'mysql',
+		'persistent' => false,
+		'host' => 'localhost',
+		'login' => 'portal_secure',
+		'password' => '@portal_secure#',
+		'database' => 'portal_secure',
+		'prefix' => '',
+	);
+	
 	var $policie = array(
 		'driver' => 'mysql',
 		'persistent' => true,
@@ -162,6 +172,20 @@ class DATABASE_CONFIG {
 // 		'encoding' => 'Latin1',
 		'encoding' => 'utf8',
 	    'port' => '1433'
+	);
+
+		var $mssql_sistemas_larsa = array( // connect to remote mssql server
+		'driver' => 'mssql',
+		'persistent' => false,
+		'host' => '192.168.20.190',
+		'login' => 'sa',
+		'password' => 'effeta',
+		'database' => 'sistemas',
+		'prefix' => '',
+// 		'encoding' => 'ISO-8859-1',
+// 		'encoding' => 'Latin1',
+		'encoding' => 'utf8',
+		'port' => '1433'
 	);
 	
 }

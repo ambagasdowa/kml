@@ -3,7 +3,8 @@ App::import('Sanitize');
 class CalendarsController extends AppController {
 
 	var $name = 'Calendars';
-	var $helpers = array('Form','Javascript');
+	var $components = array('RequestHandler','Session','Search.Prg');
+	var $helpers = array('Html','Form','Ajax','Javascript');
 
 	function index() {
 		$this->Calendar->recursive = 0;

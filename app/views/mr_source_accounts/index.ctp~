@@ -1,4 +1,8 @@
-
+<?php
+	// NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal
+	$evaluate = false;
+	$requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere') );
+?>
     <div class="container-fluid">
       <div class="row">
 
@@ -9,6 +13,19 @@
 				</li>
 				<li>
 					<input type="search" class="light-table-filter" data-table="order-table" placeholder="Quick Filter">
+				</li>
+				<li>
+					<div class="filter">
+						<?php
+							echo $this->Form->create('MrSourceAccount', array(
+								'url' => array_merge(array('action' => 'index'), $this->params['pass'])
+								));
+							echo $this->Form->input('company', array('div' => false, 'empty' => true)); // empty creates blank option.
+				// 			echo $this->Form->input('status', array('div' => false, 'empty' => true)); // disable div output.
+							echo $this->Form->submit(__('Search', true), array('div' => false));
+							echo $this->Form->end();
+						?>
+					</div>
 				</li>
 			</ul>
         </div>

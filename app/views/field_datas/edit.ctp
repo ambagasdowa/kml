@@ -1,4 +1,10 @@
 <?php //FieldDatas edit ?>
+<?php
+	// NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal
+	$evaluate = true;
+	$requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere') );
+	// NOTE @I dont see prototype over hir
+?>
 
 <?php 
 
@@ -8,7 +14,6 @@
 		} else {
 			$selected = $FieldName['catalog_datas_id'];
 		}
-
 ?>
 
 <!--     <div class="container-fluid"> -->

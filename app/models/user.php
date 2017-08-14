@@ -1,6 +1,13 @@
 <?php
 class User extends AppModel {
 	var $name = 'User';
+	
+	var $virtualFields = array(
+        'full_name' => "CONCAT(User.name, ' ', User.last_name)",
+    );
+
+    var $diplayField = 'username';
+
 	var $validate = array(
 		'username' => array(
 			'notempty' => array(

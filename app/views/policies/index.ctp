@@ -1,5 +1,10 @@
-<?php 
+<?php
 // 	debug($this->params);
+?>
+<?php
+	// NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal
+	$evaluate = false;
+	$requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere') );
 ?>
 
 <style>
@@ -11,28 +16,28 @@
     <div class="container-fluid">
 
 
-		
+
     <div class="row">
 
 	<?php if (isset($_SESSION['Auth']['User'])) {?>
-	<?php 	if (checkAdmin($_SESSION['Auth']['User']['group_id'])) {?>
-		
+	<?php 	if (checkAdmin($_SESSION['Auth']['User']['group_id']) or checkUser($_SESSION['Auth']['User']['group_id'],'PoliciesAnexos')) {?>
+
         <div class="col-md-offset-1 col-sm-11 col-md-11">
           <ul class="list-group list-inline">
 			<li class="list-group-item">
 				<?php echo $this->Html->link(__('New Policy', true), array('action' => 'add')); ?>
 			</li>
-			<li class="list-group-item"><?php echo $this->Html->link(__('List Users', true), array('controller' => 'users', 'action' => 'index')); ?> </li>
+			<!-- <li class="list-group-item"><?php echo $this->Html->link(__('List Users', true), array('controller' => 'users', 'action' => 'index')); ?> </li>
 			<li class="list-group-item"><?php echo $this->Html->link(__('New User', true), array('controller' => 'users', 'action' => 'add')); ?> </li>
 			<li class="list-group-item"><?php echo $this->Html->link(__('List Groups', true), array('controller' => 'groups', 'action' => 'index')); ?> </li>
 			<li class="list-group-item"><?php echo $this->Html->link(__('New Group', true), array('controller' => 'groups', 'action' => 'add')); ?> </li>
 			<li class="list-group-item"><?php echo $this->Html->link(__('List Policies Anexos', true), array('controller' => 'policies_anexos', 'action' => 'index')); ?> </li>
 			<li class="list-group-item"><?php echo $this->Html->link(__('New Anexo', true), array('controller' => 'policies_anexos', 'action' => 'add')); ?> </li>
 			<li class="list-group-item"><?php echo $this->Html->link(__('List Policies Filters', true), array('controller' => 'policies_filters', 'action' => 'index')); ?> </li>
-			<li class="list-group-item"><?php echo $this->Html->link(__('New Filter', true), array('controller' => 'policies_filters', 'action' => 'add')); ?> </li>
+			<li class="list-group-item"><?php echo $this->Html->link(__('New Filter', true), array('controller' => 'policies_filters', 'action' => 'add')); ?> </li> -->
 		</ul>
         </div>
-        
+
 	<?php }?>
 	<?php 	}?>
 
@@ -47,7 +52,7 @@
 				<table class="table table-bordered table-hover table-striped responstable">
 				<thead>
 					<tr>
-													
+
 										<?php if (isset($_SESSION['Auth']['User'])) {?>
 										<?php 	if (checkAdmin($_SESSION['Auth']['User']['group_id'])) {?>
 													<th><?php echo $this->Paginator->sort('id');?></th>
@@ -68,12 +73,12 @@
 										<?php }?>
 
 											<?php if (isset($_SESSION['Auth']['User'])) {?>
-											<?php 	if (checkAdmin($_SESSION['Auth']['User']['group_id'])) { ?>
+											<?php 	if (checkAdmin($_SESSION['Auth']['User']['group_id']) or checkUser($_SESSION['Auth']['User']['group_id'],'PoliciesAnexos')) {?>
 													<th class="actions" colspan="2"><?php __('Actions');?></th>
 											<?php }?>
 											<?php }?>
-													
-							
+
+
 					</tr>
 				</thead>
 				<?php
@@ -85,7 +90,7 @@
 					}
 				?>
 	<tr<?php echo $class;?>>
-		
+
 		<?php if (isset($_SESSION['Auth']['User'])) {?>
 		<?php 	if (checkAdmin($_SESSION['Auth']['User']['group_id'])) {?>
 		<td><?php echo $policy['Policy']['id']; ?>&nbsp;</td>
@@ -111,7 +116,7 @@
 		<?php 	}?>
 		<?php }?>
 		<?php if (isset($_SESSION['Auth']['User'])) {?>
-		<?php 	if (checkAdmin($_SESSION['Auth']['User']['group_id'])) {?>
+		<?php 	if (checkAdmin($_SESSION['Auth']['User']['group_id']) or checkUser($_SESSION['Auth']['User']['group_id'],'PoliciesAnexos')) {?>
 		<td class="actions">
 			<?php echo $this->Html->link(__('Editar', true), array('action' => 'edit',$policy['Policy']['id'])); ?>
 		</td>
@@ -131,13 +136,13 @@
 						?>				</p>
 
 				<ul class="pagination">
-						<?php 
-							echo $this->Paginator->prev( '«' ,array('tag'=>'li'),null, array('aria-hidden'=>'true','class' => 'disabled','tag'=>'li')); 
+						<?php
+							echo $this->Paginator->prev( '«' ,array('tag'=>'li'),null, array('aria-hidden'=>'true','class' => 'disabled','tag'=>'li'));
 						?>
-						<?php 
+						<?php
 							echo $this->Paginator->numbers(array('separator' => null,'tag'=>'li'));
 						?>
-						<?php 
+						<?php
 							echo $this->Paginator->next( '»' , array('tag'=>'li'), null, array('aria-hidden'=>'true','class' => 'disabled','tag'=>'li'));
 						?>
 				</ul>
@@ -145,6 +150,3 @@
         </div> <!--main-->
       </div> <!--row-->
     </div> <!--container fluid-->
-
-
-

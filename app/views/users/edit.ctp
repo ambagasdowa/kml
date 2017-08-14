@@ -1,4 +1,4 @@
-
+<?php ?>
 <!--     <div class="container-fluid"> -->
 <!--       <div class="row"> -->
 <center>
@@ -34,11 +34,14 @@
 		echo $this->Form->input('id',array('placeholder'=>'id','class'=>'input'));
 		echo $this->Form->input('company_id',array('placeholder'=>'company_id','class'=>'input'));
 		echo $this->Form->input('username',array('placeholder'=>'username','class'=>'input'));
-		echo $this->Form->input('password',array('placeholder'=>'password','class'=>'input'));
+		echo $this->Form->input('password',array('value'=>'','placeholder'=>'password','class'=>'input'));
 		echo $this->Form->input('group_id',array('placeholder'=>'group_id','class'=>'input'));
 		echo $this->Form->input('name',array('placeholder'=>'name','class'=>'input'));
 		echo $this->Form->input('last_name',array('placeholder'=>'last_name','class'=>'input'));
 		echo $this->Form->input('current_date_time',array('placeholder'=>'current_date_time','class'=>'input'));
+		
+		
+		
 		echo $this->Form->input('last_access',array('placeholder'=>'last_access','class'=>'input'));
 		echo $this->Form->input('user_agent',array('placeholder'=>'user_agent','class'=>'input'));
 		echo $this->Form->input('last_user_agent',array('placeholder'=>'last_user_agent','class'=>'input'));
@@ -48,12 +51,14 @@
 		echo $this->Form->input('super_user',array('placeholder'=>'super_user','class'=>'input'));
 		echo $this->Form->input('status',array('placeholder'=>'status','class'=>'input'));
 	?>
-						<?php 	echo $this->Form->input('name',array('type'=>'text','label'=>false,'placeholder'=>'Nombre de la politica'));
-									echo $this->Form->input('description',array('type'=>'textarea','class'=>'placeholder','label'=>false,'placeholder'=>'Descripcion de la politica','rows'=>'5','cols'=>'80'));
-								e('<span id="fieldActionExample" class="btn btn-default btn-file form_control">Upload');
-									echo $this->Form->file('upload', array('type'=>'file','label'=>false));
-								e('</span>');
-								?><!-- 					</table> -->
+	
+	<?php 
+// 		echo $this->Form->input('name',array('type'=>'text','label'=>false,'placeholder'=>'Nombre de la politica'));
+// 		echo $this->Form->input('description',array('type'=>'textarea','class'=>'placeholder','label'=>false,'placeholder'=>'Descripcion de la politica','rows'=>'5','cols'=>'80'));
+// 		e('<span id="fieldActionExample" class="btn btn-default btn-file form_control">Upload');
+// 		echo $this->Form->file('upload', array('type'=>'file','label'=>false));
+// 		e('</span>');
+	?><!-- 					</table> -->
 <!-- 				</div>  -->
           <!--end table response-->
 					<?php echo $this->Form->input('status',array('type'=>'hidden','class'=>'form-control','value'=>'Active'))?><?php echo $this->Form->end(__('Submit', true));?>
