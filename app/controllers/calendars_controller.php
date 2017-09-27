@@ -11,12 +11,12 @@ class CalendarsController extends AppController {
 		$this->set('calendars', $this->paginate());
 	}
 
-	
+
 	function feed() {
 		//1. Transform request parameters to MySQL datetime format.
 		$date_init = new DateTime($this->params['url']['start']);
 		$mysqlstart =  $date_init->format('Y-m-d H:i:s');
-		
+
 		$date_end = new DateTime($this->params['url']['end']);
 		$mysqlend =  $date_end->format('Y-m-d H:i:s');
 		//2. Get the events corresponding to the time range
@@ -40,7 +40,7 @@ class CalendarsController extends AppController {
 		$this->header('Content-Type: application/json');
 		echo json_encode($calendar);
 	}
-	
+
 	function negative($data = null) {
 		if(is_numeric($data)){
 			return (min(1, max(-1, $data)) === -1) ?  TRUE : FALSE ;
@@ -48,7 +48,7 @@ class CalendarsController extends AppController {
 			return null;
 		}
 	}
-	
+
 	function dropsize($id = null){
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid calendar', true));
@@ -92,7 +92,7 @@ class CalendarsController extends AppController {
 				$str_time = 'PT';
 				foreach ($exp_time as $index => $time_data) {
 					var_dump(abs($time_data));
-					
+
 					if( abs($time_data) != 0 ){
 						if ($index == 0) {
 							$str_time .= abs($time_data).'H';
@@ -109,7 +109,7 @@ class CalendarsController extends AppController {
 				$new_date_calendar_init = new DateTime($date_calendar_init);
 				$new_date_calendar_end = new DateTime($date_calendar_endit);
 				if ($this->negative($json_array['milisecs']) === TRUE) {
-					// if is a resize 
+					// if is a resize
 					if (!isset($json_array['resize'])) {
 						$new_date_calendar_init->sub(new DateInterval($str_time));
 					}
@@ -123,7 +123,7 @@ class CalendarsController extends AppController {
 				// reset the values of the datetime fields
 				$date_calendar_init =  $new_date_calendar_init->format('Y-m-d H:i:s');
 				$date_calendar_endit =  $new_date_calendar_end->format('Y-m-d H:i:s');
-				
+
 			}
 			/** @if miliseconds */
 			/** @save*/
@@ -138,7 +138,7 @@ class CalendarsController extends AppController {
 	// 		$this->layout='empty';
 		}
 	}
-	
+
 	function view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid calendar', true));
@@ -176,7 +176,7 @@ class CalendarsController extends AppController {
 			$this->set('event',$event);
 			//Do not use a view template.
 // 			$this->layout="empty";
-			
+
 		if (!empty($this->data)) {
 			//Create and save the new event in the table.
 			//Event type is set to editable - because this is a user event.
@@ -190,7 +190,7 @@ class CalendarsController extends AppController {
 				$this->Session->setFlash(__('The calendar could not be saved. Please, try again.', true));
 			}
 		} else {
-			
+
 		}
 	}
 
@@ -199,9 +199,9 @@ class CalendarsController extends AppController {
 			$this->Session->setFlash(__('Invalid calendar', true));
 			$this->redirect(array('action' => 'index'));
 		}
-		
+
 		if (!empty($this->data)) {
-			
+
 			var_dump($id);
 			$calendar = $this->Calendar->findById($id);
 			debug($calendar);

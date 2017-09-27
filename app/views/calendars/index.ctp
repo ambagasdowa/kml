@@ -88,10 +88,10 @@
 		));
 		?>
 	</p>
-	
+
 
 		<div id="eventdata"></div>
-		
+
 
 	<div class="paging">
 		<?php echo $this->Paginator->prev('<< ' . __('previous', true), array(), null, array('class'=>'disabled'));?>
@@ -113,14 +113,14 @@
 	// <!&#91;CDATA&#91;
 require(['jquery','moment','bootstrap','fullcalendar','fancybox'], function($) {
 	$(document).ready(function () {
-		
+
 // 		$('#calendar').fullCalendar('render');
-		
+
 		$('#calendar').fullCalendar({
 // 			aspectRatio: 3.55,
 // 			defaultView: 'agendaWeek',
 // 			loading: $('#calendar').fullCalendar('render');
-			
+
 			header: {
 				left: 'prev,next today',
 				center: 'title',
@@ -129,13 +129,13 @@ require(['jquery','moment','bootstrap','fullcalendar','fancybox'], function($) {
 			eventLimit: true, // allow "more" link when too many events
 // 			businessHours: true, // display business hours
 // 			editable: true,
-			slotDuration: '00:30:00', 
+			slotDuration: '00:30:00',
 			droppable: true, // this allows things to be dropped onto the calendar
 			events: "<?php echo Dispatcher::baseUrl();?>/Calendars/feed",
 			dayClick: function(date,jsEvent,view) {
-					
+
 				urlData = "<?php echo Dispatcher::baseUrl();?>/Calendars/add/false/"+ moment(date.format()).format('DD/MM/YYYY/HH/m');
-				
+
 // 				$("#eventdata").show(); //for the animation
 // 				$("#eventdata").load(urlData);
 
@@ -177,7 +177,7 @@ require(['jquery','moment','bootstrap','fullcalendar','fancybox'], function($) {
 					return false;
 				}
 			},
-			
+
 			eventDrop: function(event,delta,revertFunc,jsEvent,ui,view) {
 				console.log(delta);
 				var data_ = base64_encode(JSON.stringify([{id:event.id,days:delta._days,months:delta._months,milisecs:delta._milliseconds,view_type:view.type}]));
@@ -189,12 +189,12 @@ require(['jquery','moment','bootstrap','fullcalendar','fancybox'], function($) {
 				var data_ = base64_encode(JSON.stringify([{id:event.id,days:delta._days,months:delta._months,milisecs:delta._milliseconds,view_type:view.type,resize:true}]));
 				$.post("<?php echo Dispatcher::baseUrl();?>/Calendars/dropsize/id:" + event.id + "/" + data_ + "/");
 			},
-			
+
 			render: true
 		});
-		
+
 		$("#calendar").fullCalendar('render');
-		
+
 		$('#eventdata').hide();
 	});
 });
@@ -220,6 +220,6 @@ require(['jquery','moment','bootstrap','fullcalendar','fancybox'], function($) {
 
 
 <!--Hola , buena tarde , acabo de enviar el detalle de la transferencia en un archivo pdf en el enlace que usted me proporciono.
-si el deposito no se encuentra en su base de datos es porque aun lo tiene el banco ? 
-sin embargo en el detalle del movimiento se refleja la orden como liquidada y entiendo que es cuando la transferencia ya se ha realizado ? le envio el detalle como le menciono anteriormente , si requiere mas datos hagamelo saber 
+si el deposito no se encuentra en su base de datos es porque aun lo tiene el banco ?
+sin embargo en el detalle del movimiento se refleja la orden como liquidada y entiendo que es cuando la transferencia ya se ha realizado ? le envio el detalle como le menciono anteriormente , si requiere mas datos hagamelo saber
 Saludos.-->

@@ -2,12 +2,14 @@
 
 /* <?php //print_r($_SERVER);?> */
 
+
 /* set the body color */
-@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300);
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:100,200,300);
 body {
   background: #50a3a2;
   background: -webkit-linear-gradient(top left, #777 0%, #fff 100%);
   background: linear-gradient(to bottom right, #777 0%, #fff 100%);
+
 }
 body {
   font-family: 'Source Sans Pro', sans-serif;
@@ -44,6 +46,10 @@ body :-ms-input-placeholder {
 nav{
 	font-weight:600;
 }
+/*@media (max-width: 75em) { }*/
+/*#container{
+  height  : 90vh  ;
+}*/
 
 .placeholder {
 /* 	color:black; */
@@ -1198,3 +1204,42 @@ Follow me on Twitter @maridlcrmn
     z-index: 8802 !important;
 }
 /** DATEPICKER OVER FANCYBOX */
+
+/** NOTE filters in selected */
+
+.select2-results {
+  font-weight:bold;
+  background: linear-gradient(to bottom right, #777 0%, #fff 100%)!important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    font-weight:bold;
+    color: #fff;
+    background: linear-gradient(to bottom right, #777 0%, #fff 100%)!important;
+    line-height: 28px;
+}
+/*dropdown-LIST*/
+.select2-search--dropdown {
+    font-weight:bold;
+    background: linear-gradient(to bottom right, #777 0%, #ddd 100%)!important;
+}
+
+/*NOTE SEARCH BOX*/
+.select2-container--default .select2-search--dropdown .select2-search__field{
+    font-weight:bold;
+    color: #000;
+    background: linear-gradient(to bottom right, #ddd 0%, #fff 100%)!important;
+}
+/** NOTE END filters in selected */
+
+/*NOTE add some ui fixed*/
+.scroll-block .break {
+  height: 350px;
+}
+
+
+
+/*hide hihcharts*/
+.highcharts-credits {
+	display: none;
+}

@@ -5,13 +5,13 @@ class SecureCalendarsController extends AppController {
 	var $name = 'SecureCalendars';
 	var $components = array('RequestHandler','Session','Search.Prg');
 	var $helpers = array('Html','Form','Ajax','Javascript','Js' => array('Jquery'));
-	
-	
+
+
 	function index() {
 		$this->SecureCalendar->recursive = 0;
 		$this->set('calendars', $this->paginate());
-		
-		
+
+
 		$this->LoadModel('SecureStructure');
 		$secureStructures = $this->SecureStructure->find('all');
 
@@ -25,40 +25,40 @@ class SecureCalendarsController extends AppController {
 
 // 		debug($this->statistics_topics());
 // 		debug(json_encode($this->statistics_topics()['totalOperators']['0']['ViewGetPayroll']));
-		
+
 // 		$json_courses['0']['name'] = 'Cursos Totales';
 // 		$json_courses['0']['data'] = array(count($this->statistics_topics()['totalCourses']));
-		
+
 // 		$json_courses['1']['name'] = 'Operadores Totales';
 // 		$json_courses['1']['data'] = array(count($this->statistics_topics()['totalOperators']));
-		
+
 		$json_courses = $this->statistics_topics();
 		debug($json_courses);
-		
+
 		debug(json_encode(array_keys($json_courses['totalOperators'])));
 		debug(json_encode(array_values($json_courses['totalOperators'])));
-		
-		
+
+
 		$this->set('total_courses',count($json_courses['totalCourses']));
-		
+
 // 			$str = "exit();";
 // 			eval($str);
 // 		var_dump(eval("echo 2/3;"));
 // 		capacitacionesTotales = cursos X total de operadores
 		$label_courses_stats = $this->math_map($arr_ = $json_courses['totalOperators'],$num_data = count($json_courses['totalCourses']),$type = null,$operator = '/');
 		debug(json_encode($label_courses_stats));
-		
+
 // 		porcentaje de cumplimiento = capacitaciones capturadas / capacitaciones totales X 100
 		$this->accomplishment();
-		
-		
+
+
 		$this->set('label_bases',json_encode(array_keys($json_courses['totalOperators'])));
 		$this->set('label_workers',json_encode(array_values($json_courses['totalOperators'])));
 		$this->set('label_courses_stats',json_encode($label_courses_stats));
-		
-		
+
+
 // 		debug(json_encode($this->statistics_topics()['totalCourses']));
-		
+
 // 		$this->set(compact('json_courses'));
 // 		$this->LoadModel('ViewGetPayroll'); //NOTE Operadores totales
 // 		$conditionsPayroll['ViewGetPayroll.Cvepue'] = array('000017','000026','000028');
@@ -71,34 +71,34 @@ class SecureCalendarsController extends AppController {
 // 		debug($secureStructures);
 // 		debug($secureTopics);
 // 		debug($secureCalendars);
-		
+
 		$this->set(compact('secureStructures','groups', 'users', 'secureTopics', 'secureTopicsTypes', 'secureGpoChiefs', 'secureGoes', 'secureCalendars'));
-		
+
 	}
-	
+
 	function accomplishment ($year= null, $month = null) {
 		// NOTE Temporal
 			$year = date('Y');
 			$month = date('m');
 // 			$month = '12';
 		// NOTE Temporal
-		
+
 		if (!empty($year) and !empty($month)) {
 			$this->LoadModel('SecureControlUser');
 			$conditionsAccomplishment['YEAR(SecureControlUser.modified)'] = $year;
 			$conditionsAccomplishment['MONTH(SecureControlUser.modified)'] = $month;
 			$conditionsAccomplishment['SecureControlUser.course_is_taken'] = TRUE;
-			
+
 			$fieldsAccomplishment = array('id','secure_structures_id');
 			debug( $this->SecureControlUser->find('list',array('conditions'=>$conditionsAccomplishment,'fields'=>$fieldsAccomplishment)) );
-			
+
 		} else {
 			return null;
 		}
 	} //end accomplishment
-	
+
 	function math_map ($arr_ = array(),$num_data = null,$type = null,$operator = null) {
-		
+
 		if ($type == 'key') {
 			foreach (array_keys($arr_) as $index => $value) {
 // 				debug($value.$operator.$num_data);
@@ -128,9 +128,9 @@ class SecureCalendarsController extends AppController {
 			return null;
 		}
 	}
-	
+
 	function statistics_topics () {
-		
+
 		$this->LoadModel('SecureStructure');
 		$secureStructures = $this->SecureStructure->find('all');
 
@@ -147,7 +147,7 @@ class SecureCalendarsController extends AppController {
 		$groupPayroll = array('ViewGetPayroll.Departamento','ViewGetPayroll.Company');
 		$fieldPayroll = array('ViewGetPayroll.Departamento','count(ViewGetPayroll.Cvetra)');
 		$orderPayroll = null;
-		
+
 		$total_operator_users = $this->ViewGetPayroll->find('list',array('conditions'=>$conditionsPayroll,'group'=>$groupPayroll,'fields'=>$fieldPayroll,'order'=>$orderPayroll));
 // 		var_dump('TotalOperators');
 // 		debug($total_operator_users);
@@ -156,7 +156,7 @@ class SecureCalendarsController extends AppController {
 // 		debug(count($secureTopics));
 		$stats['totalCourses'] = $secureTopics;
 		$stats['totalOperators'] = $total_operator_users;
-		
+
 // 		debug($stats);
 		//NOTE JSON SECTION
 // 		Configure::write('debug', 0);
@@ -172,7 +172,7 @@ class SecureCalendarsController extends AppController {
 		//1. Transform request parameters to MySQL datetime format.
 		$date_init = new DateTime($this->params['url']['start']);
 		$mysqlstart =  $date_init->format('Y-m-d H:i:s');
-		
+
 		$date_end = new DateTime($this->params['url']['end']);
 		$mysqlend =  $date_end->format('Y-m-d H:i:s');
 		//2. Get the events corresponding to the time range
@@ -196,7 +196,7 @@ class SecureCalendarsController extends AppController {
 		$this->header('Content-Type: application/json');
 		echo json_encode($calendar);
 	}
-	
+
 	function negative($data = null) {
 		if(is_numeric($data)){
 			return (min(1, max(-1, $data)) === -1) ?  TRUE : FALSE ;
@@ -204,7 +204,7 @@ class SecureCalendarsController extends AppController {
 			return null;
 		}
 	}
-	
+
 	function dropsize($id = null){
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid calendar', true));
@@ -248,7 +248,7 @@ class SecureCalendarsController extends AppController {
 				$str_time = 'PT';
 				foreach ($exp_time as $index => $time_data) {
 					var_dump(abs($time_data));
-					
+
 					if( abs($time_data) != 0 ){
 						if ($index == 0) {
 							$str_time .= abs($time_data).'H';
@@ -265,7 +265,7 @@ class SecureCalendarsController extends AppController {
 				$new_date_calendar_init = new DateTime($date_calendar_init);
 				$new_date_calendar_end = new DateTime($date_calendar_endit);
 				if ($this->negative($json_array['milisecs']) === TRUE) {
-					// if is a resize 
+					// if is a resize
 					if (!isset($json_array['resize'])) {
 						$new_date_calendar_init->sub(new DateInterval($str_time));
 					}
@@ -279,7 +279,7 @@ class SecureCalendarsController extends AppController {
 				// reset the values of the datetime fields
 				$date_calendar_init =  $new_date_calendar_init->format('Y-m-d H:i:s');
 				$date_calendar_endit =  $new_date_calendar_end->format('Y-m-d H:i:s');
-				
+
 			}
 			/** @if miliseconds */
 			/** @save*/
@@ -294,7 +294,7 @@ class SecureCalendarsController extends AppController {
 	// 		$this->layout='empty';
 		}
 	}
-	
+
 	function view($id = null) {
 		if (!$id) {
 			$this->Session->setFlash(__('Invalid secure calendar', true));
@@ -351,11 +351,11 @@ class SecureCalendarsController extends AppController {
 				$groups = $this->SecureStructure->Group->find('list');
 				$users_all = $this->SecureStructure->User->find('list');
 				$usersSecure = $this->SecurePresenter->find('list');
-				
+
 				foreach ($usersSecure as $id_secure_users => $_users_id ) {
 					$users[$_users_id] = $users_all[$_users_id];
 				}
-				
+
 				$secureTopics = $this->SecureStructure->SecureTopics->find('list');
 				$secureTopicsTypes = $this->SecureStructure->SecureTopicsTypes->find('list');
 				$secureGpoChiefs = $this->SecureStructure->SecureGpoChiefs->find('list');
@@ -370,13 +370,13 @@ class SecureCalendarsController extends AppController {
 // 				}
 // 				debug($secure_users);
 // 				debug($users);
-				
-				
+
+
 			/** NOTE section belongs to SecureCalendarss*/
 
-			
+
 		if (!empty($this->data)) {
-			
+
 // 			debug($this->params);
 // 			debug($this->data);
 // 			exit();
@@ -385,16 +385,16 @@ class SecureCalendarsController extends AppController {
 			$this->SecureCalendar->create();
 			$this->data['SecureCalendar']['title'] = Sanitize::paranoid($this->data["SecureCalendar"]["title"], array('!','\'','?','_','.',' ','-'));
 			$this->data['SecureCalendar']['editable']='1';
-			
+
 			if ($this->SecureCalendar->save($this->data['SecureCalendar'])) {
 				// NOTE catch the id for the calendar
 // 				$secure_calendars_id = $this->SecureCalendar->getLastInsertID();
-				
+
 				$this->data['SecureStructure']['secure_calendars_id'] = $this->SecureCalendar->getLastInsertID();
 				$this->data['SecureStructure']['description'] = $this->data['SecureCalendar']['description'];
 				$this->data['SecureStructure']['create'] = date('Y-m-d h:m:s');
 				$this->data['SecureStructure']['status'] = true;
-				
+
 				$this->SecureStructure->create();
 				if ($this->SecureStructure->save($this->data['SecureStructure'])) {
 					$this->Session->setFlash(__('<div class="alert alert-danger alert-dismissible fade in" role="alert">
@@ -417,14 +417,14 @@ class SecureCalendarsController extends AppController {
 				$this->Session->setFlash(__('The calendar could not be saved. Please, try again.', true));
 			}
 		} else {
-			
+
 		}
 		$this->autoLayout = false;
 // 		$this->layout='empty';
 	}
-	
-	
-	
+
+
+
 // 	function edit_($id = null) {
 // 		if (!$id && empty($this->data)) {
 // 			$this->Session->setFlash(__('Invalid secure calendar', true));
@@ -442,9 +442,9 @@ class SecureCalendarsController extends AppController {
 // 			$this->data = $this->SecureCalendar->read(null, $id);
 // 		}
 // 	}
-	
+
 	function edit($id = null) {
-		
+
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid calendar', true));
 			$this->redirect(array('controller'=>'SecureCalendars','action' => 'index'));
@@ -454,7 +454,7 @@ class SecureCalendarsController extends AppController {
 			$this->LoadModel('SecureStructure');
 			$this->LoadModel('SecurePresenter');
 			$secureStructures = $this->SecureStructure->findBySecureCalendarsId($id); // what happend if a calendar has many structures???
-			
+
 				$groups = $this->SecureStructure->Group->find('list');
 				$users_all = $this->SecureStructure->User->find('list');
 				$usersSecure = $this->SecurePresenter->find('list');
@@ -469,7 +469,7 @@ class SecureCalendarsController extends AppController {
 				$this->set(compact('groups', 'users', 'secureTopics', 'secureTopicsTypes', 'secureGpoChiefs', 'secureGoes', 'secureCalendars','secureStructures'));
 // 				debug($groups);
 			/** NOTE section belongs to SecureCalendarss*/
-			
+
 		if (!empty($this->data)) {
 
 // 			debug($this->params);
@@ -480,17 +480,17 @@ class SecureCalendarsController extends AppController {
 
 			$calendar = $this->SecureCalendar->findById($id); // and this what jajaja???
 // 			var_dump($calendar);
-			
+
 // 				$this->data['SecureStructure']['secure_calendars_id'] = $this->SecureCalendar->getLastInsertID();
 				$this->data['SecureStructure']['description'] = $this->data['SecureCalendar']['description'];
 				$this->data['SecureStructure']['modified'] = date('Y-m-d h:m:s');
 				$this->data['SecureStructure']['status'] = true;
-				
+
 // 			debug($this->data);
 // 			debug($this->SecureStructure->findBySecureCalendarsId($id)); // what happend if a calendar has many structures???
-			
+
 // 			exit();
-			
+
 			if ($this->SecureCalendar->save($this->data)) {
 // 								$this->Session->setFlash(__('<div class="alert alert-danger alert-dismissible fade in" role="alert">
 // 												<button type="button" class="close" data-dismiss="alert" aria-label="Close">

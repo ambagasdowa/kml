@@ -28,7 +28,7 @@
 	<?php //echo $this->Html->charset(); ?>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 	<!--link rel="stylesheet/less" href="less/bootstrap.less" type="text/css" /-->
 	<!--link rel="stylesheet/less" href="less/responsive.less" type="text/css" /-->
@@ -105,11 +105,12 @@ e($this->Html->css($theme.'bootstrap/carousel', 'stylesheet'));
 e($this->Html->css($theme.'bootstrap/dashboard', 'stylesheet'));
 e($this->Html->css($theme.'bootstrap/sticky-footer-navbar', 'stylesheet'));
 e($this->Html->css($theme.'jquery/jquery-ui', 'stylesheet'));
-e($this->Html->css($theme.'fancybox/jquery.fancybox', 'stylesheet'));
+// e($this->Html->css($theme.'fancybox/jquery.fancybox', 'stylesheet'));
 e($this->Html->css($theme.'justified-gallery/justifiedGallery', 'stylesheet'));
 e($this->Html->css($theme.'fullcalendar/fullcalendar', 'stylesheet'));
 e($this->Html->css($theme.'xcharts/xcharts.min', 'stylesheet'));
 e($this->Html->css($theme.'select2/select2', 'stylesheet'));
+// e($this->Html->css($theme.'select2/select2-bootstrap', 'stylesheet'));
 e($this->Html->css($theme.'devoops/righteous', 'stylesheet'));
 e($this->Html->css($theme.'devoops/font-awesome.min.css', 'stylesheet'));//font-awesome
 // e($this->Html->css($theme.'devoops/style_v2', 'stylesheet')); // devoops_theme
@@ -117,6 +118,10 @@ e($this->Html->css($theme.'chartist/chartist.min', 'stylesheet'));
 e($this->Html->css($theme.'morris/morris', 'stylesheet'));
 //carousel OWL
 e($this->Html->css($theme.'owl/owl.carousel', 'stylesheet'));
+
+//NOTE colorbox in favor to fancybox
+e($this->Html->css($theme.'colorbox/colorbox', 'stylesheet'));
+
 
 /** @quick_filter js*/
 // e($this->Html->script($theme.'filter/quick_filter'));
@@ -255,11 +260,11 @@ e($this->Html->css($default.'style'));
 	<!-- If you'd like some sort of menu to
 	show up on all of your views, include it here -->
 
-		<div id="nav_menu">
+		<div id="nav_menu" class="noprint">
 			<?php e($this->element('nav_menu'));?>
 		</div>
 
-		<div id="header">
+		<div id="header" class="noprint">
 			<?php echo $this->Session->flash('auth');?>
 		</div>
 
@@ -275,7 +280,7 @@ e($this->Html->css($default.'style'));
 
 		<p>&nbsp;</p> <!--workaround footer-->
 
-		<div id="footer">
+		<div id="footer" class="noprint">
 			<?php echo $this->element('footer_app'); ?>
 			<?php //echo $this->element('sql_dump'); ?>
 			<!-- initialize tooltip -->

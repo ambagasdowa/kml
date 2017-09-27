@@ -340,6 +340,35 @@
 												</ul>
 										</li>
 
+
+                    <li class="dropdown-submenu">
+                      <a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>ModuleUsers Options</span></a>
+                        <ul class="dropdown-menu">
+                          <li><a tabindex="-1" href="<?php e($this->webroot.'ModuleUserCredentialsMains/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>CatalogOptions</span></a></li>
+
+                          <li class="dropdown-submenu">
+                            <a href="#">ModuleUserCredentialsMains</a>
+                              <ul class="dropdown-menu">
+                                <li><a href="<?php e($this->webroot.'ModuleUserCredentialsMains/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>Index</span></a></li>
+                                <li><a href="<?php e($this->webroot.'ModuleUserCredentialsMains/add/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Add</span></a></li>
+                                <li><a href="<?php e($this->webroot.'ModuleUserCredentialsMains/edit/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Edit</span></a></li>
+                                <li><a href="<?php e($this->webroot.'ModuleUserCredentialsMains/view/');?>"><i class="fa fa-cog"></i>&nbsp;<span>View</span></a></li>
+                              </ul>
+                          </li>
+
+                          <li class="dropdown-submenu">
+                            <a href="#">ModuleUserCredentialsControls</a>
+                              <ul class="dropdown-menu">
+                                <li><a href="<?php e($this->webroot.'ModuleUserCredentialsControls/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>Index</span></a></li>
+                                <li><a href="<?php e($this->webroot.'ModuleUserCredentialsControls/add/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Add</span></a></li>
+                                <li><a href="<?php e($this->webroot.'ModuleUserCredentialsControls/edit/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Edit</span></a></li>
+                                <li><a href="<?php e($this->webroot.'ModuleUserCredentialsControls/view/');?>"><i class="fa fa-cog"></i>&nbsp;<span>View</span></a></li>
+                              </ul>
+                          </li>
+
+                        </ul>
+                    </li>
+
 										<li class="dropdown-submenu">
 											<a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>Projections</span></a>
 												<ul class="dropdown-menu">

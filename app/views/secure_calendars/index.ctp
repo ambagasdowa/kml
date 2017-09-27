@@ -15,7 +15,7 @@
 // // echo "\n";
 // // echo strlen("1\n2");
 // echo "\n";
-// 
+//
 // $a = 10;
 // $b = 20;
 // $c = 4;
@@ -31,8 +31,8 @@
 // echo "\n";
 // $j = $i * $e;
 //  pr($j);
-//  
-//  
+//
+//
 // 	$string = "Hello, World!";
 // 	$a = FALSE;
 // 	$b = FALSE;
@@ -54,7 +54,7 @@
 // 			echo "Not quite.";
 // 		}
 // 	}
-// 	
+//
 // 		$array = '0123456789ABCDEFG';
 // 		pr(strlen($array));
 // 		$s = '';
@@ -63,7 +63,7 @@
 // 		$s .= $array[rand(0,strlen ($array) - 1)];
 // 		}
 // 		var_dump($s);
-// 		
+//
 // define("STOP_AT", 1024);
 //  $result = array();
 // /* Missing code */
@@ -71,8 +71,8 @@
 //  {
 //  $result[] = $idx;
 //  }
-// 
-//  pr($result); 
+//
+//  pr($result);
 ?>
 <style>
 
@@ -95,7 +95,7 @@
 		background-color:#999;
 		color: #444;
 	}
-	
+
 
 /* 	.btn-success{ */
 /* 		display: inline-block; !important; */
@@ -121,13 +121,13 @@
 	.panel-default {
 		background-color: rgba(255, 255, 255, 0.3); /* Color white with alpha 0.9*/
 	}
-	
+
 </style>
 
 <!--  Start container -->
 
 	<div class="row-fluid">
-	
+
 	<div id="dashboard_links" class="col-xs-6 col-sm-2 pull-right">
 			<ul id="tabbed" class="nav nav-pills nav-stacked">
 				<li role="presentation" class="active">
@@ -135,7 +135,7 @@
 						<i class="fa fa-home"></i>&nbsp;&nbsp;Inicio
 					</a>
 				</li>
-				
+
 				<li role="presentation" >
 					<a href="#casa" id="casa-tab" data-toggle="tab">
 						<i class="fa fa-clock-o"></i>&nbsp;&nbsp;Programar Curso
@@ -153,11 +153,11 @@
 				</li>
 			</ul>
 	</div>
-	
+
 		<div class="col-xs-6 col-sm-10">
 			<div id="tabbedContent" class='tab-content'>
-			
-			
+
+
 				<div class="tab-pane fade in active" id="stats_secure_app">
 <!-- 					<ul class="list-group list-inline"> -->
 <!-- 						<li> -->
@@ -165,11 +165,11 @@
 <!-- 						</li> -->
 <!-- 					</ul> -->
 						<div id="load_stats_secure_app">
-						
+
 							<div class="panel panel-default">
 							<!-- Default panel contents -->
 								<div class="panel-heading">Panel de Estadisticas</div>
-								
+
 <!-- 								<div class="panel-body"> -->
 <!-- 									<p>Stats</p> -->
 <!-- 								</div> -->
@@ -200,7 +200,7 @@
 								</table>
 							</div>
 
-							
+
 							<!--<div id="container_charts" style="width:100%; height:400px;"></div>
 							<p>&nbsp;</p>
 							<div id="container_charting" style="width:100%; height:400px;"></div>
@@ -209,7 +209,7 @@
 							<p>&nbsp;</p>
 							<div id="container_courses_acomplished" style="width:100%; height:400px;"></div>
 							<p>&nbsp;</p>-->
-							
+
 							<!--<div id="container_courses_operators" style="width:100%; height:400px;"></div>
 							<p>&nbsp;</p>-->
 							<!--<div id="container_courses_operators" style="width:100%; height:400px;"></div>
@@ -217,7 +217,7 @@
 						</div>
 
 				</div>
-			
+
 				<div class="tab-pane fade in" id="casa">
 					<p>
 <!-- 						<div id="calendars_update">DAta inb hir</div> -->
@@ -234,8 +234,8 @@
 						<div id="loadStructMenu"></div>
 
 				</div>
-				
-				
+
+
 				<div  class="tab-pane fade in" id="perfil">
 <!-- 				TABS -->
 				<div id="start_tabs_nav">
@@ -245,23 +245,23 @@
 					<li role="presentation" class="active modded-link">
 						<a href="#loadSecureTopics" aria-controls="loadSecureTopics" role="tab" data-toggle="tab" class="modded-link">Temas</a>
 					</li>
-					
+
 					<li role="presentation">
 						<a href="#loadSecureTopicsTypes" aria-controls="loadSecureTopicsTypes" role="tab" data-toggle="tab" class="modded-link">Tipos de Documento</a>
 					</li>
-					
+
 					<li role="presentation">
 						<a href="#loadSecureGpoChiefs" aria-controls="loadSecureGpoChiefs" role="tab" data-toggle="tab" class="modded-link">Responsable</a>
 					</li>
-					
+
 					<li role="presentation">
 						<a href="#loadSecureGos" aria-controls="loadSecureGos" role="tab" data-toggle="tab" class="modded-link">Dirigido a</a>
 					</li>
-					
+
 					<li role="presentation">
 						<a href="#loadSecurePresenters" aria-controls="loadSecurePresenters" role="tab" data-toggle="tab" class="modded-link">Presentadores</a>
 					</li>
-					
+
 					<li role="presentation">
 						<a href="#settings_tab" aria-controls="settings" role="tab" data-toggle="tab" class="modded-link">loadSecurePresenters</a>
 					</li>
@@ -270,15 +270,15 @@
 				<!-- Tab panes -->
 				<div class="tab-content">
 					<div role="tabpanel" class="tab-pane fade in active" id="loadSecureTopics">loadSecureTopics</div>
-					
+
 					<div role="tabpanel" class="tab-pane fade" id="loadSecureTopicsTypes">loadSecureTopicsTypes</div>
-					
+
 					<div role="tabpanel" class="tab-pane fade" id="loadSecureGpoChiefs">loadSecureGpoChiefs</div>
-					
+
 					<div role="tabpanel" class="tab-pane fade" id="loadSecureGos">loadSecureGoes</div>
-					
+
 					<div role="tabpanel" class="tab-pane fade" id="loadSecurePresenters">loadSecurePresenters</div>
-					
+
 					<div role="tabpanel" class="tab-pane fade" id="settings_tab">
 						<p>
 							<div class="calendars index" id="calendars_index">
@@ -341,10 +341,10 @@
 									));
 									?>
 								</p>
-								
+
 
 									<div id="eventdata"></div>
-									
+
 
 								<div class="paging">
 									<?php echo $this->Paginator->prev('<< ' . __('previous', true), array(), null, array('class'=>'disabled'));?>
@@ -365,10 +365,10 @@
 
 				</div> <!--ends_tabs_nav-->
 <!-- 				TABS -->
-				
-				
-				
-				
+
+
+
+
 
 				</div> <!--end perfil-->
 
@@ -387,13 +387,13 @@
 
 
 
-<?php 
+<?php
 // 	for($i=0;$i=3;++$i){
 // 		echo "<button id=\"$i\" onClick=\"reply_click(this.id)\">B$i</button>";
 // 	}
 ?>
 
-<?php 	
+<?php
 // 	echo $this->Form->create('SecureCalendars',array('enctype' => 'multipart/form-data','class'=>'form'));
 // 	echo $this->Form->input('group_id',array('placeholder'=>'group_id','class'=>'input'));
 // 	echo $this->Form->end(array('div'=>false,'class'=>'btn btn-success'));
@@ -405,15 +405,15 @@
 </form>-->
 <!-- the result of the search will be rendered inside this div -->
 <!-- <div id="result"></div> -->
- 
+
 <script>
 // 	$(document).ready(function () {
 // 		// Attach a submit handler to the form
 // 		$( "#searchForm" ).submit(function( event ) {
-// 		
+//
 // 			// Stop form from submitting normally
 // 			event.preventDefault();
-// 			
+//
 // 			// Get some values from elements on the page:
 // 			var $form = $( this ),
 // 			term = $form.find( "input[name='s']" ).val(),
@@ -422,7 +422,7 @@
 // 			console.log(term);
 // 			// Send the data using post
 // 			var posting = $.post( url, { s: term } );
-// 		
+//
 // 			// Put the results in a div
 // 			posting.done(function( data ) {
 // 				var content = $( data ).find( "#content" );
@@ -525,7 +525,7 @@ $(document).ready(function (){
 // 		if("undefined"==typeof $)throw new Error("JavaScript $ is undefined");
 // 		if("undefined"==typeof $.fullCalendar)throw new Error("JavaScript $.fullCalendar is undefined");
 // 		if("undefined"==typeof $.fancybox)throw new Error("JavaScript $.fancybox is undefined");
-		
+
 // 		console.log(typeof jQuery);
 // 		console.log(typeof $);
 // 		console.log(typeof $.fullCalendar);
@@ -535,12 +535,12 @@ $(document).ready(function (){
 			$('#calendar').fullCalendar('render');
 		});
 // 		$('#casa-tab a:first').tab('show');
-		
+
 		$('#calendar').fullCalendar({
 // 			aspectRatio: 3.55,
 // 			defaultView: 'agendaWeek',
 // 			loading: $('#calendar').fullCalendar('render');
-			
+
 			header: {
 				left: 'prev,next today',
 				center: 'title',
@@ -549,13 +549,15 @@ $(document).ready(function (){
 			eventLimit: true, // allow "more" link when too many events
 // 			businessHours: true, // display business hours
 // 			editable: true,
-			slotDuration: '00:30:00', 
+			slotDuration: '00:30:00',
 			droppable: true, // this allows things to be dropped onto the calendar
+			// NOTE The GET parameter names will be determined by the startParam and endParam options. ("start" and "end" by default).
+			/*NOTE //SecureCalendars/feed.php?start=2013-12-01&end=2014-01-12&_=1386054751381*/
 			events: "<?php echo Dispatcher::baseUrl();?>/SecureCalendars/feed",
 			dayClick: function(date,jsEvent,view) {
-					
+
 				urlData = "<?php echo Dispatcher::baseUrl();?>/SecureCalendars/add/false/"+ moment(date.format()).format('DD/MM/YYYY/HH/m');
-				
+
 // 				$("#eventdata").show(); //for the animation
 // 				$("#eventdata").load(urlData);
 
@@ -579,7 +581,7 @@ $(document).ready(function (){
 // 					return $('#calendar').fullCalendar('render');$("#calendars_index").show();$("#calendars_index").load(location.href + " #calendars_index");
 					return false;
 				}
-				
+
 				// change the day's background color just for fun
 // 				$(this).css('background-color', '#29AAB1');
 			},
@@ -602,7 +604,7 @@ $(document).ready(function (){
 					return false;
 				}
 			},
-			
+
 			eventDrop: function(event,delta,revertFunc,jsEvent,ui,view) {
 				console.log(delta);
 				var data_ = base64_encode(JSON.stringify([{id:event.id,days:delta._days,months:delta._months,milisecs:delta._milliseconds,view_type:view.type}]));
@@ -618,62 +620,62 @@ $(document).ready(function (){
 // 				$("#calendars_index").show();
 				$("#calendars_index").load(location.href + " #calendars_index");
 			},
-			
+
 			render: true
 		});
-		
+
 // 		$("#calendar").fullCalendar('render');
-		
+
 		$('#eventdata').hide();
-		
-		
-		
-		
+
+
+
+
 		var urlStruct = "<?php echo Dispatcher::baseUrl();?>/SecureStructures/add/";
 		var urlStructE = "<?php echo Dispatcher::baseUrl();?>/SecureStructures/edit/";
 
 			$('#calendar_create').datepicker({showButtonPanel: true});
-			
+
 			$('#newSecureStructure').fancybox({
 				'type': 'ajax',
 				'href': urlStruct,
 				'autoScale': false,
 				'autoDimensions': false
 			});
-			
+
 // 			$('#username').val(userText)
-			
+
 // 			$('#txtTestValue').attr('value', testResult );
-			
+
 			$('#editSecureStructure').fancybox({
 				'type': 'ajax',
 				'href': urlStructE,
 				'autoScale': false,
 				'autoDimensions': false
 			});
-		
-			
+
+
 // 			$('#calendar_create').live('click', function (){
 // 				$(this).datepicker({showButtonPanel: true});
 // 			});
-			
-			
-			
+
+
+
 // 		get the SecureStructures add div portion
 		var loadStructMenu = "<?php echo Dispatcher::baseUrl();?>" + '/SecureStructures/';
-		
+
 // 				$("#loadStructMenu").show(); //for the animation
 				$("#loadStructMenu").load(loadStructMenu);
 // 				alert(loadStructMenu);
-				
+
 // 		config Section
-		// NOTE TODO re-build the struct of this as a function 
+		// NOTE TODO re-build the struct of this as a function
 		var loadSecureTopics = "<?php echo Dispatcher::baseUrl();?>" + '/SecureTopics/' + ' .secureTopics';
-		
+
 			$("#loadSecureTopics").load(loadSecureTopics, function(e) {
 // 				alert( "Load was performed." );
 				/** NOTE @add-section */
-// 				if prefix equals to 
+// 				if prefix equals to
 				$('#newSecureTopics').on('click', function (e){
 					e.preventDefault(); // prevent jajajaja !
 					var url_name = $(this).attr("data-name");
@@ -688,7 +690,7 @@ $(document).ready(function (){
 					return false;
 					console.log(secureTopicsAdd);
 				});
-				
+
 				/** NOTE @edit-section */
 				$('.actions a').on( 'click', function (e){
 					e.preventDefault();
@@ -718,7 +720,7 @@ $(document).ready(function (){
 // 					var tiexto = $('#newSecureTopics').val();
 // 					alert(tiexto);
 // 				});
-			
+
 		var loadSecureTopicsTypes = "<?php echo Dispatcher::baseUrl();?>" + '/SecureTopicsTypes/' + ' .secureTopicsTypes';
 			$("#loadSecureTopicsTypes").load(loadSecureTopicsTypes,function(e){
 				$('#newSecureTopicsTypes').on('click', function (e){
@@ -783,9 +785,9 @@ $(document).ready(function (){
 					console.log(securePresentersAdd);
 					});
 				});
-				
 
-				
+
+
 		//NOTE charts section
 		$('#container_charts').highcharts({
 			chart: {
@@ -892,7 +894,7 @@ $(document).ready(function (){
             data: <?php e("$label_courses_stats")?>
         }]
     });
-    
+
 	$('#container_courses_acomplished').highcharts({
 		chart: {
 			plotBackgroundColor: null,

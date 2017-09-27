@@ -68,12 +68,58 @@ class ReporterViewSpXs4zAccount extends AppModel {
 					$tachion_backward = ( array_key_exists('backward',$options) ? $options['backward'] : false ) ?: ($cdate == 1 ?: --$cdate) ;		//NOTE if false calculate months backward
 					$tachion_forward = ( array_key_exists('forward',$options) ? $options['forward'] : false ) ?: '1';					//NOTE if false calculate months forward
 
+					// NOTE restrict uix
+					$conditions_key = ( array_key_exists('conditions_key',$options) ? $options['conditions_key'] : false ) ?: false ;					//NOTE if false calculate months forward
+					$conditions_bsu = ( array_key_exists('conditions_bsu',$options) ? $options['conditions_bsu'] : false ) ?: false ;					//NOTE if false calculate months forward
+
+					// NOTE restrict the query
+					$conditions_detail = ( array_key_exists('conditions_detail',$options) ? $options['conditions_detail'] : false ) ?: false ;					//NOTE if false calculate months forward
+
 				} else {
 					// NOTE set the defaults
 					$cperiod = date('Y-m-d H:i:s') ;
 					$tachion_backward = ($cdate == 1 ?: --$cdate) ;
 					$tachion_forward =  '1' ;
+					$conditions_key = null;
+					$conditions_bsu = null;
 				}
+
+// NOTE build the special conditions
+				if ($conditions_key != null ) {
+					$str_len = (strlen(key($conditions_key))-1) - strpos(key($conditions_key), '.') ;
+					$str_table = substr(key($conditions_key), -$str_len);
+					$str_table = 'type';
+					$str_add = " and ${str_table} in "."('".implode("','", current($conditions_key))."')";
+				} else {
+					$str_add = '';
+				}
+
+				if ($conditions_bsu != null ) {
+					$str_bsu_len = (strlen(key($conditions_bsu))-1) - strpos(key($conditions_bsu), '.') ;
+					$str_bsu_table = substr(key($conditions_bsu), -$str_bsu_len);
+					$str_bsu_table = 'area';
+					$str_bsu_add = " and ${str_bsu_table} in "."('".implode("','", current($conditions_bsu))."')";
+				} else {
+					$str_bsu_add = '';
+				}
+
+				// debug($conditions_detail);
+				$add_str_data = $string_data = null;
+
+				if ($conditions_detail != null ) {
+
+					$undata = explode('_',$conditions_detail);
+
+					$string_data[0] = ' and acc.FiscYr = "'.$undata['2'].'"';
+					$string_data[1] = ' and acc.Mes = "'.$undata['3'].'"';
+					$string_data[2] = ' and units.label = "'.$undata['4'].'"';
+					$string_data[3] = ' and acc.NoCta = "'.$undata['5'].'"';
+					$string_data[4] = ' and acc._key = "'.$undata['6'].'"';
+				}
+				if (isset($string_data)) {
+					$add_str_data = implode('', $string_data);
+				}
+
 
 				//NOTE build the querys
 
@@ -105,6 +151,7 @@ class ReporterViewSpXs4zAccount extends AppModel {
 				} // end compact
 
 				if ($mode == 'compact_bsu') { // NOTE Now check the options
+
 					//NOTE  query the compact_bsu version of costos
 							$theQuery = $this->query(
 										"
@@ -137,6 +184,8 @@ class ReporterViewSpXs4zAccount extends AppModel {
 																			UnidadNegocio not in ('00')
 																		)
 																)
+													{$str_add}
+													{$str_bsu_add}
 											group by
 														_source_company
 													 ,area
@@ -153,29 +202,62 @@ class ReporterViewSpXs4zAccount extends AppModel {
 					//NOTE  query the detail version of costos build the query
 							$theQuery = $this->query(
 										"
-											select
-													 _source_company
-													,area
-													,UnidadNegocio
-													,mes
-													,account
-													,name
-													,Real
-													,Presupuesto
-													,_period
-													,type
-													,cyear
-											from
-													sistemas.dbo.reporter_costos_accounts
-											where
-													_period
-														between
-																(left(CONVERT(VARCHAR(10), (dateadd(month,-{$tachion_backward},'{$cperiod}')), 112), 6))
-														and
-																(left(CONVERT(VARCHAR(10), (dateadd(month,{$tachion_forward},'{$cperiod}')), 112), 6))
+										select
+								            row_number() over( order by units.label asc) as 'id'
+								            ,acc._source_company
+								            ,units.label as 'area'
+								            ,acc.UnidadNegocio
+								            ,acc.Mes as 'mes'
+								            ,acc.NoCta as 'account'
+								            ,acc.NombreCta as 'name'
+								            ,round(sum(acc.Cargo - acc.Abono),3) as 'Real'
+								            ,round(sum(acc.Presupuesto),3) as 'Presupuesto'
+								            ,acc._period
+								            ,acc.Descripcion
+								            ,acc.NombreEntidad
+								            ,acc.TipoTransaccion
+								            ,acc.Referencia
+								            ,acc.ReferenciaExterna
+								            ,acc._key as 'type'
+								            ,acc.FiscYr as 'cyear'
+								        from
+								            sistemas.dbo.reporter_view_report_accounts as acc
+								        inner join
+								            sistemas.dbo.projections_view_bussiness_units as units
+								            on acc._source_company = units.tname
+								        where
+								            (
+								                (
+								                    _source_company in ('ATMMAC','TEICUA','TCGTUL')
+								                )
+								            or
+								                (
+								                    _source_company not in ('ATMMAC','TEICUA','TCGTUL')
+								                and
+								                    acc.Compania not in ('ATMMAC','TEICUA','TCGTUL')
+								                and
+								                    UnidadNegocio not in ('00')
+								                )
+								            )
+								        {$add_str_data}
+								        group by
+								              acc.UnidadNegocio
+								             ,acc._period
+								             ,acc._source_company
+								             ,units.label
+								             ,acc.NoCta
+								             ,acc.NombreCta
+								             ,acc.Mes
+								             ,acc.Descripcion
+								             ,acc.NombreEntidad
+								             ,acc.TipoTransaccion
+								             ,acc.Referencia
+								             ,acc.ReferenciaExterna
+								             ,acc._key
+								             ,acc.FiscYr
 									"
 							);
-							// return $theQuery;
+							// debug($theQuery);
 				} // end detail
 
 				if ($mode == 'company') { // NOTE Now check the options
@@ -214,6 +296,8 @@ class ReporterViewSpXs4zAccount extends AppModel {
 																			UnidadNegocio not in ('00')
 																		)
 																)
+														{$str_add}
+														{$str_bsu_add}
 											group by
 													 _source_company
  													,area
@@ -232,7 +316,7 @@ class ReporterViewSpXs4zAccount extends AppModel {
 
 			// debug($theQuery);
 			// exit();
-
+		if (isset($theQuery)) {
 			foreach ($theQuery as $qry_key => $qry_value) {
 				# code...
 				foreach ($qry_value as $key => $value) {
@@ -259,6 +343,12 @@ class ReporterViewSpXs4zAccount extends AppModel {
 			} // end foreach $theQuery
 
 			return $array_struct;
+
+	 } else {
+
+		 return null;
+
+	 }// end isset
 
 	} // end function fetch_costos_units
 

@@ -9,16 +9,17 @@
 		*
 		* @copyright     Jesus Baizabal
 		* @link          http://baizabal.xyz
-		* @mail	     baizabal.jesus@gmail.com
+		* @mail	         baizabal.jesus@gmail.com
 		* @package       cake
 		* @subpackage    cake.cake.console.libs.templates.views
 		* @since         CakePHP(tm) v 1.2.0.5234
 		* @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
 */
-        /** WARNING XD-> getout from hir どうもありがとうミスターロボット nah! */
+  /** WARNING XD-> getout from hir どうもありがとうミスターロボット nah! */
 //         e(number_format($AreaCorp['TotalMes'], 2, '.', ','));
 //         e(number_format(round($AreaCorp['TotalMes'])));
 //            number_format(money_format('%i',$num), 2, '.', ','));
+
 ?>
 
 <?php
@@ -33,7 +34,7 @@ class ProjectionsViewIndicatorsPeriodsController extends AppController {
 
 	function rest() {
         // this is for external conecctions so in this is not needed
-
+        return null;
 	}
 
 
@@ -47,7 +48,7 @@ class ProjectionsViewIndicatorsPeriodsController extends AppController {
 // 		$this->ProjectionsViewIndicatorsPeriod->recursive = 0;
 // 		$this->set('projectionsViewIndicatorsPeriods', $this->paginate());
 
-        $cyear = '2017';
+        $cyear = '2017'; //NOTE fix this to be dynamic set as IA
 
         $this->LoadModel('ProjectionsViewBussinessUnit');                           // Add units
         $this->LoadModel('ProjectionsViewFraction');                                // Add fractions
@@ -62,47 +63,75 @@ class ProjectionsViewIndicatorsPeriodsController extends AppController {
 
         // NOTE begin the patches -- remove this when done
 
-        $auth_users = array(
-                                // jesus baizabal
-                                // '5'=>array('areas'=>array('GUADALAJARA','LA PAZ'),'bsu'=>array('GUADALAJARA','LA PAZ'),'bsu_label'=>array('GUADALAJARA','LA PAZ'),'fraction'=>array('GRANEL'),'type'=>array('toneladas','viajes')),
-                                // jorge.floresb
-                                '96'=>array('areas'=>array('GUADALAJARA','LA PAZ'),'bsu'=>array('GUADALAJARA','LA PAZ'),'bsu_label'=>array('GUADALAJARA','LA PAZ'),'fraction'=>array('GRANEL'))
-                           );
+        $this->LoadModel('ModuleUserCredentialsControl');
+        $auth_user = $this->ModuleUserCredentialsControl->getCredentials('all',array('user_id'=>$this->Auth->User('id')));
 
-        if (array_key_exists($_SESSION['Auth']['User']['id'],$auth_users) === true) { // set areas
-
-            if (array_key_exists('areas',$auth_users[$_SESSION['Auth']['User']['id']])) { // set filter for graphics
-                $conditions_chart_index['ProjectionsViewIndicatorsPeriodsFullFleet.area'] = $auth_users[$_SESSION['Auth']['User']['id']]['areas'];
-            }
-            if (array_key_exists('bsu',$auth_users[$_SESSION['Auth']['User']['id']])) { // set logical areas filter
-                $bsu_conditions['ProjectionsViewBussinessUnit.name'] = $auth_users[$_SESSION['Auth']['User']['id']]['bsu'];
-            }
-            if (array_key_exists('bsu_label',$auth_users[$_SESSION['Auth']['User']['id']])) { // set UI areas filter
-                $bsu_label_conditions['ProjectionsViewBussinessUnit.label'] = $auth_users[$_SESSION['Auth']['User']['id']]['bsu_label'];
-            }
-            if (array_key_exists('fraction',$auth_users[$_SESSION['Auth']['User']['id']])) { // set UI fraction filter
-                $fraction_conditions['ProjectionsViewFraction.desc_producto'] = $auth_users[$_SESSION['Auth']['User']['id']]['fraction'];
-                $conditions_chart_index['ProjectionsViewIndicatorsPeriodsFullFleet.fraccion'] = $auth_users[$_SESSION['Auth']['User']['id']]['fraction'];
-            }
-            if (array_key_exists('type',$auth_users[$_SESSION['Auth']['User']['id']])) { // set UI type-tabbed filter
-                $conditions_mod_index['ProjectionsConfig.module_data_definition'] = $auth_users[$_SESSION['Auth']['User']['id']]['type'];
-            }
-//             .... add more filters
+      if ($auth_user) {
+        if (array_key_exists('bsu',$auth_user['ModuleUserCredentialsControl'])) { // set logical areas filter
+            $bsu_conditions = $auth_user['ModuleUserCredentialsControl']['bsu'];
+            $conditions_chart_index['ProjectionsViewIndicatorsPeriodsFullFleet.area'] = $bsu_conditions['ProjectionsViewBussinessUnit.name'];
         }
+        if (array_key_exists('bsu_label',$auth_user['ModuleUserCredentialsControl'])) { // set logical areas filter
+            $bsu_label_conditions = $auth_user['ModuleUserCredentialsControl']['bsu_label'];
+        }
+        if (array_key_exists('fraction',$auth_user['ModuleUserCredentialsControl'])) { // set logical areas filter
+            $fraction_conditions = $auth_user['ModuleUserCredentialsControl']['fraction'];
+            $conditions_chart_index['ProjectionsViewIndicatorsPeriodsFullFleet.fraccion'] = $fraction_conditions['ProjectionsViewFraction.desc_producto'];
+        }
+        if (array_key_exists('areas',$auth_user['ModuleUserCredentialsControl'])) { // set logical areas filter
+            $conditions_chart_index = $auth_user['ModuleUserCredentialsControl']['areas'];
+        }
+        if (array_key_exists('type',$auth_user['ModuleUserCredentialsControl'])) { // set UI type-tabbed filter
+            $conditions_mod_index = $auth_user['ModuleUserCredentialsControl']['type'];
+        }
+      }
+
+        // $auth_users = array(
+        //                         // jesus baizabal
+        //                         // '1'=>array('areas'=>array('GUADALAJARA','LA PAZ'),'bsu'=>array('GUADALAJARA','LA PAZ'),'bsu_label'=>array('GUADALAJARA','LA PAZ'),'fraction'=>array('GRANEL'),'type'=>array('toneladas','viajes')),
+        //                         // jorge.floresb
+        //                         '96'=>array('areas'=>array('GUADALAJARA','LA PAZ'),'bsu'=>array('GUADALAJARA','LA PAZ'),'bsu_label'=>array('GUADALAJARA','LA PAZ'),'fraction'=>array('GRANEL'))
+        //                    );
+
+//         if (array_key_exists($_SESSION['Auth']['User']['id'],$auth_users) === true) { // set areas
+//
+//             if (array_key_exists('areas',$auth_users[$_SESSION['Auth']['User']['id']])) { // set filter for graphics
+//                 $conditions_chart_index['ProjectionsViewIndicatorsPeriodsFullFleet.area'] = $auth_users[$_SESSION['Auth']['User']['id']]['areas'];
+//             }
+//             if (array_key_exists('bsu',$auth_users[$_SESSION['Auth']['User']['id']])) { // set logical areas filter
+//                 $bsu_conditions['ProjectionsViewBussinessUnit.name'] = $auth_users[$_SESSION['Auth']['User']['id']]['bsu'];
+//             }
+//             if (array_key_exists('bsu_label',$auth_users[$_SESSION['Auth']['User']['id']])) { // set UI areas filter
+//                 $bsu_label_conditions['ProjectionsViewBussinessUnit.label'] = $auth_users[$_SESSION['Auth']['User']['id']]['bsu_label'];
+//             }
+//             if (array_key_exists('fraction',$auth_users[$_SESSION['Auth']['User']['id']])) { // set UI fraction filter
+//                 $fraction_conditions['ProjectionsViewFraction.desc_producto'] = $auth_users[$_SESSION['Auth']['User']['id']]['fraction'];
+//                 $conditions_chart_index['ProjectionsViewIndicatorsPeriodsFullFleet.fraccion'] = $auth_users[$_SESSION['Auth']['User']['id']]['fraction'];
+//             }
+            // if (array_key_exists('type',$auth_users[$_SESSION['Auth']['User']['id']])) { // set UI type-tabbed filter
+            //     $conditions_mod_index['ProjectionsConfig.module_data_definition'] = $auth_users[$_SESSION['Auth']['User']['id']]['type'];
+            // }
+// //             .... add more filters
+//         }
+
+          // NOTE Credentials
+            // $this->LoadModel('ModuleUserCredentialsControl');
+            // debug( $this->ModuleUserCredentialsControl->getCredentials('all',array('user_id'=>$this->Auth->User('id'))));
+
 
       $bsu = $this->ProjectionsViewBussinessUnit->find('list',array('conditions'=>$bsu_conditions));
 		  $bsu_label = $this->ProjectionsViewBussinessUnit->find('list',array('fields'=>array('id','label'),'conditions'=>$bsu_label_conditions));
 		  $fraction = $this->ProjectionsViewFraction->find('list',array('fields'=>array('projections_corporations_id','id_fraccion','desc_producto'),'conditions'=>$fraction_conditions));
 
-        $chart_index = $this->ProjectionsViewIndicatorsPeriodsFullFleet->find('all', array('conditions'=>$conditions_chart_index) );
+      $chart_index = $this->ProjectionsViewIndicatorsPeriodsFullFleet->find('all', array('conditions' => $conditions_chart_index) );
 
-        $conditions_mod_index['ProjectionsConfig.projections_type_configs_id'] = 3 ;
-        $mod_index = $this->ProjectionsConfig->find('list',array('fields'=>array('module_field_translation','module_data_definition'),'conditions'=>$conditions_mod_index));
-        $months = months_es();
+      $conditions_mod_index['ProjectionsConfig.projections_type_configs_id'] = 3 ;
+      $mod_index = $this->ProjectionsConfig->find('list',array('fields'=>array('module_field_translation','module_data_definition'),'conditions'=>$conditions_mod_index));
 
-        $ui_bsu_index = key($bsu);
-        $ui_mod_index = key($mod_index);
+      $months = months_es();
 
+      $ui_bsu_index = key($bsu);
+      $ui_mod_index = key($mod_index);
 
         foreach ($chart_index as $name_idx => $findForChart) {
 
@@ -111,6 +140,7 @@ class ProjectionsViewIndicatorsPeriodsController extends AppController {
             }
 
         }
+
 
         $rest_chart_index = json_encode($chart);
 

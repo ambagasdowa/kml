@@ -407,7 +407,7 @@ class PoliciesController extends AppController {
 // 		var_dump($id);
 		$conditions['Policy.status'] = 'Active';
 		$group_id = (int)($_SESSION['Auth']['User']['group_id']);
-		if ( $group_id != 1  and $group_id != 5 and $group_id != 3 and $group_id != 7 and $group_id != 6 and $group_id != 8 and $group_id != 10) {
+		if ( $group_id != 1  and $group_id != 5 and $group_id != 3 and $group_id != 7 and $group_id != 6 and $group_id != 8 and $group_id != 9 and $group_id != 10) {
 			$conditions['Policy.group_id'] = $group_id;
 		}
 // 		conditions from user and selected file

@@ -338,16 +338,16 @@
 <script>
 		$(document).ready(function () {
 			/**HELP MANUAL*/
-			$(".help_manual").fancybox({
-				maxWidth	: 1200,
-				maxHeight	: 680,
-				fitToView	: false,
-				width		: '75%',
-				height	: '75%',
-				autoSize	: false,
-				closeClick	: false,
-				openEffect	: 'fade',
-				closeEffect	: 'fade'
-			});
+			// $(".help_manual").fancybox({
+			// 	maxWidth	: 1200,
+			// 	maxHeight	: 680,
+			// 	fitToView	: false,
+			// 	width		: '75%',
+			// 	height	: '75%',
+			// 	autoSize	: false,
+			// 	closeClick	: false,
+			// 	openEffect	: 'fade',
+			// 	closeEffect	: 'fade'
+			// });
 		});
 </script>

@@ -1,5 +1,8 @@
 <?php
+/** NOTE @begin->devoops */
 $theme = 'devoops'.DS;
+$default = 'kml'.DS;
+$core = 'core'.DS;
 // e($this->Html->script($theme.'raphael/raphael-min'));
 // e($this->Html->script($theme.'morris/morris'));
 
@@ -36,7 +39,9 @@ e($this->Html->script($theme.'jquery-ui/jquery-ui.min',false));
 e($this->Html->script($theme.'bootstrap/bootstrap',false));
 e($this->Html->script($theme.'moment/moment.min',false));
 e($this->Html->script($theme.'fullcalendar/fullcalendar',false));
-e($this->Html->script($theme.'fancybox/jquery.fancybox.pack',false));
+
+// e($this->Html->script($theme.'fancybox/jquery.fancybox.pack',false));
+
 e($this->Html->script($theme.'filter/quick_filter',false));
 e($this->Html->script($theme.'filterTable/jquery.filtertable',false));
 // e($this->Html->script($theme.'highCharts/charts/highcharts',false));
@@ -63,10 +68,27 @@ e($this->Html->script($theme.'jquery.sortable/jquery-sortable',false));
 // @location https://github.com/amized/Stickytable
 e($this->Html->script($theme.'Stickytable/Stickytable',false));
 
+e($this->Html->script($theme.'observe/jquery.observe_field',false));
 
 // e($this->Html->script($theme.'highCharts/stock/themes/dark-unica',false));
 
 // e($this->Html->script($theme.'twbs/jquery.twbsPagination',false));
 // e($this->Html->script($theme.'fastLiveFilter/jquery.fastLiveFilter',false));
+
+
+// select2
+// e($this->Html->css($theme.'select2/select2-bootstrap', 'stylesheet'));
+// e($this->Html->css($theme.'select2/select2', 'stylesheet'));
+e($this->Html->script($theme.'select2/select2.min',false));
+
+// print options
+// e($this->Html->script($theme.'jquery_print/jQuery.print',false));
+e($this->Html->script($theme.'print_this/printThis',false));
+
+// jquery colorbox pluging
+e($this->Html->script($theme.'colorbox/jquery.colorbox',false));
+
+
+
 
 ?>

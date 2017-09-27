@@ -1,0 +1,182 @@
+/*<style>*/
+
+/* latin */
+/*@font-face {
+  font-family: 'Inconsolata';
+  font-style: normal;
+  font-weight: 200;
+  src: local('Inconsolata Regular'), local('Inconsolata-Regular'), url(http://fonts.gstatic.com/s/inconsolata/v15/BjAYBlHtW3CJxDcjzrnZCI4P5ICox8Kq3LLUNMylGO4.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215;
+}*/
+
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:100,200,300);
+
+html {
+  font-family: 'Source Sans Pro', sans-serif;
+  font-style: normal;
+  /*font-weight: 200;*/
+  font-size: 10px;
+  /*src: url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:100,200,300);*/
+}
+
+
+
+
+table {
+  width:100%;
+  border-collapse: collapse;
+}
+
+table , th ,td {
+  border: 1px solid #eee;
+}
+
+th {
+  font-size :9px;
+}
+td {
+  font-size :8px;
+}
+
+.tableHeader ,.trHeader ,.dash_detail  {
+    border:none!important;
+}
+
+.dash_detail{
+    /*min-width: 33%;*/
+}
+
+.pull-right {
+  float: right !important;
+}
+
+.printed_head {
+  font-size:6px;
+}
+
+.footer_legend {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1rem;
+  /*background-color: #efefef;*/
+  text-align: center;
+  font-size:7px
+}
+
+/*.tableHeader > td {
+  border:none!important;
+  min-width:33%;
+}*/
+
+
+/*@font-face {
+    font-family: 'Comfortaa Regular';
+    src: url('Comfortaa.eot');
+    src: local('Comfortaa Regular'),
+         local('Comfortaa'),
+         url('Comfortaa.ttf') format('truetype'),
+         url('Comfortaa.svg#font') format('svg');
+}*/
+
+/* Remove unwanted elements */
+#header, #nav, .noprint {
+display: none;
+}
+
+/* Ensure the content spans the full width */
+#container, #container2, #content {
+width: 100%; margin: 0; float: none;
+}
+/* Change text colour to black (useful for light text on a dark background) */
+/*.lighttext {
+color: #000
+}*/
+/* Improve colour contrast of links */
+a:link, a:visited {
+color: #781351
+}
+
+
+
+/**WEATHER STYLE*/
+
+  .weather-widget-big-text {
+      font-size: 18px !important;
+  }
+  style.css:2392
+  .p-t-35 {
+      padding-top: 35px;
+  }
+  style.css:2341
+  .p-b-10 {
+      padding-bottom: 10px;
+  }
+  style.css:2284
+  .no-margin {
+      margin: 0px !important;
+  }
+  style.css:1957
+  .semi-bold {
+      font-weight: 200;
+  }
+
+  style.css:1814
+  h2 {
+      line-height: 25px;
+  }
+
+  /*MORE WEATHER*/
+.subtitle{
+  color: #333 !important;
+}
+.text-center {
+  text-align: center !important;
+}
+
+style.css:5420
+.tiles .tiles-title {
+  font-size: 10.5px;
+  font-family: 'Open Sans';
+  letter-spacing: 0.5px;
+  font-weight: 600;
+}
+style.css:2377
+.p-b-25 {
+  padding-bottom: 25px;
+}
+
+
+
+/*print the entyre table */
+._table {
+  display: table                /* <table>     */;
+	border-collapse:	collapse									   ;
+	width : 100%;
+  font-size:6px !important;
+}
+._row {
+  display: table-row            /* <tr>        */;
+	width : 100%;
+}
+._cell {
+  display: table-cell           /* <td>        */;
+}
+
+.real {
+	width: 50%	;
+}
+.prep {
+	width: 50%	;
+}
+
+
+/*hide hihcharts*/
+.highcharts-credits {
+	display: none;
+}
+/*</style>*/
+/*
+<script type="text/javascript">$("tr").filter(function(){return ($(this).find("td").length - 1) == $(this).find("td:empty").length;}).hide();</script>
+*/

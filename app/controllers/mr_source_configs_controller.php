@@ -4,7 +4,7 @@ class MrSourceConfigsController extends AppController {
 	var $name = 'MrSourceConfigs';
 	var $components = array('RequestHandler','Session');
 	var $helpers = array('Html','Form','Ajax','Javascript');
-	
+
 	function index() {
 		$this->MrSourceConfig->recursive = 0;
 		$this->set('mrSourceConfigs', $this->paginate());
@@ -32,24 +32,24 @@ class MrSourceConfigsController extends AppController {
 		$objWriter = PHPExcel_IOFactory::createWriter($objPHPExcel, 'CSV');
 		$objWriter->save($outfile);
 	}
-	
+
 	function add() {
 
 // 		BusinessUnit -> build or take from policies
 		// set the view page
-		
+
 		$this->LoadModel('BusinessUnit');
 		$bussinessUnit = $this->BusinessUnit->find('list');
-		
+
 		$this->LoadModel('MrSourceKey');
 		$sourceKeys = $this->MrSourceKey->find('list',array('fields'=>array('_key','_description')));
-		
+
 		$this->LoadModel('MrSourceControl');
 // 		$source_control = $this->MrSourceControl->find('list',array('fields'=>array('_key','source_company')));
 		$src_control = $this->MrSourceControl->find('all');
-		
+
 // 		$source_control[0] = '-- New --';
-		
+
 		foreach ($src_control as $id_source => $source_control_name) {
 			$source_control[$source_control_name['MrSourceControl']['id']] = $source_control_name['MrSourceControl']['source_company']. "\x20" . $sourceKeys[$source_control_name['MrSourceControl']['_key']];
 		}
@@ -57,11 +57,11 @@ class MrSourceConfigsController extends AppController {
 			$source_control = null;
 		}
 		$this->set(compact('bussinessUnit','sourceKeys','source_control'));
-		
-		
-		
+
+
+
 		if (!empty($this->data)) {
-			
+
 
 // 			debug($this->MrSourceConfig->query("select * from integraapp.dbo.getCostos('201511','|','TBKORI','OF')"));
 // 			if (!function_exists('mssql_min_message_severity')) {
@@ -84,12 +84,12 @@ class MrSourceConfigsController extends AppController {
 				$conditionsSourceConfig['MrSourceConfig.company'] = $bussinessUnit_;
 				$conditionsSourceConfig['MrSourceConfig._key'] = $source_ctrl['MrSourceControl']['_key'];
 				$conditionsSourceConfig['MrSourceConfig.period'] = $this->data['MrSourceConfig']['period'];
-				
+
 // 				var_dump($conditionsSourceConfig);
-				
+
 				$source_config = $this->MrSourceConfig->find('list',array('fields'=>array('id','source_company'),'conditions'=>$conditionsSourceConfig));
 // 				debug($source_config);
-				
+
 				$this->data['MrSourceConfig']['_key'] = $source_ctrl['MrSourceControl']['_key'];
 				$this->data['MrSourceConfig']['source_company'] = $source_ctrl['MrSourceControl']['source_company'];
 				$this->data['MrSourceConfig']['company'] = $bussinessUnit_;
@@ -141,24 +141,24 @@ class MrSourceConfigsController extends AppController {
 			} else {
 				$ext = '.' . strtolower(end(explode('.',$this->data['MrSourceConfig']['upload']['name'])));
 			}
-			
+
 			$name = basename(md5($this->data['MrSourceConfig']['upload']['name'])); // for the long and inconsistent names and drop the basename /tmp
-			
+
 			move_uploaded_file($this->data['MrSourceConfig']['upload']['tmp_name'],WWW_ROOT.'files'.DS.'mr_source'.DS.$name.$ext);
 
 			$file = WWW_ROOT.'files'.DS.'mr_source'.DS.$name.$ext;
 			var_dump($ext);
 			// maybe we can use a swicth approach
 			if ($ext === '.xls') {
-				
+
 				$filename = WWW_ROOT.'files'.DS.'mr_source'.DS.$name;
 
 				$this->convertXLStoCSV($file,$filename.'.csv');
 
 				$file_csv = $filename.'.csv';
-				
+
 			} else if ($ext === '.csv') {
-				
+
 				$file_csv = $file ;
 // 				var_dump($file_csv);
 			} else if ($ext === '.xlsx') {
@@ -169,10 +169,10 @@ class MrSourceConfigsController extends AppController {
 				$zip->open($file);
 				$zip->extractTo($bin_dir);
 				$zip->close();
-				// load the xml containing the accounts definitions this is the file and phpexcel can handle MR exporting files! yet 
+				// load the xml containing the accounts definitions this is the file and phpexcel can handle MR exporting files! yet
 				$xml = simplexml_load_file($bin_dir.'sharedStrings.xml');
 				$csv_file = fopen(WWW_ROOT.'files'.DS.'mr_source'.DS.$name.'.csv', 'w');
-// 				write to csv file 
+// 				write to csv file
 				foreach ($xml->si as $si) {
 					fputcsv($csv_file, get_object_vars($si),',','"');
 				}
@@ -187,19 +187,19 @@ class MrSourceConfigsController extends AppController {
 			}
 
 			$lines = file($file_csv,FILE_SKIP_EMPTY_LINES);
-			
+
 			foreach ($lines as $line_num => $line) {
-				
+
 // 				command
 // 				sed -e '1,3d' costosFijosOpOri_viewl.csv | sed '$d' | sed '$d' | sed 's/^"//g' | cut -c 1-35 | sed 's/-//g' > /disk/costos/accounts.csv
 // 				echo "<b>".substr($line,0,1)."</b>";
 // 				echo "Line #<b>{$line_num}</b> : " . htmlspecialchars($line) . "<br />\n";
-				
+
 // 				if comes from excel file MAX version supported is 2003
 				if ( (substr($line,0,1) === '"') AND substr($line,1,1) != '0') {
 					unset($line);
 				}
-				
+
 // 				or if comes from csv directly
 				if ( (substr($line,0,1) != '"') AND (substr($line,0,1) != '0') ) {
 					unset($line);
@@ -211,7 +211,7 @@ class MrSourceConfigsController extends AppController {
 					}
 // 					$string_replaced =  str_replace('-','',str_split($line,35)[0]);
 					$string_replaced =  str_replace('-','',str_split($line,24)[0]);
-					
+
 					$accounts_index[] = $string_replaced;
 					$account_build['SubAccount'] = $string_replaced;
 					$account_build['company'] = $this->data['MrSourceConfig']['company'];
@@ -220,12 +220,12 @@ class MrSourceConfigsController extends AppController {
 					$account_build['_key'] = $this->data['MrSourceConfig']['_key'];
 					$account_build['_status'] = $this->data['MrSourceConfig']['_status'];
 					$accounts_menu['MrSourceConfig'][] = $account_build;
-					
+
 				}
 			} // end foreach line
 			// old behavior
 			debug($accounts_menu);
-			
+
 			// ALERT new behavior
 				debug($accounts_index);
 
@@ -235,7 +235,7 @@ class MrSourceConfigsController extends AppController {
 					$account_builder['period'] = $this->data['MrSourceConfig']['period'];
 					$account_builder['_key'] = $this->data['MrSourceConfig']['_key'];
 					$account_builder['_status'] = $this->data['MrSourceConfig']['_status'];
-					
+
 				/** NOTE @DEBUG <check for duplicates> */
 				$accounts_end = array_unique($accounts_index);
 				debug($accounts_end);
@@ -253,16 +253,16 @@ class MrSourceConfigsController extends AppController {
 					$accounts_[$index_account]['MrSourceConfig']['_key'] = trim($account_builder['_key']);
 					$accounts_[$index_account]['MrSourceConfig']['_status'] = trim($account_builder['_status']);
 				}
-				
+
 			$accounts_menu['MrSourceConfig'] = $accounts_;
 			debug($accounts_);
 // 			exit();
 			// ALERT new behavior
-			
+
 			if($this->MrSourceConfig->saveAll($accounts_menu['MrSourceConfig'])) {
 
 			/** NOTE <mssql_procedure re-build the mr_source_account and set a proper msg to inform on success >*/
-			
+
 					$_source_company = $this->data['MrSourceConfig']['source_company'];;
 					$_period = $this->data['MrSourceConfig']['period'];;
 					$_key = $this->data['MrSourceConfig']['_key'];;

@@ -280,6 +280,7 @@ $(document).ready(function (){
                                     text: '<?php e("{$inx_type}")?>'
                                 },
                             },
+														credits:{enabled:false},
                             tooltip: {
                                 pointFormat: '<b>{point.y:,.0f}</b> <?php e("{$inx_type}")?> en {series.name} <br/>'
                             },

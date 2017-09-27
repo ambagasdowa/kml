@@ -165,7 +165,7 @@ class ProjectionsViewIndicatorsPeriodsFullFleetsController extends AppController
 
         $presupuesto = $this->ProjectionsBsuPresupuesto->find('all',array('conditions'=>$conditionsPrep));
 
-//         pr($presupuesto);
+        // pr($presupuesto);
 
         foreach ($presupuesto as $ind_prep => $presupuesto_data) {
 //             debug($ind_prep);
@@ -174,7 +174,7 @@ class ProjectionsViewIndicatorsPeriodsFullFleetsController extends AppController
             $presupuesto_nt[$presupuesto_data['ProjectionsBsuPresupuesto']['cyear']][$presupuesto_data['ProjectionsBsuPresupuesto']['cmonth']][$presupuesto_data['ProjectionsBsuPresupuesto']['bsu_name']][$presupuesto_data['ProjectionsBsuPresupuesto']['fraction']] = $presupuesto_data['ProjectionsBsuPresupuesto']['data'];
         }
 
-//         debug($presupuesto_nt);
+        // debug($presupuesto_nt);
 
         if ($offset_days > $totalLabBackwardsMonthDays) {
             //making double calculation
@@ -227,7 +227,9 @@ class ProjectionsViewIndicatorsPeriodsFullFleetsController extends AppController
                         } else {
                             $prep = $presupuesto_nt[$cyear][(int)$cmonth][$rsl_past_month[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['area']][$rsl_past_month[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['fraccion']];
                         }
-
+												// debug($prep);
+												// debug($rsl_past_month[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['area']);
+												// debug($index_rsl_past_month);
                         // build the array
                         $rsl_past_month[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['sum_tons'] = ($data_idc_past_month + ( $data_idc_past_month/$totalLabBackwardsMonthDays)*$offset_days);
 
@@ -300,8 +302,9 @@ class ProjectionsViewIndicatorsPeriodsFullFleetsController extends AppController
          // hir can be another table or section example module , data
         $auth_users = array(
                                 // adds for ambagasdowa
-                                // '5'=>array('fraction'=>array('GRANEL'),'type'=>array('toneladas'))
-                           );
+                                '5'=>array('fraction'=>array('GRANEL'),'type'=>array('toneladas'))
+																// '181'=>array('fraction'=>array('GRANEL'),'type'=>array('toneladas'))
+                      );
 
         if (array_key_exists($_SESSION['Auth']['User']['id'],$auth_users) === true) { // set areas
 
@@ -331,8 +334,8 @@ class ProjectionsViewIndicatorsPeriodsFullFleetsController extends AppController
         $months = months_es();
 
         $bsu = $this->ProjectionsViewBussinessUnit->find('list',array('conditions'=>$bsu_conditions));
-		$bsu_label = $this->ProjectionsViewBussinessUnit->find('list',array('fields'=>array('id','label'),'conditions'=>$bsu_label_conditions));
-		$fraction = $this->ProjectionsViewFraction->find('list',array('fields'=>array('projections_corporations_id','id_fraccion','desc_producto'),'conditions'=>$fraction_conditions));
+				$bsu_label = $this->ProjectionsViewBussinessUnit->find('list',array('fields'=>array('id','label'),'conditions'=>$bsu_label_conditions));
+				$fraction = $this->ProjectionsViewFraction->find('list',array('fields'=>array('projections_corporations_id','id_fraccion','desc_producto'),'conditions'=>$fraction_conditions));
 
 		$ui_bsu_index = key($bsu);
 		$ui_mod_index = key($mod_index);
@@ -350,7 +353,7 @@ class ProjectionsViewIndicatorsPeriodsFullFleetsController extends AppController
             }
 
         }
-
+				// debug($projectionsViewIndicatorsPeriodsFullFleets);
 		$this->set(compact('projectionsViewIndicatorsPeriodsFullFleets','bsu','bsu_label','fraction','ui_bsu_index','months','mod_index','chart_index','chart','cyear','cmonth','ui_mod_index'));
 // 		Configure::write('debug', 0);
 	} // end index

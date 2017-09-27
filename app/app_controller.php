@@ -95,16 +95,16 @@ class AppController extends Controller {
 							}
 
 							/** NOTE <set the proper permissions and smb account >*/
-							
-							
-							
+
+
+
 							/** NOTE <add FieldNames to Fieldatas for this user>*/
 							$this->LoadModel('FieldName');
 							$this->LoadModel('FieldData');
 							$FieldName = $this->FieldName->find('list');
 							$user_id = $this->User->getLastInsertID();
 							$user_group = $user['User']['group_id'];
-							
+
 							foreach ($FieldName as  $id_field_name => $field_name) {
 								$data_user['user_id'] = $user_id ;
 								$data_user['group_id'] = $user_group;
@@ -139,7 +139,7 @@ class AppController extends Controller {
 		}
 	}
 	/** NOTE <GST check payroll users >*/
-	
+
 	/** NOTE <GST build Menu's' options>*/
 	// conecct to policiesTypes for build the menu of the documents
 	function getDocuments ($menu=null) {
@@ -153,7 +153,7 @@ class AppController extends Controller {
 			$documents = $this->PoliciesType->find($qry,array('fields'=>array('id','description'),'conditions'=>$conditions));
 		return $documents;
 	}
-	
+
 	// build the menus for gst
 	function buildMenu () {
 		$menu = $this->getDocuments(true);
@@ -174,30 +174,30 @@ class AppController extends Controller {
 // 		debug($submenu);
 // 		debug($setMenu);
 	}
-	
+
 	/** NOTE <GST build Menu's' options>*/
-	
+
 	/** NOTE <GST build M-r's report>*/
 		// 	...
 	/** NOTE <GST build M-r's report>*/
-	
+
 
 /** @CORE <SECTION>*/
-	
+
 /** NOTE <CORE builtin functions>*/
 
 
 	function extendsUsersMenu() {
 		debug($this->ControllerList->get());
-		
+
 		$controller = $this->ControllerList->get();
-		
+
 		foreach ($controller as $controllerName => $containerViews) {
 			debug($controllerName);
 		}
 
 	}
-	
+
 /** NOTE <CORE set the proper permissions and smb account >*/
 
 	function setSmb () {
@@ -299,7 +299,7 @@ class AppController extends Controller {
 // 				'delete' => array('someAction', 'someAction2')
 			)
 		);
-		
+
 		// if we have other field for authenticathion for example email add the field hir
 		if (isset($this->data['User']['username']) and is_numeric($this->data['User']['username'])) {
 			$this->data['User']['number_id'] = $this->data['User']['username'];
@@ -360,13 +360,13 @@ class AppController extends Controller {
 // 			set the documents type and buid the nav menu
 			$documents = $this->getDocuments();
 			$documents ? $this->set('documents',$documents) : $this->set('documents',null);
-			
+
 			if (isset($this->Auth->user()['User']) && $this->Auth->user()['User']['group_id'] == 3) {
 				$this->Auth->loginRedirect = array('controller' => 'Policies', 'action' => 'view','type'=>'1','subtype'=>'1');
 			}
 			$this->buildMenu();
-		} /** <GST> */ // End gst options 
-		
+		} /** <GST> */ // End gst options
+
 
 // 		$this->extendsUsersMenu();
 
@@ -381,7 +381,7 @@ class AppController extends Controller {
 		if (isset($_SESSION['Auth']['User']['alert'])) {
 			unset($_SESSION['Auth']['User']['alert']);
 		}
-// 
+//
 
 // 			debug($this->Auth->hashPasswords($delta));
 // 			debug($this->Auth->password($data['User']['password']));
@@ -391,9 +391,9 @@ class AppController extends Controller {
 // 		var_dump(FULL_BASE_URL);
 
 // 		$this->Auth->mapActions(array('create' => array('add', 'register'));
-// 
+//
 // 		Or equivalently:
-// 
+//
 // 		$this->Auth->mapActions(array('register' => 'create', 'add' => 'create'));
 // 		exit();
 // 		debug($_SESSION);
@@ -450,8 +450,8 @@ class AppController extends Controller {
 		return strtr($string, $replace);
 	}
 
-	
-		
+
+
 
 /**
  * Reconstruye el Acl basado en los controladores actuales de la aplicación.
@@ -459,11 +459,11 @@ class AppController extends Controller {
  * @return void
  */
 
-/* As mentioned before, there is no pre-built way to input all of our controllers and actions into the Acl. However, we all    
- * hate doing repetitive things like typing in what could be hundreds of actions in a large application. We’ve whipped up 
- * an automated set of functions to build the ACO table. These functions will look at every controller in your application. 
- * It will add any non-private, non Controller methods to the Acl table, nicely nested underneath the owning controller. 
- * You can add and run this in your AppController or any controller for that matter, just be sure to remove it before 
+/* As mentioned before, there is no pre-built way to input all of our controllers and actions into the Acl. However, we all
+ * hate doing repetitive things like typing in what could be hundreds of actions in a large application. We’ve whipped up
+ * an automated set of functions to build the ACO table. These functions will look at every controller in your application.
+ * It will add any non-private, non Controller methods to the Acl table, nicely nested underneath the owning controller.
+ * You can add and run this in your AppController or any controller for that matter, just be sure to remove it before
  * putting your application into production.
  */
 //  function build_acl() {
@@ -471,7 +471,7 @@ class AppController extends Controller {
 //             return $this->_stop();
 //         }
 //         $log = array();
-// 
+//
 //         $aco =& $this->Acl->Aco;
 //         $root = $aco->node('controllers');
 //         if (!$root) {
@@ -482,7 +482,7 @@ class AppController extends Controller {
 //         } else {
 //             $root = $root[0];
 //         }
-// 
+//
 //         App::import('Core', 'File');
 //         $Controllers = App::objects('controller');
 //         $appIndex = array_search('App', $Controllers);
@@ -491,14 +491,14 @@ class AppController extends Controller {
 //         }
 //         $baseMethods = get_class_methods('Controller');
 //         $baseMethods[] = 'build_acl';
-// 
+//
 //         $Plugins = $this->_getPluginControllerNames();
 //         $Controllers = array_merge($Controllers, $Plugins);
-// 
+//
 //         // look at each controller in app/controllers
 //         foreach ($Controllers as $ctrlName) {
 //             $methods = $this->_getClassMethods($this->_getPluginControllerPath($ctrlName));
-// 
+//
 //             // Do all Plugins First
 //             if ($this->_isPlugin($ctrlName)){
 //                 $pluginNode = $aco->node('controllers/'.$this->_getPluginName($ctrlName));
@@ -527,7 +527,7 @@ class AppController extends Controller {
 //             } else {
 //                 $controllerNode = $controllerNode[0];
 //             }
-// 
+//
 //             //clean the methods. to remove those in Controller and private actions.
 //             foreach ($methods as $k => $method) {
 //                 if (strpos($method, '_', 0) === 0) {
@@ -550,7 +550,7 @@ class AppController extends Controller {
 //             debug($log);
 //         }
 //     }
-// 
+//
 //     function _getClassMethods($ctrlName = null) {
 //         App::import('Controller', $ctrlName);
 //         if (strlen(strstr($ctrlName, '.')) > 0) {
@@ -560,7 +560,7 @@ class AppController extends Controller {
 //         }
 //         $ctrlclass = $ctrlName . 'Controller';
 //         $methods = get_class_methods($ctrlclass);
-// 
+//
 //         // Add scaffold defaults if scaffolds are being used
 //         $properties = get_class_vars($ctrlclass);
 //         if (array_key_exists('scaffold',$properties)) {
@@ -572,7 +572,7 @@ class AppController extends Controller {
 //         }
 //         return $methods;
 //     }
-// 
+//
 //     function _isPlugin($ctrlName = null) {
 //         $arr = String::tokenize($ctrlName, '/');
 //         if (count($arr) > 1) {
@@ -581,7 +581,7 @@ class AppController extends Controller {
 //             return false;
 //         }
 //     }
-// 
+//
 //     function _getPluginControllerPath($ctrlName = null) {
 //         $arr = String::tokenize($ctrlName, '/');
 //         if (count($arr) == 2) {
@@ -590,7 +590,7 @@ class AppController extends Controller {
 //             return $arr[0];
 //         }
 //     }
-// 
+//
 //     function _getPluginName($ctrlName = null) {
 //         $arr = String::tokenize($ctrlName, '/');
 //         if (count($arr) == 2) {
@@ -599,7 +599,7 @@ class AppController extends Controller {
 //             return false;
 //         }
 //     }
-// 
+//
 //     function _getPluginControllerName($ctrlName = null) {
 //         $arr = String::tokenize($ctrlName, '/');
 //         if (count($arr) == 2) {
@@ -624,12 +624,12 @@ class AppController extends Controller {
 //         $paths = Configure::getInstance();
 //         $folder =& new Folder();
 //         $folder->cd(APP . 'plugins');
-// 
+//
 //         // Get the list of plugins
 //         $Plugins = $folder->read();
 //         $Plugins = $Plugins[0];
 //         $arr = array();
-// 
+//
 //         // Loop through the plugins
 //         foreach($Plugins as $pluginName) {
 //             // Change directory to the plugin
@@ -637,12 +637,12 @@ class AppController extends Controller {
 //             // Get a list of the files that have a file name that ends
 //             // with controller.php
 //             $files = $folder->findRecursive('.*_controller\.php');
-// 
+//
 //             // Loop through the controllers we found in the plugins directory
 //             foreach($files as $fileName) {
 //                 // Get the base file name
 //                 $file = basename($fileName);
-// 
+//
 //                 // Get the controller name
 //                 $file = Inflector::camelize(substr($file, 0, strlen($file)-strlen('_controller.php')));
 //                 if (!preg_match('/^'. Inflector::humanize($pluginName). 'App/', $file)) {
@@ -659,5 +659,5 @@ class AppController extends Controller {
 //         return $arr;
 //     }
 
-	
+
 }

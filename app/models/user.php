@@ -1,7 +1,7 @@
 <?php
 class User extends AppModel {
 	var $name = 'User';
-	
+
 	var $virtualFields = array(
         'full_name' => "CONCAT(User.name, ' ', User.last_name)",
     );
@@ -40,6 +40,7 @@ class User extends AppModel {
 			),
 		),
 	);
+
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
 
 	var $belongsTo = array(
@@ -53,35 +54,67 @@ class User extends AppModel {
 	);
 
 	/** NOTE <add support to catalogs>*/
-	var $hasMany = array(
-		'Post' => array(
-			'className' => 'Post',
-			'foreignKey' => 'user_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		),
-		'FieldDatas' => array(
-			'className' => 'FieldData',
-			'foreignKey' => 'user_id',
-			'dependent' => false,
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'exclusive' => '',
-			'finderQuery' => '',
-			'counterQuery' => ''
-		)
-	);
+	// var $hasMany = array(
+	// // 	'Post' => array(
+	// // 		'className' => 'Post',
+	// // 		'foreignKey' => 'user_id',
+	// // 		'dependent' => false,
+	// // 		'conditions' => '',
+	// // 		'fields' => '',
+	// // 		'order' => '',
+	// // 		'limit' => '',
+	// // 		'offset' => '',
+	// // 		'exclusive' => '',
+	// // 		'finderQuery' => '',
+	// // 		'counterQuery' => ''
+	// // 	),
+	// 	'ModuleUserCredentialsControl' => array(
+	// 		'className' => 'ModuleUserCredentialsControl',
+	// 		'foreignKey' => 'user_id',
+	// 		'dependent' => false,
+	// 		'conditions' => '',
+	// 		'fields' => '',
+	// 		'order' => '',
+	// 		'limit' => '',
+	// 		'offset' => '',
+	// 		'exclusive' => '',
+	// 		'finderQuery' => '',
+	// 		'counterQuery' => ''
+	// 	)
+	// 	,
+	// 	'FieldDatas' => array(
+	// 		'className' => 'FieldData',
+	// 		'foreignKey' => 'user_id',
+	// 		'dependent' => false,
+	// 		'conditions' => '',
+	// 		'fields' => '',
+	// 		'order' => '',
+	// 		'limit' => '',
+	// 		'offset' => '',
+	// 		'exclusive' => '',
+	// 		'finderQuery' => '',
+	// 		'counterQuery' => ''
+	// 	)
+	// );
 
+	// var $hasAndBelongsToMany = array(
+	//
+  //        'ModuleUserCredentialsControl' =>
+  //            array(
+  //                'className' => 'ModuleUserCredentialsControl',
+  //                'joinTable' => 'module_user_credentials_controls',
+  //                'foreignKey' => 'user_id',
+  //                'associationForeignKey' => 'user_id',
+  //                'unique' => true,
+  //                'conditions' => '',
+  //                'fields' => '',
+  //                'order' => '',
+  //                'limit' => '',
+  //                'offset' => '',
+  //                'finderQuery' => '',
+  //                'with' => ''
+  //            )
+  //    );
 // 	var $name = 'User';
 // 	var $belongsTo = array('Group');
 	var $actsAs = array('Acl' => array('type' => 'requester'));
@@ -101,9 +134,11 @@ class User extends AppModel {
 			return array('Group' => array('id' => $groupId));
 		}
 	}
-	
+
 	function fetchUpdateUser() {
 		return null;
 	}//fetchUpdateUser(
 
-}
+
+
+} // NOTE END CLASS

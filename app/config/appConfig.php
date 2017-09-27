@@ -147,7 +147,7 @@
 	 */
 	function checkAdmin ($id_group=null) {
 
-		  if($id_group === '1' OR $id_group === '7' ) {
+    if($id_group === '1' OR $id_group === '7' ) {
 			return true;
 		} else {
 			return false;
@@ -198,11 +198,11 @@
 	 */
 	function checkSuperUser ($id_group=null,$number_id=null,$superUser=null) {
 
-		$root=array('9000000','9000001','9000002','4000003','90000100');
+		$root=array('9000000','9000001','9000002','4000003','90000100','4000030');
 // 		var_dump(in_array($number_id,$root));
 // 		var_dump((int)$id_group);
 // 		var_dump((bool)$superUser);
-		  if(((int)$id_group === 1 OR (int)$id_group === 7) and (bool)$superUser === true  and in_array($number_id,$root) === true ) {
+	  if(((int)$id_group === 1 OR (int)$id_group === 7) and (bool)$superUser === true  and in_array($number_id,$root) === true ) {
 			return true;
 		} else {
 			return false;

@@ -41,8 +41,8 @@ class Post extends AppModel {
  * @var array
  * @access public
  */
- 
-// JW - Behavior initiated from plugin. 
+
+// JW - Behavior initiated from plugin.
 	var $actsAs = array(
 		'Search.Searchable');
 
@@ -52,14 +52,14 @@ class Post extends AppModel {
  * @var array
  * @see SearchableBehavior
  */
- 
+
  // JW - Search fields data description for processing.
 	var $filterArgs = array(
 		array('name' => 'title', 'type' => 'query', 'method' => 'filterTitle'),
 // // 		array('name' => 'body', 'type' => 'string'),
 	);
 
-	
+
 /**
  * Constructor
  *
@@ -68,7 +68,7 @@ class Post extends AppModel {
  * @param string $ds Datasource
  * @access public
  */
- 
+
 // JW - Data constructed for add.ctp
 // 	public function __construct($id = false, $table = null, $ds = null) {
 // 		$this->statuses = array(
@@ -81,7 +81,7 @@ class Post extends AppModel {
 // 			'other' => __('Other', true));
 // 		parent::__construct($id, $table, $ds);
 // 	}
-// 	
+//
 // JW - method as decalred in $filterArgs to process the free form search.
 	public function filterTitle($data, $field = null) {
 		if (empty($data['title'])) {
@@ -94,5 +94,5 @@ class Post extends AppModel {
 				$this->alias . '.body LIKE' => $title,
 			));
 	}
-	
+
 }

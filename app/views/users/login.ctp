@@ -10,6 +10,9 @@
 
   <div class="form_wrapper">
 	<div class="container">
+
+		<div style="page-break-after: always;">&nbsp;</div>
+
 		<?php echo $this->Session->flash('auth');?>
 
 		<div class="log_in">
