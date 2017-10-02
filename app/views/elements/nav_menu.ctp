@@ -340,14 +340,17 @@
 												</ul>
 										</li>
 
-
                     <li class="dropdown-submenu">
                       <a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>ModuleUsers Options</span></a>
                         <ul class="dropdown-menu">
-                          <li><a tabindex="-1" href="<?php e($this->webroot.'ModuleUserCredentialsMains/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>CatalogOptions</span></a></li>
+                          <li  class="dropdown-submenu">
+                              <a tabindex="-1" href="<?php e($this->webroot.'ModuleUserCredentialsMains/index/page:1/sort:id/direction:asc');?>">
+                                <i class="fa fa-cog"></i>&nbsp;<span>CatalogOptions</span>
+                              </a>
+                          </li>
 
-                          <li class="dropdown-submenu">
-                            <a href="#">ModuleUserCredentialsMains</a>
+                          <li class="dropdown-submenu pull-left">
+                            <a href="#">MUsrCredentialsMains</a>
                               <ul class="dropdown-menu">
                                 <li><a href="<?php e($this->webroot.'ModuleUserCredentialsMains/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>Index</span></a></li>
                                 <li><a href="<?php e($this->webroot.'ModuleUserCredentialsMains/add/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Add</span></a></li>
@@ -356,8 +359,8 @@
                               </ul>
                           </li>
 
-                          <li class="dropdown-submenu">
-                            <a href="#">ModuleUserCredentialsControls</a>
+                          <li class="dropdown-submenu pull-left">
+                            <a href="#">MUsrCredentialsCtrls</a>
                               <ul class="dropdown-menu">
                                 <li><a href="<?php e($this->webroot.'ModuleUserCredentialsControls/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>Index</span></a></li>
                                 <li><a href="<?php e($this->webroot.'ModuleUserCredentialsControls/add/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Add</span></a></li>
@@ -407,7 +410,7 @@
                           <li><a tabindex="-1" href="<?php e($this->webroot.'ReporterTableKeys/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>ReporterTableKey</span></a></li>
                           <li><a tabindex="-1" href="<?php e($this->webroot.'ReporterViewSpXs4zAccounts/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>Accounts</span></a></li>
 
-													<li class="dropdown-submenu">
+													<li class="dropdown-submenu pull-left">
 														<a href="#">More..</a>
 															<ul class="dropdown-menu">
 																<li><a href="#">3rd level</a></li>
@@ -439,6 +442,25 @@
 										<?php 	}?>
 										<?php }?>
 <!-- 										automagic hir -->
+
+
+<!-- 										Providers -->
+										<?php if (isset($_SESSION['Auth']['User'])) {?>
+										<?php 	if (checkUser($_SESSION['Auth']['User']['group_id'],'Finanzas')) {?>
+
+										<li class="dropdown-submenu">
+											<a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>Finanzas</span></a>
+												<ul class="dropdown-menu">
+													<li><a tabindex="-1" href="<?php e($this->webroot.'/ReporterViewSpXs4zAccounts/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>Reportes Financieros</span></a></li>
+												</ul>
+										</li>
+
+										<li class="divider"></li>
+										<?php 	}?>
+										<?php }?>
+<!-- 										automagic hir -->
+
+
 
 										<?php if (isset($_SESSION['Auth']['User'])) {?>
 										<?php 	if (checkUser($_SESSION['Auth']['User']['group_id'],'Ingresos')) {?>

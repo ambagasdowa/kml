@@ -1,6 +1,6 @@
 # KML acl_manager
 by Ambagasdowa
-
+![Intro Menu](./manual/intro.gif)
 ### CakePHP version
 CakePHP 1.3.20
 
@@ -20,6 +20,16 @@ ribbon menu   **done**
   **DONE**
 
 #### Projections Module
+
+  **DONE**
+
+#### Finances Module
+
+![Alt Text](./manual/firts.gif)
+
+###### Pretty Print
+
+![Alt Text](./manual/end.gif)
 
   **DONE**
 
@@ -46,8 +56,5 @@ Projections [^1]
 
 > installation Manual
 
-
 MR [^2]
-
-
 [^2]: version of MR is 1.0.0

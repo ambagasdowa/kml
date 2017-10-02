@@ -30,7 +30,7 @@
 		border-left-color:#ffffff;
 	}
 	.dropdown-submenu.pull-left {
-		float:none;
+		float:none!important;
 	}
 	.dropdown-submenu.pull-left>.dropdown-menu{
 		left:-100%;
@@ -177,7 +177,7 @@
   margin-left: 0;
 }
 .toggle-switch input:checked + .toggle-switch-inner + .toggle-switch-switch {
-  right: 0px; 
+  right: 0px;
 }
 .toggle-switch-danger input:checked + .toggle-switch-inner + .toggle-switch-switch {
   border:2px solid #D15E5E;
