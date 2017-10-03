@@ -170,8 +170,8 @@
                                     		<!-- <td><?php echo $reporterPortalCostosDetailsAccount['mes']; ?>&nbsp;</td> -->
                                     		<!-- <td><?php echo $reporterPortalCostosDetailsAccount['account']; ?>&nbsp;</td> -->
                                     		<!-- <td><?php echo $reporterPortalCostosDetailsAccount['_period']; ?>&nbsp;</td> -->
-                                    		<td><?php echo $reporterPortalCostosDetailsAccount['Descripcion']; ?>&nbsp;</td>
-                                    		<td><?php echo $reporterPortalCostosDetailsAccount['NombreEntidad']; ?>&nbsp;</td>
+                                    		<td><?php echo utf8_encode($reporterPortalCostosDetailsAccount['Descripcion']); ?>&nbsp;</td>
+                                    		<td><?php echo utf8_encode($reporterPortalCostosDetailsAccount['NombreEntidad']); ?>&nbsp;</td>
                                     		<td><?php echo $reporterPortalCostosDetailsAccount['TipoTransaccion']; ?>&nbsp;</td>
                                     		<td><?php echo $reporterPortalCostosDetailsAccount['Referencia']; ?>&nbsp;</td>
                                     		<td><?php echo $reporterPortalCostosDetailsAccount['ReferenciaExterna']; ?>&nbsp;</td>

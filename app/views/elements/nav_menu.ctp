@@ -10,7 +10,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-			<a id="home" class="navbar-brand" href="<?php e($this->webroot)?>" alt="Landing Page" title="<?php e(languaje($languaje)['landingPage']);?>" data-toggle="tooltip" data-placement="bottom">
+			<a id="home" class="navbar-brand" href="<?php e($this->webroot.'../')?>" alt="Landing Page" title="<?php e(languaje($languaje)['landingPage']);?>" data-toggle="tooltip" data-placement="bottom">
 				<i class="fa fa-home"></i>
 			</a>
 
