@@ -153,6 +153,7 @@
     }
 
 
+
 </style>
 
 
@@ -171,7 +172,7 @@
 </div>
 
 
-
+<div id="div_loading" style="display:none;"><?php echo $this->element('kml/modal');?></div>
 
  <!--       <div>
 		  <h4 class="form-signin-heading">
@@ -519,13 +520,15 @@
                             data: data_arr,
                             beforeSend: function(){
                                         console.log( 'beforeSend' );
-                                        $.fancybox.showLoading();
-                                        $.fancybox.helpers.overlay.open({parent: $('body'), closeClick : false});
+                                        // $.fancybox.showLoading();
+                                        // $.fancybox.helpers.overlay.open({parent: $('body'), closeClick : false});
+                                        $("#div_loading").show().fadeIn(1000);
                                     },
                             complete: function(){
                                         console.log( 'complete');
-                                        $.fancybox.hideLoading();
-                                        $.fancybox.helpers.overlay.close();
+                                        // $.fancybox.hideLoading();
+                                        // $.fancybox.helpers.overlay.close();
+                                        $("#div_loading").hide().fadeIn(1000);
                                         window.location.href = redirection;
                                     } //,
 //                             success: function(data) {

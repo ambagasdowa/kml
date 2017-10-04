@@ -108,11 +108,15 @@
 <!-- 	<div id="spin" class="loadingDiv" style="display:none;" ><i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i><span class="sr-only">Loading...</span></div> -->
 <span><?php echo $this->element('casetas/help_manual');?></span>
 
+<div id="modal_loading" style="display:none;">
+	<?php echo $this->element('kml/modal');?>
+</div>
 <!-- 	<span class="actions"><a href="#">TEXT</a></span> -->
 
 <!-- 	<span id="help_casetas"> -->
 <!-- 		<a class="help_manual" href="#inline_manual"><i class="fa fa-question-circle fa-3x" aria-hidden="true"></i>&nbsp;</a> -->
 <!-- 	</span> -->
+
 
 	<?php 	echo $this->Session->flash();?>
 
@@ -627,13 +631,15 @@
 				$.ajax({
 					beforeSend: function(){
 								console.log( 'beforeSend' );
-								$.fancybox.showLoading();
-								$.fancybox.helpers.overlay.open({parent: $('body'), closeClick : false});
+								// $.fancybox.showLoading();
+								// $.fancybox.helpers.overlay.open({parent: $('body'), closeClick : false});
+								$("#modal_loading").show().fadeIn(1000);
 							},
 					complete: function(){
 								console.log( 'complete');
-								$.fancybox.hideLoading();
+								// $.fancybox.hideLoading();
 // 								$.fancybox.helpers.overlay.close();
+								$("#modal_loading").hide().fadeIn(1000);
 				               },
 					success: function() {}
 				});
