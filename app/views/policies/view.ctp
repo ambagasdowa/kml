@@ -2,7 +2,10 @@
 	// policies
 	$evaluate = false;
 	$requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere') );
+	// load pdf
+	e($this->element('policies/load'));
 ?>
+
 <!--<style>
 @media print {
   html, body {
@@ -24,7 +27,7 @@
 	function pdf_size(type) {
 
 		if (type == '2') { /*means landscape*/
-			
+
 			if (window.innerWidth < 400) {
 				return 0.3;
 			} else if (window.innerWidth < 1400) {
@@ -33,7 +36,7 @@
 				return 1.125;
 			}
 		} else {
-		
+
 			if ( window.innerWidth < 400 ) {
 				return 0.4;
 			} else if ( window.innerWidth < 640 ) {
@@ -45,15 +48,15 @@
 			} else if ( window.innerWidth < 1280 ) {
 				return 1.2;
 			} else if ( window.innerWidth < 2048 ) {
-				return 1.5;
+				return 1.4;
 			} else {
 				return 2.0;
-			} 
+			}
 		}
-		
-	} // end funciton 
 
-</script> 
+	} // end funciton
+
+</script>
 
 
 <style>
@@ -85,8 +88,12 @@
     overflow: hidden;
     width: 100%;
     height: 100%;
+		/*min-height: 320;*/
+		/*min-width: 640;*/
     max-width: 1440px;
-    max-height: 800px;
+    /*max-width: auto;*/
+    /*max-height: 800px;*/
+    max-height: 130vh;
 }
 </style>
 <!--<br />
@@ -95,23 +102,23 @@ Height <span id="height"></span>
 <br />-->
 
 
-<?php 
-		
+<?php
+
 		$anx = $this->Html->url('/files/anexos/', true);
 		$app = basename(ROOT);
 		$path = "{$_SERVER['REQUEST_SCHEME']}://{$_SERVER['HTTP_HOST']}/{$app}/";
 // 		var_dump($type);
 // 		var_dump($anexos);
 // 		var_dump($anexos_type);
-// 		
+//
 // // 		$directory = '../webroot/files/policies'.DS;
 // 		$directory = WWW_ROOT.'files'.DS.'policies'.DS;
 // // 		var_dump($directory);
-// 		
+//
 // 		$scanned_directory = array_diff(scandir($directory), array('..', '.'));
 // 		// pr($scanned_directory);
 // 		$dir_paths = array_values($scanned_directory);
-// 
+//
 // 		pr($dir_paths);
 
 // 			foreach($dir_paths as $id_dir => $dir) {
@@ -134,12 +141,12 @@ Height <span id="height"></span>
 		<style>
 /* 		Navigation buttons section */
 		/* 		this link is fixed againts the lenght of the content */
-		
+
 			.minuslink , .pluslink , .resetlink ,.fslink{
 				padding-top:9px;
 				padding-bottom:9px;
 			}
-		
+
 			.fslink {
 				position: fixed;
 				bottom: 15px;
@@ -147,7 +154,7 @@ Height <span id="height"></span>
 				cursor: pointer;
 				z-index:150;
 			}
-			
+
 			.nextlink {
 				position: fixed;
 				bottom: 15px;
@@ -155,7 +162,7 @@ Height <span id="height"></span>
 				cursor: pointer;
 				z-index:150;
 			}
-			
+
 			.minuslink {
 				position: fixed;
 				bottom: 15px;
@@ -163,7 +170,7 @@ Height <span id="height"></span>
 				cursor: pointer;
 				z-index:150;
 			}
-			
+
 			.pluslink {
 				position: fixed;
 				bottom: 15px;
@@ -171,7 +178,7 @@ Height <span id="height"></span>
 				cursor: pointer;
 				z-index:150;
 			}
-			
+
 			.handlink {
 				position: fixed;
 				bottom: 15px;
@@ -179,7 +186,7 @@ Height <span id="height"></span>
 				cursor: pointer;
 				z-index:150;
 			}
-			
+
 		/* 		this link is fixed againts the lenght of the content */
 			.backlink {
 				position: fixed;
@@ -188,7 +195,7 @@ Height <span id="height"></span>
 				cursor: pointer;
 				z-index:150;
 			}
-			
+
 			.resetlink{
 				position: fixed;
 				bottom: 15px;
@@ -204,7 +211,7 @@ Height <span id="height"></span>
 				cursor: pointer;
 				z-index:150;
 			}
-			
+
 			.hand{
 				position: fixed;
 				bottom: 3%;
@@ -212,7 +219,7 @@ Height <span id="height"></span>
 				cursor: pointer;
 				z-index:150;
 			}
-			
+
 			.footer_legend{
 /* 				display:none; */
 				position: fixed;
@@ -239,7 +246,7 @@ Height <span id="height"></span>
 	margin-top: 1%;
 	z-index:120;
 	perspective: 1000px
-	
+
 	}
 
 	.social li a {
@@ -249,7 +256,7 @@ Height <span id="height"></span>
 	background: #222;
 	border-bottom: 1px solid #333;
 	font: normal normal normal
-	16px/20px 
+	16px/20px
 	'FontAwesome', 'Source Sans Pro', Helvetica, Arial, sans-serif;
 	color: #fff;
 	-webkit-font-smoothing: antialiased;
@@ -267,7 +274,7 @@ Height <span id="height"></span>
 
 	.social li:first-child a { border-radius: 0 5px 0 0 }
 	.social li:last-child a { border-radius: 0 0 5px 0 }
-		
+
 	.social li a span {
 	/*width: 400px;*/ /* lenght of the hover title*/
 	width: 400px;
@@ -295,10 +302,10 @@ Height <span id="height"></span>
 /* 	right: -20px; */
 /*	left: -20px;
 	top: 7px;*/
-	
+
 	left: -5%;
 	top: 7px;
-	
+
 /* 	border-right: 10px solid transparent; */
 /* 	border-left: 10px solid #222; */
 	border-left: 10px solid transparent;
@@ -317,7 +324,7 @@ Height <span id="height"></span>
 
 
 
-  
+
   <!-- In production, only one script (pdf.js) is necessary -->
   <!-- In production, change the content of PDFJS.workerSrc below -->
 <script language=JavaScript>
@@ -330,7 +337,7 @@ Height <span id="height"></span>
 // 					g2p.deactivate();
 // 				}
 // 			};
-// 
+//
 // 			var scrollableContainer = document.getElementById(scrollId);
 // 			var g2p = new GrabToPan({
 // 				element: scrollableContainer,         // required
@@ -373,7 +380,7 @@ var message="No se Autoriza la Impresion de este Documento";
 	document.onmousedown=clickIE4;
 	}
 	document.oncontextmenu=new Function("alert(message);return false")
-//  --> 
+//  -->
 </script>
 
 <script>
@@ -383,7 +390,7 @@ var message="No se Autoriza la Impresion de este Documento";
 </script>
 
 
-<?php 
+<?php
 	if (is_int(strpos($_SERVER['HTTP_USER_AGENT'], 'Trident')) === false) {
 		$classAnexos = 'social';
 		$classAnexosList = null;
@@ -430,7 +437,7 @@ var message="No se Autoriza la Impresion de este Documento";
 				<?php } ?>
 			</ul>
 	</div>
-	
+
 	<div id="dashboard_tabs" class="col-xs-6 col-sm-10">
 		<div id="tabbedContent" class='tab-content'>
 		<?php if(isset($files)) {?>
@@ -441,14 +448,14 @@ var message="No se Autoriza la Impresion de este Documento";
 			<?php } else {?>
 			<div class="tab-pane fade" id="<?php e($nameDecodeContent);?>">
 			<?php }?>
-				
+
 				<div class="alert alert-warning alert-dismissible" role="alert">
 					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 					<?php echo $this->element('policies/gst_aviso'); ?>
 				</div>
-				
+
 				<div id="menu_anexos">
 					<?php if(isset($anexos)) {?>
 						<ul class="<?php e($classAnexos);?>">
@@ -463,7 +470,7 @@ var message="No se Autoriza la Impresion de este Documento";
 												<a <?php e($classAnexosiconLink);?> target="_blank" href="<?php e($path.$_path);?>" >
 											<?php }?>
 												<span><?php e($anexos_names[$id_path]);?></span>
-											</a> 
+											</a>
 										</li>
 									<?php }?>
 								<?php }?>
@@ -471,33 +478,33 @@ var message="No se Autoriza la Impresion de este Documento";
 						</ul>
 					<?php }?>
 				</div>
-					
+
 
 					<div class="hand"><input type="checkbox" id="activate_g2p_<?php e($nameDecodeContent);?>" checked><i class="fa fa-hand-rock-o"></i></div>
-					
+
 					<a class="fslink btn btn-success" href="javascript:" id="listen_fs_<?php e($nameDecodeContent);?>" >
 						<i class="fa fa-arrows-alt"></i>
 					</a>
 					<div class="modal-body" id="activate_fs_<?php e($nameDecodeContent);?>">
-									
+
 									<div class="scrollable" id="scrollable_container_<?php e($nameDecodeContent);?>" style="text-align:center;">
 										<canvas id="canvas_<?php e($nameDecodeContent);?>" style="border:1px solid black"></canvas>
 									</div>
-								
+
 								<div class="pager" style="text-align:center;">
-									<span>Page: 
+									<span>Page:
 										<span id="page_num_<?php e($nameDecodeContent);?>"></span>
 										/
 										<span id="page_count_<?php e($nameDecodeContent);?>"></span>
 									</span>
 								</div>
-								
+
 								<div>
-		
+
 									<a class="nextlink btn btn-primary" href="javascript:" id="next_<?php e($nameDecodeContent);?>"  rel="next" style="float: right">
 										Siguiente &rsaquo;
 									</a>
-									
+
 									<a class="minuslink btn btn-success" href="javascript:" id="zoomOut_<?php e($nameDecodeContent);?>" style="float: right">
 										<i class="fa fa-search-minus"></i>
 									</a>
@@ -507,15 +514,15 @@ var message="No se Autoriza la Impresion de este Documento";
 									<a class="pluslink btn btn-success" href="javascript:" id="zoomIn_<?php e($nameDecodeContent);?>" >
 										<i class="fa fa-search-plus"></i>
 									</a>
-									
+
 									<a class="backlink btn btn-primary" href="javascript:" id="prev_<?php e($nameDecodeContent);?>"  rel="prev">
 										&lsaquo; Anterior
 									</a>
-									
+
 <!--									<a class="fslink btn btn-success" href="javascript:" id="listen_fs_<?php e($nameDecodeContent);?>" >
 										<i class="fa fa-search-plus"></i>
 									</a>-->
-									
+
 									&nbsp; &nbsp;
 									<?php
 // 											   $trace = debug_backtrace();
@@ -527,7 +534,7 @@ var message="No se Autoriza la Impresion de este Documento";
 												Anexos
 											</a>-->
 										</div>
-									
+
 
 									</div>
 					</div>
@@ -536,7 +543,7 @@ var message="No se Autoriza la Impresion de este Documento";
 			<?php }?>
 		</div>
 	</div>
-	
+
 	<?php //var_dump($type);?>
 		<h3><?php __('Opciones'); ?></h3>
 			<ul class="list-group list-inline">
@@ -558,23 +565,19 @@ var message="No se Autoriza la Impresion de este Documento";
 		"/*zoomIn_<?php e(str_replace('.pdf','',basename(base64_decode($encPath))));?>*/";
 		renderPdf(pdf_size(<?php e("'$format[$index]'");?>),'<?php e($encPath);?>','canvas_<?php e(str_replace('.pdf','',basename(base64_decode($encPath))));?>','page_num_<?php e(str_replace('.pdf','',basename(base64_decode($encPath))));?>','prev_<?php e(str_replace('.pdf','',basename(base64_decode($encPath))));?>','next_<?php e(str_replace('.pdf','',basename(base64_decode($encPath))));?>','page_count_<?php e(str_replace('.pdf','',basename(base64_decode($encPath))));?>','zoomIn_<?php e(str_replace('.pdf','',basename(base64_decode($encPath))));?>','zoomOut_<?php e(str_replace('.pdf','',basename(base64_decode($encPath))));?>','resetZoom_<?php e(str_replace('.pdf','',basename(base64_decode($encPath))));?>'
 					);
-		
+
 		p2g('activate_g2p_<?php e(str_replace('.pdf','',basename(base64_decode($encPath))));?>','scrollable_container_<?php e(str_replace('.pdf','',basename(base64_decode($encPath))));?>');
 
 		addEvent(document.getElementById('listen_fs_<?php e(str_replace('.pdf','',basename(base64_decode($encPath))));?>'), 'click', function () { fullScreen('activate_fs_<?php e(str_replace('.pdf','',basename(base64_decode($encPath))));?>') });
-		
+
 		<?php }?>
-		
-		
+
+
 	</script>
-	
+
 
 	<div class="bg-danger visible-print-block">
 		<div class="text-justified">
 			<?php echo $this->element('policies/gst_aviso'); ?>
 		</div>
 	</div>
-
-
-
-

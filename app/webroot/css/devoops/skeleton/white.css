@@ -1,0 +1,9 @@
+/*theme*/
+h2 > a:active , h2 > a:hover ,h2 > a:visited {
+  color:black;
+  text-decoration: none;
+}
+
+textarea {
+  height:280px;
+}

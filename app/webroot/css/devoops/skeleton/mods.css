@@ -1,0 +1,55 @@
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:100,200,300);
+
+/*fix for cakephp paginator */
+.pagination > .current,
+.pagination > .disabled {
+
+  position: relative;
+  float: left;
+  padding: 6px 12px;
+  margin-left: -1px;
+  line-height: 1.42857143;
+/*   color: #428bca; */
+  text-decoration: none;
+/*   background-color: #fff; */
+  border: 1px solid #ddd;
+}
+
+.paginations > .current {
+  z-index: 2;
+  color: #fff;
+  cursor: default;
+  background-color: #167F92;
+  border-color: #428bca;
+}
+.pagination > .disabled {
+  color: #777;
+  cursor: not-allowed;
+  background-color: #fff;
+  border-color: #ddd;
+}
+/*fix for cakephp paginator */
+
+
+.navbar-brand{
+  height: 30px!important;
+}
+
+/*font definition for navbar*/
+#nav_menu{
+  font-family: 'Source Sans Pro', sans-serif;
+  color: white;
+  font-weight: 300;
+}
+
+
+/*skeleton from custom.css*/
+.docs-header {
+    text-transform: uppercase;
+    font-size: 1.4rem;
+    letter-spacing: .2rem;
+    font-weight: 600;
+}
+
+
+/*wysihtml mods*/

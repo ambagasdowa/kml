@@ -52,75 +52,29 @@
 ?>
 
 <?php
-/** ALERT fix for load just wen needed*/
-/** TEST for @pdf.js minimal */
-// 	e($this->Html->css('pdf.js/viewer'));
-
-  e($this->Html->script("pdf.js/src/shared/util"));
-  e($this->Html->script("pdf.js/src/display/api"));
-  e($this->Html->script("pdf.js/src/display/metadata"));
-  e($this->Html->script("pdf.js/src/display/canvas"));
-  e($this->Html->script("pdf.js/src/display/webgl"));
-  e($this->Html->script("pdf.js/src/display/pattern_helper"));
-  e($this->Html->script("pdf.js/src/display/font_loader"));
-  e($this->Html->script("pdf.js/src/display/annotation_helper"));
-//   Needed for handgrab
-  /** NOTE for @pdf.js */
-  e($this->Html->script("pdf.js/grab_to_pan"));
- /** TEST render pdf for embed **/
-     e($this->Html->script("gst/pdfRender"));
-     e($this->Html->script("gst/pan2grab"));
-     e($this->Html->script("gst/pdfFullScreen"));
-
-
   /** @php.js*/
   e($this->Html->script("root/php.js/base64_encode"));
   e($this->Html->script("root/php.js/base64_decode"));
-  /** @main*/
-	e($this->Html->script("root/main/main"));
+
 
 /** NOTE @begin->devoops */
 $theme = 'devoops'.DS;
 $default = 'kml'.DS;
 $core = 'core'.DS;
 
-/** NOTE @prototype **/
-// e($this->Html->script($theme.'prototype/prototype'));
-// e($this->Html->script($theme.'scriptaculous/scriptaculous.js?load=effects'));
-/** @require*/
-// e($this->Html->script($theme.'require/require'));
-
-	// NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal
-// 	$evaluate = true;
-// 	$requiere_params = array('theme'=>$theme,'default'=>$default,'core'=>$core);
-// 	$requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere') );
-
-
-
-
-/** @css */
-e($this->Html->css($theme.'bootstrap/bootstrap', 'stylesheet'));
-e($this->Html->css($core.'bootstrap_addons', 'stylesheet'));
-e($this->Html->css($theme.'bootstrap/carousel', 'stylesheet'));
-e($this->Html->css($theme.'bootstrap/dashboard', 'stylesheet'));
-e($this->Html->css($theme.'bootstrap/sticky-footer-navbar', 'stylesheet'));
-e($this->Html->css($theme.'jquery/jquery-ui', 'stylesheet'));
 // e($this->Html->css($theme.'fancybox/jquery.fancybox', 'stylesheet'));
 e($this->Html->css($theme.'justified-gallery/justifiedGallery', 'stylesheet'));
-e($this->Html->css($theme.'fullcalendar/fullcalendar', 'stylesheet'));
-e($this->Html->css($theme.'xcharts/xcharts.min', 'stylesheet'));
-e($this->Html->css($theme.'select2/select2', 'stylesheet'));
+// e($this->Html->css($theme.'xcharts/xcharts.min', 'stylesheet'));
 // e($this->Html->css($theme.'select2/select2-bootstrap', 'stylesheet'));
-e($this->Html->css($theme.'devoops/righteous', 'stylesheet'));
+// e($this->Html->css($theme.'devoops/righteous', 'stylesheet'));
 e($this->Html->css($theme.'devoops/font-awesome.min.css', 'stylesheet'));//font-awesome
 // e($this->Html->css($theme.'devoops/style_v2', 'stylesheet')); // devoops_theme
-e($this->Html->css($theme.'chartist/chartist.min', 'stylesheet'));
-e($this->Html->css($theme.'morris/morris', 'stylesheet'));
+// e($this->Html->css($theme.'chartist/chartist.min', 'stylesheet'));
+// e($this->Html->css($theme.'morris/morris', 'stylesheet'));
 //carousel OWL
-e($this->Html->css($theme.'owl/owl.carousel', 'stylesheet'));
+// e($this->Html->css($theme.'owl/owl.carousel', 'stylesheet'));
 
-//NOTE colorbox in favor to fancybox
-e($this->Html->css($theme.'colorbox/colorbox', 'stylesheet'));
+
 
 
 /** @quick_filter js*/
@@ -153,7 +107,7 @@ e($this->Html->css($theme.'colorbox/colorbox', 'stylesheet'));
 
 /** @css you shut put hir your config files for login tables boxes comboxes etc  **/
 
-e($this->Html->css($default.'style'));
+// e($this->Html->css($default.'style'));
 
 
 /** @js */

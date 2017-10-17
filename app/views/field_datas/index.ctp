@@ -2,9 +2,17 @@
 <?php //debug($fieldDatas Index view);?>
 <?php
 	// NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal
-	$evaluate = true;
-	$requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere') );
+	// $evaluate = true;
+	// $requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere') );
 	// NOTE @I dont see prototype over hir
+?>
+<?php
+    // NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal.
+    // $evaluate = false;
+    // $requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere'));
+    // blog
+    $evaluate = true;
+    $requiere = $evaluate ? e($this->element('kml/blog/blog')) : e($this->element('requiere/norequiere') );
 ?>
 
 
@@ -80,7 +88,7 @@
 <!--							<th><?php echo $this->Paginator->sort('modified');?></th>
 							<th><?php echo $this->Paginator->sort('status');?></th>
 							<th class="actions" colspan="3"><?php __('Actions');?></th>-->
-								
+
 						</tr>
 					</thead>
 				</table>
@@ -110,17 +118,19 @@
 			<script>
 
 				<?php foreach($fieldDataUser as $index_field => $fieldDataContent) { ?>
-				<?php 
+				<?php
 
-					echo "require(['jquery', 'bootstrap'], function($) {"."\n";
+					// echo "require(['jquery', 'bootstrap'], function($) {"."\n";
 					echo "\t"."var divTag = document.getElementById('button_show_".$index_field."');"."\n";
+
 					echo "\t"."var panel_show = document.getElementById('show_panel_".$index_field."');"."\n";
+
 					echo "\t"."$(document).ready(function(){"."\n";
 					echo "\t\t"."$(divTag).click(function(){"."\n";
 					echo "\t\t\t"."$(panel_show).toggle(['slow']);"."\n";
 					echo "\t\t"."});"."\n";
 					echo "\t"."});"."\n";
-					echo "});"."\n";
+					// echo "});"."\n";
 
 				?>
 
@@ -130,8 +140,8 @@
 	<?php $index_field = $fieldDataContent = null; ?>
 
 	<?php foreach($fieldDataUser as $index_field => $fieldDataContent) { ?>
-		
-		<?php 
+
+		<?php
 				$setIdFieldData = $dataUserFieldData[$fieldDataContent['id']];
 		?>
 			<div class="panel panel-default">
@@ -139,18 +149,18 @@
 					<h3 class="panel-title">
 						<?php e($fieldDataUser[$index_field]['name'].' '.$fieldDataUser[$index_field]['last_name']);?> &nbsp;
 						<span class="pull-right">
-						
+
 							<span class="label label-company">
 								<?php echo $company[$fieldDataContent['company_id']]; ?>&nbsp;
 							</span> &nbsp;
 							<span class="label label-primary">
 								<?php e($fieldDataContent['last_ip']);?>
 							</span> &nbsp;
-							
+
 							<span class="label label-warning">
 								<?php e($fieldDataContent['last_access']);?>
 							</span> &nbsp;
-							
+
 							<span class="label label-default">
 								<?php
 								$htmlRender = checkBrowser($fieldDataContent['last_user_agent'],true,true);
@@ -171,21 +181,21 @@
 					</h3>
 				</div>
 				<span id="show_panel_<?php e($index_field);?>" class="<?php ($_SESSION['Auth']['User']['id']!=$fieldDataContent['id'])?e("show_panel_content"):e("")?>" >
-					<div class="panel-body"> 
+					<div class="panel-body">
 
 						<table class="table table-bordered table-hover table-striped responstable">
-						
+
 							<?php //debug(count($setIdFieldData));?>
 
 							<!-- table body -->
 							<?php foreach ($setIdFieldData as $indexIdFieldData => $idFieldData) { ?>
-								
+
 								<?php //debug($resultFieldData[$idFieldData]);?>
 								<th width="25%">
-								
+
 									<?php if (isset($resultFieldData[$idFieldData]['CatalogDatas']['id'])) {?>
 
-									<?php 
+									<?php
 										echo $this->Html->link(__(ucwords($resultFieldData[$idFieldData]['FieldNames']['field_names']), true),
 																					array(
 																							'controller'=>'CatalogDatas',
@@ -199,7 +209,7 @@
 										<?php e(ucwords($resultFieldData[$idFieldData]['FieldNames']['field_names']));?>
 
 									<?php } ?>
-									
+
 								</th>
 
 								<?php if (empty($resultFieldData[$idFieldData]['CatalogDatas']['catalog_data'])) { ?>
@@ -210,18 +220,18 @@
 
 							<?php } ?>
 							<!-- table body -->
-							
+
 						</table>
 					</div> <!--end panel body-->
 
 					<div class="panel-footer">
 
 					</div> <!--end panel footer-->
-					
+
 				</span>
 			</div>
 	<?php } ?>
-	
+
 	</div><!-- Jquery Demo -->
 
 
@@ -237,7 +247,7 @@
 			</p>
 
 			<ul class="pagination">
-				<?php 
+				<?php
 					echo $this->Paginator->prev( '«' ,array('tag'=>'li'),null, array('aria-hidden'=>'true','class' => 'disabled','tag'=>'li'));
 					echo $this->Paginator->numbers(array('separator' => null,'tag'=>'li'));
 					echo $this->Paginator->next( '»' , array('tag'=>'li'), null, array('aria-hidden'=>'true','class' => 'disabled','tag'=>'li'));
@@ -248,9 +258,3 @@
         </div> <!--main-->
       </div> <!--row-->
     </div> <!--container fluid-->
-
-
-
-
-
-

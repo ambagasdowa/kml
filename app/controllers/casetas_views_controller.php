@@ -53,6 +53,14 @@ class CasetasViewsController extends AppController {
 		}
 // 		debug($conditionsCasetasViews);
 // 		exit();
+// http://integradev/gst/CasetasViews/edit/
+// id:3053916/
+// iave_key:IMDM24021428../
+// monto:1310.0000/
+// nombre:QUERETARO%20ARCO%20N%201/
+// unidad:TT1248/
+// fecha_cruce:2017-09-10/
+// hora_cruce:14:32:37.0000000
 		$this->paginate = array(
 			'conditions' => $conditionsCasetasViews,
 			'limit' => 500,
@@ -428,7 +436,7 @@ $this->CasetasView->query("exec sp_upt_tollbooth_manual_conciliation '{$casetas_
 // 		$this->set('casetasViews', $this->paginate('CasetasView'));
 		$this->set('casetasViews', $casetasView);
 
-        Configure::write('debug', 0);
+        // Configure::write('debug', 0);
 // 		$this->autoRender = false;
 		$this->autoLayout = false;
 
@@ -438,6 +446,7 @@ $this->CasetasView->query("exec sp_upt_tollbooth_manual_conciliation '{$casetas_
 	function edit($id = null) {
 //         debug($this->data);
 //         debug($this->params);
+	Configure::write('debug', 2);
         $id = $this->params['named']['id'];
 //         var_dump($id);
 
@@ -490,7 +499,7 @@ $this->CasetasView->query("exec sp_upt_tollbooth_manual_conciliation '{$casetas_
             $conditionsCasetasNotConc['CasetasView._status'] = 1;
 		}
 		$conditionsCasetasNotConc['CasetasView.orden <>'] = null ;
-// 		debug($conditionsCasetasNotConc);
+		// debug($conditionsCasetasNotConc);
         if($id and !isset($this->params['named']['iave_key']) and !isset($this->params['named']['tarjeta_iave'])) {
             $conditionsCasetasNotConc['CasetasView.id'] = $id;
             $conditionsCasetasNotConc['CasetasView.casetas_historical_conciliations_id'] = $this->data['CasetasView']['casetas_historical_conciliations_id'];
@@ -502,7 +511,6 @@ $this->CasetasView->query("exec sp_upt_tollbooth_manual_conciliation '{$casetas_
 		$casetasViewNotConciliations = $this->CasetasView->find('all', array('conditions'=>array($conditionsCasetasNotConc)));
 
 //         debug($casetasViewNotConciliations);
-
 
 		$conditionsCasetasViewCon['CasetasView.casetas_controls_files_id'] = $this->data['CasetasView']['casetas_controls_files_id'];
 		$conditionsCasetasViewCon['CasetasView.casetas_historical_conciliations_id'] = $this->data['CasetasView']['casetas_historical_conciliations_id'];

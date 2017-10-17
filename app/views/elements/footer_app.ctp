@@ -63,7 +63,7 @@
 
 	/* 		footer content */
 			.footer_app{
-				margin-top:20px;
+				/*margin-top:20px;*/
 			}
 		</style>
 
