@@ -237,6 +237,9 @@ class CasetasController extends AppController {
 
 	function add() {
 
+
+		Configure::write('debug',2);
+
 		$this->LoadModel('Company');
 		$this->LoadModel('BusinessUnit');
 		$this->LoadModel('CasetasControlsConciliation');
@@ -514,9 +517,11 @@ class CasetasController extends AppController {
 					}
 				}
 			}
-// 			debug($casetas_data_model);
+			debug($casetas_data_model);
+			exit();
 // 			debug($casetas_monto['key_num_2']);
 			$count_cross = count($casetas_data_model['Caseta']);
+
 			if($this->Caseta->saveAll($casetas_data_model['Caseta'])) {
 
 				/** NOTE Save the total of the _montos*/

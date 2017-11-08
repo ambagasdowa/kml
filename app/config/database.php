@@ -83,9 +83,9 @@ class DATABASE_CONFIG {
 		'database' => 'portal_users',
 		'encoding' => 'utf8'
 	);
-	
-	//semi essential can load as module 
-	
+
+	//semi essential can load as module
+
 	var $users_info = array(
 		'driver' => 'mysql',
 		'persistent' => true,
@@ -95,7 +95,7 @@ class DATABASE_CONFIG {
 		'database' => 'portal_user_info',
 		'encoding' => 'utf8'
 	);
-	
+
 	var $portal_company = array(
 		'driver' => 'mysql',
 		'persistent' => true,
@@ -115,7 +115,7 @@ class DATABASE_CONFIG {
 		'database' => 'portal_calendar',
 		'prefix' => '',
 	);
-	
+
 	//then can add the non-essential data of the app
 
 	var $portal_secure = array(
@@ -127,7 +127,18 @@ class DATABASE_CONFIG {
 		'database' => 'portal_secure',
 		'prefix' => '',
 	);
-	
+
+	var $portal_apps = array(
+		'driver' => 'mysql',
+		'persistent' => false,
+		'host' => 'localhost',
+		'login' => 'portal_apps',
+		'password' => '@portal_apps#',
+		'database' => 'portal_apps',
+		'encoding' => 'utf8',
+		'prefix' => ''
+	);
+
 	var $policie = array(
 		'driver' => 'mysql',
 		'persistent' => true,
@@ -137,7 +148,7 @@ class DATABASE_CONFIG {
 		'database' => 'policies',
 		'encoding' => 'utf8'
 	);
-	
+
 	var $tralix = array(
 		'driver' => 'mysql',
 		'persistent' => false,
@@ -148,7 +159,7 @@ class DATABASE_CONFIG {
 		'prefix' => '',
 		'encoding' => 'utf8',
 	);
-	
+
 	//this is and must be non-sessential connection to mssql
 	// payroll => lista de empleados
 /** WARNING starting mssql connections **/
@@ -166,9 +177,9 @@ class DATABASE_CONFIG {
 // 		'encoding' => 'utf8',
 		'port' => '1433'
 	);
-	
+
 	//this is and must be non-sessential connection to mssql
-	// concilation => concilation fo iave 
+	// concilation => concilation fo iave
 /** WARNING starting mssql connections **/
 /** NOTE get the database and write to it */
 	var $mssql_sistemas = array( // connect to remote mssql server
@@ -184,7 +195,7 @@ class DATABASE_CONFIG {
 		'encoding' => 'utf8',
 		'port' => '1433'
 	);
-	
+
 	var $mssql_sistemas_larsa = array( // connect to remote mssql server
 		'driver' => 'mssql',
 		'persistent' => false,

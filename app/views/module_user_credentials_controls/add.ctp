@@ -41,28 +41,30 @@
 
 		<div class="container">
 		<i class="fa fa-file-o fa-2x"></i>
-		  <h2 class="form-signin-heading">
-			<span>
-					 <?php __('Add Module User Credentials Control'); ?>			</span>
-		</h2>
+		 <h2 class="form-signin-heading">
+			    <span>
+					 <?php __('Add Module User Credentials Control'); ?>
+          </span>
+		 </h2>
 
           <?php echo $this->Form->create('ModuleUserCredentialsControl',array('enctype' => 'multipart/form-data','class'=>'form'));?>
+
 			<div class="moduleUserCredentialsControls form">
 
-			<?php
-          echo $this->Form->input('user_id',array('placeholder'=>'user_id','class'=>'module_user_id search_value input','empty'=>'Seleccione'));
-          echo '<div class="updateModuleUser"><div class="scroll-block">&nbsp;</div></div>';
+    			<?php
+              echo $this->Form->input('user_id',array('placeholder'=>'user_id','class'=>'module_user_id search_value input','empty'=>'Seleccione'));
+              echo '<div class="updateModuleUser"><div class="scroll-block">&nbsp;</div></div>';
 
-	   ?>
+    	    ?>
 
-     <?php
-          echo $this->Form->input('ModuleUserCredentialsControl._status',array('type'=>'hidden','class'=>'form-control','value'=>'1'))
-     ?>
+          <?php
+              echo $this->Form->input('ModuleUserCredentialsControl._status',array('type'=>'hidden','class'=>'form-control','value'=>'1'))
+          ?>
 
-  <div class="form-group pull-right">
-    <?php echo $this->Form->end(array('div'=>false,'class'=>'btn btn-success'));?>
-<!-- 								<button type="button" class="btn btn-warning" data-dismiss="modal">Close</button> -->
-  </div>
+          <div class="form-group pull-right">
+            <?php echo $this->Form->end(array('div'=>false,'class'=>'btn btn-success'));?>
+        <!-- 								<button type="button" class="btn btn-warning" data-dismiss="modal">Close</button> -->
+          </div>
 			</div>
 		</div> <!--container-->
 

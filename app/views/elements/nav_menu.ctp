@@ -372,6 +372,43 @@
                         </ul>
                     </li>
 
+                    <li class="dropdown-submenu">
+                      <a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>ModulePerformance</span></a>
+                        <ul class="dropdown-menu">
+
+                          <li class="dropdown-submenu pull-left">
+                            <a href="#">PerforCustomers</a>
+                              <ul class="dropdown-menu">
+                                <li><a href="<?php e($this->webroot.'PerformanceCustomers/index/page:1/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Index</span></a></li>
+                                <li><a href="<?php e($this->webroot.'PerformanceCustomers/add/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Add</span></a></li>
+                                <li><a href="<?php e($this->webroot.'PerformanceCustomers/edit/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Edit</span></a></li>
+                                <li><a href="<?php e($this->webroot.'PerformanceCustomers/view/');?>"><i class="fa fa-cog"></i>&nbsp;<span>View</span></a></li>
+                              </ul>
+                          </li>
+
+                          <li class="dropdown-submenu pull-left">
+                            <a href="#">PerforReferences</a>
+                              <ul class="dropdown-menu">
+                                <li><a href="<?php e($this->webroot.'PerformanceReferences/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>Index</span></a></li>
+                                <li><a href="<?php e($this->webroot.'PerformanceReferences/add/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Add</span></a></li>
+                                <li><a href="<?php e($this->webroot.'PerformanceReferences/edit/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Edit</span></a></li>
+                                <li><a href="<?php e($this->webroot.'PerformanceReferences/view/');?>"><i class="fa fa-cog"></i>&nbsp;<span>View</span></a></li>
+                              </ul>
+                          </li>
+
+                          <li class="dropdown-submenu pull-left">
+                            <a href="#">PerforFacturas</a>
+                              <ul class="dropdown-menu">
+                                <li><a href="<?php e($this->webroot.'PerformanceFacturas/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>Index</span></a></li>
+                                <li><a href="<?php e($this->webroot.'PerformanceFacturas/add/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Add</span></a></li>
+                                <li><a href="<?php e($this->webroot.'PerformanceFacturas/edit/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Edit</span></a></li>
+                                <li><a href="<?php e($this->webroot.'PerformanceFacturas/view/');?>"><i class="fa fa-cog"></i>&nbsp;<span>View</span></a></li>
+                              </ul>
+                          </li>
+
+                        </ul>
+                    </li>
+
 										<li class="dropdown-submenu">
 											<a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>Projections</span></a>
 												<ul class="dropdown-menu">

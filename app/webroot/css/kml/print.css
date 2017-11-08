@@ -42,10 +42,6 @@ td {
     border:none!important;
 }
 
-.dash_detail{
-    /*min-width: 33%;*/
-}
-
 .pull-right {
   float: right !important;
 }
@@ -105,24 +101,25 @@ color: #781351
   .weather-widget-big-text {
       font-size: 18px !important;
   }
-  style.css:2392
+
+
   .p-t-35 {
       padding-top: 35px;
   }
-  style.css:2341
+
   .p-b-10 {
       padding-bottom: 10px;
   }
-  style.css:2284
+
   .no-margin {
       margin: 0px !important;
   }
-  style.css:1957
+
   .semi-bold {
       font-weight: 200;
   }
 
-  style.css:1814
+
   h2 {
       line-height: 25px;
   }
@@ -135,14 +132,14 @@ color: #781351
   text-align: center !important;
 }
 
-style.css:5420
+
 .tiles .tiles-title {
   font-size: 10.5px;
   font-family: 'Open Sans';
   letter-spacing: 0.5px;
   font-weight: 600;
 }
-style.css:2377
+
 .p-b-25 {
   padding-bottom: 25px;
 }

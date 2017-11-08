@@ -1,8 +1,10 @@
-<?php 
+
+
+<?php
 echo $this->element('design/header');
 ?>
 
-<?php 
+<?php
 echo $this->element('aros/links');
 ?>
 
