@@ -1,3 +1,12 @@
+<?php
+    // NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal.
+    // $evaluate = false;
+    // $requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere'));
+    // blog
+    $evaluate = true;
+    $requiere = $evaluate ? e($this->element('kml/blog/blog')) : e($this->element('requiere/norequiere') );
+    $requiere = $evaluate ? e($this->element('kml/forms/forms')) : e($this->element('requiere/norequiere') );
+?>
 
 <!--     <div class="container-fluid"> -->
 <!--       <div class="row"> -->
@@ -28,7 +37,7 @@
 				 <?php __('Add User'); ?>
 			</span>
 		</h2>
-		
+
           <?php echo $this->Form->create('User',array('enctype' => 'multipart/form-data','class'=>'form'));?>
 			<div class="users form">
 
@@ -79,7 +88,7 @@
 						);
 // 						echo $this->Form->input('status',array('placeholder'=>'status','class'=>'input'));
 					?>
-					
+
 					<?php
 // 							echo $this->Form->input('name',array('type'=>'text','label'=>false,'placeholder'=>'Nombre de la politica'));
 // 							echo $this->Form->input('description',array('type'=>'textarea','class'=>'placeholder','label'=>false,'placeholder'=>'Descripcion de la politica','rows'=>'5','cols'=>'80'));
@@ -90,7 +99,7 @@
 					<!-- 					</table> -->
 <!-- 				</div>  -->
           <!--end table response-->
-					<?php 
+					<?php
 						echo $this->Form->input('status',array('type'=>'hidden','class'=>'form-control','value'=>'Active'))?>
 						<?php echo $this->Form->end(__('Submit', true));?>
 			</div>
@@ -98,10 +107,3 @@
         <!--</div>--> <!--main-->
       <!--</div>--> <!--row-->
     <!--</div>--> <!--container fluid-->
-
-    
-
-
-
-
-
