@@ -486,23 +486,23 @@
 										<?php 	if (checkUser($_SESSION['Auth']['User']['group_id'],'Finanzas')) {?>
 
 
-
                       <li class="dropdown-submenu">
-  											<a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>ModuloFacturas</span></a>
+  											<a tabindex="-1" href="#"><i class="fa fa-barcode" aria-hidden="true"></i>&nbsp;<span>ModuloFacturas</span></a>
   												<ul class="dropdown-menu">
-  													<li><a tabindex="-1" href="<?php e($this->webroot.'PerformanceReferences/');?>"><i class="fa fa-cog"></i>&nbsp;<span>facturasReferencias</span></a></li>
+  													<li><a tabindex="-1" href="<?php e($this->webroot.'PerformanceReferences/');?>"><i class="fa fa-files-o" aria-hidden="true"></i>&nbsp;<span>facturasReferencias</span></a></li>
   												</ul>
   										</li>
                       <li class="divider"></li>
-                      
+
 										<li class="dropdown-submenu">
-											<a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>Finanzas</span></a>
+											<a tabindex="-1" href="#"><i class="fa fa-university" aria-hidden="true"></i>&nbsp;<span>Finanzas</span></a>
 												<ul class="dropdown-menu">
-													<li><a tabindex="-1" href="<?php e($this->webroot.'/ReporterViewSpXs4zAccounts/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>Reportes Financieros</span></a></li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'/ReporterViewSpXs4zAccounts/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-pie-chart" aria-hidden="true"></i>&nbsp;<span>Reportes Financieros</span></a></li>
 												</ul>
 										</li>
 
 										<li class="divider"></li>
+
 										<?php 	}?>
 										<?php }?>
 <!-- 										automagic hir -->

@@ -1,8 +1,13 @@
 <?php
-	// NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal
-	$evaluate = true;
-	$requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere') );
+    // NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal.
+    // $evaluate = false;
+    // $requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere'));
+    // blog
+    $evaluate = true;
+    $requiere = $evaluate ? e($this->element('kml/blog/blog')) : e($this->element('requiere/norequiere') );
+    $requiere = $evaluate ? e($this->element('kml/forms/forms')) : e($this->element('requiere/norequiere') );
 ?>
+
 <!-- <center> -->
 		<style>
 /* 		Navigation buttons section */
@@ -22,7 +27,7 @@
 				cursor: pointer;
 				z-index:150;
 			}
-			
+
 			.anxlnk{
 				position: fixed;
 				bottom: 15px;
