@@ -485,6 +485,16 @@
 										<?php if (isset($_SESSION['Auth']['User'])) {?>
 										<?php 	if (checkUser($_SESSION['Auth']['User']['group_id'],'Finanzas')) {?>
 
+
+
+                      <li class="dropdown-submenu">
+  											<a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>ModuloFacturas</span></a>
+  												<ul class="dropdown-menu">
+  													<li><a tabindex="-1" href="<?php e($this->webroot.'PerformanceReferences/');?>"><i class="fa fa-cog"></i>&nbsp;<span>facturasReferencias</span></a></li>
+  												</ul>
+  										</li>
+                      <li class="divider"></li>
+                      
 										<li class="dropdown-submenu">
 											<a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>Finanzas</span></a>
 												<ul class="dropdown-menu">

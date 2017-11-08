@@ -45,19 +45,17 @@
 
 		<div class="container">
 		    <i class="fa fa-file-o fa-2x"></i>
-	   <h2 class="form-signin-heading">
+	   <h4 class="form-signin-heading">
 			<span>
-					 <?php __('Add Performance Factura'); ?>
+					 <?php __('Agregar Fechas en Factura'); ?>
       </span>
-    </h2>
+    </h4>
 
     <div class="">
       <ul>
         <li><?php echo $performanceFacturas['PerformanceFactura']['performance_customers_id'] ?></li>
         <li><?php echo $performanceFacturas['PerformanceFactura']['performance_references_id'] ?></li>
         <li><?php echo $performanceFacturas['PerformanceFactura']['performance_bsus_id'] ?></li>
-        <li>
-        </li>
       </ul>
     </div>
 
