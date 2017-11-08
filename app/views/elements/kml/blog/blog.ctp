@@ -16,6 +16,7 @@ $core = 'core'.DS;
 			// e($this->Html->css($core.'bootstrap_addons', 'stylesheet',array('inline'=>false)));
 			e($this->Html->css($core.'bootstrap_switch', 'stylesheet',array('inline'=>false)));
 			e($this->Html->css($core.'bootstrap_navbar', 'stylesheet',array('inline'=>false)));
+			e($this->Html->css($core.'bootstrap_addon_navbar', 'stylesheet',array('inline'=>false)));
 
 			// e($this->Html->css($core.'bootstrap_reset', 'stylesheet',array('inline'=>false)));
 			e($this->Html->css($theme.'skeleton/normalize', 'stylesheet',array('inline'=>false)));
