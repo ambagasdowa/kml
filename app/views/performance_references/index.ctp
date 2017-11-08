@@ -216,7 +216,7 @@
 					    var table = id('tableFilter');
 					    var totRowIndex = table.getElementsByTagName('tr').length;
 					    var tfConfig = {
-					        base_path: '<?php e($this->webroot.'js/devoops/tablefilter/dist/tablefilter/');?>',
+					        base_path: '<?php e($this->webroot.'js/devoops/table_filter/dist/tablefilter/');?>',
 									// single_filter: true,
 									col_0: 'select',
 									rows_counter: {
