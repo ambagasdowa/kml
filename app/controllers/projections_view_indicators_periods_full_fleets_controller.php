@@ -24,6 +24,9 @@ class ProjectionsViewIndicatorsPeriodsFullFleetsController extends AppController
 
 
 	function index() {
+
+			Configure::write('debug',2);
+
         $this->ProjectionsViewIndicatorsPeriodsFullFleet->query('SET	ANSI_NULLS	ON;SET	ANSI_WARNINGS	ON;');
 
         $debug = false ;
@@ -32,7 +35,7 @@ class ProjectionsViewIndicatorsPeriodsFullFleetsController extends AppController
 
         //NOTE Call the presupuesto
 
-        $this->LoadModel('ProjectionsBsuPresupuesto'); // Add presupuesto
+        // $this->LoadModel('ProjectionsBsuPresupuesto'); // Add presupuesto
 
     if (!empty($this->params['named']['year']) && !empty($this->params['named']['month'])) {
 			$projections_options = $this->params['named'];
@@ -163,16 +166,16 @@ class ProjectionsViewIndicatorsPeriodsFullFleetsController extends AppController
 
 //         $presupuesto = $this->ProjectionsBsuPresupuesto->find('list',array('conditions'=>$conditionsPrep,'fields'=>array('fraction','data','bsu_name')));
 
-        $presupuesto = $this->ProjectionsBsuPresupuesto->find('all',array('conditions'=>$conditionsPrep));
+        // $presupuesto = $this->ProjectionsBsuPresupuesto->find('all',array('conditions'=>$conditionsPrep));
+				//
+        // debug($presupuesto);
 
-        // pr($presupuesto);
-
-        foreach ($presupuesto as $ind_prep => $presupuesto_data) {
-//             debug($ind_prep);
-//             debug($presupuesto_data['ProjectionsBsuPresupuesto']);
-
-            $presupuesto_nt[$presupuesto_data['ProjectionsBsuPresupuesto']['cyear']][$presupuesto_data['ProjectionsBsuPresupuesto']['cmonth']][$presupuesto_data['ProjectionsBsuPresupuesto']['bsu_name']][$presupuesto_data['ProjectionsBsuPresupuesto']['fraction']] = $presupuesto_data['ProjectionsBsuPresupuesto']['data'];
-        }
+//         foreach ($presupuesto as $ind_prep => $presupuesto_data) {
+// //             debug($ind_prep);
+// //             debug($presupuesto_data['ProjectionsBsuPresupuesto']);
+//
+//             $presupuesto_nt[$presupuesto_data['ProjectionsBsuPresupuesto']['cyear']][$presupuesto_data['ProjectionsBsuPresupuesto']['cmonth']][$presupuesto_data['ProjectionsBsuPresupuesto']['bsu_name']][$presupuesto_data['ProjectionsBsuPresupuesto']['fraction']] = $presupuesto_data['ProjectionsBsuPresupuesto']['data'];
+//         }
 
         // debug($presupuesto_nt);
 
@@ -188,7 +191,7 @@ class ProjectionsViewIndicatorsPeriodsFullFleetsController extends AppController
             $conditionsFullFleet['ProjectionsViewIndicatorsPeriodsFullFleet.fraccion'] = $fraction; // this can be dinamic
             // debug($conditionsFullFleet);
             $rsl_past_month = $this->ProjectionsViewIndicatorsPeriodsFullFleet->find('all',array('conditions'=>$conditionsFullFleet/*,'fields'=>array('area','subpeso')*/));
-						debug($rsl_past_month);
+						// debug($rsl_past_month);
 
         } else {
 
@@ -200,7 +203,7 @@ class ProjectionsViewIndicatorsPeriodsFullFleetsController extends AppController
 //             debug($conditionsFullFleet);
             $rsl_past_month = $this->ProjectionsViewIndicatorsPeriodsFullFleet->find('all',array('conditions'=>$conditionsFullFleet/*,'fields'=>array('area','subpeso')*/));
 
-//             debug($rsl_past_month);
+            // debug($rsl_past_month);
         }
 
         if (isset($rsl_past_month)) {
@@ -221,12 +224,9 @@ class ProjectionsViewIndicatorsPeriodsFullFleetsController extends AppController
                         }
                         // sum_tons = current_tons + offset_tons;
                         $sum_tons = ( ($current_tons) + ( ($data_idc_past_month/$totalLabBackwardsMonthDays)*$offset_days) );
+												$prep = $projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['presupuesto'];
 
-                        if ( !isset($presupuesto_nt[$cyear][(int)$cmonth][$rsl_past_month[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['area']][$rsl_past_month[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['fraccion']])) {
-                            $prep = 0;
-                        } else {
-                            $prep = $presupuesto_nt[$cyear][(int)$cmonth][$rsl_past_month[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['area']][$rsl_past_month[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['fraccion']];
-                        }
+												// e('<kbd>Presupuesto</kbd><br />');
 												// debug($prep);
 												// debug($rsl_past_month[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['area']);
 												// debug($index_rsl_past_month);
@@ -258,7 +258,7 @@ class ProjectionsViewIndicatorsPeriodsFullFleetsController extends AppController
 
                         $projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['sum_tons'] = $sum_tons;
 
-                        $projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['presupuesto'] = $prep;
+                        // $projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['presupuesto'] = $prep;
 
                         $projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['current_tons'] = $current_tons;
 
@@ -266,13 +266,9 @@ class ProjectionsViewIndicatorsPeriodsFullFleetsController extends AppController
 
 
                         if($prep == 0) {
-
-                            $projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['variacion_promedio_diario'] = 0;
-
+                          $projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['variacion_promedio_diario'] = 0;
                         } else {
-
                             $projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['variacion_promedio_diario'] = (($sum_tons/$prep) -1)*100;
-
                         }
                         $projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['current_lab_days'] = $current_lab_days;
 
