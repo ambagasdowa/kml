@@ -274,9 +274,64 @@
 					        ]
 					    };
 					    var tf = new TableFilter('tableFilter', tfConfig);
-					    tf.init();
+					    // tf.init();
 
 							// document.getElementsByClassName("helpCont").innerHTML = "New text!";
+
+							// NOTE  Summarize Support
+							// Get the sums
+				      // SUM TOTALS Done
+				        tot = [];
+				        qty = [];
+								promedio_deliver = [];
+				      // start as hidden
+				      $('.dropdown-filter-table').each(function() {
+				          var $dropdown = $(this);
+				          $("a.dropdown-link").each(function(){
+				            the_id = $(this).attr('data-id');
+										console.log("Access Granted => "+the_id);
+				            sum = 0;
+				            quantity = 0;
+
+										$("td[class^=deliver_" + the_id +"]" ).each( function() {
+											var deliver = $(this).attr('data-days');
+											console.log(deliver);
+											// NOTE compability mode
+											sum += parseInt(deliver)
+											quantity += parseInt(1);
+										});
+
+				            tot[the_id] = sum;
+				            qty[the_id] = quantity;
+										promedio_deliver[the_id] = sum/quantity;
+
+				            $("#header_dropdown_total_" + the_id ).html(tot[the_id]);
+				            $("#header_dropdown_qty_" + the_id ).html(qty[the_id]);
+				            $("#header_dropdown_promedio_deliver_" + the_id ).html(promedio_deliver[the_id]);
+				          });
+									// NOTE This is working ...
+				          $("a.dropdown-link", $dropdown).click(function(e) {
+				            e.preventDefault();
+				            data_id = $(this).attr('data-id');
+				            // console.log(data_id);
+				            $div = $(".dropdown-container_" + data_id, $dropdown);
+
+				              if ($div.is(":visible")) {
+				                $div.hide('slow');
+				                $("#_link_" + data_id).attr('class', 'fa fa-plus-square-o');
+				                $('#header_dropdown_total_' + data_id).html(tot[data_id]);
+				                $('#header_dropdown_qty_' + data_id).html(qty[data_id]);
+				                $('#header_dropdown_promedio_deliver_' + data_id).html(promedio_deliver[data_id]);
+				              } else {
+				                $div.show('slow');
+				                $("#_link_" + data_id).attr('class', 'fa fa-minus-square-o');
+				                $('#header_dropdown_total_' + data_id).html('');
+				                $('#header_dropdown_qty_' + data_id).html('');
+				                $('#header_dropdown_promedio_deliver_' + data_id).html('');
+				              }
+				          });
+				      });
+							// NOTE  Summarize Support
 
 							// NOTE call to add update
 							$("a[id^='get_factura_']").on('click', function(event) {

@@ -238,7 +238,7 @@ class CasetasController extends AppController {
 	function add() {
 
 
-		Configure::write('debug',2);
+		// Configure::write('debug',2);
 
 		$this->LoadModel('Company');
 		$this->LoadModel('BusinessUnit');

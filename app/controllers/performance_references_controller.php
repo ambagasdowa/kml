@@ -58,7 +58,12 @@ class PerformanceReferencesController extends AppController {
 
 		$performanceReferences = $this->PerformanceViewFactura->find('all',array('conditions'=>$conditionsPerformance));
 
-		$this->set(compact('performanceReferences'));
+		foreach ($performanceReferences as $key_performance => $data_performance) {
+			# code...
+			$performanceReferencesMod[$data_performance['PerformanceViewFactura']['performance_customers_id']][]['PerformanceViewFactura'] = $data_performance['PerformanceViewFactura'] ;
+		}
+
+		$this->set(compact('performanceReferencesMod'));
 
 		// NOTE set the response output for an ajax call
 		Configure::write('debug', 0);
@@ -70,9 +75,7 @@ class PerformanceReferencesController extends AppController {
 
 		Configure::write('debug',2);
 		// $this->Prg->commonProcess();
-
-
-		// $this->LoadModel('PerformanceYear');
+   	// $this->LoadModel('PerformanceYear');
 		// $this->LoadModel('PerformanceMonth');
 		$this->LoadModel('PerformanceBsu');
 

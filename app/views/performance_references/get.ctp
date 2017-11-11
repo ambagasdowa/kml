@@ -45,7 +45,7 @@
 
 <div id="first-datatable-output">
 
-		<table id="tableFilter" class="table table-bordered">
+		<table id="tableFilter" class="table table-bordered dropdown-filter-table dropdown-processed">
 
 		<thead>
 			<tr>
@@ -79,11 +79,33 @@
 
 		<tbody>
 		<?php
+			foreach ($performanceReferencesMod as $performanceReferencesKey => $performanceReferences) {
+		?>
+
+		<tr>
+
+			<td>
+				<a data-id="<?php print($performanceReferencesKey)?>" class="dropdown-link" href="#"><i id="_link_<?php print($performanceReferencesKey)?>" class="fa fa-plus-square-o" aria-hidden="true"></i>&nbsp;</a>
+				<span>
+					<?php echo $performanceReferencesKey; ?>
+				</span>
+			</td>
+
+			<td id="header_dropdown_total_<?php print($performanceReferencesKey)?>"></td>
+
+			<td id="header_dropdown_qty_<?php print($performanceReferencesKey)?>"></td>
+
+			<td id="header_dropdown_promedio_deliver_<?php print($performanceReferencesKey)?>" colspan="11"></td>
+
+		</tr>
+
+		<?php
 			foreach ($performanceReferences as $performanceReference):
 		?>
-				<tr>
+				<tr class="dropdown-container_<?php print($performanceReferencesKey)?>" style="display: none;">
+
 					<!-- <td><?php echo $performanceReference['PerformanceViewFactura']['id']; ?>&nbsp;</td> -->
-					<td>
+					<td class="item_<?php echo $performanceReferencesKey?>">
 						<?php
 									echo
 									// $this->Html->link($performanceReference['PerformanceViewFactura']['performance_customers_id'], array('controller' => 'performance_customers', 'action' => 'view', $performanceReference['PerformanceCustomers']['id'],array('div'=>false,'id'=>$performanceReference['PerformanceViewFactura']['id'])));
@@ -97,6 +119,7 @@
 																						'data-id'=>$performanceReference['PerformanceViewFactura']['performance_customers_id'],
 																						'data-reference' => $performanceReference['PerformanceViewFactura']['id'],
 																						'data-empresa' => $performanceReference['PerformanceViewFactura']['Empresa'],
+																						'data-resume' => $performanceReference['PerformanceViewFactura']['performance_customers_id'],
 																						'div'=>false
 																					)
 																		);
@@ -127,31 +150,34 @@
 							?>
 								&nbsp;
 					</td>
-					<td class="days"><?php echo $performanceReference['PerformanceViewFactura']['deliver']; ?>&nbsp;</td>
+					<td class="deliver_<?php print($performanceReferencesKey)?>" data-days="<?php echo $performanceReference['PerformanceViewFactura']['deliver']; ?>"><?php echo $performanceReference['PerformanceViewFactura']['deliver']; ?></td>
 					<td>
 							<?php
 									!empty($performanceReference['PerformanceViewFactura']['aprobacionFactura']) ? e(date('Y-m-d',strtotime($performanceReference['PerformanceViewFactura']['aprobacionFactura']))) : e('&infin;') ;
 							?>
 								&nbsp;
 					</td>
-					<td class="days"><?php echo $performanceReference['PerformanceViewFactura']['proved']; ?>&nbsp;</td>
+					<td class="proved"><?php echo $performanceReference['PerformanceViewFactura']['proved']; ?>&nbsp;</td>
 					<td>
 							<?php
 									!empty($performanceReference['PerformanceViewFactura']['fechaPromesaPago']) ? e(date('Y-m-d',strtotime($performanceReference['PerformanceViewFactura']['fechaPromesaPago']))) : e('&infin;') ;
 							?>
 								&nbsp;
 					</td>
-					<td class="days"><?php echo $performanceReference['PerformanceViewFactura']['promise']; ?>&nbsp;</td>
+					<td class="promise"><?php echo $performanceReference['PerformanceViewFactura']['promise']; ?>&nbsp;</td>
 					<td>
 							<?php
 									!empty($performanceReference['PerformanceViewFactura']['fechaPago']) ? e(date('Y-m-d',strtotime($performanceReference['PerformanceViewFactura']['fechaPago']))) : e('&infin;') ;
 							?>
 								&nbsp;
 					</td>
-					<td class="days"><?php echo $performanceReference['PerformanceViewFactura']['payment']; ?>&nbsp;</td>
+					<td class="payment"><?php echo $performanceReference['PerformanceViewFactura']['payment']; ?>&nbsp;</td>
 				</tr>
 
-			<?php endforeach; ?>
+			<?php
+					endforeach;
+				}
+			?>
 
 				<tr>
 					<td>&nbsp;</td>
