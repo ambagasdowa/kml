@@ -70,8 +70,15 @@
 		line-height: 1.2!important;
 		font-weight: normal!important;
 	}
-	#tableFilter > td {
-		min-width: 120px;
+
+	.detail_header{
+		display: none;
+	}
+
+	tr .firts-header-element{
+		display: inline-block;
+		min-width: 160px ;
+		width: 100% ;
 	}
 
 
@@ -284,31 +291,68 @@
 				        tot = [];
 				        qty = [];
 								promedio_deliver = [];
+								promedio_proved = [];
+								promedio_promise = [];
+								promedio_payment = [];
 				      // start as hidden
 				      $('.dropdown-filter-table').each(function() {
 				          var $dropdown = $(this);
 				          $("a.dropdown-link").each(function(){
 				            the_id = $(this).attr('data-id');
 										console.log("Access Granted => "+the_id);
-				            sum = 0;
-				            quantity = 0;
+				            sum_deliver = 0;
+				            qty_deliver = 0;
+										sum_proved = 0 ; qty_proved = 0 ;
+										var sum_promise , qty_promise , sum_payment , qty_payment;
 
 										$("td[class^=deliver_" + the_id +"]" ).each( function() {
 											var deliver = $(this).attr('data-days');
 											console.log(deliver);
 											// NOTE compability mode
-											sum += parseInt(deliver)
-											quantity += parseInt(1);
+											sum_deliver += parseInt(deliver)
+											qty_deliver += parseInt(1);
 										});
 
-				            tot[the_id] = sum;
-				            qty[the_id] = quantity;
-										promedio_deliver[the_id] = sum/quantity;
+										$("td[class^=proved_" + the_id +"]" ).each( function() {
+											var proved = $(this).attr('data-days');
+											console.log(proved);
+											// NOTE compability mode
+											sum_proved += parseInt(proved)
+											qty_proved += parseInt(1);
+										});
+
+										$("td[class^=promise_" + the_id +"]" ).each( function() {
+											var promise = $(this).attr('data-days');
+											console.log(promise);
+											// NOTE compability mode
+											sum_promise += parseInt(promise)
+											qty_promise += parseInt(1);
+										});
+
+										$("td[class^=payment_" + the_id +"]" ).each( function() {
+											var payment = $(this).attr('data-days');
+											console.log(payment);
+											// NOTE compability mode
+											sum_payment += parseInt(payment)
+											qty_payment += parseInt(1);
+										});
+
+				            tot[the_id] = sum_deliver;
+				            qty[the_id] = qty_deliver;
+										promedio_deliver[the_id] = sum_deliver/qty_deliver;
+										promedio_proved[the_id] = sum_proved/qty_proved;
+										promedio_promise[the_id] = sum_promise/qty_promise;
+										promedio_payment[the_id] = sum_payment/qty_payment;
 
 				            $("#header_dropdown_total_" + the_id ).html(tot[the_id]);
-				            $("#header_dropdown_qty_" + the_id ).html(qty[the_id]);
+				            // $("#header_dropdown_qty_" + the_id ).html(qty[the_id]);
 				            $("#header_dropdown_promedio_deliver_" + the_id ).html(promedio_deliver[the_id]);
+				            $("#header_dropdown_promedio_proved_" + the_id ).html(promedio_proved[the_id]);
+				            $("#header_dropdown_promedio_promise_" + the_id ).html(promedio_promise[the_id]);
+				            $("#header_dropdown_promedio_payment_" + the_id ).html(promedio_payment[the_id]);
 				          });
+
+
 									// NOTE This is working ...
 				          $("a.dropdown-link", $dropdown).click(function(e) {
 				            e.preventDefault();
@@ -317,17 +361,36 @@
 				            $div = $(".dropdown-container_" + data_id, $dropdown);
 
 				              if ($div.is(":visible")) {
-				                $div.hide('slow');
+
+												$div.hide('slow');
+
+												// NOTE header effect
+												$("#detail_header").hide();
+												$("#full_header").show();
+
 				                $("#_link_" + data_id).attr('class', 'fa fa-plus-square-o');
 				                $('#header_dropdown_total_' + data_id).html(tot[data_id]);
-				                $('#header_dropdown_qty_' + data_id).html(qty[data_id]);
+				                // $('#header_dropdown_qty_' + data_id).html(qty[data_id]);
 				                $('#header_dropdown_promedio_deliver_' + data_id).html(promedio_deliver[data_id]);
+				                $('#header_dropdown_promedio_proved_' + data_id).html(promedio_proved[data_id]);
+				                $('#header_dropdown_promedio_promise_' + data_id).html(promedio_deliver[data_id]);
+				                $('#header_dropdown_promedio_payment_' + data_id).html(promedio_deliver[data_id]);
 				              } else {
+
 				                $div.show('slow');
-				                $("#_link_" + data_id).attr('class', 'fa fa-minus-square-o');
+
+												// NOTE header effect
+												$("#detail_header").show();
+												$("#full_header").hide();
+
+												//NOTE add fields
+												$("#_link_" + data_id).attr('class', 'fa fa-minus-square-o');
 				                $('#header_dropdown_total_' + data_id).html('');
-				                $('#header_dropdown_qty_' + data_id).html('');
-				                $('#header_dropdown_promedio_deliver_' + data_id).html('');
+				                // $('#header_dropdown_qty_' + data_id).html('');
+				                $('#header_dropdown_promedio_deliver_' + data_id).html(promedio_deliver[data_id]);
+												$('#header_dropdown_promedio_proved_' + data_id).html(promedio_proved[data_id]);
+												$('#header_dropdown_promedio_promise_' + data_id).html('');
+												$('#header_dropdown_promedio_payment_' + data_id).html('');
 				              }
 				          });
 				      });
@@ -504,3 +567,23 @@
 				});
 		// &#93;&#93;>
     </script>
+
+<?php
+// NOTES
+
+// customers.terms => join RFC get dias de credito
+//
+// nombre de cliente en lugar de rfc
+// totales por cliente
+//
+// Users =>
+//
+// cliente no viaje cp ruta  fecha de inicio  decha despacho , fin_viaje
+//
+// fecha_inicio => fecha_ingreso
+//
+// fecha_fin == fecha_guia
+//
+// fecha de aceptacion =>  fecha_modifico
+
+ ?>

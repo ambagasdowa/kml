@@ -518,7 +518,7 @@ class CasetasController extends AppController {
 				}
 			}
 			debug($casetas_data_model);
-			exit();
+			// exit();
 // 			debug($casetas_monto['key_num_2']);
 			$count_cross = count($casetas_data_model['Caseta']);
 

@@ -48,9 +48,9 @@
 		<table id="tableFilter" class="table table-bordered dropdown-filter-table dropdown-processed">
 
 		<thead>
-			<tr>
+			<tr id="detail_header" class="detail_header">
 					<!-- <th><?php echo 'id'; ?></th> -->
-						<th><?php echo ('RFC');?></th>
+						<th class="firts-header-element"><?php echo ('RFC');?></th>
 						<!-- <th><?php echo ('Empresa');?></th> -->
 						<!-- <th><?php echo ('TipoDocumento');?></th> -->
 						<th><?php echo ('Folio');?></th>
@@ -74,7 +74,15 @@
 						<!-- <th><?php echo ('MES');?></th> -->
 						<!-- <th><?php echo ('DIA');?></th> -->
 			</tr>
-
+			<tr id="full_header" class="full_header">
+					<!-- <th><?php echo 'id'; ?></th> -->
+						<th class="firts-header-element"><?php echo ('RFC');?></th>
+						<th><?php echo ('Facturas');?></th>
+						<th><?php echo ('PromedioDiasEntrega');?></th>
+						<th><?php echo ('PromedioDiasAprobacion');?></th>
+						<th><?php echo ('PromedioDiasPromesa');?></th>
+						<th><?php echo ('PromedioDiasPago');?></th>
+			</tr>
 		</thead>
 
 		<tbody>
@@ -85,17 +93,20 @@
 		<tr>
 
 			<td>
-				<a data-id="<?php print($performanceReferencesKey)?>" class="dropdown-link" href="#"><i id="_link_<?php print($performanceReferencesKey)?>" class="fa fa-plus-square-o" aria-hidden="true"></i>&nbsp;</a>
-				<span>
-					<?php echo $performanceReferencesKey; ?>
-				</span>
-			</td>
 
-			<td id="header_dropdown_total_<?php print($performanceReferencesKey)?>"></td>
+				<div class="icon-open">
+						<a data-id="<?php print($performanceReferencesKey)?>" class="dropdown-link" href="#"><i id="_link_<?php print($performanceReferencesKey)?>" class="fa fa-plus-square-o" aria-hidden="true"></i>&nbsp;</a>
+					<?php echo $performanceReferencesKey; ?>
+				</div>
+
+			</td>
 
 			<td id="header_dropdown_qty_<?php print($performanceReferencesKey)?>"></td>
 
-			<td id="header_dropdown_promedio_deliver_<?php print($performanceReferencesKey)?>" colspan="11"></td>
+			<td id="header_dropdown_promedio_deliver_<?php print($performanceReferencesKey)?>" ></td>
+			<td id="header_dropdown_promedio_proved_<?php print($performanceReferencesKey)?>" ></td>
+			<td id="header_dropdown_promedio_promise_<?php print($performanceReferencesKey)?>" ></td>
+			<td id="header_dropdown_promedio_payment_<?php print($performanceReferencesKey)?>" ></td>
 
 		</tr>
 
@@ -157,21 +168,23 @@
 							?>
 								&nbsp;
 					</td>
-					<td class="proved"><?php echo $performanceReference['PerformanceViewFactura']['proved']; ?>&nbsp;</td>
+					<td class="proved_<?php print($performanceReferencesKey)?>" data-days="<?php echo $performanceReference['PerformanceViewFactura']['proved']; ?>"><?php echo $performanceReference['PerformanceViewFactura']['proved']; ?></td>
 					<td>
 							<?php
 									!empty($performanceReference['PerformanceViewFactura']['fechaPromesaPago']) ? e(date('Y-m-d',strtotime($performanceReference['PerformanceViewFactura']['fechaPromesaPago']))) : e('&infin;') ;
 							?>
 								&nbsp;
 					</td>
-					<td class="promise"><?php echo $performanceReference['PerformanceViewFactura']['promise']; ?>&nbsp;</td>
+					<!-- <td class="promise_"><?php echo $performanceReference['PerformanceViewFactura']['promise']; ?>&nbsp;</td> -->
+					<td class="promise_<?php print($performanceReferencesKey)?>" data-days="<?php echo $performanceReference['PerformanceViewFactura']['promise']; ?>"><?php echo $performanceReference['PerformanceViewFactura']['promise']; ?></td>
 					<td>
 							<?php
 									!empty($performanceReference['PerformanceViewFactura']['fechaPago']) ? e(date('Y-m-d',strtotime($performanceReference['PerformanceViewFactura']['fechaPago']))) : e('&infin;') ;
 							?>
 								&nbsp;
 					</td>
-					<td class="payment"><?php echo $performanceReference['PerformanceViewFactura']['payment']; ?>&nbsp;</td>
+					<!-- <td class="payment_"><?php echo $performanceReference['PerformanceViewFactura']['payment']; ?>&nbsp;</td> -->
+					<td class="payment_<?php print($performanceReferencesKey)?>" data-days="<?php echo $performanceReference['PerformanceViewFactura']['payment']; ?>"><?php echo $performanceReference['PerformanceViewFactura']['paymnet']; ?></td>
 				</tr>
 
 			<?php
@@ -179,7 +192,7 @@
 				}
 			?>
 
-				<tr>
+				<tr id="detail_header" class="detail_header">
 					<td>&nbsp;</td>
 					<td>&nbsp;</td>
 					<td>&nbsp;</td>
