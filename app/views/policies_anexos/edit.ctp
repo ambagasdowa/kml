@@ -1,3 +1,8 @@
+<?php
+	// NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal
+	$evaluate = false;
+	$requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere') );
+?>
 
     <div class="container-fluid">
       <div class="row">
@@ -13,7 +18,7 @@
 				</li>
 			</ul>
         </div>
-        
+
 
         <div class="col-sm-9 col-sm-offset-2 col-md-6 col-md-offset-3 main">
           <?php echo $this->Form->create('PoliciesAnexo');?>
@@ -33,7 +38,7 @@
 
 								if(checkBrowser($_SERVER['HTTP_USER_AGENT'],true) === TRUE) {
 										echo $this->Form->input('create',
-											array(	
+											array(
 													'type' => 'text',
 													'label'=>false,
 													'class'=>'',
@@ -49,7 +54,7 @@
 							---------------------------------------------*/
 								require(['jquery','jquery-ui','bootstrap'], function($) {
 									$(document).ready(function () {
-									
+
 									// Define the Spanish languaje
 										$.datepicker.regional['es'] = {
 										closeText: 'Cerrar',
@@ -97,7 +102,7 @@
 																)
 													);
 											}
-											
+
 												echo $this->Form->input('status',
 																		array(
 																				'type'=>'select',
@@ -108,9 +113,9 @@
 																			)
 																);
 						?>
-						
+
 					</table>
-				</div> 
+				</div>
           <!--end table response-->
 					<?php echo $this->Form->button('Submit', array('class'=>'btn btn-success'));?>
 					<?php echo $this->Form->end();?>
@@ -119,10 +124,3 @@
         </div> <!--main-->
       </div> <!--row-->
     </div> <!--container fluid-->
-
-    
-
-
-
-
-

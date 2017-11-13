@@ -78,10 +78,18 @@
 					<!-- <th><?php echo 'id'; ?></th> -->
 						<th class="firts-header-element"><?php echo ('RFC');?></th>
 						<th><?php echo ('Facturas');?></th>
+						<th id="detail_header" class="detail_header">&nbsp;</th>
+						<th id="detail_header" class="detail_header">&nbsp;</th>
+						<th id="detail_header" class="detail_header">&nbsp;</th>
+						<th id="detail_header" class="detail_header">&nbsp;</th>
 						<th><?php echo ('PromedioDiasEntrega');?></th>
+						<th id="detail_header" class="detail_header">&nbsp;</th>
 						<th><?php echo ('PromedioDiasAprobacion');?></th>
+						<th id="detail_header" class="detail_header">&nbsp;</th>
 						<th><?php echo ('PromedioDiasPromesa');?></th>
+						<th id="detail_header" class="detail_header">&nbsp;</th>
 						<th><?php echo ('PromedioDiasPago');?></th>
+						<th id="detail_header" class="detail_header">&nbsp;</th>
 			</tr>
 		</thead>
 
@@ -91,23 +99,25 @@
 		?>
 
 		<tr>
-
 			<td>
-
-				<div class="icon-open">
 						<a data-id="<?php print($performanceReferencesKey)?>" class="dropdown-link" href="#"><i id="_link_<?php print($performanceReferencesKey)?>" class="fa fa-plus-square-o" aria-hidden="true"></i>&nbsp;</a>
 					<?php echo $performanceReferencesKey; ?>
-				</div>
-
 			</td>
-
 			<td id="header_dropdown_qty_<?php print($performanceReferencesKey)?>"></td>
 
-			<td id="header_dropdown_promedio_deliver_<?php print($performanceReferencesKey)?>" ></td>
-			<td id="header_dropdown_promedio_proved_<?php print($performanceReferencesKey)?>" ></td>
-			<td id="header_dropdown_promedio_promise_<?php print($performanceReferencesKey)?>" ></td>
-			<td id="header_dropdown_promedio_payment_<?php print($performanceReferencesKey)?>" ></td>
+			<td id="detail_header" class="detail_header">&nbsp;</td>
+			<td id="detail_header" class="detail_header">&nbsp;</td>
+			<td id="detail_header" class="detail_header">&nbsp;</td>
+			<td id="detail_header" class="detail_header">&nbsp;</td>
+			<td id="detail_header" class="detail_header">&nbsp;</td>
 
+			<td id="header_dropdown_promedio_deliver_<?php print($performanceReferencesKey)?>" ></td>
+			<td id="detail_header" class="detail_header">&nbsp;</td>
+			<td id="header_dropdown_promedio_proved_<?php print($performanceReferencesKey)?>" ></td>
+			<td id="detail_header" class="detail_header">&nbsp;</td>
+			<td id="header_dropdown_promedio_promise_<?php print($performanceReferencesKey)?>" ></td>
+			<td id="detail_header" class="detail_header">&nbsp;Promedio</td>
+			<td id="header_dropdown_promedio_payment_<?php print($performanceReferencesKey)?>" ></td>
 		</tr>
 
 		<?php
@@ -175,7 +185,6 @@
 							?>
 								&nbsp;
 					</td>
-					<!-- <td class="promise_"><?php echo $performanceReference['PerformanceViewFactura']['promise']; ?>&nbsp;</td> -->
 					<td class="promise_<?php print($performanceReferencesKey)?>" data-days="<?php echo $performanceReference['PerformanceViewFactura']['promise']; ?>"><?php echo $performanceReference['PerformanceViewFactura']['promise']; ?></td>
 					<td>
 							<?php
@@ -183,8 +192,7 @@
 							?>
 								&nbsp;
 					</td>
-					<!-- <td class="payment_"><?php echo $performanceReference['PerformanceViewFactura']['payment']; ?>&nbsp;</td> -->
-					<td class="payment_<?php print($performanceReferencesKey)?>" data-days="<?php echo $performanceReference['PerformanceViewFactura']['payment']; ?>"><?php echo $performanceReference['PerformanceViewFactura']['paymnet']; ?></td>
+					<td class="payment_<?php print($performanceReferencesKey)?>" data-days="<?php echo $performanceReference['PerformanceViewFactura']['payment']; ?>"><?php echo $performanceReference['PerformanceViewFactura']['payment']; ?></td>
 				</tr>
 
 			<?php
@@ -193,6 +201,7 @@
 			?>
 
 				<tr id="detail_header" class="detail_header">
+				<!-- <tr id="full_header" class="full_header"> -->
 					<td>&nbsp;</td>
 					<td>&nbsp;</td>
 					<td>&nbsp;</td>

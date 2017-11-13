@@ -20,7 +20,7 @@
 		<?php
 		// SecureCalendar index
 			// NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal.
-			$evaluate = true;
+			$evaluate = false;
 			$requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere') );
 		?>
 <?php //debug($policy);?>

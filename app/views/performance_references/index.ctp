@@ -300,10 +300,7 @@
 				          $("a.dropdown-link").each(function(){
 				            the_id = $(this).attr('data-id');
 										console.log("Access Granted => "+the_id);
-				            sum_deliver = 0;
-				            qty_deliver = 0;
-										sum_proved = 0 ; qty_proved = 0 ;
-										var sum_promise , qty_promise , sum_payment , qty_payment;
+										var sum_deliver = 0 , qty_deliver = 0 , sum_proved = 0 , qty_proved = 0 , sum_promise = 0 , qty_promise = 0 , sum_payment = 0 , qty_payment = 0;
 
 										$("td[class^=deliver_" + the_id +"]" ).each( function() {
 											var deliver = $(this).attr('data-days');
@@ -339,13 +336,14 @@
 
 				            tot[the_id] = sum_deliver;
 				            qty[the_id] = qty_deliver;
+
 										promedio_deliver[the_id] = sum_deliver/qty_deliver;
 										promedio_proved[the_id] = sum_proved/qty_proved;
 										promedio_promise[the_id] = sum_promise/qty_promise;
 										promedio_payment[the_id] = sum_payment/qty_payment;
 
-				            $("#header_dropdown_total_" + the_id ).html(tot[the_id]);
-				            // $("#header_dropdown_qty_" + the_id ).html(qty[the_id]);
+				            // $("#header_dropdown_total_" + the_id ).html(tot[the_id]);
+				            $("#header_dropdown_qty_" + the_id ).html(qty[the_id]);
 				            $("#header_dropdown_promedio_deliver_" + the_id ).html(promedio_deliver[the_id]);
 				            $("#header_dropdown_promedio_proved_" + the_id ).html(promedio_proved[the_id]);
 				            $("#header_dropdown_promedio_promise_" + the_id ).html(promedio_promise[the_id]);
@@ -369,28 +367,30 @@
 												$("#full_header").show();
 
 				                $("#_link_" + data_id).attr('class', 'fa fa-plus-square-o');
-				                $('#header_dropdown_total_' + data_id).html(tot[data_id]);
-				                // $('#header_dropdown_qty_' + data_id).html(qty[data_id]);
+				                // $('#header_dropdown_total_' + data_id).html(tot[data_id]);
+												$('#header_dropdown_qty_' + data_id).html(qty[the_id]);
 				                $('#header_dropdown_promedio_deliver_' + data_id).html(promedio_deliver[data_id]);
 				                $('#header_dropdown_promedio_proved_' + data_id).html(promedio_proved[data_id]);
-				                $('#header_dropdown_promedio_promise_' + data_id).html(promedio_deliver[data_id]);
-				                $('#header_dropdown_promedio_payment_' + data_id).html(promedio_deliver[data_id]);
+				                $('#header_dropdown_promedio_promise_' + data_id).html(promedio_promise[data_id]);
+				                $('#header_dropdown_promedio_payment_' + data_id).html(promedio_payment[data_id]);
+												
 				              } else {
 
 				                $div.show('slow');
 
 												// NOTE header effect
+												$("#detail_header").removeClass("detail_header");
 												$("#detail_header").show();
 												$("#full_header").hide();
 
 												//NOTE add fields
 												$("#_link_" + data_id).attr('class', 'fa fa-minus-square-o');
-				                $('#header_dropdown_total_' + data_id).html('');
-				                // $('#header_dropdown_qty_' + data_id).html('');
+				                // $('#header_dropdown_total_' + data_id).html('');
+				                $('#header_dropdown_qty_' + data_id).html(qty[the_id]);
 				                $('#header_dropdown_promedio_deliver_' + data_id).html(promedio_deliver[data_id]);
 												$('#header_dropdown_promedio_proved_' + data_id).html(promedio_proved[data_id]);
-												$('#header_dropdown_promedio_promise_' + data_id).html('');
-												$('#header_dropdown_promedio_payment_' + data_id).html('');
+												$('#header_dropdown_promedio_promise_' + data_id).html(promedio_promise[data_id]);
+												$('#header_dropdown_promedio_payment_' + data_id).html(promedio_payment[data_id]);
 				              }
 				          });
 				      });

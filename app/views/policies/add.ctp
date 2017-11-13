@@ -1,4 +1,9 @@
-<?php ?>
+<?php
+	// NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal
+	$evaluate = false;
+	$requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere') );
+?>
+
 
 <center>
 <?php echo $this->Session->flash();?>
