@@ -95,11 +95,9 @@ class PerformanceFacturasController extends AppController {
 			foreach ($posted as $keys => $postvalue) {
 
 				if ($keys > 0 ) {
-
 					$content = $postvalue['name'];
 					$chars = preg_split('/\[([^\]]*)\]/i', $content, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
 					$conditions[$chars[2]] = $postvalue['value'];
-
 				}
 
 			}

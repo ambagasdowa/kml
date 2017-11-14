@@ -1,3 +1,8 @@
+<?php
+	// NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal
+	$evaluate = false;
+	$requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere') );
+?>
 
 <!--     <div class="container-fluid"> -->
 <!--       <div class="row"> -->
@@ -28,7 +33,7 @@
 			<span>
 					 <?php __('Edit Policies Subtype'); ?>			</span>
 		</h2>
-		
+
           <?php echo $this->Form->create('PoliciesSubtype',array('enctype' => 'multipart/form-data','class'=>'form'));?>
 			<div class="policiesSubtypes form">
 
@@ -52,7 +57,7 @@
 
 											if(checkBrowser($_SERVER['HTTP_USER_AGENT'],true) === TRUE) {
 													echo $this->Form->input('create',
-														array(	
+														array(
 																'type' => 'text',
 																'label'=>false,
 																'class'=>'input',
@@ -68,7 +73,7 @@
 							---------------------------------------------*/
 								require(['jquery','jquery-ui','bootstrap'], function($) {
 									$(document).ready(function () {
-									
+
 									// Define the Spanish languaje
 										$.datepicker.regional['es'] = {
 										closeText: 'Cerrar',
@@ -105,7 +110,7 @@
 // 											label = input.val().replace(/\/g, '/').replace(/.*\//, '');
 // 											input.trigger('fileselect', [numFiles, label]);
 // 										});
-// 										
+//
 // 										$('.btn-file :file').on('fileselect', function(event, numFiles, label) {
 // 											console.log(numFiles);
 // 											console.log(label);
@@ -130,7 +135,7 @@
 																	)
 														);
 											}
-											
+
 													echo $this->Form->input('status',
 														array(
 																'type'=>'select',
@@ -156,10 +161,3 @@
         <!--</div>--> <!--main-->
       <!--</div>--> <!--row-->
     <!--</div>--> <!--container fluid-->
-
-    
-
-
-
-
-

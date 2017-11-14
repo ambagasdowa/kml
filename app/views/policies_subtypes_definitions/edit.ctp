@@ -1,3 +1,8 @@
+<?php
+	// NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal
+	$evaluate = false;
+	$requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere') );
+?>
 
 <!--     <div class="container-fluid"> -->
 <!--       <div class="row"> -->
@@ -22,7 +27,7 @@
 				 <?php __('Edit Policies Subtypes Definition'); ?>
 			</span>
 		</h2>
-		
+
           <?php echo $this->Form->create('PoliciesSubtypesDefinition',array('enctype' => 'multipart/form-data','class'=>'form'));?>
 			<div class="policiesSubtypesDefinitions form">
 
@@ -36,7 +41,7 @@
 
 											if(checkBrowser($_SERVER['HTTP_USER_AGENT'],true) === TRUE) {
 													echo $this->Form->input('create',
-														array(	
+														array(
 																'type' => 'text',
 																'label'=>false,
 																'class'=>'input',
@@ -52,7 +57,7 @@
 							---------------------------------------------*/
 								require(['jquery','jquery-ui','bootstrap'], function($) {
 									$(document).ready(function () {
-									
+
 									// Define the Spanish languaje
 										$.datepicker.regional['es'] = {
 										closeText: 'Cerrar',
@@ -89,7 +94,7 @@
 // 											label = input.val().replace(/\/g, '/').replace(/.*\//, '');
 // 											input.trigger('fileselect', [numFiles, label]);
 // 										});
-// 										
+//
 // 										$('.btn-file :file').on('fileselect', function(event, numFiles, label) {
 // 											console.log(numFiles);
 // 											console.log(label);
@@ -114,7 +119,7 @@
 																	)
 														);
 											}
-											
+
 													echo $this->Form->input('status',
 														array(
 																'type'=>'select',
@@ -126,17 +131,17 @@
 											    );
 	?>
 						<?php 	//echo $this->Form->input('name',array('type'=>'text','label'=>false,'placeholder'=>'Nombre de la politica'));
-									
+
 // 								e('<span id="fieldActionExample" class="btn btn-default btn-file form_control">Upload');
 // 									echo $this->Form->file('upload', array('type'=>'file','label'=>false));
 // 								e('</span>');
 								?><!-- 					</table> -->
 <!-- 				</div>  -->
           <!--end table response-->
-					<?php 
+					<?php
 // 						echo $this->Form->input('status',array('type'=>'hidden','class'=>'form-control','value'=>'Active'))
 					?>
-					<?php 
+					<?php
 						echo $this->Form->end(__('Submit', true));
 					?>
 			</div>
@@ -144,10 +149,3 @@
         <!--</div>--> <!--main-->
       <!--</div>--> <!--row-->
     <!--</div>--> <!--container fluid-->
-
-    
-
-
-
-
-

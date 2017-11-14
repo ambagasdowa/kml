@@ -50,10 +50,10 @@ td {
     /*max-width: 8%;*/
 }
 
-/*.tableHeader ,.trHeader ,.dash_detail  {
-    border:none!important;
-}*/
-
+.resume_compact_footer , .compact_header ,	.detail_header{
+		display: none;
+	}
+  
 .pull-right {
   float: right !important;
 }
@@ -75,6 +75,10 @@ td {
 
 .helpCont , .helpBtn ,caption {
   display: none;
+}
+
+.dash_datetime{
+  display: inline-block;
 }
 
 /* Remove unwanted elements */

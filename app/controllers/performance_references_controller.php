@@ -34,6 +34,7 @@ class PerformanceReferencesController extends AppController {
 		Configure::write('debug',2);
 
 		$this->LoadModel('PerformanceViewFactura');
+		$this->LoadModel('PerformanceBsu');
 
 		$posted = json_decode(base64_decode($this->params['named']['data']),true);
 
@@ -55,15 +56,22 @@ class PerformanceReferencesController extends AppController {
 		// debug($mysqlend);
 		$conditionsPerformance['PerformanceViewFactura.ElaboracionFactura BETWEEN ? AND ?'] = array($mysqlstart,$mysqlend);
 		$conditionsPerformance['PerformanceViewFactura.Empresa'] = $conditions['performance_bsu'];
-
 		$performanceReferences = $this->PerformanceViewFactura->find('all',array('conditions'=>$conditionsPerformance));
+
+		// NOTE FILTER
+		$condBsu['PerformanceBsu.id'] = $conditions['performance_bsu'];
+		$bsu_compact = ucwords(strtolower(current($this->PerformanceBsu->find('list',array('fields'=>array('id','label'),'conditions'=>$condBsu)))));
+
+		$dashboard = array('inicio'=>$mysqlstart,'fin'=>$mysqlend,'bsu'=>$bsu_compact);
 
 		foreach ($performanceReferences as $key_performance => $data_performance) {
 			# code...
 			$performanceReferencesMod[$data_performance['PerformanceViewFactura']['performance_customers_id']][]['PerformanceViewFactura'] = $data_performance['PerformanceViewFactura'] ;
+			$performanceReferencesIdx[$data_performance['PerformanceViewFactura']['performance_customers_id']] = $data_performance['PerformanceViewFactura']['Nombre'] ;
+			// debug($data_performance['PerformanceViewFactura']);
 		}
 
-		$this->set(compact('performanceReferencesMod'));
+		$this->set(compact('performanceReferencesMod','performanceReferencesIdx','dashboard'));
 
 		// NOTE set the response output for an ajax call
 		Configure::write('debug', 0);

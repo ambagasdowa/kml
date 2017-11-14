@@ -71,7 +71,7 @@
 		font-weight: normal!important;
 	}
 
-	.detail_header{
+.resume_compact_footer , .compact_header ,	.detail_header{
 		display: none;
 	}
 
@@ -79,6 +79,19 @@
 		display: inline-block;
 		min-width: 160px ;
 		width: 100% ;
+	}
+
+	.head_datetime{
+	  display: none;
+	}
+
+	.container-mod{
+	  position: relative;
+	  width: 100%;
+	  max-width: 85%;
+	  margin: 0 auto;
+	  padding: 0 20px;
+	  box-sizing: border-box;
 	}
 
 
@@ -183,7 +196,7 @@
 		</div>
 
 
-		<div id="printThis" class="container ninja-scroll">
+		<div id="printThis" class="container-mod ninja-scroll">
 			<div id="updateSearchResult" class="updateSearchResult"></div>
 		</div>
 
@@ -210,6 +223,7 @@
 						console.log(data_code);
 						var urlStruct = "<?php echo Dispatcher::baseUrl();?>/PerformanceReferences/get/data:"+data_code;
 						console.log(urlStruct);
+
 						// NOTE update live
 						// $(".updateSearchResult").load(urlStruct);
 
@@ -217,73 +231,18 @@
 
 						$( ".updateSearchResult" ).load(urlStruct,function() {
 
-							var id = function (id){
-					        return document.getElementById(id);
-					    };
-					    var table = id('tableFilter');
-					    var totRowIndex = table.getElementsByTagName('tr').length;
-					    var tfConfig = {
-					        base_path: '<?php e($this->webroot.'js/devoops/table_filter/dist/tablefilter/');?>',
-									// single_filter: true,
-									col_0: 'select',
-									rows_counter: {
-			                text: 'Facturas: '
-			            },
-									// allows Bootstrap table styling
-									themes: [{
-											name: 'transparent'
-									}],
-									highlight_keywords: true,
-									auto_filter: true,
-									auto_filter_delay: 100, //milliseconds
-									// popup_filters: true,
-					        // filters_row_index: 1,
-									help_instructions:false,
-					        alternate_rows: false,
-					        btn_reset: true,
-									btn_reset_text: 'Limpiar',
-									clear_filter_text: 'Limpiar',
-					        loader: true,
-					        // status_bar: true,
-									paging: {
-										length: 15,
-					          results_per_page: ['Records: ', [ 25, 50, 100 , 200, 400]]
-					        },
-									loader: {
-					          html: '<div id="lblMsg"></div>',
-					          css_class: 'myLoader'
-					        },
-					        exclude_rows: [totRowIndex],
-									extensions:[
-											{
-										             name: 'colsVisibility',
-										             text: 'Hide',
-																 at_start: [2,3,4],
-										             enable_tick_all: true
-										            //  btn_target_id: 'colsBtn'
-											},
-					            {
-					                name: 'colOps',
-					                id: ['mean1','mean2','mean3','mean4'],
-					                col: [7,9,11,13],
-					                operation: ['mean','mean','mean','mean'],
-					                write_method: ['innerhtml', 'innerhtml'],
-					                exclude_row: [totRowIndex],
-					                decimal_precision: [2, 2],
-					                tot_row_index: [totRowIndex],
-					                format_result: [
-					                  { prefix: '<span class="avg">x</span> ' },
-														{ prefix: '<span class="avg">x</span> ' },
-														{ prefix: '<span class="avg">x</span> ' },
-														{ prefix: '<span class="avg">x</span> ' }
-					                ]
-					            }
-					        ]
-					    };
-					    var tf = new TableFilter('tableFilter', tfConfig);
-					    // tf.init();
+							//NOTE add table paginator
+							// $('#my-table').dynatable();
 
-							// document.getElementsByClassName("helpCont").innerHTML = "New text!";
+
+							// var datatable = new DataTable(document.querySelector('#first-datatable-output table'), {
+							//     pageSize: 25,
+							//     sort: [true, true, false],
+							//     filters: [true, false, 'select'],
+							//     filterText: 'Type to filter... ',
+							//     pagingDivSelector: "#paging-first-datatable"
+							// });
+
 
 							// NOTE  Summarize Support
 							// Get the sums
@@ -344,6 +303,7 @@
 
 				            // $("#header_dropdown_total_" + the_id ).html(tot[the_id]);
 				            $("#header_dropdown_qty_" + the_id ).html(qty[the_id]);
+
 				            $("#header_dropdown_promedio_deliver_" + the_id ).html(promedio_deliver[the_id]);
 				            $("#header_dropdown_promedio_proved_" + the_id ).html(promedio_proved[the_id]);
 				            $("#header_dropdown_promedio_promise_" + the_id ).html(promedio_promise[the_id]);
@@ -363,34 +323,50 @@
 												$div.hide('slow');
 
 												// NOTE header effect
+
+												// $("td[id^=_header_td]").hide();
+												$("td[id^=_header_td]").removeClass("compact_header").hide();
+												$("th[id^=_header_td]").removeClass("compact_header").hide();
+
+												$("tr[id^=resume_footer]").hide();
+
 												$("#detail_header").hide();
 												$("#full_header").show();
 
 				                $("#_link_" + data_id).attr('class', 'fa fa-plus-square-o');
-				                // $('#header_dropdown_total_' + data_id).html(tot[data_id]);
-												$('#header_dropdown_qty_' + data_id).html(qty[the_id]);
+												$('#header_dropdown_qty_' + data_id).html(qty[data_id]);
 				                $('#header_dropdown_promedio_deliver_' + data_id).html(promedio_deliver[data_id]);
 				                $('#header_dropdown_promedio_proved_' + data_id).html(promedio_proved[data_id]);
 				                $('#header_dropdown_promedio_promise_' + data_id).html(promedio_promise[data_id]);
 				                $('#header_dropdown_promedio_payment_' + data_id).html(promedio_payment[data_id]);
-												
+
 				              } else {
 
 				                $div.show('slow');
 
 												// NOTE header effect
-												$("#detail_header").removeClass("detail_header");
+
+												$("td[id^=_header_td]").removeClass("compact_header").show();
+												$("th[id^=_header_td]").removeClass("compact_header").show();
+
+												$("tr[id^=resume_footer]").removeClass("resume_compact_footer").show();
+
 												$("#detail_header").show();
 												$("#full_header").hide();
 
 												//NOTE add fields
 												$("#_link_" + data_id).attr('class', 'fa fa-minus-square-o');
+												$('#header_dropdown_qty_' + data_id).html('');
+				                $('#header_dropdown_promedio_deliver_' + data_id).html('');
+												$('#header_dropdown_promedio_proved_' + data_id).html('');
+												$('#header_dropdown_promedio_promise_' + data_id).html('');
+												$('#header_dropdown_promedio_payment_' + data_id).html('');
 				                // $('#header_dropdown_total_' + data_id).html('');
-				                $('#header_dropdown_qty_' + data_id).html(qty[the_id]);
-				                $('#header_dropdown_promedio_deliver_' + data_id).html(promedio_deliver[data_id]);
-												$('#header_dropdown_promedio_proved_' + data_id).html(promedio_proved[data_id]);
-												$('#header_dropdown_promedio_promise_' + data_id).html(promedio_promise[data_id]);
-												$('#header_dropdown_promedio_payment_' + data_id).html(promedio_payment[data_id]);
+				                $('#footer_dropdown_qty_' + data_id).html(qty[data_id]);
+				                $('#footer_dropdown_promedio_deliver_' + data_id).html(promedio_deliver[data_id]);
+												$('#footer_dropdown_promedio_proved_' + data_id).html(promedio_proved[data_id]);
+												$('#footer_dropdown_promedio_promise_' + data_id).html(promedio_promise[data_id]);
+												$('#footer_dropdown_promedio_payment_' + data_id).html(promedio_payment[data_id]);
 				              }
 				          });
 				      });
@@ -479,6 +455,9 @@
 
 							// NOTE PRINT
 							$("#print").on('click',function(e){
+
+								$(".row").find(".head_datetime").removeClass("head_datetime").addClass("dash_datetime");
+
 								var ids = "#printThis";
 
 										$( ids ).printThis({
@@ -504,9 +483,6 @@
 						});
 
 					});//send
-
-// https://mega.nz/#!y8knDKQb!M63J1wP0KrcVfBDQuDzJYr-cGdUMb8XqD04g4nJUZmw
-
 
 				// filter results the firts optionbox
 					$(".search_value").select2();

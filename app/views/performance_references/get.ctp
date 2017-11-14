@@ -28,18 +28,44 @@
 		?>
 
 
+	<div class="row head_datetime">
+<div>&nbsp;</div>
+		<div class="one columns dash_datetime">
+			Periodo
+		</div>
+		<div class="one columns dash_datetime">
+			del
+		</div>
+		<div class="one columns dash_datetime">
+			<?php echo $dashboard['inicio'] ?>
+		</div>
+		<div class="one columns dash_datetime">
+			al
+		</div>
+		<div class="one columns dash_datetime">
+			<?php echo $dashboard['fin'] ?>
+		</div>
+
+		<div class="one columns dash_datetime pull-right">
+			Unidad de Negocio <?php echo $dashboard['bsu'] ?>
+		</div>
+<div>&nbsp;</div>
+	</div>
+
+
+
 	<div class="row">
+
 		<div class="one columns">
 			<div id="print" class="pull-right">
 				<i class="fa fa-print" aria-hidden="true"></i>
 			</div>
 		</div>
-		<div class="three columns ">
-				&nbsp;
-		</div>
-		<div id="colsBtn" class="eight columns ">
-			&nbsp;
-		</div>
+
+		<div class="three columns "></div>
+
+		<div id="colsBtn" class="eight columns "></div>
+
 	</div>
 
 
@@ -74,23 +100,28 @@
 						<!-- <th><?php echo ('MES');?></th> -->
 						<!-- <th><?php echo ('DIA');?></th> -->
 			</tr>
+
 			<tr id="full_header" class="full_header">
 					<!-- <th><?php echo 'id'; ?></th> -->
 						<th class="firts-header-element"><?php echo ('RFC');?></th>
-						<th><?php echo ('Facturas');?></th>
-						<th id="detail_header" class="detail_header">&nbsp;</th>
-						<th id="detail_header" class="detail_header">&nbsp;</th>
-						<th id="detail_header" class="detail_header">&nbsp;</th>
-						<th id="detail_header" class="detail_header">&nbsp;</th>
-						<th><?php echo ('PromedioDiasEntrega');?></th>
-						<th id="detail_header" class="detail_header">&nbsp;</th>
-						<th><?php echo ('PromedioDiasAprobacion');?></th>
-						<th id="detail_header" class="detail_header">&nbsp;</th>
-						<th><?php echo ('PromedioDiasPromesa');?></th>
-						<th id="detail_header" class="detail_header">&nbsp;</th>
-						<th><?php echo ('PromedioDiasPago');?></th>
-						<th id="detail_header" class="detail_header">&nbsp;</th>
+						<th>Facturas</th>
+
+						<th id="_header_td" class="compact_header"></th>
+						<th id="_header_td" class="compact_header"></th>
+						<th id="_header_td" class="compact_header"></th>
+						<th id="_header_td" class="compact_header"></th>
+						<th id="_header_td" class="compact_header"></th>
+
+						<th><span class="avg">x</span>&nbsp;D&iacute;as&nbsp;Entrega</th>
+						<th id="_header_td" class="compact_header"></th>
+						<th><span class="avg">x</span>&nbsp;D&iacute;as&nbsp;Aprobacion</th>
+						<th id="_header_td" class="compact_header"></th>
+						<th><span class="avg">x</span>&nbsp;D&iacute;as&nbsp;Promesa</th>
+						<th id="_header_td" class="compact_header"></th>
+						<th><span class="avg">x</span>&nbsp;D&iacute;as&nbsp;Pago</th>
+
 			</tr>
+
 		</thead>
 
 		<tbody>
@@ -100,24 +131,26 @@
 
 		<tr>
 			<td>
-						<a data-id="<?php print($performanceReferencesKey)?>" class="dropdown-link" href="#"><i id="_link_<?php print($performanceReferencesKey)?>" class="fa fa-plus-square-o" aria-hidden="true"></i>&nbsp;</a>
-					<?php echo $performanceReferencesKey; ?>
+						<a data-id="<?php print($performanceReferencesKey)?>" class="dropdown-link" href="#"><i id="_link_<?php print($performanceReferencesKey)?>" class="fa fa-plus-square-o" aria-hidden="true"></i></a>
+					<?php echo $performanceReferencesIdx[$performanceReferencesKey]; ?>
 			</td>
 			<td id="header_dropdown_qty_<?php print($performanceReferencesKey)?>"></td>
 
-			<td id="detail_header" class="detail_header">&nbsp;</td>
-			<td id="detail_header" class="detail_header">&nbsp;</td>
-			<td id="detail_header" class="detail_header">&nbsp;</td>
-			<td id="detail_header" class="detail_header">&nbsp;</td>
-			<td id="detail_header" class="detail_header">&nbsp;</td>
+			<td id="_header_td" class="compact_header"></td>
+			<td id="_header_td" class="compact_header"></td>
+			<td id="_header_td" class="compact_header"></td>
+			<td id="_header_td" class="compact_header"></td>
+			<td id="_header_td" class="compact_header"></td>
+
 
 			<td id="header_dropdown_promedio_deliver_<?php print($performanceReferencesKey)?>" ></td>
-			<td id="detail_header" class="detail_header">&nbsp;</td>
+			<td id="_header_td" class="compact_header"></td>
 			<td id="header_dropdown_promedio_proved_<?php print($performanceReferencesKey)?>" ></td>
-			<td id="detail_header" class="detail_header">&nbsp;</td>
+			<td id="_header_td" class="compact_header"></td>
 			<td id="header_dropdown_promedio_promise_<?php print($performanceReferencesKey)?>" ></td>
-			<td id="detail_header" class="detail_header">&nbsp;Promedio</td>
+			<td id="_header_td" class="compact_header"></td>
 			<td id="header_dropdown_promedio_payment_<?php print($performanceReferencesKey)?>" ></td>
+
 		</tr>
 
 		<?php
@@ -125,7 +158,7 @@
 		?>
 				<tr class="dropdown-container_<?php print($performanceReferencesKey)?>" style="display: none;">
 
-					<!-- <td><?php echo $performanceReference['PerformanceViewFactura']['id']; ?>&nbsp;</td> -->
+					<!-- <td><?php echo $performanceReference['PerformanceViewFactura']['id']; ?></td> -->
 					<td class="item_<?php echo $performanceReferencesKey?>">
 						<?php
 									echo
@@ -146,77 +179,82 @@
 																		);
 						?>
 					</td>
-					<!-- <td><?php echo $performanceReference['PerformanceViewFactura']['Empresa']; ?>&nbsp;</td> -->
-					<!-- <td><?php echo $performanceReference['PerformanceViewFactura']['TipoDocumento']; ?>&nbsp;</td> -->
-					<td><?php echo $performanceReference['PerformanceViewFactura']['Folio']; ?>&nbsp;</td>
-					<!-- <td><?php echo $performanceReference['PerformanceViewFactura']['Nombre']; ?>&nbsp;</td> -->
-					<!-- <td><?php echo utf8_encode($performanceReference['PerformanceViewFactura']['Nombre']); ?>&nbsp;</td> -->
-					<!-- <td><?php echo iconv("CP1252", "UTF-8", $performanceReference['PerformanceViewFactura']['Nombre']); ?>&nbsp;</td> -->
-					<td><?php echo $performanceReference['PerformanceViewFactura']['Flete']; ?>&nbsp;</td>
-					<!-- <td><?php echo $performanceReference['PerformanceViewFactura']['Iva']; ?>&nbsp;</td> -->
-					<!-- <td><?php echo $performanceReference['PerformanceViewFactura']['Retencion']; ?>&nbsp;</td> -->
-					<!-- <td><?php echo $performanceReference['PerformanceViewFactura']['Total']; ?>&nbsp;</td> -->
-					<td><?php echo $performanceReference['PerformanceViewFactura']['Referencia']; ?>&nbsp;</td>
-					<td><?php echo $performanceReference['PerformanceViewFactura']['Lote']; ?>&nbsp;</td>
-					<!-- <td><?php echo $performanceReference['PerformanceViewFactura']['Descripcion']; ?>&nbsp;</td> -->
+					<!-- <td><?php echo $performanceReference['PerformanceViewFactura']['Empresa']; ?></td> -->
+					<!-- <td><?php echo $performanceReference['PerformanceViewFactura']['TipoDocumento']; ?></td> -->
+					<td><?php echo $performanceReference['PerformanceViewFactura']['Folio']; ?></td>
+					<!-- <td><?php echo $performanceReference['PerformanceViewFactura']['Nombre']; ?></td> -->
+					<!-- <td><?php echo utf8_encode($performanceReference['PerformanceViewFactura']['Nombre']); ?></td> -->
+					<!-- <td><?php echo iconv("CP1252", "UTF-8", $performanceReference['PerformanceViewFactura']['Nombre']); ?></td> -->
+					<td><?php echo $performanceReference['PerformanceViewFactura']['Flete']; ?></td>
+					<!-- <td><?php echo $performanceReference['PerformanceViewFactura']['Iva']; ?></td> -->
+					<!-- <td><?php echo $performanceReference['PerformanceViewFactura']['Retencion']; ?></td> -->
+					<!-- <td><?php echo $performanceReference['PerformanceViewFactura']['Total']; ?></td> -->
+					<td><?php echo $performanceReference['PerformanceViewFactura']['Referencia']; ?></td>
+					<td><?php echo $performanceReference['PerformanceViewFactura']['Lote']; ?></td>
+					<!-- <td><?php echo $performanceReference['PerformanceViewFactura']['Descripcion']; ?></td> -->
 					<td>
 							<?php
 									!empty($performanceReference['PerformanceViewFactura']['ElaboracionFactura']) ? e(date('Y-m-d',strtotime($performanceReference['PerformanceViewFactura']['ElaboracionFactura']))) : e('&infin;') ;
 							?>
-								&nbsp;
+
 					</td>
 					<td>
 							<?php
 									!empty($performanceReference['PerformanceViewFactura']['entregaFacturaCliente']) ? e(date('Y-m-d',strtotime($performanceReference['PerformanceViewFactura']['entregaFacturaCliente']))) : e('&infin;') ;
 							?>
-								&nbsp;
+
 					</td>
 					<td class="deliver_<?php print($performanceReferencesKey)?>" data-days="<?php echo $performanceReference['PerformanceViewFactura']['deliver']; ?>"><?php echo $performanceReference['PerformanceViewFactura']['deliver']; ?></td>
 					<td>
 							<?php
 									!empty($performanceReference['PerformanceViewFactura']['aprobacionFactura']) ? e(date('Y-m-d',strtotime($performanceReference['PerformanceViewFactura']['aprobacionFactura']))) : e('&infin;') ;
 							?>
-								&nbsp;
+
 					</td>
 					<td class="proved_<?php print($performanceReferencesKey)?>" data-days="<?php echo $performanceReference['PerformanceViewFactura']['proved']; ?>"><?php echo $performanceReference['PerformanceViewFactura']['proved']; ?></td>
 					<td>
 							<?php
 									!empty($performanceReference['PerformanceViewFactura']['fechaPromesaPago']) ? e(date('Y-m-d',strtotime($performanceReference['PerformanceViewFactura']['fechaPromesaPago']))) : e('&infin;') ;
 							?>
-								&nbsp;
+
 					</td>
 					<td class="promise_<?php print($performanceReferencesKey)?>" data-days="<?php echo $performanceReference['PerformanceViewFactura']['promise']; ?>"><?php echo $performanceReference['PerformanceViewFactura']['promise']; ?></td>
 					<td>
 							<?php
 									!empty($performanceReference['PerformanceViewFactura']['fechaPago']) ? e(date('Y-m-d',strtotime($performanceReference['PerformanceViewFactura']['fechaPago']))) : e('&infin;') ;
 							?>
-								&nbsp;
+
 					</td>
 					<td class="payment_<?php print($performanceReferencesKey)?>" data-days="<?php echo $performanceReference['PerformanceViewFactura']['payment']; ?>"><?php echo $performanceReference['PerformanceViewFactura']['payment']; ?></td>
 				</tr>
 
 			<?php
 					endforeach;
+			?>
+			<tr id="resume_footer" class="resume_compact_footer">
+				<td>Facturas</td>
+				<td id="footer_dropdown_qty_<?php print($performanceReferencesKey)?>"></td>
+
+				<td id="_footer_td" class="compact_footer"></td>
+				<td id="_footer_td" class="compact_footer"></td>
+				<td id="_footer_td" class="compact_footer"></td>
+				<td id="_footer_td" class="compact_footer"></td>
+				<td id="_footer_td" class="compact_footer">PromedioDiasEntrega</td>
+
+				<td id="footer_dropdown_promedio_deliver_<?php print($performanceReferencesKey)?>" ></td>
+				<td id="_footer_td" class="compact_footer">PromedioDiasAprobacion</td>
+				<td id="footer_dropdown_promedio_proved_<?php print($performanceReferencesKey)?>" ></td>
+				<td id="_footer_td" class="compact_footer">PromedioDiasPromesa</td>
+				<td id="footer_dropdown_promedio_promise_<?php print($performanceReferencesKey)?>" ></td>
+				<td id="_footer_td" class="compact_footer">PromedioDiasPago</td>
+				<td id="footer_dropdown_promedio_payment_<?php print($performanceReferencesKey)?>" ></td>
+
+			</tr>
+			<?php
 				}
 			?>
 
-				<tr id="detail_header" class="detail_header">
-				<!-- <tr id="full_header" class="full_header"> -->
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;</td>
-					<td>&nbsp;Promedio</td>
-					<td id="mean1">&nbsp;</td>
-					<td>&nbsp;Promedio</td>
-					<td id="mean2">&nbsp;</td>
-					<td>&nbsp;Promedio</td>
-					<td id="mean3">&nbsp;</td>
-					<td>&nbsp;Promedio</td>
-					<td id="mean4">&nbsp;</td>
-				</tr>
+
 			</tbody>
 		</table>
 

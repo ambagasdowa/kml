@@ -16,7 +16,7 @@ $core = 'core'.DS;
       e($this->Html->css($theme.'jquery_datepicker_skins/css/siena.datepicker', 'stylesheet', array('inline'=>false)));
       e($this->Html->css($theme.'jquery_datepicker_skins/css/skeleton.datepicker', 'stylesheet', array('inline'=>false)));
 
-      // e($this->Html->css($theme.'datatable/css/datatable-bootstrap', 'stylesheet', array('inline'=>false)));
+      e($this->Html->css($theme.'datatable/css/datatable-bootstrap', 'stylesheet', array('inline'=>false)));
 
       e($this->Html->css($theme.'table_filter/tablefilter', 'stylesheet', array('inline'=>false)));
 
@@ -25,10 +25,10 @@ $core = 'core'.DS;
       e($this->Html->script($theme.'jquery-ui/jquery-ui.min',false));
       e($this->Html->script($theme.'select2/select2.min',false));
 
-      // e($this->Html->script($theme.'datatable/js/datatable',false));
-      // e($this->Html->script($theme.'datatable/js/datatable.jquery',false));
+      e($this->Html->script($theme.'datatable/js/datatable',false));
+      e($this->Html->script($theme.'datatable/js/datatable.jquery',false));
 
-      e($this->Html->script($theme.'table_filter/dist/tablefilter/tablefilter',false));
+      // e($this->Html->script($theme.'table_filter/dist/tablefilter/tablefilter',false));
 
 
       // jquery colorbox pluging
