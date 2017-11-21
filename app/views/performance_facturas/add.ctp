@@ -43,19 +43,26 @@
 
 ?>
 
-		<div class="container">
-		    <i class="fa fa-file-o fa-2x"></i>
-	   <h4 class="form-signin-heading">
-			<span>
-					 <?php __('Agregar Fechas en Factura'); ?>
-      </span>
-    </h4>
+		<div class="colorbax">
 
-    <div class="">
-      <ul>
-        <li><?php echo $performanceFacturas['PerformanceFactura']['performance_customers_id'] ?></li>
-        <li><?php echo $performanceFacturas['PerformanceFactura']['performance_references_id'] ?></li>
-        <li><?php echo $performanceFacturas['PerformanceFactura']['performance_bsus_id'] ?></li>
+      <div class="row">
+
+        <h5>
+          <i class="fa fa-file-o"></i>
+          <span>
+          		 Agregar Fechas
+          </span>
+        </h5>
+
+      </div>
+
+
+    <div class="row">
+
+      <ul class="list-group">
+        <li class="list-group-item"> RFC : &nbsp; <?php echo $performanceFacturas['PerformanceFactura']['performance_customers_id'] ?></li>
+        <li class="list-group-item"> Folio : &nbsp; <?php echo $performanceFacturas['PerformanceFactura']['performance_references_id'] ?></li>
+        <li class="list-group-item"> Unidad de Negocio : &nbsp; <?php echo $performanceFacturas['PerformanceFactura']['performance_bsus_id'] ?></li>
       </ul>
     </div>
 
@@ -134,16 +141,16 @@
                               'class'=>'u-full-width'
                              )
                   );
-        		echo $this->Form->input(
-                        'fechaPromesaPago',
-                        array(
-                             'type'=>'text',
-                             'id'=>'datepicker_promise',
-                             'placeholder'=>'fechaPromesaPago',
-                             'value'      => ($performanceFacturaStatus == true ? $fechaPromesaPago : ''),
-                             'class'=>'u-full-width'
-                             )
-                  );
+        		// echo $this->Form->input(
+            //             'fechaPromesaPago',
+            //             array(
+            //                  'type'=>'text',
+            //                  'id'=>'datepicker_promise',
+            //                  'placeholder'=>'fechaPromesaPago',
+            //                  'value'      => ($performanceFacturaStatus == true ? $fechaPromesaPago : ''),
+            //                  'class'=>'u-full-width'
+            //                  )
+            //       );
         		echo $this->Form->input(
                         'fechaPago',
                         array(

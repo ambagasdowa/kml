@@ -68,10 +68,17 @@ class PerformanceReferencesController extends AppController {
 			# code...
 			$performanceReferencesMod[$data_performance['PerformanceViewFactura']['performance_customers_id']][]['PerformanceViewFactura'] = $data_performance['PerformanceViewFactura'] ;
 			$performanceReferencesIdx[$data_performance['PerformanceViewFactura']['performance_customers_id']] = $data_performance['PerformanceViewFactura']['Nombre'] ;
-			// debug($data_performance['PerformanceViewFactura']);
+
+			$performanceReferencesResume[$data_performance['PerformanceViewFactura']['performance_customers_id']]['deliver'][] = $data_performance['PerformanceViewFactura']['deliver'];
+
+			$performanceReferencesResume[$data_performance['PerformanceViewFactura']['performance_customers_id']]['proved'][] = $data_performance['PerformanceViewFactura']['proved'];
+
+			$performanceReferencesResume[$data_performance['PerformanceViewFactura']['performance_customers_id']]['promise'][] = $data_performance['PerformanceViewFactura']['promise'];
+
+			$performanceReferencesResume[$data_performance['PerformanceViewFactura']['performance_customers_id']]['payment'][] = $data_performance['PerformanceViewFactura']['payment'];
 		}
 
-		$this->set(compact('performanceReferencesMod','performanceReferencesIdx','dashboard'));
+		$this->set(compact('performanceReferencesMod','performanceReferencesIdx','dashboard','performanceReferencesResume'));
 
 		// NOTE set the response output for an ajax call
 		Configure::write('debug', 0);

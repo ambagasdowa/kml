@@ -50,10 +50,10 @@ td {
     /*max-width: 8%;*/
 }
 
-.resume_compact_footer , .compact_header ,	.detail_header{
+/*.resume_compact_footer , .compact_header ,	.detail_header{
 		display: none;
-	}
-  
+	}*/
+
 .pull-right {
   float: right !important;
 }

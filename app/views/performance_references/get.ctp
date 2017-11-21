@@ -15,7 +15,7 @@
 		* @since         CakePHP(tm) v 1.2.0.5234
 		* @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
 		*/
-		?>
+?>
 
 		<?php
 		    // NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal.
@@ -30,6 +30,8 @@
 
 	<div class="row head_datetime">
 <div>&nbsp;</div>
+		<div class="six columns"></div>
+
 		<div class="one columns dash_datetime">
 			Periodo
 		</div>
@@ -49,22 +51,25 @@
 		<div class="one columns dash_datetime pull-right">
 			Unidad de Negocio <?php echo $dashboard['bsu'] ?>
 		</div>
+
 <div>&nbsp;</div>
 	</div>
 
 
 
-	<div class="row">
+	<div class="row noprint">
 
-		<div class="one columns">
+		<div class="two colums">
+
+		</div>
+
+		<div class="ten colums">
+			Filtrar: <input type="text" id="kwd_search" value=""/>
+
 			<div id="print" class="pull-right">
 				<i class="fa fa-print" aria-hidden="true"></i>
 			</div>
 		</div>
-
-		<div class="three columns "></div>
-
-		<div id="colsBtn" class="eight columns "></div>
 
 	</div>
 
@@ -75,8 +80,9 @@
 
 		<thead>
 			<tr id="detail_header" class="detail_header">
-					<!-- <th><?php echo 'id'; ?></th> -->
-						<th class="firts-header-element"><?php echo ('RFC');?></th>
+
+						<th class="firts-header-element">Nombre</th>
+						<th><?php echo ('RFC');?></th>
 						<!-- <th><?php echo ('Empresa');?></th> -->
 						<!-- <th><?php echo ('TipoDocumento');?></th> -->
 						<th><?php echo ('Folio');?></th>
@@ -90,80 +96,45 @@
 						<!-- <th><?php echo ('Descripcion');?></th> -->
 						<th><?php echo ('ElaboracionFactura');?></th>
 						<th><?php echo ('entregaFacturaCliente');?></th>
-						<th><?php echo ('deliver');?></th>
+						<th><?php echo ('Entrega');?></th>
 						<th><?php echo ('aprobacionFactura');?></th>
-						<th><?php echo ('proved');?></th>
+						<th><?php echo ('Aprobacion');?></th>
 						<th><?php echo ('fechaPromesaPago');?></th>
-						<th><?php echo ('promise');?></th>
+						<th><?php echo ('PromesaPago');?></th>
 						<th><?php echo ('fechaPago');?></th>
-						<th><?php echo ('payment');?></th>
+						<th><?php echo ('Pago');?></th>
 						<!-- <th><?php echo ('MES');?></th> -->
 						<!-- <th><?php echo ('DIA');?></th> -->
-			</tr>
-
-			<tr id="full_header" class="full_header">
-					<!-- <th><?php echo 'id'; ?></th> -->
-						<th class="firts-header-element"><?php echo ('RFC');?></th>
-						<th>Facturas</th>
-
-						<th id="_header_td" class="compact_header"></th>
-						<th id="_header_td" class="compact_header"></th>
-						<th id="_header_td" class="compact_header"></th>
-						<th id="_header_td" class="compact_header"></th>
-						<th id="_header_td" class="compact_header"></th>
-
-						<th><span class="avg">x</span>&nbsp;D&iacute;as&nbsp;Entrega</th>
-						<th id="_header_td" class="compact_header"></th>
-						<th><span class="avg">x</span>&nbsp;D&iacute;as&nbsp;Aprobacion</th>
-						<th id="_header_td" class="compact_header"></th>
-						<th><span class="avg">x</span>&nbsp;D&iacute;as&nbsp;Promesa</th>
-						<th id="_header_td" class="compact_header"></th>
-						<th><span class="avg">x</span>&nbsp;D&iacute;as&nbsp;Pago</th>
-
 			</tr>
 
 		</thead>
 
 		<tbody>
+
 		<?php
 			foreach ($performanceReferencesMod as $performanceReferencesKey => $performanceReferences) {
 		?>
 
-		<tr>
-			<td>
-						<a data-id="<?php print($performanceReferencesKey)?>" class="dropdown-link" href="#"><i id="_link_<?php print($performanceReferencesKey)?>" class="fa fa-plus-square-o" aria-hidden="true"></i></a>
-					<?php echo $performanceReferencesIdx[$performanceReferencesKey]; ?>
-			</td>
-			<td id="header_dropdown_qty_<?php print($performanceReferencesKey)?>"></td>
-
-			<td id="_header_td" class="compact_header"></td>
-			<td id="_header_td" class="compact_header"></td>
-			<td id="_header_td" class="compact_header"></td>
-			<td id="_header_td" class="compact_header"></td>
-			<td id="_header_td" class="compact_header"></td>
-
-
-			<td id="header_dropdown_promedio_deliver_<?php print($performanceReferencesKey)?>" ></td>
-			<td id="_header_td" class="compact_header"></td>
-			<td id="header_dropdown_promedio_proved_<?php print($performanceReferencesKey)?>" ></td>
-			<td id="_header_td" class="compact_header"></td>
-			<td id="header_dropdown_promedio_promise_<?php print($performanceReferencesKey)?>" ></td>
-			<td id="_header_td" class="compact_header"></td>
-			<td id="header_dropdown_promedio_payment_<?php print($performanceReferencesKey)?>" ></td>
-
-		</tr>
+		<!-- <tr class="hidden-gan info"> -->
+			<!-- <td><?php print($performanceReferencesKey)?></td> -->
+			<!-- <td colspan="13"> -->
+						<!-- <span data-id="<?php print($performanceReferencesKey)?>" class="dropdown-link" href="#"> -->
+							<!-- <i id="_link_<?php print($performanceReferencesKey)?>" class="fa fa-plus-square-o" aria-hidden="true"></i> -->
+						<!-- </span> -->
+					<?php //echo $performanceReferencesIdx[$performanceReferencesKey]; ?>
+			<!-- </td> -->
+		<!-- </tr> -->
 
 		<?php
 			foreach ($performanceReferences as $performanceReference):
 		?>
-				<tr class="dropdown-container_<?php print($performanceReferencesKey)?>" style="display: none;">
+				<tr class="dropdown-container_<?php print($performanceReferencesKey)?>">
 
-					<!-- <td><?php echo $performanceReference['PerformanceViewFactura']['id']; ?></td> -->
+					<td><?php echo $performanceReferencesIdx[$performanceReferencesKey]; ?></td>
+
 					<td class="item_<?php echo $performanceReferencesKey?>">
 						<?php
 									echo
-									// $this->Html->link($performanceReference['PerformanceViewFactura']['performance_customers_id'], array('controller' => 'performance_customers', 'action' => 'view', $performanceReference['PerformanceCustomers']['id'],array('div'=>false,'id'=>$performanceReference['PerformanceViewFactura']['id'])));
-									//
 									$this->Html->link(
 																			$performanceReference['PerformanceViewFactura']['performance_customers_id'],
 																			// array('action' => 'get', null),
@@ -231,23 +202,48 @@
 			<?php
 					endforeach;
 			?>
-			<tr id="resume_footer" class="resume_compact_footer">
-				<td>Facturas</td>
-				<td id="footer_dropdown_qty_<?php print($performanceReferencesKey)?>"></td>
+			<tr id="resume_footer" class="resume_compact_footer success">
+				<td><?php echo $performanceReferencesIdx[$performanceReferencesKey]; ?></td>
+				<td><?php print($performanceReferencesKey)?></td>
+				<td id="footer_dropdown_qty_<?php print($performanceReferencesKey)?>">
+					<?php
+						echo count($performanceReferencesResume[$performanceReferencesKey]['deliver']);
+					?>
+				</td>
 
 				<td id="_footer_td" class="compact_footer"></td>
-				<td id="_footer_td" class="compact_footer"></td>
+				<td id="_footer_td" class="compact_footer">
+					<?php
+						// echo array_sum($performanceReferencesResume[$performanceReferencesKey]['deliver']);
+					?>
+				</td>
 				<td id="_footer_td" class="compact_footer"></td>
 				<td id="_footer_td" class="compact_footer"></td>
 				<td id="_footer_td" class="compact_footer">PromedioDiasEntrega</td>
 
-				<td id="footer_dropdown_promedio_deliver_<?php print($performanceReferencesKey)?>" ></td>
+				<td id="footer_dropdown_promedio_deliver_<?php print($performanceReferencesKey)?>">
+					<?php
+						echo (array_sum($performanceReferencesResume[$performanceReferencesKey]['deliver'])/count($performanceReferencesResume[$performanceReferencesKey]['deliver'])) ;
+					?>
+				</td>
 				<td id="_footer_td" class="compact_footer">PromedioDiasAprobacion</td>
-				<td id="footer_dropdown_promedio_proved_<?php print($performanceReferencesKey)?>" ></td>
+				<td id="footer_dropdown_promedio_proved_<?php print($performanceReferencesKey)?>">
+					<?php
+						echo (array_sum($performanceReferencesResume[$performanceReferencesKey]['proved'])/count($performanceReferencesResume[$performanceReferencesKey]['proved'])) ;
+					?>
+				</td>
 				<td id="_footer_td" class="compact_footer">PromedioDiasPromesa</td>
-				<td id="footer_dropdown_promedio_promise_<?php print($performanceReferencesKey)?>" ></td>
+				<td id="footer_dropdown_promedio_promise_<?php print($performanceReferencesKey)?>">
+					<?php
+						echo (array_sum($performanceReferencesResume[$performanceReferencesKey]['promise'])/count($performanceReferencesResume[$performanceReferencesKey]['promise'])) ;
+					?>
+				</td>
 				<td id="_footer_td" class="compact_footer">PromedioDiasPago</td>
-				<td id="footer_dropdown_promedio_payment_<?php print($performanceReferencesKey)?>" ></td>
+				<td id="footer_dropdown_promedio_payment_<?php print($performanceReferencesKey)?>">
+					<?php
+						echo (array_sum($performanceReferencesResume[$performanceReferencesKey]['payment'])/count($performanceReferencesResume[$performanceReferencesKey]['payment'])) ;
+					?>
+				</td>
 
 			</tr>
 			<?php
@@ -261,3 +257,6 @@
 		<div id="paging-first-datatable"></div>
 
 </div>
+
+
+<!-- if clients -->

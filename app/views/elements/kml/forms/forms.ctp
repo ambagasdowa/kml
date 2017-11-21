@@ -16,22 +16,22 @@ $core = 'core'.DS;
       e($this->Html->css($theme.'jquery_datepicker_skins/css/siena.datepicker', 'stylesheet', array('inline'=>false)));
       e($this->Html->css($theme.'jquery_datepicker_skins/css/skeleton.datepicker', 'stylesheet', array('inline'=>false)));
 
-      e($this->Html->css($theme.'datatable/css/datatable-bootstrap', 'stylesheet', array('inline'=>false)));
 
-      e($this->Html->css($theme.'table_filter/tablefilter', 'stylesheet', array('inline'=>false)));
-
+      // e($this->Html->css($theme.'table_filter/tablefilter', 'stylesheet', array('inline'=>false)));
 
       /** @js */
       e($this->Html->script($theme.'jquery-ui/jquery-ui.min',false));
       e($this->Html->script($theme.'select2/select2.min',false));
 
-      e($this->Html->script($theme.'datatable/js/datatable',false));
-      e($this->Html->script($theme.'datatable/js/datatable.jquery',false));
+
+      //NOTE datatable hol
+      // e($this->Html->css($theme.'datatable/css/datatable-bootstrap', 'stylesheet', array('inline'=>false)));
+      // e($this->Html->script($theme.'datatable/js/datatable',false));
+      // e($this->Html->script($theme.'datatable/js/datatable.jquery',false));
 
       // e($this->Html->script($theme.'table_filter/dist/tablefilter/tablefilter',false));
 
-
-      // jquery colorbox pluging
+      //NOTE jquery colorbox pluging
       //NOTE colorbox in favor to fancybox
       e($this->Html->css($theme.'colorbox/colorbox', 'stylesheet', array('inline'=>false)));
       e($this->Html->script($theme.'colorbox/jquery.colorbox',false));
@@ -39,4 +39,21 @@ $core = 'core'.DS;
 
       //NOTE Impression pluging
       e($this->Html->script($theme.'print_this/printThis',false));
+
+
+
+
+      // NOTE easyPaginator
+      // https://st3ph.github.io/jquery.easyPaginate/
+      e($this->Html->script($theme.'easyPaginator/jquery.easyPaginate',false));
+
+      // NOTE Datatables Pluging
+      // @url https://datatables.net/
+      // e($this->Html->css($theme.'DataTablesBootstrap/datatables.min', 'stylesheet', array('inline'=>false)));
+      // e($this->Html->script($theme.'DataTablesBootstrap/datatables',false));
+
+      // NOTE Dynatable
+      // e($this->Html->css($theme.'dynatable/jquery.dynatable', 'stylesheet', array('inline'=>false)));
+      // e($this->Html->script($theme.'dynatable/jquery.dynatable',false));
+
 ?>

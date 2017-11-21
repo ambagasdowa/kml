@@ -1,36 +1,45 @@
+<?php
+		// NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal.
+		// $evaluate = false;
+		// $requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere'));
+		// blog
+		$evaluate = true;
+		$requiere = $evaluate ? e($this->element('kml/blog/blog')) : e($this->element('requiere/norequiere') );
+		$requiere = $evaluate ? e($this->element('kml/forms/forms')) : e($this->element('requiere/norequiere') );
+?>
 
 <!--     <div class="container-fluid"> -->
 <!--       <div class="row"> -->
 <?php
 /**
 
-		* 
+		*
 
-		* PHP versions 4 and 5 
+		* PHP versions 4 and 5
 
-		* 
+		*
 
-		* kml : Kamila Software 
+		* kml : Kamila Software
 
-		* Licensed under The MIT License  
+		* Licensed under The MIT License
 
-		* Redistributions of files must retain the above copyright notice. 
+		* Redistributions of files must retain the above copyright notice.
 
-		* 
+		*
 
-		* @copyright     Jesus Baizabal 
+		* @copyright     Jesus Baizabal
 
-		* @link          http://baizabal.xyz 
+		* @link          http://baizabal.xyz
 
-		* @mail	     baizabal.jesus@gmail.com 
+		* @mail	     baizabal.jesus@gmail.com
 
-		* @package       cake 
+		* @package       cake
 
-		* @subpackage    cake.cake.console.libs.templates.views 
+		* @subpackage    cake.cake.console.libs.templates.views
 
-		* @since         CakePHP(tm) v 1.2.0.5234 
+		* @since         CakePHP(tm) v 1.2.0.5234
 
-		* @license       MIT License (http://www.opensource.org/licenses/mit-license.php) 
+		* @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
 
 		*/
 ?>
@@ -51,7 +60,7 @@
 
 		<li><?php echo $this->Html->link(__('List Casetas Corporations', true), array('controller' => 'casetas_corporations', 'action' => 'index'),array('class'=>'btn btn-default list-group-item')); ?> </li>
 		<li><?php echo $this->Html->link(__('New Casetas Corporations', true), array('controller' => 'casetas_corporations', 'action' => 'add'),array('class'=>'btn btn-default list-group-item')); ?> </li>
-		
+
 
 			</ul>
         </div>
@@ -64,7 +73,7 @@
 			<span>
 					 <?php __('Edit Casetas Controls User'); ?>			</span>
 		</h2>
-		
+
           <?php echo $this->Form->create('CasetasControlsUser',array('enctype' => 'multipart/form-data','class'=>'form'));?>
 			<div class="casetasControlsUsers form">
 
@@ -104,17 +113,17 @@
 					)
 				)
 		);
-		
-		
 
-		
+
+
+
 	?>
 
-	
+
 	<span id='divBsu'>
 		<p>&nbsp;</p>
 	</span>
-	
+
 <!-- 				</div>  -->
           <!--end table response-->
 					<?php echo $this->Form->input('_status',array('type'=>'hidden','value'=>'1'))?>
@@ -125,10 +134,3 @@
         <!--</div>--> <!--main-->
       <!--</div>--> <!--row-->
     <!--</div>--> <!--container fluid-->
-
-    
-
-
-
-
-
