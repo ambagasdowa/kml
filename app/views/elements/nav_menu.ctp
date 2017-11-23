@@ -406,6 +406,16 @@
                               </ul>
                           </li>
 
+                          <li class="dropdown-submenu pull-left">
+                            <a href="#">PerforViajes</a>
+                              <ul class="dropdown-menu">
+                                <li><a href="<?php e($this->webroot.'PerformanceTrips/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>Index</span></a></li>
+                                <li><a href="<?php e($this->webroot.'PerformanceTrips/add/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Add</span></a></li>
+                                <li><a href="<?php e($this->webroot.'PerformanceTrips/edit/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Edit</span></a></li>
+                                <li><a href="<?php e($this->webroot.'PerformanceTrips/view/');?>"><i class="fa fa-cog"></i>&nbsp;<span>View</span></a></li>
+                              </ul>
+                          </li>
+
                         </ul>
                     </li>
 

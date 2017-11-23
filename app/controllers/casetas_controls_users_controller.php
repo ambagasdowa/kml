@@ -1,34 +1,19 @@
 <?php
 /**
-
-		* 
-
-		* PHP versions 4 and 5 
-
-		* 
-
-		* kml : Kamila Software 
-
-		* Licensed under The MIT License  
-
-		* Redistributions of files must retain the above copyright notice. 
-
-		* 
-
-		* @copyright     Jesus Baizabal 
-
-		* @link          http://baizabal.xyz 
-
-		* @mail	     baizabal.jesus@gmail.com 
-
-		* @package       cake 
-
-		* @subpackage    cake.cake.console.libs.templates.views 
-
-		* @since         CakePHP(tm) v 1.2.0.5234 
-
-		* @license       MIT License (http://www.opensource.org/licenses/mit-license.php) 
-
+		*
+		* PHP versions 4 and 5
+		*
+		* kml : Kamila Software
+		* Licensed under The MIT License
+		* Redistributions of files must retain the above copyright notice.
+		*
+		* @copyright     Jesus Baizabal
+		* @link          http://baizabal.xyz
+		* @mail	     baizabal.jesus@gmail.com
+		* @package       cake
+		* @subpackage    cake.cake.console.libs.templates.views
+		* @since         CakePHP(tm) v 1.2.0.5234
+		* @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
 		*/
 ?>
 
@@ -39,10 +24,10 @@ class CasetasControlsUsersController extends AppController {
 	var $helpers = array('Html','Form','Ajax','Js');
 
 	function index() {
-		
+
 		$this->LoadModel('BusinessUnit');
 		$bsu = $this->BusinessUnit->find('list');
-		
+
 // 		debug($bsu);
 		$this->set(compact('bsu'));
 		$this->CasetasControlsUser->recursive = 0;
@@ -57,7 +42,7 @@ class CasetasControlsUsersController extends AppController {
 		$this->set('casetasControlsUser', $this->CasetasControlsUser->read(null, $id));
 	}
 
-	
+
 	function selectBsu () {
 
 		if (isset($this->data['CasetasControlsUser']['casetas_corporations_id'])) {
@@ -67,12 +52,12 @@ class CasetasControlsUsersController extends AppController {
 			$conditionsBsuCompany['BusinessUnit.name NOT'] = 'TBKCUL';
 			$bsu = $this->BusinessUnit->find('list',array('fields'=>array('id','name'),'conditions'=>$conditionsBsuCompany));
 			$this->set(compact('bsu'));
-			
+
 		}
 
 		$this->autoLayout = false;
 	}
-	
+
 	function add() {
 
 // 		debug($this->data);
@@ -88,7 +73,7 @@ class CasetasControlsUsersController extends AppController {
 		$this->set(compact('corporations'));
 
 // 		$this->selectBsu('1');
-		
+
 
 		if (!empty($this->data)) {
 			$this->CasetasControlsUser->create();
@@ -106,14 +91,14 @@ class CasetasControlsUsersController extends AppController {
 	}
 
 	function edit($id = null) {
-		
+
 // 		debug($this->data);
 // 		debug($id);
-		
+
 		$this->LoadModel('CasetasCorporations');
 		$corporations = $this->CasetasCorporations->find('list');
 		$this->set(compact('corporations'));
-		
+
 		if (!$id && empty($this->data)) {
 			$this->Session->setFlash(__('Invalid casetas controls user', true));
 			$this->redirect(array('action' => 'index'));

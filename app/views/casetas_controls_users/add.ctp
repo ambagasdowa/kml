@@ -3,20 +3,20 @@
 <!--       <div class="row"> -->
 <?php
 /**
-		* 
-		* PHP versions 4 and 5 
-		* 
-		* kml : Kamila Software 
-		* Licensed under The MIT License  
-		* Redistributions of files must retain the above copyright notice. 
-		* 
-		* @copyright     Jesus Baizabal 
-		* @link          http://baizabal.xyz 
-		* @mail	     baizabal.jesus@gmail.com 
-		* @package       cake 
-		* @subpackage    cake.cake.console.libs.templates.views 
-		* @since         CakePHP(tm) v 1.2.0.5234 
-		* @license       MIT License (http://www.opensource.org/licenses/mit-license.php) 
+		*
+		* PHP versions 4 and 5
+		*
+		* kml : Kamila Software
+		* Licensed under The MIT License
+		* Redistributions of files must retain the above copyright notice.
+		*
+		* @copyright     Jesus Baizabal
+		* @link          http://baizabal.xyz
+		* @mail	     baizabal.jesus@gmail.com
+		* @package       cake
+		* @subpackage    cake.cake.console.libs.templates.views
+		* @since         CakePHP(tm) v 1.2.0.5234
+		* @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
 		*/
 ?>
 <?php
@@ -25,7 +25,7 @@
 	$requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere') );
 ?>
 
-	
+
       <?php 	echo $this->Session->flash();?>        <div class="col-md-offset-1 col-sm-11 col-md-11">
 			<ul class="list-group list-inline">
 
@@ -42,7 +42,7 @@
 			<span>
 					 <?php __('Add Casetas Controls User'); ?>			</span>
 		</h2>
-		
+
           <?php echo $this->Form->create('CasetasControlsUser',array('enctype' => 'multipart/form-data','class'=>'form'));?>
 			<div class="casetasControlsUsers form">
 
@@ -79,13 +79,13 @@
 					)
 				)
 		);
-				
+
 	?>
 
 	<span id='divBsu'>
 		<p>&nbsp;</p>
 	</span>
-						
+
           <!--end table response-->
 		<?php echo $this->Form->input('_status',array('type'=>'hidden','class'=>'form-control','value'=>'1'))?>
 	<p>&nbsp;</p>
@@ -95,10 +95,3 @@
         <!--</div>--> <!--main-->
       <!--</div>--> <!--row-->
     <!--</div>--> <!--container fluid-->
-
-    
-
-
-
-
-
