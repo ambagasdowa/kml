@@ -223,25 +223,69 @@
 
 				<td id="footer_dropdown_promedio_deliver_<?php print($performanceReferencesKey)?>">
 					<?php
-						echo (array_sum($performanceReferencesResume[$performanceReferencesKey]['deliver'])/count($performanceReferencesResume[$performanceReferencesKey]['deliver'])) ;
+						// echo (array_sum($performanceReferencesResume[$performanceReferencesKey]['deliver'])/count($performanceReferencesResume[$performanceReferencesKey]['deliver'])) ;
+						echo
+						number_format(
+								money_format(
+										'%i',
+										(
+												array_sum($performanceReferencesResume[$performanceReferencesKey]['deliver'])
+													/
+												count($performanceReferencesResume[$performanceReferencesKey]['deliver'])
+										)
+								), 2, '.', ','
+						);
 					?>
 				</td>
 				<td id="_footer_td" class="compact_footer">PromedioDiasAprobacion</td>
 				<td id="footer_dropdown_promedio_proved_<?php print($performanceReferencesKey)?>">
 					<?php
-						echo (array_sum($performanceReferencesResume[$performanceReferencesKey]['proved'])/count($performanceReferencesResume[$performanceReferencesKey]['proved'])) ;
+						// echo (array_sum($performanceReferencesResume[$performanceReferencesKey]['proved'])/count($performanceReferencesResume[$performanceReferencesKey]['proved'])) ;
+						echo
+						number_format(
+								money_format(
+										'%i',
+										(
+												array_sum($performanceReferencesResume[$performanceReferencesKey]['proved'])
+													/
+												count($performanceReferencesResume[$performanceReferencesKey]['proved'])
+										)
+								), 2, '.', ','
+						);
 					?>
 				</td>
 				<td id="_footer_td" class="compact_footer">PromedioDiasPromesa</td>
 				<td id="footer_dropdown_promedio_promise_<?php print($performanceReferencesKey)?>">
 					<?php
-						echo (array_sum($performanceReferencesResume[$performanceReferencesKey]['promise'])/count($performanceReferencesResume[$performanceReferencesKey]['promise'])) ;
+						// echo (array_sum($performanceReferencesResume[$performanceReferencesKey]['promise'])/count($performanceReferencesResume[$performanceReferencesKey]['promise'])) ;
+						echo
+						number_format(
+								money_format(
+										'%i',
+										(
+												array_sum($performanceReferencesResume[$performanceReferencesKey]['promise'])
+													/
+												count($performanceReferencesResume[$performanceReferencesKey]['promise'])
+										)
+								), 2, '.', ','
+						);
 					?>
 				</td>
 				<td id="_footer_td" class="compact_footer">PromedioDiasPago</td>
 				<td id="footer_dropdown_promedio_payment_<?php print($performanceReferencesKey)?>">
 					<?php
-						echo (array_sum($performanceReferencesResume[$performanceReferencesKey]['payment'])/count($performanceReferencesResume[$performanceReferencesKey]['payment'])) ;
+						// echo (array_sum($performanceReferencesResume[$performanceReferencesKey]['payment'])/count($performanceReferencesResume[$performanceReferencesKey]['payment'])) ;
+						echo
+						number_format(
+								money_format(
+										'%i',
+										(
+												array_sum($performanceReferencesResume[$performanceReferencesKey]['payment'])
+													/
+												count($performanceReferencesResume[$performanceReferencesKey]['payment'])
+										)
+								), 2, '.', ','
+						);
 					?>
 				</td>
 

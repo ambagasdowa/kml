@@ -93,7 +93,7 @@
 
 			<div class="row">
 					<div class="twelve columns ">
-						<h6 class="docs-header">Indicadores</h6>
+						<h6 class="docs-header">Indicadores Facturas</h6>
 				</div>
 			</div>
 

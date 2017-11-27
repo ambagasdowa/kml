@@ -407,12 +407,32 @@
                           </li>
 
                           <li class="dropdown-submenu pull-left">
-                            <a href="#">PerforViajes</a>
+                            <a href="#">PerforTrips</a>
                               <ul class="dropdown-menu">
                                 <li><a href="<?php e($this->webroot.'PerformanceTrips/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>Index</span></a></li>
                                 <li><a href="<?php e($this->webroot.'PerformanceTrips/add/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Add</span></a></li>
                                 <li><a href="<?php e($this->webroot.'PerformanceTrips/edit/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Edit</span></a></li>
                                 <li><a href="<?php e($this->webroot.'PerformanceTrips/view/');?>"><i class="fa fa-cog"></i>&nbsp;<span>View</span></a></li>
+                              </ul>
+                          </li>
+
+                          <li class="dropdown-submenu pull-left">
+                            <a href="#">PerforViajes</a>
+                              <ul class="dropdown-menu">
+                                <li><a href="<?php e($this->webroot.'PerformanceViajes/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>Index</span></a></li>
+                                <li><a href="<?php e($this->webroot.'PerformanceViajes/add/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Add</span></a></li>
+                                <li><a href="<?php e($this->webroot.'PerformanceViajes/edit/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Edit</span></a></li>
+                                <li><a href="<?php e($this->webroot.'PerformanceViajes/view/');?>"><i class="fa fa-cog"></i>&nbsp;<span>View</span></a></li>
+                              </ul>
+                          </li>
+
+                          <li class="dropdown-submenu pull-left">
+                            <a href="#">PerforViewViajes</a>
+                              <ul class="dropdown-menu">
+                                <li><a href="<?php e($this->webroot.'PerformanceViewViajes/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>Index</span></a></li>
+                                <li><a href="<?php e($this->webroot.'PerformanceViewViajes/add/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Add</span></a></li>
+                                <li><a href="<?php e($this->webroot.'PerformanceViewViajes/edit/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Edit</span></a></li>
+                                <li><a href="<?php e($this->webroot.'PerformanceViewViajes/view/');?>"><i class="fa fa-cog"></i>&nbsp;<span>View</span></a></li>
                               </ul>
                           </li>
 
@@ -499,7 +519,8 @@
                       <li class="dropdown-submenu">
   											<a tabindex="-1" href="#"><i class="fa fa-barcode" aria-hidden="true"></i>&nbsp;<span>ModuloFacturas</span></a>
   												<ul class="dropdown-menu">
-  													<li><a tabindex="-1" href="<?php e($this->webroot.'PerformanceReferences/');?>"><i class="fa fa-files-o" aria-hidden="true"></i>&nbsp;<span>facturasReferencias</span></a></li>
+  													<li><a tabindex="-1" href="<?php e($this->webroot.'PerformanceReferences/');?>"><i class="fa fa-files-o" aria-hidden="true"></i>&nbsp;<span>Facturas</span></a></li>
+  													<li><a tabindex="-1" href="<?php e($this->webroot.'PerformanceTrips/');?>"><i class="fa fa-files-o" aria-hidden="true"></i>&nbsp;<span>Viajes</span></a></li>
   												</ul>
   										</li>
                       <li class="divider"></li>
