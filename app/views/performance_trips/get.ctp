@@ -55,7 +55,9 @@
 <div>&nbsp;</div>
 	</div>
 
-
+	<div class="row noprint">
+		<?php	echo $this->Session->flash();?>
+	</div>
 
 	<div class="row noprint">
 
@@ -74,59 +76,46 @@
 	</div>
 
 
-<div id="first-datatable-output">
+<div id="first-datatable-output" class="table-responsive">
 
-		<table id="tableFilter" class="table table-bordered dropdown-filter-table dropdown-processed">
+		<table id="tableFilter" class="table table-bordered table-hover">
 
-		<thead>
-			<tr id="detail_header" class="detail_header">
-            <th class="firts-header-element"><?php echo 'Cliente'; ?> </th>
-            <th><?php echo 'Porte'; ?> </th>
-            <!-- <th><?php echo 'id'; ?> </th> -->
-            <th><?php echo 'id_unidad'; ?> </th>
-            <!-- <th><?php echo 'id_configuracionviaje'; ?> </th> -->
-            <!-- <th><?php echo 'id_tipo_operacion'; ?> </th> -->
-            <!-- <th><?php echo 'id_fraccion'; ?> </th> -->
-            <!-- <th><?php echo 'id_flota'; ?> </th> -->
-            <th><?php echo 'no_viaje'; ?> </th>
-            <th><?php echo 'num_guia'; ?> </th>
-            <th><?php echo 'no_guia'; ?> </th>
-            <!-- <th><?php echo 'f_despachado'; ?> </th> -->
-            <th><?php echo 'fecha_ingreso'; ?> </th>
-            <th><?php echo 'fecha_guia'; ?> </th>
-            <th><?php echo 'end'; ?> </th>
-            <th><?php echo 'recepcionEvidencias'; ?> </th>
-            <th><?php echo 'reception'; ?> </th>
-            <th><?php echo 'fecha_modifico'; ?> </th>
-            <th><?php echo 'aceptance'; ?> </th>
-            <th><?php echo 'entregaEvidenciasCliente'; ?> </th>
-            <th><?php echo 'deliver'; ?> </th>
-            <th><?php echo 'validacionEvidenciasCliente'; ?> </th>
-            <th><?php echo 'validation'; ?> </th>
-            <th><?php echo 'mes'; ?> </th>
-            <!-- <th><?php echo 'cliente'; ?> </th> -->
-            <!-- <th><?php echo 'kms_viaje'; ?> </th> -->
-            <!-- <th><?php echo 'kms_real'; ?> </th> -->
-            <th><?php echo 'subtotal'; ?> </th>
-            <!-- <th><?php echo 'peso'; ?> </th> -->
-            <th><?php echo 'configuracion_viaje'; ?> </th>
-            <th><?php echo 'tipo_de_operacion'; ?> </th>
-            <th><?php echo 'flota'; ?> </th>
-            <th><?php echo 'area'; ?> </th>
-            <th><?php echo 'fraccion'; ?> </th>
-            <!-- <th><?php echo 'company'; ?> </th> -->
-            <!-- <th><?php echo 'trip_count'; ?> </th> -->
-            <!-- <th><?php echo 'internal_id'; ?> </th> -->
-            <!-- <th><?php echo 'id_area'; ?> </th> -->
-            <!-- <th><?php echo 'performance_bsus_id'; ?> </th> -->
-            <!-- <th><?php echo 'recepcionEvidencias'; ?> </th> -->
-            <!-- <th><?php echo 'entregaEvidenciasCliente'; ?> </th> -->
-            <!-- <th><?php echo 'validacionEvidenciasCliente'; ?> </th> -->
-            <!-- <th><?php echo 'user_id'; ?> </th> -->
-            <!-- <th><?php echo 'status'; ?> </th> -->
-            <!-- <th><?php echo 'created'; ?> </th> -->
-            <!-- <th><?php echo 'modified'; ?> </th> -->
-
+		<thead class="detail_header">
+			<tr class="cache-header">
+            <th>Cliente</th>
+            <th>Porte</th>
+            <!-- <th>id</th> -->
+            <th>Unidad</th>
+            <!-- <th>id_configuracionviaje</th> -->
+            <!-- <th>id_tipo_operacion</th> -->
+            <!-- <th>id_fraccion</th> -->
+            <!-- <th>id_flota</th> -->
+            <th>Viaje</th>
+            <!-- <th>num_guia</th> -->
+            <th>No guia</th>
+            <!-- <th>f_despachado</th> -->
+            <th>Inicio de Viaje</th>
+            <th>Cierre de Viaje</th>
+            <th>End</th>
+            <th>RecepcionEvidencias</th>
+            <th>Reception</th>
+            <th>Aceptaci&oacute;n de Viajes</th>
+            <th>Aceptance</th>
+            <th>EntregaEvidenciasCliente</th>
+            <th>Deliver</th>
+            <th>ValidacionEvidenciasCliente</th>
+            <th>Validation</th>
+            <th>Mes</th>
+            <!-- <th>cliente</th> -->
+            <!-- <th>kms_viaje</th> -->
+            <!-- <th>kms_real</th> -->
+            <th>Subtotal</th>
+            <!-- <th>peso</th> -->
+            <th>Configuracion_viaje</th>
+            <th>Tipo_de_operacion</th>
+            <th>Flota</th>
+            <th>Area</th>
+            <th>Fraccion</th>
 			</tr>
 
 		</thead>
@@ -177,7 +166,7 @@
           <!-- <td><?php echo $performanceViewViaje['PerformanceViewViaje']['id_fraccion']; ?>&nbsp;</td> -->
           <!-- <td><?php echo $performanceViewViaje['PerformanceViewViaje']['id_flota']; ?>&nbsp;</td> -->
           <td><?php echo $performanceViewViaje['PerformanceViewViaje']['no_viaje']; ?>&nbsp;</td>
-          <td><?php echo $performanceViewViaje['PerformanceViewViaje']['num_guia']; ?>&nbsp;</td>
+          <!-- <td><?php echo $performanceViewViaje['PerformanceViewViaje']['num_guia']; ?>&nbsp;</td> -->
           <td><?php echo $performanceViewViaje['PerformanceViewViaje']['no_guia']; ?>&nbsp;</td>
           <!-- <td><?php echo $performanceViewViaje['PerformanceViewViaje']['f_despachado']; ?>&nbsp;</td> -->
           <!-- <td><?php echo $performanceViewViaje['PerformanceViewViaje']['fecha_ingreso']; ?>&nbsp;</td> -->
@@ -245,22 +234,6 @@
           <td><?php echo $performanceViewViaje['PerformanceViewViaje']['flota']; ?>&nbsp;</td>
           <td><?php echo $performanceViewViaje['PerformanceViewViaje']['area']; ?>&nbsp;</td>
           <td><?php echo $performanceViewViaje['PerformanceViewViaje']['fraccion']; ?>&nbsp;</td>
-          <!-- <td><?php echo $performanceViewViaje['PerformanceViewViaje']['company']; ?>&nbsp;</td> -->
-          <!-- <td><?php echo $performanceViewViaje['PerformanceViewViaje']['trip_count']; ?>&nbsp;</td> -->
-          <!-- <td><?php echo $performanceViewViaje['PerformanceViewViaje']['internal_id']; ?>&nbsp;</td> -->
-          <!-- <td><?php echo $performanceViewViaje['PerformanceViewViaje']['id_area']; ?>&nbsp;</td> -->
-          <!-- <td>
-            <?php echo $this->Html->link($performanceViewViaje['PerformanceBsus']['label'], array('controller' => 'performance_bsus', 'action' => 'view', $performanceViewViaje['PerformanceBsus']['id'])); ?>
-          </td> -->
-          <!-- <td><?php echo $performanceViewViaje['PerformanceViewViaje']['recepcionEvidencias']; ?>&nbsp;</td> -->
-          <!-- <td><?php echo $performanceViewViaje['PerformanceViewViaje']['entregaEvidenciasCliente']; ?>&nbsp;</td> -->
-          <!-- <td><?php echo $performanceViewViaje['PerformanceViewViaje']['validacionEvidenciasCliente']; ?>&nbsp;</td> -->
-          <!-- <td>
-            <?php echo $this->Html->link($performanceViewViaje['User']['name'], array('controller' => 'users', 'action' => 'view', $performanceViewViaje['User']['id'])); ?>
-          </td> -->
-          <!-- <td><?php echo $performanceViewViaje['PerformanceViewViaje']['status']; ?>&nbsp;</td> -->
-          <!-- <td><?php echo $performanceViewViaje['PerformanceViewViaje']['created']; ?>&nbsp;</td> -->
-          <!-- <td><?php echo $performanceViewViaje['PerformanceViewViaje']['modified']; ?>&nbsp;</td> -->
 <!-- add -->
 				</tr>
 
@@ -282,11 +255,6 @@
 				</td>
 
 				<td id="_footer_td" class="compact_footer"></td>
-				<td id="_footer_td" class="compact_footer">
-					<?php
-						// echo array_sum($performanceReferencesResume[$performanceReferencesKey]['deliver']);
-					?>
-				</td>
 				<td id="_footer_td" class="compact_footer"></td>
 				<td id="_footer_td" class="compact_footer"></td>
 				<td id="_footer_td" class="compact_footer">Cierre de Viaje</td>

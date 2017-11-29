@@ -25,7 +25,43 @@ class PerformanceTripsController extends AppController {
 	var $helpers = array('Html','Form','Ajax','Javascript','Js');
 
 
-	function get() {
+	// function csv( $data = null ) {
+	//
+  //   $data = array(
+  //     array("firstname" => "Mary", "lastname" => "Johnson", "age" => 25),
+  //     array("firstname" => "Amanda", "lastname" => "Miller", "age" => 18),
+  //     array("firstname" => "James", "lastname" => "Brown", "age" => 31),
+  //     array("firstname" => "Patricia", "lastname" => "Williams", "age" => 7),
+  //     array("firstname" => "Michael", "lastname" => "Davis", "age" => 43),
+  //     array("firstname" => "Sarah", "lastname" => "Miller", "age" => 24),
+  //     array("firstname" => "Patrick", "lastname" => "Miller", "age" => 27)
+  //   );
+	//
+	// 	// filename for download
+  //   $filename = "website_data_" . date('Ymd') . ".csv";
+  //   $out = fopen("php://output", 'w');
+  //   $flag = false;
+	//
+	// 	Configure::write('debug', 0);
+	// 	$this->autoRender = false;
+	// 	$this->autoLayout = false;
+	// 	$this->header('Content-Disposition: attachment; filename=\"$filename\"');
+	// 	$this->header('Content-Type: text/csv');
+	//
+  //   foreach($data as $row) {
+  //     if(!$flag) {
+  //       // display field/column names as first row
+  //       fputcsv($out, array_keys($row), ',', '"');
+  //       $flag = true;
+  //     }
+  //     array_walk($row, __NAMESPACE__ . '\cleanData');
+  //     fputcsv($out, array_values($row), ',', '"');
+  //   }
+  //   fclose($out);
+  //   // exit();
+	// } // NOTE end csv
+
+	function get( $xport=null ) {
 		Configure::write('debug',2);
 
 		$this->LoadModel('PerformanceViewViaje');
@@ -42,10 +78,8 @@ class PerformanceTripsController extends AppController {
 
 			}
 		}
-
 		// debug($posted);
 		// debug($conditions);
-// exit();
 		//1. Transform request parameters to MySQL datetime format.
 		$date_init = new DateTime($conditions['performance_dateini']);
 		$mysqlstart =  $date_init->format('Y-m-d');
@@ -85,14 +119,30 @@ class PerformanceTripsController extends AppController {
 
 		}
 
-		// debug($performanceReferencesMod);
+			if ( isset($xport) and $xport != null)  {
 
-		$this->set(compact('performanceViewViaje','performanceReferencesMod','performanceReferencesIdx','dashboard','performanceReferencesResume'));
+				debug($xport);
+				  $data = array(
+			      array("firstname" => "Mary", "lastname" => "Johnson", "age" => 25),
+			      array("firstname" => "Amanda", "lastname" => "Miller", "age" => 18),
+			      array("firstname" => "James", "lastname" => "Brown", "age" => 31),
+			      array("firstname" => "Patricia", "lastname" => "Williams", "age" => 7),
+			      array("firstname" => "Michael", "lastname" => "Davis", "age" => 43),
+			      array("firstname" => "Sarah", "lastname" => "Miller", "age" => 24),
+			      array("firstname" => "Patrick", "lastname" => "Miller", "age" => 27)
+			    );
+					csv($data);
+				
+			} else {
 
-		// NOTE set the response output for an ajax call
-		Configure::write('debug', 0);
-		$this->autoLayout = false;
-	}
+			$this->set(compact('performanceViewViaje','performanceReferencesMod','performanceReferencesIdx','dashboard','performanceReferencesResume'));
+
+			// NOTE set the response output for an ajax call
+			Configure::write('debug', 0);
+			$this->autoLayout = false;
+		}
+
+	} // NOTE End get()
 
 	function index() {
 
@@ -109,7 +159,6 @@ class PerformanceTripsController extends AppController {
 		// $this->PerformanceTrip->recursive = 0;
 		// $this->set('performanceTrips', $this->paginate());
 	}
-
 
 	function view($id = null) {
 		if (!$id) {

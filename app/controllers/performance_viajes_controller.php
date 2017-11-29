@@ -134,10 +134,29 @@ class PerformanceViajesController extends AppController {
 
 				$this->PerformanceViaje->create();
 				if ($this->PerformanceViaje->updateAll($conditions)) {
-					$this->Session->setFlash(__('The performance factura has been saved', true));
+
+					// $this->Session->setFlash(__('The performance factura has been saved', true));
+
+					$this->Session->setFlash(__(
+								'<div class="alert alert-success alert-dismissible fade in" role="alert">
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+									</button>
+									<strong>Las fechas se han Guardado Correctamente</strong>
+									</div>'
+					, true));
+
 					$this->redirect(array('action' => 'index'));
 				} else {
-					$this->Session->setFlash(__('The performance factura could not be saved. Please, try again.', true));
+					// $this->Session->setFlash(__('The performance factura could not be saved. Please, try again.', true));
+					$this->Session->setFlash(__(
+								'<div class="alert alert-warning alert-dismissible fade in" role="alert">
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+									</button>
+									<strong>Las fechas no se han podido Guardar por favor intentelo nuevamente</strong>
+									</div>'
+					, true));
 				}
 
 			} else {
@@ -148,10 +167,25 @@ class PerformanceViajesController extends AppController {
 
 				$this->PerformanceViaje->create();
 				if ($this->PerformanceViaje->save($saveData)) {
-					$this->Session->setFlash(__('The performance factura has been saved', true));
+					$this->Session->setFlash(__(
+								'<div class="alert alert-success alert-dismissible fade in" role="alert">
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+									</button>
+									<strong>Las fechas se han Guardado Correctamente</strong>
+									</div>'
+					, true));
 					$this->redirect(array('action' => 'index'));
 				} else {
-					$this->Session->setFlash(__('The performance factura could not be saved. Please, try again.', true));
+
+					$this->Session->setFlash(__(
+								'<div class="alert alert-warning alert-dismissible fade in" role="alert">
+									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+											<span aria-hidden="true">&times;</span>
+									</button>
+									<strong>Las fechas no se han podido Guardar por favor intentelo nuevamente</strong>
+									</div>'
+					, true));
 				}
 			}
 

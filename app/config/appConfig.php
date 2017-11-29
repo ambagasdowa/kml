@@ -246,6 +246,73 @@
 		return false;
 	}//End of checkBrowser
 
+
+	/**
+	 * @package name <removeString> this must change
+	 * @congif extract areas from lis-db
+	 * @extract areas,flotas and tipo de Operacion
+	 * @use isql model connection with mssql
+	 * @param=>arrayString <array | string>
+	 * @param=>string <array | string>
+	 * @param=>$model <name of the model|1stlevet array>
+	 * @param=>field <name of the table|2nd level array>
+	 * @param=>unset <bool if you want remove the first pointer>
+	 * NOTE  array('model'=>array('field','value'));
+	 */
+
+	function cleanData(&$str) {
+		if($str == 't') $str = 'TRUE';
+		if($str == 'f') $str = 'FALSE';
+		if(preg_match("/^0/", $str) || preg_match("/^\+?\d{8,}$/", $str) || preg_match("/^\d{4}.\d{1,2}.\d{1,2}/", $str)) {
+			$str = "'$str";
+		}
+		if(strstr($str, '"')) $str = '"' . str_replace('"', '""', $str) . '"';
+	}
+
+
+	function csv( $data = null ) {
+    // $data = array(
+    //   array("firstname" => "Mary", "lastname" => "Johnson", "age" => 25),
+    //   array("firstname" => "Amanda", "lastname" => "Miller", "age" => 18),
+    //   array("firstname" => "James", "lastname" => "Brown", "age" => 31),
+    //   array("firstname" => "Patricia", "lastname" => "Williams", "age" => 7),
+    //   array("firstname" => "Michael", "lastname" => "Davis", "age" => 43),
+    //   array("firstname" => "Sarah", "lastname" => "Miller", "age" => 24),
+    //   array("firstname" => "Patrick", "lastname" => "Miller", "age" => 27)
+    // );
+		// filename for download
+    $filename = "website_data_" . date('Ymd') . ".csv";
+    $out = fopen("php://output", 'w');
+    $flag = false;
+
+		Configure::write('debug', 0);
+		$this->autoRender = false;
+		$this->autoLayout = false;
+		$this->header('Content-Disposition: attachment; filename=\"$filename\"');
+		$this->header('Content-Type: text/csv');
+
+    foreach($data as $row) {
+      if(!$flag) {
+        // display field/column names as first row
+        fputcsv($out, array_keys($row), ',', '"');
+        $flag = true;
+      }
+      array_walk($row, __NAMESPACE__ . '\cleanData');
+      fputcsv($out, array_values($row), ',', '"');
+    }
+    fclose($out);
+    // exit();
+	} // NOTE end csv
+
+
+	function test() {
+		return "hello cakephp";
+	}
+
+
+	function print_data () {
+		print_r(test());
+	}
 	 /**
 	 * @package name <htmlMotor> this must change
 	 * @congif build a script code to call datepicker

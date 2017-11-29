@@ -11,9 +11,10 @@
 		* @link          http://baizabal.xyz
 		* @mail	     baizabal.jesus@gmail.com
 		* @package       cake
-		* @subpackage    cake.cake.console.libs.templates.views
+		* @subpackage    PerformanceTrips,Index
 		* @since         CakePHP(tm) v 1.2.0.5234
 		* @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
+		*
 		*/
 		?>
 
@@ -44,29 +45,17 @@
 	  display: none;
 	}
 
-	#tableFilter {
-		font-size: 1em !important; /* currently ems cause chrome bug misinterpreting rems on body element */
-		line-height: 1.2!important;
-		font-weight: normal!important;
+	th {
+		/*font-size: 12px;*/
+		white-space:nowrap;
+	}
+	td {
+		font-size: 12px;
+		white-space:nowrap;
 	}
 
-/*.resume_compact_footer , .compact_header ,	.detail_header{
+	.detail_header {
 		display: none;
-	}*/
-
-	.hidden-gan {
-		/*display: none;*/
-	}
-
-	tr .firts-header-element{
-		display: inline-block;
-		min-width: 480px ;
-		width: 100% ;
-	}
-
-	#tableFilter > td {
-		width: 100%;
-		/*min-width: 320px ;*/
 	}
 
 	.head_datetime{
@@ -92,6 +81,7 @@
 	}
 
 </style>
+
 
 
 <div class="container-mod">
@@ -233,12 +223,38 @@
 						$( ".updateSearchResult" ).html('<div class="text-center"><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><span class="sr-only">Loading...</span><div>');
 						$( ".updateSearchResult" ).load(urlStruct,function() {
 
+						// NOTE clone and clean the header
+						var headder = $("#tableFilter thead").clone().removeClass("detail_header").addClass("header_row");
+
+						// NOTE calculate the pages per rows
+						var tds = $("#tableFilter").children('tbody').children('tr').length;
+
+						console.log(tds);
+						if (tds >= 60 ) {
+							var tdper = parseInt(60) ;
+						} else if (tds < 60  && tds >= 10 ) {
+							var tdper = parseInt(10) ;
+						} else {
+							tdper = parseInt(9) ;
+						}
+
+						console.log(tdper);
 // NOTE Start EasyPagination
 							$('#tableFilter').easyPaginate({
 									paginateElement: 'tr',
-									elementsPerPage: 60,
+									elementsPerPage: tdper,
 									effect: 'default',
 									complete: function() {
+
+										console.log($(".cache-header").is(':visible'));
+											// NOTE clone the header
+											if($(".cache-header").is(':visible') == false) {
+											    // Code
+												$("#tableFilter").prepend(headder);
+											} else {
+												$(".cache-header").remove();
+												$("#tableFilter").prepend(headder);
+											}
 
 										// //NOTE ==== Wotking UI behavior ===== //
 											// NOTE call to add update

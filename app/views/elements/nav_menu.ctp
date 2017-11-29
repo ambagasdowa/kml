@@ -520,7 +520,7 @@
   											<a tabindex="-1" href="#"><i class="fa fa-barcode" aria-hidden="true"></i>&nbsp;<span>ModuloFacturas</span></a>
   												<ul class="dropdown-menu">
   													<li><a tabindex="-1" href="<?php e($this->webroot.'PerformanceReferences/');?>"><i class="fa fa-files-o" aria-hidden="true"></i>&nbsp;<span>Facturas</span></a></li>
-  													<li><a tabindex="-1" href="<?php e($this->webroot.'PerformanceTrips/');?>"><i class="fa fa-files-o" aria-hidden="true"></i>&nbsp;<span>Viajes</span></a></li>
+  													<li><a tabindex="-1" href="<?php e($this->webroot.'PerformanceTrips/');?>"><i class="fa fa-truck" aria-hidden="true"></i>&nbsp;<span>Viajes</span></a></li>
   												</ul>
   										</li>
                       <li class="divider"></li>

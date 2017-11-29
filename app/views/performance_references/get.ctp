@@ -11,7 +11,7 @@
 		* @link          http://baizabal.xyz
 		* @mail	     baizabal.jesus@gmail.com
 		* @package       cake
-		* @subpackage    cake.cake.console.libs.templates.views
+		* @subpackage    PerformanceReferences
 		* @since         CakePHP(tm) v 1.2.0.5234
 		* @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
 		*/
@@ -55,7 +55,9 @@
 <div>&nbsp;</div>
 	</div>
 
-
+	<div class="row noprint">
+		<?php	echo $this->Session->flash();?>
+	</div>
 
 	<div class="row noprint">
 
@@ -74,13 +76,12 @@
 	</div>
 
 
-<div id="first-datatable-output">
+<div id="first-datatable-output" class="table-responsive">
 
-		<table id="tableFilter" class="table table-bordered dropdown-filter-table dropdown-processed">
+		<table id="tableFilter" class="table table-bordered table-hover">
 
-		<thead>
-			<tr id="detail_header" class="detail_header">
-
+		<thead  class="detail_header">
+			<tr class="cache-header">
 						<th class="firts-header-element">Nombre</th>
 						<th><?php echo ('RFC');?></th>
 						<!-- <th><?php echo ('Empresa');?></th> -->
@@ -103,8 +104,6 @@
 						<th><?php echo ('PromesaPago');?></th>
 						<th><?php echo ('fechaPago');?></th>
 						<th><?php echo ('Pago');?></th>
-						<!-- <th><?php echo ('MES');?></th> -->
-						<!-- <th><?php echo ('DIA');?></th> -->
 			</tr>
 
 		</thead>
