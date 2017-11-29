@@ -39,16 +39,13 @@ class PerformanceFacturasController extends AppController {
 	function add() {
 
 			Configure::write('debug', 2);
-
 			// debug($this->params['named']);
-
 			$posted = json_decode(base64_decode($this->params['named']['data']),true);
 			// debug($posted); // NOTE set this in the add view for parsing as hidden values
 			foreach ($posted as $idx => $data ) {
 				$conditionsPerformanceFactura['PerformanceFactura.'.$idx]	= $data;
 				$parse_id['PerformanceFactura'][$idx] = $data;
 			}
-
 			// debug($conditionsPerformanceFactura);
 			// debug($parse_id);
 			// NOTE add the array param fields
@@ -101,15 +98,7 @@ class PerformanceFacturasController extends AppController {
 				}
 
 			}
-
-			debug($conditions);
-
-			// $date_deliver = new DateTime($conditions['PerformanceFactura']['entregaFacturaCliente']);
-			// $deliver =  $date_deliver->format('Y-m-d');
-			//
-			// $date_proved = new DateTime($conditions['PerformanceFactura']['entregaFacturaCliente']);
-			// $proved =  $date_proved->format('Y-m-d');
-
+			// debug($conditions);
 			// set the search array
 			$dates = array('entregaFacturaCliente','aprobacionFactura','fechaPromesaPago','fechaPago');
 
@@ -183,18 +172,6 @@ class PerformanceFacturasController extends AppController {
 
 		} // end save or update
 		//
-		// if (!empty($this->data)) { // NOTE this is useless in this concept
-		// 	exit();
-		// 	$this->PerformanceFactura->create();
-		// 	if ($this->PerformanceFactura->save($this->data)) {
-		// 		$this->Session->setFlash(__('The performance factura has been saved', true));
-		// 		$this->redirect(array('action' => 'index'));
-		// 	} else {
-		// 		$this->Session->setFlash(__('The performance factura could not be saved. Please, try again.', true));
-		// 	}
-		//
-		// }
-
 		$performanceCustomers = $this->PerformanceFactura->PerformanceCustomers->find('list');
 		$performanceReferences = $this->PerformanceFactura->PerformanceReferences->find('list');
 		$users = $this->PerformanceFactura->User->find('list');
@@ -203,7 +180,8 @@ class PerformanceFacturasController extends AppController {
 		// NOTE set the response output for an ajax call
 		Configure::write('debug', 0);
 		$this->autoLayout = false;
-	}
+
+	} // End ADD
 
 	function edit($id = null) {
 		if (!$id && empty($this->data)) {

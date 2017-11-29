@@ -84,7 +84,6 @@
 			<tr class="cache-header">
 						<th class="firts-header-element">Nombre</th>
 						<th><?php echo ('RFC');?></th>
-						<!-- <th><?php echo ('Empresa');?></th> -->
 						<!-- <th><?php echo ('TipoDocumento');?></th> -->
 						<th><?php echo ('Folio');?></th>
 						<!-- <th><?php echo ('Nombre');?></th> -->
@@ -94,6 +93,7 @@
 						<!-- <th><?php echo ('Total');?></th> -->
 						<th><?php echo ('Referencia');?></th>
 						<th><?php echo ('Lote');?></th>
+						<th><?php echo ('Empresa');?></th>
 						<!-- <th><?php echo ('Descripcion');?></th> -->
 						<th><?php echo ('ElaboracionFactura');?></th>
 						<th><?php echo ('entregaFacturaCliente');?></th>
@@ -149,7 +149,6 @@
 																		);
 						?>
 					</td>
-					<!-- <td><?php echo $performanceReference['PerformanceViewFactura']['Empresa']; ?></td> -->
 					<!-- <td><?php echo $performanceReference['PerformanceViewFactura']['TipoDocumento']; ?></td> -->
 					<td><?php echo $performanceReference['PerformanceViewFactura']['Folio']; ?></td>
 					<!-- <td><?php echo $performanceReference['PerformanceViewFactura']['Nombre']; ?></td> -->
@@ -161,6 +160,7 @@
 					<!-- <td><?php echo $performanceReference['PerformanceViewFactura']['Total']; ?></td> -->
 					<td><?php echo $performanceReference['PerformanceViewFactura']['Referencia']; ?></td>
 					<td><?php echo $performanceReference['PerformanceViewFactura']['Lote']; ?></td>
+					<td><?php echo $performanceReference['PerformanceViewFactura']['Empresa']; ?></td>
 					<!-- <td><?php echo $performanceReference['PerformanceViewFactura']['Descripcion']; ?></td> -->
 					<td>
 							<?php
@@ -216,6 +216,7 @@
 						// echo array_sum($performanceReferencesResume[$performanceReferencesKey]['deliver']);
 					?>
 				</td>
+				<td id="_footer_td" class="compact_footer"></td>
 				<td id="_footer_td" class="compact_footer"></td>
 				<td id="_footer_td" class="compact_footer"></td>
 				<td id="_footer_td" class="compact_footer">PromedioDiasEntrega</td>

@@ -96,24 +96,6 @@ td {
 			<div class="row">
 				<?php echo $this->Form->create('PerformanceReference',array('enctype' => 'multipart/form-data','class'=>'form','id'=>'pform'));?>
 				<?php
-				// echo '<div class="two columns input-group">';
-				// echo
-				// 			$this->Form->input
-				// 												(
-				// 													'performance_type',
-				// 													 array
-				// 																(
-				// 																	'type'=>'select',
-				// 																	'options'=>array('Factura','Viaje'),
-				// 																	'class'=>'performance_bsu search_value u-full-width form-control',
-				// 																	'label'=>false,
-				// 																	'div'=>false,
-				// 																	'empty'=>'Indicador'
-				//
-				// 																)
-				// 												);
-				// echo '</div>';
-
 				echo '<div class="three columns input-group">';
 				echo '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>';
 				echo
@@ -160,7 +142,8 @@ td {
 																						'class'=>'performance_bsu search_value u-full-width form-control',
 																						'label'=>false,
 																						'div'=>false,
-																						'empty'=>'Unidad de Negocio'
+																						'multiple' => true
+																						// 'empty'=>'Unidad de Negocio'
 
 																					)
 																	);
@@ -599,7 +582,16 @@ td {
 					});//NOTE End send
 
 				// filter results the firts optionbox
-					$(".search_value").select2();
+					// $(".search_value").select2();
+
+					$('.search_value').multiselect({
+						enableFiltering: true,
+						enableCaseInsensitiveFiltering: true,
+						filterPlaceholder: 'Filtrar',
+						nonSelectedText: 'Unidad de Negocio',
+						onDropdownHide: true,
+						buttonWidth: '300px'
+					});
 
 					// NOTE Datepicker Define the Spanish languaje
 							$.datepicker.regional['es'] = {

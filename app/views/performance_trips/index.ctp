@@ -134,7 +134,7 @@
 																				)
 																);
 					echo '</div>';
-					echo '<div class="three columns input-group">';
+					echo '<div class="five columns input-group">';
 					echo
 								$this->Form->input
 																	(
@@ -146,7 +146,8 @@
 																						'class'=>'performance_bsu search_value u-full-width form-control',
 																						'label'=>false,
 																						'div'=>false,
-																						'empty'=>'Unidad de Negocio'
+																						'multiple'=>true
+																						// 'empty'=>'Unidad de Negocio'
 
 																					)
 																	);
@@ -502,7 +503,21 @@
 					});//NOTE End send
 
 				// filter results the firts optionbox
-					$(".search_value").select2();
+					// $(".search_value").select2({
+					// 	'placeholder': 'UnidadNegocio',
+					// 	'height': '10px',
+					// 	'font-size':'9px',
+					// 	'allowClear': true
+					// });
+
+					$('.search_value').multiselect({
+						enableFiltering: true,
+						enableCaseInsensitiveFiltering: true,
+						filterPlaceholder: 'Filtrar',
+						nonSelectedText: 'Unidad de Negocio',
+						onDropdownHide: true,
+						buttonWidth: '300px'
+					});
 
 					// NOTE Datepicker Define the Spanish languaje
 							$.datepicker.regional['es'] = {

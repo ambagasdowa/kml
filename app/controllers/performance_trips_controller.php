@@ -69,16 +69,27 @@ class PerformanceTripsController extends AppController {
 
 		$posted = json_decode(base64_decode($this->params['named']['data']),true);
 
+		// debug($posted);
+		$conditions = array();
+
 		foreach ($posted as $keys => $postvalue) {
 			if ($keys > 0 ) {
 
 				$content = $postvalue['name'];
 				$chars = preg_split('/\[([^\]]*)\]/i', $content, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
-				$conditions[$chars[2]] = $postvalue['value'];
+				if ( isset($chars[2]) && $chars[2] == 'performance_bsu' && $postvalue['value'] != '') {
+					$add_conditions[] = $postvalue['value'];
+				}
+				// debug($chars);
+				if(isset($chars[2])) {
+					$conditions[$chars[2]] = $postvalue['value'];
+				}
 
 			}
 		}
 		// debug($posted);
+		$conditions['performance_bsu'] = $add_conditions;
+
 		// debug($conditions);
 		//1. Transform request parameters to MySQL datetime format.
 		$date_init = new DateTime($conditions['performance_dateini']);
@@ -92,10 +103,14 @@ class PerformanceTripsController extends AppController {
 		$condBsu['PerformanceBsu.id'] = $conditions['performance_bsu'];
 
 		$area = $this->PerformanceBsu->find('list',array('fields'=>array('id','label'),'conditions'=>$condBsu));
-		$bsu_compact = ucwords(strtolower(current($area)));
+		// debug($area);
+		//NOTE Fixed needed
+		$bsu_compact = ucwords(strtolower(implode(',',$area)));
+		// debug($bsu_compact);
 
 		$conditionsPerformance['PerformanceViewViaje.fecha_guia BETWEEN ? AND ?'] = array($mysqlstart,$mysqlend);
-		$conditionsPerformance['PerformanceViewViaje.area'] = current($area);
+		$conditionsPerformance['PerformanceViewViaje.area'] = $area;
+
 		$performanceViewViaje = $this->PerformanceViewViaje->find('all',array('conditions'=>$conditionsPerformance));
 
 		$dashboard = array('inicio'=>$mysqlstart,'fin'=>$mysqlend,'bsu'=>$bsu_compact);
@@ -132,7 +147,7 @@ class PerformanceTripsController extends AppController {
 			      array("firstname" => "Patrick", "lastname" => "Miller", "age" => 27)
 			    );
 					csv($data);
-				
+
 			} else {
 
 			$this->set(compact('performanceViewViaje','performanceReferencesMod','performanceReferencesIdx','dashboard','performanceReferencesResume'));

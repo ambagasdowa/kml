@@ -47,6 +47,15 @@ $core = 'core'.DS;
       // https://st3ph.github.io/jquery.easyPaginate/
       e($this->Html->script($theme.'easyPaginator/jquery.easyPaginate',false));
 
+
+      // NOTE adding support for multiselection form
+      /** @package css */
+      e($this->Html->css($theme.'bootstrap-multiselect/bootstrap-multiselect', 'stylesheet', array('inline'=>false)));
+      /** @package js*/
+      e($this->Html->script($theme.'bootstrap-multiselect/bootstrap-multiselect',false));
+
+
+
       // NOTE Datatables Pluging
       // @url https://datatables.net/
       // e($this->Html->css($theme.'DataTablesBootstrap/datatables.min', 'stylesheet', array('inline'=>false)));

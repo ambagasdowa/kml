@@ -38,15 +38,26 @@ class PerformanceReferencesController extends AppController {
 
 		$posted = json_decode(base64_decode($this->params['named']['data']),true);
 
+		$conditions = array();
+
 		foreach ($posted as $keys => $postvalue) {
 			if ($keys > 0 ) {
 
 				$content = $postvalue['name'];
 				$chars = preg_split('/\[([^\]]*)\]/i', $content, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
-				$conditions[$chars[2]] = $postvalue['value'];
+				if ( isset($chars[2]) && $chars[2] == 'performance_bsu' && $postvalue['value'] != '') {
+					$add_conditions[] = $postvalue['value'];
+				}
+				// debug($chars);
+				if(isset($chars[2])) {
+					$conditions[$chars[2]] = $postvalue['value'];
+				}
 
 			}
 		}
+		// debug($posted);
+		$conditions['performance_bsu'] = $add_conditions;
+
 		//1. Transform request parameters to MySQL datetime format.
 		$date_init = new DateTime($conditions['performance_dateini']);
 		$mysqlstart =  $date_init->format('Y-m-d');
@@ -60,7 +71,7 @@ class PerformanceReferencesController extends AppController {
 
 		// NOTE FILTER
 		$condBsu['PerformanceBsu.id'] = $conditions['performance_bsu'];
-		$bsu_compact = ucwords(strtolower(current($this->PerformanceBsu->find('list',array('fields'=>array('id','label'),'conditions'=>$condBsu)))));
+		$bsu_compact = ucwords(strtolower(implode(',',$this->PerformanceBsu->find('list',array('fields'=>array('id','label'),'conditions'=>$condBsu)))));
 
 		$dashboard = array('inicio'=>$mysqlstart,'fin'=>$mysqlend,'bsu'=>$bsu_compact);
 
