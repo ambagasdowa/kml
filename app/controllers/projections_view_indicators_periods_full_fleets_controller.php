@@ -25,7 +25,7 @@ class ProjectionsViewIndicatorsPeriodsFullFleetsController extends AppController
 
 	function index() {
 
-			Configure::write('debug',2);
+			Configure::write('debug',0);
 
         $this->ProjectionsViewIndicatorsPeriodsFullFleet->query('SET	ANSI_NULLS	ON;SET	ANSI_WARNINGS	ON;');
 
@@ -137,22 +137,37 @@ class ProjectionsViewIndicatorsPeriodsFullFleetsController extends AppController
 		$projectionsViewIndicatorsPeriodsFullFleets = $this->ProjectionsViewIndicatorsPeriodsFullFleet->find('all',array('conditions'=>$conditionsProjectionsViewIndicatorsPeriodsFullFleet));
 
 		// DEBUG bugging
-// 		debug($projectionsViewIndicatorsPeriodsFullFleets);
+		// debug($projectionsViewIndicatorsPeriodsFullFleets);
+
+
+
 		$bssus = array_values($this->ProjectionsViewBussinessUnit->find('list'));
-
+// debug($bssus);
 		$new_projections_back = $projectionsViewIndicatorsPeriodsFullFleets;
+// debug($new_projections_back);
 
-		foreach ($bssus as $indX => $area_name) {
-            foreach ($new_projections_back  as $index_now => $array_now) {
-                $bsus_key = array_search($array_now['ProjectionsViewIndicatorsPeriodsFullFleet']['area'],$bssus);
-
-                if ( isset($bsus_key) ) {
-                    $change_proj_inx[$bsus_key] = $array_now;
-                }
-            }
+		foreach ($new_projections_back  as $indx_now => $jarray_now) {
+			$array_now[$jarray_now['ProjectionsViewIndicatorsPeriodsFullFleet']['area']] = $jarray_now;
 		}
 
-//         debug($change_proj_inx);
+		// debug($array_now);
+
+		foreach ($bssus as $indX => $area_name) {
+			// debug($area_name);
+			if ( isset ($array_now[$area_name])) {
+				$change_proj_inx[] = $array_now[$area_name];
+			} else {
+				$change_proj_inx[] = array('ProjectionsViewIndicatorsPeriodsFullFleet'=>array('area'=>$area_name));
+			}
+              // $bsus_key = array_search($array_now['ProjectionsViewIndicatorsPeriodsFullFleet']['area'],$bssus);
+							// debug($bsus_key);
+              // if ( isset($bsus_key) ) {
+              //     $change_proj_inx[$bsus_key] = $array_now;
+              // }
+		} //NOTE end foreach loop
+
+// debug($change_proj_inx);
+
 		$projectionsViewIndicatorsPeriodsFullFleets = null; //reset
 		$projectionsViewIndicatorsPeriodsFullFleets = $change_proj_inx; //load with the new arragement
 
@@ -210,8 +225,8 @@ class ProjectionsViewIndicatorsPeriodsFullFleetsController extends AppController
             foreach ($rsl_past_month as $index_rsl_past_month => $ind_rsl_past_month ) {
 
                 foreach ($ind_rsl_past_month['ProjectionsViewIndicatorsPeriodsFullFleet'] as $name_past_index => $data_idc_past_month) {
-//                     debug($index_rsl_past_month['ProjectionsViewIndicatorsPeriodsFullFleet']);
-//                     debug($projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]);
+                    // debug($index_rsl_past_month['ProjectionsViewIndicatorsPeriodsFullFleet']);
+                    // debug($projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]);
 
                     if ($name_past_index == 'subpeso') {
 
@@ -224,8 +239,12 @@ class ProjectionsViewIndicatorsPeriodsFullFleetsController extends AppController
                         }
                         // sum_tons = current_tons + offset_tons;
                         $sum_tons = ( ($current_tons) + ( ($data_idc_past_month/$totalLabBackwardsMonthDays)*$offset_days) );
-												$prep = $projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['presupuesto'];
 
+												if (isset($projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['presupuesto'])) {
+													$prep = $projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['presupuesto'];
+												} else {
+													$prep = 0;
+												}
 												// e('<kbd>Presupuesto</kbd><br />');
 												// debug($prep);
 												// debug($rsl_past_month[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['area']);
