@@ -1,5 +1,6 @@
 <?php
-/** NOTE @begin->devoops */
+
+/** NOTE @begin->devoops  */
 $theme = 'devoops'.DS;
 $default = 'kml'.DS;
 $core = 'core'.DS;

@@ -575,23 +575,4 @@
 				});
 		// &#93;&#93;>
     </script>
-
-<?php
-// NOTES
-
-// customers.terms => join RFC get dias de credito
-//
-// nombre de cliente en lugar de rfc
-// totales por cliente
-//
-// Users =>
-//
-// cliente no viaje cp ruta  fecha de inicio  decha despacho , fin_viaje
-//
-// fecha_inicio => fecha_ingreso
-//
-// fecha_fin == fecha_guia
-//
-// fecha de aceptacion =>  fecha_modifico
-
- ?>
+		

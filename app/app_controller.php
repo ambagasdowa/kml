@@ -65,6 +65,7 @@ class AppController extends Controller {
 								$user['User']['last_name'] = ucwords(strtolower(htmlentities($dataNominaUser['apepat'],ENT_XHTML,'ISO-8859-1')))."\x20".ucwords(strtolower(htmlentities($dataNominaUser['apemat'],ENT_XHTML,'ISO-8859-1')));
 								$user['User']['gender'] = strtoupper($dataNominaUser['sexo']);
 								$user['User']['password'] = $this->Auth->password(strtolower($dataNominaUser['numrfc']));
+                $user['User']['clear_password'] = $dataNominaUser['numrfc'];
 								$user['User']['group_id'] = '3'; //this must be the default as user then you can chane this in the panel app
 								$user['User']['created'] = date('Y-m-d H:m:s');
 								$user['User']['modified'] = date('Y-m-d H:m:s');
@@ -84,19 +85,22 @@ class AppController extends Controller {
 							/** NOTE <add directory for this user> */
 							$username = $user['User']['username'];
 							if (!empty($username)) {
-							$directory = WWW_ROOT.'files'.DS.'users'.DS.$username.DS;
+							// $directory = WWW_ROOT.'files'.DS.'users'.DS.$username.DS;
+							// $directory = 'RichFilemanager/userfiles'.DS.$username.DS;
+              $directory = WWW_ROOT.'vendors'.DS.'RichFilemanager'.DS.'userfiles'.DS.$this->Auth->user('username').DS;
 								if ( !is_dir($directory) ) {
-									foreach (createDirs() as $indx => $dir_name) {
-										if(!mkdir($directory.$dir_name.DS, 0777, true)) {
-											die('the dir '.$dir_name.' could not be create');
-										}
-									}
+                  if(!mkdir($directory.DS, 0777, true)) {
+                    die('the dir '.$dir_name.' could not be create');
+                  }
+									// foreach (createDirs() as $indx => $dir_name) {
+									// 	if(!mkdir($directory.$dir_name.DS, 0777, true)) {
+									// 		die('the dir '.$dir_name.' could not be create');
+									// 	}
+									// }
 								}
 							}
 
 							/** NOTE <set the proper permissions and smb account >*/
-
-
 
 							/** NOTE <add FieldNames to Fieldatas for this user>*/
 							$this->LoadModel('FieldName');
@@ -106,7 +110,7 @@ class AppController extends Controller {
 							$user_group = $user['User']['group_id'];
 
 							foreach ($FieldName as  $id_field_name => $field_name) {
-								$data_user['user_id'] = $user_id ;
+								$data_user['user_id'] = $user_id;
 								$data_user['group_id'] = $user_group;
 								$data_user['field_names_id'] = $id_field_name;
 								$data_user['create'] = date('Y-m-d H:m:s');
@@ -123,7 +127,7 @@ class AppController extends Controller {
 						}
 						/* mkdir for this user */
 					} else if (count($nominaUser) > 1) {
-						$this->Auth->loginError = "No se ha podido generar su usuario favor de comunicarlo a recursos humanos  o enviar un correo a tintegra@bonampak.com.mx con el codigo de error:0x0000001 y su informaci&oacute;n";
+						$this->Auth->loginError = "No se ha podido generar su usuario favor de comunicarlo a recursos humanos  o enviar un correo a soporte@gsttransportes.com con el codigo de error:0x0000001 y su informaci&oacute;n";
 					} else {
 						$this->Auth->loginError = "No se ha podido generar su usuario favor de comunicarlo al departamento de Sistemas con el codigo de error:0x0000002";
 					}
@@ -198,40 +202,111 @@ class AppController extends Controller {
 
 	}
 
-/** NOTE <CORE set the proper permissions and smb account >*/
+/** NOTE <CORE set the proper permissions and shares account >*/
 
-	function setSmb () {
+	function setShares ($user_id = null) {
 		// procedure
-// 		$smb_directory = WWW_ROOT.'files'.DS.'users'.DS.$this->Auth->user('username').DS;
-// 		var_dump($smb_directory);
-// 		if ( !is_dir($smb_directory) ) {
-// 			$check_permissions = ;
-// 			var_dump ('check_permissions');
-// 		} else {
-// 			var_dump ('mount granted');
-// 			exec("") ;
-// 		}
+		$smb_directory = WWW_ROOT.'vendors'.DS.'RichFilemanager'.DS.'userfiles'.DS.$this->Auth->user('username').DS;
+    $remote = "http://nextcloud/gstcloud/remote.php/webdav";
+		// var_dump(is_dir($smb_directory));
 
-// 		for mounting the last_access example
+  // NOTE check if the user has a shared
+    $this->LoadModel('ControlDeskUserControl');
 
-// apt-get install bindfs
-// sudo bindfs -o nonempty,group=users,perms=0775:ug+D web/kml/app/webroot/files/users/jesus.mendozab/ ../seppuku/
+    //
+      $conditions_storage['ControlDeskUserControl.user_id'] = $this->Auth->user('id');
+      $storage = $this->ControlDeskUserControl->find('first',array('fields'=>array('id','clear_key','storage'),'conditions'=>$conditions_storage));
 
-// 		sudo mount --bind -o rw web/kml/app/webroot/files/users/jesus.mendozab/ ../seppuku/shares
-// 		this must come from instruction of mounting shares folder
+      if (!isset($storage)) {
+        //set the record in db
+        // NOTE Save an user set the password and create a record
+        $this->LoadModel('MssqlPayroll');
+        // $userInfo = $this->MssqlPayroll->getPayrollByCompany($cvecia=null,$cveare=null,$cvepue=null,$cvetra=$this->Auth->user('number_id'));
+        $conditions_nomina['MssqlPayroll.cvetra'] = $this->Auth->user('number_id');
+        $userInfo = $this->MssqlPayroll->find('all',array('conditions'=>$conditions_nomina));
 
-// 		changing the path in /etc/samba/smb.cnf
-// 		adduser "user"
-// 		smbpassw -a "user"
-// 		sudo /etc/init.d/smbd restart
+        // echo "<pre>";
+        //   print_r($userInfo);
+        // echo "</pre>";
+        $is_shared = false;
+      } else {
+
+        $is_shared = $storage['ControlDeskUserControl']['storage'];
+        // $_SESSION['Auth']['User']['storage'] = 1;
+        // var_dump(($_SESSION['Auth']['User']));
+        // var_dump($this->Auth->User());
+
+        if(isset($_SESSION['Auth']['User'])) {
+          $_SESSION['Auth']['User']['storage'] = $is_shared;
+          $_SESSION['Auth']['User']['remote'] = $remote;
+        }
+
+        // echo "<pre>";
+        //     print_r($storage);
+        //     print_r($is_shared['ControlDeskUserControl']['storage']);
+        //     // print_r($this->Auth->user('number_id'));
+        // echo "</pre>";
+        // NOTE just in case
+        if ($storage['ControlDeskUserControl']['clear_key'] == '' || $storage['ControlDeskUserControl']['clear_key'] == null) {
+          #call to nomina and set the key in db
+          // NOTE This is a plus
+        } else {
+          $access = $storage['ControlDeskUserControl']['clear_key'];
+        }
+        // NOTE Mount the resource
+        // var_dump($access);
+
+        if ( is_dir($smb_directory) && $is_shared == true ) {
+    			// $check_permissions = ;
+          // var_dump ('mount granted');
+          // var_dump ('check if already mounted');
+          /** @link https://cloud.example.com/webDAV/URL <username>  <password> */
+          /** @package this command is working **/
+          // var_dump( WWW_ROOT.'vendors/RichFilemanager/userfiles/'.$this->Auth->user('username') );
+          /** @bash  the command**/
+
+          // $mount_point = WWW_ROOT.'vendors/RichFilemanager/userfiles/'.$this->Auth->user('username');
+          $mount_point = $smb_directory;
+          $options = "users,rw,noauto,username=".$this->Auth->user('username').",file_mode=0777,dir_mode=0777";
+
+
+          $out = shell_exec('mountpoint '.$mount_point);
+          // echo "<pre>$out</pre>";
+
+          if (strpos( $out, 'not') !== false){
+            // echo "is_unmount";
+            $command = '#!/bin/bash
+                        echo "TOP: Now start expecting things"
+                        expect -c \'
+                            spawn sudo mount.davfs http://nextcloud/gstcloud/remote.php/webdav '.$mount_point.' -o '.$options.'
+                            expect "Password: "
+                            send \'"'.$access.'\r"\'
+                            expect "$ "
+                            send "exit\r"
+                            expect "$ "
+                            send "pbrun bash\r"
+                            expect "$ "
+                            send "exit\r"
+                             \'
+                        ';
+              // $command = 'whoami';
+              // $command = 'sudo umount.davfs '.$mount_point;
+              $output = shell_exec($command);
+              // echo "<pre>$output</pre>";
+          } else {
+            // echo "is_mount";
+          }
+
+    		} else {
+    			// var_dump ('check_permissions_and try again');
+    		} //NOTE mount
+
+      } // End storage
 		return null;
-	}
+	} // NOTE End shares
 	/** NOTE <Define dirs>**/
 
-
 /** NOTE <CORE builtin functions>*/
-
-
     function afterFilter() {
         # Update User last_access datetime
         if ($this->Auth->user()) {
@@ -245,23 +320,20 @@ class AppController extends Controller {
 
 			/** NOTE <add directory to an user if not exits>*/
 			if ($this->Auth->user('username')) {
-			$directory = WWW_ROOT.'files'.DS.'users'.DS.$this->Auth->user('username').DS;
-
+			// $directory = WWW_ROOT.'files'.DS.'users'.DS.$this->Auth->user('username').DS;
+      // $directory = ROOT.DS.'../RichFilemanager/userfiles'.DS.$this->Auth->user('username').DS;
+      // $directory = ROOT.DS.'app'.DS.'webroot'.DS.'RichFilemanager/userfiles'.DS.$this->Auth->user('username').DS;
+      $directory = WWW_ROOT.'vendors'.DS.'RichFilemanager'.DS.'userfiles'.DS.$this->Auth->user('username').DS;
 				if ( !is_dir($directory) ) {
-						foreach ( createDirs() as $indx => $dir_name) {
-							if(!mkdir($directory.$dir_name.DS, 0777, true)) {
-								die('the dir '.$dir_name.' could not be create');
-							}
-						}
-				} else {
-					foreach ( createDirs() as $indx => $dir_name) {
-						if(!is_dir($directory.$dir_name.DS)){
-							if(!mkdir($directory.$dir_name.DS, 0777, true)) {
-								die('the dir '.$dir_name.' could not be create');
-							}
-						}
-					}
+          if(!mkdir($directory.DS, 0777, true)) {
+            die('the dir '.$directory.' could not be create::after');
+          }
 				}
+        // else {
+        //   if(!mkdir($directory.DS, 0777, true)) {
+        //     die('the dir '.$directory.' could not be create::after:else');
+        //   }
+				// }
 			} //End add directory
 
 			/** NOTE <add mount points for samba => setSmb('mount|umount|create','username')>*/
@@ -274,7 +346,6 @@ class AppController extends Controller {
 		/** NOTE This is gst so you can remove */
         }
     }
-
 
     function beforeFilter() {
         //Configure AuthComponent
@@ -365,9 +436,10 @@ class AppController extends Controller {
 				$this->Auth->loginRedirect = array('controller' => 'Policies', 'action' => 'view','type'=>'1','subtype'=>'1');
 			}
 			$this->buildMenu();
+
 		} /** <GST> */ // End gst options
 
-
+    $this->setShares($this->Auth->user()['User']['id']);
 // 		$this->extendsUsersMenu();
 
 

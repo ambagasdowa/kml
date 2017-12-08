@@ -74,6 +74,15 @@
 
 		<ul class="nav navbar-nav navbar-right pull-right">
 		<?php if (isset($_SESSION['Auth']['User'])) {?>
+
+      <?php if ($_SESSION['Auth']['User']['storage'] == 1) { ?>
+  			<li>
+  				<a id="browse_server" href="<?php echo 'http://'.$_SERVER['HTTP_HOST'].DS.Dispatcher::baseUrl().DS.'app/webroot/vendors/RichFilemanager?exclusiveFolder='.$_SESSION['Auth']['User']['username']; ?>" class="ajax-link" alt="Archivos" title="Archivos">
+  						<i class="fa fa-hdd-o"></i>
+  				</a>
+  			</li>
+      <?php } ?>
+
 			<li>
 				<a href="<?php e($this->webroot."Users/edit_password/{$_SESSION['Auth']['User']['id']}/");?>" class="ajax-link" alt="Configuracio&oacute;n de Usuario" title="Configuraci&oacute;n de Usuario">
 <!-- 					<span class="badge"> -->
@@ -201,6 +210,13 @@
 												<span><?php e(languaje($languaje)['navMenuD']);?></span>
 											</a>
 										</li>
+
+                    <li>
+                      <a id="storage" href="<?php echo 'http://'.$_SERVER['HTTP_HOST'].DS.Dispatcher::baseUrl().DS.'app/webroot/vendors/RichFilemanager'; ?>" class="ajax-link">
+                        <i class="fa fa-cog"></i>
+                        <span>Storage</span>
+                      </a>
+                    </li>
 
 										<li class="divider"></li>
 
@@ -433,6 +449,16 @@
                                 <li><a href="<?php e($this->webroot.'PerformanceViewViajes/add/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Add</span></a></li>
                                 <li><a href="<?php e($this->webroot.'PerformanceViewViajes/edit/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Edit</span></a></li>
                                 <li><a href="<?php e($this->webroot.'PerformanceViewViajes/view/');?>"><i class="fa fa-cog"></i>&nbsp;<span>View</span></a></li>
+                              </ul>
+                          </li>
+
+                          <li class="dropdown-submenu pull-left">
+                            <a href="#">SharedStorage</a>
+                              <ul class="dropdown-menu">
+                                <li><a href="<?php e($this->webroot.'ControlDeskUserControls/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Index</span></a></li>
+                                <li><a href="<?php e($this->webroot.'ControlDeskUserControls/add/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Add</span></a></li>
+                                <li><a href="<?php e($this->webroot.'ControlDeskUserControls/edit/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Edit</span></a></li>
+                                <li><a href="<?php e($this->webroot.'ControlDeskUserControls/view/');?>"><i class="fa fa-cog"></i>&nbsp;<span>View</span></a></li>
                               </ul>
                           </li>
 
@@ -702,7 +728,6 @@
 										<?php }?>
 <!-- 										login option -->
 										<?php if (isset($_SESSION['Auth']['User'])) {?>
-
 
 										<li>
 											<a href="<?php e($this->webroot."Users/edit_password/{$_SESSION['Auth']['User']['id']}/");?>" class="ajax-link">

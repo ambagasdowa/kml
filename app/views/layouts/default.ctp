@@ -68,6 +68,13 @@ e($this->Html->css($theme.'justified-gallery/justifiedGallery', 'stylesheet'));
 // e($this->Html->css($theme.'select2/select2-bootstrap', 'stylesheet'));
 // e($this->Html->css($theme.'devoops/righteous', 'stylesheet'));
 e($this->Html->css($theme.'devoops/font-awesome.min.css', 'stylesheet'));//font-awesome
+
+//NOTE jquery colorbox pluging
+//NOTE colorbox in favor to fancybox
+// e($this->Html->css($theme.'colorbox/colorbox', 'stylesheet', array('inline'=>false)));
+// e($this->Html->script($theme.'colorbox/jquery.colorbox',false));
+
+
 // e($this->Html->css($theme.'devoops/style_v2', 'stylesheet')); // devoops_theme
 // e($this->Html->css($theme.'chartist/chartist.min', 'stylesheet'));
 // e($this->Html->css($theme.'morris/morris', 'stylesheet'));
@@ -250,3 +257,43 @@ e($this->Html->css($theme.'devoops/font-awesome.min.css', 'stylesheet'));//font-
 </body>
 </html>
 <?php //echo $this->Js->writeBuffer(); ?>
+<script type="text/javascript">
+// <!&#91;CDATA&#91;
+		$(document).ready(function (){
+
+			$("#browse_server").on('click',function(event){
+				event.stopPropagation();
+				event.preventDefault();
+				var data_code = 1;
+				var rulr = "<?php echo 'http://'.$_SERVER['HTTP_HOST'].DS.Dispatcher::baseUrl().DS.'app/webroot/vendors/RichFilemanager?exclusiveFolder='.$_SESSION['Auth']['User']['username']; ?>"
+
+				console.log($(this).attr('data-user'));
+					$.colorbox({
+						iframe:true,
+						href:rulr,
+						innerWidth:"90%",
+						innerHeight:"90%",
+						'scrolling' : false,
+						'trapFocus' :	true
+					});
+			});
+
+			$("#storage").on('click',function(event){
+				event.stopPropagation();
+				event.preventDefault();
+				var data_code = 1;
+				var rulr = "<?php echo 'http://'.$_SERVER['HTTP_HOST'].DS.Dispatcher::baseUrl().DS.'app/webroot/vendors/RichFilemanager'; ?>"
+
+				console.log($(this).attr('data-user'));
+					$.colorbox({
+						iframe:true,
+						href:rulr,
+						innerWidth:"90%",
+						innerHeight:"90%",
+						'scrolling' : false,
+						'trapFocus' :	true
+					});
+			});
+		});
+// &#93;&#93;>
+</script>
