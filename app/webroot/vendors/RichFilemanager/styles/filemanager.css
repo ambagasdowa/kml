@@ -170,9 +170,10 @@ html[data-useragent*='MSIE 11.0'] .fm-container #newfile {
 .fm-container .fm-header .btn-nav-home span {
     background-image: url(../images/nav/grey/home.png);
 }
-.fm-container .fm-header .btn-nav-level-up span {
+
+/*.fm-container .fm-header .btn-nav-level-up span {
     background-image: url(../images/nav/grey/level-up.png);
-}
+}*/
 .fm-container .fm-header .btn-nav-refresh span {
     background-image: url(../images/nav/grey/refresh.png);
 }
