@@ -265,7 +265,7 @@ e($this->Html->css($theme.'devoops/font-awesome.min.css', 'stylesheet'));//font-
 				event.stopPropagation();
 				event.preventDefault();
 				var data_code = 1;
-				var rulr = "<?php echo 'http://'.$_SERVER['HTTP_HOST'].DS.Dispatcher::baseUrl().DS.'app/webroot/vendors/RichFilemanager?exclusiveFolder='.$_SESSION['Auth']['User']['username']; ?>"
+				var rulr = "<?php echo 'http://'.$_SERVER['HTTP_HOST'].Dispatcher::baseUrl().DS.'app/webroot/vendors/RichFilemanager?exclusiveFolder='.$_SESSION['Auth']['User']['username']; ?>"
 
 				console.log($(this).attr('data-user'));
 					$.colorbox({
@@ -282,7 +282,7 @@ e($this->Html->css($theme.'devoops/font-awesome.min.css', 'stylesheet'));//font-
 				event.stopPropagation();
 				event.preventDefault();
 				var data_code = 1;
-				var rulr = "<?php echo 'http://'.$_SERVER['HTTP_HOST'].DS.Dispatcher::baseUrl().DS.'app/webroot/vendors/RichFilemanager'; ?>"
+				var rulr = "<?php echo 'http://'.$_SERVER['HTTP_HOST'].Dispatcher::baseUrl().DS.'app/webroot/vendors/RichFilemanager'; ?>"
 
 				console.log($(this).attr('data-user'));
 					$.colorbox({

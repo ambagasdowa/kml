@@ -18,9 +18,9 @@ $.richFilemanagerPlugin = function(element, pluginOptions)
 	 * Plugin's default options
 	 */
 	var defaults = {
-		// baseUrl: '.',	// relative path to the FM plugin folder
+		baseUrl: '.',	// relative path to the FM plugin folder
 		// baseUrl: 'app/webroot/js/devoops/RichFilemanager',
-		baseUrl: 'app/webroot/vendors/RichFilemanager',
+		// baseUrl: 'app/webroot/vendors/RichFilemanager',
 		// baseUrl: '.',
 		config: {},		// configuration options
         callbacks: {
