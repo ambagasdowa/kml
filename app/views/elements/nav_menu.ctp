@@ -213,7 +213,7 @@
 
                     <li>
                       <a id="storage" href="<?php echo 'http://'.$_SERVER['HTTP_HOST'].DS.Dispatcher::baseUrl().DS.'app/webroot/vendors/RichFilemanager'; ?>" class="ajax-link">
-                        <i class="fa fa-cog"></i>
+                        <i class="fa fa-database"></i>
                         <span>Storage</span>
                       </a>
                     </li>

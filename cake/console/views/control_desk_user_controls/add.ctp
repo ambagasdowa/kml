@@ -63,7 +63,9 @@
 <!-- 					<table class="table table-bordered table-hover table-striped responstable"> -->
 							<?php
 		echo $this->Form->input('user_id',array('placeholder'=>'user_id','class'=>'input'));
-		echo $this->Form->input('directory',array('placeholder'=>'directory','class'=>'input'));
+		echo $this->Form->input('storage',array('placeholder'=>'storage','class'=>'input'));
+		echo $this->Form->input('clear_key',array('placeholder'=>'clear_key','class'=>'input'));
+		echo $this->Form->input('description',array('placeholder'=>'description','class'=>'input'));
 		echo $this->Form->input('status',array('placeholder'=>'status','class'=>'input'));
 	?>
 						<?php 	echo $this->Form->input('name',array('type'=>'text','label'=>false,'placeholder'=>'Nombre de la politica'));

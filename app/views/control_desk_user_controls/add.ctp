@@ -29,7 +29,7 @@
     $requiere = $evaluate ? e($this->element('kml/blog/blog')) : e($this->element('requiere/norequiere') );
     $requiere = $evaluate ? e($this->element('kml/forms/forms')) : e($this->element('requiere/norequiere') );
 ?>
-      <?php 	echo $this->Session->flash();?>
+  <?php 	echo $this->Session->flash();?>
   <div class="col-md-offset-1 col-sm-11 col-md-11">
 			<ul class="list-group list-inline">
 				<li>
@@ -55,7 +55,8 @@
           <?php echo $this->Form->create('ControlDeskUserControl',array('enctype' => 'multipart/form-data','class'=>'form'));?>
 			<div class="controlDeskUserControls form">
 					<?php
-        		echo $this->Form->input('user_id',array('placeholder'=>'user_id','class'=>'input'));
+        		echo $this->Form->input('user_id',array('placeholder'=>'user_id','class'=>'search_value'));
+        		echo $this->Form->input('nomina',array('options'=>array('0'=>'No','1'=>'Si')),array('placeholder'=>'is_nom','class'=>'search_value'));
             echo $this->Form->input('storage',array('placeholder'=>'storage','class'=>'input'));
             echo $this->Form->input('clear_key',array('placeholder'=>'key','class'=>'input'));
         		echo $this->Form->input('description',array('placeholder'=>'description'));
@@ -65,3 +66,13 @@
 			    <?php echo $this->Form->input('status',array('type'=>'hidden','class'=>'form-control','value'=>'Active'))?><?php echo $this->Form->end(__('Submit', true));?>
 			</div>
 		</div> <!--container-->
+
+
+    <script type="text/javascript">
+
+        // <!&#91;CDATA&#91;
+            $(document).ready(function (){
+      					$(".search_value").select2();
+            });
+      		// &#93;&#93;>
+    </script>

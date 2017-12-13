@@ -67,7 +67,9 @@
 					<tr>
 													<th><?php echo $this->Paginator->sort('id');?></th>
 													<th><?php echo $this->Paginator->sort('user_id');?></th>
-													<th><?php echo $this->Paginator->sort('directory');?></th>
+													<th><?php echo $this->Paginator->sort('storage');?></th>
+													<th><?php echo $this->Paginator->sort('clear_key');?></th>
+													<th><?php echo $this->Paginator->sort('description');?></th>
 													<th><?php echo $this->Paginator->sort('status');?></th>
 													<th><?php echo $this->Paginator->sort('created');?></th>
 													<th><?php echo $this->Paginator->sort('modified');?></th>
@@ -88,7 +90,9 @@
 		<td>
 			<?php echo $this->Html->link($controlDeskUserControl['User']['name'], array('controller' => 'users', 'action' => 'view', $controlDeskUserControl['User']['id'])); ?>
 		</td>
-		<td><?php echo $controlDeskUserControl['ControlDeskUserControl']['directory']; ?>&nbsp;</td>
+		<td><?php echo $controlDeskUserControl['ControlDeskUserControl']['storage']; ?>&nbsp;</td>
+		<td><?php echo $controlDeskUserControl['ControlDeskUserControl']['clear_key']; ?>&nbsp;</td>
+		<td><?php echo $controlDeskUserControl['ControlDeskUserControl']['description']; ?>&nbsp;</td>
 		<td><?php echo $controlDeskUserControl['ControlDeskUserControl']['status']; ?>&nbsp;</td>
 		<td><?php echo $controlDeskUserControl['ControlDeskUserControl']['created']; ?>&nbsp;</td>
 		<td><?php echo $controlDeskUserControl['ControlDeskUserControl']['modified']; ?>&nbsp;</td>

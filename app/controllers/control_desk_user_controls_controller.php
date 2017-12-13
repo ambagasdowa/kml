@@ -28,13 +28,8 @@ class ControlDeskUserControlsController extends AppController {
 
 	function index() {
 
-		$username = $this->Auth->user('username');
-
-		debug($this->Auth->user());
-		// $this->ControlDeskUserControl->recursive = 0;
-		$this->set(compact('username'));
-
-		// $this->set('controlDeskUserControls', $this->paginate());
+		$this->ControlDeskUserControl->recursive = 0;
+		$this->set('controlDeskUserControls', $this->paginate());
 	}
 
 	function view($id = null) {
@@ -46,16 +41,59 @@ class ControlDeskUserControlsController extends AppController {
 	}
 
 	function add() {
+
+		Configure::write('debug',2);
 		if (!empty($this->data)) {
-			$this->ControlDeskUserControl->create();
-			if ($this->ControlDeskUserControl->save($this->data)) {
-				$this->Session->setFlash(__('The control desk user control has been saved', true));
-				$this->redirect(array('action' => 'index'));
+			debug($this->data);
+			// NOTE search in controlDesk
+			$the_id = $this->data['ControlDeskUserControl']['user_id'];
+			$conditionsCtrl['ControlDeskUserControl.user_id'] = $the_id;
+			$getControl = $this->ControlDeskUserControl->find('all',array('conditions'=>$conditionsCtrl));
+
+			debug($getControl);
+			if (!$getControl) {
+//
+					if ($this->data['ControlDeskUserControl']['nomina'] == true) {
+						// NOTE go to search in mssql
+						$this->LoadModel('User');
+						$this->LoadModel('MssqlPayroll');
+
+						$conditionsUser['User.id'] = $the_id;
+						$getTheNum = $this->User->find('first',array('conditions'=>$conditionsUser));
+
+						debug($getTheNum['User']);
+						debug($getTheNum['User']['number_id']);
+
+						$getPass = $this->MssqlPayroll->getPayrollByCompany($cvecia=null,$cveare=null,$cvepue=null,$cvetra=$getTheNum['User']['number_id']);
+
+							if (!$getPass) {
+								$this->Session->setFlash(__('this user must create in with option nomina = off ', true));
+								$this->redirect(array('action' => 'index'));
+							} else {
+								$set_pass = current($getPass)['MssqlPayroll']['numrfc'];
+								// debug($set_pass);
+							}
+							$save_this['ControlDeskUserControl']['user_id'] = $this->data['ControlDeskUserControl']['user_id'];
+							$save_this['ControlDeskUserControl']['storage'] = 1;
+							$save_this['ControlDeskUserControl']['clear_key'] = $set_pass;
+						} else {
+							$save_this = $this->data;
+						}
+						$this->ControlDeskUserControl->create();
+						if ($this->ControlDeskUserControl->save($save_this)) {
+							$this->Session->setFlash(__('The control desk user control has been saved', true));
+							$this->redirect(array('action' => 'index'));
+						} else {
+							$this->Session->setFlash(__('The control desk user control could not be saved. Please, try again.', true));
+						}
 			} else {
-				$this->Session->setFlash(__('The control desk user control could not be saved. Please, try again.', true));
+					$this->Session->setFlash(__('This user already set ', true));
+					$this->redirect(array('action' => 'index'));
 			}
 		}
-		$users = $this->ControlDeskUserControl->User->find('list');
+
+		$users = $this->ControlDeskUserControl->User->find('list',array('fields'=>array('id','full_name')));
+		Configure::write('debug',2);
 		$this->set(compact('users'));
 	}
 

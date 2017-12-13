@@ -12,9 +12,19 @@
 			<?php echo $this->Html->link($controlDeskUserControl['User']['name'], array('controller' => 'users', 'action' => 'view', $controlDeskUserControl['User']['id'])); ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Directory'); ?></dt>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Storage'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $controlDeskUserControl['ControlDeskUserControl']['directory']; ?>
+			<?php echo $controlDeskUserControl['ControlDeskUserControl']['storage']; ?>
+			&nbsp;
+		</dd>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Clear Key'); ?></dt>
+		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+			<?php echo $controlDeskUserControl['ControlDeskUserControl']['clear_key']; ?>
+			&nbsp;
+		</dd>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Description'); ?></dt>
+		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+			<?php echo $controlDeskUserControl['ControlDeskUserControl']['description']; ?>
 			&nbsp;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Status'); ?></dt>
