@@ -237,6 +237,13 @@
 							var tdper = parseInt(10) ;
 						} else {
 							tdper = parseInt(9) ;
+							if($(".cache-header").is(':visible') == false) {
+									// Code
+								$("#tableFilter").prepend(headder);
+							} else {
+								$(".cache-header").remove();
+								$("#tableFilter").prepend(headder);
+							}
 						}
 
 						console.log(tdper);
@@ -575,4 +582,3 @@
 				});
 		// &#93;&#93;>
     </script>
-		
