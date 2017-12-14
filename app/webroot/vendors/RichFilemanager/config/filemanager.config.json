@@ -122,16 +122,16 @@
         "opendoc": {
             "enabled": true,
             "extensions": [
-                "pdf",
-                "odt",
-                "odp",
-                "ods"
+                 "pdf"
+                ,"odt"
+                ,"odp"
+                ,"ods"
             ],
             "readerWidth": "640",
             "readerHeight": "480"
         },
         "google": {
-            "enabled": true,
+            "enabled": false,
             "extensions": [
                 "doc",
                 "docx",
