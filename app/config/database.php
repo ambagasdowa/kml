@@ -139,6 +139,17 @@ class DATABASE_CONFIG {
 		'prefix' => ''
 	);
 
+	var $portal_cloud = array(
+		'driver' => 'mysql',
+		'persistent' => false,
+		'host' => 'localhost',
+		'login' => 'portal_nextcloud',
+		'password' => '@portal_nextcloud#',
+		'database' => 'portal_nextcloud',
+		'encoding' => 'utf8',
+		'prefix' => ''
+	);
+
 	var $policie = array(
 		'driver' => 'mysql',
 		'persistent' => true,

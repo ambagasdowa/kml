@@ -80,6 +80,11 @@
 		box-sizing: border-box;
 	}
 
+	.current {
+	  pointer-events: none;
+	  cursor: default;
+		color:gray;
+	}
 </style>
 
 

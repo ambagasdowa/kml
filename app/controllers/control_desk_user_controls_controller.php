@@ -51,6 +51,7 @@ class ControlDeskUserControlsController extends AppController {
 			$getControl = $this->ControlDeskUserControl->find('all',array('conditions'=>$conditionsCtrl));
 
 			debug($getControl);
+
 			if (!$getControl) {
 //
 					if ($this->data['ControlDeskUserControl']['nomina'] == true) {
@@ -63,6 +64,8 @@ class ControlDeskUserControlsController extends AppController {
 
 						debug($getTheNum['User']);
 						debug($getTheNum['User']['number_id']);
+
+						$username = $getTheNum['User']['username'];
 
 						$getPass = $this->MssqlPayroll->getPayrollByCompany($cvecia=null,$cveare=null,$cvepue=null,$cvetra=$getTheNum['User']['number_id']);
 
@@ -79,13 +82,29 @@ class ControlDeskUserControlsController extends AppController {
 						} else {
 							$save_this = $this->data;
 						}
+
+						// NOTE add automation of users in Gst-Cloud
+
+						// $conditionsOcUser['OcUser.uid'] = $username;
+						// $this->LoadModel('OcUser');
+						//
+						// debug($this->OcUser->find('first',array('conditions'=>$conditionsOcUser)));
+						//
+						// if (!$this->OcUser->find('first',array('conditions'=>$conditionsOcUser))) {
+						// 	// NOTE create user
+						// 	debug("build the user");
+						// }
+
+						// exit();
 						$this->ControlDeskUserControl->create();
 						if ($this->ControlDeskUserControl->save($save_this)) {
+							//NOTE create a cloud user
 							$this->Session->setFlash(__('The control desk user control has been saved', true));
 							$this->redirect(array('action' => 'index'));
 						} else {
 							$this->Session->setFlash(__('The control desk user control could not be saved. Please, try again.', true));
 						}
+
 			} else {
 					$this->Session->setFlash(__('This user already set ', true));
 					$this->redirect(array('action' => 'index'));

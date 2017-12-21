@@ -362,6 +362,11 @@
 			</tbody>
 		</table>
 
+<pre>
+		<?php
+			// print_r($performanceReferencesResume);
+		?>
+</pre>
 		<div id="paging-first-datatable"></div>
 
 </div>

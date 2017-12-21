@@ -2,7 +2,7 @@
 * jQuery easyShare plugin
 * Update on 04 april 2017
 * Version 1.2
-*
+* moded version
 * Licensed under GPL <http://en.wikipedia.org/wiki/GNU_General_Public_License>
 * Copyright (c) 2008, St?hane Litou <contact@mushtitude.com>
 * All rights reserved.
@@ -53,6 +53,8 @@ $.fn.easyPaginate = function (options) {
         }
 
         var getNbOfPages = function() {
+          var numPages = Math.ceil(plugin.settings.objElements.length / plugin.settings.elementsPerPage);
+          console.log(numPages);
             return Math.ceil(plugin.settings.objElements.length / plugin.settings.elementsPerPage);
         };
 
@@ -61,6 +63,7 @@ $.fn.easyPaginate = function (options) {
 
             if(plugin.settings.firstButton) {
                 htmlNav += '<a href="#'+plugin.settings.hashPage+':1" title="First page" rel="1" class="first">'+plugin.settings.firstButtonText+'</a>';
+                console.log(plugin.settings.firstButtonText);
             }
 
             if(plugin.settings.prevButton) {
@@ -73,6 +76,8 @@ $.fn.easyPaginate = function (options) {
 
             if(plugin.settings.nextButton) {
                 htmlNav += '<a href="" title="Next" rel="" class="next">'+plugin.settings.nextButtonText+'</a>';
+                console.log('nextbtn');
+                console.log(plugin.settings.nextButtonText);
             }
 
             if(plugin.settings.lastButton) {
@@ -103,23 +108,64 @@ $.fn.easyPaginate = function (options) {
             $(elSelector + ' .easyPaginateNav a.next').on('click', function(e) {
                 e.preventDefault();
                 page = plugin.settings.currentPage < plugin.settings.pages?parseInt(plugin.settings.currentPage) + 1:plugin.settings.pages;
+                console.log(page);
                 displayPage(page);
             });
+
+            // NOTE addition
+                        // if ( $.isFunction( plugin.settings.complete ) ) {
+                        //     plugin.settings.complete.call(this);
+                        //     console.log('completeInsidePluginDisplayNav');
+                        // }
+            // NOTE addition
+
         };
 
         var displayPage = function(page, forceEffect) {
             if(plugin.settings.currentPage != page) {
                 plugin.settings.currentPage = parseInt(page);
+                console.log('page in ');
+                console.log(page);
+                console.log('plugin.settings.elementsPerPage => ' + plugin.settings.elementsPerPage);
+
                 offsetStart = (page - 1) * plugin.settings.elementsPerPage;
+                console.log('offsetStart :' + offsetStart);
+
                 offsetEnd = page * plugin.settings.elementsPerPage;
+                console.log('offsetEnd :' + offsetEnd);
+
+
                 if(typeof(forceEffect) != 'undefined') {
                     eval("transition_"+forceEffect+"("+offsetStart+", "+offsetEnd+")");
                 }else {
                     eval("transition_"+plugin.settings.effect+"("+offsetStart+", "+offsetEnd+")");
                 }
 
+                console.log('page first => ' + page);
+                console.log('plugin.settings.pages => ' + plugin.settings.pages);
+
                 plugin.nav.find('.current').removeClass('current');
                 plugin.nav.find('a.page:eq('+(page - 1)+')').addClass('current');
+
+                // addition
+                // NOTE fix the pager when is in the first page
+                if (page == 1) {
+                  plugin.nav.find('.first').addClass('current');
+                  plugin.nav.find('.prev').addClass('current');
+                } else {
+                  plugin.nav.find('.first').removeClass('current');
+                  plugin.nav.find('.prev').removeClass('current');
+                }
+
+                // NOTE fix the pager when is in the last page
+                if (page == plugin.settings.pages) {
+                  plugin.nav.find('.last').addClass('current');
+                  plugin.nav.find('.next').addClass('current');
+                } else {
+                  plugin.nav.find('.last').removeClass('current');
+                  plugin.nav.find('.next').removeClass('current');
+                }
+                // addition
 
                 switch(plugin.settings.currentPage) {
                     case 1:
@@ -138,10 +184,11 @@ $.fn.easyPaginate = function (options) {
 // NOTE addition
             if ( $.isFunction( plugin.settings.complete ) ) {
                 plugin.settings.complete.call(this);
-                console.log('completeInsidePlugin');
+                console.log('completeInsidePluginDisplayPage');
             }
-        };
 // NOTE addition
+        };
+
         var transition_default = function(offsetStart, offsetEnd) {
             plugin.currentElements.hide();
             plugin.currentElements = plugin.settings.objElements.slice(offsetStart, offsetEnd).clone();
@@ -228,7 +275,6 @@ $.fn.easyPaginate = function (options) {
                     page = 1;
                 }
             }
-
             displayPage(page, 'default');
         }
     });

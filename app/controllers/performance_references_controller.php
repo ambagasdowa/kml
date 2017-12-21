@@ -87,9 +87,32 @@ class PerformanceReferencesController extends AppController {
 			$performanceReferencesResume[$data_performance['PerformanceViewFactura']['performance_customers_id']]['promise'][] = $data_performance['PerformanceViewFactura']['promise'];
 
 			$performanceReferencesResume[$data_performance['PerformanceViewFactura']['performance_customers_id']]['payment'][] = $data_performance['PerformanceViewFactura']['payment'];
+
 		}
 
-		$this->set(compact('performanceReferencesMod','performanceReferencesIdx','dashboard','performanceReferencesResume'));
+		$generalResume = $performanceReferencesResume;
+		$general['Entrega'] = null;
+		$general['Aprobacion'] = null;
+		$general['Promesa'] = null;
+		$general['Pago'] = null;
+		$general['Cantidad'] = null;
+
+			foreach ( $generalResume as $resumenkey => $resumenvalue ) {
+				# code...
+				$general['Entrega'] += array_sum($resumenvalue['deliver']);
+				$general['Aprobacion'] += array_sum($resumenvalue['proved']);
+				$general['Promesa'] += array_sum($resumenvalue['promise']);
+				$general['Pago'] += array_sum($resumenvalue['payment']);
+				$general['Cantidad'] += count($resumenvalue['deliver']);
+
+			}
+
+			$performanceGeneral = $general;
+			// NOTE cant * preciounitario ,
+			// cast monto decimal 12,2
+			// impuesto recal 2 => 6
+
+		$this->set(compact('performanceReferencesMod','performanceReferencesIdx','dashboard','performanceReferencesResume','performanceGeneral'));
 
 		// NOTE set the response output for an ajax call
 		Configure::write('debug', 0);

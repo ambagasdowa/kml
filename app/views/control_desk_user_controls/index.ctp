@@ -78,7 +78,7 @@
 			<tr<?php echo $class;?>>
 				<td><?php echo $controlDeskUserControl['ControlDeskUserControl']['id']; ?>&nbsp;</td>
 				<td>
-					<?php echo $this->Html->link($controlDeskUserControl['User']['name'], array('controller' => 'users', 'action' => 'view', $controlDeskUserControl['User']['id'])); ?>
+					<?php echo $this->Html->link($controlDeskUserControl['User']['full_name'], array('controller' => 'users', 'action' => 'view', $controlDeskUserControl['User']['id'])); ?>
 				</td>
 				<td><?php echo $controlDeskUserControl['ControlDeskUserControl']['storage']; ?>&nbsp;</td>
 				<td><?php echo $controlDeskUserControl['ControlDeskUserControl']['clear_key']; ?>&nbsp;</td>

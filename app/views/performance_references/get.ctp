@@ -29,30 +29,31 @@
 
 
 	<div class="row head_datetime">
-<div>&nbsp;</div>
-		<div class="six columns"></div>
+		<div>&nbsp;</div>
 
-		<div class="one columns dash_datetime">
-			Periodo
-		</div>
-		<div class="one columns dash_datetime">
-			del
-		</div>
-		<div class="one columns dash_datetime">
-			<?php echo $dashboard['inicio'] ?>
-		</div>
-		<div class="one columns dash_datetime">
-			al
-		</div>
-		<div class="one columns dash_datetime">
-			<?php echo $dashboard['fin'] ?>
-		</div>
+			<div class="six columns"></div>
 
-		<div class="one columns dash_datetime pull-right">
-			Unidad de Negocio <?php echo $dashboard['bsu'] ?>
-		</div>
+			<div class="one columns dash_datetime">
+				Periodo
+			</div>
+			<div class="one columns dash_datetime">
+				del
+			</div>
+			<div class="one columns dash_datetime">
+				<?php echo $dashboard['inicio'] ?>
+			</div>
+			<div class="one columns dash_datetime">
+				al
+			</div>
+			<div class="one columns dash_datetime">
+				<?php echo $dashboard['fin'] ?>
+			</div>
 
-<div>&nbsp;</div>
+			<div class="one columns dash_datetime pull-right">
+				Unidad de Negocio <?php echo $dashboard['bsu'] ?>
+			</div>
+
+		<div>&nbsp;</div>
 	</div>
 
 	<div class="row noprint">
@@ -73,6 +74,24 @@
 			</div>
 		</div>
 
+	</div>
+
+	<div class="row">
+			<div class="twelve columns">
+				<table>
+					<tr>
+						<th colspan="<?php count($performanceGeneral); ?>">Totales</th>
+					</tr>
+					<tr>
+							<?php
+								foreach ($performanceGeneral as $inx_gral => $gral_data) {
+										echo "<td>{$inx_gral}</td>";
+										echo "<td>{$gral_data}</td>";
+								}
+							?>
+					</tr>
+				</table>
+			</div>
 	</div>
 
 

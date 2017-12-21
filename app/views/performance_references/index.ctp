@@ -79,6 +79,11 @@ td {
 	box-sizing: border-box;
 }
 
+.current {
+	pointer-events: none;
+	cursor: default;
+	color:gray;
+}
 </style>
 
 <div class="container-mod">
@@ -374,7 +379,15 @@ td {
 											 							};
 											 							$.datepicker.setDefaults($.datepicker.regional['es']);
 																 $( function() {
-																		$( "input[id^='datepicker_']" ).datepicker();
+																		$( "input[id^='datepicker_']" ).datepicker({
+																			// onClose: function( selectedDate ) {
+        															// 	jQuery( "#from" ).datepicker( "option", "maxDate", selectedDate );
+        															// }
+																			onClose: function(selectedDate) {
+																				console.log($(this));
+																				console.log(selectedDate);
+																			}
+																		});
 																 } );
 
 																 $("#add_update").on('click',function(){
@@ -509,7 +522,12 @@ td {
 							 							};
 							 							$.datepicker.setDefaults($.datepicker.regional['es']);
 												 $( function() {
-														$( "input[id^='datepicker_']" ).datepicker();
+														$( "input[id^='datepicker_']" ).datepicker({
+															onClose: function(selectedDate) {
+																console.log($(this));
+																console.log(selectedDate);
+															}
+														});
 												 } );
 
 												 $("#add_update").on('click',function(){
