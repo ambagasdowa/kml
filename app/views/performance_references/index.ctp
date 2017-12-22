@@ -384,6 +384,7 @@ td {
         															// 	jQuery( "#from" ).datepicker( "option", "maxDate", selectedDate );
         															// }
 																			onClose: function(selectedDate) {
+																				console.log("onCompleteCalling Get Inside EasyPagination");
 																				console.log($(this));
 																				console.log(selectedDate);
 																			}
@@ -524,8 +525,46 @@ td {
 												 $( function() {
 														$( "input[id^='datepicker_']" ).datepicker({
 															onClose: function(selectedDate) {
-																console.log($(this));
+																// TODO build an filter to this 
+																console.log("Outside of EasyPagination ??")
+																console.log($(this).attr('id'));
 																console.log(selectedDate);
+																// NOTE check with an array and use id attr
+																console.log('"#'+ $(this).attr('id') +'"');
+																var ondataId = $(this).attr('id');
+																var data_ids = {
+																		1:'datepicker_deliver',
+																		2:'datepicker_aproved',
+																		3:'datepicker_payment'
+																}
+
+																// var dates = {}
+
+																for (var key in data_ids) {
+																    // check if the property/key is defined in the object itself, not in parent
+																    if (data_ids.hasOwnProperty(key)) {
+																        // console.log(key, data_ids[key]);
+																				// NOTE find the prev id
+																				var currentId = data_ids[key];
+																				var subkey = key;
+																				console.log(key,subkey+1);
+																				var prev_id = data_ids[subkey+1];
+																				console.log('ondataId '+ondataId);
+																				console.log('currentId '+currentId);
+																				console.log('prev_id '+ prev_id);
+
+																				if ( ondataId == currentId ) {
+																					console.log( ondataId + ' => ' + currentId + ' => ' + prev_id );
+																					backId = "#" + prev_id;
+																					console.log('Tre backId is ' + backId);
+																					$(backId).datepicker( "option", "maxDate", selectedDate );
+																				}
+																				// jQuery( '"#'+ data_ids[key-1] +'"' ).datepicker( "option", "maxDate", selectedDate );
+																    }
+																}
+																console.log('Found the backend id : '+ backId + ' and selectted is => ' + selectedDate);
+																// $(backId).datepicker( "option", "maxDate", selectedDate );
+																// jQuery( '"#'+ data_ids[key-1] +'"' ).datepicker( "option", "maxDate", selectedDate );
 															}
 														});
 												 } );

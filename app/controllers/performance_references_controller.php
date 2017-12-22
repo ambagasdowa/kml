@@ -91,18 +91,18 @@ class PerformanceReferencesController extends AppController {
 		}
 
 		$generalResume = $performanceReferencesResume;
-		$general['Entrega'] = null;
-		$general['Aprobacion'] = null;
-		$general['Promesa'] = null;
-		$general['Pago'] = null;
+		$general['Dias de Entrega'] = null;
+		$general['Dias de Aprobacion'] = null;
+		$general['Dias de Promesa'] = null;
+		$general['Dias de Pago'] = null;
 		$general['Cantidad'] = null;
 
 			foreach ( $generalResume as $resumenkey => $resumenvalue ) {
 				# code...
-				$general['Entrega'] += array_sum($resumenvalue['deliver']);
-				$general['Aprobacion'] += array_sum($resumenvalue['proved']);
-				$general['Promesa'] += array_sum($resumenvalue['promise']);
-				$general['Pago'] += array_sum($resumenvalue['payment']);
+				$general['Dias de Entrega'] += array_sum($resumenvalue['deliver']);
+				$general['Dias de Aprobacion'] += array_sum($resumenvalue['proved']);
+				$general['Dias de Promesa'] += array_sum($resumenvalue['promise']);
+				$general['Dias de Pago'] += array_sum($resumenvalue['payment']);
 				$general['Cantidad'] += count($resumenvalue['deliver']);
 
 			}

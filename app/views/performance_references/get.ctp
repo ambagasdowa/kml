@@ -78,9 +78,9 @@
 
 	<div class="row">
 			<div class="twelve columns">
-				<table>
+				<table class="table table-hover">
 					<tr>
-						<th colspan="<?php count($performanceGeneral); ?>">Totales</th>
+						<th colspan="<?php echo count($performanceGeneral)*2; ?>">Totales</th>
 					</tr>
 					<tr>
 							<?php

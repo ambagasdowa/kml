@@ -134,6 +134,28 @@ class PerformanceTripsController extends AppController {
 
 		}
 
+		// debug($performanceReferencesResume);
+
+		$generalResume = $performanceReferencesResume;
+		$general['Dias de Cierre'] = null;
+		$general['Dias de Recepcion'] = null;
+		$general['Dias de Aceptado'] = null;
+		$general['Dias de Entrega'] = null;
+		$general['Dias de Validacion'] = null;
+		$general['Cantidad'] = null;
+
+			foreach ( $generalResume as $resumenkey => $resumenvalue ) {
+				# code...
+				$general['Dias de Cierre'] += array_sum($resumenvalue['end']);
+				$general['Dias de Recepcion'] += array_sum($resumenvalue['reception']);
+				$general['Dias de Aceptado'] += array_sum($resumenvalue['aceptance']);
+				$general['Dias de Entrega'] += array_sum($resumenvalue['deliver']);
+				$general['Dias de Validacion'] += array_sum($resumenvalue['validation']);
+				$general['Cantidad'] += count($resumenvalue['end']);
+			}
+			// debug($general);
+			$performanceGeneral = $general;
+
 			if ( isset($xport) and $xport != null)  {
 
 				debug($xport);
@@ -150,7 +172,7 @@ class PerformanceTripsController extends AppController {
 
 			} else {
 
-			$this->set(compact('performanceViewViaje','performanceReferencesMod','performanceReferencesIdx','dashboard','performanceReferencesResume'));
+			$this->set(compact('performanceViewViaje','performanceReferencesMod','performanceReferencesIdx','dashboard','performanceReferencesResume','performanceGeneral'));
 
 			// NOTE set the response output for an ajax call
 			Configure::write('debug', 0);

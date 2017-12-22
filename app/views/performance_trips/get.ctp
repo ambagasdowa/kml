@@ -75,6 +75,24 @@
 
 	</div>
 
+	<div class="row">
+			<div class="twelve columns">
+				<table class="table table-hover">
+					<tr>
+						<th colspan="<?php echo count($performanceGeneral)*2; ?>">Totales</th>
+					</tr>
+					<tr>
+							<?php
+								foreach ($performanceGeneral as $inx_gral => $gral_data) {
+										echo "<td>{$inx_gral}</td>";
+										echo "<td>{$gral_data}</td>";
+								}
+							?>
+					</tr>
+				</table>
+			</div>
+	</div>
+
 
 <div id="first-datatable-output" class="table-responsive">
 
@@ -362,11 +380,6 @@
 			</tbody>
 		</table>
 
-<pre>
-		<?php
-			// print_r($performanceReferencesResume);
-		?>
-</pre>
 		<div id="paging-first-datatable"></div>
 
 </div>
