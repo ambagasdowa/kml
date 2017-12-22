@@ -57,6 +57,7 @@
 							<tr>
 															<th><?php echo $this->Paginator->sort('id');?></th>
 															<th><?php echo $this->Paginator->sort('user_id');?></th>
+															<th><?php echo $this->Paginator->sort('username','user_id');?></th>
 															<th><?php echo $this->Paginator->sort('storage');?></th>
 															<th><?php echo $this->Paginator->sort('clear_key');?></th>
 															<th><?php echo $this->Paginator->sort('description');?></th>
@@ -79,6 +80,9 @@
 				<td><?php echo $controlDeskUserControl['ControlDeskUserControl']['id']; ?>&nbsp;</td>
 				<td>
 					<?php echo $this->Html->link($controlDeskUserControl['User']['full_name'], array('controller' => 'users', 'action' => 'view', $controlDeskUserControl['User']['id'])); ?>
+				</td>
+				<td>
+					<?php echo $this->Html->link($controlDeskUserControl['User']['username'], array('controller' => 'users', 'action' => 'view', $controlDeskUserControl['User']['id'])); ?>
 				</td>
 				<td><?php echo $controlDeskUserControl['ControlDeskUserControl']['storage']; ?>&nbsp;</td>
 				<td><?php echo $controlDeskUserControl['ControlDeskUserControl']['clear_key']; ?>&nbsp;</td>
