@@ -202,6 +202,15 @@ class AppController extends Controller {
 
 	}
 
+/** NOTE <CORE set the proper permissions and shares account >
+*   @vendor
+*/
+
+  function controlModules($user_id = null) {
+
+    return null;
+  }
+
 /** NOTE <CORE set the proper permissions and shares account >*/
 
 	function setShares ($user_id = null) {
@@ -441,6 +450,13 @@ class AppController extends Controller {
 
     $this->setShares($this->Auth->user()['User']['id']);
 // 		$this->extendsUsersMenu();
+
+    /** NOTE Add function for control Module Control Module
+    * @packages this module controls the main menu
+    * $this->controlModuleUsers($this->Auth->user()['User']['id']);
+    */
+
+
 
 
 // 		exit();

@@ -1,3 +1,13 @@
+<?php
+		// NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal.
+		// $evaluate = false;
+		// $requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere'));
+		// blog
+		$evaluate = true;
+		$requiere = $evaluate ? e($this->element('kml/blog/blog')) : e($this->element('requiere/norequiere') );
+		$requiere = $evaluate ? e($this->element('kml/forms/forms')) : e($this->element('requiere/norequiere') );
+?>
+
 <div class="groups form">
 <?php echo $this->Form->create('Group');?>
 	<fieldset>

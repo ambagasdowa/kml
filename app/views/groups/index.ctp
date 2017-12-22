@@ -1,7 +1,17 @@
 <?php //users?>
+<?php
+    // NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal.
+    // $evaluate = false;
+    // $requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere'));
+    // blog
+    $evaluate = true;
+    $requiere = $evaluate ? e($this->element('kml/blog/blog')) : e($this->element('requiere/norequiere') );
+    $requiere = $evaluate ? e($this->element('kml/forms/forms')) : e($this->element('requiere/norequiere') );
+?>
+
     <div class="container-fluid">
       <div class="row">
-      
+
         <div class="col-md-offset-1 col-sm-11 col-md-11">
           <ul class="list-group list-inline">
 
@@ -9,15 +19,15 @@
 				<?php echo $this->Html->link(__('New Group', true), array('action' => 'add')); ?>
 			</li>
 			<li class="list-group-item">
-				<?php echo $this->Html->link(__('List Users', true), array('controller' => 'users', 'action' => 'index')); ?> 
+				<?php echo $this->Html->link(__('List Users', true), array('controller' => 'users', 'action' => 'index')); ?>
 			</li>
 			<li class="list-group-item">
-				<?php echo $this->Html->link(__('New User', true), array('controller' => 'users', 'action' => 'add')); ?> 
+				<?php echo $this->Html->link(__('New User', true), array('controller' => 'users', 'action' => 'add')); ?>
 			</li>
-			
+
           </ul>
         </div>
-        
+
         <div class="col-sm-9 col-sm-offset-2 col-md-10 col-md-offset-1 main">
           <h1 class="page-header"><?php __('Groups');?></h1>
           <div class="table-responsive">
@@ -78,13 +88,13 @@
 				</p>
 
 				<ul class="pagination">
-						<?php 
-							echo $this->Paginator->prev( '«' ,array('tag'=>'li'),null, array('aria-hidden'=>'true','class' => 'disabled','tag'=>'li')); 
+						<?php
+							echo $this->Paginator->prev( '«' ,array('tag'=>'li'),null, array('aria-hidden'=>'true','class' => 'disabled','tag'=>'li'));
 						?>
-						<?php 
+						<?php
 							echo $this->Paginator->numbers(array('separator' => null,'tag'=>'li'));
 						?>
-						<?php 
+						<?php
 							echo $this->Paginator->next( '»' , array('tag'=>'li'), null, array('aria-hidden'=>'true','class' => 'disabled','tag'=>'li'));
 						?>
 				</ul>
@@ -92,5 +102,3 @@
         </div> <!--main-->
       </div> <!--row-->
     </div> <!--container fluid-->
-
-
