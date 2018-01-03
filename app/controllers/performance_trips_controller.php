@@ -154,7 +154,25 @@ class PerformanceTripsController extends AppController {
 				$general['Cantidad'] += count($resumenvalue['end']);
 			}
 			// debug($general);
-			$performanceGeneral = $general;
+			foreach ($general as $key => $value) {
+				# code...
+				if ($key != 'Cantidad') {
+					$result_array[$key] =
+					number_format(
+							money_format(
+									'%i',
+									(
+										$value / $general['Cantidad']
+									)
+							), 2, '.', ','
+					);
+				} else {
+					$result_array[$key] = $value;
+				}
+			}
+			// debug($result_array);
+			$performanceGeneral = $result_array;
+			// $performanceGeneral = $general;
 
 			if ( isset($xport) and $xport != null)  {
 

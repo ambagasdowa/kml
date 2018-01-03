@@ -97,17 +97,38 @@ class PerformanceReferencesController extends AppController {
 		$general['Dias de Pago'] = null;
 		$general['Cantidad'] = null;
 
-			foreach ( $generalResume as $resumenkey => $resumenvalue ) {
-				# code...
-				$general['Dias de Entrega'] += array_sum($resumenvalue['deliver']);
-				$general['Dias de Aprobacion'] += array_sum($resumenvalue['proved']);
-				$general['Dias de Promesa'] += array_sum($resumenvalue['promise']);
-				$general['Dias de Pago'] += array_sum($resumenvalue['payment']);
-				$general['Cantidad'] += count($resumenvalue['deliver']);
+		foreach ( $generalResume as $resumenkey => $resumenvalue ) {
+			# code...
+			$general['Dias de Entrega'] += array_sum($resumenvalue['deliver']);
+			$general['Dias de Aprobacion'] += array_sum($resumenvalue['proved']);
+			$general['Dias de Promesa'] += array_sum($resumenvalue['promise']);
+			$general['Dias de Pago'] += array_sum($resumenvalue['payment']);
+			$general['Cantidad'] += count($resumenvalue['deliver']);
 
+		}
+
+		foreach ($general as $key => $value) {
+			# code...
+			if ($key != 'Cantidad') {
+				$result_array[$key] =
+				number_format(
+						money_format(
+								'%i',
+								(
+									$value / $general['Cantidad']
+								)
+						), 2, '.', ','
+				);
+			} else {
+				$result_array[$key] = $value;
 			}
+		}
+		// debug($result_array);
 
-			$performanceGeneral = $general;
+		$performanceGeneral = $result_array;
+
+
+		// debug($general);
 			// NOTE cant * preciounitario ,
 			// cast monto decimal 12,2
 			// impuesto recal 2 => 6

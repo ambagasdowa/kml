@@ -417,6 +417,26 @@
 	 * @param=>userAgent <string | convert an array to utf8  >
 	 * NOTE  this function is far away to be complete but for the purpose is ok
 	 */
+	function average($elem,$size = null ,$mode = null){
+
+		if ($mode == null ) {
+			return array_sum($elem)/sizeof($elem);
+		} else {
+			foreach ($elem as $key => $value) {
+				# code...
+				$result_array[$key] = $value / $size;
+			}
+		 return $result_array;
+		}
+	}
+
+	 /**
+	 * @package name <map_utf8> this must change
+	 * @congif build a script code to call datepicker
+	 * @usage
+	 * @param=>userAgent <string | convert an array to utf8  >
+	 * NOTE  this function is far away to be complete but for the purpose is ok
+	 */
 	function map_utf8($results) {
 
 		foreach ($results as $key => $value) {
