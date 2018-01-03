@@ -90,6 +90,9 @@ class PerformanceReferencesController extends AppController {
 
 		}
 
+		if (!isset($performanceReferencesResume)) {
+			$performanceReferencesResume = null ;
+		}
 		$generalResume = $performanceReferencesResume;
 		$general['Dias de Entrega'] = null;
 		$general['Dias de Aprobacion'] = null;
@@ -97,6 +100,7 @@ class PerformanceReferencesController extends AppController {
 		$general['Dias de Pago'] = null;
 		$general['Cantidad'] = null;
 
+	if (isset($generalResume)) {
 		foreach ( $generalResume as $resumenkey => $resumenvalue ) {
 			# code...
 			$general['Dias de Entrega'] += array_sum($resumenvalue['deliver']);
@@ -126,7 +130,9 @@ class PerformanceReferencesController extends AppController {
 		// debug($result_array);
 
 		$performanceGeneral = $result_array;
-
+	} else {
+		$performanceGeneral = null;
+	}
 
 		// debug($general);
 			// NOTE cant * preciounitario ,

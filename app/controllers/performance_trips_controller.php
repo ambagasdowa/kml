@@ -135,6 +135,7 @@ class PerformanceTripsController extends AppController {
 		}
 
 		// debug($performanceReferencesResume);
+	if (isset($performanceReferencesResume)) {
 
 		$generalResume = $performanceReferencesResume;
 		$general['Dias de Cierre'] = null;
@@ -172,6 +173,7 @@ class PerformanceTripsController extends AppController {
 			}
 			// debug($result_array);
 			$performanceGeneral = $result_array;
+		}
 			// $performanceGeneral = $general;
 
 			if ( isset($xport) and $xport != null)  {
