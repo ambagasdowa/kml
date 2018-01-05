@@ -25,6 +25,8 @@
 		    $evaluate = true;
 		    $requiere = $evaluate ? e($this->element('kml/blog/blog')) : e($this->element('requiere/norequiere') );
 				$requiere = $evaluate ? e($this->element('kml/forms/forms')) : e($this->element('requiere/norequiere') );
+				// $requiere = $evaluate ? e($this->element('kml/performance/main')) : e($this->element('requiere/norequiere') );
+
 		?>
 
 <!-- temporal style  -->
@@ -80,10 +82,20 @@ td {
 }
 
 .current {
+	display: inline-block;  /* For IE11/ MS Edge bug */
 	pointer-events: none;
 	cursor: default;
 	color:gray;
+	text-decoration: none;
 }
+
+.current > a {
+  color: gray;
+  display: inline-block;  /* For IE11/ MS Edge bug */
+  pointer-events: none;
+  text-decoration: none;
+}
+
 </style>
 
 <div class="container-mod">
@@ -525,7 +537,7 @@ td {
 												 $( function() {
 														$( "input[id^='datepicker_']" ).datepicker({
 															onClose: function(selectedDate) {
-																// TODO build an filter to this 
+																// TODO build an filter to this
 																console.log("Outside of EasyPagination ??")
 																console.log($(this).attr('id'));
 																console.log(selectedDate);

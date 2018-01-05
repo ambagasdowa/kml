@@ -1,34 +1,19 @@
 <?php
 /**
-
-		* 
-
-		* PHP versions 4 and 5 
-
-		* 
-
-		* kml : Kamila Software 
-
-		* Licensed under The MIT License  
-
-		* Redistributions of files must retain the above copyright notice. 
-
-		* 
-
-		* @copyright     Jesus Baizabal 
-
-		* @link          http://baizabal.xyz 
-
-		* @mail	     baizabal.jesus@gmail.com 
-
-		* @package       cake 
-
-		* @subpackage    cake.cake.console.libs.templates.views 
-
-		* @since         CakePHP(tm) v 1.2.0.5234 
-
-		* @license       MIT License (http://www.opensource.org/licenses/mit-license.php) 
-
+		*
+		* PHP versions 4 and 5
+	  *
+		* kml : Kamila Software
+		* Licensed under The MIT License
+		* Redistributions of files must retain the above copyright notice.
+		*
+		* @copyright     Jesus Baizabal
+		* @link          http://baizabal.xyz
+		* @mail	     baizabal.jesus@gmail.com
+		* @package       cake
+		* @subpackage    cake.cake.console.libs.templates.views
+  	* @since         CakePHP(tm) v 1.2.0.5234
+		* @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
 		*/
 ?>
 
@@ -40,9 +25,9 @@ class ProjectionsViewIndicatorsPeriodsFleetsController extends AppController {
 	var $helpers = array('Html','Form','Ajax','Javascript','Js');
 
 	function index($year = null , $month = null) {
-        
+
 //         var_dump($this->params['named']['year']);
-	
+
         if (!empty($this->params['named']['year']) && !empty($this->params['named']['month'])) {
 			$projections_options = $this->params['named'];
             $cyear    = $projections_options['year'];
@@ -55,7 +40,7 @@ class ProjectionsViewIndicatorsPeriodsFleetsController extends AppController {
 		}
 
         $this->ProjectionsViewIndicatorsPeriodsFleet->query('SET	ANSI_NULLS	ON;SET	ANSI_WARNINGS	ON;');
-        
+
 		// ALERT get tw0 years
 		$work = GetWorkingDays($MexicanoHolidays=GetNationalMexicanHolidays(array('2016','2017')),$debug=false,$return_compact=true,$saturday_is_weekend=false);
 
@@ -77,7 +62,7 @@ class ProjectionsViewIndicatorsPeriodsFleetsController extends AppController {
         $off_month = explode('-',$newDateSub);
         debug($off_month);
 		$backwardsMonthDays = $work[$off_month['0']][$off_month['1']]['list'];
-		
+
 		debug($newDateSub);
 
 // 		$totalFullDaysInCurrentMonth = date('t');
@@ -102,19 +87,19 @@ class ProjectionsViewIndicatorsPeriodsFleetsController extends AppController {
 
 		debug($fullDetailsLabDays);
 
-		
-        $this->LoadModel('ProjectionsViewIndicatorsPeriodsFullFleet'); // Load the model full fleets 
-        
-        
+
+        $this->LoadModel('ProjectionsViewIndicatorsPeriodsFullFleet'); // Load the model full fleets
+
+
 		$conditionsProjectionsViewIndicatorsPeriodsFleet['ProjectionsViewIndicatorsPeriodsFleet.cyear'] = $cyear;
 		$conditionsProjectionsViewIndicatorsPeriodsFleet['ProjectionsViewIndicatorsPeriodsFleet.mes'] = ucwords(months_es()[(int)$cmonth]);
-		
+
 		$conditionsProjectionsViewIndicatorsPeriodsFleet['ProjectionsViewIndicatorsPeriodsFleet.fraccion'] = $fraction; // this can be dinamic
 // 		$conditionsProjectionsViewIndicatorsPeriodsFleet['ProjectionsViewIndicatorsPeriodsFleet.fraccion'] = 'CAJA SECA'; // this can be dinamic
-		
-		
+
+
 		debug($conditionsProjectionsViewIndicatorsPeriodsFleet);
-		
+
 
 		$this->paginate = array(
 			'conditions' => $conditionsProjectionsViewIndicatorsPeriodsFleet,

@@ -61,6 +61,7 @@ class ReporterViewSpXs4zAccount extends AppModel {
 			} elseif ( $mode != null && is_string($mode) ) { //NOTE first check
 
 				$cdate = date('n') ; //NOTE check the current month
+
 				//NOTE if mode exists the check options
 				if ( $options != null && is_array($options) ) {
 
@@ -83,7 +84,7 @@ class ReporterViewSpXs4zAccount extends AppModel {
 					$conditions_key = null;
 					$conditions_bsu = null;
 				}
-
+				// debug($tachion_backward)
 // NOTE build the special conditions
 				if ($conditions_key != null ) {
 					$str_len = (strlen(key($conditions_key))-1) - strpos(key($conditions_key), '.') ;
@@ -119,7 +120,6 @@ class ReporterViewSpXs4zAccount extends AppModel {
 				if (isset($string_data)) {
 					$add_str_data = implode('', $string_data);
 				}
-
 
 				//NOTE build the querys
 

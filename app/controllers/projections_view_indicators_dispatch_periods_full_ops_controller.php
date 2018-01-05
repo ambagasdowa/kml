@@ -25,13 +25,13 @@ class ProjectionsViewIndicatorsDispatchPeriodsFullOpsController extends AppContr
 	var $helpers = array('Html','Form','Ajax','Javascript','Js');
 
 	function index() {
-		
+
         $this->ProjectionsViewIndicatorsDispatchPeriodsFullOp->query('SET	ANSI_NULLS	ON;SET	ANSI_WARNINGS	ON;');
 
 // 		$this->ProjectionsViewIndicatorsDispatchPeriodsFullOp->recursive = 0;
 // 		$this->set('projectionsViewIndicatorsDispatchPeriodsFullOps', $this->paginate());
 
-       $cyear = '2017';
+       $cyear = '2018';
 
         $this->LoadModel('ProjectionsViewBussinessUnit');   // Add units
         $this->LoadModel('ProjectionsViewFraction');        // Add fractions

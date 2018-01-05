@@ -26,6 +26,7 @@
 		    $evaluate = true;
 		    $requiere = $evaluate ? e($this->element('kml/blog/blog')) : e($this->element('requiere/norequiere') );
 				$requiere = $evaluate ? e($this->element('kml/forms/forms')) : e($this->element('requiere/norequiere') );
+				// $requiere = $evaluate ? e($this->element('kml/performance/main')) : e($this->element('requiere/norequiere') );
 		?>
 
 <!-- temporal style  -->
@@ -81,10 +82,20 @@
 	}
 
 	.current {
-	  pointer-events: none;
-	  cursor: default;
+		display: inline-block;  /* For IE11/ MS Edge bug */
+		pointer-events: none;
+		cursor: default;
 		color:gray;
+		text-decoration: none;
 	}
+
+	.current > a {
+		color: gray;
+		display: inline-block;  /* For IE11/ MS Edge bug */
+		pointer-events: none;
+		text-decoration: none;
+	}
+
 </style>
 
 

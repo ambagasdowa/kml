@@ -568,7 +568,7 @@
                     <?php }?>
 
 										<?php if (isset($_SESSION['Auth']['User'])) {?>
-										<?php 	if (checkUser($_SESSION['Auth']['User']['group_id'],'Ingresos')) {?>
+										<?php 	if (checkUser($_SESSION['Auth']['User']['group_id'],'Ingresos') OR checkUser($_SESSION['Auth']['User']['group_id'],'CasetasIngresos')) {?>
 
 										<li class="dropdown-submenu">
 											<a tabindex="-1" href="#"><i class="fa fa-line-chart"></i>&nbsp;<span>Proyecci&oacute;n</span></a>
@@ -590,7 +590,7 @@
 										<?php }?>
 
 										<?php if (isset($_SESSION['Auth']['User'])) {?>
-										<?php 	if (checkUser($_SESSION['Auth']['User']['group_id'],'Casetas')) {?>
+										<?php 	if (checkUser($_SESSION['Auth']['User']['group_id'],'Casetas') OR checkUser($_SESSION['Auth']['User']['group_id'],'CasetasIngresos')) {?>
 
 										<li class="dropdown-submenu">
 											<a tabindex="-1" href="#"><i class="fa fa-truck"></i>&nbsp;<span>Casetas</span></a>

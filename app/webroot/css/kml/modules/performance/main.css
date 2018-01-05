@@ -1,0 +1,56 @@
+/*@media screen {*/
+		.ninja-scroll {
+			scroll-behavior: smooth;
+			overflow-x: auto;
+			/*overflow-y: auto;*/
+		}
+		.avg {
+			font-style: italic;
+			text-decoration: overline;
+		}
+
+		select::-ms-expand {
+			display: none;
+		}
+
+		th {
+			/*font-size: 12px;*/
+			white-space:nowrap;
+		}
+		td {
+			font-size: 12px;
+			white-space:nowrap;
+		}
+
+		.detail_header {
+			display: none;
+		}
+
+		.head_datetime{
+			display: none;
+		}
+
+		.colorbax {
+			position: relative;
+			width: 100%;
+			min-width: 95%;
+			margin: 0 auto;
+			padding: 0 20px;
+			box-sizing: border-box;
+		}
+
+		.current {
+			display: inline-block;  /* For IE11/ MS Edge bug */
+			pointer-events: none;
+			cursor: default;
+			color:gray;
+			text-decoration: none;
+		}
+
+		.current > a {
+		  color: gray;
+		  display: inline-block;  /* For IE11/ MS Edge bug */
+		  pointer-events: none;
+		  text-decoration: none;
+		}
+/*}*/

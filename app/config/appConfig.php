@@ -170,7 +170,7 @@
 	 //NOTE which groups in that module gorup xx and module_name
 	function checkUser ($id_group=null,$group=null) {
 
-		if ( ( (int)$id_group === 8 OR (int)$id_group === 6 OR (int)$id_group === 1 OR (int)$id_group === 7) and $group === 'Casetas') {
+		if ( ( (int)$id_group === 8 OR (int)$id_group === 6 OR (int)$id_group === 1 OR (int)$id_group === 7) and ($group === 'Casetas')) {
 			return true;
 		} else if (( (int)$id_group === 5 OR (int)$id_group === 1  OR (int)$id_group === 7) and $group === 'PoliciesAnexos') {
 			return true;
@@ -183,6 +183,8 @@
 		} else if (( (int)$id_group === 8 OR (int)$id_group === 10 OR (int)$id_group === 1 OR (int)$id_group === 7) and $group === 'Finanzas') {
 			return true;
 		} else if (( (int)$id_group === 11 OR (int)$id_group === 1 OR (int)$id_group === 7) and $group === 'Facturacion') {
+			return true;
+		} else if (( (int)$id_group === 12 OR (int)$id_group === 1 OR (int)$id_group === 7) and $group === 'CasetasIngresos') { //group for projections and casetas
 			return true;
 		} else {
 			return false;

@@ -97,6 +97,8 @@ class ReporterViewSpXs4zAccountsController extends AppController {
 
 	function index( $cyear=null ) {
 
+		Configure::write('debug', 2);
+
 		if ( $cyear==null ) {
 			$cyear = date('Y');
 		}

@@ -53,7 +53,7 @@ class ProjectionsViewIndicatorsPeriodsFullFleetsController extends AppController
 		}
 
 		// ALERT get avaliable working days over the years
-		$work = GetWorkingDays($MexicanoHolidays=GetNationalMexicanHolidays(array('2016','2017')),$debug=false,$return_compact=true,$saturday_is_weekend=false);
+		$work = GetWorkingDays($MexicanoHolidays=GetNationalMexicanHolidays(array('2017','2018')),$debug=false,$return_compact=true,$saturday_is_weekend=false);
 
 		$newFetchDate = new DateTime($cyear.'-'.$cmonth.'-01');
 		$newDate = $newFetchDate->format('Y-m-d');
