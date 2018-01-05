@@ -317,6 +317,19 @@
 	function print_data () {
 		print_r(test());
 	}
+
+
+	/**
+	* @package name <htmlMotor> this must change
+	* @congif build a script code to call datepicker
+	* @usage
+	* @param=>userAgent <string | set the string of "HTTP_USER_AGENT" >
+	* NOTE  this function is far away to be complete but for the purpose is ok
+	*/
+	function setYear ($current = null ,$offset = null) {
+		return null;
+	}
+
 	 /**
 	 * @package name <htmlMotor> this must change
 	 * @congif build a script code to call datepicker

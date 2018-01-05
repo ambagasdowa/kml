@@ -31,7 +31,7 @@ class ProjectionsViewIndicatorsDispatchPeriodsFullOpsController extends AppContr
 // 		$this->ProjectionsViewIndicatorsDispatchPeriodsFullOp->recursive = 0;
 // 		$this->set('projectionsViewIndicatorsDispatchPeriodsFullOps', $this->paginate());
 
-       $cyear = '2018';
+       $cyear = '2017';
 
         $this->LoadModel('ProjectionsViewBussinessUnit');   // Add units
         $this->LoadModel('ProjectionsViewFraction');        // Add fractions
