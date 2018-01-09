@@ -28,7 +28,7 @@ class ProjectionsViewIndicatorsPeriodsFleetsController extends AppController {
 
 //         var_dump($this->params['named']['year']);
 
-        if (!empty($this->params['named']['year']) && !empty($this->params['named']['month'])) {
+    if (!empty($this->params['named']['year']) && !empty($this->params['named']['month'])) {
 			$projections_options = $this->params['named'];
             $cyear    = $projections_options['year'];
             $cmonth   = $projections_options['month'];

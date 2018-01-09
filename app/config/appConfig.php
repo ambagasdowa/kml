@@ -180,7 +180,7 @@
 			return true;
 		} else if (( (int)$id_group === 8 OR (int)$id_group === 10 OR (int)$id_group === 1 OR (int)$id_group === 7) and $group === 'Ingresos') {
 			return true;
-		} else if (( (int)$id_group === 8 OR (int)$id_group === 10 OR (int)$id_group === 1 OR (int)$id_group === 7) and $group === 'Finanzas') {
+		} else if (( (int)$id_group === 8 OR (int)$id_group === 1 OR (int)$id_group === 7) and $group === 'Finanzas') {
 			return true;
 		} else if (( (int)$id_group === 11 OR (int)$id_group === 1 OR (int)$id_group === 7) and $group === 'Facturacion') {
 			return true;
@@ -324,7 +324,7 @@
 	* @congif build a script code to call datepicker
 	* @usage
 	* @param=>userAgent <string | set the string of "HTTP_USER_AGENT" >
-	* NOTE  this function is far away to be complete but for the purpose is ok
+	* TODO set a funciton of year maybe this can come from a db
 	*/
 	function setYear ($current = null ,$offset = null) {
 		return null;

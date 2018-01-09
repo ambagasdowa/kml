@@ -574,13 +574,13 @@
 											<a tabindex="-1" href="#"><i class="fa fa-line-chart"></i>&nbsp;<span>Proyecci&oacute;n</span></a>
 												<ul class="dropdown-menu">
 													<li>
-                                                        <a tabindex="-1" href="<?php e($this->webroot.'ProjectionsViewIndicatorsPeriods/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-pencil-square-o"></i>&nbsp;<span> Aceptado </span></a>
+                            <a tabindex="-1" href="<?php e($this->webroot.'ProjectionsViewIndicatorsPeriods/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-pencil-square-o"></i>&nbsp;<span> Aceptado </span></a>
 													</li>
 													<li>
-                                                        <a tabindex="-1" href="<?php e($this->webroot.'ProjectionsViewIndicatorsDispatchPeriodsFullOps/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-exchange"></i>&nbsp;<span>Despachado</span></a>
+                            <a tabindex="-1" href="<?php e($this->webroot.'ProjectionsViewIndicatorsDispatchPeriodsFullOps/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-exchange"></i>&nbsp;<span>Despachado</span></a>
 													</li>
 													<li>
-                                                        <a tabindex="-1" href="<?php e($this->webroot.'ProjectionsViewIndicatorsPeriodsFullFleets/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-bar-chart"></i>&nbsp;<span>Proyecci&oacute;n</span></a>
+                            <a tabindex="-1" href="<?php e($this->webroot.'ProjectionsViewIndicatorsPeriodsFullFleets/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-bar-chart"></i>&nbsp;<span>Proyecci&oacute;n</span></a>
 													</li>
 												</ul>
 										</li>
