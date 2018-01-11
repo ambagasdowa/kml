@@ -449,12 +449,12 @@ var message="No se Autoriza la Impresion de este Documento";
 			<div class="tab-pane fade" id="<?php e($nameDecodeContent);?>">
 			<?php }?>
 
-				<div class="alert alert-warning alert-dismissible" role="alert">
+				<!-- <div class="alert alert-warning alert-dismissible" role="alert">
 					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
-					<?php echo $this->element('policies/gst_aviso'); ?>
-				</div>
+					<?php // echo $this->element('policies/gst_aviso'); ?>
+				</div> -->
 
 				<div id="menu_anexos">
 					<?php if(isset($anexos)) {?>
