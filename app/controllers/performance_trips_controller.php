@@ -178,6 +178,11 @@ class PerformanceTripsController extends AppController {
 
 			}
 			// debug($general);
+		$general['Cierre'] = $generalall['end'];
+		$general['Recepcion'] = $generalall['reception'];
+		$general['Aceptado'] = $generalall['aceptance'];
+		$general['Entrega'] = $generalall['deliver'];
+		$general['Validacion'] = $generalall['validation'];
 
 			foreach ($general as $key => $value) {
 				# code...

@@ -141,7 +141,10 @@ class PerformanceReferencesController extends AppController {
 
 // debug(array_key_exists('Cantidad',$general));
 
-		$exclude_key = array('Cantidad');
+		$general['Entrega'] = $generalall['deliver'];
+		$general['Aprobado'] = $generalall['proved'];
+		$general['Promesa'] = $generalall['promise'];
+		$general['Pago'] = $generalall['payment'];
 
 		foreach ($general as $key => $value) {
 			# code...
@@ -187,16 +190,16 @@ class PerformanceReferencesController extends AppController {
 									)
 							), 2, '.', ','
 					);
-				} else {
-					$result_array[$key] =
-					number_format(
-							money_format(
-									'%i',
-									(
-										$value / $general['Cantidad']
-									)
-							), 2, '.', ','
-					);
+				// } else {
+				// 	$result_array[$key] =
+				// 	number_format(
+				// 			money_format(
+				// 					'%i',
+				// 					(
+				// 						$value / $general['Cantidad']
+				// 					)
+				// 			), 2, '.', ','
+				// 	);
 				}
 
 			} else {
