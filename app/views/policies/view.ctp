@@ -449,6 +449,7 @@ var message="No se Autoriza la Impresion de este Documento";
 			<div class="tab-pane fade" id="<?php e($nameDecodeContent);?>">
 			<?php }?>
 
+<!-- NOTE LEGAL ADVISOR -->
 				<!-- <div class="alert alert-warning alert-dismissible" role="alert">
 					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 						<span aria-hidden="true">&times;</span>

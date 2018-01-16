@@ -250,7 +250,8 @@
 										(
 												array_sum($performanceReferencesResume[$performanceReferencesKey]['deliver'])
 													/
-												count($performanceReferencesResume[$performanceReferencesKey]['deliver'])
+												// count($performanceReferencesResume[$performanceReferencesKey]['deliver'])
+												$subgeneral[$performanceReferencesKey]['deliver']
 										)
 								), 2, '.', ','
 						);
@@ -267,7 +268,8 @@
 										(
 												array_sum($performanceReferencesResume[$performanceReferencesKey]['proved'])
 													/
-												count($performanceReferencesResume[$performanceReferencesKey]['proved'])
+												// count($performanceReferencesResume[$performanceReferencesKey]['proved'])
+												$subgeneral[$performanceReferencesKey]['proved']
 										)
 								), 2, '.', ','
 						);
@@ -284,7 +286,8 @@
 										(
 												array_sum($performanceReferencesResume[$performanceReferencesKey]['promise'])
 													/
-												count($performanceReferencesResume[$performanceReferencesKey]['promise'])
+												// count($performanceReferencesResume[$performanceReferencesKey]['promise'])
+												$subgeneral[$performanceReferencesKey]['promise']
 										)
 								), 2, '.', ','
 						);
@@ -301,7 +304,8 @@
 										(
 												array_sum($performanceReferencesResume[$performanceReferencesKey]['payment'])
 													/
-												count($performanceReferencesResume[$performanceReferencesKey]['payment'])
+												// count($performanceReferencesResume[$performanceReferencesKey]['payment'])
+												$subgeneral[$performanceReferencesKey]['payment']
 										)
 								), 2, '.', ','
 						);

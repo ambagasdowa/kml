@@ -99,6 +99,13 @@ class PerformanceReferencesController extends AppController {
 		$general['Dias de Promesa'] = null;
 		$general['Dias de Pago'] = null;
 		$general['Cantidad'] = null;
+		// Quantities
+		$general['Entrega'] = null;
+		$general['Aprobado'] = null;
+		$general['Promesa'] = null;
+		$general['Pago'] = null;
+
+		// debug($generalResume);
 
 	if (isset($generalResume)) {
 		foreach ( $generalResume as $resumenkey => $resumenvalue ) {
@@ -109,20 +116,89 @@ class PerformanceReferencesController extends AppController {
 			$general['Dias de Pago'] += array_sum($resumenvalue['payment']);
 			$general['Cantidad'] += count($resumenvalue['deliver']);
 
-		}
+			// NOTE Counts
+			foreach ($resumenvalue as $rkey => $rvalue) {
+				foreach ($rvalue as $gkey => $gvalue) {
+					if ($gvalue > 0 ) {
+						if (!isset($subgeneral[$resumenkey][$rkey])) {
+							$subgeneral[$resumenkey][$rkey] = null;
+						}
+						if (!isset($generalall[$rkey])) {
+							$generalall[$rkey] = null;
+						}
+						$subgeneral[$resumenkey][$rkey] += 1;
+						$generalall[$rkey] += 1;
+					}
+				}
+			} // NOTE end foreach
+
+
+			//Continue
+		} // NOTE end General
+
+// debug($subgeneral);
+// debug($generalall);
+
+// debug(array_key_exists('Cantidad',$general));
+
+		$exclude_key = array('Cantidad');
 
 		foreach ($general as $key => $value) {
 			# code...
-			if ($key != 'Cantidad') {
-				$result_array[$key] =
-				number_format(
-						money_format(
-								'%i',
-								(
-									$value / $general['Cantidad']
-								)
-						), 2, '.', ','
-				);
+			if ($key != 'Cantidad' and $key != 'Entrega' and $key != 'Aprobado' and $key != 'Promesa' and $key != 'Pago') {
+
+				if ($key == 'Dias de Entrega') {
+					$result_array[$key] =
+					number_format(
+							money_format(
+									'%i',
+									(
+										$value / $generalall['deliver']
+									)
+							), 2, '.', ','
+					);
+				} else if ($key == 'Dias de Aprobacion') {
+					$result_array[$key] =
+					number_format(
+							money_format(
+									'%i',
+									(
+										$value / $generalall['proved']
+									)
+							), 2, '.', ','
+					);
+				} else if ($key == 'Dias de Promesa') {
+					$result_array[$key] =
+					number_format(
+							money_format(
+									'%i',
+									(
+										$value / $generalall['promise']
+									)
+							), 2, '.', ','
+					);
+				} else if ($key == 'Dias de Pago') {
+					$result_array[$key] =
+					number_format(
+							money_format(
+									'%i',
+									(
+										$value / $generalall['payment']
+									)
+							), 2, '.', ','
+					);
+				} else {
+					$result_array[$key] =
+					number_format(
+							money_format(
+									'%i',
+									(
+										$value / $general['Cantidad']
+									)
+							), 2, '.', ','
+					);
+				}
+
 			} else {
 				$result_array[$key] = $value;
 			}
@@ -139,7 +215,7 @@ class PerformanceReferencesController extends AppController {
 			// cast monto decimal 12,2
 			// impuesto recal 2 => 6
 
-		$this->set(compact('performanceReferencesMod','performanceReferencesIdx','dashboard','performanceReferencesResume','performanceGeneral'));
+		$this->set(compact('performanceReferencesMod','performanceReferencesIdx','dashboard','performanceReferencesResume','performanceGeneral','subgeneral'));
 
 		// NOTE set the response output for an ajax call
 		Configure::write('debug', 0);

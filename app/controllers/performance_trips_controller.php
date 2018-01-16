@@ -62,7 +62,7 @@ class PerformanceTripsController extends AppController {
 	// } // NOTE end csv
 
 	function get( $xport=null ) {
-		Configure::write('debug',2);
+		// Configure::write('debug',2);
 
 		$this->LoadModel('PerformanceViewViaje');
 		$this->LoadModel('PerformanceBsu');
@@ -144,6 +144,12 @@ class PerformanceTripsController extends AppController {
 		$general['Dias de Entrega'] = null;
 		$general['Dias de Validacion'] = null;
 		$general['Cantidad'] = null;
+		// NOTE generals
+		$general['Cierre'] = null;
+		$general['Recepcion'] = null;
+		$general['Aceptado'] = null;
+		$general['Entrega'] = null;
+		$general['Validacion'] = null;
 
 			foreach ( $generalResume as $resumenkey => $resumenvalue ) {
 				# code...
@@ -153,20 +159,90 @@ class PerformanceTripsController extends AppController {
 				$general['Dias de Entrega'] += array_sum($resumenvalue['deliver']);
 				$general['Dias de Validacion'] += array_sum($resumenvalue['validation']);
 				$general['Cantidad'] += count($resumenvalue['end']);
+
+				// NOTE Counts
+				foreach ($resumenvalue as $rkey => $rvalue) {
+					foreach ($rvalue as $gkey => $gvalue) {
+						if ($gvalue > 0 ) {
+							if (!isset($subgeneral[$resumenkey][$rkey])) {
+								$subgeneral[$resumenkey][$rkey] = null;
+							}
+							if (!isset($generalall[$rkey])) {
+								$generalall[$rkey] = null;
+							}
+							$subgeneral[$resumenkey][$rkey] += 1;
+							$generalall[$rkey] += 1;
+						}
+					}
+				} // NOTE end foreach
+
 			}
 			// debug($general);
+
 			foreach ($general as $key => $value) {
 				# code...
-				if ($key != 'Cantidad') {
-					$result_array[$key] =
-					number_format(
-							money_format(
-									'%i',
-									(
-										$value / $general['Cantidad']
-									)
-							), 2, '.', ','
-					);
+				if ($key != 'Cantidad' and $key != 'Cierre' and $key != 'Recepcion' and $key != 'Aceptado' and $key != 'Entrega' and $key != 'Validacion') {
+					if ($key == 'Dias de Cierre') {
+						$result_array[$key] =
+						number_format(
+								money_format(
+										'%i',
+										(
+											$value / $generalall['end']
+										)
+								), 2, '.', ','
+						);
+					} else if ($key == 'Dias de Recepcion') {
+						$result_array[$key] =
+						number_format(
+								money_format(
+										'%i',
+										(
+											$value / $generalall['reception']
+										)
+								), 2, '.', ','
+						);
+					} else if ($key == 'Dias de Aceptado') {
+						$result_array[$key] =
+						number_format(
+								money_format(
+										'%i',
+										(
+											$value / $generalall['aceptance']
+										)
+								), 2, '.', ','
+						);
+					} else if ($key == 'Dias de Entrega') {
+						$result_array[$key] =
+						number_format(
+								money_format(
+										'%i',
+										(
+											$value / $generalall['deliver']
+										)
+								), 2, '.', ','
+						);
+					} else if ($key == 'Dias de Validacion') {
+						$result_array[$key] =
+						number_format(
+								money_format(
+										'%i',
+										(
+											$value / $generalall['validation']
+										)
+								), 2, '.', ','
+						);
+					} else {
+						$result_array[$key] =
+						number_format(
+								money_format(
+										'%i',
+										(
+											$value / $general['Cantidad']
+										)
+								), 2, '.', ','
+						);
+					}
 				} else {
 					$result_array[$key] = $value;
 				}
@@ -192,7 +268,7 @@ class PerformanceTripsController extends AppController {
 
 			} else {
 
-			$this->set(compact('performanceViewViaje','performanceReferencesMod','performanceReferencesIdx','dashboard','performanceReferencesResume','performanceGeneral'));
+			$this->set(compact('performanceViewViaje','performanceReferencesMod','performanceReferencesIdx','dashboard','performanceReferencesResume','performanceGeneral','subgeneral'));
 
 			// NOTE set the response output for an ajax call
 			Configure::write('debug', 0);

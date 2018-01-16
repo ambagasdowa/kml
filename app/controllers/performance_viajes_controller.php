@@ -83,14 +83,11 @@ class PerformanceViajesController extends AppController {
 				// NOTE set the ids in the form
 			}
 			// debug(current($search));
-
 			// debug($parse_id);
-
 			$this->LoadModel('PerformanceBsu');
 			$condBsus['PerformanceBsu.projections_corporations_id'] = $performanceViajes['PerformanceViaje']['projections_corporations_id'];
 			$condBsus['PerformanceBsu.id_area'] = $performanceViajes['PerformanceViaje']['id_area'];
 			$bsus_name = current($this->PerformanceBsu->find('list',array('conditions'=>$condBsus,'fields'=>array('id','label'))));
-
 			// // set the bsu
 			$performanceViajes['PerformanceViaje']['bsu'] = $bsus_name;
 			// set vars
@@ -98,7 +95,6 @@ class PerformanceViajesController extends AppController {
 			// NOTE check like if $this->data
 
 		if (!empty($this->params['named']['save']) && $this->params['named']['save'] != null) {
-
 			// debug($this->params['named']['save']);
 			$posted = json_decode(base64_decode($this->params['named']['save']),true);
 			// debug($posted);
@@ -107,23 +103,26 @@ class PerformanceViajesController extends AppController {
 				if ($keys > 0 ) {
 					$content = $postvalue['name'];
 					$chars = preg_split('/\[([^\]]*)\]/i', $content, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
-					$conditions[$chars[2]] = $postvalue['value'];
+					if ( $postvalue['value'] != "") {
+						$conditions[$chars[2]] = $postvalue['value'];
+					}
+
 				}
 
 			}
 
 			// debug($conditions);
-
 			// set the search array
 			$dates = array('recepcionEvidencias','entregaEvidenciasCliente','validacionEvidenciasCliente');
-
 			foreach ($conditions as $indx => $perData) {
 				if ( in_array($indx,$dates) == true ) {
-					$dates_conv = new DateTime($perData);
-					$conditions[$indx] = $dates_conv->format('Y-m-d');
+					if ($perData != "" OR $perData != null) {
+						$dates_conv = new DateTime($perData);
+						$conditions[$indx] = $dates_conv->format('Y-m-d');
+					}
 				}
 			}
-
+			// debug($conditions);
 			// exit();
 			if ($conditions['dataUpdate'] === true ) {
 				// update
@@ -134,9 +133,7 @@ class PerformanceViajesController extends AppController {
 
 				$this->PerformanceViaje->create();
 				if ($this->PerformanceViaje->updateAll($conditions)) {
-
 					// $this->Session->setFlash(__('The performance factura has been saved', true));
-
 					$this->Session->setFlash(__(
 								'<div class="alert alert-success alert-dismissible fade in" role="alert">
 									<button type="button" class="close" data-dismiss="alert" aria-label="Close">

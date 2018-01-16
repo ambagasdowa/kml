@@ -94,7 +94,9 @@ class PerformanceFacturasController extends AppController {
 				if ($keys > 0 ) {
 					$content = $postvalue['name'];
 					$chars = preg_split('/\[([^\]]*)\]/i', $content, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
-					$conditions[$chars[2]] = $postvalue['value'];
+					if ( $postvalue['value'] != "") {
+						$conditions[$chars[2]] = $postvalue['value'];
+					}
 				}
 
 			}
@@ -104,8 +106,10 @@ class PerformanceFacturasController extends AppController {
 
 			foreach ($conditions as $indx => $perData) {
 				if ( in_array($indx,$dates) == true ) {
-					$dates_conv = new DateTime($perData);
-					$conditions[$indx] = $dates_conv->format('Y-m-d');
+					if ($perData != "" OR $perData != null) {
+						$dates_conv = new DateTime($perData);
+						$conditions[$indx] = $dates_conv->format('Y-m-d');
+					}
 				}
 			}
 

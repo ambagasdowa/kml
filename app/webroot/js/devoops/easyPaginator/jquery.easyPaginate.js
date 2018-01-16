@@ -101,7 +101,7 @@ $.fn.easyPaginate = function (options) {
 
             $(elSelector + ' .easyPaginateNav a.prev').on('click', function(e) {
                 e.preventDefault();
-                page = plugin.settings.currentPage > 1?parseInt(plugin.settings.currentPage) - 1:1;
+                page = plugin.settings.currentPage > 1 ? parseInt(plugin.settings.currentPage) - 1:1;
                 displayPage(page);
             });
 
@@ -125,8 +125,10 @@ $.fn.easyPaginate = function (options) {
             if(plugin.settings.currentPage != page) {
                 plugin.settings.currentPage = parseInt(page);
                 console.log('page in ');
-                console.log(page);
-                console.log('plugin.settings.elementsPerPage => ' + plugin.settings.elementsPerPage);
+                // NOTE Work form hir to Search pluging implementation
+                // console.log(typeof(plugin.settings.objElements));
+                // console.log(plugin.settings.objElements);
+                console.log('after-plugin.settings.objElements')
 
                 offsetStart = (page - 1) * plugin.settings.elementsPerPage;
                 console.log('offsetStart :' + offsetStart);
@@ -264,7 +266,6 @@ $.fn.easyPaginate = function (options) {
         plugin.settings.pages = getNbOfPages();
         if(plugin.settings.pages > 1) {
             plugin.el.html();
-
             // Here we go
             displayNav();
 

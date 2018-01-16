@@ -287,7 +287,7 @@
 										(
 												array_sum($performanceReferencesResume[$performanceReferencesKey]['end'])
 													/
-												count($performanceReferencesResume[$performanceReferencesKey]['end'])
+												$subgeneral[$performanceReferencesKey]['end']
 										)
 								), 2, '.', ','
 						);
@@ -304,7 +304,7 @@
 										(
 												array_sum($performanceReferencesResume[$performanceReferencesKey]['reception'])
 													/
-												count($performanceReferencesResume[$performanceReferencesKey]['reception'])
+												$subgeneral[$performanceReferencesKey]['reception']
 										)
 								), 2, '.', ','
 						);
@@ -321,7 +321,7 @@
 										(
 												array_sum($performanceReferencesResume[$performanceReferencesKey]['aceptance'])
 													/
-												count($performanceReferencesResume[$performanceReferencesKey]['aceptance'])
+												$subgeneral[$performanceReferencesKey]['aceptance']
 										)
 								), 2, '.', ','
 						);
@@ -338,7 +338,7 @@
 										(
 												array_sum($performanceReferencesResume[$performanceReferencesKey]['deliver'])
 													/
-												count($performanceReferencesResume[$performanceReferencesKey]['deliver'])
+												$subgeneral[$performanceReferencesKey]['deliver']
 										)
 								), 2, '.', ','
 						);
@@ -356,7 +356,7 @@
 										(
 												array_sum($performanceReferencesResume[$performanceReferencesKey]['validation'])
 													/
-												count($performanceReferencesResume[$performanceReferencesKey]['validation'])
+												$subgeneral[$performanceReferencesKey]['validation']
 										)
 								), 2, '.', ','
 						);
