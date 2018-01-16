@@ -80,14 +80,20 @@ class PerformanceReferencesController extends AppController {
 			$performanceReferencesMod[$data_performance['PerformanceViewFactura']['performance_customers_id']][]['PerformanceViewFactura'] = $data_performance['PerformanceViewFactura'] ;
 			$performanceReferencesIdx[$data_performance['PerformanceViewFactura']['performance_customers_id']] = $data_performance['PerformanceViewFactura']['Nombre'] ;
 
-			$performanceReferencesResume[$data_performance['PerformanceViewFactura']['performance_customers_id']]['deliver'][] = $data_performance['PerformanceViewFactura']['deliver'];
+			if (!empty($data_performance['PerformanceViewFactura']['entregaFacturaCliente'])) {
+				$performanceReferencesResume[$data_performance['PerformanceViewFactura']['performance_customers_id']]['deliver'][] = $data_performance['PerformanceViewFactura']['deliver'];
+			}
 
-			$performanceReferencesResume[$data_performance['PerformanceViewFactura']['performance_customers_id']]['proved'][] = $data_performance['PerformanceViewFactura']['proved'];
+			if (!empty($data_performance['PerformanceViewFactura']['aprobacionFactura'])) {
+				$performanceReferencesResume[$data_performance['PerformanceViewFactura']['performance_customers_id']]['proved'][] = $data_performance['PerformanceViewFactura']['proved'];
+			}
 
-			$performanceReferencesResume[$data_performance['PerformanceViewFactura']['performance_customers_id']]['promise'][] = $data_performance['PerformanceViewFactura']['promise'];
-
-			$performanceReferencesResume[$data_performance['PerformanceViewFactura']['performance_customers_id']]['payment'][] = $data_performance['PerformanceViewFactura']['payment'];
-
+			if (!empty($data_performance['PerformanceViewFactura']['diasCredito'])) {
+				$performanceReferencesResume[$data_performance['PerformanceViewFactura']['performance_customers_id']]['promise'][] = 	$data_performance['PerformanceViewFactura']['promise'];
+			}
+			if (!empty($data_performance['PerformanceViewFactura']['fechaPago'])) {
+				$performanceReferencesResume[$data_performance['PerformanceViewFactura']['performance_customers_id']]['payment'][] = $data_performance['PerformanceViewFactura']['payment'];
+			}
 		}
 
 		if (!isset($performanceReferencesResume)) {
@@ -119,7 +125,7 @@ class PerformanceReferencesController extends AppController {
 			// NOTE Counts
 			foreach ($resumenvalue as $rkey => $rvalue) {
 				foreach ($rvalue as $gkey => $gvalue) {
-					if ($gvalue > 0 ) {
+					// if ($gvalue > 0 ) {
 						if (!isset($subgeneral[$resumenkey][$rkey])) {
 							$subgeneral[$resumenkey][$rkey] = null;
 						}
@@ -128,7 +134,7 @@ class PerformanceReferencesController extends AppController {
 						}
 						$subgeneral[$resumenkey][$rkey] += 1;
 						$generalall[$rkey] += 1;
-					}
+					// }
 				}
 			} // NOTE end foreach
 
