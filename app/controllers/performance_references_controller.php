@@ -31,7 +31,7 @@ class PerformanceReferencesController extends AppController {
 
 
 	function get() {
-		Configure::write('debug',2);
+		// Configure::write('debug',2);
 
 		$this->LoadModel('PerformanceViewFactura');
 		$this->LoadModel('PerformanceBsu');

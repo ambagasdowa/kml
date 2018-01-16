@@ -126,12 +126,24 @@ class PerformanceTripsController extends AppController {
 
 			$performanceReferencesIdx[$data_performance['PerformanceViewViaje']['id_cliente']] = $data_performance['PerformanceViewViaje']['cliente'] ;
 
-			$performanceReferencesResume[$data_performance['PerformanceViewViaje']['id_cliente']]['end'][] = $data_performance['PerformanceViewViaje']['end'];
-			$performanceReferencesResume[$data_performance['PerformanceViewViaje']['id_cliente']]['reception'][] = $data_performance['PerformanceViewViaje']['reception'];
-			$performanceReferencesResume[$data_performance['PerformanceViewViaje']['id_cliente']]['aceptance'][] = $data_performance['PerformanceViewViaje']['aceptance'];
-			$performanceReferencesResume[$data_performance['PerformanceViewViaje']['id_cliente']]['deliver'][] = $data_performance['PerformanceViewViaje']['deliver'];
-			$performanceReferencesResume[$data_performance['PerformanceViewViaje']['id_cliente']]['validation'][] = $data_performance['PerformanceViewViaje']['validation'];
+			if (!empty($data_performance['PerformanceViewViaje']['fecha_guia'])) {
+				$performanceReferencesResume[$data_performance['PerformanceViewViaje']['id_cliente']]['end'][] = $data_performance['PerformanceViewViaje']['end'];
+			}
+			if (!empty($data_performance['PerformanceViewViaje']['recepcionEvidencias'])) {
+				$performanceReferencesResume[$data_performance['PerformanceViewViaje']['id_cliente']]['reception'][] = $data_performance['PerformanceViewViaje']['reception'];
+			}
 
+			if (!empty($data_performance['PerformanceViewViaje']['fecha_modifico'])) {
+				$performanceReferencesResume[$data_performance['PerformanceViewViaje']['id_cliente']]['aceptance'][] = $data_performance['PerformanceViewViaje']['aceptance'];
+			}
+
+			if (!empty($data_performance['PerformanceViewViaje']['entregaEvidenciasCliente'])) {
+				$performanceReferencesResume[$data_performance['PerformanceViewViaje']['id_cliente']]['deliver'][] = $data_performance['PerformanceViewViaje']['deliver'];
+			}
+
+			if (!empty($data_performance['PerformanceViewViaje']['validacionEvidenciasCliente'])) {
+				$performanceReferencesResume[$data_performance['PerformanceViewViaje']['id_cliente']]['validation'][] = $data_performance['PerformanceViewViaje']['validation'];
+			}
 		}
 
 		// debug($performanceReferencesResume);
@@ -151,19 +163,31 @@ class PerformanceTripsController extends AppController {
 		$general['Entrega'] = null;
 		$general['Validacion'] = null;
 
+		// debug($generalResume);
+
 			foreach ( $generalResume as $resumenkey => $resumenvalue ) {
 				# code...
-				$general['Dias de Cierre'] += array_sum($resumenvalue['end']);
-				$general['Dias de Recepcion'] += array_sum($resumenvalue['reception']);
-				$general['Dias de Aceptado'] += array_sum($resumenvalue['aceptance']);
-				$general['Dias de Entrega'] += array_sum($resumenvalue['deliver']);
-				$general['Dias de Validacion'] += array_sum($resumenvalue['validation']);
+				if (isset($resumenvalue['end']) == true and !empty($resumenvalue['end']) == true and ($resumenvalue['end']) != null ) {
+					$general['Dias de Cierre'] += array_sum($resumenvalue['end']);
+				}
+				if (isset($resumenvalue['reception']) == true and !empty($resumenvalue['reception']) == true and ($resumenvalue['reception']) != null ) {
+					$general['Dias de Recepcion'] += array_sum($resumenvalue['reception']);
+				}
+				if (isset($resumenvalue['aceptance']) == true and !empty($resumenvalue['aceptance']) == true and ($resumenvalue['aceptance']) != null ) {
+					$general['Dias de Aceptado'] += array_sum($resumenvalue['aceptance']);
+				}
+				if (isset($resumenvalue['deliver']) == true and !empty($resumenvalue['deliver']) == true and ($resumenvalue['deliver']) != null ) {
+					$general['Dias de Entrega'] += array_sum($resumenvalue['deliver']);
+				}
+				if (isset($resumenvalue['validation']) == true and !empty($resumenvalue['validation']) == true and ($resumenvalue['validation']) != null ) {
+					$general['Dias de Validacion'] += array_sum($resumenvalue['validation']);
+				}
 				$general['Cantidad'] += count($resumenvalue['end']);
 
 				// NOTE Counts
 				foreach ($resumenvalue as $rkey => $rvalue) {
 					foreach ($rvalue as $gkey => $gvalue) {
-						if ($gvalue > 0 ) {
+						// if ($gvalue > 0 ) {
 							if (!isset($subgeneral[$resumenkey][$rkey])) {
 								$subgeneral[$resumenkey][$rkey] = null;
 							}
@@ -172,11 +196,12 @@ class PerformanceTripsController extends AppController {
 							}
 							$subgeneral[$resumenkey][$rkey] += 1;
 							$generalall[$rkey] += 1;
-						}
+						// }
 					}
 				} // NOTE end foreach
 
 			}
+			// debug($generalall);
 			// debug($general);
 		$general['Cierre'] = $generalall['end'];
 		$general['Recepcion'] = $generalall['reception'];
