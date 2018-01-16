@@ -48,7 +48,7 @@ class ProjectionsViewIndicatorsPeriodsController extends AppController {
 // 		$this->ProjectionsViewIndicatorsPeriod->recursive = 0;
 // 		$this->set('projectionsViewIndicatorsPeriods', $this->paginate());
 
-        $cyear = '2017'; //NOTE fix this to be dynamic set as IA
+        $cyear = '2018'; //NOTE fix this to be dynamic set as IA
 
 				// echo "<pre>";
 				// print_r($cyear);

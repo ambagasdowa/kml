@@ -52,6 +52,28 @@ $.fn.easyPaginate = function (options) {
             currentPage: 1
         }
 
+/**
+      // NOTE Firts Approach
+        var search = function () {
+          if( $(this).val() != "") {
+            // Show only matching TR, hide rest of them
+            $("#tableFilter tbody tr").hide();
+            $("#tableFilter td:contains-ci('" + $(this).val() + "')").parent("tr").show();
+          } else {
+            // When there is no input or clean again, show everything back
+            $("#tableFilter tbody tr").show();
+          }
+        }
+
+        $.extend($.expr[":"],
+        {
+            "contains-ci": function(elem, i, match, array)
+          {
+            return (elem.textContent || elem.innerText || $(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+          }
+        });
+*/
+
         var getNbOfPages = function() {
           var numPages = Math.ceil(plugin.settings.objElements.length / plugin.settings.elementsPerPage);
           console.log(numPages);
@@ -127,8 +149,9 @@ $.fn.easyPaginate = function (options) {
                 console.log('page in ');
                 // NOTE Work form hir to Search pluging implementation
                 // console.log(typeof(plugin.settings.objElements));
-                // console.log(plugin.settings.objElements);
-                console.log('after-plugin.settings.objElements')
+                console.log('before-at-end -plugin.settings.objElements')
+                console.log(plugin.settings.objElements);
+                // console.log('after-plugin.settings.objElements')
 
                 offsetStart = (page - 1) * plugin.settings.elementsPerPage;
                 console.log('offsetStart :' + offsetStart);
@@ -186,6 +209,7 @@ $.fn.easyPaginate = function (options) {
 // NOTE addition
             if ( $.isFunction( plugin.settings.complete ) ) {
                 plugin.settings.complete.call(this);
+                // console.log(this);
                 console.log('completeInsidePluginDisplayPage');
             }
 // NOTE addition
@@ -276,6 +300,7 @@ $.fn.easyPaginate = function (options) {
                     page = 1;
                 }
             }
+
             displayPage(page, 'default');
         }
     });

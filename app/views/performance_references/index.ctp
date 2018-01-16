@@ -235,6 +235,10 @@ td {
 						$( ".updateSearchResult" ).html('<div class="text-center"><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><span class="sr-only">Loading...</span><div>');
 						$( ".updateSearchResult" ).load(urlStruct,function() {
 
+
+							theindex = $("#tableFilter").clone();
+							console.log(theindex);
+
 							// NOTE clone and clean the header
 							var headder = $("#tableFilter thead").clone().removeClass("detail_header").addClass("header_row");
 							console.log(headder);
@@ -318,8 +322,6 @@ td {
 							// $("#tableFilter").DataTable();
 
 							// $('#tableFilter').dynatable();
-
-
 // NOTE Start EasyPagination
 							$('#tableFilter').easyPaginate({
 									paginateElement: 'tr',
@@ -427,43 +429,15 @@ td {
 													});
 											}); // NOTE Edit add etc stuff
 
-
-											// // NOTE PRINT
-											// $("#print").on('click',function(e){
-											//
-											// 	$(".row").find(".head_datetime").removeClass("head_datetime").addClass("dash_datetime");
-											//
-											// 	var ids = "#printThis";
-											//
-											// 			$( ids ).printThis({
-											// 					debug: false,               // show the iframe for debugging
-											// 					importCSS: false,            // import page CSS
-											// 					importStyle: true,         // import style tags
-											// 					printContainer: true,       // grab outer container as well as the contents of the selector
-											// 					loadCSS: "<?php echo Dispatcher::baseUrl();?>/css/kml/performance_print.css",  // path to additional css file - use an array [] for multiple
-											// 					pageTitle: "&#8203;", // add title to print page
-											// 					removeInline: false,        // remove all inline styles from print elements
-											// 					printDelay: 333,            // variable print delay; depending on complexity a higher value may be necessary
-											// 					header: '<img src="<?php echo Dispatcher::baseUrl();?>/img/logotipos/gst/header_gs.png" width="100%">',               // prefix to html
-											// 					footer: '', // postfix to html <div class="footer_legend">© GST Software Development Department</div>
-											// 					base: false ,               // preserve the BASE tag, or accept a string for the URL
-											// 					formValues: false,           // preserve input/form values
-											// 					canvas: false,              // copy canvas elements (experimental)
-											// 					doctypeString: "",       // enter a different doctype for older markup
-											// 					removeScripts: false,       // remove script tags from print content
-											// 					copyTagClasses: false       // copy classes from the html & body tag
-											// 			});
-											// }); //NOTE End Print
-
 											// NOTE add Filter in table
 
 											$("#kwd_search").keyup(function(){
 												// When value of the input is not blank
 												if( $(this).val() != "") {
 													// Show only matching TR, hide rest of them
-													// $("#tableFilter thead>tr").show();
 													$("#tableFilter tbody tr").hide();
 													$("#tableFilter td:contains-ci('" + $(this).val() + "')").parent("tr").show();
+													// console.log($(this).val());
 												} else {
 													// When there is no input or clean again, show everything back
 													$("#tableFilter tbody tr").show();
