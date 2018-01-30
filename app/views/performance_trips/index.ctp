@@ -116,7 +116,7 @@
 				<?php echo $this->Form->create('PerformanceTrips',array('enctype' => 'multipart/form-data','class'=>'form','id'=>'pform'));?>
 				<?php
 
-				echo '<div class="three columns input-group">';
+				echo '<div class="two columns input-group">';
 				echo '<div class="input-group-addon"><i id="focus-this" class="fa fa-calendar"></i></div>';
 				echo
 							$this->Form->input
@@ -125,15 +125,16 @@
 																	 array
 																				(
 																					'type'=>'text',
-																					'class'=>'performance_dateini u-full-width form-control',
+																					'class'=>'performance_dateini u-full-width form-control init-focus',
 																					'id'=>'from',
 																					'placeholder' => 'Fecha Inicio',
 																					'div'=>FALSE,
-																					'label'=>FALSE
+																					'label'=>FALSE,
+																					'tabindex'=>'1'
 																				)
 																);
 				echo '</div>';
-				echo '<div class="three columns input-group">';
+				echo '<div class="two columns input-group">';
 				echo '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>';
 				echo
 							$this->Form->input
@@ -146,12 +147,35 @@
 																					'id'=>'to',
 																					'placeholder' => 'Fecha Fin',
 																					'div'=>FALSE,
-																					'label'=>FALSE
+																					'label'=>FALSE,
+																					'tabindex'=>'2'
 																				)
 																);
-					echo '</div>';
-					echo '<div class="five columns input-group">';
-					echo
+				echo '</div>';
+
+				echo '<div class="two columns input-group">';
+				// echo '<div class="input-group-addon"><i class="fa fa-truck"></i></div>';
+				echo
+							$this->Form->input
+																(
+																	'performance_fraccion',
+																	 array
+																				(
+																					'type'=>'select',
+																					'class'=>'u-full-width form-control',
+																					'id'=>'fraction',
+																					'placeholder' => 'Fraccion',
+																					'div'=>FALSE,
+																					'label'=>FALSE,
+																					'empty'=>'Todo',
+																					'options'=> array('1' => 'Granel','2' => 'Terceros'),
+																					'tabindex'=>'3'
+																				)
+																);
+				echo '</div>';
+
+				echo '<div class="three columns input-group">';
+				echo
 								$this->Form->input
 																	(
 																		'performance_bsu',
@@ -162,7 +186,8 @@
 																						'class'=>'performance_bsu search_value u-full-width form-control',
 																						'label'=>false,
 																						'div'=>false,
-																						'multiple'=>true
+																						'multiple'=>true,
+																						'tabindex'=>'4'
 																						// 'empty'=>'Unidad de Negocio'
 
 																					)
@@ -170,27 +195,18 @@
 					echo '</div>';
 				?>
 
-
-				<?php
-						// echo $this->Form->input('PerformanceReference.status',array('type'=>'hidden','class'=>'form-control','value'=>'1'))
-				?>
-
-				<!-- <div class="pull-right"> -->
-					<!-- <?php echo $this->Form->end(array('div'=>false,'class'=>'btn btn-success'));?> -->
-				<!-- </div> -->
-
-				<div class="row">
-					<div class="label twelve columns">
+				<!-- <div class="row"> -->
+					<div class="label one columns input-group">
 						<?php
 									echo
 											$this->Html->link(
 																					__('Buscar ...', true),
 																					array('action' => 'get', null),
-																					array('id'=>'send_query','div'=>false,'class'=>'btn btn-primary btn-sm pull-right')
+																					array('id'=>'send_query','div'=>false,'class'=>'btn btn-primary btn-sm pull-right','tabindex'=>'4')
 																				);
 						?>
 					</div>
-				</div>
+				<!-- </div> -->
 
 
 			</div>
@@ -218,7 +234,7 @@
     // <!&#91;CDATA&#91;
         $(document).ready(function (){
 					// NOTE set the focus firts
-					// $("#focus-this").focus();
+					$("#from").focus();
 
 				// NOTE send the post/get data
 					$("#send_query").on('click', function(event) {
@@ -242,17 +258,17 @@
 
 						// NOTE clone and clean the header
 						var headder = $("#tableFilter thead").clone().removeClass("detail_header").addClass("header_row");
+						heather = $("#tableFilter thead th").clone();
 
 						// NOTE calculate the pages per rows
 						var tds = $("#tableFilter").children('tbody').children('tr').length;
 
-						console.log(tds);
-						if (tds >= 60 ) {
-							var tdper = parseInt(60) ;
-						} else if (tds < 60  && tds >= 10 ) {
-							var tdper = parseInt(10) ;
-						} else {
-							tdper = parseInt(9) ;
+						// console.log(tds);
+
+						// if (tds > 60 ) {
+							tdper = parseInt(60) ;
+						// } else {
+							// tdper = parseInt(59);
 							if($(".cache-header").is(':visible') == false) {
 									// Code
 								$("#tableFilter").prepend(headder);
@@ -260,14 +276,15 @@
 								$(".cache-header").remove();
 								$("#tableFilter").prepend(headder);
 							}
-						}
+						// }
 
-						console.log(tdper);
+						// console.log(tdper);
 // NOTE Start EasyPagination
 							$('#tableFilter').easyPaginate({
 									paginateElement: 'tr',
 									elementsPerPage: tdper,
 									effect: 'default',
+									headerTable:heather,
 									complete: function() {
 
 										console.log($(".cache-header").is(':visible'));
@@ -350,12 +367,13 @@
 																	console.log(post_serial);
 																	post_data_code = base64_encode(post_serial);
 																	console.log(post_data_code);
+																	console.log($('.page current'));
 
 													 				$.post("<?php echo Dispatcher::baseUrl();?>/PerformanceViajes/add/save:"+ post_data_code)
 																	.done(function(data){
 																		$.colorbox.close();
 																		document.getElementById("send_query").click();
-																		console.log('loaded_table');
+																		console.log('loaded_table_table');
 																	});
 																	// $.colorbox();
 
@@ -365,29 +383,103 @@
 											}); // NOTE Edit add etc stuff
 
 											// NOTE add Filter in table
-											$("#kwd_search").keyup(function(){
-												// When value of the input is not blank
-												if( $(this).val() != "") {
-													// Show only matching TR, hide rest of them
-													$("#tableFilter tbody>tr").hide();
-													$("#tableFilter td:contains-ci('" + $(this).val() + "')").parent("tr").show();
-												} else {
-													// When there is no input or clean again, show everything back
-													$("#tableFilter tbody>tr").show();
-												}
-											});
-
-											$.extend($.expr[":"],
-											{
-											    "contains-ci": function(elem, i, match, array)
-												{
-													return (elem.textContent || elem.innerText || $(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
-												}
-											});
+											// $("#kwd_search").keyup(function(){
+											// 	// When value of the input is not blank
+											// 	if( $(this).val() != "") {
+											// 		// Show only matching TR, hide rest of them
+											// 		$("#tableFilter tbody>tr").hide();
+											// 		$("#tableFilter td:contains-ci('" + $(this).val() + "')").parent("tr").show();
+											// 	} else {
+											// 		// When there is no input or clean again, show everything back
+											// 		$("#tableFilter tbody>tr").show();
+											// 	}
+											// });
+											//
+											// $.extend($.expr[":"],
+											// {
+											//     "contains-ci": function(elem, i, match, array)
+											// 	{
+											// 		return (elem.textContent || elem.innerText || $(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+											// 	}
+											// });
 
 									} // NOTE End Complete Callback
 
 							}); //NOTE End EasyPagination
+
+							$('#charting').on('click',function(evento){
+								evento.stopPropagation();
+								evento.preventDefault();
+
+								$.colorbox({
+										// 	width: "100%",
+										inline: true,
+										href: function () {
+						          // var elementID = $(this).attr('id');
+						          // return "#" + elementID;
+											return "#chart";
+						       },
+									 onClosed:function(){
+										 $('#chart').hide();
+									 },
+									 onLoad:function(){
+										 $('#chart').show();
+										 Highcharts.chart('the-chart', {
+												 chart: {
+														 plotBackgroundColor: null,
+														 plotBorderWidth: null,
+														 plotShadow: false,
+														 type: 'pie'
+												 },
+												 title: {
+														 text: 'Browser market shares January, 2015 to May, 2015'
+												 },
+												 tooltip: {
+														 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+												 },
+												 plotOptions: {
+														 pie: {
+																 allowPointSelect: true,
+																 cursor: 'pointer',
+																 dataLabels: {
+																		 enabled: true,
+																		 format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+																		 style: {
+																				 color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+																		 }
+																 }
+														 }
+												 },
+												 series: [{
+														 name: 'Brands',
+														 colorByPoint: true,
+														 data: [{
+																 name: 'IE',
+																 y: 56.33
+														 }, {
+																 name: 'Chrome',
+																 y: 24.03,
+																 sliced: true,
+																 selected: true
+														 }, {
+																 name: 'Firefox',
+																 y: 10.38
+														 }, {
+																 name: 'Safari',
+																 y: 4.77
+														 }, {
+																 name: 'Opera',
+																 y: 0.91
+														 }, {
+																 name: 'Other',
+																 y: 0.2
+														 }]
+												 }]
+										 });
+									 }
+						      });
+
+							});
 
 							// // NOTE call to add update
 							$("a[id^='get_factura_']").on('click', function(event) {
@@ -474,25 +566,25 @@
 
 							// NOTE add Filter in table
 
-							$("#kwd_search").keyup(function(){
-								// When value of the input is not blank
-								if( $(this).val() != "") {
-									// Show only matching TR, hide rest of them
-									$("#tableFilter tbody>tr").hide();
-									$("#tableFilter td:contains-ci('" + $(this).val() + "')").parent("tr").show();
-								} else {
-									// When there is no input or clean again, show everything back
-									$("#tableFilter tbody>tr").show();
-								}
-							});
-
-							$.extend($.expr[":"],
-							{
-									"contains-ci": function(elem, i, match, array)
-								{
-									return (elem.textContent || elem.innerText || $(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
-								}
-							});
+							// $("#kwd_search").keyup(function(){
+							// 	// When value of the input is not blank
+							// 	if( $(this).val() != "") {
+							// 		// Show only matching TR, hide rest of them
+							// 		$("#tableFilter tbody>tr").hide();
+							// 		$("#tableFilter td:contains-ci('" + $(this).val() + "')").parent("tr").show();
+							// 	} else {
+							// 		// When there is no input or clean again, show everything back
+							// 		$("#tableFilter tbody>tr").show();
+							// 	}
+							// });
+							//
+							// $.extend($.expr[":"],
+							// {
+							// 		"contains-ci": function(elem, i, match, array)
+							// 	{
+							// 		return (elem.textContent || elem.innerText || $(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+							// 	}
+							// });
 
 							// NOTE PRINT
 							$("#print").on('click',function(e){

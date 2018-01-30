@@ -1,37 +1,19 @@
-
-<!--     <div class="container-fluid"> -->
-<!--       <div class="row"> -->
 <?php
 /**
-
 		*
-
 		* PHP versions 4 and 5
-
 		*
-
 		* kml : Kamila Software
-
 		* Licensed under The MIT License
-
 		* Redistributions of files must retain the above copyright notice.
-
 		*
-
 		* @copyright     Jesus Baizabal
-
 		* @link          http://baizabal.xyz
-
 		* @mail	     baizabal.jesus@gmail.com
-
-		* @package       cake
-
-		* @subpackage    cake.cake.console.libs.templates.views
-
+		* @package       PerformanceReferences
+		* @subpackage    Editar
 		* @since         CakePHP(tm) v 1.2.0.5234
-
 		* @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
-
 		*/
 ?>
 
@@ -43,9 +25,8 @@
     $evaluate = true;
     $requiere = $evaluate ? e($this->element('kml/blog/blog')) : e($this->element('requiere/norequiere') );
 ?>
-
-
-      <?php 	echo $this->Session->flash();?>        <div class="col-md-offset-1 col-sm-11 col-md-11">
+      <?php 	echo $this->Session->flash();?>
+     <div class="col-md-offset-1 col-sm-11 col-md-11">
 			<ul class="list-group list-inline">
 
 										<li>

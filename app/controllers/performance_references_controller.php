@@ -65,8 +65,16 @@ class PerformanceReferencesController extends AppController {
 		$date_end = new DateTime($conditions['performance_dateend']);
 		$mysqlend = $date_end->format('Y-m-d');
 		// debug($mysqlend);
-		$conditionsPerformance['PerformanceViewFactura.ElaboracionFactura BETWEEN ? AND ?'] = array($mysqlstart,$mysqlend);
+
+		if ( $mysqlstart == $mysqlend) {
+			$conditionsPerformance['PerformanceViewFactura.ElaboracionFactura'] = $mysqlstart;
+		} else {
+			$conditionsPerformance['PerformanceViewFactura.ElaboracionFactura BETWEEN ? AND ?'] = array($mysqlstart,$mysqlend);
+		}
+
 		$conditionsPerformance['PerformanceViewFactura.Empresa'] = $conditions['performance_bsu'];
+		// debug($conditionsPerformance);
+
 		$performanceReferences = $this->PerformanceViewFactura->find('all',array('conditions'=>$conditionsPerformance));
 
 		// NOTE FILTER
@@ -80,21 +88,26 @@ class PerformanceReferencesController extends AppController {
 			$performanceReferencesMod[$data_performance['PerformanceViewFactura']['performance_customers_id']][]['PerformanceViewFactura'] = $data_performance['PerformanceViewFactura'] ;
 			$performanceReferencesIdx[$data_performance['PerformanceViewFactura']['performance_customers_id']] = $data_performance['PerformanceViewFactura']['Nombre'] ;
 
-			if (!empty($data_performance['PerformanceViewFactura']['entregaFacturaCliente'])) {
+			if (!empty($data_performance['PerformanceViewFactura']['ElaboracionFactura']) AND !empty($data_performance['PerformanceViewFactura']['entregaFacturaCliente'])) {
+
 				$performanceReferencesResume[$data_performance['PerformanceViewFactura']['performance_customers_id']]['deliver'][] = $data_performance['PerformanceViewFactura']['deliver'];
 			}
 
-			if (!empty($data_performance['PerformanceViewFactura']['aprobacionFactura'])) {
+			if (!empty($data_performance['PerformanceViewFactura']['aprobacionFactura']) AND !empty($data_performance['PerformanceViewFactura']['entregaFacturaCliente'])) {
+
 				$performanceReferencesResume[$data_performance['PerformanceViewFactura']['performance_customers_id']]['proved'][] = $data_performance['PerformanceViewFactura']['proved'];
 			}
 
-			if (!empty($data_performance['PerformanceViewFactura']['diasCredito'])) {
+			if (!empty($data_performance['PerformanceViewFactura']['aprobacionFactura'])) {
 				$performanceReferencesResume[$data_performance['PerformanceViewFactura']['performance_customers_id']]['promise'][] = 	$data_performance['PerformanceViewFactura']['promise'];
 			}
-			if (!empty($data_performance['PerformanceViewFactura']['fechaPago'])) {
+
+			if (!empty($data_performance['PerformanceViewFactura']['fechaPago']) AND !empty($data_performance['PerformanceViewFactura']['fechaPromesaPago'])) {
 				$performanceReferencesResume[$data_performance['PerformanceViewFactura']['performance_customers_id']]['payment'][] = $data_performance['PerformanceViewFactura']['payment'];
 			}
 		}
+
+		// debug($performanceReferencesResume);
 
 		if (!isset($performanceReferencesResume)) {
 			$performanceReferencesResume = null ;

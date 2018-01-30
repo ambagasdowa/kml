@@ -25,8 +25,6 @@
 		    $evaluate = true;
 		    $requiere = $evaluate ? e($this->element('kml/blog/blog')) : e($this->element('requiere/norequiere') );
 				$requiere = $evaluate ? e($this->element('kml/forms/forms')) : e($this->element('requiere/norequiere') );
-				// $requiere = $evaluate ? e($this->element('kml/performance/main')) : e($this->element('requiere/norequiere') );
-
 		?>
 
 <!-- temporal style  -->
@@ -54,6 +52,7 @@ td {
 	font-size: 12px;
 	white-space:nowrap;
 }
+
 
 .detail_header {
 	display: none;
@@ -122,11 +121,12 @@ td {
 																	 array
 																				(
 																					'type'=>'text',
-																					'class'=>'performance_dateini u-full-width form-control',
+																					'class'=>'performance_dateini u-full-width form-control init-focus',
 																					'id'=>'from',
 																					'placeholder' => 'Fecha Inicio',
 																					'div'=>FALSE,
-																					'label'=>FALSE
+																					'label'=>FALSE,
+																					'tabindex'=>'1'
 																				)
 																);
 				echo '</div>';
@@ -143,7 +143,8 @@ td {
 																					'id'=>'to',
 																					'placeholder' => 'Fecha Fin',
 																					'div'=>FALSE,
-																					'label'=>FALSE
+																					'label'=>FALSE,
+																					'tabindex'=>'2'
 																				)
 																);
 					echo '</div>';
@@ -159,7 +160,8 @@ td {
 																						'class'=>'performance_bsu search_value u-full-width form-control',
 																						'label'=>false,
 																						'div'=>false,
-																						'multiple' => true
+																						'multiple' => true,
+																						'tabindex'=>'3'
 																						// 'empty'=>'Unidad de Negocio'
 
 																					)
@@ -167,29 +169,18 @@ td {
 					echo '</div>';
 				?>
 
-
-				<?php
-						// echo $this->Form->input('PerformanceReference.status',array('type'=>'hidden','class'=>'form-control','value'=>'1'))
-				?>
-
-				<!-- <div class="pull-right"> -->
-					<!-- <?php echo $this->Form->end(array('div'=>false,'class'=>'btn btn-success'));?> -->
-				<!-- </div> -->
-
-				<div class="row">
-					<div class="label twelve columns">
+				<!-- <div class="row"> -->
+					<div class="label one columns input-group">
 						<?php
 									echo
 											$this->Html->link(
 																					__('Buscar ...', true),
 																					array('action' => 'get', null),
-																					array('id'=>'send_query','div'=>false,'class'=>'btn btn-primary btn-sm pull-right')
+																					array('id'=>'send_query','div'=>false,'class'=>'btn btn-primary btn-sm pull-right','tabindex'=>'4')
 																				);
 						?>
 					</div>
-				</div>
-
-
+				<!-- </div> -->
 			</div>
 
 		</div>
@@ -213,20 +204,31 @@ td {
 		<script type="text/javascript">
 
     // <!&#91;CDATA&#91;
+
         $(document).ready(function (){
 
+					if($(".init-focus").is(':visible') == true) {
+						// document.getElementById("from").focus();
+						console.log("focus ?");
+						$(".init-focus").focus();
+					} else {
+						console.log("focus is in the yard!!");
+					}
+
+					// NOTE Graphics
 				// NOTE send the post/get data
 					$("#send_query").on('click', function(event) {
 
 						event.stopPropagation();
 						event.preventDefault();
+
 						var data_code = $(this).attr('id');
 						var serial = JSON.stringify($("#pform").serializeArray());
-						console.log(serial);
+						// console.log(serial);
 						data_code = base64_encode(serial);
-						console.log(data_code);
+						// console.log(data_code);
 						var urlStruct = "<?php echo Dispatcher::baseUrl();?>/PerformanceReferences/get/data:"+data_code;
-						console.log(urlStruct);
+						// console.log(urlStruct);
 
 						// NOTE update live
 						// $(".updateSearchResult").load(urlStruct);
@@ -235,24 +237,19 @@ td {
 						$( ".updateSearchResult" ).html('<div class="text-center"><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><span class="sr-only">Loading...</span><div>');
 						$( ".updateSearchResult" ).load(urlStruct,function() {
 
-
-							theindex = $("#tableFilter").clone();
-							console.log(theindex);
-
 							// NOTE clone and clean the header
-							var headder = $("#tableFilter thead").clone().removeClass("detail_header").addClass("header_row");
-							console.log(headder);
+							headder = $("#tableFilter thead").clone().removeClass("detail_header").addClass("header_row");
+							heather = $("#tableFilter thead th").clone();
+
 							// NOTE calculate the pages per rows
-
 							var tds = $("#tableFilter").children('tbody').children('tr').length;
-
-							console.log(tds);
-							if (tds >= 60 ) {
-								var tdper = parseInt(60) ;
-							} else if (tds < 60  && tds >= 10 ) {
-								var tdper = parseInt(10) ;
-							} else {
-								tdper = parseInt(9) ;
+							// console.log(tds);
+							// if (tds >= 60 ) {
+								tdper = parseInt(60) ;
+							// } else if (tds < 60  && tds >= 10 ) {
+							// 	var tdper = parseInt(10) ;
+							// } else {
+							// 	tdper = parseInt(9) ;
 								if($(".cache-header").is(':visible') == false) {
 										// Code
 									$("#tableFilter").prepend(headder);
@@ -260,73 +257,18 @@ td {
 									$(".cache-header").remove();
 									$("#tableFilter").prepend(headder);
 								}
-							}
-
-							console.log(tdper);
+							// }
+							// console.log(tdper);
 							//NOTE add table paginator
-
-// NOTE Starting branch Pagination on table
-							// var datatable = new DataTable(document.querySelector('#first-datatable-output table'), {
-							//     pageSize: 25,
-							//     sort: [true, true, false],
-							//     filters: [true, false, 'select'],
-							//     filterText: 'Type to filter... ',
-							//     pagingDivSelector: "#paging-first-datatable"
-							// });
-
-							// (function($){
-							//   $.fn.myAwesomePlugin = function(settings) {
-							//
-							// 		var defaults = {
-							// 			alertLog: 'hey',
-							// 			complete : null
-							// 		}
-							//     var callback = settings.callback;
-							//
-							//     if ($.isFunction(callback)) {
-							//       var parameter = 'Hello World';
-							// 			console.log('callback');
-							//       callback.call(this, parameter);
-							//     }
-							//
-							// 		if ( $.isFunction( settings.complete ) ) {
-							// 				settings.complete.call(this);
-							// 				console.log('complete');
-							// 		}
-							//
-							// 		return this.each (function (instance) {
-							// 			var plugin = {};
-					    //       plugin.el = $(this);
-							//
-							// 		var instSome = function () {
-							// 			if(plugin.settings.alertLog) {
-							// 					alert('Log');
-							// 					console.log('SomeLog');
-							// 			}
-							// 		}
-							//
-							// 		plugin.settings = $.extend({}, defaults, settings);
-							// 		instSome();
-							// 		});
-							//
-							//   };
-							// })(jQuery);
-							//
-							// $("#breakspace").myAwesomePlugin({
-							//   callback: function(data){
-							//     alert(data);
-							//   },
-							// 	complete	: function() { alert('DoneSomeComplete!'); }
-							// });
-
 							// $("#tableFilter").DataTable();
-
 							// $('#tableFilter').dynatable();
+
 // NOTE Start EasyPagination
 							$('#tableFilter').easyPaginate({
 									paginateElement: 'tr',
 									elementsPerPage: tdper,
 									effect: 'default',
+									headerTable:heather,
 									complete: function() {
 
 										console.log($(".cache-header").is(':visible'));
@@ -338,7 +280,6 @@ td {
 											$(".cache-header").remove();
 											$("#tableFilter").prepend(headder);
 										}
-
 										// //NOTE ==== Wotking UI behavior ===== //
 											// NOTE call to add update
 											$("a[id^='get_factura_']").on('click', function(event) {
@@ -399,28 +340,35 @@ td {
         															// }
 																			onClose: function(selectedDate) {
 																				console.log("onCompleteCalling Get Inside EasyPagination");
-																				console.log($(this));
+																				// console.log($(this));
 																				console.log(selectedDate);
 																			}
 																		});
 																 } );
 
+																 console.log('in-updatebtn');
 																 $("#add_update").on('click',function(){
 
 																	event.stopPropagation();
 																	event.preventDefault();
-
-																	console.log($(this).attr('data-update'));
+																	// console.log($(this).attr('data-update'));
 																 	var post_serial = JSON.stringify($("#post_form").serializeArray());
-																	console.log(post_serial);
+																	// console.log(post_serial);
 																	post_data_code = base64_encode(post_serial);
-																	console.log(post_data_code);
+																	// console.log(post_data_code);
+
+																	console.log('current-page');
+																	console.log($('.current').attr('href'));
 
 													 				$.post("<?php echo Dispatcher::baseUrl();?>/PerformanceFacturas/add/save:"+ post_data_code)
 																	.done(function(data){
 																		$.colorbox.close();
+
 																		document.getElementById("send_query").click();
-																		console.log('loaded_table');
+
+																		// $("a .page").click();
+
+																		console.log('loaded_table_dance');
 																	});
 																	// $.colorbox();
 
@@ -429,32 +377,83 @@ td {
 													});
 											}); // NOTE Edit add etc stuff
 
-											// NOTE add Filter in table
-
-											$("#kwd_search").keyup(function(){
-												// When value of the input is not blank
-												if( $(this).val() != "") {
-													// Show only matching TR, hide rest of them
-													$("#tableFilter tbody tr").hide();
-													$("#tableFilter td:contains-ci('" + $(this).val() + "')").parent("tr").show();
-													// console.log($(this).val());
-												} else {
-													// When there is no input or clean again, show everything back
-													$("#tableFilter tbody tr").show();
-												}
-											});
-
-											$.extend($.expr[":"],
-											{
-											    "contains-ci": function(elem, i, match, array)
-												{
-													return (elem.textContent || elem.innerText || $(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
-												}
-											});
-
 									} // NOTE End Complete Callback
 
 							}); //NOTE End EasyPagination
+
+							$('#charting').on('click',function(evento){
+								evento.stopPropagation();
+								evento.preventDefault();
+
+								$.colorbox({
+										// 	width: "100%",
+										inline: true,
+										href: function () {
+						          // var elementID = $(this).attr('id');
+						          // return "#" + elementID;
+											return "#chart";
+						       },
+									 onClosed:function(){
+										 $('#chart').hide();
+									 },
+									 onLoad:function(){
+										 $('#chart').show();
+										 Highcharts.chart('the-chart', {
+												 chart: {
+														 plotBackgroundColor: null,
+														 plotBorderWidth: null,
+														 plotShadow: false,
+														 type: 'pie'
+												 },
+												 title: {
+														 text: 'Browser market shares January, 2015 to May, 2015'
+												 },
+												 tooltip: {
+														 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+												 },
+												 plotOptions: {
+														 pie: {
+																 allowPointSelect: true,
+																 cursor: 'pointer',
+																 dataLabels: {
+																		 enabled: true,
+																		 format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+																		 style: {
+																				 color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+																		 }
+																 }
+														 }
+												 },
+												 series: [{
+														 name: 'Brands',
+														 colorByPoint: true,
+														 data: [{
+																 name: 'IE',
+																 y: 56.33
+														 }, {
+																 name: 'Chrome',
+																 y: 24.03,
+																 sliced: true,
+																 selected: true
+														 }, {
+																 name: 'Firefox',
+																 y: 10.38
+														 }, {
+																 name: 'Safari',
+																 y: 4.77
+														 }, {
+																 name: 'Opera',
+																 y: 0.91
+														 }, {
+																 name: 'Other',
+																 y: 0.2
+														 }]
+												 }]
+										 });
+									 }
+						      });
+
+							});
 
 							// // NOTE call to add update
 							$("a[id^='get_factura_']").on('click', function(event) {
@@ -566,11 +565,14 @@ td {
 													post_data_code = base64_encode(post_serial);
 													console.log(post_data_code);
 
+													console.log('current-page');
+													console.log($('.current').attr('rel'));
+
 									 				$.post("<?php echo Dispatcher::baseUrl();?>/PerformanceFacturas/add/save:"+ post_data_code)
 													.done(function(data){
 														$.colorbox.close();
 														document.getElementById("send_query").click();
-														console.log('loaded_table');
+														console.log('loaded_table-tbl');
 													});
 													// $.colorbox();
 
@@ -581,24 +583,24 @@ td {
 
 							// NOTE add Filter in table
 
-							$("#kwd_search").keyup(function(){
-								// When value of the input is not blank
-								if( $(this).val() != "") {
-									// Show only matching TR, hide rest of them
-									$("#tableFilter tbody tr").hide();
-									$("#tableFilter td:contains-ci('" + $(this).val() + "')").parent("tr").show();
-								} else {
-									// When there is no input or clean again, show everything back
-									$("#tableFilter tbody tr").show();
-								}
-							});
-
-							$.extend($.expr[":"],{
-									"contains-ci": function(elem, i, match, array)
-								{
-									return (elem.textContent || elem.innerText || $(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
-								}
-							});
+							// $("#kwd_search").keyup(function(){
+							// 	// When value of the input is not blank
+							// 	if( $(this).val() != "") {
+							// 		// Show only matching TR, hide rest of them
+							// 		$("#tableFilter tbody tr").hide();
+							// 		$("#tableFilter td:contains-ci('" + $(this).val() + "')").parent("tr").show();
+							// 	} else {
+							// 		// When there is no input or clean again, show everything back
+							// 		$("#tableFilter tbody tr").show();
+							// 	}
+							// });
+							//
+							// $.extend($.expr[":"],{
+							// 		"contains-ci": function(elem, i, match, array)
+							// 	{
+							// 		return (elem.textContent || elem.innerText || $(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
+							// 	}
+							// });
 
 							// NOTE PRINT
 							$("#print").on('click',function(e){

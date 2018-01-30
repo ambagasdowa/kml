@@ -10,13 +10,12 @@
 		* @copyright     Jesus Baizabal
 		* @link          http://baizabal.xyz
 		* @mail	     baizabal.jesus@gmail.com
-		* @package       cake
-		* @subpackage    PerformanceReferences
+		* @package       PerformanceReferences
+		* @subpackage    Get
 		* @since         CakePHP(tm) v 1.2.0.5234
 		* @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
 		*/
 ?>
-
 		<?php
 		    // NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal.
 		    // $evaluate = false;
@@ -56,6 +55,15 @@
 		<div>&nbsp;</div>
 	</div>
 
+	<div class="row">
+		<div class="twelve columns">
+			<div id="chart" class="chart" style="display:none;">
+				<div id="the-chart">
+				</div>
+			</div>
+		</div>
+	</div>
+
 	<div class="row noprint">
 		<?php	echo $this->Session->flash();?>
 	</div>
@@ -67,7 +75,12 @@
 		</div>
 
 		<div class="ten colums">
-			Filtrar: <input type="text" id="kwd_search" value=""/>
+			<input type="text" id="kwd_search" value="" placeholder="Buscar"/>
+
+			<a id="details" class="button button-primary" href="#">Totales</a>
+
+			<!-- <a id="charting" class="button button-primary" href="#">Graficas</a> -->
+			<!-- <a id="charting" class="button button-primary" href="#" style="display:none;">Graficas</a> -->
 
 			<div id="print" class="pull-right">
 				<i class="fa fa-print" aria-hidden="true"></i>
@@ -106,15 +119,15 @@
 						<!-- <th><?php echo ('TipoDocumento');?></th> -->
 						<th><?php echo ('Folio');?></th>
 						<!-- <th><?php echo ('Nombre');?></th> -->
-						<th><?php echo ('Flete');?></th>
+						<th class="hideme"><?php echo ('Flete');?></th>
 						<!-- <th><?php echo ('Iva');?></th> -->
 						<!-- <th><?php echo ('Retencion');?></th> -->
-						<!-- <th><?php echo ('Total');?></th> -->
-						<th><?php echo ('Referencia');?></th>
-						<th><?php echo ('Lote');?></th>
-						<th><?php echo ('Empresa');?></th>
+						<th class="hideme"><?php echo ('Referencia');?></th>
+						<th class="hideme"><?php echo ('Lote');?></th>
+						<th class="hideme"><?php echo ('Monto');?></th>
+						<th class="hideme"><?php echo ('Empresa');?></th>
 						<!-- <th><?php echo ('Descripcion');?></th> -->
-						<th><?php echo ('ElaboracionFactura');?></th>
+						<th class="hideme"><?php echo ('ElaboracionFactura');?></th>
 						<th><?php echo ('entregaFacturaCliente');?></th>
 						<th><?php echo ('Entrega');?></th>
 						<th><?php echo ('aprobacionFactura');?></th>
@@ -173,15 +186,41 @@
 					<!-- <td><?php echo $performanceReference['PerformanceViewFactura']['Nombre']; ?></td> -->
 					<!-- <td><?php echo utf8_encode($performanceReference['PerformanceViewFactura']['Nombre']); ?></td> -->
 					<!-- <td><?php echo iconv("CP1252", "UTF-8", $performanceReference['PerformanceViewFactura']['Nombre']); ?></td> -->
-					<td><?php echo $performanceReference['PerformanceViewFactura']['Flete']; ?></td>
+
+					<td class="hideme">
+						<?php
+						echo
+						number_format(
+								money_format(
+										'%i',
+										(
+											$performanceReference['PerformanceViewFactura']['Flete']
+										)
+								), 0, '.', ','
+						);
+						?>
+					</td>
+
 					<!-- <td><?php echo $performanceReference['PerformanceViewFactura']['Iva']; ?></td> -->
 					<!-- <td><?php echo $performanceReference['PerformanceViewFactura']['Retencion']; ?></td> -->
-					<!-- <td><?php echo $performanceReference['PerformanceViewFactura']['Total']; ?></td> -->
-					<td><?php echo $performanceReference['PerformanceViewFactura']['Referencia']; ?></td>
-					<td><?php echo $performanceReference['PerformanceViewFactura']['Lote']; ?></td>
-					<td><?php echo $performanceReference['PerformanceViewFactura']['Empresa']; ?></td>
+					<td class="hideme"><?php echo $performanceReference['PerformanceViewFactura']['Referencia']; ?></td>
+					<td class="hideme"><?php echo $performanceReference['PerformanceViewFactura']['Lote']; ?></td>
+					<td class="hideme">
+						<?php
+						echo
+						number_format(
+								money_format(
+										'%i',
+										(
+											$performanceReference['PerformanceViewFactura']['Total']
+										)
+								), 2, '.', ','
+						);
+						?>
+					</td>
+					<td class="hideme"><?php echo $performanceReference['PerformanceViewFactura']['Empresa']; ?></td>
 					<!-- <td><?php echo $performanceReference['PerformanceViewFactura']['Descripcion']; ?></td> -->
-					<td>
+					<td class="hideme">
 							<?php
 									!empty($performanceReference['PerformanceViewFactura']['ElaboracionFactura']) ? e(date('Y-m-d',strtotime($performanceReference['PerformanceViewFactura']['ElaboracionFactura']))) : e('&infin;') ;
 							?>
@@ -229,15 +268,16 @@
 					?>
 				</td>
 
-				<td id="_footer_td" class="compact_footer"></td>
-				<td id="_footer_td" class="compact_footer">
+				<td id="_footer_td" class="hideme"></td>
+				<td id="_footer_td" class="hideme">
 					<?php
 						// echo array_sum($performanceReferencesResume[$performanceReferencesKey]['deliver']);
 					?>
 				</td>
-				<td id="_footer_td" class="compact_footer"></td>
-				<td id="_footer_td" class="compact_footer"></td>
-				<td id="_footer_td" class="compact_footer"></td>
+				<td id="_footer_td" class="hideme"></td>
+				<td id="_footer_td" class="hideme" data-desc="monto"></td>
+				<td id="_footer_td" class="hideme"></td>
+				<td id="_footer_td" class="hideme"></td>
 				<td id="_footer_td" class="compact_footer">PromedioDiasEntrega</td>
 
 				<td id="footer_dropdown_promedio_deliver_<?php print($performanceReferencesKey)?>">

@@ -37,7 +37,9 @@ $.fn.easyPaginate = function (options) {
         prevButtonText: '<',
         nextButton: true,
         nextButtonText: '>',
+        headerTable:'head',
         complete:null
+
     }
 
     return this.each (function (instance) {
@@ -52,27 +54,84 @@ $.fn.easyPaginate = function (options) {
             currentPage: 1
         }
 
-/**
-      // NOTE Firts Approach
-        var search = function () {
-          if( $(this).val() != "") {
-            // Show only matching TR, hide rest of them
-            $("#tableFilter tbody tr").hide();
-            $("#tableFilter td:contains-ci('" + $(this).val() + "')").parent("tr").show();
-          } else {
-            // When there is no input or clean again, show everything back
-            $("#tableFilter tbody tr").show();
-          }
-        }
+        // NOTE addition
+                // NOTE filter-controls
+                console.log($('#details').attr('data-control'));
+                // NOTE addition
+                filter = 'all';
+                $('#details').on('click',function(ev) {
+  									ev.preventDefault();
+  									if ($(this).attr('data-control') == undefined) {
+  										// NOTE means the firts time  ? ? or maybe navigating
+  										$(this).attr('data-control','1');
+  										document.getElementById("details").text = "Detalle"
+  									}
+  									if ($(this).attr('data-control') == '0') {
+                      $("#tableFilter tbody tr").show();
+                      $("#tableFilter").find(".hideme").show();
+                      $("#tableFilter tbody tr[id^='resume-filtered']").each(function(index,element){
+                        $(this).hide();
+                      });
+  										$(this).attr('data-control','1');
+  										document.getElementById("details").text = "Totales"
+  									} else {
+  										$("#tableFilter tbody tr").hide();
+                      if (filter === 'all') {
+                          var warOfTheClones =  plugin.settings.objElements.clone();
+                          var filtered = warOfTheClones.filter(function(index){
+                              return $(this).attr('id') === 'resume_footer';
+                          }).show();
+                          //NOTE  console.log(filtered);
+                          filtered.each(function(index,element){
+                            $(this).attr('id','resume-filtered');
+                            $(this).find(".hideme").hide();
+                            $("#tableFilter").find(".hideme").hide();
+  										    });
+                          console.log(filtered);
+                          $("#tableFilter tbody").append(filtered);
+                          console.log($("#tableFilter tbody tr"));
+                      } else {
+  										// NOTE can show the object
+  										    $("#tableFilter tbody tr[id^='resume_footer']").each(function(index,element){
+  												  $(this).show();
+  										    });
+                      }
+  										document.getElementById("details").text = "Detalle"
+  										$(this).attr('data-control','0');
+  									}
+  							});
+                // NOTE Work from hir TODO
+                finder = $("#tableFilter tbody tr");
+                console.log('At init ... ');
+                // headther = $("#tableFilter thead").clone();
+                console.log(plugin.settings.headerTable);
 
-        $.extend($.expr[":"],
-        {
-            "contains-ci": function(elem, i, match, array)
-          {
-            return (elem.textContent || elem.innerText || $(elem).text() || "").toLowerCase().indexOf((match[3] || "").toLowerCase()) >= 0;
-          }
-        });
-*/
+  							$('#kwd_search').keyup(function() {
+// TODO check the appended
+                  var numbers = Math.ceil(plugin.settings.objElements.length / plugin.settings.elementsPerPage);
+
+                  if(numbers > 1 ) {
+                    $("#tableFilter tbody tr").hide();
+                  }
+  								var val = '^(?=.*\\b' + $.trim($(this).val()).split(/\s+/).join('\\b)(?=.*\\b') + ').*$',
+  										reg = RegExp(val, 'i'),
+  										text;
+                    finder.show().filter(function(index){
+                    text = $(this).text().replace(/\s+/g, ' ');
+                    return !reg.test(text);
+                  }).hide();
+
+                  if ( numbers > 1 ){
+                    if ( $.isFunction( plugin.settings.complete ) ) {
+                        plugin.settings.complete.call(this);
+                        console.log('completeInsidehtmlNav');
+                    }
+                    $("#tableFilter thead").append(plugin.settings.headerTable);
+                    $("#tableFilter tbody").append(finder);
+                  }
+  							});
+                // NOTE addition
+                // NOTE detail section
 
         var getNbOfPages = function() {
           var numPages = Math.ceil(plugin.settings.objElements.length / plugin.settings.elementsPerPage);
@@ -144,13 +203,35 @@ $.fn.easyPaginate = function (options) {
         };
 
         var displayPage = function(page, forceEffect) {
+          // console.log('inFunction page ' + page + ' plug ' + plugin.settings.currentPage);
             if(plugin.settings.currentPage != page) {
+              console.log(' inside != after = page ' + page + ' plug ' + plugin.settings.currentPage);
+              console.log('details ==> ' + $(this).attr('data-control'));
+                if (plugin.settings.currentPage === undefined && page == 1) {
+                  pagecheck = 0;
+                } else {
+                  pagecheck = 1;
+                }
                 plugin.settings.currentPage = parseInt(page);
+                // NOTE ADDITION
+                                document.getElementById("details").text = "Totales"
+                                $("#tableFilter").find(".hideme").show();
+                                // for some reason we need execute a query on button
+                                // console.log('before setting page ' + page + ' plug ' + plugin.settings.currentPage);
+                                console.log('details =Z ' + $(this).attr('data-control'));
+                                console.log('pagecheck');
+                                console.log(pagecheck);
+                                if (pagecheck == 1 ) {
+                                  // document.getElementById("details").click();
+                                }
+
+                // NOTE ADDITION
+
                 console.log('page in ');
                 // NOTE Work form hir to Search pluging implementation
                 // console.log(typeof(plugin.settings.objElements));
-                console.log('before-at-end -plugin.settings.objElements')
-                console.log(plugin.settings.objElements);
+                // console.log('before-at-end -plugin.settings.objElements')
+                // console.log(plugin.settings.objElements);
                 // console.log('after-plugin.settings.objElements')
 
                 offsetStart = (page - 1) * plugin.settings.elementsPerPage;
@@ -190,7 +271,6 @@ $.fn.easyPaginate = function (options) {
                   plugin.nav.find('.last').removeClass('current');
                   plugin.nav.find('.next').removeClass('current');
                 }
-                // addition
 
                 switch(plugin.settings.currentPage) {
                     case 1:
@@ -287,9 +367,11 @@ $.fn.easyPaginate = function (options) {
 
         plugin.currentElements = $([]);
         plugin.settings.objElements = plugin.el.find(plugin.settings.paginateElement);
+
         plugin.settings.pages = getNbOfPages();
         if(plugin.settings.pages > 1) {
             plugin.el.html();
+            console.log('inside if plugin '+ plugin.settings.pages);
             // Here we go
             displayNav();
 

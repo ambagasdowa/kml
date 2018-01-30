@@ -56,6 +56,21 @@ $core = 'core'.DS;
       e($this->Html->script($theme.'bootstrap-multiselect/bootstrap-multiselect',false));
 
 
+      // NOTE highCharts
+      // e($this->Html->script($theme.'highCharts/charts/highcharts',false));
+      e($this->Html->script($theme.'highCharts/stock/highstock',false));
+      e($this->Html->script($theme.'highCharts/charts/highcharts-more',false));
+      e($this->Html->script($theme.'highCharts/stock/modules/exporting',false));
+
+      // e($this->Html->script($theme.'highCharts/stock/themes/dark-blue',false));
+      // e($this->Html->script($theme.'highCharts/stock/themes/dark-green',false));
+      // e($this->Html->script($theme.'highCharts/stock/themes/dark-unica',false));
+      // e($this->Html->script($theme.'highCharts/stock/themes/gray',false));
+      // e($this->Html->script($theme.'highCharts/stock/themes/grid',false));
+      // e($this->Html->script($theme.'highCharts/stock/themes/grid-light',false));
+      e($this->Html->script($theme.'highCharts/stock/themes/sand-signika',false));
+      // e($this->Html->script($theme.'highCharts/stock/themes/skies',false));
+      e($this->Html->script($theme.'highCharts/plugin/export-csv',false));
 
       // NOTE Datatables Pluging
       // @url https://datatables.net/

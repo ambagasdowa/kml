@@ -40,6 +40,8 @@
       }
       extract($new_dates, EXTR_PREFIX_SAME, "wddx");
     }
+
+    // debug($performanceViajes['PerformanceViaje']);
 ?>
 
 		<div class="colorbax">
@@ -149,7 +151,8 @@
                               'type'=>'text',
                               'id'=> 'datepicker_deliver',
                               'placeholder'=>'recepcionEvidencias',
-                              'value'      => ($performanceFacturaStatus == true ? $recepcionEvidencias : ''), // check this??
+                              // 'value'      => ($performanceFacturaStatus == true ? $recepcionEvidencias : ''), // check this??
+                              'value'      => $recepcionEvidencias, // check this??
                               'class'=>'u-full-width'
                              )
                  );
@@ -160,7 +163,7 @@
                               'type'=>'text',
                               'placeholder'=>'entregaEvidenciasCliente',
                               'id'=>'datepicker_aproved',
-                              'value'      => ($performanceFacturaStatus == true ? $entregaEvidenciasCliente : ''),
+                              'value'      => $entregaEvidenciasCliente,
                               'class'=>'u-full-width'
                              )
                   );
@@ -180,7 +183,7 @@
                              'type'=>'text',
                              'id'=>'datepicker_payment',
                              'placeholder'=>'validacionEvidenciasCliente',
-                             'value'      => ($performanceFacturaStatus == true ? $validacionEvidenciasCliente : ''),
+                             'value'      =>  $validacionEvidenciasCliente ,
                              'class'=>'u-full-width'
                              )
                 );

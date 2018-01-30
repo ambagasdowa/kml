@@ -55,6 +55,18 @@
 <div>&nbsp;</div>
 	</div>
 
+	<div class="row">
+		<div class="twelve columns">
+			<div id="chart" class="chart" style="display:none;">
+			<!-- <div id="chart" class="chart"> -->
+				<div id="the-chart">
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
 	<div class="row noprint">
 		<?php	echo $this->Session->flash();?>
 	</div>
@@ -66,7 +78,12 @@
 		</div>
 
 		<div class="ten colums">
-			Filtrar: <input type="text" id="kwd_search" value=""/>
+			<input type="text" id="kwd_search" value="" placeholder="Buscar"/>
+
+			<a id="details" class="button button-primary" href="#">Totales</a>
+
+			<!-- <a id="charting" class="button button-primary" href="#">Graficas</a> -->
+			<!-- <a id="charting" class="button button-primary" href="#" style="display:none;">Graficas</a> -->
 
 			<div id="print" class="pull-right">
 				<i class="fa fa-print" aria-hidden="true"></i>
@@ -108,11 +125,11 @@
             <!-- <th>id_tipo_operacion</th> -->
             <!-- <th>id_fraccion</th> -->
             <!-- <th>id_flota</th> -->
-            <th>Viaje</th>
+            <th class="hideme">Viaje</th>
             <!-- <th>num_guia</th> -->
-            <th>No guia</th>
+            <th class="hideme">No guia</th>
             <!-- <th>f_despachado</th> -->
-            <th>Inicio de Viaje</th>
+            <th class="hideme">Inicio de Viaje</th>
             <th>Cierre de Viaje</th>
             <th>End</th>
             <th>RecepcionEvidencias</th>
@@ -123,17 +140,17 @@
             <th>Deliver</th>
             <th>ValidacionEvidenciasCliente</th>
             <th>Validation</th>
-            <th>Mes</th>
+            <th class="hideme">Mes</th>
             <!-- <th>cliente</th> -->
             <!-- <th>kms_viaje</th> -->
             <!-- <th>kms_real</th> -->
-            <th>Subtotal</th>
+            <th class="hideme">Subtotal</th>
             <!-- <th>peso</th> -->
-            <th>Configuracion_viaje</th>
-            <th>Tipo_de_operacion</th>
-            <th>Flota</th>
-            <th>Area</th>
-            <th>Fraccion</th>
+            <th class="hideme">Configuracion_viaje</th>
+            <th class="hideme">Tipo_de_operacion</th>
+            <th class="hideme">Flota</th>
+            <th class="hideme">Area</th>
+            <th class="hideme">Fraccion</th>
 			</tr>
 
 		</thead>
@@ -183,12 +200,12 @@
           <!-- <td><?php echo $performanceViewViaje['PerformanceViewViaje']['id_tipo_operacion']; ?>&nbsp;</td> -->
           <!-- <td><?php echo $performanceViewViaje['PerformanceViewViaje']['id_fraccion']; ?>&nbsp;</td> -->
           <!-- <td><?php echo $performanceViewViaje['PerformanceViewViaje']['id_flota']; ?>&nbsp;</td> -->
-          <td><?php echo $performanceViewViaje['PerformanceViewViaje']['no_viaje']; ?>&nbsp;</td>
+          <td class="hideme"><?php echo $performanceViewViaje['PerformanceViewViaje']['no_viaje']; ?>&nbsp;</td>
           <!-- <td><?php echo $performanceViewViaje['PerformanceViewViaje']['num_guia']; ?>&nbsp;</td> -->
-          <td><?php echo $performanceViewViaje['PerformanceViewViaje']['no_guia']; ?>&nbsp;</td>
+          <td class="hideme"><?php echo $performanceViewViaje['PerformanceViewViaje']['no_guia']; ?>&nbsp;</td>
           <!-- <td><?php echo $performanceViewViaje['PerformanceViewViaje']['f_despachado']; ?>&nbsp;</td> -->
           <!-- <td><?php echo $performanceViewViaje['PerformanceViewViaje']['fecha_ingreso']; ?>&nbsp;</td> -->
-					<td>
+					<td class="hideme">
 							<?php
 									!empty($performanceViewViaje['PerformanceViewViaje']['fecha_ingreso']) ? e(date('Y-m-d',strtotime($performanceViewViaje['PerformanceViewViaje']['fecha_ingreso']))) : e('&infin;') ;
 							?>
@@ -272,9 +289,9 @@
 					?>
 				</td>
 
-				<td id="_footer_td" class="compact_footer"></td>
-				<td id="_footer_td" class="compact_footer"></td>
-				<td id="_footer_td" class="compact_footer"></td>
+				<td id="_footer_td" class="hideme"></td>
+				<td id="_footer_td" class="hideme"></td>
+				<td id="_footer_td" class="hideme"></td>
 				<td id="_footer_td" class="compact_footer">Cierre de Viaje</td>
 
 				<td id="footer_dropdown_promedio_deliver_<?php print($performanceReferencesKey)?>">
@@ -363,13 +380,13 @@
 					?>
 				</td>
 
-				<td id="_footer_td" class="compact_footer"></td>
-				<td id="_footer_td" class="compact_footer"></td>
-				<td id="_footer_td" class="compact_footer"></td>
-				<td id="_footer_td" class="compact_footer"></td>
-				<td id="_footer_td" class="compact_footer"></td>
-				<td id="_footer_td" class="compact_footer"></td>
-				<td id="_footer_td" class="compact_footer"></td>
+				<td id="_footer_td" class="hideme"></td>
+				<td id="_footer_td" class="hideme"></td>
+				<td id="_footer_td" class="hideme"></td>
+				<td id="_footer_td" class="hideme"></td>
+				<td id="_footer_td" class="hideme"></td>
+				<td id="_footer_td" class="hideme"></td>
+				<td id="_footer_td" class="hideme"></td>
 
 			</tr>
 			<?php

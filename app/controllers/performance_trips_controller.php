@@ -89,7 +89,6 @@ class PerformanceTripsController extends AppController {
 		}
 		// debug($posted);
 		$conditions['performance_bsu'] = $add_conditions;
-
 		// debug($conditions);
 		//1. Transform request parameters to MySQL datetime format.
 		$date_init = new DateTime($conditions['performance_dateini']);
@@ -108,11 +107,33 @@ class PerformanceTripsController extends AppController {
 		$bsu_compact = ucwords(strtolower(implode(',',$area)));
 		// debug($bsu_compact);
 
-		$conditionsPerformance['PerformanceViewViaje.fecha_guia BETWEEN ? AND ?'] = array($mysqlstart,$mysqlend);
+		if ( $mysqlstart == $mysqlend) {
+			$conditionsPerformance['PerformanceViewViaje.fecha_guia'] = $mysqlstart;
+		} else {
+				$conditionsPerformance['PerformanceViewViaje.fecha_guia BETWEEN ? AND ?'] = array($mysqlstart,$mysqlend);
+		}
+
 		$conditionsPerformance['PerformanceViewViaje.area'] = $area;
 
-		$performanceViewViaje = $this->PerformanceViewViaje->find('all',array('conditions'=>$conditionsPerformance));
+		// var_dump(isset($conditions['performance_fraccion']));
+		// echo("<br />");
+		// var_dump($conditions['performance_fraccion']);
+		// NOTE Filter Fraction TODO make the query
+		if (isset($conditions['performance_fraccion']) AND $conditions['performance_fraccion'] != '') {
 
+			if ($conditions['performance_fraccion'] == '1') {
+				$conditionsPerformance['PerformanceViewViaje.id_fraccion'] = array('1','2','6');
+			}
+			if ($conditions['performance_fraccion'] == '2') {
+				$conditionsPerformance['PerformanceViewViaje.id_fraccion NOT'] = array('1','2','6');
+			}
+
+		}
+
+
+		debug($conditionsPerformance);
+
+		$performanceViewViaje = $this->PerformanceViewViaje->find('all',array('conditions'=>$conditionsPerformance));
 		$dashboard = array('inicio'=>$mysqlstart,'fin'=>$mysqlend,'bsu'=>$bsu_compact);
 
 		// debug($performanceViewViaje);
@@ -126,22 +147,22 @@ class PerformanceTripsController extends AppController {
 
 			$performanceReferencesIdx[$data_performance['PerformanceViewViaje']['id_cliente']] = $data_performance['PerformanceViewViaje']['cliente'] ;
 
-			if (!empty($data_performance['PerformanceViewViaje']['fecha_guia'])) {
+			if (!empty($data_performance['PerformanceViewViaje']['fecha_guia']) AND !empty($data_performance['PerformanceViewViaje']['fecha_ingreso'])) {
 				$performanceReferencesResume[$data_performance['PerformanceViewViaje']['id_cliente']]['end'][] = $data_performance['PerformanceViewViaje']['end'];
 			}
-			if (!empty($data_performance['PerformanceViewViaje']['recepcionEvidencias'])) {
+			if (!empty($data_performance['PerformanceViewViaje']['recepcionEvidencias']) AND !empty($data_performance['PerformanceViewViaje']['fecha_guia'])) {
 				$performanceReferencesResume[$data_performance['PerformanceViewViaje']['id_cliente']]['reception'][] = $data_performance['PerformanceViewViaje']['reception'];
 			}
 
-			if (!empty($data_performance['PerformanceViewViaje']['fecha_modifico'])) {
+			if (!empty($data_performance['PerformanceViewViaje']['fecha_modifico']) AND !empty($data_performance['PerformanceViewViaje']['recepcionEvidencias']) ) {
 				$performanceReferencesResume[$data_performance['PerformanceViewViaje']['id_cliente']]['aceptance'][] = $data_performance['PerformanceViewViaje']['aceptance'];
 			}
 
-			if (!empty($data_performance['PerformanceViewViaje']['entregaEvidenciasCliente'])) {
+			if (!empty($data_performance['PerformanceViewViaje']['entregaEvidenciasCliente']) AND !empty($data_performance['PerformanceViewViaje']['fecha_modifico'])) {
 				$performanceReferencesResume[$data_performance['PerformanceViewViaje']['id_cliente']]['deliver'][] = $data_performance['PerformanceViewViaje']['deliver'];
 			}
 
-			if (!empty($data_performance['PerformanceViewViaje']['validacionEvidenciasCliente'])) {
+			if (!empty($data_performance['PerformanceViewViaje']['validacionEvidenciasCliente']) AND !empty($data_performance['PerformanceViewViaje']['entregaEvidenciasCliente'])) {
 				$performanceReferencesResume[$data_performance['PerformanceViewViaje']['id_cliente']]['validation'][] = $data_performance['PerformanceViewViaje']['validation'];
 			}
 		}
