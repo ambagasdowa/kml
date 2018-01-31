@@ -80,7 +80,6 @@
 			<a id="details" class="button button-primary" href="#">Totales</a>
 
 			<!-- <a id="charting" class="button button-primary" href="#">Graficas</a> -->
-			<!-- <a id="charting" class="button button-primary" href="#" style="display:none;">Graficas</a> -->
 
 			<div id="print" class="pull-right">
 				<i class="fa fa-print" aria-hidden="true"></i>

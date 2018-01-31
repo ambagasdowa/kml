@@ -112,7 +112,7 @@ td {
 			<div class="row">
 				<?php echo $this->Form->create('PerformanceReference',array('enctype' => 'multipart/form-data','class'=>'form','id'=>'pform'));?>
 				<?php
-				echo '<div class="three columns input-group">';
+				echo '<div class="two columns input-group">';
 				echo '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>';
 				echo
 							$this->Form->input
@@ -130,7 +130,7 @@ td {
 																				)
 																);
 				echo '</div>';
-				echo '<div class="three columns input-group">';
+				echo '<div class="two columns input-group">';
 				echo '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>';
 				echo
 							$this->Form->input
@@ -148,6 +148,28 @@ td {
 																				)
 																);
 					echo '</div>';
+
+					echo '<div class="two columns input-group">';
+					// echo '<div class="input-group-addon"><i class="fa fa-truck"></i></div>';
+					echo
+								$this->Form->input
+																	(
+																		'performance_fraccion',
+																		 array
+																					(
+																						'type'=>'select',
+																						'class'=>'u-full-width form-control',
+																						'id'=>'fraction',
+																						'placeholder' => 'Clasificacion',
+																						'div'=>FALSE,
+																						'label'=>FALSE,
+																						'empty'=>'Todo',
+																						'options'=> array('1' => 'Granel','2' => 'Terceros','3'=>'Otros','4'=>'Colaboracion','5'=>'n/a'),
+																						'tabindex'=>'3'
+																					)
+																	);
+					echo '</div>';
+
 					echo '<div class="three columns input-group">';
 					echo
 								$this->Form->input
@@ -161,7 +183,7 @@ td {
 																						'label'=>false,
 																						'div'=>false,
 																						'multiple' => true,
-																						'tabindex'=>'3'
+																						'tabindex'=>'4'
 																						// 'empty'=>'Unidad de Negocio'
 
 																					)
@@ -176,7 +198,7 @@ td {
 											$this->Html->link(
 																					__('Buscar ...', true),
 																					array('action' => 'get', null),
-																					array('id'=>'send_query','div'=>false,'class'=>'btn btn-primary btn-sm pull-right','tabindex'=>'4')
+																					array('id'=>'send_query','div'=>false,'class'=>'btn btn-primary btn-sm pull-right','tabindex'=>'5')
 																				);
 						?>
 					</div>
@@ -554,27 +576,35 @@ td {
 														});
 												 } );
 
+												 var count = 0;
 												 $("#add_update").on('click',function(){
-
 													event.stopPropagation();
 													event.preventDefault();
+													console.log($(this));
+													count += 1;
+													console.log('counts1st => ' + count);
+											    if (count > 1) {
+											      // $('table tr:odd').removeClass('odd');
+														$(this).prop('disabled',true);
+											    } else {
+													console.log('counts2nd => ' + count);
+															// console.log($(this).attr('data-update'));
+														 	var post_serial = JSON.stringify($("#post_form").serializeArray());
+															// console.log(post_serial);
+															post_data_code = base64_encode(post_serial);
+															// console.log(post_data_code);
 
-													console.log($(this).attr('data-update'));
-												 	var post_serial = JSON.stringify($("#post_form").serializeArray());
-													console.log(post_serial);
-													post_data_code = base64_encode(post_serial);
-													console.log(post_data_code);
+															console.log('current-page');
+															console.log($('.current').attr('rel'));
 
-													console.log('current-page');
-													console.log($('.current').attr('rel'));
-
-									 				$.post("<?php echo Dispatcher::baseUrl();?>/PerformanceFacturas/add/save:"+ post_data_code)
-													.done(function(data){
-														$.colorbox.close();
-														document.getElementById("send_query").click();
-														console.log('loaded_table-tbl');
-													});
+											 				$.post("<?php echo Dispatcher::baseUrl();?>/PerformanceFacturas/add/save:"+ post_data_code)
+															.done(function(data){
+																$.colorbox.close();
+																document.getElementById("send_query").click();
+																console.log('loaded_table-tbl');
+															});
 													// $.colorbox();
+												 }
 
 												 });
 											 }

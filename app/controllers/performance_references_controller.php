@@ -72,6 +72,25 @@ class PerformanceReferencesController extends AppController {
 			$conditionsPerformance['PerformanceViewFactura.ElaboracionFactura BETWEEN ? AND ?'] = array($mysqlstart,$mysqlend);
 		}
 
+		if (isset($conditions['performance_fraccion']) AND $conditions['performance_fraccion'] != '') {
+			if ($conditions['performance_fraccion'] == '1') {
+				$conditionsPerformance['PerformanceViewFactura.Clasificacion'] = array('Granel');
+			}
+			if ($conditions['performance_fraccion'] == '2') {
+				$conditionsPerformance['PerformanceViewFactura.Clasificacion'] = array('Terceros');
+			}
+			if ($conditions['performance_fraccion'] == '3') {
+				$conditionsPerformance['PerformanceViewFactura.Clasificacion'] = array('Otros');
+			}
+			if ($conditions['performance_fraccion'] == '4') {
+				$conditionsPerformance['PerformanceViewFactura.Clasificacion'] = array('Colaboracion');
+			}
+			if ($conditions['performance_fraccion'] == '5') {
+				// $conditionsPerformance['PerformanceViewFactura.Clasificacion NOT'] = array('Granel','Terceros','Otros','Colaboracion');
+				$conditionsPerformance['PerformanceViewFactura.Clasificacion'] = null;
+			}
+		}
+
 		$conditionsPerformance['PerformanceViewFactura.Empresa'] = $conditions['performance_bsu'];
 		// debug($conditionsPerformance);
 

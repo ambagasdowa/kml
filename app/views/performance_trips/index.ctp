@@ -202,7 +202,7 @@
 											$this->Html->link(
 																					__('Buscar ...', true),
 																					array('action' => 'get', null),
-																					array('id'=>'send_query','div'=>false,'class'=>'btn btn-primary btn-sm pull-right','tabindex'=>'4')
+																					array('id'=>'send_query','div'=>false,'class'=>'btn btn-primary btn-sm pull-right','tabindex'=>'5')
 																				);
 						?>
 					</div>
@@ -540,25 +540,28 @@
 														$( "input[id^='datepicker_']" ).datepicker();
 												 } );
 
+												 var count = 0;
 												 $("#add_update").on('click',function(){
 
 													event.stopPropagation();
 													event.preventDefault();
+													count += 1;
+															if (count > 1) {
+																$(this).prop('disabled',true);
+															} else {
+																console.log($(this).attr('data-update'));
+															 	var post_serial = JSON.stringify($("#post_form").serializeArray());
+																console.log(post_serial);
+																post_data_code = base64_encode(post_serial);
+																console.log(post_data_code);
 
-													console.log($(this).attr('data-update'));
-												 	var post_serial = JSON.stringify($("#post_form").serializeArray());
-													console.log(post_serial);
-													post_data_code = base64_encode(post_serial);
-													console.log(post_data_code);
-
-									 				$.post("<?php echo Dispatcher::baseUrl();?>/PerformanceViajes/add/save:"+ post_data_code)
-													.done(function(data){
-														$.colorbox.close();
-														document.getElementById("send_query").click();
-														console.log('loaded_table');
-													});
-													// $.colorbox();
-
+												 				$.post("<?php echo Dispatcher::baseUrl();?>/PerformanceViajes/add/save:"+ post_data_code)
+																.done(function(data){
+																	$.colorbox.close();
+																	document.getElementById("send_query").click();
+																	console.log('loaded_table');
+																});
+														}
 												 });
 											 }
 									});
