@@ -139,9 +139,7 @@ class ProjectionsViewIndicatorsPeriodsFullFleetsController extends AppController
 		// DEBUG bugging
 		// debug($projectionsViewIndicatorsPeriodsFullFleets);
 
-
-
-		$bssus = array_values($this->ProjectionsViewBussinessUnit->find('list'));
+		$bssus = array_values($this->ProjectionsViewBussinessUnit->find('list',array('conditions'=>$bsu_conditions)));
 // debug($bssus);
 		$new_projections_back = $projectionsViewIndicatorsPeriodsFullFleets;
 // debug($new_projections_back);
@@ -314,35 +312,57 @@ class ProjectionsViewIndicatorsPeriodsFullFleetsController extends AppController
 //         $conditions_chart_index['ProjectionsViewIndicatorsPeriodsFullFleet.cyear'] = $cyear;
 
         // NOTE begin the patches -- remove this when done
+				$this->LoadModel('ModuleUserCredentialsControl');
+        $auth_user = $this->ModuleUserCredentialsControl->getCredentials('all',array('user_id'=>$this->Auth->User('id')));
+
+      if ($auth_user) {
+        if (array_key_exists('bsu',$auth_user['ModuleUserCredentialsControl'])) { // set logical areas filter
+            $bsu_conditions = $auth_user['ModuleUserCredentialsControl']['bsu'];
+            $conditions_chart_index['ProjectionsViewIndicatorsPeriodsFullFleet.area'] = $bsu_conditions['ProjectionsViewBussinessUnit.name'];
+        }
+        if (array_key_exists('bsu_label',$auth_user['ModuleUserCredentialsControl'])) { // set logical areas filter
+            $bsu_label_conditions = $auth_user['ModuleUserCredentialsControl']['bsu_label'];
+        }
+        // if (array_key_exists('fraction',$auth_user['ModuleUserCredentialsControl'])) { // set logical areas filter
+        //     $fraction_conditions = $auth_user['ModuleUserCredentialsControl']['fraction'];
+        //     $conditions_chart_index['ProjectionsViewIndicatorsPeriodsFullFleet.fraccion'] = $fraction_conditions['ProjectionsViewFraction.desc_producto'];
+        // }
+        if (array_key_exists('areas',$auth_user['ModuleUserCredentialsControl'])) { // set logical areas filter
+            $conditions_chart_index = $auth_user['ModuleUserCredentialsControl']['areas'];
+        }
+        if (array_key_exists('type',$auth_user['ModuleUserCredentialsControl'])) { // set UI type-tabbed filter
+            $conditions_mod_index = $auth_user['ModuleUserCredentialsControl']['type'];
+        }
+      }
          // hir can be another table or section example module , data
-        $auth_users = array(
-                                // adds for ambagasdowa
-                                '5'=>array('fraction'=>array('GRANEL'),'type'=>array('toneladas'))
-																// '181'=>array('fraction'=>array('GRANEL'),'type'=>array('toneladas'))
-                      );
-
-        if (array_key_exists($_SESSION['Auth']['User']['id'],$auth_users) === true) { // set areas
-
-            if (array_key_exists('areas',$auth_users[$_SESSION['Auth']['User']['id']])) { // set filter for graphics
-                $conditions_chart_index['ProjectionsViewIndicatorsPeriodsFullFleet.area'] = $auth_users[$_SESSION['Auth']['User']['id']]['areas'];
-            }
-            if (array_key_exists('bsu',$auth_users[$_SESSION['Auth']['User']['id']])) { // set logical areas filter
-                $bsu_conditions['ProjectionsViewBussinessUnit.name'] = $auth_users[$_SESSION['Auth']['User']['id']]['bsu'];
-            }
-            if (array_key_exists('bsu_label',$auth_users[$_SESSION['Auth']['User']['id']])) { // set UI areas filter
-                $bsu_label_conditions['ProjectionsViewBussinessUnit.label'] = $auth_users[$_SESSION['Auth']['User']['id']]['bsu_label'];
-            }
-            if (array_key_exists('fraction',$auth_users[$_SESSION['Auth']['User']['id']])) { // set UI fraction filter
-                $fraction_conditions['ProjectionsViewFraction.desc_producto'] = $auth_users[$_SESSION['Auth']['User']['id']]['fraction'];
-            }
-            if (array_key_exists('type',$auth_users[$_SESSION['Auth']['User']['id']])) { // set UI type-tabbed filter
-                $conditions_mod_index['ProjectionsConfig.module_data_definition'] = $auth_users[$_SESSION['Auth']['User']['id']]['type'];
-            }
+        // $auth_users = array(
+        //                         // adds for ambagasdowa
+        //                         '5'=>array('fraction'=>array('GRANEL'),'type'=>array('toneladas'))
+				// 												// '181'=>array('fraction'=>array('GRANEL'),'type'=>array('toneladas'))
+        //               );
+				//
+        // if (array_key_exists($_SESSION['Auth']['User']['id'],$auth_users) === true) { // set areas
+				//
+        //     if (array_key_exists('areas',$auth_users[$_SESSION['Auth']['User']['id']])) { // set filter for graphics
+        //         $conditions_chart_index['ProjectionsViewIndicatorsPeriodsFullFleet.area'] = $auth_users[$_SESSION['Auth']['User']['id']]['areas'];
+        //     }
+        //     if (array_key_exists('bsu',$auth_users[$_SESSION['Auth']['User']['id']])) { // set logical areas filter
+        //         $bsu_conditions['ProjectionsViewBussinessUnit.name'] = $auth_users[$_SESSION['Auth']['User']['id']]['bsu'];
+        //     }
+        //     if (array_key_exists('bsu_label',$auth_users[$_SESSION['Auth']['User']['id']])) { // set UI areas filter
+        //         $bsu_label_conditions['ProjectionsViewBussinessUnit.label'] = $auth_users[$_SESSION['Auth']['User']['id']]['bsu_label'];
+        //     }
+        //     if (array_key_exists('fraction',$auth_users[$_SESSION['Auth']['User']['id']])) { // set UI fraction filter
+        //         $fraction_conditions['ProjectionsViewFraction.desc_producto'] = $auth_users[$_SESSION['Auth']['User']['id']]['fraction'];
+        //     }
+        //     if (array_key_exists('type',$auth_users[$_SESSION['Auth']['User']['id']])) { // set UI type-tabbed filter
+        //         $conditions_mod_index['ProjectionsConfig.module_data_definition'] = $auth_users[$_SESSION['Auth']['User']['id']]['type'];
+        //     }
 //             .... add more filters
-        } else {
+        // } else {
                 $fraction_conditions['ProjectionsViewFraction.desc_producto'] = 'GRANEL';
                 $conditions_mod_index['ProjectionsConfig.module_data_definition'] = 'toneladas';
-        }
+        // }
 
         $conditions_mod_index['ProjectionsConfig.projections_type_configs_id'] = 3 ;
         $mod_index = $this->ProjectionsConfig->find('list',array('fields'=>array('module_field_translation','module_data_definition'),'conditions'=>$conditions_mod_index));

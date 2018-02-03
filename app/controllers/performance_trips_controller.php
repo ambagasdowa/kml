@@ -165,6 +165,11 @@ class PerformanceTripsController extends AppController {
 			if (!empty($data_performance['PerformanceViewViaje']['validacionEvidenciasCliente']) AND !empty($data_performance['PerformanceViewViaje']['entregaEvidenciasCliente'])) {
 				$performanceReferencesResume[$data_performance['PerformanceViewViaje']['id_cliente']]['validation'][] = $data_performance['PerformanceViewViaje']['validation'];
 			}
+
+			if (!empty($data_performance['PerformanceViewViaje']['subtotal'])) {
+				$performanceReferencesResume[$data_performance['PerformanceViewViaje']['id_cliente']]['amount'][$data_performance['PerformanceViewViaje']['num_guia']] = (float)$data_performance['PerformanceViewViaje']['subtotal'];
+			}
+
 		}
 
 		// debug($performanceReferencesResume);
@@ -183,6 +188,7 @@ class PerformanceTripsController extends AppController {
 		$general['Aceptado'] = null;
 		$general['Entrega'] = null;
 		$general['Validacion'] = null;
+		$general['Monto'] = null;
 
 		// debug($generalResume);
 
@@ -204,6 +210,7 @@ class PerformanceTripsController extends AppController {
 					$general['Dias de Validacion'] += array_sum($resumenvalue['validation']);
 				}
 				$general['Cantidad'] += count($resumenvalue['end']);
+				$general['Monto'] += array_sum($resumenvalue['amount']);
 
 				// NOTE Counts
 				foreach ($resumenvalue as $rkey => $rvalue) {
@@ -283,6 +290,16 @@ class PerformanceTripsController extends AppController {
 										)
 								), 2, '.', ','
 						);
+					} else if ($key == 'Monto') {
+						$result_array[$key] =
+						number_format(
+								money_format(
+										'%i',
+										(
+											$value
+										)
+								), 2, '.', ','
+						);
 					} else {
 						$result_array[$key] =
 						number_format(
@@ -302,6 +319,26 @@ class PerformanceTripsController extends AppController {
 			$performanceGeneral = $result_array;
 		}
 			// $performanceGeneral = $general;
+			// NOTE to concvert need drop al traces of a string
+				$new_monto = str_replace(',','',$performanceGeneral['Monto']);
+				$factor = ( (100) / $new_monto );
+
+				foreach ($performanceReferencesIdx as $key_rfc => $comp_name) {
+					$to_parsing[] = json_encode(array('name'=>$comp_name,'y'=>round((array_sum($performanceReferencesResume[$key_rfc]['amount']))*$factor,2),'drilldown'=>$key_rfc), JSON_PRETTY_PRINT);
+					foreach ($performanceReferencesResume[$key_rfc]['amount'] as $key_reference => $amount_value) {
+						$data_x[$key_rfc][$key_reference] = '["'.$key_reference.'",'. $amount_value * $factor . ']' ;
+						$performanceReferencesResume[$key_rfc]['amount'][$key_reference] = $amount_value * $factor;
+					}
+
+					$data='['.str_replace('}',']',str_replace('{','[',str_replace(':',',',str_replace(',','],[',json_encode($performanceReferencesResume[$key_rfc]['amount']))))).']';
+					$init_parsing[$key_rfc] = json_encode(array('name'=>$comp_name,'id'=>$key_rfc,'data'=>"{$data}"), JSON_FORCE_OBJECT);
+				}
+
+				$in_parsing = str_replace(']"',']',str_replace('"[','[',str_replace('\"','"',$init_parsing)));
+				$json_parsing_level_one = implode(',',$to_parsing);
+				$json_parsing_level_two = implode(',',$in_parsing);
+
+
 
 			if ( isset($xport) and $xport != null)  {
 
@@ -319,7 +356,7 @@ class PerformanceTripsController extends AppController {
 
 			} else {
 
-			$this->set(compact('performanceViewViaje','performanceReferencesMod','performanceReferencesIdx','dashboard','performanceReferencesResume','performanceGeneral','subgeneral'));
+			$this->set(compact('performanceViewViaje','performanceReferencesMod','performanceReferencesIdx','dashboard','performanceReferencesResume','performanceGeneral','subgeneral','json_parsing_level_one','json_parsing_level_two'));
 
 			// NOTE set the response output for an ajax call
 			Configure::write('debug', 0);

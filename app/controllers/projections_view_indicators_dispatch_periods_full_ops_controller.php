@@ -45,34 +45,28 @@ class ProjectionsViewIndicatorsDispatchPeriodsFullOpsController extends AppContr
         $conditions_chart_index['ProjectionsViewIndicatorsDispatchPeriodsFullOp.cyear'] = $cyear;
 
         // NOTE begin the patches -- remove this when done
+				$this->LoadModel('ModuleUserCredentialsControl');
+        $auth_user = $this->ModuleUserCredentialsControl->getCredentials('all',array('user_id'=>$this->Auth->User('id')));
 
-        $auth_users = array(
-                                // jesus baizabal
-                                // '5'=>array('areas'=>array('GUADALAJARA','LA PAZ'),'bsu'=>array('GUADALAJARA','LA PAZ'),'bsu_label'=>array('GUADALAJARA','LA PAZ'),'fraction'=>array('GRANEL'),'type'=>array('toneladas','viajes')),
-                                // jorge.floresb
-                                '96'=>array('areas'=>array('GUADALAJARA','LA PAZ'),'bsu'=>array('GUADALAJARA','LA PAZ'),'bsu_label'=>array('GUADALAJARA','LA PAZ'),'fraction'=>array('GRANEL'))
-                           );
-
-        if (array_key_exists($_SESSION['Auth']['User']['id'],$auth_users) === true) { // set areas
-
-            if (array_key_exists('areas',$auth_users[$_SESSION['Auth']['User']['id']])) { // set filter for graphics
-                $conditions_chart_index['ProjectionsViewIndicatorsDispatchPeriodsFullOp.area'] = $auth_users[$_SESSION['Auth']['User']['id']]['areas'];
-            }
-            if (array_key_exists('bsu',$auth_users[$_SESSION['Auth']['User']['id']])) { // set logical areas filter
-                $bsu_conditions['ProjectionsViewBussinessUnit.name'] = $auth_users[$_SESSION['Auth']['User']['id']]['bsu'];
-            }
-            if (array_key_exists('bsu_label',$auth_users[$_SESSION['Auth']['User']['id']])) { // set UI areas filter
-                $bsu_label_conditions['ProjectionsViewBussinessUnit.label'] = $auth_users[$_SESSION['Auth']['User']['id']]['bsu_label'];
-            }
-            if (array_key_exists('fraction',$auth_users[$_SESSION['Auth']['User']['id']])) { // set UI fraction filter
-                $fraction_conditions['ProjectionsViewFraction.desc_producto'] = $auth_users[$_SESSION['Auth']['User']['id']]['fraction'];
-                $conditions_chart_index['ProjectionsViewIndicatorsDispatchPeriodsFullOp.fraccion'] = $auth_users[$_SESSION['Auth']['User']['id']]['fraction'];
-            }
-            if (array_key_exists('type',$auth_users[$_SESSION['Auth']['User']['id']])) { // set UI type-tabbed filter
-                $conditions_mod_index['ProjectionsConfig.module_data_definition'] = $auth_users[$_SESSION['Auth']['User']['id']]['type'];
-            }
-//             .... add more filters
+      if ($auth_user) {
+        if (array_key_exists('bsu',$auth_user['ModuleUserCredentialsControl'])) { // set logical areas filter
+            $bsu_conditions = $auth_user['ModuleUserCredentialsControl']['bsu'];
+            $conditions_chart_index['ProjectionsViewIndicatorsDispatchPeriodsFullOp.area'] = $bsu_conditions['ProjectionsViewBussinessUnit.name'];
         }
+        if (array_key_exists('bsu_label',$auth_user['ModuleUserCredentialsControl'])) { // set logical areas filter
+            $bsu_label_conditions = $auth_user['ModuleUserCredentialsControl']['bsu_label'];
+        }
+        if (array_key_exists('fraction',$auth_user['ModuleUserCredentialsControl'])) { // set logical areas filter
+            $fraction_conditions = $auth_user['ModuleUserCredentialsControl']['fraction'];
+            $conditions_chart_index['ProjectionsViewIndicatorsDispatchPeriodsFullOp.fraccion'] = $fraction_conditions['ProjectionsViewFraction.desc_producto'];
+        }
+        if (array_key_exists('areas',$auth_user['ModuleUserCredentialsControl'])) { // set logical areas filter
+            $conditions_chart_index = $auth_user['ModuleUserCredentialsControl']['areas'];
+        }
+        if (array_key_exists('type',$auth_user['ModuleUserCredentialsControl'])) { // set UI type-tabbed filter
+            $conditions_mod_index = $auth_user['ModuleUserCredentialsControl']['type'];
+        }
+      }
 
     $bsu = $this->ProjectionsViewBussinessUnit->find('list',array('conditions'=>$bsu_conditions));
 		$bsu_label = $this->ProjectionsViewBussinessUnit->find('list',array('fields'=>array('id','label'),'conditions'=>$bsu_label_conditions));

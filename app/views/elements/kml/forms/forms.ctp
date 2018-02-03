@@ -61,6 +61,9 @@ $core = 'core'.DS;
       e($this->Html->script($theme.'highCharts/stock/highstock',false));
       e($this->Html->script($theme.'highCharts/charts/highcharts-more',false));
       e($this->Html->script($theme.'highCharts/stock/modules/exporting',false));
+      e($this->Html->script($theme.'highCharts/stock/modules/data',false));
+      e($this->Html->script($theme.'highCharts/stock/modules/drilldown',false));
+
 
       // e($this->Html->script($theme.'highCharts/stock/themes/dark-blue',false));
       // e($this->Html->script($theme.'highCharts/stock/themes/dark-green',false));

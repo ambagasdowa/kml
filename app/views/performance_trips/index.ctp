@@ -51,6 +51,7 @@
 		white-space:nowrap;
 	}
 	td {
+		font-family: "Arial", monospace, sans-serif;
 		font-size: 12px;
 		white-space:nowrap;
 	}
@@ -412,75 +413,20 @@
 								evento.preventDefault();
 
 								$.colorbox({
-										// 	width: "100%",
-										inline: true,
-										href: function () {
-						          // var elementID = $(this).attr('id');
-						          // return "#" + elementID;
-											return "#chart";
-						       },
-									 onClosed:function(){
-										 $('#chart').hide();
-									 },
-									 onLoad:function(){
-										 $('#chart').show();
-										 Highcharts.chart('the-chart', {
-												 chart: {
-														 plotBackgroundColor: null,
-														 plotBorderWidth: null,
-														 plotShadow: false,
-														 type: 'pie'
-												 },
-												 title: {
-														 text: 'Browser market shares January, 2015 to May, 2015'
-												 },
-												 tooltip: {
-														 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-												 },
-												 plotOptions: {
-														 pie: {
-																 allowPointSelect: true,
-																 cursor: 'pointer',
-																 dataLabels: {
-																		 enabled: true,
-																		 format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-																		 style: {
-																				 color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-																		 }
-																 }
-														 }
-												 },
-												 series: [{
-														 name: 'Brands',
-														 colorByPoint: true,
-														 data: [{
-																 name: 'IE',
-																 y: 56.33
-														 }, {
-																 name: 'Chrome',
-																 y: 24.03,
-																 sliced: true,
-																 selected: true
-														 }, {
-																 name: 'Firefox',
-																 y: 10.38
-														 }, {
-																 name: 'Safari',
-																 y: 4.77
-														 }, {
-																 name: 'Opera',
-																 y: 0.91
-														 }, {
-																 name: 'Other',
-																 y: 0.2
-														 }]
-												 }]
-										 });
-									 }
+											inline: true,
+											href: function () {
+							          // var elementID = $(this).attr('id');
+							          // return "#" + elementID;
+												return "#chart";
+							       },
+										 onClosed:function(){
+											 $('#chart').hide();
+										 },
+										 onLoad:function(){
+											 $('#chart').css('width','100%').show();
+										 }
 						      });
-
 							});
-
 							// // NOTE call to add update
 							$("a[id^='get_factura_']").on('click', function(event) {
 									event.stopPropagation();
@@ -664,7 +610,8 @@
 				        .datepicker({
 				          // defaultDate: "+1w"
 				          // changeMonth: true
-				          // numberOfMonths: 3
+				          numberOfMonths: 2,
+									showCurrentAtPos: 1
 				        })
 				        .on( "change", function() {
 				          to.datepicker( "option", "minDate", getDate( this ) );
@@ -672,7 +619,8 @@
 				      to = $( "#to" ).datepicker({
 				        // defaultDate: "+1w",
 				        // changeMonth: true,
-				        numberOfMonths: 2
+				        numberOfMonths: 2,
+								showCurrentAtPos: 1
 				      })
 				      .on( "change", function() {
 				        from.datepicker( "option", "maxDate", getDate( this ) );

@@ -32,7 +32,6 @@ class PerformanceReferencesController extends AppController {
 
 	function get() {
 		// Configure::write('debug',2);
-
 		$this->LoadModel('PerformanceViewFactura');
 		$this->LoadModel('PerformanceBsu');
 
@@ -94,7 +93,7 @@ class PerformanceReferencesController extends AppController {
 		$conditionsPerformance['PerformanceViewFactura.Empresa'] = $conditions['performance_bsu'];
 		// debug($conditionsPerformance);
 
-		$performanceReferences = $this->PerformanceViewFactura->find('all',array('conditions'=>$conditionsPerformance));
+		$performanceReferences = $this->PerformanceViewFactura->find('all',array('conditions'=>$conditionsPerformance,'order'=>array('PerformanceViewFactura.performance_customers_id'=>'desc')));
 
 		// NOTE FILTER
 		$condBsu['PerformanceBsu.id'] = $conditions['performance_bsu'];
@@ -124,6 +123,10 @@ class PerformanceReferencesController extends AppController {
 			if (!empty($data_performance['PerformanceViewFactura']['fechaPago']) AND !empty($data_performance['PerformanceViewFactura']['fechaPromesaPago'])) {
 				$performanceReferencesResume[$data_performance['PerformanceViewFactura']['performance_customers_id']]['payment'][] = $data_performance['PerformanceViewFactura']['payment'];
 			}
+
+			if (!empty($data_performance['PerformanceViewFactura']['Total'])) {
+				$performanceReferencesResume[$data_performance['PerformanceViewFactura']['performance_customers_id']]['amount'][$data_performance['PerformanceViewFactura']['Referencia']] = (float)$data_performance['PerformanceViewFactura']['Total'];
+			}
 		}
 
 		// debug($performanceReferencesResume);
@@ -142,6 +145,7 @@ class PerformanceReferencesController extends AppController {
 		$general['Aprobado'] = null;
 		$general['Promesa'] = null;
 		$general['Pago'] = null;
+		$general['Monto'] = null;
 
 		// debug($generalResume);
 
@@ -153,6 +157,7 @@ class PerformanceReferencesController extends AppController {
 			$general['Dias de Promesa'] += array_sum($resumenvalue['promise']);
 			$general['Dias de Pago'] += array_sum($resumenvalue['payment']);
 			$general['Cantidad'] += count($resumenvalue['deliver']);
+			$general['Monto'] += array_sum($resumenvalue['amount']);
 
 			// NOTE Counts
 			foreach ($resumenvalue as $rkey => $rvalue) {
@@ -228,6 +233,16 @@ class PerformanceReferencesController extends AppController {
 									)
 							), 2, '.', ','
 					);
+				} else if ($key == 'Monto') {
+					$result_array[$key] =
+					number_format(
+							money_format(
+									'%i',
+									(
+										$value
+									)
+							), 2, '.', ','
+					);
 				// } else {
 				// 	$result_array[$key] =
 				// 	number_format(
@@ -244,19 +259,33 @@ class PerformanceReferencesController extends AppController {
 				$result_array[$key] = $value;
 			}
 		}
-		// debug($result_array);
-
 		$performanceGeneral = $result_array;
 	} else {
 		$performanceGeneral = null;
 	}
 
-		// debug($general);
-			// NOTE cant * preciounitario ,
-			// cast monto decimal 12,2
-			// impuesto recal 2 => 6
+	// NOTE to concvert need drop al traces of a string
+		$new_monto = str_replace(',','',$performanceGeneral['Monto']);
+		$factor = ( (100) / $new_monto );
 
-		$this->set(compact('performanceReferencesMod','performanceReferencesIdx','dashboard','performanceReferencesResume','performanceGeneral','subgeneral'));
+		foreach ($performanceReferencesIdx as $key_rfc => $comp_name) {
+			$to_parsing[] = json_encode(array('name'=>$comp_name,'y'=>round((array_sum($performanceReferencesResume[$key_rfc]['amount']))*$factor,2),'drilldown'=>$key_rfc), JSON_PRETTY_PRINT);
+			foreach ($performanceReferencesResume[$key_rfc]['amount'] as $key_reference => $amount_value) {
+				$data_x[$key_rfc][$key_reference] = '["'.$key_reference.'",'. $amount_value * $factor . ']' ;
+				$performanceReferencesResume[$key_rfc]['amount'][$key_reference] = $amount_value * $factor;
+			}
+
+			$data='['.str_replace('}',']',str_replace('{','[',str_replace(':',',',str_replace(',','],[',json_encode($performanceReferencesResume[$key_rfc]['amount']))))).']';
+			$init_parsing[$key_rfc] = json_encode(array('name'=>$comp_name,'id'=>$key_rfc,'data'=>"{$data}"), JSON_FORCE_OBJECT);
+		}
+
+		$in_parsing = str_replace(']"',']',str_replace('"[','[',str_replace('\"','"',$init_parsing)));
+		$json_parsing_level_one = implode(',',$to_parsing);
+		$json_parsing_level_two = implode(',',$in_parsing);
+
+		// debug($json_parsing_level_two);
+
+		$this->set(compact('performanceReferencesMod','performanceReferencesIdx','dashboard','performanceReferencesResume','performanceGeneral','subgeneral','json_parsing_level_one','json_parsing_level_two'));
 
 		// NOTE set the response output for an ajax call
 		Configure::write('debug', 0);

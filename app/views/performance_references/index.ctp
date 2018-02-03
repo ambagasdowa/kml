@@ -49,6 +49,8 @@ th {
 	white-space:nowrap;
 }
 td {
+	font-family: "Arial", monospace, sans-serif;
+	/*font-family: monospace;*/
 	font-size: 12px;
 	white-space:nowrap;
 }
@@ -216,7 +218,6 @@ td {
 		<div id="printThis" class="container-mod ninja-scroll">
 			<div id="updateSearchResult" class="updateSearchResult"></div>
 		</div>
-
 
 <!-- =======================
 				start old crud
@@ -408,73 +409,19 @@ td {
 								evento.preventDefault();
 
 								$.colorbox({
-										// 	width: "100%",
-										inline: true,
-										href: function () {
-						          // var elementID = $(this).attr('id');
-						          // return "#" + elementID;
-											return "#chart";
-						       },
-									 onClosed:function(){
-										 $('#chart').hide();
-									 },
-									 onLoad:function(){
-										 $('#chart').show();
-										 Highcharts.chart('the-chart', {
-												 chart: {
-														 plotBackgroundColor: null,
-														 plotBorderWidth: null,
-														 plotShadow: false,
-														 type: 'pie'
-												 },
-												 title: {
-														 text: 'Browser market shares January, 2015 to May, 2015'
-												 },
-												 tooltip: {
-														 pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-												 },
-												 plotOptions: {
-														 pie: {
-																 allowPointSelect: true,
-																 cursor: 'pointer',
-																 dataLabels: {
-																		 enabled: true,
-																		 format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-																		 style: {
-																				 color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-																		 }
-																 }
-														 }
-												 },
-												 series: [{
-														 name: 'Brands',
-														 colorByPoint: true,
-														 data: [{
-																 name: 'IE',
-																 y: 56.33
-														 }, {
-																 name: 'Chrome',
-																 y: 24.03,
-																 sliced: true,
-																 selected: true
-														 }, {
-																 name: 'Firefox',
-																 y: 10.38
-														 }, {
-																 name: 'Safari',
-																 y: 4.77
-														 }, {
-																 name: 'Opera',
-																 y: 0.91
-														 }, {
-																 name: 'Other',
-																 y: 0.2
-														 }]
-												 }]
-										 });
-									 }
+											inline: true,
+											href: function () {
+							          // var elementID = $(this).attr('id');
+							          // return "#" + elementID;
+												return "#chart";
+							       },
+										 onClosed:function(){
+											 $('#chart').hide();
+										 },
+										 onLoad:function(){
+											 $('#chart').css('width','100%').show();
+										 }
 						      });
-
 							});
 
 							// // NOTE call to add update
@@ -600,6 +547,7 @@ td {
 											 				$.post("<?php echo Dispatcher::baseUrl();?>/PerformanceFacturas/add/save:"+ post_data_code)
 															.done(function(data){
 																$.colorbox.close();
+																// $("#tableFilter").load(location.href + " #tableFilter");
 																document.getElementById("send_query").click();
 																console.log('loaded_table-tbl');
 															});
@@ -700,9 +648,10 @@ td {
 				    // var dateFormat = "mm/dd/yy",
 				      from = $( "#from" )
 				        .datepicker({
-				          // defaultDate: "+1w"
-				          // changeMonth: true
-				          // numberOfMonths: 3
+				          // defaultDate: "+1w",
+				          // changeMonth: true,
+				          numberOfMonths: 2,
+									showCurrentAtPos: 1
 				        })
 				        .on( "change", function() {
 				          to.datepicker( "option", "minDate", getDate( this ) );
@@ -710,7 +659,8 @@ td {
 				      to = $( "#to" ).datepicker({
 				        // defaultDate: "+1w",
 				        // changeMonth: true,
-				        numberOfMonths: 2
+				        numberOfMonths: 2,
+								showCurrentAtPos: 1
 				      })
 				      .on( "change", function() {
 				        from.datepicker( "option", "maxDate", getDate( this ) );
