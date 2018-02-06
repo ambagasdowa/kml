@@ -59,8 +59,7 @@
     },
     "upload": {
         "multiple": true,
-        "fileSizeLimit":false,
-        "maxNumberOfFiles": 5000,
+        "maxNumberOfFiles": 50,
         "chunkSize": false
     },
     "clipboard": {
