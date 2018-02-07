@@ -129,7 +129,7 @@ class PerformanceReferencesController extends AppController {
 			}
 		}
 
-		// debug($performanceReferencesResume);
+
 
 		if (!isset($performanceReferencesResume)) {
 			$performanceReferencesResume = null ;
@@ -272,10 +272,10 @@ class PerformanceReferencesController extends AppController {
 			$to_parsing[] = json_encode(array('name'=>$comp_name,'y'=>round((array_sum($performanceReferencesResume[$key_rfc]['amount']))*$factor,2),'drilldown'=>$key_rfc), JSON_PRETTY_PRINT);
 			foreach ($performanceReferencesResume[$key_rfc]['amount'] as $key_reference => $amount_value) {
 				$data_x[$key_rfc][$key_reference] = '["'.$key_reference.'",'. $amount_value * $factor . ']' ;
-				$performanceReferencesResume[$key_rfc]['amount'][$key_reference] = $amount_value * $factor;
+				$performanceReferencesResumePercent[$key_rfc]['amount'][$key_reference] = $amount_value * $factor;
 			}
 
-			$data='['.str_replace('}',']',str_replace('{','[',str_replace(':',',',str_replace(',','],[',json_encode($performanceReferencesResume[$key_rfc]['amount']))))).']';
+			$data='['.str_replace('}',']',str_replace('{','[',str_replace(':',',',str_replace(',','],[',json_encode($performanceReferencesResumePercent[$key_rfc]['amount']))))).']';
 			$init_parsing[$key_rfc] = json_encode(array('name'=>$comp_name,'id'=>$key_rfc,'data'=>"{$data}"), JSON_FORCE_OBJECT);
 		}
 
@@ -284,6 +284,8 @@ class PerformanceReferencesController extends AppController {
 		$json_parsing_level_two = implode(',',$in_parsing);
 
 		// debug($json_parsing_level_two);
+
+// debug($performanceReferencesResume);
 
 		$this->set(compact('performanceReferencesMod','performanceReferencesIdx','dashboard','performanceReferencesResume','performanceGeneral','subgeneral','json_parsing_level_one','json_parsing_level_two'));
 
