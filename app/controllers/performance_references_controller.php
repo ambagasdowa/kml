@@ -152,11 +152,12 @@ class PerformanceReferencesController extends AppController {
 	if (isset($generalResume)) {
 		foreach ( $generalResume as $resumenkey => $resumenvalue ) {
 			# code...
+			debug($resumenvalue);
 			$general['Dias de Entrega'] += array_sum($resumenvalue['deliver']);
 			$general['Dias de Aprobacion'] += array_sum($resumenvalue['proved']);
 			$general['Dias de Promesa'] += array_sum($resumenvalue['promise']);
 			$general['Dias de Pago'] += array_sum($resumenvalue['payment']);
-			$general['Cantidad'] += count($resumenvalue['deliver']);
+			// $general['Cantidad'] += count($resumenvalue['deliver']);
 			$general['Monto'] += array_sum($resumenvalue['amount']);
 
 			// NOTE Counts
@@ -191,7 +192,7 @@ class PerformanceReferencesController extends AppController {
 
 		foreach ($general as $key => $value) {
 			# code...
-			if ($key != 'Cantidad' and $key != 'Entrega' and $key != 'Aprobado' and $key != 'Promesa' and $key != 'Pago') {
+			if ($key != 'Entrega' and $key != 'Aprobado' and $key != 'Promesa' and $key != 'Pago') {
 
 				if ($key == 'Dias de Entrega') {
 					$result_array[$key] =

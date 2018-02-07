@@ -271,7 +271,7 @@
 				<td><?php print($performanceReferencesKey)?></td>
 				<td id="footer_dropdown_qty_<?php print($performanceReferencesKey)?>">
 					<?php
-						echo count($performanceReferencesResume[$performanceReferencesKey]['deliver']);
+						echo count($performanceReferencesResume[$performanceReferencesKey]['amount']);
 					?>
 				</td>
 
