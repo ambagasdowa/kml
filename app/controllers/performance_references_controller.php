@@ -1,6 +1,5 @@
 <?php
 /**
-		*
 		* PHP versions 4 and 5
 		*
 		* kml : Kamila Software
@@ -28,7 +27,6 @@ class PerformanceReferencesController extends AppController {
 	// var $presetVars = array(
 	// 	array('field' => 'name', 'type' => 'value'),
 	// );
-
 
 	function get() {
 		// Configure::write('debug',2);

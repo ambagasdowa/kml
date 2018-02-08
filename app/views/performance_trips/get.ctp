@@ -144,7 +144,7 @@
             <th class="hideme">Subtotal</th>
             <!-- <th>peso</th> -->
             <th class="hideme">Configuracion_viaje</th>
-            <th class="hideme">Tipo_de_operacion</th>
+            <!-- <th class="hideme">Tipo_de_operacion</th> -->
             <th class="hideme">Flota</th>
             <th class="hideme">Area</th>
             <th class="hideme">Fraccion</th>
@@ -262,7 +262,7 @@
 					</td>
           <!-- <td><?php echo $performanceViewViaje['PerformanceViewViaje']['peso']; ?>&nbsp;</td> -->
           <td><?php echo $performanceViewViaje['PerformanceViewViaje']['configuracion_viaje']; ?>&nbsp;</td>
-          <td><?php echo $performanceViewViaje['PerformanceViewViaje']['tipo_de_operacion']; ?>&nbsp;</td>
+          <!-- <td><?php echo $performanceViewViaje['PerformanceViewViaje']['tipo_de_operacion']; ?>&nbsp;</td> -->
           <td><?php echo $performanceViewViaje['PerformanceViewViaje']['flota']; ?>&nbsp;</td>
           <td><?php echo $performanceViewViaje['PerformanceViewViaje']['area']; ?>&nbsp;</td>
           <td><?php echo $performanceViewViaje['PerformanceViewViaje']['fraccion']; ?>&nbsp;</td>
@@ -380,7 +380,7 @@
 				<td id="_footer_td" class="hideme"></td>
 				<td id="_footer_td" class="hideme"></td>
 				<td id="_footer_td" class="hideme"></td>
-				<td id="_footer_td" class="hideme"></td>
+				<!-- <td id="_footer_td" class="hideme"></td> -->
 				<td id="_footer_td" class="hideme"></td>
 				<td id="_footer_td" class="hideme"></td>
 				<td id="_footer_td" class="hideme"></td>
