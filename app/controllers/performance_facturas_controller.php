@@ -46,8 +46,11 @@ class PerformanceFacturasController extends AppController {
 				$conditionsPerformanceFactura['PerformanceFactura.'.$idx]	= $data;
 				$parse_id['PerformanceFactura'][$idx] = $data;
 			}
-			// debug($conditionsPerformanceFactura);
-			// debug($parse_id);
+			// NOTE add status filter
+			$conditionsPerformanceFactura['PerformanceFactura.status'] = 1;
+
+			debug($conditionsPerformanceFactura);
+			debug($parse_id);
 			// NOTE add the array param fields
 			$search = $this->PerformanceFactura->find(
 																				'all',
@@ -80,7 +83,7 @@ class PerformanceFacturasController extends AppController {
 				$performanceFacturas = $parse_id;
 				// NOTE set the ids in the form
 			}
-			// debug(current($search));
+			debug(current($search));
 			// set vars
 			// NOTE check like if $this->data
 
@@ -112,8 +115,8 @@ class PerformanceFacturasController extends AppController {
 					}
 				}
 			}
-
-			// exit();
+// debug($conditions);
+// exit();
 			if ($conditions['dataUpdate'] === true ) {
 				// update
 				// NOTE firts check for the id , then update

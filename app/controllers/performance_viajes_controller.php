@@ -68,6 +68,8 @@ class PerformanceViajesController extends AppController {
 																			));
 			// NOTE count the array elements
 			// debug($search);
+			// NOTE add status filter
+			$conditionsPerformanceViajes['PerformanceViaje.status'] = 1;
 
 			if ( !empty($search) && count($search) > 0 ) {
 				// NOTE means that we have encounter a least one record (and shut be only one ) for this id

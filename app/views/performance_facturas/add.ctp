@@ -32,14 +32,20 @@
 
 <?php
 
+    // debug($performanceFacturas['PerformanceFactura']);
+
     if ($performanceFacturaStatus == true) {
       $new_dates = array('entregaFacturaCliente','aprobacionFactura','fechaPromesaPago','fechaPago');
       foreach ($new_dates as $inx => $new_name) {
-        $new_promise[$new_name] = new datetime($performanceFacturas['PerformanceFactura'][$new_name]);
-        $new_dates[$new_name] = $new_promise[$new_name]->format('Y/m/d');
+        if ($performanceFacturas['PerformanceFactura'][$new_name] != null) {
+          $new_promise[$new_name] = new datetime($performanceFacturas['PerformanceFactura'][$new_name]);
+          $new_dates[$new_name] = $new_promise[$new_name]->format('Y/m/d');
+        }
       }
       extract($new_dates, EXTR_PREFIX_SAME, "wddx");
     }
+
+    // debug($new_dates);
 
 ?>
 
@@ -126,7 +132,7 @@
                               'type'=>'text',
                               'id'=> 'datepicker_deliver',
                               'placeholder'=>'entregaFacturaCliente',
-                              'value'      => ($performanceFacturaStatus == true ? $entregaFacturaCliente : ''),
+                              'value'      => ( isset($entregaFacturaCliente) ? $entregaFacturaCliente  : ''),
                               'class'=>'u-full-width'
                              )
                  );
@@ -137,7 +143,7 @@
                               'type'=>'text',
                               'placeholder'=>'aprobacionFactura',
                               'id'=>'datepicker_aproved',
-                              'value'      => ($performanceFacturaStatus == true ? $aprobacionFactura : ''),
+                              'value'      => ( isset($aprobacionFactura) ? $aprobacionFactura : ''),
                               'class'=>'u-full-width'
                              )
                   );
@@ -157,7 +163,7 @@
                              'type'=>'text',
                              'id'=>'datepicker_payment',
                              'placeholder'=>'fechaPago',
-                             'value'      => ($performanceFacturaStatus == true ? $fechaPago : ''),
+                             'value'      => ( isset($fechaPago) ? $fechaPago : ''),
                              'class'=>'u-full-width'
                              )
                 );

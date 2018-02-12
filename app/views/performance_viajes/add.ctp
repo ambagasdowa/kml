@@ -35,8 +35,10 @@
       $new_dates = array('recepcionEvidencias','entregaEvidenciasCliente','validacionEvidenciasCliente');
 
       foreach ($new_dates as $inx => $new_name) {
-        $new_promise[$new_name] = new datetime($performanceViajes['PerformanceViaje'][$new_name]);
-        $new_dates[$new_name] = $new_promise[$new_name]->format('Y/m/d');
+        if ($performanceViajes['PerformanceViaje'][$new_name] != null ) {
+          $new_promise[$new_name] = new datetime($performanceViajes['PerformanceViaje'][$new_name]);
+          $new_dates[$new_name] = $new_promise[$new_name]->format('Y/m/d');
+        }
       }
       extract($new_dates, EXTR_PREFIX_SAME, "wddx");
     }
@@ -152,7 +154,7 @@
                               'id'=> 'datepicker_deliver',
                               'placeholder'=>'recepcionEvidencias',
                               // 'value'      => ($performanceFacturaStatus == true ? $recepcionEvidencias : ''), // check this??
-                              'value'      => $recepcionEvidencias, // check this??
+                              'value'      => ( isset($recepcionEvidencias) ? $recepcionEvidencias :''), // check this??
                               'class'=>'u-full-width'
                              )
                  );
@@ -163,7 +165,7 @@
                               'type'=>'text',
                               'placeholder'=>'entregaEvidenciasCliente',
                               'id'=>'datepicker_aproved',
-                              'value'      => $entregaEvidenciasCliente,
+                              'value'      => ( isset($entregaEvidenciasCliente) ? $entregaEvidenciasCliente : ''),
                               'class'=>'u-full-width'
                              )
                   );
@@ -183,7 +185,7 @@
                              'type'=>'text',
                              'id'=>'datepicker_payment',
                              'placeholder'=>'validacionEvidenciasCliente',
-                             'value'      =>  $validacionEvidenciasCliente ,
+                             'value'      =>  ( isset($validacionEvidenciasCliente) ? $validacionEvidenciasCliente : ''),
                              'class'=>'u-full-width'
                              )
                 );
