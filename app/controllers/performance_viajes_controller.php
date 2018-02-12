@@ -38,7 +38,7 @@ class PerformanceViajesController extends AppController {
 
 	function add() {
 
-			Configure::write('debug', 2);
+			// Configure::write('debug', 2);
 			// debug($this->params);
 			$posted = json_decode(base64_decode($this->params['named']['data']),true);
 			// debug($posted); // NOTE set this in the add view for parsing as hidden values
