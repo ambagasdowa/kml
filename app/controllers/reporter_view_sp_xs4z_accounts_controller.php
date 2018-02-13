@@ -31,7 +31,7 @@ class ReporterViewSpXs4zAccountsController extends AppController {
 		$this->LoadModel('ModuleUserCredentialsControl');
 		$auth_user = $this->ModuleUserCredentialsControl->getCredentials('all',array('user_id'=>$this->Auth->User('id')));
 
-		debug($auth_user);
+		// debug($auth_user);
 
 		if ($auth_user) {
 			if (array_key_exists('bsu',$auth_user['ModuleUserCredentialsControl'])) { // set logical areas filter
