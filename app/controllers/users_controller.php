@@ -193,7 +193,7 @@ class UsersController extends AppController {
 // 		}
 		if ($this->Session->read('Auth.User')) {
 
-			$this->Session->setFlash('You are logged in!');
+			$this->Session->setFlash('');
 			$this->redirect('/', null, false);
 
 		}
@@ -201,7 +201,7 @@ class UsersController extends AppController {
 
 	function logout() {
 		//Leave empty for now.
-		$this->Session->setFlash('Good-Bye');
+		$this->Session->setFlash('Session Terminada');
 		foreach($_SESSION as $container => $arrayContainer){
 		  if($container !== 'Auth' AND $container !== 'Config' AND $container !== 'Message'){//Belong to normal Session
 		  unset($_SESSION[$container]); // Sanitize the Global var $_SESSION

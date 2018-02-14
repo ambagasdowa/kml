@@ -39,7 +39,6 @@ $.fn.easyPaginate = function (options) {
         nextButtonText: '>',
         headerTable:'head',
         complete:null
-
     }
 
     return this.each (function (instance) {
@@ -140,32 +139,35 @@ $.fn.easyPaginate = function (options) {
         };
 
         var displayNav = function() {
-            htmlNav = '<div class="easyPaginateNav">';
 
+            htmlNav = '<div class="easyPaginateNav">';
+            htmlNav += '<nav aria-label="Page navigation"><ul class="pagination">';
             if(plugin.settings.firstButton) {
-                htmlNav += '<a href="#'+plugin.settings.hashPage+':1" title="First page" rel="1" class="first">'+plugin.settings.firstButtonText+'</a>';
-                console.log(plugin.settings.firstButtonText);
+                htmlNav += '<li><a href="#'+plugin.settings.hashPage+':1" title="First page" rel="1" class="first">'+plugin.settings.firstButtonText+'</a></li>';
+                // console.log(plugin.settings.firstButtonText);
             }
 
             if(plugin.settings.prevButton) {
-                htmlNav += '<a href="" title="Previous" rel="" class="prev">'+plugin.settings.prevButtonText+'</a>';
+                htmlNav += '<li><a href="" title="Previous" rel="" class="prev">'+plugin.settings.prevButtonText+'</a></li>';
             }
 
             for(i = 1;i <= plugin.settings.pages;i++) {
-                htmlNav += '<a href="#'+plugin.settings.hashPage+':'+i+'" title="Page '+i+'" rel="'+i+'" class="page">'+i+'</a>';
+                htmlNav += '<li><a href="#'+plugin.settings.hashPage+':'+i+'" title="Page '+i+'" rel="'+i+'" class="page">'+i+'</a></li>';
             };
 
             if(plugin.settings.nextButton) {
-                htmlNav += '<a href="" title="Next" rel="" class="next">'+plugin.settings.nextButtonText+'</a>';
-                console.log('nextbtn');
-                console.log(plugin.settings.nextButtonText);
+                htmlNav += '<li><a href="" title="Next" rel="" class="next">'+plugin.settings.nextButtonText+'</a></li>';
+                // console.log('nextbtn');
+                // console.log(plugin.settings.nextButtonText);
             }
 
             if(plugin.settings.lastButton) {
-                htmlNav += '<a href="#'+plugin.settings.hashPage+':'+plugin.settings.pages+'" title="Last page" rel="'+plugin.settings.pages+'" class="last">'+plugin.settings.lastButtonText+'</a>';
+                htmlNav += '<li><a href="#'+plugin.settings.hashPage+':'+plugin.settings.pages+'" title="Last page" rel="'+plugin.settings.pages+'" class="last">'+plugin.settings.lastButtonText+'</a></li>';
             }
 
+            htmlNav += '</ul></nav>';
             htmlNav += '</div>';
+
             plugin.nav = $(htmlNav);
             plugin.nav.css({
                 'width': plugin.el.width()
@@ -173,6 +175,7 @@ $.fn.easyPaginate = function (options) {
             plugin.el.after(plugin.nav);
 
             var elSelector = '#' + plugin.el.get(0).id + ' + ';
+            console.log(elSelector);
             $(elSelector + ' .easyPaginateNav a.page,'
                 + elSelector + ' .easyPaginateNav a.first,'
                 + elSelector + ' .easyPaginateNav a.last').on('click', function(e) {

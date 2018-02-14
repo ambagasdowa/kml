@@ -108,7 +108,7 @@ class DATABASE_CONFIG {
 
 	var $portal_calendar = array(
 		'driver' => 'mysql',
-		'persistent' => false,
+		'persistent' => true,
 		'host' => 'localhost',
 		'login' => 'portal_calendar',
 		'password' => '@portal_calendar#',
@@ -120,7 +120,7 @@ class DATABASE_CONFIG {
 
 	var $portal_secure = array(
 		'driver' => 'mysql',
-		'persistent' => false,
+		'persistent' => true,
 		'host' => 'localhost',
 		'login' => 'portal_secure',
 		'password' => '@portal_secure#',
@@ -130,7 +130,7 @@ class DATABASE_CONFIG {
 
 	var $portal_apps = array(
 		'driver' => 'mysql',
-		'persistent' => false,
+		'persistent' => true,
 		'host' => 'localhost',
 		'login' => 'portal_apps',
 		'password' => '@portal_apps#',
@@ -141,7 +141,7 @@ class DATABASE_CONFIG {
 
 	var $portal_cloud = array(
 		'driver' => 'mysql',
-		'persistent' => false,
+		'persistent' => true,
 		'host' => 'localhost',
 		'login' => 'portal_nextcloud',
 		'password' => '@portal_nextcloud#',
@@ -177,7 +177,7 @@ class DATABASE_CONFIG {
 /** NOTE get the entire db of all workers compare against login */
 	var $mssql_payroll = array( // connect to remote mssql server
 		'driver' => 'mssql',
-		'persistent' => false,
+		'persistent' => true,
 		'host' => 'IntegraDb',
 		'login' => 'zam',
 		'password' => 'lis',
@@ -195,7 +195,7 @@ class DATABASE_CONFIG {
 /** NOTE get the database and write to it */
 	var $mssql_sistemas = array( // connect to remote mssql server
 		'driver' => 'mssql',
-		'persistent' => false,
+		'persistent' => true,
 		'host' => 'IntegraDb',
 		'login' => 'zam',
 		'password' => 'lis',

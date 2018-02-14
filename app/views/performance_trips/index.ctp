@@ -86,17 +86,25 @@
 		display: inline-block;  /* For IE11/ MS Edge bug */
 		pointer-events: none;
 		cursor: default;
-		color:gray;
+		color:gray !important;
 		text-decoration: none;
 	}
 
 	.current > a {
-		color: gray;
+		color: gray !important;
 		display: inline-block;  /* For IE11/ MS Edge bug */
 		pointer-events: none;
 		text-decoration: none;
 	}
 
+	/**PAGINATOR STYLE*/
+	.easyPaginateNav{
+		position: fixed;
+		bottom: 1%;
+		left: 35%;
+		cursor: pointer;
+		z-index:150;
+	}
 </style>
 
 
