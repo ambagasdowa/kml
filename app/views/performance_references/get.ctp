@@ -233,28 +233,28 @@
 							?>
 
 					</td>
-					<td>
+					<td class="<?php e($performanceReferencesKey.'_'.$performanceReference['PerformanceViewFactura']['id'].'_') ?>entregaFacturaCliente">
 							<?php
 									!empty($performanceReference['PerformanceViewFactura']['entregaFacturaCliente']) ? e(date('Y-m-d',strtotime($performanceReference['PerformanceViewFactura']['entregaFacturaCliente']))) : e('&infin;') ;
 							?>
 
 					</td>
 					<td class="deliver_<?php print($performanceReferencesKey)?>" data-days="<?php echo $performanceReference['PerformanceViewFactura']['deliver']; ?>"><?php echo $performanceReference['PerformanceViewFactura']['deliver']; ?></td>
-					<td>
+					<td class="aprobacionFactura">
 							<?php
 									!empty($performanceReference['PerformanceViewFactura']['aprobacionFactura']) ? e(date('Y-m-d',strtotime($performanceReference['PerformanceViewFactura']['aprobacionFactura']))) : e('&infin;') ;
 							?>
 
 					</td>
 					<td class="proved_<?php print($performanceReferencesKey)?>" data-days="<?php echo $performanceReference['PerformanceViewFactura']['proved']; ?>"><?php echo $performanceReference['PerformanceViewFactura']['proved']; ?></td>
-					<td>
+					<td class="fechaPromesaPago">
 							<?php
 									!empty($performanceReference['PerformanceViewFactura']['fechaPromesaPago']) ? e(date('Y-m-d',strtotime($performanceReference['PerformanceViewFactura']['fechaPromesaPago']))) : e('&infin;') ;
 							?>
 
 					</td>
 					<td class="promise_<?php print($performanceReferencesKey)?>" data-days="<?php echo $performanceReference['PerformanceViewFactura']['promise']; ?>"><?php echo $performanceReference['PerformanceViewFactura']['promise']; ?></td>
-					<td>
+					<td class="fechaPago">
 							<?php
 									!empty($performanceReference['PerformanceViewFactura']['fechaPago']) ? e(date('Y-m-d',strtotime($performanceReference['PerformanceViewFactura']['fechaPago']))) : e('&infin;') ;
 							?>

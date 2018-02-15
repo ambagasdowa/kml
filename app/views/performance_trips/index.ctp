@@ -27,6 +27,7 @@
 		    $requiere = $evaluate ? e($this->element('kml/blog/blog')) : e($this->element('requiere/norequiere') );
 				$requiere = $evaluate ? e($this->element('kml/forms/forms')) : e($this->element('requiere/norequiere') );
 				// $requiere = $evaluate ? e($this->element('kml/performance/main')) : e($this->element('requiere/norequiere') );
+				// TODO : Build a Paginator mech with Scroll
 		?>
 
 <!-- temporal style  -->

@@ -395,10 +395,7 @@ td {
 																	.done(function(data){
 																		$.colorbox.close();
 
-																		document.getElementById("send_query").click();
-
-																		// $("a .page").click();
-
+																		// document.getElementById("send_query").click();
 																		console.log('loaded_table_dance');
 																	});
 																	// $.colorbox();
@@ -544,6 +541,7 @@ td {
 											    } else {
 													console.log('counts2nd => ' + count);
 															// console.log($(this).attr('data-update'));
+															var print_serial = $("#post_form").serializeArray();
 														 	var post_serial = JSON.stringify($("#post_form").serializeArray());
 															// console.log(post_serial);
 															post_data_code = base64_encode(post_serial);
@@ -557,6 +555,18 @@ td {
 																$.colorbox.close();
 																// $("#tableFilter").load(location.href + " #tableFilter");
 																document.getElementById("send_query").click();
+																// TODO just update the div with the succesfull value
+																// console.log(print_serial);
+																// var class_id = print_serial[2].value+"_"+print_serial[3].value+"_entregaFacturaCliente";
+																// alert(print_serial[5].value);
+																// console.log(class_id);
+																// $('.'+class_id).innerHTML = print_serial[5].value;
+																// // $('.'+class_id).innerHTML = print_serial[5].value;
+																//
+																// // $(this).find('.entregaFacturaCliente').html('<div class="text-center"><i class="fa fa-spinner fa-pulse fa-fw"></i><span class="sr-only">Loading...</span><div>');
+																// $('.'+class_id).load();
+																// $( ".updateSearchResult" ).load(urlStruct,function() {});
+
 																console.log('loaded_table-tbl');
 															});
 													// $.colorbox();
