@@ -46,13 +46,13 @@
 			<div class="one columns dash_datetime">
 				del
 			</div>
-			<div class="one columns dash_datetime">
+			<div id="date-ini" class="one columns dash_datetime">
 				<?php echo $dashboard['inicio'] ?>
 			</div>
 			<div class="one columns dash_datetime">
 				al
 			</div>
-			<div class="one columns dash_datetime">
+			<div id="date-end" class="one columns dash_datetime">
 				<?php echo $dashboard['fin'] ?>
 			</div>
 
@@ -166,10 +166,9 @@
 		<?php
 			foreach ($performanceReferences as $performanceReference):
 		?>
-				<tr class="dropdown-container_<?php print($performanceReferencesKey)?>">
+				<tr class="dropdown-container_<?php print($performanceReferencesKey)?>" data-filter="<?php echo $performanceReference['PerformanceViewFactura']['dmon'] ?>">
 
 					<td><?php echo $performanceReferencesIdx[$performanceReferencesKey]; ?></td>
-
 					<td class="item_<?php echo $performanceReferencesKey?>">
 						<?php
 									echo
@@ -231,44 +230,53 @@
 							<?php
 									!empty($performanceReference['PerformanceViewFactura']['ElaboracionFactura']) ? e(date('Y-m-d',strtotime($performanceReference['PerformanceViewFactura']['ElaboracionFactura']))) : e('&infin;') ;
 							?>
-
 					</td>
 					<td class="<?php e($performanceReferencesKey.'_'.$performanceReference['PerformanceViewFactura']['id'].'_') ?>entregaFacturaCliente">
 							<?php
 									!empty($performanceReference['PerformanceViewFactura']['entregaFacturaCliente']) ? e(date('Y-m-d',strtotime($performanceReference['PerformanceViewFactura']['entregaFacturaCliente']))) : e('&infin;') ;
 							?>
-
 					</td>
 					<td class="deliver_<?php print($performanceReferencesKey)?>" data-days="<?php echo $performanceReference['PerformanceViewFactura']['deliver']; ?>"><?php echo $performanceReference['PerformanceViewFactura']['deliver']; ?></td>
-					<td class="aprobacionFactura">
+					<td class="<?php e($performanceReferencesKey.'_'.$performanceReference['PerformanceViewFactura']['id'].'_') ?>aprobacionFactura">
 							<?php
 									!empty($performanceReference['PerformanceViewFactura']['aprobacionFactura']) ? e(date('Y-m-d',strtotime($performanceReference['PerformanceViewFactura']['aprobacionFactura']))) : e('&infin;') ;
 							?>
 
 					</td>
 					<td class="proved_<?php print($performanceReferencesKey)?>" data-days="<?php echo $performanceReference['PerformanceViewFactura']['proved']; ?>"><?php echo $performanceReference['PerformanceViewFactura']['proved']; ?></td>
-					<td class="fechaPromesaPago">
+					<td class="<?php e($performanceReferencesKey.'_'.$performanceReference['PerformanceViewFactura']['id'].'_') ?>fechaPromesaPago">
 							<?php
 									!empty($performanceReference['PerformanceViewFactura']['fechaPromesaPago']) ? e(date('Y-m-d',strtotime($performanceReference['PerformanceViewFactura']['fechaPromesaPago']))) : e('&infin;') ;
 							?>
 
 					</td>
 					<td class="promise_<?php print($performanceReferencesKey)?>" data-days="<?php echo $performanceReference['PerformanceViewFactura']['promise']; ?>"><?php echo $performanceReference['PerformanceViewFactura']['promise']; ?></td>
-					<td class="fechaPago">
+					<td class="<?php e($performanceReferencesKey.'_'.$performanceReference['PerformanceViewFactura']['id'].'_') ?>fechaPago">
 							<?php
 									!empty($performanceReference['PerformanceViewFactura']['fechaPago']) ? e(date('Y-m-d',strtotime($performanceReference['PerformanceViewFactura']['fechaPago']))) : e('&infin;') ;
 							?>
 
 					</td>
-					<td class="payment_<?php print($performanceReferencesKey)?>" data-days="<?php echo $performanceReference['PerformanceViewFactura']['payment']; ?>"><?php echo $performanceReference['PerformanceViewFactura']['payment']; ?></td>
+					<td class="payment_<?php print($performanceReferencesKey)?>" data-days="<?php echo $performanceReference['PerformanceViewFactura']['payment']; ?>">
+						<?php echo $performanceReference['PerformanceViewFactura']['payment']; ?>
+					</td>
 				</tr>
 
 			<?php
 					endforeach;
 			?>
-			<tr id="resume_footer" class="resume_compact_footer success">
+			<tr id="resume_footer" class="resume_compact_footer success link_external">
 				<td><?php echo $performanceReferencesIdx[$performanceReferencesKey]; ?></td>
-				<td><?php print($performanceReferencesKey)?></td>
+				<td><?php print($performanceReferencesKey)?>
+					<a id="this_link_<?php print($performanceReferencesKey)?>" href="#" class="link_search_ icon"
+						 data-id="<?php print($performanceReferencesKey)?>"
+						 data-empresa="<?php echo $performanceReference['PerformanceViewFactura']['Empresa']?>"
+						 data-ini="<?php echo $dashboard['inicio'] ?>"
+						 data-end="<?php echo $dashboard['fin'] ?>"
+						 alt="Fechas para todos los registros de <?php print($performanceReferencesKey)?>"
+						 title="Fechas para todos los registros"
+						 ><i class="fa fa-external-link" aria-hidden="true"></i></a>
+				</td>
 				<td id="footer_dropdown_qty_<?php print($performanceReferencesKey)?>">
 					<?php
 						echo count($performanceReferencesResume[$performanceReferencesKey]['amount']);

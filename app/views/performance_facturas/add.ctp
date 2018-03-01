@@ -67,12 +67,17 @@
 
       <ul class="list-group">
         <li class="list-group-item"> RFC : &nbsp; <?php echo $performanceFacturas['PerformanceFactura']['performance_customers_id'] ?></li>
+        <?php if($xcontrol == false ){ ?>
         <li class="list-group-item"> Folio : &nbsp; <?php echo $performanceFacturas['PerformanceFactura']['performance_references_id'] ?></li>
+      <?php } else { ?>
+        <li class="list-group-item"> Rango : &nbsp; <?php echo $pd['fecha_init']?> : <?php echo $pd['fecha_end']?></li>
+      <?php } ?>
         <li class="list-group-item"> Unidad de Negocio : &nbsp; <?php echo $performanceFacturas['PerformanceFactura']['performance_bsus_id'] ?></li>
       </ul>
     </div>
 
   <?php echo $this->Form->create('PerformanceFactura',array('enctype' => 'multipart/form-data','class'=>'form','id'=>'post_form'));?>
+
 
 			<div class="performanceFacturas form">
         	<?php
@@ -102,7 +107,7 @@
                               'label'       => false
                              )
                 );
-
+        if($xcontrol == false ){
         		echo $this->Form->input(
                         'performance_references_id',
                         array(
@@ -113,6 +118,7 @@
                               'class'       =>  'u-full-width'
                              )
                   );
+        }
 
         		echo $this->Form->input(
                         'performance_bsus_id',
@@ -124,6 +130,28 @@
                               'class'       => 'u-full-width'
                              )
                   );
+          if($xcontrol == true ){
+            echo $this->Form->input(
+                        'performance_date_ini',
+                        array(
+                              'type'        => 'hidden',
+                              'value'       => $pd['fecha_init'],
+                              'placeholder' => 'rango inicial',
+                              'label'       => false,
+                              'class'       => 'u-full-width'
+                             )
+                  );
+            echo $this->Form->input(
+                        'performance_date_end',
+                        array(
+                              'type'        => 'hidden',
+                              'value'       => $pd['fecha_end'],
+                              'placeholder' => 'rango final',
+                              'label'       => false,
+                              'class'       => 'u-full-width'
+                             )
+                  );
+          }
 
               // but this
         		echo $this->Form->input(
@@ -131,7 +159,9 @@
                         array(
                               'type'=>'text',
                               'id'=> 'datepicker_deliver',
-                              'placeholder'=>'entregaFacturaCliente',
+                              'placeholder'=>'EntregaFacturaCliente',
+                              'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
+                              'title'=>'Puede teclear la fecha en Formato yyyymmdd',
                               'value'      => ( isset($entregaFacturaCliente) ? $entregaFacturaCliente  : ''),
                               'class'=>'u-full-width'
                              )
@@ -141,7 +171,9 @@
                         'aprobacionFactura',
                         array(
                               'type'=>'text',
-                              'placeholder'=>'aprobacionFactura',
+                              'placeholder'=>'AprobacionFactura',
+                              'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
+                              'title'=>'Puede teclear la fecha en Formato yyyymmdd',
                               'id'=>'datepicker_aproved',
                               'value'      => ( isset($aprobacionFactura) ? $aprobacionFactura : ''),
                               'class'=>'u-full-width'
@@ -162,7 +194,9 @@
                         array(
                              'type'=>'text',
                              'id'=>'datepicker_payment',
-                             'placeholder'=>'fechaPago',
+                             'placeholder'=>'FechaPago',
+                             'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
+                             'title'=>'Puede teclear la fecha en Formato yyyymmdd',
                              'value'      => ( isset($fechaPago) ? $fechaPago : ''),
                              'class'=>'u-full-width'
                              )

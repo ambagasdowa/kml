@@ -153,6 +153,8 @@
                               'type'=>'text',
                               'id'=> 'datepicker_deliver',
                               'placeholder'=>'recepcionEvidencias',
+                              'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
+                              'title'=>'Puede teclear la fecha en Formato yyyymmdd',
                               // 'value'      => ($performanceFacturaStatus == true ? $recepcionEvidencias : ''), // check this??
                               'value'      => ( isset($recepcionEvidencias) ? $recepcionEvidencias :''), // check this??
                               'class'=>'u-full-width'
@@ -164,6 +166,8 @@
                         array(
                               'type'=>'text',
                               'placeholder'=>'entregaEvidenciasCliente',
+                              'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
+                              'title'=>'Puede teclear la fecha en Formato yyyymmdd',
                               'id'=>'datepicker_aproved',
                               'value'      => ( isset($entregaEvidenciasCliente) ? $entregaEvidenciasCliente : ''),
                               'class'=>'u-full-width'
@@ -185,6 +189,8 @@
                              'type'=>'text',
                              'id'=>'datepicker_payment',
                              'placeholder'=>'validacionEvidenciasCliente',
+                             'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
+                             'title'=>'Puede teclear la fecha en Formato yyyymmdd',
                              'value'      =>  ( isset($validacionEvidenciasCliente) ? $validacionEvidenciasCliente : ''),
                              'class'=>'u-full-width'
                              )

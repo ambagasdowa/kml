@@ -9,6 +9,7 @@ $core = 'core'.DS;
 			/** @css */
 
       e($this->Html->css($theme.'select2/select2', 'stylesheet', array('inline'=>false)));
+      e($this->Html->css($theme.'select2/select2-skeleton', 'stylesheet', array('inline'=>false)));
       e($this->Html->css($theme.'jquery-ui/jquery-ui', 'stylesheet', array('inline'=>false)));
       e($this->Html->css($theme.'jquery_datepicker_skins/css/nigran.datepicker', 'stylesheet', array('inline'=>false)));
       e($this->Html->css($theme.'jquery_datepicker_skins/css/lugo.datepicker', 'stylesheet', array('inline'=>false)));

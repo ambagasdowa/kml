@@ -95,10 +95,20 @@ $.fn.easyPaginate = function (options) {
   												  $(this).show();
   										    });
                       }
+
   										document.getElementById("details").text = "Detalle"
   										$(this).attr('data-control','0');
+
+                      if ( $.isFunction( plugin.settings.complete ) ) {
+                          plugin.settings.complete.call(this);
+                          console.log('completeInDetalleDataControl');
+                      }
+                      $("#tableFilter thead").append(plugin.settings.headerTable);
   									}
   							});
+
+
+
                 // NOTE Work from hir TODO
                 finder = $("#tableFilter tbody tr");
                 console.log('At init ... ');

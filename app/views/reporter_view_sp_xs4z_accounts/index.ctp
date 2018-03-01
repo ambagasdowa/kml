@@ -287,9 +287,11 @@ tr .icon{
   transition:all 0.5s;
   opacity:0;
 }
+
 tr .link_external:hover .icon{
   opacity:1;
 }
+
 
 .inner_panel {
   /*background-color: white;*/
@@ -495,8 +497,8 @@ tr .link_external:hover .icon{
                                                                     'cyear'     =>  $cyear,
                                                                     'mes'       =>  ucwords($mth),
                                                                     'area'      =>  $sbunames,
-                                                                                                                                        'account'        =>  $fract_arr,
-                                                                                                                                        'type'            =>    $mod_inx
+                                                                    'account'        =>  $fract_arr,
+                                                                    'type'            =>    $mod_inx
                                                                   );
         $search_data = (isset($chart_index[$cyear][ucwords($mth)][$mod_inx][$sbunames][$fract_arr]) ? $chart_index[$cyear][ucwords($mth)][$mod_inx][$sbunames][$fract_arr] : null) ?: null ; ?>
                                                     <?php
@@ -507,9 +509,9 @@ tr .link_external:hover .icon{
                                                                                                                                 // debug(number_format(round($search_data['Real'])));
                                                                     if (number_format(round($search_data['Real'])) > 0) {
                                                                         echo '<td class="excel_cell _cell_Default _xls_cell link_external">'.number_format(round($search_data['Real'])).'&nbsp; <a id="this_link_'.
-                                                                                                                                        $query["cyear"].'_'.$query["mes"].'_'.$query["area"].'_'.$query["account"].'_'.$query["type"].'_'.number_format(round($search_data['Real'])).'_'.
-                                                                                                                                        (number_format(round($search_data['Presupuesto']))?:'0').
-                                                                                                                                        '" href="#" class="link_search_ icon"><i class="fa fa-external-link" aria-hidden="true"></i></a></td>'; // without decimal s
+                                                                      $query["cyear"].'_'.$query["mes"].'_'.$query["area"].'_'.$query["account"].'_'.$query["type"].'_'.number_format(round($search_data['Real'])).'_'.
+                                                                        (number_format(round($search_data['Presupuesto']))?:'0').
+                                                                        '" href="#" class="link_search_ icon"><i class="fa fa-external-link" aria-hidden="true"></i></a></td>'; // without decimal s
                                                                     } else {
                                                                         echo('<td class="excel_cell _cell_Default _xls_cell"></td>');
                                                                     }

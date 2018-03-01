@@ -32,6 +32,7 @@ class PerformanceReferencesController extends AppController {
 		// Configure::write('debug',2);
 		$this->LoadModel('PerformanceViewFactura');
 		$this->LoadModel('PerformanceBsu');
+		$this->LoadModel('PerformanceCustomer');
 
 		$posted = json_decode(base64_decode($this->params['named']['data']),true);
 
@@ -83,13 +84,17 @@ class PerformanceReferencesController extends AppController {
 				$conditionsPerformance['PerformanceViewFactura.Clasificacion'] = array('Colaboracion');
 			}
 			if ($conditions['performance_fraccion'] == '5') {
-				// $conditionsPerformance['PerformanceViewFactura.Clasificacion NOT'] = array('Granel','Terceros','Otros','Colaboracion');
 				$conditionsPerformance['PerformanceViewFactura.Clasificacion'] = null;
 			}
 		}
 
+		/** TODO search by Customer*/
+		if (isset($conditions['performance_customers_id']) and $conditions['performance_customers_id'] != '') {
+			$conditionsPerformance['PerformanceCustomers.id'] = $conditions['performance_customers_id'];
+		}
+
 		$conditionsPerformance['PerformanceViewFactura.Empresa'] = $conditions['performance_bsu'];
-		// debug($conditionsPerformance);
+
 
 		$performanceReferences = $this->PerformanceViewFactura->find('all',array('conditions'=>$conditionsPerformance,'order'=>array('PerformanceViewFactura.performance_customers_id'=>'desc')));
 
@@ -301,15 +306,17 @@ class PerformanceReferencesController extends AppController {
    	// $this->LoadModel('PerformanceYear');
 		// $this->LoadModel('PerformanceMonth');
 		$this->LoadModel('PerformanceBsu');
+		$this->LoadModel('PerformanceCustomer');
 
 		// $performance_years = $this->PerformanceYear->find('list');
 		// $performance_months = $this->PerformanceMonth->find('list');
 		$performance_bsus = $this->PerformanceBsu->find('list',array('fields'=>array('tname','label')));
+		$performance_customers = $this->PerformanceCustomer->find('list',array('fields'=>array('id','Name')));
 
-		$this->set(compact('performance_bsus'));
+		$this->set(compact('performance_bsus','performance_customers'));
 
-		$this->PerformanceReference->recursive = 0;
-		$this->set('performanceReferences', $this->paginate());
+		// $this->PerformanceReference->recursive = 0;
+		// $this->set('performanceReferences', $this->paginate());
 	}
 
 	function view($id = null) {

@@ -67,7 +67,7 @@ td {
 .container-mod{
 	position: relative;
 	width: 100%;
-	max-width: 85%;
+	max-width: 95%;
 	margin: 0 auto;
 	padding: 0 20px;
 	box-sizing: border-box;
@@ -105,6 +105,16 @@ td {
 	cursor: pointer;
 	z-index:150;
 }
+
+.icon{
+  transition:all 0.5s;
+  opacity:0;
+}
+
+.link_external:hover .icon{
+  opacity:1;
+}
+
 </style>
 
 <div class="container-mod">
@@ -134,6 +144,8 @@ td {
 																					'class'=>'performance_dateini u-full-width form-control init-focus',
 																					'id'=>'from',
 																					'placeholder' => 'Fecha Inicio',
+																					'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
+						                              'title'=>'Puede teclear la fecha en Formato yyyymmdd',
 																					'div'=>FALSE,
 																					'label'=>FALSE,
 																					'tabindex'=>'1'
@@ -152,6 +164,8 @@ td {
 																					'class'=>'performance_dateend datepicker ll-skin-melon u-full-width form-control',
 																					'id'=>'to',
 																					'placeholder' => 'Fecha Fin',
+																					'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
+						                              'title'=>'Puede teclear la fecha en Formato yyyymmdd',
 																					'div'=>FALSE,
 																					'label'=>FALSE,
 																					'tabindex'=>'2'
@@ -164,23 +178,46 @@ td {
 					echo
 								$this->Form->input
 																	(
-																		'performance_fraccion',
+																		'performance_customers_id',
 																		 array
 																					(
 																						'type'=>'select',
-																						'class'=>'u-full-width form-control',
-																						'id'=>'fraction',
-																						'placeholder' => 'Clasificacion',
+																						'class'=>'search_client u-full-width form-control',
+																						'id'=>'customer',
+																						'placeholder' => 'Cliente',
 																						'div'=>FALSE,
 																						'label'=>FALSE,
-																						'empty'=>'Todo',
-																						'options'=> array('1' => 'Granel','2' => 'Terceros','3'=>'Otros','4'=>'Colaboracion','5'=>'n/a'),
+																						'empty'=>'Todos los Clientes',
+																						'options'=> $performance_customers,
 																						'tabindex'=>'3'
 																					)
 																	);
 					echo '</div>';
 
-					echo '<div class="three columns input-group">';
+
+
+					echo '<div class="two columns input-group">';
+					// echo '<div class="input-group-addon"><i class="fa fa-truck"></i></div>';
+					echo
+								$this->Form->input
+																	(
+																		'performance_fraccion',
+																		 array
+																					(
+																						'type'=>'select',
+																						'class'=>'search_client u-full-width form-control',
+																						'id'=>'fraction',
+																						'placeholder' => 'Clasificacion',
+																						'div'=>FALSE,
+																						'label'=>FALSE,
+																						'empty'=>'Todas las fracciones',
+																						'options'=> array('1' => 'Granel','2' => 'Terceros','3'=>'Otros','4'=>'Colaboracion','5'=>'n/a'),
+																						'tabindex'=>'4'
+																					)
+																	);
+					echo '</div>';
+
+					echo '<div class="two columns input-group">';
 					echo
 								$this->Form->input
 																	(
@@ -193,7 +230,7 @@ td {
 																						'label'=>false,
 																						'div'=>false,
 																						'multiple' => true,
-																						'tabindex'=>'4'
+																						'tabindex'=>'5'
 																						// 'empty'=>'Unidad de Negocio'
 
 																					)
@@ -208,7 +245,7 @@ td {
 											$this->Html->link(
 																					__('Buscar ...', true),
 																					array('action' => 'get', null),
-																					array('id'=>'send_query','div'=>false,'class'=>'btn btn-primary btn-sm pull-right','tabindex'=>'5')
+																					array('id'=>'send_query','div'=>false,'class'=>'btn btn-primary btn-sm pull-right','tabindex'=>'6')
 																				);
 						?>
 					</div>
@@ -235,6 +272,9 @@ td {
 		<script type="text/javascript">
 
     // <!&#91;CDATA&#91;
+
+
+
 
         $(document).ready(function (){
 
@@ -266,8 +306,17 @@ td {
 
 						console.log("loaded...");
 						$( ".updateSearchResult" ).html('<div class="text-center"><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><span class="sr-only">Loading...</span><div>');
-						$( ".updateSearchResult" ).load(urlStruct,function() {
+						$( ".updateSearchResult" ).load(urlStruct,function(responseText, statusText, xhr) {
 
+							// if(statusText == "success"){
+							// 				 alert("Successfully loaded the content!");
+							// }
+							if(statusText == "error"){
+											//  alert("An error occurred: Inicie Session Nuevamente " + xhr.status + " - " + xhr.statusText);
+											 thisUrl = "<?php echo Dispatcher::baseUrl();?>/users/login";
+											 console.log(thisUrl);
+											 window.location.href(thisUrl);
+							}
 							// NOTE clone and clean the header
 							headder = $("#tableFilter thead").clone().removeClass("detail_header").addClass("header_row");
 							heather = $("#tableFilter thead th").clone();
@@ -364,18 +413,18 @@ td {
 											 							yearSuffix: ''
 											 							};
 											 							$.datepicker.setDefaults($.datepicker.regional['es']);
-																 $( function() {
-																		$( "input[id^='datepicker_']" ).datepicker({
-																			// onClose: function( selectedDate ) {
-        															// 	jQuery( "#from" ).datepicker( "option", "maxDate", selectedDate );
-        															// }
-																			onClose: function(selectedDate) {
-																				console.log("onCompleteCalling Get Inside EasyPagination");
-																				// console.log($(this));
-																				console.log(selectedDate);
-																			}
-																		});
-																 } );
+																	 $( function() {
+																			$( "input[id^='datepicker_']" ).datepicker({
+																				// onClose: function( selectedDate ) {
+	        															// 	jQuery( "#from" ).datepicker( "option", "maxDate", selectedDate );
+	        															// }
+																				onClose: function(selectedDate) {
+																					console.log("onCompleteCalling Get Inside EasyPagination");
+																					// console.log($(this));
+																					console.log(selectedDate);
+																				}
+																			});
+																	 } );
 
 																 console.log('in-updatebtn');
 																 $("#add_update").on('click',function(){
@@ -405,6 +454,120 @@ td {
 													});
 											}); // NOTE Edit add etc stuff
 
+											// NOTE add group by customer name update
+											$("a[id^='this_link_']").on('click',function(adv){
+												adv.stopPropagation();
+												adv.preventDefault();
+												// console.log($(this));
+												// console.log( $(this).attr('id') );
+												var posted_data = {
+																					'performance_customers_id':$(this).attr('data-id'),
+																					'performance_bsus_id':$(this).attr('data-empresa'),
+																					'performance_fecha_ini':$(this).attr('data-ini'),
+																					'performance_fecha_end':$(this).attr('data-end'),
+																					'performance_mode':'group'
+																				};
+												var string_to_pass = JSON.stringify(posted_data);
+												console.log(string_to_pass);
+												datascode = base64_encode(string_to_pass);
+												var urlStructure = "<?php echo Dispatcher::baseUrl();?>/PerformanceFacturas/add/data:" + datascode;
+												console.log(urlStructure);
+												$.colorbox({
+													'href' : urlStructure,
+													'scrolling' : false,
+													'trapFocus' :	true,
+													onComplete : function () {
+														// NOTE Datepicker Define the Spanish languaje
+															 $.datepicker.regional['es'] = {
+															 closeText: 'Cerrar',
+															 prevText: '<Ant',
+															 nextText: 'Sig>',
+															 currentText: 'Hoy',
+															 monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+															 monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+															 dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+															 dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+															 dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+															 weekHeader: 'Sm',
+															 dateFormat: 'yy/mm/dd',
+															 firstDay: 1,
+														//				numberOfMonths: 2,
+															 isRTL: false,
+															 showMonthAfterYear: false,
+															 yearSuffix: ''
+															 };
+															 $.datepicker.setDefaults($.datepicker.regional['es']);
+															$( function() {
+																 $( "input[id^='datepicker_']" ).datepicker({
+																	 // onClose: function( selectedDate ) {
+																	 // 	jQuery( "#from" ).datepicker( "option", "maxDate", selectedDate );
+																	 // }
+																	 onClose: function(selectedDate) {
+																		 console.log("onCompleteCalling Get Inside Group");
+																		 // console.log($(this));
+																		 console.log(selectedDate);
+																	 }
+																 });
+															} );
+															// NOTE catch the send
+															var count = 0;
+															$("#add_update").on('click',function(){
+															 event.stopPropagation();
+															 event.preventDefault();
+															 console.log($(this));
+															 count += 1;
+															 console.log('counts1st => ' + count);
+															 if (count > 1) {
+																 // $('table tr:odd').removeClass('odd');
+																 $(this).prop('disabled',true);
+															 } else {
+															 console.log('countsGroup => ' + count);
+
+																	 console.log($(this).attr('data-update'));
+																	 var print_serial = $("#post_form").serializeArray();
+																	 var post_serial = JSON.stringify($("#post_form").serializeArray());
+																	 console.log(post_serial);
+																	 post_data_code = base64_encode(post_serial);
+																	 console.log(post_data_code);
+
+																	 console.log('current-page');
+																	 console.log($('.current').attr('rel'));
+
+																	 $.post("<?php echo Dispatcher::baseUrl();?>/PerformanceFacturas/add/save:"+ post_data_code,function(){
+																			 // alert('data is : ' + data);
+																	 }).done(function(data){
+																		 $.colorbox.close();
+																		//  document.getElementById("send_query").click();
+																		//  console.log($.parseJSON(data));
+																		//  dataer = $.parseJSON(data);
+																		console.log($.parseJSON(data));
+																		dataer = $.parseJSON(data);
+
+																		var class_entregaFacturaCliente = dataer.performance_customers_id+"_"+dataer.performance_references_id+"_entregaFacturaCliente";
+																		$("."+class_entregaFacturaCliente).html( dataer.entregaFacturaCliente );
+
+																		var class_entregaFacturaCliente = dataer.performance_customers_id+"_"+dataer.performance_references_id+"_aprobacionFactura";
+																		$("."+class_entregaFacturaCliente).html( dataer.aprobacionFactura );
+
+																		var class_entregaFacturaCliente = dataer.performance_customers_id+"_"+dataer.performance_references_id+"_fechaPromesaPago";
+																		$("."+class_entregaFacturaCliente).html(dataer.fechaPromesaPago);
+
+																		var class_entregaFacturaCliente = dataer.performance_customers_id+"_"+dataer.performance_references_id+"_fechaPago";
+																		$("."+class_entregaFacturaCliente).html(dataer.fechaPago);
+																		 console.log('loaded_group');
+																	 });
+															 // $.colorbox();
+															}
+
+															});
+
+													} // End OnComplete Colorbox
+
+												}); // end calling colorbox
+
+											}); // grouping end
+
+
 									} // NOTE End Complete Callback
 
 							}); //NOTE End EasyPagination
@@ -429,7 +592,7 @@ td {
 						      });
 							});
 
-							// // NOTE call to add update
+							// // NOTE call to add a individual-update
 							$("a[id^='get_factura_']").on('click', function(event) {
 									event.stopPropagation();
 									event.preventDefault();
@@ -443,11 +606,8 @@ td {
 																	};
 
 									var str_to_pass = JSON.stringify(post_data);
-
 								  console.log(str_to_pass);
-
 									data_code = base64_encode(str_to_pass);
-
 									var urlStruct = "<?php echo Dispatcher::baseUrl();?>/PerformanceFacturas/add/data:" + data_code;
 									console.log(urlStruct);
 
@@ -550,23 +710,26 @@ td {
 															console.log('current-page');
 															console.log($('.current').attr('rel'));
 
-											 				$.post("<?php echo Dispatcher::baseUrl();?>/PerformanceFacturas/add/save:"+ post_data_code)
-															.done(function(data){
+											 				$.post("<?php echo Dispatcher::baseUrl();?>/PerformanceFacturas/add/save:"+ post_data_code,function(){
+																	// alert('data is : ' + data);
+															}).done(function(data){
 																$.colorbox.close();
 																// $("#tableFilter").load(location.href + " #tableFilter");
-																document.getElementById("send_query").click();
-																// TODO just update the div with the succesfull value
-																// console.log(print_serial);
-																// var class_id = print_serial[2].value+"_"+print_serial[3].value+"_entregaFacturaCliente";
-																// alert(print_serial[5].value);
-																// console.log(class_id);
-																// $('.'+class_id).innerHTML = print_serial[5].value;
-																// // $('.'+class_id).innerHTML = print_serial[5].value;
-																//
-																// // $(this).find('.entregaFacturaCliente').html('<div class="text-center"><i class="fa fa-spinner fa-pulse fa-fw"></i><span class="sr-only">Loading...</span><div>');
-																// $('.'+class_id).load();
-																// $( ".updateSearchResult" ).load(urlStruct,function() {});
+																// alert('data is done : ' + data);
+																console.log($.parseJSON(data));
+																dataer = $.parseJSON(data);
 
+																var class_entregaFacturaCliente = dataer.performance_customers_id+"_"+dataer.performance_references_id+"_entregaFacturaCliente";
+																$("."+class_entregaFacturaCliente).html( dataer.entregaFacturaCliente );
+
+																var class_entregaFacturaCliente = dataer.performance_customers_id+"_"+dataer.performance_references_id+"_aprobacionFactura";
+																$("."+class_entregaFacturaCliente).html( dataer.aprobacionFactura );
+
+																var class_entregaFacturaCliente = dataer.performance_customers_id+"_"+dataer.performance_references_id+"_fechaPromesaPago";
+																$("."+class_entregaFacturaCliente).html(dataer.fechaPromesaPago);
+
+																var class_entregaFacturaCliente = dataer.performance_customers_id+"_"+dataer.performance_references_id+"_fechaPago";
+																$("."+class_entregaFacturaCliente).html(dataer.fechaPago);
 																console.log('loaded_table-tbl');
 															});
 													// $.colorbox();
@@ -576,6 +739,106 @@ td {
 											 }
 									});
 							}); // NOTE Edit add etc stuff
+
+							// NOTE add group by customer name update
+							$("a[id^='this_link_']").on('click',function(adv){
+								adv.stopPropagation();
+								adv.preventDefault();
+								// console.log($(this));
+								// console.log( $(this).attr('id') );
+								var posted_data = {
+																	'performance_customers_id':$(this).attr('data-id'),
+																	'performance_bsus_id':$(this).attr('data-empresa'),
+																	'performance_fecha_ini':$(this).attr('data-ini'),
+																	'performance_fecha_end':$(this).attr('data-end'),
+																	'performance_mode':'group'
+																};
+								var string_to_pass = JSON.stringify(posted_data);
+								console.log(string_to_pass);
+								datascode = base64_encode(string_to_pass);
+								var urlStructure = "<?php echo Dispatcher::baseUrl();?>/PerformanceFacturas/add/data:" + datascode;
+								console.log(urlStructure);
+								$.colorbox({
+									'href' : urlStructure,
+									'scrolling' : false,
+									'trapFocus' :	true,
+									onComplete : function () {
+										// NOTE Datepicker Define the Spanish languaje
+											 $.datepicker.regional['es'] = {
+											 closeText: 'Cerrar',
+											 prevText: '<Ant',
+											 nextText: 'Sig>',
+											 currentText: 'Hoy',
+											 monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+											 monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+											 dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+											 dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+											 dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+											 weekHeader: 'Sm',
+											 dateFormat: 'yy/mm/dd',
+											 firstDay: 1,
+										//				numberOfMonths: 2,
+											 isRTL: false,
+											 showMonthAfterYear: false,
+											 yearSuffix: ''
+											 };
+											 $.datepicker.setDefaults($.datepicker.regional['es']);
+											$( function() {
+												 $( "input[id^='datepicker_']" ).datepicker({
+													 // onClose: function( selectedDate ) {
+													 // 	jQuery( "#from" ).datepicker( "option", "maxDate", selectedDate );
+													 // }
+													 onClose: function(selectedDate) {
+														 console.log("onCompleteCalling Get Inside Group");
+														 // console.log($(this));
+														 console.log(selectedDate);
+													 }
+												 });
+											} );
+											// NOTE catch the send
+											var count = 0;
+											$("#add_update").on('click',function(){
+											 event.stopPropagation();
+											 event.preventDefault();
+											 console.log($(this));
+											 count += 1;
+											 console.log('counts1st => ' + count);
+											 if (count > 1) {
+												 // $('table tr:odd').removeClass('odd');
+												 $(this).prop('disabled',true);
+											 } else {
+											 console.log('countsGroup => ' + count);
+
+													 console.log($(this).attr('data-update'));
+													 var print_serial = $("#post_form").serializeArray();
+													 var post_serial = JSON.stringify($("#post_form").serializeArray());
+													 console.log(post_serial);
+													 post_data_code = base64_encode(post_serial);
+													 console.log(post_data_code);
+
+													 console.log('current-page');
+													 console.log($('.current').attr('rel'));
+
+													 $.post("<?php echo Dispatcher::baseUrl();?>/PerformanceFacturas/add/save:"+ post_data_code,function(){
+															 // alert('data is : ' + data);
+													 }).done(function(data){
+														 $.colorbox.close();
+														 document.getElementById("send_query").click();
+														 console.log($.parseJSON(data));
+														 dataer = $.parseJSON(data);
+														 console.log('loaded_group');
+													 });
+											 // $.colorbox();
+											}
+
+											});
+
+									} // End OnComplete Colorbox
+
+								}); // end calling colorbox
+
+							}); // grouping end
+
 
 							// NOTE add Filter in table
 
@@ -630,7 +893,7 @@ td {
 					});//NOTE End send
 
 				// filter results the firts optionbox
-					// $(".search_value").select2();
+					$(".search_client").select2();
 
 					$('.search_value').multiselect({
 						enableFiltering: true,
@@ -638,7 +901,7 @@ td {
 						filterPlaceholder: 'Filtrar',
 						nonSelectedText: 'Unidad de Negocio',
 						onDropdownHide: true,
-						buttonWidth: '300px'
+						buttonWidth: '200px'
 					});
 
 					// NOTE Datepicker Define the Spanish languaje

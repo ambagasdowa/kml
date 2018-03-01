@@ -68,7 +68,7 @@
 	.container-mod{
 	  position: relative;
 	  width: 100%;
-	  max-width: 85%;
+	  max-width: 95%;
 	  margin: 0 auto;
 	  padding: 0 20px;
 	  box-sizing: border-box;
@@ -106,6 +106,14 @@
 		cursor: pointer;
 		z-index:150;
 	}
+	.icon{
+	  transition:all 0.5s;
+	  opacity:0;
+	}
+
+	.link_external:hover .icon{
+	  opacity:1;
+	}
 </style>
 
 
@@ -138,6 +146,8 @@
 																					'class'=>'performance_dateini u-full-width form-control init-focus',
 																					'id'=>'from',
 																					'placeholder' => 'Fecha Inicio',
+																					'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
+						                              'title'=>'Puede teclear la fecha en Formato yyyymmdd',
 																					'div'=>FALSE,
 																					'label'=>FALSE,
 																					'tabindex'=>'1'
@@ -156,6 +166,8 @@
 																					'class'=>'performance_dateend datepicker ll-skin-melon u-full-width form-control',
 																					'id'=>'to',
 																					'placeholder' => 'Fecha Fin',
+																					'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
+						                              'title'=>'Puede teclear la fecha en Formato yyyymmdd',
 																					'div'=>FALSE,
 																					'label'=>FALSE,
 																					'tabindex'=>'2'
@@ -264,7 +276,11 @@
 
 						console.log("loaded...");
 						$( ".updateSearchResult" ).html('<div class="text-center"><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><span class="sr-only">Loading...</span><div>');
-						$( ".updateSearchResult" ).load(urlStruct,function() {
+						$( ".updateSearchResult" ).load(urlStruct,function(responseText, statusText, xhr) {
+
+							if(statusText == "error"){
+											 alert("An error occurred: Inicie Session Nuevamente " + xhr.status + " - " + xhr.statusText);
+							}
 
 						// NOTE clone and clean the header
 						var headder = $("#tableFilter thead").clone().removeClass("detail_header").addClass("header_row");
