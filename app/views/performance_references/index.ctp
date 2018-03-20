@@ -431,6 +431,10 @@ td {
 
 																	event.stopPropagation();
 																	event.preventDefault();
+																count += 1;
+																if (count > 1) {
+																		$(this).prop('disabled',true);
+																} else {
 																	// console.log($(this).attr('data-update'));
 																 	var post_serial = JSON.stringify($("#post_form").serializeArray());
 																	// console.log(post_serial);
@@ -443,12 +447,11 @@ td {
 													 				$.post("<?php echo Dispatcher::baseUrl();?>/PerformanceFacturas/add/save:"+ post_data_code)
 																	.done(function(data){
 																		$.colorbox.close();
-
 																		// document.getElementById("send_query").click();
 																		console.log('loaded_table_dance');
 																	});
+																}
 																	// $.colorbox();
-
 																 });
 															 }
 													});

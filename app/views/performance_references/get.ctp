@@ -123,6 +123,10 @@
 			<tr class="cache-header">
 						<th class="firts-header-element">Nombre</th>
 						<th><?php echo ('RFC');?></th>
+						<!-- <th>
+							<input type="checkbox" id="checkbox-main" name="" />
+							 <label for="checkbox-main"></label>
+						</th> -->
 						<!-- <th><?php echo ('TipoDocumento');?></th> -->
 						<th><?php echo ('Folio');?></th>
 						<!-- <th><?php echo ('Nombre');?></th> -->
@@ -135,13 +139,13 @@
 						<th class="hideme"><?php echo ('Empresa');?></th>
 						<!-- <th><?php echo ('Descripcion');?></th> -->
 						<th class="hideme"><?php echo ('ElaboracionFactura');?></th>
-						<th><?php echo ('entregaFacturaCliente');?></th>
+						<th><?php echo ('EntregaFacturaCliente');?></th>
 						<th><?php echo ('Entrega');?></th>
-						<th><?php echo ('aprobacionFactura');?></th>
+						<th><?php echo ('AprobacionFactura');?></th>
 						<th><?php echo ('Aprobacion');?></th>
-						<th><?php echo ('fechaPromesaPago');?></th>
+						<th><?php echo ('FechaPromesaPago');?></th>
 						<th><?php echo ('PromesaPago');?></th>
-						<th><?php echo ('fechaPago');?></th>
+						<th><?php echo ('FechaPago');?></th>
 						<th><?php echo ('Pago');?></th>
 			</tr>
 
@@ -187,6 +191,10 @@
 																		);
 						?>
 					</td>
+					<!-- <td class="check">
+						<input type="checkbox" id="checkbox-<?php echo $performanceReference['PerformanceViewFactura']['Referencia'];?>" name="chk_group[]" class="small">
+						 <label for="checkbox-<?php echo $performanceReference['PerformanceViewFactura']['Referencia']; ?>"></label>
+					</td> -->
 					<!-- <td><?php echo $performanceReference['PerformanceViewFactura']['TipoDocumento']; ?></td> -->
 					<td><?php echo $performanceReference['PerformanceViewFactura']['Folio']; ?></td>
 					<!-- <td><?php echo $performanceReference['PerformanceViewFactura']['Nombre']; ?></td> -->
@@ -277,6 +285,12 @@
 						 title="Fechas para todos los registros"
 						 ><i class="fa fa-external-link" aria-hidden="true"></i></a>
 				</td>
+
+				<!-- <td class="checkbox_footer">
+					<input type="checkbox" id="checkbox-footer-<?php print($performanceReferencesKey)?>" />
+					 <label for="checkbox-footer-<?php print($performanceReferencesKey)?>"></label>
+				</td> -->
+
 				<td id="footer_dropdown_qty_<?php print($performanceReferencesKey)?>">
 					<?php
 						echo count($performanceReferencesResume[$performanceReferencesKey]['amount']);

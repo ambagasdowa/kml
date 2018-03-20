@@ -26,6 +26,7 @@ class CasetasViewResumesController extends AppController {
 
 
 	function index() {
+		// Configure::write('debug',2);
 		$this->Prg->commonProcess();
 		$this->CasetasViewResume->recursive = 0;
 
@@ -46,10 +47,22 @@ class CasetasViewResumesController extends AppController {
 			$conditionsCasetasViewResume = $this->CasetasViewResume->parseCriteria($this->passedArgs);
 		}else {
 			$conditionsUnits['BusinessUnit.company_id'] = key($cpny_id);
+			debug(key($cpny_id));
 			$conditionsUnits['BusinessUnit.name NOT'] = 'TBKCUL';
 			$conditionsUnitsGet['CasetasUnit.casetas_units_name like'] = current($this->BusinessUnit->find('list',array('conditions'=>$conditionsUnits)));
+
+			debug(current($this->BusinessUnit->find('list',array('conditions'=>$conditionsUnits))));
+
+			debug($this->BusinessUnit->find('all',array('fields'=>array('id','name'))));
+
 			$id_corporations = $this->CasetasUnit->find('list',array('conditions'=>$conditionsUnitsGet));
-			// debug($id_corporations);
+
+			debug($this->CasetasUnit->find('list'));
+
+			$condUc['CasetasControlsUser.user_id'] = $this->Auth->User('id');
+			debug($this->CasetasControlsUser->find('all',array('conditions'=>$condUc)));
+
+			debug($id_corporations);
 
 
 			$conditions_control['CasetasControlsUser.user_id'] = $_SESSION['Auth']['User']['id'];

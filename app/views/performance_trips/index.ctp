@@ -387,22 +387,26 @@
 
 																	event.stopPropagation();
 																	event.preventDefault();
+																	count += 1;
+																	if (count > 1) {
+																			$(this).prop('disabled',true);
+																	} else {
 
-																	console.log($(this).attr('data-update'));
-																 	var post_serial = JSON.stringify($("#post_form").serializeArray());
-																	console.log(post_serial);
-																	post_data_code = base64_encode(post_serial);
-																	console.log(post_data_code);
-																	console.log($('.page current'));
+																		console.log($(this).attr('data-update'));
+																	 	var post_serial = JSON.stringify($("#post_form").serializeArray());
+																		console.log(post_serial);
+																		post_data_code = base64_encode(post_serial);
+																		console.log(post_data_code);
+																		console.log($('.page current'));
 
-													 				$.post("<?php echo Dispatcher::baseUrl();?>/PerformanceViajes/add/save:"+ post_data_code)
-																	.done(function(data){
-																		$.colorbox.close();
-																		document.getElementById("send_query").click();
-																		console.log('loaded_table_table');
-																	});
-																	// $.colorbox();
-
+														 				$.post("<?php echo Dispatcher::baseUrl();?>/PerformanceViajes/add/save:"+ post_data_code)
+																		.done(function(data){
+																			$.colorbox.close();
+																			document.getElementById("send_query").click();
+																			console.log('loaded_table_table');
+																		});
+																		// $.colorbox();
+																	}
 																 });
 															 }
 													});
@@ -546,7 +550,7 @@
 							// 		// Show only matching TR, hide rest of them
 							// 		$("#tableFilter tbody>tr").hide();
 							// 		$("#tableFilter td:contains-ci('" + $(this).val() + "')").parent("tr").show();
-							// 	} else {
+								// 	} else {
 							// 		// When there is no input or clean again, show everything back
 							// 		$("#tableFilter tbody>tr").show();
 							// 	}

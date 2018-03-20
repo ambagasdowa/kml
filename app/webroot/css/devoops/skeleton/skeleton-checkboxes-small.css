@@ -1,0 +1,10 @@
+input[type="checkbox"].small + label {
+  padding-left: 1.3rem;
+  font-size: 1rem;
+}
+
+input[type=checkbox]:checked.small + label:after {
+  top: 0.5ex;
+  left: 0.5ex;
+  height: 1ex;
+}

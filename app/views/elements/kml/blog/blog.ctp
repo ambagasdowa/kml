@@ -25,6 +25,8 @@ $core = 'core'.DS;
       // e($this->Html->css($theme.'skeleton/custom', 'stylesheet',array('inline'=>false)));
       // e($this->Html->css($theme.'skeleton/black', 'stylesheet',array('inline'=>false)));
 			e($this->Html->css($theme.'skeleton/white', 'stylesheet',array('inline'=>false)));
+			e($this->Html->css($theme.'skeleton/skeleton-checkboxes', 'stylesheet',array('inline'=>false)));
+			e($this->Html->css($theme.'skeleton/skeleton-checkboxes-small', 'stylesheet',array('inline'=>false)));
 
       /** @js */
 			e($this->Html->script($theme.'jquery/jquery.min',false));

@@ -36,6 +36,11 @@ class PerformanceFacturasController extends AppController {
 		$this->set('performanceFactura', $this->PerformanceFactura->read(null, $id));
 	}
 
+/** NOTE  Add Method which comes from save in performance_customers add post call
+	*
+**/
+
+
 	function add() {
 
 			// Configure::write('debug', 1);
@@ -99,6 +104,8 @@ $this->LoadModel('PerformanceViewFactura');
 
 				$rowsView = $this->PerformanceViewFactura->find('list',array('conditions'=>$saveGroup,'fields'=>array('id','performance_facturas_id')));
 
+				debug($rowsView);
+
 				$saveFacturas['PerformanceFactura'] = $conditions;
 				unset($saveFacturas['PerformanceFactura']['dataUpdate']);
 				unset($saveFacturas['PerformanceFactura']['performance_date_ini']);
@@ -115,7 +122,7 @@ $this->LoadModel('PerformanceViewFactura');
 						$facturas[] = $facturas_id;
 					}
 				}
-			// debug($createFacturas);
+			debug($createFacturas);
 			if (count($createFacturas['PerformanceFactura']) > 0) {
 				$this->PerformanceFactura->create();
 				if ($this->PerformanceFactura->saveAll($createFacturas['PerformanceFactura'])) {
@@ -123,6 +130,8 @@ $this->LoadModel('PerformanceViewFactura');
 				}
 			}
 			// NOTE this is done
+			// exit();
+			// NOTE save section
 
 			if (count($facturas) > 0) {
 					$updateFacturas['PerformanceFactura.performance_customers_id'] = $saveGroup['PerformanceViewFactura.performance_customers_id'];
