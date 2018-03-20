@@ -447,7 +447,7 @@ td {
 													 				$.post("<?php echo Dispatcher::baseUrl();?>/PerformanceFacturas/add/save:"+ post_data_code)
 																	.done(function(data){
 																		$.colorbox.close();
-																		// document.getElementById("send_query").click();
+																		document.getElementById("send_query").click();
 																		console.log('loaded_table_dance');
 																	});
 																}

@@ -123,7 +123,7 @@
 			<tr class="cache-header">
 						<th class="firts-header-element">Nombre</th>
 						<th><?php echo ('RFC');?></th>
-						<!-- <th>
+						<!-- <th class="hideme">
 							<input type="checkbox" id="checkbox-main" name="" />
 							 <label for="checkbox-main"></label>
 						</th> -->
@@ -191,7 +191,7 @@
 																		);
 						?>
 					</td>
-					<!-- <td class="check">
+					<!-- <td class="hideme check">
 						<input type="checkbox" id="checkbox-<?php echo $performanceReference['PerformanceViewFactura']['Referencia'];?>" name="chk_group[]" class="small">
 						 <label for="checkbox-<?php echo $performanceReference['PerformanceViewFactura']['Referencia']; ?>"></label>
 					</td> -->
@@ -286,7 +286,7 @@
 						 ><i class="fa fa-external-link" aria-hidden="true"></i></a>
 				</td>
 
-				<!-- <td class="checkbox_footer">
+				<!-- <td class="hideme checkbox_footer">
 					<input type="checkbox" id="checkbox-footer-<?php print($performanceReferencesKey)?>" />
 					 <label for="checkbox-footer-<?php print($performanceReferencesKey)?>"></label>
 				</td> -->
