@@ -382,7 +382,7 @@
 																 $( function() {
 																		$( "input[id^='datepicker_']" ).datepicker();
 																 } );
-
+																 var count = 0;
 																 $("#add_update").on('click',function(){
 
 																	event.stopPropagation();
