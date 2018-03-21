@@ -427,6 +427,7 @@ td {
 																	 } );
 
 																 console.log('in-updatebtn');
+																 var count = 0;
 																 $("#add_update").on('click',function(){
 
 																	event.stopPropagation();
