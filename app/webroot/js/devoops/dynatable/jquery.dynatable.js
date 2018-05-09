@@ -713,471 +713,7 @@
     };
   };
 
-  function RecordsCount(obj, settings) {
-    this.initOnLoad = function() {
-      return settings.features.recordCount;
-    };
-
-    this.init = function() {
-      this.attach();
-    };
-
-    this.create = function() {
-      var pageTemplate = '',
-          filteredTemplate = '',
-          options = {
-            elementId: obj.element.id,
-            recordsShown: obj.records.count(),
-            recordsQueryCount: settings.dataset.queryRecordCount,
-            recordsTotal: settings.dataset.totalRecordCount,
-            collectionName: settings.params.records === "_root" ? "records" : settings.params.records,
-            text: settings.inputs.recordCountText
-          };
-
-      if (settings.features.paginate) {
-
-        // If currently displayed records are a subset (page) of the entire collection
-        if (options.recordsShown < options.recordsQueryCount) {
-          var bounds = obj.records.pageBounds();
-          options.pageLowerBound = bounds[0] + 1;
-          options.pageUpperBound = bounds[1];
-          pageTemplate = settings.inputs.recordCountPageBoundTemplate;
-
-        // Else if currently displayed records are the entire collection
-        } else if (options.recordsShown === options.recordsQueryCount) {
-          pageTemplate = settings.inputs.recordCountPageUnboundedTemplate;
-        }
-      }
-
-      // If collection for table is queried subset of collection
-      if (options.recordsQueryCount < options.recordsTotal) {
-        filteredTemplate = settings.inputs.recordCountFilteredTemplate;
-      }
-
-      // Populate templates with options
-      options.pageTemplate = utility.template(pageTemplate, options);
-      options.filteredTemplate = utility.template(filteredTemplate, options);
-      options.totalTemplate = utility.template(settings.inputs.recordCountTotalTemplate, options);
-      options.textTemplate = utility.template(settings.inputs.recordCountTextTemplate, options);
-
-      return utility.template(settings.inputs.recordCountTemplate, options);
-    };
-
-    this.attach = function() {
-      var $target = settings.inputs.recordCountTarget ? $(settings.inputs.recordCountTarget) : obj.$element;
-      $target[settings.inputs.recordCountPlacement](this.create());
-    };
-  };
-
-  function ProcessingIndicator(obj, settings) {
-    this.init = function() {
-      this.attach();
-    };
-
-    this.create = function() {
-      var $processing = $('<div></div>', {
-            html: '<span>' + settings.inputs.processingText + '</span>',
-            id: 'dynatable-processing-' + obj.element.id,
-            'class': 'dynatable-processing',
-            style: 'position: absolute; display: none;'
-          });
-
-      return $processing;
-    };
-
-    this.position = function() {
-      var $processing = $('#dynatable-processing-' + obj.element.id),
-          $span = $processing.children('span'),
-          spanHeight = $span.outerHeight(),
-          spanWidth = $span.outerWidth(),
-          $covered = obj.$element,
-          offset = $covered.offset(),
-          height = $covered.outerHeight(), width = $covered.outerWidth();
-
-      $processing
-        .offset({left: offset.left, top: offset.top})
-        .width(width)
-        .height(height)
-      $span
-        .offset({left: offset.left + ( (width - spanWidth) / 2 ), top: offset.top + ( (height - spanHeight) / 2 )});
-
-      return $processing;
-    };
-
-    this.attach = function() {
-      obj.$element.before(this.create());
-    };
-
-    this.show = function() {
-      $('#dynatable-processing-' + obj.element.id).show();
-      this.position();
-    };
-
-    this.hide = function() {
-      $('#dynatable-processing-' + obj.element.id).hide();
-    };
-  };
-
-  function State(obj, settings) {
-    this.initOnLoad = function() {
-      // Check if pushState option is true, and if browser supports it
-      return settings.features.pushState && history.pushState;
-    };
-
-    this.init = function() {
-      window.onpopstate = function(event) {
-        if (event.state && event.state.dynatable) {
-          obj.state.pop(event);
-        }
-      }
-    };
-
-    this.push = function(data) {
-      var urlString = window.location.search,
-          urlOptions,
-          path,
-          params,
-          hash,
-          newParams,
-          cacheStr,
-          cache,
-          // replaceState on initial load, then pushState after that
-          firstPush = !(window.history.state && window.history.state.dynatable),
-          pushFunction = firstPush ? 'replaceState' : 'pushState';
-
-      if (urlString && /^\?/.test(urlString)) { urlString = urlString.substring(1); }
-      $.extend(urlOptions, data);
-
-      params = utility.refreshQueryString(urlString, data, settings);
-      if (params) { params = '?' + params; }
-      hash = window.location.hash;
-      path = window.location.pathname;
-
-      obj.$element.trigger('dynatable:push', data);
-
-      cache = { dynatable: { dataset: settings.dataset } };
-      if (!firstPush) { cache.dynatable.scrollTop = $(window).scrollTop(); }
-      cacheStr = JSON.stringify(cache);
-
-      // Mozilla has a 640k char limit on what can be stored in pushState.
-      // See "limit" in https://developer.mozilla.org/en/DOM/Manipulating_the_browser_history#The_pushState().C2.A0method
-      // and "dataStr.length" in http://wine.git.sourceforge.net/git/gitweb.cgi?p=wine/wine-gecko;a=patch;h=43a11bdddc5fc1ff102278a120be66a7b90afe28
-      //
-      // Likewise, other browsers may have varying (undocumented) limits.
-      // Also, Firefox's limit can be changed in about:config as browser.history.maxStateObjectSize
-      // Since we don't know what the actual limit will be in any given situation, we'll just try caching and rescue
-      // any exceptions by retrying pushState without caching the records.
-      //
-      // I have absolutely no idea why perPageOptions suddenly becomes an array-like object instead of an array,
-      // but just recently, this started throwing an error if I don't convert it:
-      // 'Uncaught Error: DATA_CLONE_ERR: DOM Exception 25'
-      cache.dynatable.dataset.perPageOptions = $.makeArray(cache.dynatable.dataset.perPageOptions);
-
-      try {
-        window.history[pushFunction](cache, "Dynatable state", path + params + hash);
-      } catch(error) {
-        // Make cached records = null, so that `pop` will rerun process to retrieve records
-        cache.dynatable.dataset.records = null;
-        window.history[pushFunction](cache, "Dynatable state", path + params + hash);
-      }
-    };
-
-    this.pop = function(event) {
-      var data = event.state.dynatable;
-      settings.dataset = data.dataset;
-
-      if (data.scrollTop) { $(window).scrollTop(data.scrollTop); }
-
-      // If dataset.records is cached from pushState
-      if ( data.dataset.records ) {
-        obj.dom.update();
-      } else {
-        obj.process(true);
-      }
-    };
-  };
-
-  function Sorts(obj, settings) {
-    this.initOnLoad = function() {
-      return settings.features.sort;
-    };
-
-    this.init = function() {
-      var sortsUrl = window.location.search.match(new RegExp(settings.params.sorts + '[^&=]*=[^&]*', 'g'));
-      if (sortsUrl) {
-        settings.dataset.sorts = utility.deserialize(sortsUrl)[settings.params.sorts];
-      }
-      if (!settings.dataset.sortsKeys.length) {
-        settings.dataset.sortsKeys = utility.keysFromObject(settings.dataset.sorts);
-      }
-    };
-
-    this.add = function(attr, direction) {
-      var sortsKeys = settings.dataset.sortsKeys,
-          index = $.inArray(attr, sortsKeys);
-      settings.dataset.sorts[attr] = direction;
-      obj.$element.trigger('dynatable:sorts:added', [attr, direction]);
-      if (index === -1) { sortsKeys.push(attr); }
-      return dt;
-    };
-
-    this.remove = function(attr) {
-      var sortsKeys = settings.dataset.sortsKeys,
-          index = $.inArray(attr, sortsKeys);
-      delete settings.dataset.sorts[attr];
-      obj.$element.trigger('dynatable:sorts:removed', attr);
-      if (index !== -1) { sortsKeys.splice(index, 1); }
-      return dt;
-    };
-
-    this.clear = function() {
-      settings.dataset.sorts = {};
-      settings.dataset.sortsKeys.length = 0;
-      obj.$element.trigger('dynatable:sorts:cleared');
-    };
-
-    // Try to intelligently guess which sort function to use
-    // based on the type of attribute values.
-    // Consider using something more robust than `typeof` (http://javascriptweblog.wordpress.com/2011/08/08/fixing-the-javascript-typeof-operator/)
-    this.guessType = function(a, b, attr) {
-      var types = {
-            string: 'string',
-            number: 'number',
-            'boolean': 'number',
-            object: 'number' // dates and null values are also objects, this works...
-          },
-          attrType = a[attr] ? typeof(a[attr]) : typeof(b[attr]),
-          type = types[attrType] || 'number';
-      return type;
-    };
-
-    // Built-in sort functions
-    // (the most common use-cases I could think of)
-    this.functions = {
-      number: function(a, b, attr, direction) {
-        return a[attr] === b[attr] ? 0 : (direction > 0 ? a[attr] - b[attr] : b[attr] - a[attr]);
-      },
-      string: function(a, b, attr, direction) {
-        var aAttr = (a['dynatable-sortable-text'] && a['dynatable-sortable-text'][attr]) ? a['dynatable-sortable-text'][attr] : a[attr],
-            bAttr = (b['dynatable-sortable-text'] && b['dynatable-sortable-text'][attr]) ? b['dynatable-sortable-text'][attr] : b[attr],
-            comparison;
-        aAttr = aAttr.toLowerCase();
-        bAttr = bAttr.toLowerCase();
-        comparison = aAttr === bAttr ? 0 : (direction > 0 ? aAttr > bAttr : bAttr > aAttr);
-        // force false boolean value to -1, true to 1, and tie to 0
-        return comparison === false ? -1 : (comparison - 0);
-      },
-      originalPlacement: function(a, b) {
-        return a['dynatable-original-index'] - b['dynatable-original-index'];
-      }
-    };
-  };
-
-  // turn table headers into links which add sort to sorts array
-  function SortsHeaders(obj, settings) {
-    var _this = this;
-
-    this.initOnLoad = function() {
-      return settings.features.sort;
-    };
-
-    this.init = function() {
-      this.attach();
-    };
-
-    this.create = function(cell) {
-      var $cell = $(cell),
-          $link = $('<a></a>', {
-            'class': 'dynatable-sort-header',
-            href: '#',
-            html: $cell.html()
-          }),
-          id = $cell.data('dynatable-column'),
-          column = utility.findObjectInArray(settings.table.columns, {id: id});
-
-      $link.bind('click', function(e) {
-        _this.toggleSort(e, $link, column);
-        obj.process();
-
-        e.preventDefault();
-      });
-
-      if (this.sortedByColumn($link, column)) {
-        if (this.sortedByColumnValue(column) == 1) {
-          this.appendArrowUp($link);
-        } else {
-          this.appendArrowDown($link);
-        }
-      }
-
-      return $link;
-    };
-
-    this.removeAll = function() {
-      obj.$element.find(settings.table.headRowSelector).children('th,td').each(function(){
-        _this.removeAllArrows();
-        _this.removeOne(this);
-      });
-    };
-
-    this.removeOne = function(cell) {
-      var $cell = $(cell),
-          $link = $cell.find('.dynatable-sort-header');
-      if ($link.length) {
-        var html = $link.html();
-        $link.remove();
-        $cell.html($cell.html() + html);
-      }
-    };
-
-    this.attach = function() {
-      obj.$element.find(settings.table.headRowSelector).children('th,td').each(function(){
-        _this.attachOne(this);
-      });
-    };
-
-    this.attachOne = function(cell) {
-      var $cell = $(cell);
-      if (!$cell.data('dynatable-no-sort')) {
-        $cell.html(this.create(cell));
-      }
-    };
-
-    this.appendArrowUp = function($link) {
-      this.removeArrow($link);
-      $link.append("<span class='dynatable-arrow'> &#9650;</span>");
-    };
-
-    this.appendArrowDown = function($link) {
-      this.removeArrow($link);
-      $link.append("<span class='dynatable-arrow'> &#9660;</span>");
-    };
-
-    this.removeArrow = function($link) {
-      // Not sure why `parent()` is needed, the arrow should be inside the link from `append()` above
-      $link.find('.dynatable-arrow').remove();
-    };
-
-    this.removeAllArrows = function() {
-      obj.$element.find('.dynatable-arrow').remove();
-    };
-
-    this.toggleSort = function(e, $link, column) {
-      var sortedByColumn = this.sortedByColumn($link, column),
-          value = this.sortedByColumnValue(column);
-      // Clear existing sorts unless this is a multisort event
-      if (!settings.inputs.multisort || !utility.anyMatch(e, settings.inputs.multisort, function(evt, key) { return e[key]; })) {
-        this.removeAllArrows();
-        obj.sorts.clear();
-      }
-
-      // If sorts for this column are already set
-      if (sortedByColumn) {
-        // If ascending, then make descending
-        if (value == 1) {
-          for (var i = 0, len = column.sorts.length; i < len; i++) {
-            obj.sorts.add(column.sorts[i], -1);
-          }
-          this.appendArrowDown($link);
-        // If descending, remove sort
-        } else {
-          for (var i = 0, len = column.sorts.length; i < len; i++) {
-            obj.sorts.remove(column.sorts[i]);
-          }
-          this.removeArrow($link);
-        }
-      // Otherwise, if not already set, set to ascending
-      } else {
-        for (var i = 0, len = column.sorts.length; i < len; i++) {
-          obj.sorts.add(column.sorts[i], 1);
-        }
-        this.appendArrowUp($link);
-      }
-    };
-
-    this.sortedByColumn = function($link, column) {
-      return utility.allMatch(settings.dataset.sorts, column.sorts, function(sorts, sort) { return sort in sorts; });
-    };
-
-    this.sortedByColumnValue = function(column) {
-      return settings.dataset.sorts[column.sorts[0]];
-    };
-  };
-
-  function Queries(obj, settings) {
-    var _this = this;
-
-    this.initOnLoad = function() {
-      return settings.inputs.queries || settings.features.search;
-    };
-
-    this.init = function() {
-      var queriesUrl = window.location.search.match(new RegExp(settings.params.queries + '[^&=]*=[^&]*', 'g'));
-
-      settings.dataset.queries = queriesUrl ? utility.deserialize(queriesUrl)[settings.params.queries] : {};
-      if (settings.dataset.queries === "") { settings.dataset.queries = {}; }
-
-      if (settings.inputs.queries) {
-        this.setupInputs();
-      }
-    };
-
-    this.add = function(name, value) {
-      // reset to first page since query will change records
-      if (settings.features.paginate) {
-        settings.dataset.page = 1;
-      }
-      settings.dataset.queries[name] = value;
-      obj.$element.trigger('dynatable:queries:added', [name, value]);
-      return dt;
-    };
-
-    this.remove = function(name) {
-      delete settings.dataset.queries[name];
-      obj.$element.trigger('dynatable:queries:removed', name);
-      return dt;
-    };
-
-    this.run = function() {
-      for (query in settings.dataset.queries) {
-        if (settings.dataset.queries.hasOwnProperty(query)) {
-          var value = settings.dataset.queries[query];
-          if (_this.functions[query] === undefined) {
-            // Try to lazily evaluate query from column names if not explicitly defined
-            var queryColumn = utility.findObjectInArray(settings.table.columns, {id: query});
-            if (queryColumn) {
-              _this.functions[query] = function(record, queryValue) {
-                return record[query] == queryValue;
-              };
-            } else {
-              $.error("Query named '" + query + "' called, but not defined in queries.functions");
-              continue; // to skip to next query
-            }
-          }
-          // collect all records that return true for query
-          settings.dataset.records = $.map(settings.dataset.records, function(record) {
-            return _this.functions[query](record, value) ? record : null;
-          });
-        }
-      }
-      settings.dataset.queryRecordCount = obj.records.count();
-    };
-
-    // Shortcut for performing simple query from built-in search
-    this.runSearch = function(q) {
-      var origQueries = $.extend({}, settings.dataset.queries);
-      if (q) {
-        this.add('search', q);
-      } else {
-        this.remove('search');
-      }
-      if (!utility.objectsEqual(settings.dataset.queries, origQueries)) {
-        obj.process();
-      }
-    };
-
-    this.setupInputs = function() {
-      settings.inputs.queries.each(function() {
+  function RecordsCount(obj, settcorazón a los nervios, y aumentándose así este dolor, se prolongaba la muerte.Como me hallase de este modo lleno de dolores, abrí los ojos y vi a mi Madre que estaba llorando, cuyo corazón se hallaba lleno de amargura, con todos sus miembros yertos y pálidos, y sus ayes y gemidos me atormentaban más que mi propio dolor. Vi también a mis amigos estar en suma ansiedad, y algunos casi dudaban, pero otros conservaban, aunque muy trastornados. Hallándome yo en tan cruel agonía y continuando en tan graves amarguras, rompióse al fin mi corazón con la violencia de la pasión, y salió mi alma, al salir la cual alzóse un poco la cabeza, estremeciéronse todos los miembros, abriéronse los ojos como a la mitad, y apoyándose en los pies todo el peso del cuerpo, quedé colgando como un lienzo hecho jirones. Esto padecí yo, tu Creador, y nadie hay que lo considere, y de ello me quejo delante de ti, para que pienses lo que yo hice, y cómo se me paga.Te ruego, en segundo lugar, que trabajes conmigo. Todo el que deseare hacer alguna obra, debe tener tres cosas: primera, la materia de que se haga la obra; segunda, los instrumentos con que haya de hacerse; y tercera, una esmerada premeditación para que se haga bien. Yo mismo soy la materia y la sabiduría misma, la cual y de la cual dimana toda sabiduría, puesto que he enviado mis palabras al mundo. Los instrumentos son mis amigos.Recoge, pues, mis palabras, y mira si están frescas y no corrompidas, si indican y tienen el sabor de la fe sana y recta; mira si son dignas y adecuadas para mi tesoro; considera si encaminan del amor del mundo al amor de Dios, de la senda del infierno a la altura del cielo, y si así las hallares, procura mi honra con mis amigos, como con buenos instrumentos; procúrala con prudencia como el hombre sabio; trabaja varonilmente, como el varon fuerte, trabaja con fervor, como amigo del Señor.Te mando, en tercer lugar, como Señor, para que acabes lo que has comenzado. Tú fuiste por mi camino, echaste tu arado en una pequeña porción de tierra y principiaste a arar. Mas ahora te mando que vuelvas con mayor frecuencia, que estirpes las raíces y espinas, y edifiques allí iglesias con los bienes de tu iglesia, pues entrego en tus manos esa parte de la tierra, y esa reclamo de ti. Por tanto, trabaja con fervor y asuduidad.Refiriéndome ahora a los posesos, digo que se admiran algunos de que el espíritu no se aparte del poseído, y en esto pueden considerar mi grandísima justicia, pues yo no le hago mayor injuria al demonio que al ángel en el cielo. Y pues es justicia que como una cosa viene, así se retire; y pues el espíritu llega alguna vez desde lejos, así también se retirará lentamente.Tres clases de demonios hay. Una es como el aire, que con facilidad se escurre, y obscurece la conciencia del hombre para que hable y haga cosas impúdicas: esta clase de espíritus malos viene fácilmente, y sale lo mismo.La segunda clase es como el fuego, que con la impaciencia aflige todo el cuerpo y la carne, y hace al hombre la vida tan amarga, que desearía morir más que vivir, y por impaciencia es impelido a todo lo que le sugiere aquel espíritu impuro: esta clase tan fácilmente como viene, sale, pero quedando la dolencia en el cuerpo.La tercera clase de demonios es como el humo, y al modo que el humo dondequiera que entra, lo mancha todo y se mezcla con todas las cosas, así también esta clase de demonios se mezcla totalmente con el alma y cuerpo del hombre. Por tanto, como el humo cuando encuentra un agujero va saliendo poco a poco y desde lejos, de la misma manera este espíritu, que con las oraciones principió a salir, se irá poco a poco, hasta que el poseído se haya purificado por completo.Y cuando se hubieren derramado tantas lágrimas como son necesarias, y se hubieren hecho todas las abstinencias debidas, entonces saldrá del todo el mal espíritu, y el hombre se verá purificado; porque así como ese espíritu llegó paulatinamente y desde lejos, del mismo modo es justicia que se retire.Se acusa santa Brígida delante de la Virgen María de las distracciones de su mente, y cómo la Señora la consuela.Libro 9 - Capítulo 8Bendita seáis vos, Reina del cielo, le dice la Santa a la Virgen, que no despreciáis a ningún pecador, cuando de todo corazón os invoca. Dignaos oirme, aunque soy indigna de abrir mis labios para suplicaros. Sé, pues, que sin estar robustecida con vuestra ayuda, no puedo gobernarme a mí misma, porque mi cuerpo es como el animal indómito, que si no tiene puesto el freno en la boca, va corriendo a todos los parajes adonde acostumbra tener sus deleites. Mi voluntad es ligera como el ave, y continuamente quiere seguir sus frívolos pensamientos y cruzar por todas partes como las aves que vuelan. Os pido, pues, que se le ponga un freno a mi cuerpo, antes que quiera correa hacia alguna parte adonde desagradare a vuestro Hijo, y llevadlo donde pueda cumplir su voluntad. Ponedle también un cordel a esa ave, que es mi voluntad, para que no vuele más lejos de lo que sea del agrado de vuestro amadísimo Hijo.Y respondió la Virgen: La oración hecha con devoto corazón para honra de Dios, merece ser oída para concederle la gracia que pide. Y por tanto, a fin de que se ponga un freno a tu cuerpo para que sea regido según la voluntad de Dios, conviene que se te ponga también una carga, que hayas de llevar para honra de quien te gobierna, a fin de que tu voluntad sea tal, que más bien quieras callar que hablar con la gente del mundo, y te sea más grato sufrir en tu casa la pobreza, que disfrutar de todas las riquezas en los palacios de los príncipes, cuya amistad no estimas, con tal que pueda merecer la amistad de Dios. Así, pues te ponga la carga de que digas palabras que agraden a Dios.Simbólica visión de la Santa, en la que se le muestra la envidia de nuestro enemigo.Libro 9 - Capítulo 9Como en cierto tiempo estuviese orando santa Brígida, vió delante de sí en visión espiritual un escaso fuego y una ollita puesta sobre éste, y en ella una comida apetitosa. Vió también a un mancebo vestido de muy reluciente púrpura de oro, el cual, dobladas las rodillas estaba alrededor de la olla, unas veces soplando el fuego, otras moviendo la leña, y así la estaba cuidando, hasta que por último, dijo a la Santa que lo estaba mirando: Tú que estás viendo todo esto, ¿has visto jamás una persona tan humilde como soy yo?Yo, como ves, ataviado con vestiduras de oro, hago tamaños servicios a esta olla; dobladas las rodillas doy vuelta alrededor de ella, inclino la cabeza hasta la tierra soplando el fuego, arreglo y amontono la leña, a veces también la desvío sin escusarme molestia alguna; por tanto, reconóceme por muy humilde. Pero me importa manifestarte lo que esto significa. Por esa olla entiendo tu corazón; por la comida que en ella está, entiendo esas dulcísimas palabras que Dios te da desde lo alto; por el fuego, el fervor de amor divino que tienes de Dios.Yo soy el demonio, envidioso de tu consuelo, que me muestro tan humilde servidor, soplando no tanto para que arda más el fuego, como para que las cenizas, que son los afectos de las cosas de la tierra, suban a la olla, esto es, a tu corazón, a fin de que esa sabrosa comida, que son las palabras del Espíritu Santo que se te han inspirado, se hagan insípidas. Revuelvo las teas y la leña, para que la olla, que es tu corazón, se incline a la tierra, esto es, a personas conocidas de la tierra o parientes, a fin de que de este modo sea Dios menos amado.Revela Dios a un santo monje la santitud y virtud insigne de santa Brígida.Libro 9 - Capítulo 10Un monje de santa vida del mismo monasterio de Alvastro refirió con lágrimas y juramento al prior el P. Pedro, que cuando santa Brígida fué allí para residir en el mismo monasterio, se admiró el monje en su corazón, y por celo de la regla y de la santidad dijo interiormente: ¿Por qué esta señora habita aquí en el monasterio de los monjes contra nuestra regla e introduciendo una nueva costumbre? Arrebatado entonces en oración el mismo religioso, oyó en un arrobamiento mental una voz que le decía: Esa mujer es amiga de Dios, y viene al monasterio para coger flores debajo de este monte, con las ñor creado todas las cosas y particularmente al hombre, y que era justísimo juez de todos; entonces, al modo que las aguas salen en abundancia de un manantial, así desde el cerebro de la Virgen lanzábanse a la cumbre del cielo sus sentidos y entendimiento, y después corrían por el valle, esto es, por todo su humildísimo cuerpo.Pues así como dice la Iglesia que el Hijo de Dios salió del Padre y que su vuelta fué al Padre, aunque ninguno de ellos se apartó jamás del otro; igualmente los sentidos y entendimiento de la Virgen, elevándose con frecuencía a lo más alto de los cielos, veían constantemente a Dios por medio de la fe, con cuyo dulcísimo amor suavemente abrazada volvía a sí misma.Mantuvo con la mayor firmeza este amor con esperanza racional y temor divino, inflamando por medio del mismo amor su propia alma, de suerte, que comenzó a arder en amor de Dios como vehementísimo fuego. Los sentidos y entendimiento de la Virgen sometieron también de tal manera el cuerpo al alma para obedecer a Dios, que desde entonces le estuvo el cuerpo obediente con la mayor humildad.¡Con cuánta rapidez los sentidos y entendimiento de la Virgen comprendieron el amor de Dios! ¡Con cuánta prudencia se enriqueció a sí misma la Señora! Por consiguiente, como si hubiera sido trasplantado algún lirio, sujeto en la tierra por tres raices, con que estuviese más firme, y abriese arriba tres preciosas flores para deleitar la vista, del mismo modo el amor divino traspasado a esta gloriosa tierra, a nuestra santísima Virgen por virtud divina, se unió a su cuerpo con tres virtudes muy sólidas, como con tres raices por las cuales fortaleció también el mismo cuerpo de la Virgen, y con tres joyas, como con tres preciosísimas flores adornó honoríficamente a la Virgen respecto al alma, para alegría de Dios, de los ángeles y de cuantos la mirasen.La primera fortaleza de la discreta abstinencia del cuerpo de la Virgen moderaba en la Señora la comida y bebida, de suerte, que por ninguna superfluidad la apartó nunca del servicio de Dios la menor pereza, ni por la inmoderada parsimonia resultaba jamás sin fuerzas para obrar.La segunda fortaleza de la templanza de las vigilias gobernaba su cuerpo de tal manera, que por lo escaso del sueño en ningún tiempo en que debía estar en vela, se hallaba entorpecida con ninguna pesadez, ni por el mucho adormecimiento acortaba en lo más leve los períodos marcados de la vigilia.La tercera fortaleza de la robusta complexión del cuerpo de la Virgen hizo tan constante la misma virginidad, que con igual ánimo sobrellevaba el trabajo, la adversidad corporal y la felicidad pasajera del cuerpo, sin quejarse por la adversidad de éste y sin alegrarse por su dicha. Esta era también la primera joya con que el amor divino ataviaba a la Virgen respecto al alma, a saber, que prefería en su alma los premios que Dios había de conceder a sus amigos, a la hermosura de todas las cosas, y por consiguiente parecíanle vilísmo lodo todas las riquezas del mundo. Adornaba su alma como segunda joya el discernir perfectamente en su entendimiento cuán incomparable con la gloria del cielo es el honor del mundo, por lo que apartábase de oir la gloria mundana, como de aire corrompido, que con su hedor destruye en breve la vida de muchos.Como tercera joya, en fin, glorificaba el alma de la Virgen el considerar dulcísimas en su corazón todas las cosas gratas a Dios, y más amargas que la hiel las cosas odiosas y contrarias al Señor, y por tanto, la misma voluntad de la Virgen impelía su alma para desear la verdadera dulzura tan eficazmente, que después no debió sentir en esta vida amargura espiritual. Con estas joyas sobre todas las cosas creadas apareció la Virgen tan hermosamente adornada en su alma, que plugo al Creador cumplir todas sus promesas por mediación de la misma Señora.Hallábase esta tan fortalecida por la virtud del amor, que no se resfriaba en ninguna obra buena ni en el menor ápice prevalecía jamás sobre ella el enemigo. Debe, en efecto, creerse que, así como su alma era hermosísima delante de Dios y de los ángeles, igualmente su cuerpo fué gratísimo a los ojos de cuantos la miraban; y así como Dios y los ángeles se congratulaban en los cielos por la hermosura de su alma, igualmente la gratísima hermosura de su cuerpo fué provechosa y consoladora en la tierra a cuantos deseaban verla.Viendo, pues, las personas piadosas el gran fervor con que la Virgen servía a Dios, se hacían más celosas por la honra de Dios, y las personas propensas a pecar, cuando consideraban a la Virgen, resfriábanse al punto en el ardor del pecado con la honestidad de sus palabras y comportamiento.Feria Quinta. - Lección SegundaLibro 11 - Capítulo 14Bendición. Dignese borrar nuestros pecados la Virgen saludada por el Ángel. Amén.Ninguna lengua puede referir con cuánta sabiduría comprendieron a Dios los sentidos y entendimiento de la gloriosísima Virgen, en el mismo instante en que por primera vez tuvo conocimiento del Señor, principalmente porque toda inteligencia humana es débil para pensar las muchas formas con que se sometió al servicio de Dios la bendita voluntad de la Virgen, pues se complacía sobremanera en hacer todo cuanto conocía ser agradable a Dios.Conoció la Virgen que no por méritos suyos había el Señor creado su cuerpo y su alma y dádole a su voluntad la libertad de guardar humildemente los preceptos divinos, o de oponerse a ellos si quisiera; y así, determinó la humildísima voluntad de la Virgen, servir a Dios con el mayor amor durante toda su vida por los beneficios ya recibidos, aunque ya no le concediera más el Señor. Mas cuando el entendimiento de la Virgen pudo comprender que el mismo Creador de todas las almas se dignaría hacerse también Redentor de ellas, y que por recompensa de tan penoso trabajo, no desearía nada sino recobrar para sí las mismas almas, y que todo hombre en su mano tiene la libertad de aplacar a Dios con buenas obras, o de provocarlo a ira con malas acciones, comenzó la voluntad de la Virgen a dirigir atentamente su cuerpo en las borrascas del mundo, como el prudente piloto dirige su nave.Pues así como teme el piloto que con las oleadas pueda peligrar el buque, ni tampoco se apartan de su imaginación los escollos en que muchas veces se estrellan las naves, acomoda con firmeza las jarcias y pertrechos del buque, ésta contínuamente contemplando el puerto donde después del trabajo desea descansar, y cuida mucho lleguen debidamente a su verdadero dueño las riquezas contenidas en su nave, del mismo modo esa prudentísima Virgen, después de tener conocimiento de los mandatos de Dios, al punto según el espíritu de ellos comenzó su voluntad a dirigir con la mayor solicitud su cuerpo.Temía con frecuencia la Virgen el trato con los parientes, a fin de que no la entibiasen para servir a Dios con palabras o con obras la prosperidad o desgracia de ellos, las cuales se asemejan a los vaivenes del mundo. Tenía además presente de contínuo en la memoria todo lo prohibido por la ley divina, evitándolo con suma atención, a fin de que no perdiesen espiritualmente su alma, como tremendo escollo.Esta laudable voluntad dominó refrenando a la misma Virgen y sus sentidos de suerte que nunca se movía su lengua para palabras inútiles, y jamás se alzaron sus recatadísimos ojos para ver nada innecesario, sus oídos atendían sólo a lo perteneciente a la gloria de Dios, sus manos y dedos no se extendían sino para su utilidad propia o la del prójimo, y no permitía diesen sus pies un solo paso sin haber examinado antes el provecho que de ahí resultaría. Deseaba también la voluntad de la Virgen sufrir con placer todas las tribulaciones del mundo, para llegar al puerto de salvación, es decir, al seno de Dios Padre, anhelando constantemente que su alma restablecida diese grato honor al Señor, a quien sobremanera amaba.Y como la voluntad de la Virgen no careció jamás de bondad alguna, Dios, de quien dimanan todos los bienes, la exaltó muy sublimente en la cumbre de todas las virtudes y la hizo brillar con el mayor esplendor. ¿Quién no ha de admirarse de que haya Dios amado sobre todas las cosas a esta Virgen, cuando excepto ella sola, no conoció a nas.each(function() {
         var $this = $(this),
             event = $this.data('dynatable-query-event') || settings.inputs.queryEvent,
             query = $this.data('dynatable-query') || $this.attr('name') || this.id,

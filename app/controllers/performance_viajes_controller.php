@@ -125,6 +125,9 @@ class PerformanceViajesController extends AppController {
 				}
 			}
 			// debug($conditions);
+			// NOTE fail to add this field in db is not null and breaks the insert
+			// TODO fix in db
+			$conditions['performance_bsus_id'] = '';
 			// exit();
 			if ($conditions['dataUpdate'] === true ) {
 				// update
