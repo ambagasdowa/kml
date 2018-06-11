@@ -357,6 +357,11 @@ class AppController extends Controller {
     }
 
     function beforeFilter() {
+
+  // NOTE core php config
+    ini_set('memory_limit','-1');
+    ini_set('max_execution_time', '300');
+      
         //Configure AuthComponent
 		$this->Auth->authorize = 'actions';
 		$this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');

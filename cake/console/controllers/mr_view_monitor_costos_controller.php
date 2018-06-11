@@ -1,33 +1,33 @@
 <?php
 /**
 
-		* 
+		*
 
-		* PHP versions 4 and 5 
+		* PHP versions 4 and 5
 
-		* 
+		*
 
-		* kml : Kamila Software 
+		* kml : Kamila Software
 
-		* Licensed under The MIT License  
+		* Licensed under The MIT License
 
-		* Redistributions of files must retain the above copyright notice. 
+		* Redistributions of files must retain the above copyright notice.
 
-		* 
+		*
 
-		* @copyright     Jesus Baizabal 
+		* @copyright     Jesus Baizabal
 
-		* @link          http://baizabal.xyz 
+		* @link          http://baizabal.xyz
 
-		* @mail	     baizabal.jesus@gmail.com 
+		* @mail	     baizabal.jesus@gmail.com
 
-		* @package       cake 
+		* @package       cake
 
-		* @subpackage    cake.cake.console.libs.templates.views 
+		* @subpackage    cake.cake.console.libs.templates.views
 
-		* @since         CakePHP(tm) v 1.2.0.5234 
+		* @since         CakePHP(tm) v 1.2.0.5234
 
-		* @license       MIT License (http://www.opensource.org/licenses/mit-license.php) 
+		* @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
 
 		*/
 ?>
@@ -37,39 +37,38 @@ class MrViewMonitorCostosController extends AppController {
 
 	var $name = 'MrViewMonitorCostos';
 
-<?php
 /**
 
-		* 
+		*
 
-		* PHP versions 4 and 5 
+		* PHP versions 4 and 5
 
-		* 
+		*
 
-		* kml : Kamila Software 
+		* kml : Kamila Software
 
-		* Licensed under The MIT License  
+		* Licensed under The MIT License
 
-		* Redistributions of files must retain the above copyright notice. 
+		* Redistributions of files must retain the above copyright notice.
 
-		* 
+		*
 
-		* @copyright     Jesus Baizabal 
+		* @copyright     Jesus Baizabal
 
-		* @link          http://baizabal.xyz 
+		* @link          http://baizabal.xyz
 
-		* @mail	     baizabal.jesus@gmail.com 
+		* @mail	     baizabal.jesus@gmail.com
 
-		* @package       cake 
+		* @package       cake
 
-		* @subpackage    cake.cake.console.libs.templates.views 
+		* @subpackage    cake.cake.console.libs.templates.views
 
-		* @since         CakePHP(tm) v 1.2.0.5234 
+		* @since         CakePHP(tm) v 1.2.0.5234
 
-		* @license       MIT License (http://www.opensource.org/licenses/mit-license.php) 
+		* @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
 
 		*/
-?>
+
 
 	function index() {
 		$this->MrViewMonitorCosto->recursive = 0;
@@ -127,3 +126,4 @@ class MrViewMonitorCostosController extends AppController {
 		$this->redirect(array('action' => 'index'));
 	}
 }
+?>
