@@ -78,14 +78,14 @@ class DATABASE_CONFIG {
 		'driver' => 'mysql',
 		'persistent' => true,
 		'host' => 'localhost',
-		'login' => 'portal_users',
-		'password' => '@portal_users#',
+		'login' => 'root',
+		'password' => 'effeta',
 		'database' => 'portal_users',
 		'encoding' => 'utf8'
 	);
-	
-	//semi essential can load as module 
-	
+
+	//semi essential can load as module
+
 	var $users_info = array(
 		'driver' => 'mysql',
 		'persistent' => true,
@@ -95,7 +95,7 @@ class DATABASE_CONFIG {
 		'database' => 'portal_user_info',
 		'encoding' => 'utf8'
 	);
-	
+
 	var $portal_company = array(
 		'driver' => 'mysql',
 		'persistent' => true,
@@ -108,36 +108,58 @@ class DATABASE_CONFIG {
 
 	var $portal_calendar = array(
 		'driver' => 'mysql',
-		'persistent' => false,
+		'persistent' => true,
 		'host' => 'localhost',
 		'login' => 'portal_calendar',
 		'password' => '@portal_calendar#',
 		'database' => 'portal_calendar',
 		'prefix' => '',
 	);
-	
+
 	//then can add the non-essential data of the app
 
 	var $portal_secure = array(
 		'driver' => 'mysql',
-		'persistent' => false,
+		'persistent' => true,
 		'host' => 'localhost',
 		'login' => 'portal_secure',
 		'password' => '@portal_secure#',
 		'database' => 'portal_secure',
 		'prefix' => '',
 	);
-	
+
+	var $portal_apps = array(
+		'driver' => 'mysql',
+		'persistent' => true,
+		'host' => 'localhost',
+		'login' => 'portal_apps',
+		'password' => '@portal_apps#',
+		'database' => 'portal_apps',
+		'encoding' => 'utf8',
+		'prefix' => ''
+	);
+
+	var $portal_cloud = array(
+		'driver' => 'mysql',
+		'persistent' => true,
+		'host' => 'localhost',
+		'login' => 'portal_nextcloud',
+		'password' => '@portal_nextcloud#',
+		'database' => 'portal_nextcloud',
+		'encoding' => 'utf8',
+		'prefix' => ''
+	);
+
 	var $policie = array(
 		'driver' => 'mysql',
 		'persistent' => true,
 		'host' => 'localhost',
-		'login' => 'policies',
-		'password' => '@policies#',
+		'login' => 'root',
+		'password' => 'effeta',
 		'database' => 'policies',
 		'encoding' => 'utf8'
 	);
-	
+
 	var $tralix = array(
 		'driver' => 'mysql',
 		'persistent' => false,
@@ -148,14 +170,14 @@ class DATABASE_CONFIG {
 		'prefix' => '',
 		'encoding' => 'utf8',
 	);
-	
+
 	//this is and must be non-sessential connection to mssql
 	// payroll => lista de empleados
 /** WARNING starting mssql connections **/
 /** NOTE get the entire db of all workers compare against login */
 	var $mssql_payroll = array( // connect to remote mssql server
 		'driver' => 'mssql',
-		'persistent' => false,
+		'persistent' => true,
 		'host' => 'IntegraDb',
 		'login' => 'zam',
 		'password' => 'lis',
@@ -166,14 +188,14 @@ class DATABASE_CONFIG {
 // 		'encoding' => 'utf8',
 		'port' => '1433'
 	);
-	
+
 	//this is and must be non-sessential connection to mssql
-	// concilation => concilation fo iave 
+	// concilation => concilation fo iave
 /** WARNING starting mssql connections **/
 /** NOTE get the database and write to it */
 	var $mssql_sistemas = array( // connect to remote mssql server
 		'driver' => 'mssql',
-		'persistent' => false,
+		'persistent' => true,
 		'host' => 'IntegraDb',
 		'login' => 'zam',
 		'password' => 'lis',
@@ -184,6 +206,20 @@ class DATABASE_CONFIG {
 		'encoding' => 'utf8',
 		'port' => '1433'
 	);
-	
+
+	var $mssql_sistemas_larsa = array( // connect to remote mssql server
+		'driver' => 'mssql',
+		'persistent' => false,
+		'host' => '192.168.20.190',
+		'login' => 'sa',
+		'password' => 'effeta',
+		'database' => 'sistemas',
+		'prefix' => '',
+// 		'encoding' => 'ISO-8859-1',
+// 		'encoding' => 'Latin1',
+		'encoding' => 'utf8',
+		'port' => '1433'
+	);
+
 }
 ?>

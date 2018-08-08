@@ -154,8 +154,8 @@ class DATABASE_CONFIG {
 		'driver' => 'mysql',
 		'persistent' => true,
 		'host' => 'localhost',
-		'login' => 'policies',
-		'password' => '@policies#',
+		'login' => 'root',
+		'password' => 'effeta',
 		'database' => 'policies',
 		'encoding' => 'utf8'
 	);

@@ -2,12 +2,14 @@
 
 /* <?php //print_r($_SERVER);?> */
 
+
 /* set the body color */
-@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:200,300);
+@import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:100,200,300);
 body {
   background: #50a3a2;
   background: -webkit-linear-gradient(top left, #777 0%, #fff 100%);
   background: linear-gradient(to bottom right, #777 0%, #fff 100%);
+
 }
 body {
   font-family: 'Source Sans Pro', sans-serif;
@@ -44,6 +46,10 @@ body :-ms-input-placeholder {
 nav{
 	font-weight:600;
 }
+/*@media (max-width: 75em) { }*/
+/*#container{
+  height  : 90vh  ;
+}*/
 
 .placeholder {
 /* 	color:black; */
@@ -73,19 +79,30 @@ nav{
   margin-top: -200px;
   overflow: hidden;
 }
-.form_wrapper.form-success .container h1 {
+.form_wrapper .form-success .container_login h1 {
   -webkit-transform: translateY(85px);
       -ms-transform: translateY(85px);
           transform: translateY(85px);
 }
-.container {
+
+.container_footer {
   max-width: 600px;
   margin: 0 auto;
   padding: 80px 0;
   height: auto;
   text-align: center;
+  clear: both;
 }
-.container h1 {
+
+.log_in{
+  width: 250px;
+  padding: 10px 15px;
+  margin: 0 auto 10px auto;
+  display: block;
+  text-align: center;
+}
+
+.container_login h1 {
   font-size: 40px;
   -webkit-transition-duration: 1s;
           transition-duration: 1s;
@@ -93,7 +110,7 @@ nav{
           transition-timing-function: ease-in-put;
   font-weight: 200;
 }
-form ,.form_control , select {
+form , .form_control , select {
   padding: 20px 0;
   position: relative;
   z-index: 3;
@@ -132,21 +149,21 @@ form input, .form_control ,select{
 }
 
 textarea{
-  background: #50a3a2; 
+  background: #50a3a2;
   background: -webkit-linear-gradient(top left, #999 0%, #ddd 100%);
   background: linear-gradient(to bottom right, #999 0%, #ddd 100%);
-  font-weight:700; 
+  font-weight:700;
 }
 
 /*Opacity for label*/
 /*label{
 
-	-khtml-opacity:.10; 
-	-moz-opacity:.10; 
+	-khtml-opacity:.10;
+	-moz-opacity:.10;
 	-ms-filter:”alpha(opacity=10)”;
 	filter:alpha(opacity=10);
 	filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0.1);
-	opacity:.10; 
+	opacity:.10;
 }*/
 
 
@@ -202,7 +219,7 @@ form button:hover {
 .bg-bubbles li {
   position: absolute;
   list-style: none;
-   display: block; 
+   display: block;
 /*  width: 40px;
   height: 40px; */
 /*   background-color: rgba(255, 255, 255, 0.15); */
@@ -309,11 +326,11 @@ form button:hover {
 /*   font-family: Arial, sans-serif; */
 /*   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; */
 /*   font-size: 12px; */
-  
-  
+
+
 /* 	background-image: -webkit-radial-gradient(ellipse farthest-corner at center top, #95A2A3 0%, #5A95A3 100%); */
 /* 	background-image: radial-gradient(ellipse farthest-corner at center top, #95A2A3 0%, #5A95A3 100%); */
-	
+
 /*   background: #50a3a2; */
 /*   background: -webkit-linear-gradient(top left, #f2f2f2 0%, #fff 100%); */
 /*   background: linear-gradient(to bottom right, #f2f2f2 0%, #fff 100%); */
@@ -350,7 +367,7 @@ body a:active {
 	background: #eee !important;
 }*/
 
-.wrapper {	
+.wrapper {
   margin-top: 80px;
   margin-bottom: 80px;
 /*   background: #eee !important; */
@@ -361,7 +378,7 @@ body a:active {
 				padding: 15px 35px 45px;
 				margin: 0 auto;
 				background-color: #fff;
-				border: 1px solid rgba(0,0,0,0.1);  
+				border: 1px solid rgba(0,0,0,0.1);
 
 				.form-signin-heading,
 					.checkbox {
@@ -625,7 +642,7 @@ font-size: 2em;
   margin-left: 0;
 }
 .toggle-switch input:checked + .toggle-switch-inner + .toggle-switch-switch {
-  right: 0px; 
+  right: 0px;
 }
 .toggle-switch-danger input:checked + .toggle-switch-inner + .toggle-switch-switch {
   border:2px solid #D15E5E;
@@ -884,7 +901,7 @@ If you like this solution, you might also want to check out the 1.0 version:
 /*fix for cakephp paginator */
 .pagination > .current,
 .pagination > .disabled {
-	
+
   position: relative;
   float: left;
   padding: 6px 12px;
@@ -952,7 +969,7 @@ If you like this solution, you might also want to check out the 1.0 version:
 		cursor: inherit;
 		display: block;
     }
-    
+
     .form_control {
 		padding: 20px 0;
 		position: relative;
@@ -975,7 +992,7 @@ If you like this solution, you might also want to check out the 1.0 version:
 			transition-duration: 0.25s;
 		font-weight: 300;
 	}
-    
+
 /* styling input file  */
 
 
@@ -1058,11 +1075,11 @@ select:hover{
 	-webkit-transition: all 0.2s ease-in;
 	transition: all 0.2s ease-in;
 }
-option:not(:checked) { 
+option:not(:checked) {
 	background-color: #f1f1f1 !important;
     color:#444;
 }
-option:checked { 
+option:checked {
 	background-color: #333 !important;
     color:#fff;
 }
@@ -1091,8 +1108,8 @@ Follow me on Twitter @maridlcrmn
 .btn.btn-outline { background-color: transparent; }
 
 @media screen and (max-width: 767px) {
-    .navbar .navbar-collapse .navbar-right > li:last-child { padding-left: 15px; padding-right: 15px; } 
-    
+    .navbar .navbar-collapse .navbar-right > li:last-child { padding-left: 15px; padding-right: 15px; }
+
     .navbar .nav-collapse { margin: 7.5px auto; padding: 0; }
     .navbar .nav-collapse .navbar-form { margin: 0; }
     .nav-collapse>li { float: none; }
@@ -1120,12 +1137,12 @@ Follow me on Twitter @maridlcrmn
 	color: black;
 	}
 	.search:focus,.search:hover::-moz-placeholder {  /* Firefox 19+ */
-	color: black;  
+	color: black;
 	}
 	.search:focus,.search:hover:-ms-input-placeholder {
-	color: black;  
+	color: black;
 	}
-	
+
 	.search::-webkit-input-placeholder {
 	color: white;
 	}
@@ -1133,10 +1150,10 @@ Follow me on Twitter @maridlcrmn
 	color: white;
 	}
 	.search::-moz-placeholder {  /* Firefox 19+ */
-	color: white;  
+	color: white;
 	}
-	.search:-ms-input-placeholder {  
-	color: white;  
+	.search:-ms-input-placeholder {
+	color: white;
 	}
 
 /** SEARCH INPUT IN NAV BAR*/
@@ -1160,13 +1177,13 @@ Follow me on Twitter @maridlcrmn
 
 /* 		Navigation buttons section */
 		/* 		this link is fixed againts the lenght of the content */
-		
+
 			.helplink {
 				padding-top:6px;
 				padding-bottom:6px;
 			}
-		
-		
+
+
 			.helplink {
 				position: fixed;
 				bottom: 15px;
@@ -1174,11 +1191,11 @@ Follow me on Twitter @maridlcrmn
 				cursor: pointer;
 				z-index:150;
 			}
-			
+
 			.help{
 				visibility:hidden!important;
 			}
-			
+
 /** HELP BUTTON */
 
 
@@ -1187,3 +1204,68 @@ Follow me on Twitter @maridlcrmn
     z-index: 8802 !important;
 }
 /** DATEPICKER OVER FANCYBOX */
+
+/** NOTE filters in selected */
+
+.select2-results {
+  font-weight:bold;
+  background: linear-gradient(to bottom right, #777 0%, #fff 100%)!important;
+}
+
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    font-weight:bold;
+    color: #fff;
+    background: linear-gradient(to bottom right, #777 0%, #fff 100%)!important;
+    line-height: 28px;
+}
+/*dropdown-LIST*/
+.select2-search--dropdown {
+    font-weight:bold;
+    background: linear-gradient(to bottom right, #777 0%, #ddd 100%)!important;
+}
+
+/*NOTE SEARCH BOX*/
+.select2-container--default .select2-search--dropdown .select2-search__field{
+    font-weight:bold;
+    color: #000;
+    background: linear-gradient(to bottom right, #ddd 0%, #fff 100%)!important;
+}
+/** NOTE END filters in selected */
+
+/*NOTE add some ui fixed*/
+.scroll-block .break {
+  height: 350px;
+}
+
+
+
+/*hide hihcharts*/
+.highcharts-credits {
+	display: none;
+}
+
+/*CSS MODAL*/
+.modalDialog {
+  position: fixed;
+  font-family: Arial, Helvetica, sans-serif;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0,0,0,0.8);
+  z-index: 99999;
+  opacity:1;
+  -webkit-transition: opacity 400ms ease-in;
+  -moz-transition: opacity 400ms ease-in;
+  transition: opacity 400ms ease-in;
+  pointer-events: none;
+}
+.modalDialog > div {
+  position: relative;
+  margin: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%)
+}

@@ -165,4 +165,4 @@
       </a>
     </div><!-- /.carousel -->
 
-<span><?php //echo $this->element('helpdesk/help');?></span>
+<span><?php echo $this->element('helpdesk/help');?></span>
