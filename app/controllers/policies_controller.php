@@ -315,10 +315,11 @@ class PoliciesController extends AppController {
 			$this->data['Policy']['policies_path'] = $name.$ext;
 			$this->data['Policy']['create'] = date('Y-m-d h:m:s'); // appears mysql not working
 // 			$this->data['Policy']['status'] = 'Active'; // appears mysql not working
+			$this->data['Policy']['empresa_id'] = 0;
 // 		var_dump($this->data);
 // // 		debug($this->params);
 // 		exit();
-			$this->Policy->create();
+//			$this->Policy->create();
 
 			if ($this->Policy->save($this->data)) {
 	// 			Build the struct for view permissions
