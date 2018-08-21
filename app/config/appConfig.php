@@ -186,6 +186,8 @@
 			return true;
 		} else if (( (int)$id_group === 12 OR (int)$id_group === 1 OR (int)$id_group === 7) and $group === 'CasetasIngresos') { //group for projections and casetas
 			return true;
+		} else if (( (int)$id_group === 13 OR (int)$id_group === 1 OR (int)$id_group === 7) and $group === 'PoliciesIngresos') { //projections & pol
+			return true;
 		} else {
 			return false;
 		}
