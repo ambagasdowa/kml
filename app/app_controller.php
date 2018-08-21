@@ -192,12 +192,12 @@ class AppController extends Controller {
 
 
 	function extendsUsersMenu() {
-		debug($this->ControllerList->get());
+		// debug($this->ControllerList->get());
 
 		$controller = $this->ControllerList->get();
 
 		foreach ($controller as $controllerName => $containerViews) {
-			debug($controllerName);
+			// debug($controllerName);
 		}
 
 	}
