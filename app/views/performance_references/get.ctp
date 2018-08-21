@@ -89,6 +89,8 @@
 
 			<a id="charting" class="button button-primary" href="#">Graficas</a>
 
+			<a id="upd_checkboxes" class="button button-primary" href="#">Guardar</a>
+
 			<div id="print" class="pull-right">
 				<i class="fa fa-print" aria-hidden="true"></i>
 			</div>
@@ -123,10 +125,10 @@
 			<tr class="cache-header">
 						<th class="firts-header-element">Nombre</th>
 						<th><?php echo ('RFC');?></th>
-						<!-- <th class="hideme">
+						<th class="hideme">
 							<input type="checkbox" id="checkbox-main" name="" />
 							 <label for="checkbox-main"></label>
-						</th> -->
+						</th>
 						<!-- <th><?php echo ('TipoDocumento');?></th> -->
 						<th><?php echo ('Folio');?></th>
 						<!-- <th><?php echo ('Nombre');?></th> -->
@@ -191,10 +193,16 @@
 																		);
 						?>
 					</td>
-					<!-- <td class="hideme check">
-						<input type="checkbox" id="checkbox-<?php echo $performanceReference['PerformanceViewFactura']['Referencia'];?>" name="chk_group[]" class="small">
-						 <label for="checkbox-<?php echo $performanceReference['PerformanceViewFactura']['Referencia']; ?>"></label>
-					</td> -->
+					<td class="hideme check">
+						<input type="checkbox" id="checkboxes-<?php echo $performanceReference['PerformanceViewFactura']['Referencia'];?>" name="chk_group[]" class="small"
+						"data-factura" = <?php echo $performanceReference['PerformanceViewFactura']['id'] ?>
+						"data-customers"= <?php echo $performanceReference['PerformanceViewFactura']['performance_customers_id'] ?>
+						"data-reference" = <?php echo $performanceReference['PerformanceViewFactura']['id'] ?>
+						"data-empresa" = <?php echo $performanceReference['PerformanceViewFactura']['Empresa'] ?>
+						"data-resume" = <?php echo $performanceReference['PerformanceViewFactura']['performance_customers_id'] ?>
+						/>
+						 <label for="checkboxes-<?php echo $performanceReference['PerformanceViewFactura']['Referencia']; ?>"></label>
+					</td>
 					<!-- <td><?php echo $performanceReference['PerformanceViewFactura']['TipoDocumento']; ?></td> -->
 					<td><?php echo $performanceReference['PerformanceViewFactura']['Folio']; ?></td>
 					<!-- <td><?php echo $performanceReference['PerformanceViewFactura']['Nombre']; ?></td> -->

@@ -360,6 +360,45 @@ td {
 											$(".cache-header").remove();
 											$("#tableFilter").prepend(headder);
 										}
+
+
+										// WARNING NOTE Add checkboxes selection can be in replace of individual selection
+										// NOTE check all mechanism
+										$("#checkbox-main").click(function () {
+										     $('input:checkbox').not(this).prop('checked', this.checked);
+										 });
+
+										$("#upd_checkboxes").on( 'click', function (event) {
+												event.stopPropagation();
+												event.preventDefault();
+
+												console.log( $("INPUT[id^='checkboxes-']").is(':visible') );
+												console.log($("INPUT[id^='checkboxes-']:visible").prop('checked', this.checked));
+
+												var selected = [];
+												$('input:checked').each(function() {
+												    // selected.push($(this).attr('name'));
+														console.log($(this).attr('data-factura'));
+														// console.log( $(this).attr('data-factura') );
+														// console.log($(this).attr('data-factura').text());
+												});
+										});
+
+										//
+										// $('#checkbox-main').on('click',function () {
+										// 	var isChecked = $(this).prop('checked') ? 1 : 0;
+										// 	alert(isChecked);
+										// 	console.log($("INPUT[id^='checkboxes-']").is(':visible'));
+										// 	console.log($("INPUT[id^='checkboxes-']"));
+										// 	if (isChecked == 1) {
+										// 		$("INPUT[id^='checkboxes-']:visible").prop('checked', this.checked);
+										// 	} else {
+										// 		$("INPUT[id^='checkboxes-']").prop('ch8ecked', this.checked).change();
+										// 	}
+										// }); // on controlUserCheck
+
+
+
 										// //NOTE ==== Wotking UI behavior ===== //
 											// NOTE call to add update
 											$("a[id^='get_factura_']").on('click', function(event) {

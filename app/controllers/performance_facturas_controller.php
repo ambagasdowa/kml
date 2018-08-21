@@ -22,19 +22,19 @@ class PerformanceFacturasController extends AppController {
 
 	var $name = 'PerformanceFacturas';
 
-
-	function index() {
-		$this->PerformanceFactura->recursive = 0;
-		$this->set('performanceFacturas', $this->paginate());
-	}
-
-	function view($id = null) {
-		if (!$id) {
-			$this->Session->setFlash(__('Invalid performance factura', true));
-			$this->redirect(array('action' => 'index'));
-		}
-		$this->set('performanceFactura', $this->PerformanceFactura->read(null, $id));
-	}
+	//
+	// function index() {
+	// 	$this->PerformanceFactura->recursive = 0;
+	// 	$this->set('performanceFacturas', $this->paginate());
+	// }
+	//
+	// function view($id = null) {
+	// 	if (!$id) {
+	// 		$this->Session->setFlash(__('Invalid performance factura', true));
+	// 		$this->redirect(array('action' => 'index'));
+	// 	}
+	// 	$this->set('performanceFactura', $this->PerformanceFactura->read(null, $id));
+	// }
 
 /** NOTE  Add Method which comes from save in performance_customers add post call
 	*
@@ -43,7 +43,7 @@ class PerformanceFacturasController extends AppController {
 
 	function add() {
 
-			// Configure::write('debug', 1);
+			Configure::write('debug', 1);
 			// NOTE check like if $this->data
 
 		if (!empty($this->params['named']['save']) && $this->params['named']['save'] != null) {
@@ -76,13 +76,15 @@ class PerformanceFacturasController extends AppController {
 				}
 			}
 
-// debug($conditions);
+debug($conditions);
+// exit();
 
 $this->LoadModel('PerformanceViewFactura');
 
-
 			if (isset($conditions['performance_date_ini']) && isset($conditions['performance_date_end'])) {
-				/** NOTE we know */
+
+			/** NOTE @param this_only_executes_when_select_group_update */
+
 				//1. Transform request parameters to MySQL datetime format.
 				$date_init = new DateTime($conditions['performance_date_ini']);
 				$mysqlstart =  $date_init->format('Y-m-d');
@@ -169,6 +171,16 @@ $this->LoadModel('PerformanceViewFactura');
 			//NOTE  build conditions for multiple save or update
 // exit();
 // Configure::write('debug', 2);
+debug($conditions);
+exit();
+
+			if (!empty($conditions['multiple'])) {
+				
+
+			} // NOTE conditions when catch multiple // IDEA:
+
+
+	// NOTE Normal behaviour
 
 				// NOTE don't need check any just save this
 				// NOTE parse the ids
@@ -179,6 +191,7 @@ $this->LoadModel('PerformanceViewFactura');
 				} else {
 					$this->PerformanceFactura->create();
 				}
+
 				if ($this->PerformanceFactura->save($saveData)) {
 					if ($conditions['dataUpdate'] != true ) {
 						$lastInsertId = $this->PerformanceFactura->getLastInsertId();
@@ -303,38 +316,38 @@ $this->LoadModel('PerformanceViewFactura');
 
 	} // End ADD
 
-	function edit($id = null) {
-		if (!$id && empty($this->data)) {
-			$this->Session->setFlash(__('Invalid performance factura', true));
-			$this->redirect(array('action' => 'index'));
-		}
-		if (!empty($this->data)) {
-			if ($this->PerformanceFactura->save($this->data)) {
-				$this->Session->setFlash(__('The performance factura has been saved', true));
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The performance factura could not be saved. Please, try again.', true));
-			}
-		}
-		if (empty($this->data)) {
-			$this->data = $this->PerformanceFactura->read(null, $id);
-		}
-		$performanceCustomers = $this->PerformanceFactura->PerformanceCustomer->find('list');
-		$performanceReferences = $this->PerformanceFactura->PerformanceReference->find('list');
-		$users = $this->PerformanceFactura->User->find('list');
-		$this->set(compact('performanceCustomers', 'performanceReferences', 'users'));
-	}
-
-	function delete($id = null) {
-		if (!$id) {
-			$this->Session->setFlash(__('Invalid id for performance factura', true));
-			$this->redirect(array('action'=>'index'));
-		}
-		if ($this->PerformanceFactura->delete($id)) {
-			$this->Session->setFlash(__('Performance factura deleted', true));
-			$this->redirect(array('action'=>'index'));
-		}
-		$this->Session->setFlash(__('Performance factura was not deleted', true));
-		$this->redirect(array('action' => 'index'));
-	}
+	// function edit($id = null) {
+	// 	if (!$id && empty($this->data)) {
+	// 		$this->Session->setFlash(__('Invalid performance factura', true));
+	// 		$this->redirect(array('action' => 'index'));
+	// 	}
+	// 	if (!empty($this->data)) {
+	// 		if ($this->PerformanceFactura->save($this->data)) {
+	// 			$this->Session->setFlash(__('The performance factura has been saved', true));
+	// 			$this->redirect(array('action' => 'index'));
+	// 		} else {
+	// 			$this->Session->setFlash(__('The performance factura could not be saved. Please, try again.', true));
+	// 		}
+	// 	}
+	// 	if (empty($this->data)) {
+	// 		$this->data = $this->PerformanceFactura->read(null, $id);
+	// 	}
+	// 	$performanceCustomers = $this->PerformanceFactura->PerformanceCustomer->find('list');
+	// 	$performanceReferences = $this->PerformanceFactura->PerformanceReference->find('list');
+	// 	$users = $this->PerformanceFactura->User->find('list');
+	// 	$this->set(compact('performanceCustomers', 'performanceReferences', 'users'));
+	// }
+	//
+	// function delete($id = null) {
+	// 	if (!$id) {
+	// 		$this->Session->setFlash(__('Invalid id for performance factura', true));
+	// 		$this->redirect(array('action'=>'index'));
+	// 	}
+	// 	if ($this->PerformanceFactura->delete($id)) {
+	// 		$this->Session->setFlash(__('Performance factura deleted', true));
+	// 		$this->redirect(array('action'=>'index'));
+	// 	}
+	// 	$this->Session->setFlash(__('Performance factura was not deleted', true));
+	// 	$this->redirect(array('action' => 'index'));
+	// }
 }

@@ -21,7 +21,7 @@
 			<?php //echo $this->Html->link(__('List Secure Structures', true), array('controller' => 'secure_structures', 'action' => 'index')); ?>
 		</li>
 		<li class="list-group-item">
-			<?php //echo $this->Html->link(__('New Secure Structures', true), array('controller' => 'secure_structures', 'action' => 'add')); ?> 
+			<?php //echo $this->Html->link(__('New Secure Structures', true), array('controller' => 'secure_structures', 'action' => 'add')); ?>
 		</li>
 		<li class="list-group-item">
 			<?php //echo $this->Html->link(__('List View Get Payrolls', true), array('controller' => 'view_get_payrolls', 'action' => 'index')); ?>
@@ -34,7 +34,7 @@
 <!-- 		</li> -->
 <!--           </ul> -->
 <!--         </div> -->
-        
+
 <!--         <div class="col-sm-9 col-sm-offset-2 col-md-10 col-md-offset-1 main"> -->
 <!--         <div class="col-sm-9 col-sm-offset-2 col-md-10 col-md-offset-1"> -->
 <!--           <h1 class="page-header"><?php //__('Secure Control Users');?></h1> -->
@@ -65,7 +65,7 @@
 <!-- 													<th><?php echo $this->Paginator->sort('modified');?></th> -->
 <!-- 													<th><?php echo $this->Paginator->sort('status');?></th> -->
 													<th class="actions" colspan="3"><?php __('Actions');?></th>
-				
+
 		</tr>
 	</thead>
 	<?php
@@ -92,12 +92,12 @@
 		<td>
 			<?php echo $this->Html->link($secureControlUser['ViewGetPayrolls']['Company'], array('controller' => 'view_get_payrolls', 'action' => 'view', $secureControlUser['ViewGetPayrolls']['Cvetra'])); ?>
 		</td>
-		
-		
+
+
 <!--		<td>
 			<?php echo $this->Html->link($secureCalendars[$secureControlUser['SecureStructures']['secure_calendars_id']], array('controller' => 'secure_topics', 'action' => 'view', $secureControlUser['SecureStructures']['secure_calendars_id'])); ?>
 		</td>-->
-		
+
 <!-- 		<td><?php //echo $secureControlUser['SecureControlUser']['course_is_taken']; ?>&nbsp;</td> -->
 		<td>
 			<div class="checkbox">
@@ -107,44 +107,44 @@
 				</label>
 			</div>
 		</td>
-		
+
 		<td><?php echo $secureControlUser['SecureControlUser']['description']; ?>&nbsp;</td>
 <!-- 		<td><?php echo $secureControlUser['SecureControlUser']['create']; ?>&nbsp;</td> -->
 <!-- 		<td><?php echo $secureControlUser['SecureControlUser']['modified']; ?>&nbsp;</td> -->
 <!-- 		<td><?php echo $secureControlUser['SecureControlUser']['status']; ?>&nbsp;</td> -->
  		<td class="actions">
 			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $secureControlUser['SecureControlUser']['id'])); ?>
-		</td> 
+		</td>
  		<td class="actions">
 			<?php echo $this->Html->link(__('Edit', true), array('controller'=>'SecureControlUsers','action' => 'edit', $secureControlUser['SecureControlUser']['id'])); ?>
-		</td> 
+		</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('Delete', true), array('controller'=>'SecureControlUsers','action' => 'delete', $secureControlUser['SecureControlUser']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $secureControlUser['SecureControlUser']['id'])); ?>
- 		</td> 
+ 		</td>
 	</tr>
 <?php endforeach; ?>
 	</table>
-	
 
-	
+
+
 			<!--</span>--> <!--class="filter-container"-->
 	<p>
 		<?php
 			echo $this->Paginator->counter(array(
 			'format' => __('Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%', true)
 			));
-			?>				
+			?>
 	</p>
 </span> <!--end reload_control_users-->
 
 <span class="updatePagination">
 	<ul class="pagination">
-		<?php 
-			echo $this->Paginator->prev( '«' ,array('tag'=>'li'),null, array('aria-hidden'=>'true','class' => 'disabled','tag'=>'li')); 
+		<?php
+			echo $this->Paginator->prev( '«' ,array('tag'=>'li'),null, array('aria-hidden'=>'true','class' => 'disabled','tag'=>'li'));
 		?>
-		<?php 
+		<?php
 			echo $this->Paginator->numbers(array('separator' => null,'tag'=>'li','class'=>'numbers'));
-		?>				
+		?>
 		<?php
 			echo $this->Paginator->next( '»' , array('tag'=>'li'), null, array('aria-hidden'=>'true','class' => 'disabled','tag'=>'li'));
 		?>
@@ -182,7 +182,7 @@
 // 				success: function (data) {
 // 				// on success, post returned data in fancybox
 // 				console.log(data);
-// 				
+//
 // // 				$.fancybox(data, {
 // // 					// fancybox API options
 // // // 						openEffecct:'none',
@@ -200,7 +200,7 @@
 // // 					openEffect	: 'none',
 // // 					closeEffect	: 'none',
 // // 					enableEscapeButton:true
-// // // 						helpers : { 
+// // // 						helpers : {
 // // // 							overlay : {closeClick: false}
 // // // 						}
 // // 				}); // fancybox
@@ -208,7 +208,7 @@
 // 			}); // ajax
 // 		return false;
 		}); // on reload_control_users
-		
+
 		// NOTE check all mechanism
 		$('#controlUserCheck').on('click',function () {
 			var isChecked = $(".controlUserCheck").prop('checked') ? true : false;
@@ -221,7 +221,7 @@
 			}
 		}); // on controlUserCheck
 
-		// NOTE Update the status of selected users something like on click.post.load 
+		// NOTE Update the status of selected users something like on click.post.load
 		$('#updateControlUser').on('click',function(e) {
 			e.preventDefault(); // avoids calling form from the button
 // 			var isUpdate = $(this).attr('href');
@@ -244,7 +244,7 @@
 					$("#updateMessage").hide().fadeIn(1000);
 					$("#updateMessage").show().fadeIn(1000);
 			});
-// 			
+//
 		});
 	});
 	</script>

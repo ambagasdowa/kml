@@ -178,14 +178,14 @@ class DATABASE_CONFIG {
 	var $mssql_payroll = array( // connect to remote mssql server
 		'driver' => 'mssql',
 		'persistent' => true,
-		'host' => 'IntegraDb',
+		'host' => '192.168.20.235',
 		'login' => 'zam',
 		'password' => 'lis',
 		'database' => 'NOM2001',
 		'prefix' => '',
 //  		'encoding' => 'ISO-8859-1',
 // 		'encoding' => 'Latin 1',
-// 		'encoding' => 'utf8',
+		'encoding' => 'utf8',
 		'port' => '1433'
 	);
 
