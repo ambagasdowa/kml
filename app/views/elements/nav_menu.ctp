@@ -568,7 +568,7 @@
                     <?php }?>
 
 										<?php if (isset($_SESSION['Auth']['User'])) {?>
-										<?php 	if (checkUser($_SESSION['Auth']['User']['group_id'],'Ingresos') OR checkUser($_SESSION['Auth']['User']['group_id'],'CasetasIngresos')) {?>
+										<?php 	if (checkUser($_SESSION['Auth']['User']['group_id'],'Ingresos') OR checkUser($_SESSION['Auth']['User']['group_id'],'CasetasIngresos') OR checkUser($_SESSION['Auth']['User']['group_id'],'PoliciesIngresos')) {?>
 
 										<li class="dropdown-submenu">
 											<a tabindex="-1" href="#"><i class="fa fa-line-chart"></i>&nbsp;<span>Proyecci&oacute;n</span></a>
@@ -623,7 +623,7 @@
 <!-- 										automagic hir -->
 
 										<?php if (isset($_SESSION['Auth']['User'])) {?>
-										<?php 	if (checkUser($_SESSION['Auth']['User']['group_id'],'PoliciesAnexos')) {?>
+										<?php 	if (checkUser($_SESSION['Auth']['User']['group_id'],'PoliciesAnexos') OR checkUser($_SESSION['Auth']['User']['group_id'],'PoliciesIngresos')) {?>
 
 
 										<li class="dropdown-submenu">
