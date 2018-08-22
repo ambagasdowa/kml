@@ -47,15 +47,21 @@ class AppController extends Controller {
 // 			debug($this->Auth->hashPasswords($delta));
 // 			debug($this->Auth->password($data['User']['password']));
 			$this->loadModel($model,'User');
-// 			var_dump($this->Auth->user());
-// 			var_dump($this->Session->read('Auth.User'));
-// 			debug($this->MssqlPayroll->getPayrollByCompany($cvecia=null,$cveare=null,$cvepue=null,$cvetra=$data['User']['username']));
-// 			debug($this->User->find('all',array('conditions'=>array('User.number_id'=>$data['User']['username']))));
+
+      // var_dump($this->Auth->user());
+			// var_dump($this->Session->read('Auth.User'));
+			// debug($this->MssqlPayroll->getPayrollByCompany($cvecia=null,$cveare=null,$cvepue=null,$cvetra=$data['User']['username']));
+			// debug($this->User->find('all',array('conditions'=>array('User.number_id'=>$data['User']['username']))));
+
+
+
 			if(!$this->User->find('all',array('conditions'=>array('User.number_id'=>$data['User']['username'])))){
 				$nominaUser = $this->MssqlPayroll->getPayrollByCompany($cvecia=null,$cveare=null,$cvepue=null,$cvetra=$data['User']['username']);
+
 				if (empty($nominaUser) or !isset($nominaUser)) {
 					$this->Auth->loginError = "Su numero de empleado no se encuentra en nuestra base de datos si usted es un empleado <strong>activo</strong>,por favor comuniquelo con el departamento de Recursos Humanos";
 				} else {
+
 					if(count($nominaUser) === 1){ // just a precaution over a not know inconsistence in the system NOM
 
 						foreach ($nominaUser as $idNominaUser => $valueNominaUser) {
@@ -69,6 +75,7 @@ class AppController extends Controller {
 								$user['User']['group_id'] = '3'; //this must be the default as user then you can chane this in the panel app
 								$user['User']['created'] = date('Y-m-d H:m:s');
 								$user['User']['modified'] = date('Y-m-d H:m:s');
+								$user['User']['last_access'] = date('Y-m-d H:m:s');
 								$user['User']['status'] = 'Active'; //because it found in nom
 								$user['User']['current_date_time'] = date('Y-m-d H:m:s');
 								$user['User']['languaje'] = 'es'; // we are in gst
@@ -78,6 +85,7 @@ class AppController extends Controller {
 								$user['User']['last_user_agent'] = $_SERVER['HTTP_USER_AGENT']; // user agent from ??
 							}
 						}
+
 						if(!$this->User->save($user['User'])){
 							$this->Auth->loginError = "Ha ocurrido un error al generar su usuario , por favor comuniquelo con el departamento de Sistemas o intentelo de nuevo mas tarde";
 						} else {
@@ -125,6 +133,8 @@ class AppController extends Controller {
 								$this->Session->setFlash(__('The field name could not be saved. Please, try again.', true));
 							}
 						}
+
+            // exit();
 						/* mkdir for this user */
 					} else if (count($nominaUser) > 1) {
 						$this->Auth->loginError = "No se ha podido generar su usuario favor de comunicarlo a recursos humanos  o enviar un correo a soporte@gsttransportes.com con el codigo de error:0x0000001 y su informaci&oacute;n";
