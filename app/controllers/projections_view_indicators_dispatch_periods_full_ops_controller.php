@@ -25,8 +25,9 @@ class ProjectionsViewIndicatorsDispatchPeriodsFullOpsController extends AppContr
 	var $helpers = array('Html','Form','Ajax','Javascript','Js');
 
 	function index() {
-
-        $this->ProjectionsViewIndicatorsDispatchPeriodsFullOp->query('SET	ANSI_NULLS	ON;SET	ANSI_WARNINGS	ON;');
+// Configure::write('debug', 2);
+			// debug($this->params);
+        // $this->ProjectionsViewIndicatorsDispatchPeriodsFullSrcOp->query('SET	ANSI_NULLS	ON;SET	ANSI_WARNINGS	ON;');
 
 // 		$this->ProjectionsViewIndicatorsDispatchPeriodsFullOp->recursive = 0;
 // 		$this->set('projectionsViewIndicatorsDispatchPeriodsFullOps', $this->paginate());
@@ -36,13 +37,15 @@ class ProjectionsViewIndicatorsDispatchPeriodsFullOpsController extends AppContr
         $this->LoadModel('ProjectionsViewBussinessUnit');   // Add units
         $this->LoadModel('ProjectionsViewFraction');        // Add fractions
         $this->LoadModel('ProjectionsConfig');             // module Configs
-        $this->LoadModel('ProjectionsViewIndicatorsDispatchPeriodsFullOp');  // module Full
+        // $this->LoadModel('ProjectionsViewIndicatorsDispatchPeriodsFullOp');  // module Full
+        $this->LoadModel('ProjectionsViewIndicatorsDispatchPeriodsFullSrcOp');  // module Full
+				$this->ProjectionsViewIndicatorsDispatchPeriodsFullSrcOp->query('SET	ANSI_NULLS	ON;SET	ANSI_WARNINGS	ON;');
 
         $bsu_conditions = null;
         $bsu_label_conditions = null;
         $fraction_conditions = null;
         // MORE conditions ??
-        $conditions_chart_index['ProjectionsViewIndicatorsDispatchPeriodsFullOp.cyear'] = $cyear;
+        $conditions_chart_index['ProjectionsViewIndicatorsDispatchPeriodsFullSrcOp.cyear'] = $cyear;
 
         // NOTE begin the patches -- remove this when done
 				$this->LoadModel('ModuleUserCredentialsControl');
@@ -51,14 +54,14 @@ class ProjectionsViewIndicatorsDispatchPeriodsFullOpsController extends AppContr
       if ($auth_user) {
         if (array_key_exists('bsu',$auth_user['ModuleUserCredentialsControl'])) { // set logical areas filter
             $bsu_conditions = $auth_user['ModuleUserCredentialsControl']['bsu'];
-            $conditions_chart_index['ProjectionsViewIndicatorsDispatchPeriodsFullOp.area'] = $bsu_conditions['ProjectionsViewBussinessUnit.name'];
+            $conditions_chart_index['ProjectionsViewIndicatorsDispatchPeriodsFullSrcOp.area'] = $bsu_conditions['ProjectionsViewBussinessUnit.name'];
         }
         if (array_key_exists('bsu_label',$auth_user['ModuleUserCredentialsControl'])) { // set logical areas filter
             $bsu_label_conditions = $auth_user['ModuleUserCredentialsControl']['bsu_label'];
         }
         if (array_key_exists('fraction',$auth_user['ModuleUserCredentialsControl'])) { // set logical areas filter
             $fraction_conditions = $auth_user['ModuleUserCredentialsControl']['fraction'];
-            $conditions_chart_index['ProjectionsViewIndicatorsDispatchPeriodsFullOp.fraccion'] = $fraction_conditions['ProjectionsViewFraction.desc_producto'];
+            $conditions_chart_index['ProjectionsViewIndicatorsDispatchPeriodsFullSrcOp.fraccion'] = $fraction_conditions['ProjectionsViewFraction.desc_producto'];
         }
         if (array_key_exists('areas',$auth_user['ModuleUserCredentialsControl'])) { // set logical areas filter
             $conditions_chart_index = $auth_user['ModuleUserCredentialsControl']['areas'];
@@ -76,7 +79,9 @@ class ProjectionsViewIndicatorsDispatchPeriodsFullOpsController extends AppContr
 
 // 		debug($fraction);
 
-        $chart_index = $this->ProjectionsViewIndicatorsDispatchPeriodsFullOp->find('all', array('conditions'=>$conditions_chart_index) );
+        $chart_index = $this->ProjectionsViewIndicatorsDispatchPeriodsFullSrcOp->find('all', array('conditions'=>$conditions_chart_index) );
+
+				// debug($chart_index);
 
         $conditions_mod_index['ProjectionsConfig.projections_type_configs_id'] = 7 ;
         $mod_index = $this->ProjectionsConfig->find('list',array('fields'=>array('module_field_translation','module_data_definition'),'conditions'=>$conditions_mod_index));
@@ -92,14 +97,15 @@ class ProjectionsViewIndicatorsDispatchPeriodsFullOpsController extends AppContr
 
             foreach ($mod_index as $module_table => $module_type) {
 //                 debug($module_table);
-                $chart[$findForChart['ProjectionsViewIndicatorsDispatchPeriodsFullOp']['cyear']][$findForChart['ProjectionsViewIndicatorsDispatchPeriodsFullOp']['area']][$module_type][$findForChart['ProjectionsViewIndicatorsDispatchPeriodsFullOp']['fraccion']][$findForChart['ProjectionsViewIndicatorsDispatchPeriodsFullOp']['mes']] = $findForChart['ProjectionsViewIndicatorsDispatchPeriodsFullOp'][$module_table];
+                $chart[$findForChart['ProjectionsViewIndicatorsDispatchPeriodsFullSrcOp']['cyear']][$findForChart['ProjectionsViewIndicatorsDispatchPeriodsFullSrcOp']['area']][$module_type][$findForChart['ProjectionsViewIndicatorsDispatchPeriodsFullSrcOp']['fraccion']][$findForChart['ProjectionsViewIndicatorsDispatchPeriodsFullSrcOp']['mes']] = $findForChart['ProjectionsViewIndicatorsDispatchPeriodsFullSrcOp'][$module_table];
             }
 
         }
-
+				// debug($chart);
         $rest_chart_index = json_encode($chart);
 
         $json_months = json_encode($months,JSON_PRETTY_PRINT);
+				// debug($rest_chart_index);
 
 // 		if ($json === true) {
 //
@@ -123,7 +129,7 @@ class ProjectionsViewIndicatorsDispatchPeriodsFullOpsController extends AppContr
 			$this->Session->setFlash(__('Invalid projections view indicators dispatch periods full op', true));
 			$this->redirect(array('action' => 'index'));
 		}
-		$this->set('projectionsViewIndicatorsDispatchPeriodsFullOp', $this->ProjectionsViewIndicatorsDispatchPeriodsFullOp->read(null, $id));
+		// $this->set('projectionsViewIndicatorsDispatchPeriodsFullOp', $this->ProjectionsViewIndicatorsDispatchPeriodsFullOp->read(null, $id));
 	}
 
 	function add() {

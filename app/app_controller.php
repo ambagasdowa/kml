@@ -111,27 +111,27 @@ class AppController extends Controller {
 							/** NOTE <set the proper permissions and smb account >*/
 
 							/** NOTE <add FieldNames to Fieldatas for this user>*/
-							$this->LoadModel('FieldName');
-							$this->LoadModel('FieldData');
-							$FieldName = $this->FieldName->find('list');
-							$user_id = $this->User->getLastInsertID();
-							$user_group = $user['User']['group_id'];
-
-							foreach ($FieldName as  $id_field_name => $field_name) {
-								$data_user['user_id'] = $user_id;
-								$data_user['group_id'] = $user_group;
-								$data_user['field_names_id'] = $id_field_name;
-								$data_user['create'] = date('Y-m-d H:m:s');
-// 								$data_user['last_ip'] = $_SERVER['REMOTE_ADDR'];
-								$dataSet[] = $data_user;
-							}
-
-							$this->FieldData->create();
-							if ($this->FieldData->saveAll($dataSet)) {
-								$this->Session->setFlash(__('The field name has been saved', true));
-							} else {
-								$this->Session->setFlash(__('The field name could not be saved. Please, try again.', true));
-							}
+// 							$this->LoadModel('FieldName');
+// 							$this->LoadModel('FieldData');
+// 							$FieldName = $this->FieldName->find('list');
+// 							$user_id = $this->User->getLastInsertID();
+// 							$user_group = $user['User']['group_id'];
+//
+// 							foreach ($FieldName as  $id_field_name => $field_name) {
+// 								$data_user['user_id'] = $user_id;
+// 								$data_user['group_id'] = $user_group;
+// 								$data_user['field_names_id'] = $id_field_name;
+// 								$data_user['create'] = date('Y-m-d H:m:s');
+// // 								$data_user['last_ip'] = $_SERVER['REMOTE_ADDR'];
+// 								$dataSet[] = $data_user;
+// 							}
+//
+// 							$this->FieldData->create();
+// 							if ($this->FieldData->saveAll($dataSet)) {
+// 								$this->Session->setFlash(__('The field name has been saved', true));
+// 							} else {
+// 								$this->Session->setFlash(__('The field name could not be saved. Please, try again.', true));
+// 							}
 						}
 
             // exit();
