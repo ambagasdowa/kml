@@ -193,13 +193,15 @@ class DATABASE_CONFIG {
 	// concilation => concilation fo iave
 /** WARNING starting mssql connections **/
 /** NOTE get the database and write to it */
+// change in /etc/hosts and freetds.conf
+
 	var $mssql_sistemas = array( // connect to remote mssql server
 		'driver' => 'mssql',
 		'persistent' => true,
-		'host' => 'IntegraDb',
-		'login' => 'zam',
-		'password' => 'lis',
-		'database' => 'sistemas',
+		'host' => 'IntegraDb', /*current in local kvm change in freetds.conf*/
+		'login' => 'sa',
+		'password' => 'effeta', /*zam*/
+		'database' => 'sistemas', /*lis*/
 		'prefix' => '',
 // 		'encoding' => 'ISO-8859-1',
 // 		'encoding' => 'Latin1',

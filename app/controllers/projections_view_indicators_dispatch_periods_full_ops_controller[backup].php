@@ -71,8 +71,8 @@ class ProjectionsViewIndicatorsDispatchPeriodsFullOpsController extends AppContr
         }
       }
 
-    $bsu = $this->ProjectionsViewBussinessUnit->find('list',array('conditions'=>$bsu_conditions,'order'=>array('id_area')));
-		$bsu_label = $this->ProjectionsViewBussinessUnit->find('list',array('fields'=>array('id','label'),'conditions'=>$bsu_label_conditions,'order'=>array('id_area')));
+    $bsu = $this->ProjectionsViewBussinessUnit->find('list',array('conditions'=>$bsu_conditions));
+		$bsu_label = $this->ProjectionsViewBussinessUnit->find('list',array('fields'=>array('id','label'),'conditions'=>$bsu_label_conditions));
 		$fraction = $this->ProjectionsViewFraction->find('list',array('fields'=>array('projections_corporations_id','id_fraccion','desc_producto'),'conditions'=>$fraction_conditions));
 
 		$fraction['VACIO'] = array(); // NOTE add the ghost fraction Empty's
