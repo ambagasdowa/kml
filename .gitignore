@@ -7,5 +7,6 @@
 # cakephp 1.x
 app/tmp/*
 app/webroot/files/*
-/app/Config/core.php
-/app/Config/database.php
+app/config/core.php
+app/config/database.php
+
