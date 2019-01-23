@@ -199,9 +199,9 @@ class DATABASE_CONFIG {
 		'driver' => 'mssql',
 		'persistent' => true,
 		'host' => 'IntegraDb', /*current in local kvm change in freetds.conf*/
-		'login' => 'sa',
-		'password' => 'zam',
-		'database' => 'lis',
+		'login' => 'zam',
+		'password' => 'lis',
+		'database' => '',
 		'prefix' => '',
 // 		'encoding' => 'ISO-8859-1',
 // 		'encoding' => 'Latin1',
