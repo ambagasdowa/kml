@@ -71,13 +71,15 @@ class ProjectionsViewIndicatorsDispatchPeriodsFullOpsController extends AppContr
         }
       }
 
-    $bsu = $this->ProjectionsViewBussinessUnit->find('list',array('conditions'=>$bsu_conditions,'order'=>array('id_area')));
-		$bsu_label = $this->ProjectionsViewBussinessUnit->find('list',array('fields'=>array('id','label'),'conditions'=>$bsu_label_conditions,'order'=>array('id_area')));
+    $bsu = $this->ProjectionsViewBussinessUnit->find('list',array('conditions'=>$bsu_conditions));
+		$bsu_label = $this->ProjectionsViewBussinessUnit->find('list',array('fields'=>array('id','label'),'conditions'=>$bsu_label_conditions));
 		$fraction = $this->ProjectionsViewFraction->find('list',array('fields'=>array('projections_corporations_id','id_fraccion','desc_producto'),'conditions'=>$fraction_conditions));
 
 		$fraction['VACIO'] = array(); // NOTE add the ghost fraction Empty's
 
-// 		debug($fraction);
+		// debug($bsu);
+		// debug($bsu_label);
+		// debug($fraction);
 
         $chart_index = $this->ProjectionsViewIndicatorsDispatchPeriodsFullSrcOp->find('all', array('conditions'=>$conditions_chart_index) );
 
@@ -85,7 +87,7 @@ class ProjectionsViewIndicatorsDispatchPeriodsFullOpsController extends AppContr
 
         $conditions_mod_index['ProjectionsConfig.projections_type_configs_id'] = 7 ;
         $mod_index = $this->ProjectionsConfig->find('list',array('fields'=>array('module_field_translation','module_data_definition'),'conditions'=>$conditions_mod_index));
-//         debug($mod_index);
+        // debug($mod_index);
 
         $months = months_es();
 
@@ -102,6 +104,7 @@ class ProjectionsViewIndicatorsDispatchPeriodsFullOpsController extends AppContr
 
         }
 				// debug($chart);
+
         $rest_chart_index = json_encode($chart);
 
         $json_months = json_encode($months,JSON_PRETTY_PRINT);
@@ -110,7 +113,7 @@ class ProjectionsViewIndicatorsDispatchPeriodsFullOpsController extends AppContr
 // 		if ($json === true) {
 //
 //             //4. Return as a json array
-//             Configure::write('debug', 0);
+            Configure::write('debug', 0);
 //             $this->autoRender = false;
 //             $this->autoLayout = false;
 //     // 		$this->layout='empty';
@@ -118,7 +121,7 @@ class ProjectionsViewIndicatorsDispatchPeriodsFullOpsController extends AppContr
 //             echo json_encode($calendar);
 //
 // 		} else {
-            Configure::write('debug', 0);
+            // Configure::write('debug', 0);
             $this->set(compact('bsu','bsu_label','fraction','chart_index','mod_index','cyear','months','rest_chart_index','chart','json_months','ui_bsu_index','ui_mod_index'));
 // 		}
 

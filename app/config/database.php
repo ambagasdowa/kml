@@ -200,8 +200,8 @@ class DATABASE_CONFIG {
 		'persistent' => true,
 		'host' => 'IntegraDb', /*current in local kvm change in freetds.conf*/
 		'login' => 'sa',
-		'password' => 'zam', 
-		'database' => 'lis', 
+		'password' => 'effeta',
+		'database' => 'sistemas',
 		'prefix' => '',
 // 		'encoding' => 'ISO-8859-1',
 // 		'encoding' => 'Latin1',
