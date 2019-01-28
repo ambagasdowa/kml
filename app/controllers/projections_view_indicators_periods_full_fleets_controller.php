@@ -25,14 +25,17 @@ class ProjectionsViewIndicatorsPeriodsFullFleetsController extends AppController
 
 	function index() {
 
-			Configure::write('debug',0);
-
-        $this->ProjectionsViewIndicatorsPeriodsFullFleet->query('SET	ANSI_NULLS	ON;SET	ANSI_WARNINGS	ON;');
+			Configure::write('debug',2);
 
         $debug = false ;
 
-        $this->LoadModel('ProjectionsViewBussinessUnit');   // Add units
+				$this->LoadModel('ProjectionsViewBussinessUnit');   // Add units
+				$this->LoadModel('ProjectionsViewFraction');        // Add fractions
+				$this->LoadModel('ProjectionsConfig');             // module Configs
 
+				$this->LoadModel('ProjectionsViewIndicatorsPeriodsGstFleet');
+
+        $this->ProjectionsViewIndicatorsPeriodsGstFleet->query('SET	ANSI_NULLS	ON;SET	ANSI_WARNINGS	ON;');
         //NOTE Call the presupuesto
 
         // $this->LoadModel('ProjectionsBsuPresupuesto'); // Add presupuesto
@@ -47,13 +50,14 @@ class ProjectionsViewIndicatorsPeriodsFullFleetsController extends AppController
                 $fraction = 'GRANEL';
             }
 		} else {
-		    $cyear    = date('Y');
+		    		$cyear    = date('Y');
             $cmonth   = date('m');
             $fraction = 'GRANEL';
 		}
 
+// debug($fraction);
 		// ALERT get avaliable working days over the years
-		$work = GetWorkingDays($MexicanoHolidays=GetNationalMexicanHolidays(array('2017','2018')),$debug=false,$return_compact=true,$saturday_is_weekend=false);
+		$work = GetWorkingDays($MexicanoHolidays=GetNationalMexicanHolidays(array('2018','2019')),$debug=false,$return_compact=true,$saturday_is_weekend=false);
 
 		$newFetchDate = new DateTime($cyear.'-'.$cmonth.'-01');
 		$newDate = $newFetchDate->format('Y-m-d');
@@ -69,6 +73,8 @@ class ProjectionsViewIndicatorsPeriodsFullFleetsController extends AppController
 		$totalLabDaysInMonth = array_sum($fullDetailsLabDays); // get the working in current month
 		$totalFullDaysInMonth = count($fullDetailsLabDays); // counting that
 
+		// debug($totalLabDaysInMonth);
+		// debug($totalFullDaysInMonth);
 
 		$newFetchDate->sub(new DateInterval('P1M'));
 		$newDateSub = $newFetchDate->format('Y-m-d');
@@ -80,10 +86,12 @@ class ProjectionsViewIndicatorsPeriodsFullFleetsController extends AppController
 		$totalLabBackwardsMonthDays = array_sum($backwardsMonthDays);
 		$totalFullBackwardsMonthDays = count($backwardsMonthDays);
 
-// 		debug('$newDateSub');
-// 		debug($newDateSub);
+		// debug('$newDateSub');
+		// debug($newDateSub);
 // NOTE @build a today-1 because trafic dont have any
 
+		// debug($totalLabBackwardsMonthDays);
+	  // debug($totalFullBackwardsMonthDays);
         $newDayDate = new DateTime(date('Y-m-d'));
         $newDayDate->sub(new DateInterval('P1D'));
         $newDay = $newDayDate->format('Y-m-d');
@@ -128,24 +136,35 @@ class ProjectionsViewIndicatorsPeriodsFullFleetsController extends AppController
 
 		// debug('offset_days => ' . $offset_days);
 
-    $conditionsProjectionsViewIndicatorsPeriodsFullFleet['ProjectionsViewIndicatorsPeriodsFullFleet.cyear'] = $cyear;
-		$conditionsProjectionsViewIndicatorsPeriodsFullFleet['ProjectionsViewIndicatorsPeriodsFullFleet.mes'] = ucwords(months_es()[(int)$cmonth]);
 
-		$conditionsProjectionsViewIndicatorsPeriodsFullFleet['ProjectionsViewIndicatorsPeriodsFullFleet.fraccion'] = $fraction; // this can be dinamic
+    $conditionsProjectionsViewIndicatorsPeriodsFullFleet['ProjectionsViewIndicatorsPeriodsGstFleet.cyear'] = $cyear;
+		$conditionsProjectionsViewIndicatorsPeriodsFullFleet['ProjectionsViewIndicatorsPeriodsGstFleet.mes'] = ucwords(months_es()[(int)$cmonth]);
+
+		$conditionsProjectionsViewIndicatorsPeriodsFullFleet['ProjectionsViewIndicatorsPeriodsGstFleet.fraccion'] = $fraction; // this can be dinamic
 // 		$conditionsProjectionsViewIndicatorsPeriodsFleet['ProjectionsViewIndicatorsPeriodsFleet.fraccion'] = 'CAJA SECA'; // this can be dinamic
 
-		$projectionsViewIndicatorsPeriodsFullFleets = $this->ProjectionsViewIndicatorsPeriodsFullFleet->find('all',array('conditions'=>$conditionsProjectionsViewIndicatorsPeriodsFullFleet));
+		$projectionsViewIndicatorsPeriodsFullFleets = $this->ProjectionsViewIndicatorsPeriodsGstFleet->find('all',array('conditions'=>$conditionsProjectionsViewIndicatorsPeriodsFullFleet));
 
 		// DEBUG bugging
 		// debug($projectionsViewIndicatorsPeriodsFullFleets);
+		if (!isset($bsu_conditions)){
+			$bsu_conditions = null;
+		}
 
 		$bssus = array_values($this->ProjectionsViewBussinessUnit->find('list',array('conditions'=>$bsu_conditions)));
 // debug($bssus);
 		$new_projections_back = $projectionsViewIndicatorsPeriodsFullFleets;
 // debug($new_projections_back);
-
+// exit();
 		foreach ($new_projections_back  as $indx_now => $jarray_now) {
-			$array_now[$jarray_now['ProjectionsViewIndicatorsPeriodsFullFleet']['area']] = $jarray_now;
+
+			// if ($jarray_now['ProjectionsViewIndicatorsPeriodsGstFleet']['presupuesto'] == null) {
+			// 	// debug($jarray_now['ProjectionsViewIndicatorsPeriodsGstFleet']['area']);
+			// 	// debug('isnull');
+			// 	$jarray_now['ProjectionsViewIndicatorsPeriodsGstFleet']['presupuesto'] = 0;
+			// }
+			$array_now[$jarray_now['ProjectionsViewIndicatorsPeriodsGstFleet']['area']] = $jarray_now;
+			// debug($jarray_now['ProjectionsViewIndicatorsPeriodsGstFleet']['area']);
 		}
 
 		// debug($array_now);
@@ -155,7 +174,7 @@ class ProjectionsViewIndicatorsPeriodsFullFleetsController extends AppController
 			if ( isset ($array_now[$area_name])) {
 				$change_proj_inx[] = $array_now[$area_name];
 			} else {
-				$change_proj_inx[] = array('ProjectionsViewIndicatorsPeriodsFullFleet'=>array('area'=>$area_name));
+				$change_proj_inx[] = array('ProjectionsViewIndicatorsPeriodsGstFleet'=>array('area'=>$area_name));
 			}
               // $bsus_key = array_search($array_now['ProjectionsViewIndicatorsPeriodsFullFleet']['area'],$bssus);
 							// debug($bsus_key);
@@ -169,7 +188,8 @@ class ProjectionsViewIndicatorsPeriodsFullFleetsController extends AppController
 		$projectionsViewIndicatorsPeriodsFullFleets = null; //reset
 		$projectionsViewIndicatorsPeriodsFullFleets = $change_proj_inx; //load with the new arragement
 
-// 		debug($projectionsViewIndicatorsPeriodsFullFleets);
+		// debug($projectionsViewIndicatorsPeriodsFullFleets);
+		// exit();
 // calculate from hir
         //hacking
 //           $offset_days = 27;
@@ -191,38 +211,49 @@ class ProjectionsViewIndicatorsPeriodsFullFleetsController extends AppController
 //         }
 
         // debug($presupuesto_nt);
+				// debug($offset_days);
+				// debug($totalLabBackwardsMonthDays);
+
+		// BUG: Work From Hir
+			debug($offset_days);
+			debug($totalLabBackwardsMonthDays);
 
         if ($offset_days > $totalLabBackwardsMonthDays) {
             //making double calculation
 
 						if ($an_off_month['0'] < $off_month['0'] ) { //NOTE check what happen when we are in DECEMBER
-							$conditionsFullFleet['ProjectionsViewIndicatorsPeriodsFullFleet.cyear'] = array($an_off_month['0'],$off_month['0']);
+							$conditionsFullFleet['ProjectionsViewIndicatorsPeriodsGstFleet.cyear'] = array($an_off_month['0'],$off_month['0']);
 						} else {
-							$conditionsFullFleet['ProjectionsViewIndicatorsPeriodsFullFleet.cyear'] = array($off_month['0']);
+							$conditionsFullFleet['ProjectionsViewIndicatorsPeriodsGstFleet.cyear'] = array($off_month['0']);
 						}
-            $conditionsFullFleet['ProjectionsViewIndicatorsPeriodsFullFleet.mes'] = array(ucwords(months_es()[(int)$an_off_month['1']]),ucwords(months_es()[(int)$off_month['1']]));
-            $conditionsFullFleet['ProjectionsViewIndicatorsPeriodsFullFleet.fraccion'] = $fraction; // this can be dinamic
+            $conditionsFullFleet['ProjectionsViewIndicatorsPeriodsGstFleet.mes'] = array(ucwords(months_es()[(int)$an_off_month['1']]),ucwords(months_es()[(int)$off_month['1']]));
+            $conditionsFullFleet['ProjectionsViewIndicatorsPeriodsGstFleet.fraccion'] = $fraction; // this can be dinamic
             // debug($conditionsFullFleet);
-            $rsl_past_month = $this->ProjectionsViewIndicatorsPeriodsFullFleet->find('all',array('conditions'=>$conditionsFullFleet/*,'fields'=>array('area','subpeso')*/));
+            $rsl_past_month = $this->ProjectionsViewIndicatorsPeriodsGstFleet->find('all',array('conditions'=>$conditionsFullFleet/*,'fields'=>array('area','subpeso')*/));
 						// debug($rsl_past_month);
 
         } else {
 
 //            e('<kbd>do the stuff</kbd><br />');
-//             $totalLabBackwardsMonthDays;
+						$this->LoadModel('ProjectionsViewIndicatorsPeriodsFullFleet');
+            $totalLabBackwardsMonthDays;
             $conditionsFullFleet['ProjectionsViewIndicatorsPeriodsFullFleet.cyear'] = $off_month['0'];
             $conditionsFullFleet['ProjectionsViewIndicatorsPeriodsFullFleet.mes'] = ucwords(months_es()[(int)$off_month['1']]);
             $conditionsFullFleet['ProjectionsViewIndicatorsPeriodsFullFleet.fraccion'] = $fraction; // this can be dinamic
-//             debug($conditionsFullFleet);
-            $rsl_past_month = $this->ProjectionsViewIndicatorsPeriodsFullFleet->find('all',array('conditions'=>$conditionsFullFleet/*,'fields'=>array('area','subpeso')*/));
+            debug($conditionsFullFleet);
+					$rsl_past_month = $this->ProjectionsViewIndicatorsPeriodsFullFleet->find('all',array('conditions'=>$conditionsFullFleet/*,'fields'=>array('area','subpeso')*/));
 
-            // debug($rsl_past_month);
         }
 
+				debug($rsl_past_month);
+				exit();
+// debug($current_lab_days);
+// debug($rsl_past_month);
         if (isset($rsl_past_month)) {
             foreach ($rsl_past_month as $index_rsl_past_month => $ind_rsl_past_month ) {
 
-                foreach ($ind_rsl_past_month['ProjectionsViewIndicatorsPeriodsFullFleet'] as $name_past_index => $data_idc_past_month) {
+                foreach ($ind_rsl_past_month['ProjectionsViewIndicatorsPeriodsGstFleet'] as $name_past_index => $data_idc_past_month) {
+
                     // debug($index_rsl_past_month['ProjectionsViewIndicatorsPeriodsFullFleet']);
                     // debug($projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]);
 
@@ -230,16 +261,16 @@ class ProjectionsViewIndicatorsPeriodsFullFleetsController extends AppController
 
 //                         e('<kbd>prom tons vs days</kbd><br />');
 
-                        if ( !isset($projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['subpeso']) ) {
+                        if ( !isset($projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsGstFleet']['subpeso']) ) {
                             $current_tons = 0;
                         } else {
-                            $current_tons = $projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['subpeso'];
+                            $current_tons = $projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsGstFleet']['subpeso'];
                         }
                         // sum_tons = current_tons + offset_tons;
                         $sum_tons = ( ($current_tons) + ( ($data_idc_past_month/$totalLabBackwardsMonthDays)*$offset_days) );
 
-												if (isset($projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['presupuesto'])) {
-													$prep = $projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['presupuesto'];
+												if (isset($projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsGstFleet']['presupuesto'])) {
+													$prep = $projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsGstFleet']['presupuesto'];
 												} else {
 													$prep = 0;
 												}
@@ -248,48 +279,48 @@ class ProjectionsViewIndicatorsPeriodsFullFleetsController extends AppController
 												// debug($rsl_past_month[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['area']);
 												// debug($index_rsl_past_month);
                         // build the array
-                        $rsl_past_month[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['sum_tons'] = ($data_idc_past_month + ( $data_idc_past_month/$totalLabBackwardsMonthDays)*$offset_days);
+                        $rsl_past_month[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsGstFleet']['sum_tons'] = ($data_idc_past_month + ( $data_idc_past_month/$totalLabBackwardsMonthDays)*$offset_days);
 
-                        $projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['offset_tons'] = ( (( $data_idc_past_month/$totalLabBackwardsMonthDays))*$offset_days);
+                        $projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsGstFleet']['offset_tons'] = ( (( $data_idc_past_month/$totalLabBackwardsMonthDays))*$offset_days);
 
 
                         // NOTE add this to the
 
-                        if ( !isset($projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['area']) ) {
-                            $projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['area'] = $ind_rsl_past_month['ProjectionsViewIndicatorsPeriodsFullFleet']['area'];
+                        if ( !isset($projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsGstFleet']['area']) ) {
+                            $projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsGstFleet']['area'] = $ind_rsl_past_month['ProjectionsViewIndicatorsPeriodsFullFleet']['area'];
                         }
 
-                        if ( !isset($projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['cyear']) ) {
-                            $projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['cyear'] = $ind_rsl_past_month['ProjectionsViewIndicatorsPeriodsFullFleet']['cyear'];
+                        if ( !isset($projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsGstFleet']['cyear']) ) {
+                            $projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsGstFleet']['cyear'] = $ind_rsl_past_month['ProjectionsViewIndicatorsPeriodsFullFleet']['cyear'];
                         }
-                        if ( !isset($projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['fraccion']) ) {
-                            $projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['fraccion'] = $ind_rsl_past_month['ProjectionsViewIndicatorsPeriodsFullFleet']['fraccion'];
+                        if ( !isset($projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsGstFleet']['fraccion']) ) {
+                            $projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsGstFleet']['fraccion'] = $ind_rsl_past_month['ProjectionsViewIndicatorsPeriodsFullFleet']['fraccion'];
                         }
-                        if ( !isset($projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['mes']) ) {
-                            $projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['mes'] = ucwords(months_es()[(int)$cmonth]);
+                        if ( !isset($projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsGstFleet']['mes']) ) {
+                            $projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsGstFleet']['mes'] = ucwords(months_es()[(int)$cmonth]);
                         }
-                        if ( !isset($projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['subpeso']) ) {
-                            $projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['subpeso'] = 0;
+                        if ( !isset($projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsGstFleet']['subpeso']) ) {
+                            $projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsGstFleet']['subpeso'] = 0;
                         }
                         // NOTE add this
 
-                        $projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['sum_tons'] = $sum_tons;
+                        $projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsGstFleet']['sum_tons'] = $sum_tons;
 
                         // $projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['presupuesto'] = $prep;
 
-                        $projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['current_tons'] = $current_tons;
+                        $projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsGstFleet']['current_tons'] = $current_tons;
 
-                        $projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['variacion_vs_presupuesto_diario'] = $sum_tons-$prep;
+                        $projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsGstFleet']['variacion_vs_presupuesto_diario'] = $sum_tons-$prep;
 
 
                         if($prep == 0) {
-                          $projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['variacion_promedio_diario'] = 0;
+                          $projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsGstFleet']['variacion_promedio_diario'] = 0;
                         } else {
-                            $projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['variacion_promedio_diario'] = (($sum_tons/$prep) -1)*100;
+                            $projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsGstFleet']['variacion_promedio_diario'] = (($sum_tons/$prep) -1)*100;
                         }
-                        $projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['current_lab_days'] = $current_lab_days;
+                        $projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsGstFleet']['current_lab_days'] = $current_lab_days;
 
-                        $projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsFullFleet']['totalLabDaysInMonth'] = $totalLabDaysInMonth;
+                        $projectionsViewIndicatorsPeriodsFullFleets[$index_rsl_past_month]['ProjectionsViewIndicatorsPeriodsGstFleet']['totalLabDaysInMonth'] = $totalLabDaysInMonth;
                     }
 
                 }
@@ -377,20 +408,20 @@ class ProjectionsViewIndicatorsPeriodsFullFleetsController extends AppController
 
 		$chart_index = $projectionsViewIndicatorsPeriodsFullFleets;
 
-// 		debug($chart_index);
+		// debug($chart_index);
 
         foreach ($chart_index as $name_idx => $findForChart) {
 
             foreach ($mod_index as $module_table => $module_type) {
-                if (isset($findForChart['ProjectionsViewIndicatorsPeriodsFullFleet']['cyear'])){
-                    $chart[$findForChart['ProjectionsViewIndicatorsPeriodsFullFleet']['cyear']][$findForChart['ProjectionsViewIndicatorsPeriodsFullFleet']['area']][$module_type][$findForChart['ProjectionsViewIndicatorsPeriodsFullFleet']['fraccion']][$findForChart['ProjectionsViewIndicatorsPeriodsFullFleet']['mes']] = $findForChart['ProjectionsViewIndicatorsPeriodsFullFleet'][$module_table];
+                if (isset($findForChart['ProjectionsViewIndicatorsPeriodsGstFleet']['cyear'])){
+                    $chart[$findForChart['ProjectionsViewIndicatorsPeriodsGstFleet']['cyear']][$findForChart['ProjectionsViewIndicatorsPeriodsGstFleet']['area']][$module_type][$findForChart['ProjectionsViewIndicatorsPeriodsGstFleet']['fraccion']][$findForChart['ProjectionsViewIndicatorsPeriodsGstFleet']['mes']] = $findForChart['ProjectionsViewIndicatorsPeriodsGstFleet'][$module_table];
                 }
             }
 
         }
 				// debug($projectionsViewIndicatorsPeriodsFullFleets);
 		$this->set(compact('projectionsViewIndicatorsPeriodsFullFleets','bsu','bsu_label','fraction','ui_bsu_index','months','mod_index','chart_index','chart','cyear','cmonth','ui_mod_index'));
-// 		Configure::write('debug', 0);
+		// Configure::write('debug', 0);
 	} // end index
 
 

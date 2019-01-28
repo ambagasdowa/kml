@@ -587,9 +587,9 @@
 													<li>
                             <a tabindex="-1" href="<?php e($this->webroot.'ProjectionsViewIndicatorsDispatchPeriodsFullOps/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-exchange"></i>&nbsp;<span>Despachado</span></a>
 													</li>
-													<li>
+													<!-- <li>
                             <a tabindex="-1" href="<?php e($this->webroot.'ProjectionsViewIndicatorsPeriodsFullFleets/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-bar-chart"></i>&nbsp;<span>Proyecci&oacute;n</span></a>
-													</li>
+													</li> -->
 												</ul>
 										</li>
 

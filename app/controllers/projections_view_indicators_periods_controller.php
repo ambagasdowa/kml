@@ -60,7 +60,7 @@ class ProjectionsViewIndicatorsPeriodsController extends AppController {
         $this->LoadModel('ProjectionsViewFraction');                                // Add fractions
         $this->LoadModel('ProjectionsConfig');                                      // module Configs
         // $this->LoadModel('ProjectionsViewIndicatorsPeriodsFullFleet');              // module Full
-				$this->LoadModel('ProjectionsViewIndicatorsAceptedPeriodsFullSrcOp');       // New Module 
+				$this->LoadModel('ProjectionsViewIndicatorsAceptedPeriodsFullSrcOp');       // New Module
 
 				$this->ProjectionsViewIndicatorsAceptedPeriodsFullSrcOp->query('SET	ANSI_NULLS	ON;SET	ANSI_WARNINGS	ON;');
 
