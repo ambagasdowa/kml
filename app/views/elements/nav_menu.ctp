@@ -593,6 +593,20 @@
 												</ul>
 										</li>
 
+                    <li class="divider"></li>
+
+                    <li class="dropdown-submenu">
+                      <a tabindex="-1" href="#"><i class="fa fa-line-chart"></i>&nbsp;<span>Rendimiento/Disponibilidad</span></a>
+                        <ul class="dropdown-menu">
+                          <li>
+                            <a tabindex="-1" href="<?php e($this->webroot.'RendViewFullGstCoreIndicators/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-pencil-square-o"></i>&nbsp;<span> Rendimiento </span></a>
+                          </li>
+                          <!-- <li>
+                            <a tabindex="-1" href="<?php e($this->webroot.'RendViewFullGstCoreIndicators/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-exchange"></i>&nbsp;<span>Despachado</span></a>
+                          </li> -->
+                        </ul>
+                    </li>
+
 										<li class="divider"></li>
 										<?php 	}?>
 										<?php }?>

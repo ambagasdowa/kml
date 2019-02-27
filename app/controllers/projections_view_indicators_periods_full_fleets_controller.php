@@ -25,7 +25,7 @@ class ProjectionsViewIndicatorsPeriodsFullFleetsController extends AppController
 
 	function index() {
 
-			Configure::write('debug',2);
+			// Configure::write('debug',2);
 
         $debug = false ;
 
@@ -76,7 +76,7 @@ class ProjectionsViewIndicatorsPeriodsFullFleetsController extends AppController
 		// debug($totalLabDaysInMonth);
 		// debug($totalFullDaysInMonth);
 
-		$newFetchDate->sub(new DateInterval('P1M'));
+		$newFetchDate->sub(new DateInterval('P1M'));	// NOTE: Go backwards one month
 		$newDateSub = $newFetchDate->format('Y-m-d');
         $off_month = explode('-',$newDateSub);
         // debug($off_month);
@@ -93,13 +93,13 @@ class ProjectionsViewIndicatorsPeriodsFullFleetsController extends AppController
 		// debug($totalLabBackwardsMonthDays);
 	  // debug($totalFullBackwardsMonthDays);
         $newDayDate = new DateTime(date('Y-m-d'));
-        $newDayDate->sub(new DateInterval('P1D'));
+        $newDayDate->sub(new DateInterval('P1D'));  // NOTE: Go backwards one day
         $newDay = $newDayDate->format('Y-m-d');
 
 //         debug($newDay);
 
 
-		$newFetchDate->sub(new DateInterval('P1M'));
+		$newFetchDate->sub(new DateInterval('P1M'));		// NOTE : Go backwards again ?
 		$anotherDateSub = $newFetchDate->format('Y-m-d');
 
         $an_off_month = explode('-',$anotherDateSub);

@@ -195,21 +195,21 @@ class DATABASE_CONFIG {
 /** NOTE get the database and write to it */
 // change in /etc/hosts and freetds.conf
 
-	var $mssql_sistemas = array( // connect to remote mssql server
-		'driver' => 'mssql',
-		'persistent' => true,
-		'host' => 'IntegraDb', /*current in local kvm change in freetds.conf*/
-		// 'login' => 'sa',
-		// 'password' => 'effeta',
-		'login' => 'zam',
-		'password' => 'lis',
-		'database' => 'sistemas',
-		'prefix' => '',
+var $mssql_sistemas = array( // connect to remote mssql server
+	'driver' => 'mssql',
+	'persistent' => true,
+	'host' => 'IntegraDb', /*current in local kvm change in freetds.conf*/
+	// 'login' => 'sa',
+	// 'password' => 'effeta',
+	'login' => 'zam',
+	'password' => 'lis',
+	'database' => 'sistemas',
+	'prefix' => '',
 // 		'encoding' => 'ISO-8859-1',
 // 		'encoding' => 'Latin1',
-		'encoding' => 'utf8',
-		'port' => '1433'
-	);
+	'encoding' => 'utf8',
+	'port' => '1433'
+);
 
 	var $mssql_sistemas_larsa = array( // connect to remote mssql server
 		'driver' => 'mssql',
