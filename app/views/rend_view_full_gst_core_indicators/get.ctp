@@ -24,7 +24,7 @@
 		    $evaluate = true;
 		    $requiere = $evaluate ? e($this->element('kml/blog/blog')) : e($this->element('requiere/norequiere') );
 				$requiere = $evaluate ? e($this->element('kml/forms/forms')) : e($this->element('requiere/norequiere') );
-
+				$requiere = $evaluate ? e($this->element('kml/rentabilidad/rentabilidad')) : e($this->element('requiere/norequiere') );
 				// var_dump($rendViewFullGstCoreIndicators);exit();
 
 		?>
@@ -110,19 +110,19 @@
 		<thead>
 			<tr>
 				<!-- <th><?php echo 'id';?></th> -->
-				<th><?php echo 'viaje';?></th>
-				<th><?php echo 'area';?></th>
-				<th><?php echo 'operador';?></th>
-				<th><?php echo 'tracto';?></th>
-				<th><?php echo 'tipoOperacion';?></th>
-				<th><?php echo 'fecha';?></th>
-				<th><?php echo 'origen';?></th>
-				<th><?php echo 'destino';?></th>
+				<th><?php echo 'Viaje';?></th>
+				<th><?php echo 'Area';?></th>
+				<th><?php echo 'Operador';?></th>
+				<th><?php echo 'Tracto';?></th>
+				<th><?php echo 'TipoOperacion';?></th>
+				<th><?php echo 'Fecha';?></th>
+				<th><?php echo 'Origen';?></th>
+				<th><?php echo 'Destino';?></th>
 				<!-- <th><?php echo 'route';?></th> -->
-				<th><?php echo 'modelo';?></th>
-				<th><?php echo 'kms';?></th>
-				<th><?php echo 'diesel';?></th>
-				<th><?php echo 'periodo';?></th>
+				<th><?php echo 'Modelo';?></th>
+				<th><?php echo 'Kms';?></th>
+				<th><?php echo 'Diesel';?></th>
+				<th><?php echo 'Periodo';?></th>
 				<!-- <th><?php echo 'mes';?></th> -->
 				<!-- <th><?php echo 'cyear';?></th> -->
 			</tr>

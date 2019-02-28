@@ -18,14 +18,14 @@
 		?>
 
 		<?php
-				// NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal.
-				// $evaluate = false;
-				// $requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere'));
-				// blog
-				$evaluate = true;
-				$requiere = $evaluate ? e($this->element('kml/blog/blog')) : e($this->element('requiere/norequiere') );
-				$requiere = $evaluate ? e($this->element('kml/forms/forms')) : e($this->element('requiere/norequiere') );
-
+		// NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal.
+		// $evaluate = false;
+		// $requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere'));
+		// blog
+		$evaluate = true;
+		// $requiere = $evaluate ? e($this->element('kml/blog/blog')) : e($this->element('requiere/norequiere') );
+		// $requiere = $evaluate ? e($this->element('kml/forms/forms')) : e($this->element('requiere/norequiere') );
+		$requiere = $evaluate ? e($this->element('kml/rentabilidad/rentabilidad')) : e($this->element('requiere/norequiere') );
 		?>
 
 		<!-- temporal style  -->
@@ -145,14 +145,15 @@
 																			'periodo',
 																			 array
 																						(
-																							'type'=>'text',
-																							'class'=>'performance_dateini u-full-width form-control init-focus',
+																							'type'=>'select',
+																							'class'=>'search_udn u-full-width form-control init-focus',
 																							'id'=>'from',
 																							'placeholder' => 'Periodo',
 																							'alt'=>'Puede teclear la fecha en Formato yyyymm',
 								                              'title'=>'Puede teclear la fecha en Formato yyyymm',
 																							'div'=>FALSE,
 																							'label'=>FALSE,
+																							'options'=> array('201901'=>'Enero','201902'=>'Febrero'),
 																							'tabindex'=>'1'
 																						)
 																		);
@@ -174,7 +175,7 @@
 								                              'title'=>'Puede teclear la fecha en Formato yyyymmdd',
 																							'div'=>FALSE,
 																							'label'=>FALSE,
-																							'options'=>array(1=>'orizaba',2=>'guadalajara'),
+																							'options'=>array(1=>'orizaba',2=>'guadalajara',3=>'ramos'),
 																							'tabindex'=>'2'
 																						)
 																		);

@@ -28,6 +28,10 @@ e($this->Html->script($theme.'fullcalendar/fullcalendar',false));
 e($this->Html->script($theme.'filter/quick_filter',false));
 e($this->Html->script($theme.'filterTable/jquery.filtertable',false));
 
+
+
+// e($this->Html->script($theme.'datatables/',false));
+
 // e($this->Html->script($theme.'highCharts/charts/highcharts',false));
 e($this->Html->script($theme.'highCharts/stock/highstock',false));
 e($this->Html->script($theme.'highCharts/charts/highcharts-more',false));
