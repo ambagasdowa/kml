@@ -9,7 +9,8 @@ $core = 'core'.DS;
 // Datatables
 
 			// Add datatables
-			// e($this->Html->script($theme.'datatables/jQuery-3.3.1/jquery-3.3.1',false));
+			e($this->Html->script($theme.'datatables/jquery-3.3.1',false));
+			e($this->Html->script($theme.'datatables/jquery.dataTables.min',false));
 			e($this->Html->script($theme.'datatables/jQuery-1.12.4/jquery-1.12.4',false));
 			e($this->Html->script($theme.'datatables/JSZip-2.5.0/jszip',false));
 			e($this->Html->script($theme.'datatables/pdfmake-0.1.36/pdfmake',false));

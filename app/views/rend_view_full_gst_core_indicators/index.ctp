@@ -46,13 +46,15 @@
 		}
 
 		th {
-			/*font-size: 12px;*/
+			font-family: "Arial", monospace, sans-serif;
+			font-size: 12px;
+			font-weight: bold;
 			white-space:nowrap;
 		}
 		td {
 			font-family: "Arial", monospace, sans-serif;
 			/*font-family: monospace;*/
-			font-size: 12px;
+			font-size: 11px;
 			white-space:nowrap;
 		}
 
@@ -234,8 +236,43 @@
 								// $( ".updateSearchResult" ).load(urlStruct);
 								$( ".updateSearchResult" ).load(urlStruct,function(responseText, statusText, xhr) {
 									// Add Table UIX
-									$('#indTable').DataTable();
-									
+									// $('#indTable').DataTable();
+
+									//
+									$('#indTable').DataTable( {
+
+												 "footerCallback": function ( row, data, start, end, display ) {
+														 var api = this.api(), data;
+														 // Remove the formatting to get integer data for summation
+														 var intVal = function ( i ) {
+															 // console.log(i);
+																 return typeof i === 'string' ?
+																		 i.replace(/[\$,]/g, '')*1 :
+																		 typeof i === 'number' ?
+																				 i : 0;
+														 };
+														 // Total over all pages
+														 total = api
+																 .column( 10 )
+																 .data()
+																 .reduce( function (a, b) {
+																		 return intVal(a) + intVal(b);
+																 }, 0 );
+														 // Total over this page
+														 pageTotal = api
+																 .column( 10, { page: 'current'} )
+																 .data()
+																 .reduce( function (a, b) {
+																		 return intVal(a) + intVal(b);
+																 }, 0 );
+														 // Update footer
+														 $( api.column( 10 ).footer() ).html(
+																 ''+ (Math.round(pageTotal * 100) / 100)  +' ( '+ (Math.round(total * 100) / 100) +' total)'
+														 );
+												 }
+										 });
+									// End table
+
 									console.log(statusText);
 
 									if(statusText == "error"){
