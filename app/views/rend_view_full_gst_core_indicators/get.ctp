@@ -22,9 +22,9 @@
 		    // $requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere'));
 		    // blog
 		    $evaluate = true;
-		    $requiere = $evaluate ? e($this->element('kml/blog/blog')) : e($this->element('requiere/norequiere') );
-				$requiere = $evaluate ? e($this->element('kml/forms/forms')) : e($this->element('requiere/norequiere') );
-				// $requiere = $evaluate ? e($this->element('kml/rentabilidad/rentabilidad')) : e($this->element('requiere/norequiere') );
+		    // $requiere = $evaluate ? e($this->element('kml/blog/blog')) : e($this->element('requiere/norequiere') );
+				// $requiere = $evaluate ? e($this->element('kml/forms/forms')) : e($this->element('requiere/norequiere') );
+				$requiere = $evaluate ? e($this->element('kml/rentabilidad/rentabilidad')) : e($this->element('requiere/norequiere') );
 				// var_dump($rendViewFullGstCoreIndicators);exit();
 
 		?>
@@ -122,8 +122,8 @@
 				<th><?php echo 'Modelo';?></th>
 				<th><?php echo 'Kms';?></th>
 				<th><?php echo 'Diesel';?></th>
+				<th><?php echo 'Rendimiento';?></th>
 				<th><?php echo 'Periodo';?></th>
-				<!-- <th><?php echo 'mes';?></th> -->
 				<!-- <th><?php echo 'cyear';?></th> -->
 			</tr>
 		</thead>
@@ -145,8 +145,8 @@
 			<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['modelo']; ?>&nbsp;</td>
 			<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['kms']; ?>&nbsp;</td>
 			<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['diesel']; ?>&nbsp;</td>
+			<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['rendimiento']; ?>&nbsp;</td>
 			<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['periodo']; ?>&nbsp;</td>
-			<!-- <td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['mes']; ?>&nbsp;</td> -->
 			<!-- <td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['cyear']; ?>&nbsp;</td> -->
 			<?php $totalkms += $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['kms']; ?>
 			<?php $totaldiesel += $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['diesel']; ?>
