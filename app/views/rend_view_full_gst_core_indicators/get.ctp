@@ -106,12 +106,12 @@
 <div id="first-datatable-output" class="table-responsive">
 
 
-		<table class="order-table table table-bordered table-hover table-striped responstable">
+		<table id="indTable" class="order-table table table-bordered table-hover table-striped responstable">
 		<thead>
 			<tr>
 				<!-- <th><?php echo 'id';?></th> -->
 				<th><?php echo 'Viaje';?></th>
-				<th><?php echo 'Area';?></th>
+				<!-- <th><?php echo 'Area';?></th> -->
 				<th><?php echo 'Operador';?></th>
 				<th><?php echo 'Tracto';?></th>
 				<th><?php echo 'TipoOperacion';?></th>
@@ -123,7 +123,7 @@
 				<th><?php echo 'Kms';?></th>
 				<th><?php echo 'Diesel';?></th>
 				<th><?php echo 'Rendimiento';?></th>
-				<th><?php echo 'Periodo';?></th>
+				<!-- <th><?php echo 'Periodo';?></th> -->
 				<!-- <th><?php echo 'cyear';?></th> -->
 			</tr>
 		</thead>
@@ -134,7 +134,7 @@
 		<tr>
 			<!-- <td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['id']; ?>&nbsp;</td> -->
 			<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['viaje']; ?>&nbsp;</td>
-			<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['area']; ?>&nbsp;</td>
+			<!-- <td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['area']; ?>&nbsp;</td> -->
 			<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['operador']; ?>&nbsp;</td>
 			<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['tracto']; ?>&nbsp;</td>
 			<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['tipoOperacion']; ?>&nbsp;</td>
@@ -146,19 +146,19 @@
 			<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['kms']; ?>&nbsp;</td>
 			<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['diesel']; ?>&nbsp;</td>
 			<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['rendimiento']; ?>&nbsp;</td>
-			<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['periodo']; ?>&nbsp;</td>
+			<!-- <td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['periodo']; ?>&nbsp;</td> -->
 			<!-- <td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['cyear']; ?>&nbsp;</td> -->
 			<?php $totalkms += $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['kms']; ?>
 			<?php $totaldiesel += $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['diesel']; ?>
 
 		</tr>
 	<?php }//endforeach; ?>
-		<tr>
+		<!-- <tr>
 			<td>totalkms</td>
 			<td><?php echo $totalkms ?></td>
 			<td>totaldiesel</td>
 			<td><?php echo $totaldiesel ?></td>
-		</tr>
+		</tr> -->
 		</table>
 </div>
 

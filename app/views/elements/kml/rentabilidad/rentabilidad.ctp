@@ -5,6 +5,52 @@ $theme = 'devoops'.DS;
 $default = 'kml'.DS;
 $core = 'core'.DS;
 
+
+// Datatables
+
+			// Add datatables
+			// e($this->Html->script($theme.'datatables/jQuery-3.3.1/jquery-3.3.1',false));
+			e($this->Html->script($theme.'datatables/jQuery-1.12.4/jquery-1.12.4',false));
+			e($this->Html->script($theme.'datatables/JSZip-2.5.0/jszip',false));
+			e($this->Html->script($theme.'datatables/pdfmake-0.1.36/pdfmake',false));
+			e($this->Html->script($theme.'datatables/pdfmake-0.1.36/vfs_fonts',false));
+			e($this->Html->script($theme.'datatables/DataTables-1.10.18/js/jquery.dataTables',false));
+			e($this->Html->script($theme.'datatables/DataTables-1.10.18/js/dataTables.bootstrap',false));
+			e($this->Html->script($theme.'datatables/AutoFill-2.3.2/js/dataTables.autoFill',false));
+			e($this->Html->script($theme.'datatables/AutoFill-2.3.2/js/autoFill.bootstrap',false));
+			e($this->Html->script($theme.'datatables/Buttons-1.5.4/js/dataTables.buttons',false));
+			e($this->Html->script($theme.'datatables/Buttons-1.5.4/js/buttons.bootstrap',false));
+			e($this->Html->script($theme.'datatables/Buttons-1.5.4/js/buttons.colVis',false));
+			e($this->Html->script($theme.'datatables/Buttons-1.5.4/js/buttons.flash',false));
+			e($this->Html->script($theme.'datatables/Buttons-1.5.4/js/buttons.html5',false));
+			e($this->Html->script($theme.'datatables/Buttons-1.5.4/js/buttons.print',false));
+			e($this->Html->script($theme.'datatables/ColReorder-1.5.0/js/dataTables.colReorder',false));
+			e($this->Html->script($theme.'datatables/FixedColumns-3.2.5/js/dataTables.fixedColumns',false));
+			e($this->Html->script($theme.'datatables/FixedHeader-3.1.4/js/dataTables.fixedHeader',false));
+			e($this->Html->script($theme.'datatables/KeyTable-2.5.0/js/dataTables.keyTable',false));
+			e($this->Html->script($theme.'datatables/Responsive-2.2.2/js/dataTables.responsive',false));
+			e($this->Html->script($theme.'datatables/RowGroup-1.1.0/js/dataTables.rowGroup',false));
+			e($this->Html->script($theme.'datatables/RowReorder-1.2.4/js/dataTables.rowReorder',false));
+			e($this->Html->script($theme.'datatables/Scroller-1.5.0/js/dataTables.scroller',false));
+			e($this->Html->script($theme.'datatables/Select-1.2.6/js/dataTables.select',false));
+
+			// e($this->Html->script($theme.'datatables/datatables.min',false));
+			e($this->Html->css($theme.'datatables/DataTables-1.10.18/css/dataTables.bootstrap', 'stylesheet',array('inline'=>false)));
+			e($this->Html->css($theme.'datatables/AutoFill-2.3.2/css/autoFill.bootstrap.min', 'stylesheet',array('inline'=>false)));
+			e($this->Html->css($theme.'datatables/Buttons-1.5.4/css/buttons.bootstrap', 'stylesheet',array('inline'=>false)));
+			e($this->Html->css($theme.'datatables/ColReorder-1.5.0/css/colReorder.bootstrap', 'stylesheet',array('inline'=>false)));
+			e($this->Html->css($theme.'datatables/FixedColumns-3.2.5/css/fixedColumns.bootstrap', 'stylesheet',array('inline'=>false)));
+			e($this->Html->css($theme.'datatables/FixedHeader-3.1.4/css/fixedHeader.bootstrap', 'stylesheet',array('inline'=>false)));
+			e($this->Html->css($theme.'datatables/KeyTable-2.5.0/css/keyTable.bootstrap', 'stylesheet',array('inline'=>false)));
+			e($this->Html->css($theme.'datatables/Responsive-2.2.2/css/responsive.bootstrap', 'stylesheet',array('inline'=>false)));
+			e($this->Html->css($theme.'datatables/RowGroup-1.1.0/css/rowGroup.bootstrap', 'stylesheet',array('inline'=>false)));
+			e($this->Html->css($theme.'datatables/RowReorder-1.2.4/css/rowReorder.bootstrap', 'stylesheet',array('inline'=>false)));
+			e($this->Html->css($theme.'datatables/Scroller-1.5.0/css/scroller.bootstrap', 'stylesheet',array('inline'=>false)));
+			e($this->Html->css($theme.'datatables/Select-1.2.6/css/select.bootstrap', 'stylesheet',array('inline'=>false)));
+
+
+
+
 // from blog
 
 
@@ -33,7 +79,7 @@ $core = 'core'.DS;
 			e($this->Html->css($theme.'skeleton/skeleton-checkboxes-small', 'stylesheet',array('inline'=>false)));
 
       /** @js */
-			e($this->Html->script($theme.'jquery/jquery.min',false));
+			// e($this->Html->script($theme.'jquery/jquery.min',false));
 			// e($this->Html->script($theme.'skeleton/site',false));
 			// e($this->Html->script($theme.'jquery-ui/jquery-ui.min',false));
 			e($this->Html->script($theme.'bootstrap/bootstrap',false));
@@ -127,15 +173,6 @@ $core = 'core'.DS;
       // NOTE Dynatable
       // e($this->Html->css($theme.'dynatable/jquery.dynatable', 'stylesheet', array('inline'=>false)));
       // e($this->Html->script($theme.'dynatable/jquery.dynatable',false));
-
-
-
-// NOTE Bootstrap
-			/** @css */
-
-// Add datatables
-// e($this->Html->script($theme.'datatables/datatables.min',false));
-// e($this->Html->css($theme.'datatables/datatables.min', 'stylesheet',array('inline'=>false)));
 
 
 ?>
