@@ -64,14 +64,17 @@
 		echo $this->Form->input('area',array('placeholder'=>'area','class'=>'input'));
 		echo $this->Form->input('operador',array('placeholder'=>'operador','class'=>'input'));
 		echo $this->Form->input('tracto',array('placeholder'=>'tracto','class'=>'input'));
-		echo $this->Form->input('config',array('placeholder'=>'config','class'=>'input'));
+		echo $this->Form->input('tipoOperacion',array('placeholder'=>'tipoOperacion','class'=>'input'));
 		echo $this->Form->input('fecha',array('placeholder'=>'fecha','class'=>'input'));
 		echo $this->Form->input('origen',array('placeholder'=>'origen','class'=>'input'));
 		echo $this->Form->input('destino',array('placeholder'=>'destino','class'=>'input'));
+		echo $this->Form->input('route',array('placeholder'=>'route','class'=>'input'));
 		echo $this->Form->input('modelo',array('placeholder'=>'modelo','class'=>'input'));
 		echo $this->Form->input('kms',array('placeholder'=>'kms','class'=>'input'));
 		echo $this->Form->input('diesel',array('placeholder'=>'diesel','class'=>'input'));
 		echo $this->Form->input('periodo',array('placeholder'=>'periodo','class'=>'input'));
+		echo $this->Form->input('mes',array('placeholder'=>'mes','class'=>'input'));
+		echo $this->Form->input('cyear',array('placeholder'=>'cyear','class'=>'input'));
 	?>
 						<?php 	echo $this->Form->input('name',array('type'=>'text','label'=>false,'placeholder'=>'Nombre de la politica'));
 									echo $this->Form->input('description',array('type'=>'textarea','class'=>'placeholder','label'=>false,'placeholder'=>'Descripcion de la politica','rows'=>'5','cols'=>'80'));

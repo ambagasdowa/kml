@@ -1,4 +1,4 @@
-96<?php
+<?php
 		/**
 		*
 		* PHP versions 4 and 5
@@ -24,128 +24,332 @@
 			$requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere') );
 		?>
 
-		<style>
-			/* unvisited link */
-			.modded-link:link {
-				display:block !important;
-				background-color:#999;
-				color: #444;
-			}
-			/* mouse over link */
-			.modded-link:hover {
-				font-weight: bold;
-			}
-			.panel-default {
-				background-color: rgba(255, 255, 255, 0.3); /* Color white with alpha 0.9*/
-			}
-
-		</style>
 
 
-    <div class="container-fluid">
-      <div class="row">
 
-        <div class="col-md-offset-1 col-sm-11 col-md-11">
-          <ul class="list-group list-inline">
-			<li class="list-group-item">
-				<?php echo $this->Html->link(__('New Rendimiento View Full Gst Core Indicator', true), array('action' => 'add')); ?>			</li>
-							<li>
-				<input type="search" class="light-table-filter form-control " data-table="order-table" placeholder="Filter">
-			</li>
-          </ul>
-        </div>
+<!-- REPLACE Builder -->
 
-        <div class="col-sm-9 col-sm-offset-2 col-md-10 col-md-offset-1 main">
-          <h1 class="page-header"><?php __('Rendimiento View Full Gst Core Indicators');?></h1>
-          <div class="table-responsive">
-			<span class="filter-container">
-				<table class="order-table table table-bordered table-hover table-striped responstable">
-				<thead>
-					<tr>
-													<th><?php echo $this->Paginator->sort('id');?></th>
-													<th><?php echo $this->Paginator->sort('viaje');?></th>
-													<th><?php echo $this->Paginator->sort('area');?></th>
-													<th><?php echo $this->Paginator->sort('operador');?></th>
-													<th><?php echo $this->Paginator->sort('tracto');?></th>
-													<th><?php echo $this->Paginator->sort('config');?></th>
-													<th><?php echo $this->Paginator->sort('fecha');?></th>
-													<th><?php echo $this->Paginator->sort('origen');?></th>
-													<th><?php echo $this->Paginator->sort('destino');?></th>
-													<th><?php echo $this->Paginator->sort('modelo');?></th>
-													<th><?php echo $this->Paginator->sort('kms');?></th>
-													<th><?php echo $this->Paginator->sort('diesel');?></th>
-													<th><?php echo $this->Paginator->sort('periodo');?></th>
-													<th class="actions" colspan="3"><?php __('Actions');?></th>
 
-					</tr>
-				</thead>
-				<?php
-				$i = 0;
-				foreach ($rendimientoViewFullGstCoreIndicators as $rendimientoViewFullGstCoreIndicator):
-					$class = null;
-					if ($i++ % 2 == 0) {
-						$class = ' class="altrow"';
-					}
-				?>
-	<tr<?php echo $class;?>>
-		<td><?php echo $rendimientoViewFullGstCoreIndicator['RendimientoViewFullGstCoreIndicator']['id']; ?>&nbsp;</td>
-		<td><?php echo $rendimientoViewFullGstCoreIndicator['RendimientoViewFullGstCoreIndicator']['viaje']; ?>&nbsp;</td>
-		<td><?php echo $rendimientoViewFullGstCoreIndicator['RendimientoViewFullGstCoreIndicator']['area']; ?>&nbsp;</td>
-		<td><?php echo $rendimientoViewFullGstCoreIndicator['RendimientoViewFullGstCoreIndicator']['operador']; ?>&nbsp;</td>
-		<td><?php echo $rendimientoViewFullGstCoreIndicator['RendimientoViewFullGstCoreIndicator']['tracto']; ?>&nbsp;</td>
-		<td><?php echo $rendimientoViewFullGstCoreIndicator['RendimientoViewFullGstCoreIndicator']['config']; ?>&nbsp;</td>
-		<td><?php echo $rendimientoViewFullGstCoreIndicator['RendimientoViewFullGstCoreIndicator']['fecha']; ?>&nbsp;</td>
-		<td><?php echo $rendimientoViewFullGstCoreIndicator['RendimientoViewFullGstCoreIndicator']['origen']; ?>&nbsp;</td>
-		<td><?php echo $rendimientoViewFullGstCoreIndicator['RendimientoViewFullGstCoreIndicator']['destino']; ?>&nbsp;</td>
-		<td><?php echo $rendimientoViewFullGstCoreIndicator['RendimientoViewFullGstCoreIndicator']['modelo']; ?>&nbsp;</td>
-		<td><?php echo $rendimientoViewFullGstCoreIndicator['RendimientoViewFullGstCoreIndicator']['kms']; ?>&nbsp;</td>
-		<td><?php echo $rendimientoViewFullGstCoreIndicator['RendimientoViewFullGstCoreIndicator']['diesel']; ?>&nbsp;</td>
-		<td><?php echo $rendimientoViewFullGstCoreIndicator['RendimientoViewFullGstCoreIndicator']['periodo']; ?>&nbsp;</td>
-		<td class="actions">
-			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $rendimientoViewFullGstCoreIndicator['RendimientoViewFullGstCoreIndicator']['id'])); ?>
-		</td>
-		<td class="actions">
-			<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $rendimientoViewFullGstCoreIndicator['RendimientoViewFullGstCoreIndicator']['id'])); ?>
-		</td>
-		<td class="actions">
-			<?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $rendimientoViewFullGstCoreIndicator['RendimientoViewFullGstCoreIndicator']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $rendimientoViewFullGstCoreIndicator['RendimientoViewFullGstCoreIndicator']['id'])); ?>
-		</td>
-	</tr>
-<?php endforeach; ?>
-				</table>
-			</span> <!--class="filter-container"-->
-				<p>
-					<?php
-						echo $this->Paginator->counter(array(
-						'format' => __('Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%', true)
-						));
-						?>				</p>
+<?php
+    /** =============================================  NOTE ALERT ==> start the making     =============================================   */
+?>
 
-				<ul class="pagination">
-							<?php
+<style>
 
-							echo $this->Paginator->prev( 'Â«' ,array('tag'=>'li'),null, array('aria-hidden'=>'true','class' => 'disabled','tag'=>'li'));
+	body {
+		margin: 40px 10px;
+		padding: 0;
+/* 		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif; */
+/* 		font-size: 14px; */
+	}
 
-	?>							<?php
+	#calendar {
+		max-width: 800px;
+/* 		max-height: 900px; */
+		margin: 0 auto;
+	}
 
-							echo $this->Paginator->numbers(array('separator' => null,'tag'=>'li'));
+	/* unvisited link */
+	.modded-link:link {
+		display:block !important;
+		background-color:#999 !important;
+		color: #444 !important;
+	}
 
-	?>						<?php
 
-							echo $this->Paginator->next( 'Â»' , array('tag'=>'li'), null, array('aria-hidden'=>'true','class' => 'disabled','tag'=>'li'));
-	?>				</ul>
-          </div>
-        </div> <!--main-->
-      </div> <!--row-->
-    </div> <!--container fluid-->
+/* 	.btn-success{ */
+/* 		display: inline-block; !important; */
+/* 		box-shadow: inset 0 3px 5px rgba(0, 0, 0, .125); */
+/* 	} */
 
-    <script>
-	$(document).ready(function () {
-		$(function () {
-			$("table").stickyTableHeaders({fixedOffset: 22,marginTop: 22});
-		});
-		/*! Copyright (c) 2011 by Jonas Mosbech - https://github.com/jmosbech/StickyTableHeaders
-			MIT license info: https://github.com/jmosbech/StickyTableHeaders/blob/master/license.txt */
+	/* visited link */
+/*	.modded-link:visited {
+		color: green;
+	}*/
 
-	});
-    </script>
+	/* visited link */
+	/*.modded-link:visited {
+		background-color:#999;
+		color: #444;
+	}*/
+
+	/* mouse over link */
+	.modded-link:hover {
+/* 		color: hotpink; */
+		 font-weight: bold;
+	}
+
+	/* selected link */
+	.modded-link:active {
+		/*background-color:#999;
+		color: #444;*/
+	}
+
+	.panel-default {
+		background-color: rgba(255, 255, 255, 0.3) !important; /* Color white with alpha 0.9*/
+	}
+
+
+	/*GRID*/
+
+		.grid_current {
+				background-color: #b4c973 ;
+		}
+
+	/*ninja scroll XD*/
+
+	/* Copyright 2013 Rob Wu <gwnRob@gmail.com>
+	 * https://github.com/Rob--W/grab-to-pan.js
+	 *
+	 * grab.cur and grabbing.cur are taken from Firefox's repository.
+	 **/
+	/*.grab-to-pan-grab {
+	    cursor: url("grab.cur"), move !important;
+	    cursor: -webkit-grab !important;
+	    cursor: -moz-grab !important;
+	    cursor: grab !important;
+	}
+	.grab-to-pan-grab *:not(input):not(textarea):not(button):not(select):not(:link) {
+	    cursor: inherit !important;
+	}
+	.grab-to-pan-grab:active,
+	.grab-to-pan-grabbing {
+	    cursor: url("grabbing.cur"), move !important;
+	    cursor: -webkit-grabbing !important;
+	    cursor: -moz-grabbing !important;
+	    cursor: grabbing !important;
+	}*/
+
+	.scrollable {
+
+		/*margin-left:1px;
+		margin-right:1px;
+	  overflow: hidden;
+	  width: 99.9%;
+	  height: 100%;*/
+
+
+	/* 	inner box */
+	    /*max-width: auto;*/
+	    /*max-height: 6%;*/
+		/* 	inner box */
+	    /*background-color: #EEE;*/
+	}
+	.filler {
+
+			/*width: 250%;*/
+
+			 /* I don't want to type a huge wall of Lorem ipsum */
+	    /*font-size: 34px;*/
+	}
+
+
+/*EXCEL SROLLER*/
+/*
+
+.fht-table,
+.fht-table thead,
+.fht-table tfoot,
+.fht-table tbody,
+.fht-table tr,
+.fht-table th,
+.fht-table td {
+	margin: 0;
+}*/
+/*
+.fht-table{
+	border: 0 none;
+	height: auto;
+	width: auto;
+	border-collapse: collapse;
+	border-spacing: 0;*/
+	/*table-layout: fixed;  Algoritmo de distribucion fijo */
+  /*white-space:nowrap;   Impide los saltos de línea automáticos*/
+/*}
+
+.fht-table th,.fht-table td {
+    overflow: hidden;
+}
+
+.fht-table-wrapper,
+.fht-table-wrapper .fht-thead,
+.fht-table-wrapper .fht-tfoot,
+.fht-table-wrapper .fht-fixed-column .fht-tbody,
+.fht-table-wrapper .fht-fixed-body .fht-tbody,
+.fht-table-wrapper .fht-tbody {
+	overflow: hidden;
+	position: relative;
+}
+
+.fht-table-wrapper .fht-fixed-body .fht-tbody,
+.fht-table-wrapper .fht-tbody {
+	overflow: auto;
+}
+
+.fht-table-wrapper .fht-table .fht-cell {
+	overflow: hidden;
+	height: 1px;
+}
+
+.fht-table-wrapper .fht-fixed-column,
+.fht-table-wrapper .fht-fixed-body {
+	top: 0;
+	left: 0;
+	position: absolute;
+}
+
+.fht-table-wrapper .fht-fixed-column {
+	z-index: 1;
+}
+
+.fht-fixed-body .fht-thead table {
+	margin-right: 20px;
+	border: 0 none;
+}*/
+
+/*For Examples*/
+
+.ContenedorTabla {
+	height    : 98%;
+  width     : 100%;
+	margin    : 0 auto;
+	overflow  : auto;
+	position  : relative;
+
+	overflow:hidden;
+}
+
+/*.fixed-zoom {
+  height: 90vh;
+  width: 90vh;
+}*/
+
+/*.header, .main {
+    display: inline-block;
+    height: auto;
+    width: 100%;
+}*/
+
+/*style excel*/
+.excel_cell{
+	border: 1px solid #CCC;
+	color: #222;
+	text-align: center;
+	/*font-size: 13px;*/
+	font-weight:  normal;
+	/*padding: 4px;*/
+	/*white-space: pre-line;*/
+	min-width: 90px !important;
+
+}
+._xls_cell {
+	empty-cells: show;
+	padding: 1px 0.5em;
+}
+._cell_header{
+	border: 1px solid #CCC;
+	color: #222;
+	text-align: center;
+	font-weight:  normal;
+	background-color: #EEE;
+}
+._cell_Default{
+	background-color: #FFF;
+	/*text-align: left;*/
+}
+
+.firts_column {
+	border: 1px solid #CCC;
+	color: #222;
+	text-align: center;
+	font-weight:  normal;
+	background-color: #EEE;
+	min-width: 325px;
+	text-align: left !important;
+}
+._table {
+  display: table                /* <table>     */;
+	border-collapse:	collapse									   ;
+	width : 100%;
+}
+._row {
+  display: table-row            /* <tr>        */;
+	width : 100%;
+}
+._cell {
+  display: table-cell           /* <td>        */;
+	/*width: 100%;*/
+}
+
+.real {
+	width: 50%	;
+}
+.prep {
+	width: 50%	;
+}
+
+/*https://stackoverflow.com/questions/34701057/making-table-data-appear-on-hover-javascript-jquery-or-css*/
+tr .icon{
+  transition:all 0.5s;
+  opacity:0;
+}
+
+tr .link_external:hover .icon{
+  opacity:1;
+}
+
+
+.inner_panel {
+  /*background-color: white;*/
+  color:#333;
+}
+
+.print_thuis:hover {
+  border  : collapse;
+  display : inline-block;
+  color : #eee;
+  background-color   : #3398d6;
+  cursor  : pointer;
+}
+
+/*.break_line {
+  padding-bottom: 15px;
+  display:block;
+}*/
+
+</style>
+
+<?php //NOTE this must come from AppConfig or from this controller at least?>
+
+<?php
+    $mod_inx = $mod_inxd = $mod_index;
+        $charting = $chart;
+?>
+
+
+<div id="newIngressStructure" class="newIngressStructure"></div>
+<!--  Start container -->
+
+	<div class="row-fluid">
+
+	<div id="dashboard_links" class="col-xs-6 col-sm-2 pull-right">
+
+            <ul id="tabbed" class="nav nav-pills nav-stacked">
+
+                <?php foreach ($bsu as $idx_bsu => $bsu_names) {
+    ?>
+                    <?php $bsu_name = str_replace(' ', '_', $bsu_names); ?>
+                    <li role="presentation" <?php $idx_bsu === $ui_bsu_index ? e('class="active"'): ' '; ?> >
+                        <a href="<?php echo '#_'.$bsu_name.'_' ?>" id="<?php echo '_'.$bsu_name.'_'.$idx_bsu ?>_tab" data-toggle="tab" data-name="<?php echo "$bsu_name"?>">
+                            <i class="fa fa-truck"></i>&nbsp;&nbsp;<?php e($bsu_label[$idx_bsu]); ?>
+                        </a>
+                    </li>
+                <?php
+}?>
+
+			</ul>
+	</div>
+
+
+<!--
+	

@@ -67,14 +67,17 @@
 													<th><?php echo $this->Paginator->sort('area');?></th>
 													<th><?php echo $this->Paginator->sort('operador');?></th>
 													<th><?php echo $this->Paginator->sort('tracto');?></th>
-													<th><?php echo $this->Paginator->sort('config');?></th>
+													<th><?php echo $this->Paginator->sort('tipoOperacion');?></th>
 													<th><?php echo $this->Paginator->sort('fecha');?></th>
 													<th><?php echo $this->Paginator->sort('origen');?></th>
 													<th><?php echo $this->Paginator->sort('destino');?></th>
+													<th><?php echo $this->Paginator->sort('route');?></th>
 													<th><?php echo $this->Paginator->sort('modelo');?></th>
 													<th><?php echo $this->Paginator->sort('kms');?></th>
 													<th><?php echo $this->Paginator->sort('diesel');?></th>
 													<th><?php echo $this->Paginator->sort('periodo');?></th>
+													<th><?php echo $this->Paginator->sort('mes');?></th>
+													<th><?php echo $this->Paginator->sort('cyear');?></th>
 													<th class="actions" colspan="3"><?php __('Actions');?></th>
 							
 					</tr>
@@ -93,14 +96,17 @@
 		<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['area']; ?>&nbsp;</td>
 		<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['operador']; ?>&nbsp;</td>
 		<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['tracto']; ?>&nbsp;</td>
-		<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['config']; ?>&nbsp;</td>
+		<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['tipoOperacion']; ?>&nbsp;</td>
 		<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['fecha']; ?>&nbsp;</td>
 		<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['origen']; ?>&nbsp;</td>
 		<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['destino']; ?>&nbsp;</td>
+		<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']; ?>&nbsp;</td>
 		<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['modelo']; ?>&nbsp;</td>
 		<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['kms']; ?>&nbsp;</td>
 		<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['diesel']; ?>&nbsp;</td>
 		<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['periodo']; ?>&nbsp;</td>
+		<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['mes']; ?>&nbsp;</td>
+		<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['cyear']; ?>&nbsp;</td>
 		<td class="actions">
 			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['id'])); ?>
 		</td>

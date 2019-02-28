@@ -21,15 +21,62 @@
 class RendViewFullGstCoreIndicatorsController extends AppController {
 
 	var $name = 'RendViewFullGstCoreIndicators';
-	var $components = array('RequestHandler','Session','Search.Prg');
-	var $helpers = array('Html','Form','Ajax','Javascript','Js');
+
+	function get() {
+		Configure::write('debug',2);
+
+		// $this->LoadModel('BalanzaViewUdnsRpt');
+
+		$posted = json_decode(base64_decode($this->params['named']['data']),true);
+		// debug($posted);
+
+		$conditions = array();
+		$add_conditions = array();
+		foreach ($posted as $keys => $postvalue) {
+
+			if ($keys > 0 ) {
+				$content = $postvalue['name'];
+				// debug($postvalue['value']);
+				$chars = preg_split('/\[([^\]]*)\]/i', $content, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
+				// debug($chars);
+				if ( isset($chars[1]) && $chars[1] == 'RendViewFullGstCoreIndicator' && $postvalue['value'] != '') {
+
+					// if ($chars[2] == 'Funcionario' && $postvalue['value'] != '') {
+					// 	// code...
+					// }
+
+					$add_conditions[$chars[2]] = $postvalue['value'];
+					$conditions[$chars[2]] = $postvalue['value'];
+				}
+				// if(isset($chars[2])) {
+				// 	$conditions[$chars[2]] = $postvalue['value'];
+				// }
+			}
+		}
+
+		// debug($conditions);
+		// exit();
+		$conditionsBl['RendViewFullGstCoreIndicator.periodo'] = $add_conditions['periodo'];
+		$conditionsBl['RendViewFullGstCoreIndicator.id_area'] = $add_conditions['id_area'];
+		// $conditionsBl['RendViewFullGstCoreIndicator.id'] = 10;
+
+		$rendViewFullGstCoreIndicators = $this->RendViewFullGstCoreIndicator->find('all',array('conditions'=>$conditionsBl));
+
+		// debug($rendViewFullGstCoreIndicators);
+
+		// exit();
+
+		$this->set(compact('rendViewFullGstCoreIndicators'));
+
+		// NOTE set the response output for an ajax call
+		Configure::write('debug', 0);
+		$this->autoLayout = false;
+	}
+
+
 
 	function index() {
-		Configure::write('debug', 2);
-		$this->RendViewFullGstCoreIndicator->query('SET	ANSI_NULLS	ON;SET	ANSI_WARNINGS	ON;');
 		$this->RendViewFullGstCoreIndicator->recursive = 0;
-		debug($this->paginate());
-		exit();
 		$this->set('rendViewFullGstCoreIndicators', $this->paginate());
 	}
 
