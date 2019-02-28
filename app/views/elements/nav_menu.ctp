@@ -601,9 +601,9 @@
                           <li>
                             <a tabindex="-1" href="<?php e($this->webroot.'RendViewFullGstCoreIndicators/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-pencil-square-o"></i>&nbsp;<span> Rendimiento </span></a>
                           </li>
-                          <li>
+                          <!-- <li>
                             <a tabindex="-1" href="<?php //e($this->webroot.'RendimientoViewFullGstCoreIndicators/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-exchange"></i>&nbsp;<span>Disponibilidad</span></a>
-                          </li>
+                          </li> -->
                         </ul>
                     </li>
 
