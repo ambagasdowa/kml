@@ -54,7 +54,7 @@
 		td {
 			font-family: "Arial", monospace, sans-serif;
 			/*font-family: monospace;*/
-			font-size: 11px;
+			font-size: 10px;
 			white-space:nowrap;
 		}
 
@@ -238,6 +238,36 @@
 									// Add Table UIX
 									// $('#indTable').DataTable();
 
+
+									// var table = $('#indTable').DataTable();
+									//
+									// table.columns( '.sum' ).every( function (row, data, start, end, display) {
+									//
+									// 		var intVal = function ( i ) {
+									// 							 // console.log(i);
+									// 								 return typeof i === 'string' ?
+									// 										 i.replace(/[\$,]/g, '')*1 :
+									// 										 typeof i === 'number' ?
+									// 												 i : 0;
+									// 		};
+									//
+									// 		function isVisible(e) {
+									// 		    return !!( e.offsetWidth || e.offsetHeight || e.getClientRects().length );
+									// 		}
+									//     var sum = this
+									//         .data()
+									//         .reduce( function (a,b) {
+									//             return intVal(a) + intVal(b);
+									//         },0 );
+									//
+									// 				// var sumc = this
+									// 		    //     .data()
+									// 		    //     .reduce( function (a,b) {
+									// 		    //         return intVal(a) + intVal(b);
+									// 		    //     },0 );
+									//     $( this.footer() ).html( ''+(Math.round(sumc * 100) / 100) );
+									// } );
+
 									//
 									$('#indTable').DataTable( {
 
@@ -251,15 +281,57 @@
 																		 typeof i === 'number' ?
 																				 i : 0;
 														 };
+
+														 // KMS
 														 // Total over all pages
-														 total = api
+														 ktotal = api
+																 .column( 8 )
+																 .data()
+																 .reduce( function (a, b) {
+																		 return intVal(a) + intVal(b);
+																 }, 0 );
+														 // Total over this page
+														 kpageTotal = api
+																 .column( 8, { page: 'current'} )
+																 .data()
+																 .reduce( function (a, b) {
+																		 return intVal(a) + intVal(b);
+																 }, 0 );
+														 // Update footer
+														 $( api.column( 8 ).footer() ).html(
+																 ''+ (Math.round(kpageTotal * 100) / 100)  +' ( '+ (Math.round(ktotal * 100) / 100) +' total)'
+														 );
+
+														 // Diesel
+														 // Total over all pages
+														 dtotal = api
+																 .column( 9 )
+																 .data()
+																 .reduce( function (a, b) {
+																		 return intVal(a) + intVal(b);
+																 }, 0 );
+														 // Total over this page
+														 dpageTotal = api
+																 .column( 9, { page: 'current'} )
+																 .data()
+																 .reduce( function (a, b) {
+																		 return intVal(a) + intVal(b);
+																 }, 0 );
+														 // Update footer
+														 $( api.column( 9 ).footer() ).html(
+																 ''+ (Math.round(dpageTotal * 100) / 100)  +' ( '+ (Math.round(dtotal * 100) / 100) +' total)'
+														 );
+
+														 // Rendimiento
+														 // Total over all pages
+														 rtotal = api
 																 .column( 10 )
 																 .data()
 																 .reduce( function (a, b) {
 																		 return intVal(a) + intVal(b);
 																 }, 0 );
 														 // Total over this page
-														 pageTotal = api
+														 rpageTotal = api
 																 .column( 10, { page: 'current'} )
 																 .data()
 																 .reduce( function (a, b) {
@@ -267,7 +339,7 @@
 																 }, 0 );
 														 // Update footer
 														 $( api.column( 10 ).footer() ).html(
-																 ''+ (Math.round(pageTotal * 100) / 100)  +' ( '+ (Math.round(total * 100) / 100) +' total)'
+																 ''+ (Math.round(rpageTotal * 100) / 100)  +' ( '+ (Math.round(rtotal * 100) / 100) +' total)'
 														 );
 												 }
 										 });

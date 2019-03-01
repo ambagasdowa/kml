@@ -120,9 +120,9 @@
 				<th><?php echo 'Destino';?></th>
 				<!-- <th><?php echo 'route';?></th> -->
 				<th><?php echo 'Modelo';?></th>
-				<th><?php echo 'Kms';?></th>
-				<th><?php echo 'Diesel';?></th>
-				<th><?php echo 'Rendimiento';?></th>
+				<th class="sum" ><?php echo 'Kms';?></th>
+				<th class="sum" ><?php echo 'Diesel';?></th>
+				<th class="sum" ><?php echo 'Rendimiento';?></th>
 				<!-- <th><?php echo 'Periodo';?></th> -->
 				<!-- <th><?php echo 'cyear';?></th> -->
 			</tr>
@@ -154,7 +154,9 @@
 		</tbody>
 		<tfoot>
 	            <tr>
-	                <th colspan="10" style="text-align:right">Total:</th>
+	                <th colspan="8" style="text-align:right">Total:</th>
+	                <th></th>
+	                <th></th>
 	                <th></th>
 	            </tr>
 	  </tfoot>
