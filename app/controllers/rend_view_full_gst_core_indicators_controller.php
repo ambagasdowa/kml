@@ -76,15 +76,15 @@ class RendViewFullGstCoreIndicatorsController extends AppController {
 
 
 	function index() {
-
-		$this->LoadModule('ProjectionsViewBussinessUnit');
-		// DEBUG bugging
-		// debug($projectionsViewIndicatorsPeriodsFullFleets);
-		if (!isset($bsu_conditions)){
-			$bsu_conditions = null;
-		}
-		$bssus = array_values($this->ProjectionsViewBussinessUnit->find('list',array('conditions'=>$bsu_conditions)));
-		debug($bssus);
+		// 
+		// $this->LoadModule('ProjectionsViewBussinessUnit');
+		// // DEBUG bugging
+		// // debug($projectionsViewIndicatorsPeriodsFullFleets);
+		// if (!isset($bsu_conditions)){
+		// 	$bsu_conditions = null;
+		// }
+		// $bssus = array_values($this->ProjectionsViewBussinessUnit->find('list',array('conditions'=>$bsu_conditions)));
+		// debug($bssus);
 
 		$this->RendViewFullGstCoreIndicator->recursive = 0;
 		$this->set('rendViewFullGstCoreIndicators', $this->paginate());
