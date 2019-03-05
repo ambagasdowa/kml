@@ -155,7 +155,7 @@
 								                              'title'=>'Puede teclear la fecha en Formato yyyymm',
 																							'div'=>FALSE,
 																							'label'=>FALSE,
-																							'options'=> array('201901'=>'Enero','201902'=>'Febrero'),
+																							'options'=> array('201901'=>'Enero','201902'=>'Febrero','201903'=>'Marzo'),
 																							'tabindex'=>'1'
 																						)
 																		);
@@ -177,7 +177,7 @@
 								                              'title'=>'Puede teclear la fecha en Formato yyyymmdd',
 																							'div'=>FALSE,
 																							'label'=>FALSE,
-																							'options'=>array(1=>'orizaba',2=>'guadalajara',3=>'ramos'),
+																							'options'=>array(1=>'Orizaba',2=>'Guadalajara',3=>'Ramos Arizpe',4=>'Mexicali',5=>'Hermosillo',6=>'La Paz',7=>'Macuspana',8=>'Cuautitlan',9=>'Tultitlan'),
 																							'tabindex'=>'2'
 																						)
 																		);
@@ -269,7 +269,106 @@
 									// } );
 
 									//
-									$('#indTable').DataTable( {
+									var table_a = $('#table_res').DataTable( {
+
+												 "footerCallback": function ( row, data, start, end, display ) {
+														 var api = this.api(), data;
+														 // Remove the formatting to get integer data for summation
+														 var intVal = function ( i ) {
+															 // console.log(i);
+																 return typeof i === 'string' ?
+																		 i.replace(/[\$,]/g, '')*1 :
+																		 typeof i === 'number' ?
+																				 i : 0;
+														 };
+
+														 // KMS
+														 // Total over all pages
+														 kvtotal = api
+																 .column( 1 )
+																 .data()
+																 .reduce( function (a, b) {
+																		 return intVal(a) + intVal(b);
+																 }, 0 );
+														 // Total over this page
+														 kvpageTotal = api
+																 .column( 1, { page: 'current'} )
+																 .data()
+																 .reduce( function (a, b) {
+																		 return intVal(a) + intVal(b);
+																 }, 0 );
+														 // Update footer
+														 $( api.column( 1 ).footer() ).html(
+																 ''+ (Math.round(kvpageTotal * 100) / 100)  +' ( '+ (Math.round(kvtotal * 100) / 100) +' total)'
+														 );
+
+														 // Viajes
+														 // Total over all pages
+														 kvxtotal = api
+																 .column( 2 )
+																 .data()
+																 .reduce( function (a, b) {
+																		 return intVal(a) + intVal(b);
+																 }, 0 );
+														 // Total over this page
+														 kvxpageTotal = api
+																 .column( 2, { page: 'current'} )
+																 .data()
+																 .reduce( function (a, b) {
+																		 return intVal(a) + intVal(b);
+																 }, 0 );
+														 // Update footer
+														 $( api.column( 2 ).footer() ).html(
+																 ''+ (Math.round(kvxpageTotal * 100) / 100)  +' ( '+ (Math.round(kvxtotal * 100) / 100) +' total)'
+														 );
+
+														 //diesel
+														 // Total over all pages
+														 kvytotal = api
+																 .column( 3 )
+																 .data()
+																 .reduce( function (a, b) {
+																		 return intVal(a) + intVal(b);
+																 }, 0 );
+														 // Total over this page
+														 kvypageTotal = api
+																 .column( 3, { page: 'current'} )
+																 .data()
+																 .reduce( function (a, b) {
+																		 return intVal(a) + intVal(b);
+																 }, 0 );
+														 // Update footer
+														 $( api.column( 3 ).footer() ).html(
+																 ''+ (Math.round(kvypageTotal * 100) / 100)  +' ( '+ (Math.round(kvytotal * 100) / 100) +' total)'
+														 );
+
+														//Rendiemiento
+														// Total over all pages
+														kvmtotal = api
+																.column( 4 )
+																.data()
+																.reduce( function (a, b) {
+																		return intVal(a) + intVal(b);
+																}, 0 );
+														// Total over this page
+														kvmpageTotal = api
+																.column( 4, { page: 'current'} )
+																.data()
+																.reduce( function (a, b) {
+																		return intVal(a) + intVal(b);
+																}, 0 );
+														// Update footer
+														$( api.column( 4 ).footer() ).html(
+																''+ (Math.round(kvmpageTotal * 100) / 100)  +' ( '+ (Math.round(kvmtotal * 100) / 100) +' total)'
+														);
+
+
+												 }
+										 });
+									// End table
+
+									//
+									var table_b = $('#table_det').DataTable( {
 
 												 "footerCallback": function ( row, data, start, end, display ) {
 														 var api = this.api(), data;
@@ -285,13 +384,33 @@
 														 // KMS
 														 // Total over all pages
 														 ktotal = api
-																 .column( 8 )
+																 .column( 7 )
 																 .data()
 																 .reduce( function (a, b) {
 																		 return intVal(a) + intVal(b);
 																 }, 0 );
 														 // Total over this page
 														 kpageTotal = api
+																 .column( 7, { page: 'current'} )
+																 .data()
+																 .reduce( function (a, b) {
+																		 return intVal(a) + intVal(b);
+																 }, 0 );
+														 // Update footer
+														 $( api.column( 7 ).footer() ).html(
+																 ''+ (Math.round(kpageTotal * 100) / 100)  +' ( '+ (Math.round(ktotal * 100) / 100) +' total)'
+														 );
+
+														 // Diesel
+														 // Total over all pages
+														 dtotal = api
+																 .column( 8 )
+																 .data()
+																 .reduce( function (a, b) {
+																		 return intVal(a) + intVal(b);
+																 }, 0 );
+														 // Total over this page
+														 dpageTotal = api
 																 .column( 8, { page: 'current'} )
 																 .data()
 																 .reduce( function (a, b) {
@@ -299,19 +418,19 @@
 																 }, 0 );
 														 // Update footer
 														 $( api.column( 8 ).footer() ).html(
-																 ''+ (Math.round(kpageTotal * 100) / 100)  +' ( '+ (Math.round(ktotal * 100) / 100) +' total)'
+																 ''+ (Math.round(dpageTotal * 100) / 100)  +' ( '+ (Math.round(dtotal * 100) / 100) +' total)'
 														 );
 
-														 // Diesel
+														 // Rendimiento
 														 // Total over all pages
-														 dtotal = api
+														 rtotal = api
 																 .column( 9 )
 																 .data()
 																 .reduce( function (a, b) {
 																		 return intVal(a) + intVal(b);
 																 }, 0 );
 														 // Total over this page
-														 dpageTotal = api
+														 rpageTotal = api
 																 .column( 9, { page: 'current'} )
 																 .data()
 																 .reduce( function (a, b) {
@@ -319,34 +438,18 @@
 																 }, 0 );
 														 // Update footer
 														 $( api.column( 9 ).footer() ).html(
-																 ''+ (Math.round(dpageTotal * 100) / 100)  +' ( '+ (Math.round(dtotal * 100) / 100) +' total)'
-														 );
-
-														 // Rendimiento
-														 // Total over all pages
-														 rtotal = api
-																 .column( 10 )
-																 .data()
-																 .reduce( function (a, b) {
-																		 return intVal(a) + intVal(b);
-																 }, 0 );
-														 // Total over this page
-														 rpageTotal = api
-																 .column( 10, { page: 'current'} )
-																 .data()
-																 .reduce( function (a, b) {
-																		 return intVal(a) + intVal(b);
-																 }, 0 );
-														 // Update footer
-														 $( api.column( 10 ).footer() ).html(
 																 ''+ (Math.round(rpageTotal * 100) / 100)  +' ( '+ (Math.round(rtotal * 100) / 100) +' total)'
 														 );
 												 }
 										 });
 									// End table
 
-									console.log(statusText);
+									$('#myInput').on( 'keyup', function () {
+									    table_a.search( this.value ).draw();
+									    table_b.search( this.value ).draw();
+									} );
 
+									console.log(statusText);
 									if(statusText == "error"){
 												 thisUrl = "<?php echo Dispatcher::baseUrl();?>/users/login";
 													 console.log(thisUrl);

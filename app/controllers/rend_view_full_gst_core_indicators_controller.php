@@ -23,9 +23,7 @@ class RendViewFullGstCoreIndicatorsController extends AppController {
 	var $name = 'RendViewFullGstCoreIndicators';
 
 	function get() {
-		Configure::write('debug',2);
-
-		// $this->LoadModel('BalanzaViewUdnsRpt');
+		// Configure::write('debug',2);
 
 		$posted = json_decode(base64_decode($this->params['named']['data']),true);
 		// debug($posted);
@@ -62,11 +60,88 @@ class RendViewFullGstCoreIndicatorsController extends AppController {
 
 		$rendViewFullGstCoreIndicators = $this->RendViewFullGstCoreIndicator->find('all',array('conditions'=>$conditionsBl));
 
+
 		// debug($rendViewFullGstCoreIndicators);
 
-		// exit();
+		$sum_kms = $sum_diesel = $sum_viajes = $sum_rendimiento = array();
 
-		$this->set(compact('rendViewFullGstCoreIndicators'));
+		foreach ($rendViewFullGstCoreIndicators as $key => $rendViewFullGstCoreIndicator) {
+			// debug($key);
+			if ( !isset($sum_kms[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']]) ) {
+				$sum_kms[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']] = null;
+			}
+			if ( !isset($sum_kms[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']]) ) {
+				$sum_diesel[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']] = null;
+			}
+			if ( !isset($sum_kms[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']]) ) {
+				$sum_rendimiento[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']] = null;
+			}
+			if ( !isset($sum_kms[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']]) ) {
+				$sum_viajes[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']] = null;
+			}
+
+			$sum_kms[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']][] += $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['kms'];
+			$sum_diesel[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']][] += $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['diesel'];
+			$sum_rendimiento[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']][] += $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['rendimiento'];
+			$sum_viajes[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']][] += $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['viajes'];
+			$data[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']] = $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['viaje'].','.$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['rendimiento'];
+			// debug($data);
+			$json_parsing_level_two[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']][] = json_encode(
+																						array(
+																									'name'=>$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']
+																									,'id'=>$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']
+																									,'data'=>"{$data[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']]}"
+																								 )
+																					 ,JSON_FORCE_OBJECT
+																					);
+		}
+
+
+		// debug($json_parsing_level_two);
+
+		foreach ($sum_kms as $key_kms => $values_kms) {
+				$sums_kms[$key_kms]= array_sum($values_kms);
+		}
+
+		foreach ($sum_diesel as $key_diesel => $values_diesel) {
+				$sums_diesel[$key_diesel]= array_sum($values_diesel);
+		}
+
+		$json_parsing_lv_one = null;
+		foreach ($sum_viajes as $key_viajes => $values_viajes) {
+				$sums_viajes[$key_viajes]= array_sum($values_viajes);
+
+				$json_parsing_lv_one .= json_encode(
+																	array(
+																					 'name'=>$key_viajes
+																					,'y'=>round((array_sum($values_viajes)),2)
+																					// ,'drilldown'=>$key_viajes
+																					,'drilldown'=>null
+																			 )
+																					, JSON_PRETTY_PRINT
+										);
+		}
+
+		$json_parsing_level_one = implode('},{',explode('}{',$json_parsing_lv_one));
+
+		// debug($json_parsing_level_one);
+
+		foreach ($sum_rendimiento as $key_rendimiento => $values_rendimiento) {
+			$sums_rendimiento[$key_rendimiento]= round(array_sum($values_rendimiento) / $sums_viajes[$key_rendimiento],2);
+			$sums_rendimiento_af[$key_rendimiento]= round(array_sum($values_rendimiento),2);
+		}
+
+
+
+	$this->set(compact(
+											 'rendViewFullGstCoreIndicators'
+											,'sums_kms'
+											,'sums_diesel'
+											,'sums_rendimiento'
+											,'sums_viajes'
+											,'json_parsing_level_one'
+										)
+						);
 
 		// NOTE set the response output for an ajax call
 		Configure::write('debug', 0);
@@ -76,7 +151,7 @@ class RendViewFullGstCoreIndicatorsController extends AppController {
 
 
 	function index() {
-		// 
+
 		// $this->LoadModule('ProjectionsViewBussinessUnit');
 		// // DEBUG bugging
 		// // debug($projectionsViewIndicatorsPeriodsFullFleets);
@@ -85,10 +160,20 @@ class RendViewFullGstCoreIndicatorsController extends AppController {
 		// }
 		// $bssus = array_values($this->ProjectionsViewBussinessUnit->find('list',array('conditions'=>$bsu_conditions)));
 		// debug($bssus);
-
+		//
 		$this->RendViewFullGstCoreIndicator->recursive = 0;
 		$this->set('rendViewFullGstCoreIndicators', $this->paginate());
 		$this->set(compact('bssus'));
+
+
+		// viajes despa no documentados
+		// date , operacion , area
+		// resumen , sin_documento / total de viajes ,  | promedio acumulado
+		// rendimiento
+		// disponibilidad
+
+// vales de combustibles?
+
 	}
 
 	function view($id = null) {

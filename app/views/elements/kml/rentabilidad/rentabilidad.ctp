@@ -161,8 +161,8 @@ $core = 'core'.DS;
       // e($this->Html->script($theme.'highCharts/stock/themes/dark-unica',false));
       // e($this->Html->script($theme.'highCharts/stock/themes/gray',false));
       // e($this->Html->script($theme.'highCharts/stock/themes/grid',false));
-      // e($this->Html->script($theme.'highCharts/stock/themes/grid-light',false));
-      e($this->Html->script($theme.'highCharts/stock/themes/sand-signika',false));
+      e($this->Html->script($theme.'highCharts/stock/themes/grid-light',false));
+      // e($this->Html->script($theme.'highCharts/stock/themes/sand-signika',false));
       // e($this->Html->script($theme.'highCharts/stock/themes/skies',false));
       e($this->Html->script($theme.'highCharts/plugin/export-csv',false));
 
