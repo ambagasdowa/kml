@@ -39,9 +39,9 @@
 			<ul class="list-group list-inline">
 
 										<li>
-							<?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $this->Form->value('DisponibilidadTblUnidadesGstIndicator.id')), null, sprintf(__('Are you sure you want to delete # %s?', true), $this->Form->value('DisponibilidadTblUnidadesGstIndicator.id'))); ?>						</li>
+							<?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $this->Form->value('DisponibilidadViewRptGroupGstIndicator.id')), null, sprintf(__('Are you sure you want to delete # %s?', true), $this->Form->value('DisponibilidadViewRptGroupGstIndicator.id'))); ?>						</li>
 										<li>
-							<?php echo $this->Html->link(__('List Disponibilidad Tbl Unidades Gst Indicators', true), array('action' => 'index'),array('class'=>'btn btn-default list-group-item'));?>						</li>
+							<?php echo $this->Html->link(__('List Disponibilidad View Rpt Group Gst Indicators', true), array('action' => 'index'),array('class'=>'btn btn-default list-group-item'));?>						</li>
 				
 			</ul>
         </div>
@@ -52,22 +52,22 @@
 		<i class="fa fa-file-o fa-2x"></i>
 		  <h2 class="form-signin-heading">
 			<span>
-					 <?php __('Edit Disponibilidad Tbl Unidades Gst Indicator'); ?>			</span>
+					 <?php __('Edit Disponibilidad View Rpt Group Gst Indicator'); ?>			</span>
 		</h2>
 		
-          <?php echo $this->Form->create('DisponibilidadTblUnidadesGstIndicator',array('enctype' => 'multipart/form-data','class'=>'form'));?>
-			<div class="disponibilidadTblUnidadesGstIndicators form">
+          <?php echo $this->Form->create('DisponibilidadViewRptGroupGstIndicator',array('enctype' => 'multipart/form-data','class'=>'form'));?>
+			<div class="disponibilidadViewRptGroupGstIndicators form">
 
 <!-- 				 -->
 <!-- 				<div class="table-responsive"> -->
 <!-- 					<table class="table table-bordered table-hover table-striped responstable"> -->
 							<?php
 		echo $this->Form->input('id',array('placeholder'=>'id','class'=>'input'));
-		echo $this->Form->input('unidad',array('placeholder'=>'unidad','class'=>'input'));
+		echo $this->Form->input('unidades',array('placeholder'=>'unidades','class'=>'input'));
 		echo $this->Form->input('id_status',array('placeholder'=>'id_status','class'=>'input'));
-		echo $this->Form->input('description',array('placeholder'=>'description','class'=>'input'));
-		echo $this->Form->input('compromise',array('placeholder'=>'compromise','class'=>'input'));
-		echo $this->Form->input('status',array('placeholder'=>'status','class'=>'input'));
+		echo $this->Form->input('estatus',array('placeholder'=>'estatus','class'=>'input'));
+		echo $this->Form->input('id_area',array('placeholder'=>'id_area','class'=>'input'));
+		echo $this->Form->input('area',array('placeholder'=>'area','class'=>'input'));
 	?>
 						<?php 	echo $this->Form->input('name',array('type'=>'text','label'=>false,'placeholder'=>'Nombre de la politica'));
 									echo $this->Form->input('description',array('type'=>'textarea','class'=>'placeholder','label'=>false,'placeholder'=>'Descripcion de la politica','rows'=>'5','cols'=>'80'));

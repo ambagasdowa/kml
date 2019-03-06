@@ -97,7 +97,7 @@
 
 	<div class="row">
  	 <div class="twelve columns">
- 		 <div id="chart" class="chart" style="display:none;" >
+ 		 <div id="chart" class="chart" >
  					 <div id="the-chart" style="min-width:80%; min-height: 480px; margin: 0 auto">
  						 <!-- graphics -->
  					 </div>
@@ -112,32 +112,62 @@
 
 <div class="row">
 <?php
-// echo '<div class="two columns"><i class="fa fa-barcode"></i></div>';
-// echo '<div class="two columns"></div>';
-// echo
-// 			$this->Form->input
-// 												(
-// 													'searchbox',
-// 													 array
-// 																(
-// 																	'type'=>'text',
-// 																	'class'=>'search_udn u-full-width form-control',
-// 																	'id'=>'myInput',
-// 																	'placeholder' => 'Filtro General',
-// 																	// 'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
-// 																	// 'title'=>'Puede teclear la fecha en Formato yyyymmdd',
-// 																	'div'=>FALSE,
-// 																	'label'=>FALSE,
-// 																	// 'options'=>array(1=>'ATSA IZUCAR - SIVESA ORIZABA',2=>'ATSA MIXQUI - SIVESA ORIZABA',3=>'CALIZA MIXQUI - FANAL TULTITLAN'),
-// 																	'tabindex'=>'2'
-// 																)
-// 												);
-// 	echo '</div>';
+echo '<div class="two columns"><i class="fa fa-barcode"></i></div>';
+echo '<div class="two columns"></div>';
+echo
+			$this->Form->input
+												(
+													'searchbox',
+													 array
+																(
+																	'type'=>'text',
+																	'class'=>'search_udn u-full-width form-control',
+																	'id'=>'FilterAll',
+																	'placeholder' => 'Filtro General',
+																	// 'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
+																	// 'title'=>'Puede teclear la fecha en Formato yyyymmdd',
+																	'div'=>FALSE,
+																	'label'=>FALSE,
+																	// 'options'=>array(1=>'ATSA IZUCAR - SIVESA ORIZABA',2=>'ATSA MIXQUI - SIVESA ORIZABA',3=>'CALIZA MIXQUI - FANAL TULTITLAN'),
+																	'tabindex'=>'2'
+																)
+												);
+	echo '</div>';
  ?>
  </div>
 
 
 <div id="first-datatable-output" class="table-responsive">
+
+		<table id="table_grp" class="display order-table table table-bordered table-hover table-striped responstable">
+			<thead>
+					<!-- <th><?php echo 'id';?></th> -->
+					<th><?php echo 'Unidades';?></th>
+					<!-- <th><?php echo 'id_status';?></th> -->
+					<th><?php echo 'Estatus';?></th>
+					<!-- <th><?php echo 'id_area';?></th> -->
+					<!-- <th><?php echo 'Area';?></th> -->
+			</thead>
+			<tbody>
+				<?php
+					foreach ($disponibilidadViewRptGroupGstIndicators as $key => $disponibilidadViewRptGroupGstIndicator) {
+				?>
+				<tr>
+					<!-- <td><?php echo $disponibilidadViewRptGroupGstIndicator['DisponibilidadViewRptGroupGstIndicator']['id']; ?></td> -->
+					<td><?php echo $disponibilidadViewRptGroupGstIndicator['DisponibilidadViewRptGroupGstIndicator']['unidades']; ?></td>
+					<!-- <td><?php echo $disponibilidadViewRptGroupGstIndicator['DisponibilidadViewRptGroupGstIndicator']['id_status']; ?></td> -->
+					<td><?php echo $disponibilidadViewRptGroupGstIndicator['DisponibilidadViewRptGroupGstIndicator']['estatus']; ?></td>
+					<!-- <td><?php echo $disponibilidadViewRptGroupGstIndicator['DisponibilidadViewRptGroupGstIndicator']['id_area']; ?></td> -->
+					<!-- <td><?php echo $disponibilidadViewRptGroupGstIndicator['DisponibilidadViewRptGroupGstIndicator']['area']; ?></td> -->
+				</tr>
+				<?php } ?>
+			</tbody>
+			<!-- <tfoot>
+
+			</tfoot> -->
+		</table>
+
+
 
 		<table id="table_det" class="display order-table table table-bordered table-hover table-striped responstable">
 		<thead>
@@ -149,8 +179,8 @@
 				<th><?php echo 'Remolque';?></th>
 				<!-- <th><?php echo 'Area';?></th> -->
 				<th><?php echo 'Operacion';?></th>
-				<th><?php echo 'Description';?></th>
-				<th><?php echo 'Compromise';?></th>
+				<th>Descripci&oacute;n</th>
+				<th><?php echo 'Fecha Compromiso';?></th>
 				<!-- <th><?php echo 'Status_viaje';?></th> -->
 				<!-- <th><?php echo 'Desc_viaje';?></th> -->
 				<!-- <th><?php echo 'Status_taller';?></th> -->
@@ -166,7 +196,7 @@
 		<tr id="<?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['unidad'] ?>">
 			<td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['unidad']; ?>&nbsp;</td>
 			<td><?php
-			 			if ($disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['iseditable'] == true ) {
+			 			if ($disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['iseditable'] == true and $user_mod == true ) {
 							echo
 										$this->Form->input
 																			(
@@ -199,8 +229,64 @@
 			<td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['remolque']; ?>&nbsp;</td>
 			<!-- <td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['area']; ?>&nbsp;</td> -->
 			<td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['segmento']; ?>&nbsp;</td>
-			<td id="description_<?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['unidad'] ?>"><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['description']; ?>&nbsp;</td>
-			<td id="compromise_<?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['unidad'] ?>"><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['compromise']; ?>&nbsp;</td>
+			<td>
+				<?php
+				if ($disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['iseditable'] == true and $user_mod == true ) {
+					echo
+								$this->Form->input
+																	(
+																		'searchbox',
+																		 array
+																					(
+																						'type'=>'text',
+																						'class'=>'u-full-width form-control',
+																						'id'=>'description_'.$disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['unidad'],
+																						// 'data-unidad'=>$disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['unidad'],
+																						// 'data-status'=>$disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['id_status'],
+																						// 'placeholder' => $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['estatus'],
+																						// 'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
+																						// 'title'=>'Puede teclear la fecha en Formato yyyymmdd',
+																						// 'selected'=>$disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['id_status'],
+																						'div'=>FALSE,
+																						'label'=>FALSE
+																						// 'options'=>$disponibilidadViewStatusGstIndicators
+																						// 'tabindex'=>'2'
+																					)
+																	);
+				} else {
+							echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['description'];
+				}
+				?>
+			</td>
+			<td>
+				<?php
+				if ($disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['iseditable'] == true and $user_mod == true ) {
+					echo
+								$this->Form->input
+																	(
+																		'searchbox',
+																		 array
+																					(
+																						'type'=>'text',
+																						'class'=>'u-full-width form-control',
+																						'id'=>'compromise_'.$disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['unidad'],
+																						// 'data-unidad'=>$disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['unidad'],
+																						// 'data-status'=>$disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['id_status'],
+																						// 'placeholder' => $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['estatus'],
+																						// 'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
+																						// 'title'=>'Puede teclear la fecha en Formato yyyymmdd',
+																						// 'selected'=>$disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['id_status'],
+																						'div'=>FALSE,
+																						'label'=>FALSE
+																						// 'options'=>$disponibilidadViewStatusGstIndicators
+																						// 'tabindex'=>'2'
+																					)
+																	);
+				} else {
+							echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['compromise'];
+				}
+				?>
+			</td>
 			<!-- <td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['status_viaje']; ?>&nbsp;</td> -->
 			<!-- <td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['desc_viaje']; ?>&nbsp;</td> -->
 			<!-- <td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['status_taller']; ?>&nbsp;</td> -->
@@ -222,10 +308,17 @@
 
 <!-- if clients -->
 <script type="text/javascript">
+$(document).ready(function(){
 
+	// const isEmptyValue = (value) => {
+	//     if (value === '' || value === null || value === undefined) {
+	//         return true
+	//     } else {
+	//         return false
+	//     }
+	// }
 
 		$(".update_status").select2();
-
 		$(".update_status").on('select2:select', function (e) {
 				// e.stopPropagation();
 				// e.preventDefault();
@@ -234,90 +327,121 @@
 				console.log(this);
 				console.log($(this).attr('data-unidad'));
 				console.log($(this).attr('data-status'));
-var unidad = $(this).attr('data-unidad');
+
+				var description = "description_"+$(this).attr('data-unidad');
+				var compromise = "compromise_"+$(this).attr('data-unidad');
 // or ajax
-// $("a[id^='descript_']").
-console.log(unidad)
-console.log($('#description_'+unidad).attr('value'));
 
+				// desc = document.getElementById(description).innerText;
+				// comp = document.getElementById(compromise).innerText;
 
+				desc = document.getElementById(description).value;
+				comp = document.getElementById(compromise).value;
+
+				console.log(desc);
+				console.log(comp);
+
+				if ( (desc === '' || desc === null || desc === undefined) || (comp === '' || comp === null || comp === undefined) ) {
+						// return true
+						console.log('void');
+						alert('descripcion y compromiso son obligatorios');
+						save = true
+				} else {
+						// return false
+						console.log('notvoid');
+						save = false
 				var post_data = {
 													'unidad':$(this).attr('data-unidad'),
-													'id_status':$(this).attr('data-status')
+													'id_status':$(this).attr('data-status'),
+													'description':desc,
+													'compromise':comp
 												};
 
 				var str_to_pass = JSON.stringify(post_data);
-
 				console.log(str_to_pass);
-
 				data_code = base64_encode(str_to_pass);
-
-				var urlStruct = "<?php //echo Dispatcher::baseUrl();?>/PerformanceFacturas/add/data:" + data_code;
+				var urlStruct = "<?php echo Dispatcher::baseUrl();?>/DisponibilidadViewRptUnidadesGstIndicators/add/save:" + data_code;
 				console.log(urlStruct);
 
+				// Assign handlers immediately after making the request,
+// and remember the jqxhr object for this request
+						var jqxhr = $.post( urlStruct, function() {
+						  alert( "success" );
+						})
+						  .done(function() {
+						    alert( "second success" );
+						  })
+						  .fail(function() {
+						    alert( "error" );
+						  })
+						  .always(function() {
+						    alert( "finished" );
+						  });
+				}
 		});
 
-		// $(document).ready(function(){
+
 		//
-		// 	Highcharts.chart('the-chart', {
-		// 			chart: {
-		// 					type: 'column',
-		// 					backgroundColor: {
-		// 					            linearGradient: [0, 0, 500, 500],
-		// 					            stops: [
-		// 					                [0, 'rgb(255, 255, 255)'],
-		// 					                [1, 'rgb(240, 240, 255)']
-		// 					            ]
-		// 					 }
-		// 			},
-		// 			width:1200,
-		// 			title: {
-		// 					text: 'Indicadores de Rendimiento Combustible'
-		// 			},
-		// 			credits:{enabled:false},
-		// 			// colors: ['#058DC7','#3398d6','#6c99bb','#50B432','#b4c973', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'], // orig
-		// 			colors: ['#00649f','#01aac1','#00dbe7','#97ecc5','#1fab89','#62d2a2','#9df3c4','#d7fbe8','#f67280','#c06c84','#6c5b7b','#355c7d','#ffb400','#fffbe0','#2994b2','#474744'], // theme colores
-		// 			// colors:['#1a1334','#26294a',' #01545a','#017351','#03c383','#aad962','#fbbf45','#ef6a32','#ed0345','#a12a5e','#710162','#110141'], // darks theme
-		// 			// colors:["#bfb7e6", "#7d86c1", "#403874", "#261c4e", "#1f0937", "#574331", "#9d9121", "#a49959", "#b6b37e", "#91a3f5"], //cold_water
-		// 			// colors:["#043227", "#097168", "#ffcc88", "#fa482e", "#f4a32e"], // oldPapers
-		// 			// theme trover
-		// 			// colors:["#51574a", "#447c69", "#74c493", "#8e8c6d", "#e4bf80", "#e9d78e", "#e2975d", "#f19670", "#e16552", "#c94a53", "#be5168", "#a34974", "#993767", "#65387d", "#4e2472", "#9163b6", "#e279a3", "#e0598b", "#7c9fb0", "#5698c4", "#9abf88"],
-		// 			subtitle: {
-		// 					// text: 'Click en las columnas para ver el detalle del porcentaje por Unidad.'
-		// 			},
-		// 			xAxis: {
-		// 					type: 'category'
-		// 			},
-		// 			yAxis: {
-		// 					title: {
-		// 							text: 'Numero de Viajes'
-		// 					}
-		// 			},
-		// 			legend: {
-		// 					enabled: false
-		// 			},
-		// 			plotOptions: {
-		// 					series: {
-		// 							borderWidth: 0,
-		// 							dataLabels: {
-		// 									enabled: true,
-		// 									format: '{point.y}'
-		// 							}
-		// 					}
-		// 			},
-		// 			tooltip: {
-		// 					headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-		// 					pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b> viajes <br/>'
-		// 			},
-		// 			series: [{
-		// 					name: 'Rutas',
-		// 					colorByPoint: true,
-		// 					data: [ <?php //print($json_parsing_level_one) ?> ]
-		// 			}] //,
-		// 			// drilldown: {
-		// 			// 		series: [ <?php //print($json_parsing_level_two) ?> ]
-		// 			// }
-		// 	}); // End the chart
-		// 	//
-		// });
+			Highcharts.chart('the-chart', {
+					chart: {
+							type: 'pie',
+							// type: 'column',
+							backgroundColor: {
+							            linearGradient: [0, 0, 500, 500],
+							            stops: [
+							                [0, 'rgb(255, 255, 255)'],
+							                [1, 'rgb(240, 240, 255)']
+							            ]
+							 }
+					},
+					width:1200,
+					title: {
+							text: 'Indicadores de Disponibilidad de Unidades'
+					},
+					credits:{enabled:false},
+					// colors: ['#058DC7','#3398d6','#6c99bb','#50B432','#b4c973', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'], // orig
+					colors: ['#00649f','#01aac1','#00dbe7','#97ecc5','#1fab89','#62d2a2','#9df3c4','#d7fbe8','#f67280','#c06c84','#6c5b7b','#355c7d','#ffb400','#fffbe0','#2994b2','#474744'], // theme colores
+					// colors:['#1a1334','#26294a',' #01545a','#017351','#03c383','#aad962','#fbbf45','#ef6a32','#ed0345','#a12a5e','#710162','#110141'], // darks theme
+					// colors:["#bfb7e6", "#7d86c1", "#403874", "#261c4e", "#1f0937", "#574331", "#9d9121", "#a49959", "#b6b37e", "#91a3f5"], //cold_water
+					// colors:["#043227", "#097168", "#ffcc88", "#fa482e", "#f4a32e"], // oldPapers
+					// theme trover
+					// colors:["#51574a", "#447c69", "#74c493", "#8e8c6d", "#e4bf80", "#e9d78e", "#e2975d", "#f19670", "#e16552", "#c94a53", "#be5168", "#a34974", "#993767", "#65387d", "#4e2472", "#9163b6", "#e279a3", "#e0598b", "#7c9fb0", "#5698c4", "#9abf88"],
+					subtitle: {
+							// text: 'Click en las columnas para ver el detalle del porcentaje por Unidad.'
+					},
+					xAxis: {
+							type: 'category'
+					},
+					yAxis: {
+							title: {
+									text: 'Numero de Unidades'
+							}
+					},
+					legend: {
+							enabled: false
+					},
+					plotOptions: {
+							series: {
+									borderWidth: 0,
+									dataLabels: {
+											enabled: true,
+											format: '{point.y}'
+									}
+							}
+					},
+					tooltip: {
+							headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+							pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b> Unidades <br/>'
+					},
+					series: [{
+							name: 'Unidades',
+							colorByPoint: true,
+							data: [ <?php print($json_parsing_level_one) ?> ]
+					}] //,
+					// drilldown: {
+					// 		series: [ <?php //print($json_parsing_level_two) ?> ]
+					// }
+			}); // End the chart
+			//
+});
 </script>

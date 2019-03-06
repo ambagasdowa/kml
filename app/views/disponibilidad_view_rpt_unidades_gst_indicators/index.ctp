@@ -238,7 +238,7 @@
 								// $( ".updateSearchResult" ).load(urlStruct);
 								$( ".updateSearchResult" ).load(urlStruct,function(responseText, statusText, xhr) {
 									// Add Table UIX
-
+									var table_a = $('#table_grp').DataTable();
 									var table_b = $('#table_det').DataTable( {
 
 												 // "footerCallback": function ( row, data, start, end, display ) {
@@ -328,10 +328,10 @@
 									// } );
 
 
-									// $('#myInput').on( 'keyup', function () {
-									//     table_a.search( this.value ).draw();
-									//     table_b.search( this.value ).draw();
-									// } );
+									$('#FilterAll').on( 'keyup', function () {
+									    table_a.search( this.value ).draw();
+									    table_b.search( this.value ).draw();
+									} );
 
 									// console.log(statusText);
 									if(statusText == "error"){

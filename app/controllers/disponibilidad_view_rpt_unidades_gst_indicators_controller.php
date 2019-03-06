@@ -63,43 +63,39 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 
 		// $conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.periodo'] = $add_conditions['periodo'];
 		$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.id_area'] = $add_conditions['id_area'];
+		$conditionsTf['DisponibilidadViewRptGroupGstIndicator.id_area'] = $add_conditions['id_area'];
 		// $conditionsBl['RendViewFullGstCoreIndicator.id'] = 10;
 
 		$disponibilidadViewRptUnidadesGstIndicators = $this->DisponibilidadViewRptUnidadesGstIndicator->find('all',array('conditions'=>$conditionsBl));
 
 		$this->LoadModel('DisponibilidadViewStatusGstIndicator');
 
+		$this->LoadModel('DisponibilidadViewRptGroupGstIndicator');
+
 		$disponibilidadViewStatusGstIndicators = $this->DisponibilidadViewStatusGstIndicator->find('list',array('fields'=>array('id_status','nombre')));
 
-		// debug($disponibilidadViewStatusGstIndicators);
-		 //exit();
+		$disponibilidadViewRptGroupGstIndicators = $this->DisponibilidadViewRptGroupGstIndicator->find('all',array('conditions'=>$conditionsTf));
+$json_parsing_lv_one = null;
+		$disp_grp = $disponibilidadViewRptGroupGstIndicators ;
+
+		foreach ($disp_grp as $key => $data) {
+			// code...
+			// debug($data);
+					$json_parsing_lv_one .= json_encode(
+																		array(
+																						 'name'=>$data['DisponibilidadViewRptGroupGstIndicator']['estatus']
+																						,'y'=>round($data['DisponibilidadViewRptGroupGstIndicator']['unidades'],2)
+																						// ,'drilldown'=>$key_viajes
+																						,'drilldown'=>null
+																				 )
+																						, JSON_PRETTY_PRINT
+											);
+
+		}
+
+		$json_parsing_level_one = implode('},{',explode('}{',$json_parsing_lv_one));
 
 
-		// debug($disponibilidadViewRptUnidadesGstIndicators);
-
-		// $sum_kms = $sum_diesel = $sum_viajes = $sum_rendimiento = array();
-
-		// foreach ($rendViewFullGstCoreIndicators as $key => $rendViewFullGstCoreIndicator) {
-		// 	// debug($key);
-		// 	if ( !isset($sum_kms[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']]) ) {
-		// 		$sum_kms[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']] = null;
-		// 	}
-		// 	if ( !isset($sum_kms[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']]) ) {
-		// 		$sum_diesel[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']] = null;
-		// 	}
-		// 	if ( !isset($sum_kms[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']]) ) {
-		// 		$sum_rendimiento[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']] = null;
-		// 	}
-		// 	if ( !isset($sum_kms[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']]) ) {
-		// 		$sum_viajes[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']] = null;
-		// 	}
-		//
-		// 	$sum_kms[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']][] += $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['kms'];
-		// 	$sum_diesel[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']][] += $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['diesel'];
-		// 	$sum_rendimiento[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']][] += $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['rendimiento'];
-		// 	$sum_viajes[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']][] += $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['viajes'];
-		// 	$data[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']] = $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['viaje'].','.$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['rendimiento'];
-		// 	// debug($data);
 		// 	$json_parsing_level_two[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']][] = json_encode(
 		// 																				array(
 		// 																							'name'=>$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']
@@ -110,20 +106,6 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 		// 																			);
 		// }
 
-
-		// debug($json_parsing_level_two);
-
-		// foreach ($sum_kms as $key_kms => $values_kms) {
-		// 		$sums_kms[$key_kms]= array_sum($values_kms);
-		// }
-		//
-		// foreach ($sum_diesel as $key_diesel => $values_diesel) {
-		// 		$sums_diesel[$key_diesel]= array_sum($values_diesel);
-		// }
-		//
-		// $json_parsing_lv_one = null;
-		// foreach ($sum_viajes as $key_viajes => $values_viajes) {
-		// 		$sums_viajes[$key_viajes]= array_sum($values_viajes);
 		//
 		// 		$json_parsing_lv_one .= json_encode(
 		// 															array(
@@ -135,26 +117,20 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 		// 																			, JSON_PRETTY_PRINT
 		// 								);
 		// }
-		//
-		// $json_parsing_level_one = implode('},{',explode('}{',$json_parsing_lv_one));
-		//
-		// // debug($json_parsing_level_one);
-		//
-		// foreach ($sum_rendimiento as $key_rendimiento => $values_rendimiento) {
-		// 	$sums_rendimiento[$key_rendimiento]= round(array_sum($values_rendimiento) / $sums_viajes[$key_rendimiento],2);
-		// 	$sums_rendimiento_af[$key_rendimiento]= round(array_sum($values_rendimiento),2);
-		// }
 
 
-
+	$user_mod = true;
+	$user_mod = false;
 	$this->set(compact(
 											  'disponibilidadViewRptUnidadesGstIndicators'
 											 ,'disponibilidadViewStatusGstIndicators'
+											 ,'disponibilidadViewRptGroupGstIndicators'
+											 ,'user_mod'
 											// ,'sums_kms'
 											// ,'sums_diesel'
 											// ,'sums_rendimiento'
 											// ,'sums_viajes'
-											// ,'json_parsing_level_one'
+											,'json_parsing_level_one'
 										)
 						);
 
@@ -179,15 +155,60 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 	}
 
 	function add() {
-		if (!empty($this->data)) {
-			$this->DisponibilidadViewRptUnidadesGstIndicator->create();
-			if ($this->DisponibilidadViewRptUnidadesGstIndicator->save($this->data)) {
-				$this->Session->setFlash(__('The disponibilidad view rpt unidades gst indicator has been saved', true));
-				$this->redirect(array('action' => 'index'));
-			} else {
-				$this->Session->setFlash(__('The disponibilidad view rpt unidades gst indicator could not be saved. Please, try again.', true));
-			}
-		}
+
+		Configure::write('debug', 1);
+		// NOTE check like if $this->data
+		debug($this->params);
+		// exit();
+
+	if (!empty($this->params['named']['save']) && $this->params['named']['save'] != null) {
+
+		debug($this->params['named']['save']);
+
+		$posted['DisponibilidadTblUnidadesGstIndicator'] = json_decode(base64_decode($this->params['named']['save']),true);
+		debug($posted);
+		$conditions = $posted;
+		//
+		// foreach ($posted as $keys => $postvalue) {
+		//
+		// 	if ($keys > 0 ) {
+		// 		$content = $postvalue['name'];
+		// 		$chars = preg_split('/\[([^\]]*)\]/i', $content, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
+		// 		if ( $postvalue['value'] != "") {
+		// 			$conditions[$chars[2]] = $postvalue['value'];
+		// 		}
+		// 	}
+		//
+		// }
+
+		// set the search array
+		// $dates = array('entregaFacturaCliente','aprobacionFactura','fechaPromesaPago','fechaPago');
+		//
+		// foreach ($conditions as $indx => $perData) {
+		// 	if ( in_array($indx,$dates) == true ) {
+		// 		if ($perData != "" OR $perData != null) {
+		// 			$dates_conv = new DateTime($perData);
+		// 			$conditions[$indx] = $dates_conv->format('Y-m-d');
+		// 		}
+		// 	}
+		// }
+debug($conditions);
+// exit();
+}
+
+if (!empty($conditions)) {
+	$this->LoadModel('DisponibilidadTblUnidadesGstIndicator');
+	$this->DisponibilidadTblUnidadesGstIndicator->create();
+	if ($this->DisponibilidadTblUnidadesGstIndicator->save($conditions)) {
+		$this->Session->setFlash(__('The disponibilidad tbl unidades gst indicator has been saved', true));
+		$this->redirect(array('action' => 'index'));
+	} else {
+		$this->Session->setFlash(__('The disponibilidad tbl unidades gst indicator could not be saved. Please, try again.', true));
+	}
+}
+		// NOTE set the response output for an ajax call
+		Configure::write('debug', 1);
+		$this->autoLayout = false;
 	}
 
 	function edit($id = null) {

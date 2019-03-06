@@ -48,7 +48,7 @@
         <div class="col-md-offset-1 col-sm-11 col-md-11">
           <ul class="list-group list-inline">
 			<li class="list-group-item">
-				<?php echo $this->Html->link(__('New Disponibilidad Tbl Unidades Gst Indicator', true), array('action' => 'add')); ?>			</li>
+				<?php echo $this->Html->link(__('New Disponibilidad View Rpt Group Gst Indicator', true), array('action' => 'add')); ?>			</li>
 							<li>
 				<input type="search" class="light-table-filter form-control " data-table="order-table" placeholder="Filter">
 			</li>
@@ -56,49 +56,45 @@
         </div>
         
         <div class="col-sm-9 col-sm-offset-2 col-md-10 col-md-offset-1 main">
-          <h1 class="page-header"><?php __('Disponibilidad Tbl Unidades Gst Indicators');?></h1>
+          <h1 class="page-header"><?php __('Disponibilidad View Rpt Group Gst Indicators');?></h1>
           <div class="table-responsive">
 			<span class="filter-container">
 				<table class="order-table table table-bordered table-hover table-striped responstable">
 				<thead>
 					<tr>
 													<th><?php echo $this->Paginator->sort('id');?></th>
-													<th><?php echo $this->Paginator->sort('unidad');?></th>
+													<th><?php echo $this->Paginator->sort('unidades');?></th>
 													<th><?php echo $this->Paginator->sort('id_status');?></th>
-													<th><?php echo $this->Paginator->sort('description');?></th>
-													<th><?php echo $this->Paginator->sort('compromise');?></th>
-													<th><?php echo $this->Paginator->sort('created');?></th>
-													<th><?php echo $this->Paginator->sort('modified');?></th>
-													<th><?php echo $this->Paginator->sort('status');?></th>
+													<th><?php echo $this->Paginator->sort('estatus');?></th>
+													<th><?php echo $this->Paginator->sort('id_area');?></th>
+													<th><?php echo $this->Paginator->sort('area');?></th>
 													<th class="actions" colspan="3"><?php __('Actions');?></th>
 							
 					</tr>
 				</thead>
 				<?php
 				$i = 0;
-				foreach ($disponibilidadTblUnidadesGstIndicators as $disponibilidadTblUnidadesGstIndicator):
+				foreach ($disponibilidadViewRptGroupGstIndicators as $disponibilidadViewRptGroupGstIndicator):
 					$class = null;
 					if ($i++ % 2 == 0) {
 						$class = ' class="altrow"';
 					}
 				?>
 	<tr<?php echo $class;?>>
-		<td><?php echo $disponibilidadTblUnidadesGstIndicator['DisponibilidadTblUnidadesGstIndicator']['id']; ?>&nbsp;</td>
-		<td><?php echo $disponibilidadTblUnidadesGstIndicator['DisponibilidadTblUnidadesGstIndicator']['unidad']; ?>&nbsp;</td>
-		<td><?php echo $disponibilidadTblUnidadesGstIndicator['DisponibilidadTblUnidadesGstIndicator']['id_status']; ?>&nbsp;</td>
-		<td><?php echo $disponibilidadTblUnidadesGstIndicator['DisponibilidadTblUnidadesGstIndicator']['description']; ?>&nbsp;</td>
-		<td><?php echo $disponibilidadTblUnidadesGstIndicator['DisponibilidadTblUnidadesGstIndicator']['compromise']; ?>&nbsp;</td>
-		<td><?php echo $disponibilidadTblUnidadesGstIndicator['DisponibilidadTblUnidadesGstIndicator']['created']; ?>&nbsp;</td>
-		<td><?php echo $disponibilidadTblUnidadesGstIndicator['DisponibilidadTblUnidadesGstIndicator']['modified']; ?>&nbsp;</td>
-		<td><?php echo $disponibilidadTblUnidadesGstIndicator['DisponibilidadTblUnidadesGstIndicator']['status']; ?>&nbsp;</td>
+		<td><?php echo $disponibilidadViewRptGroupGstIndicator['DisponibilidadViewRptGroupGstIndicator']['id']; ?>&nbsp;</td>
+		<td><?php echo $disponibilidadViewRptGroupGstIndicator['DisponibilidadViewRptGroupGstIndicator']['unidades']; ?>&nbsp;</td>
+		<td><?php echo $disponibilidadViewRptGroupGstIndicator['DisponibilidadViewRptGroupGstIndicator']['id_status']; ?>&nbsp;</td>
+		<td><?php echo $disponibilidadViewRptGroupGstIndicator['DisponibilidadViewRptGroupGstIndicator']['estatus']; ?>&nbsp;</td>
+		<td><?php echo $disponibilidadViewRptGroupGstIndicator['DisponibilidadViewRptGroupGstIndicator']['id_area']; ?>&nbsp;</td>
+		<td><?php echo $disponibilidadViewRptGroupGstIndicator['DisponibilidadViewRptGroupGstIndicator']['area']; ?>&nbsp;</td>
 		<td class="actions">
-			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $disponibilidadTblUnidadesGstIndicator['DisponibilidadTblUnidadesGstIndicator']['id'])); ?>
+			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $disponibilidadViewRptGroupGstIndicator['DisponibilidadViewRptGroupGstIndicator']['id'])); ?>
 		</td>
 		<td class="actions">
-			<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $disponibilidadTblUnidadesGstIndicator['DisponibilidadTblUnidadesGstIndicator']['id'])); ?>
+			<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $disponibilidadViewRptGroupGstIndicator['DisponibilidadViewRptGroupGstIndicator']['id'])); ?>
 		</td>
 		<td class="actions">
-			<?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $disponibilidadTblUnidadesGstIndicator['DisponibilidadTblUnidadesGstIndicator']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $disponibilidadTblUnidadesGstIndicator['DisponibilidadTblUnidadesGstIndicator']['id'])); ?>
+			<?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $disponibilidadViewRptGroupGstIndicator['DisponibilidadViewRptGroupGstIndicator']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $disponibilidadViewRptGroupGstIndicator['DisponibilidadViewRptGroupGstIndicator']['id'])); ?>
 		</td>
 	</tr>
 <?php endforeach; ?>
