@@ -326,7 +326,7 @@ $(document).ready(function(){
 		    // console.log(data);
 				console.log(this);
 				console.log($(this).attr('data-unidad'));
-				console.log($(this).attr('data-status'));
+				console.log($(this).val());
 
 				var description = "description_"+$(this).attr('data-unidad');
 				var compromise = "compromise_"+$(this).attr('data-unidad');
@@ -352,7 +352,7 @@ $(document).ready(function(){
 						save = false
 				var post_data = {
 													'unidad':$(this).attr('data-unidad'),
-													'id_status':$(this).attr('data-status'),
+													'id_status':$(this).val(),
 													'description':desc,
 													'compromise':comp
 												};
@@ -366,17 +366,18 @@ $(document).ready(function(){
 				// Assign handlers immediately after making the request,
 // and remember the jqxhr object for this request
 						var jqxhr = $.post( urlStruct, function() {
-						  alert( "success" );
+						  alert( "Registro Actualizado" );
+							// document.body.inninnerHTML
 						})
-						  .done(function() {
-						    alert( "second success" );
-						  })
+						  // .done(function() {
+						  //   alert( "second success" );
+						  // })
 						  .fail(function() {
 						    alert( "error" );
 						  })
-						  .always(function() {
-						    alert( "finished" );
-						  });
+						  // .always(function() {
+						  //   alert( "finished" );
+						  // });
 				}
 		});
 

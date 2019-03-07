@@ -119,8 +119,11 @@ $json_parsing_lv_one = null;
 		// }
 
 
-	$user_mod = true;
-	$user_mod = false;
+	if ($this->Auth->user('group_id') == 7 OR $this->Auth->user('group_id') == 1 ) {
+			$user_mod = true;
+	} else {
+			$user_mod = false;
+	}
 	$this->set(compact(
 											  'disponibilidadViewRptUnidadesGstIndicators'
 											 ,'disponibilidadViewStatusGstIndicators'
@@ -200,14 +203,14 @@ if (!empty($conditions)) {
 	$this->LoadModel('DisponibilidadTblUnidadesGstIndicator');
 	$this->DisponibilidadTblUnidadesGstIndicator->create();
 	if ($this->DisponibilidadTblUnidadesGstIndicator->save($conditions)) {
-		$this->Session->setFlash(__('The disponibilidad tbl unidades gst indicator has been saved', true));
-		$this->redirect(array('action' => 'index'));
+		// $this->Session->setFlash(__('The disponibilidad tbl unidades gst indicator has been saved', true));
+		// $this->redirect(array('action' => 'index'));
 	} else {
-		$this->Session->setFlash(__('The disponibilidad tbl unidades gst indicator could not be saved. Please, try again.', true));
+		// $this->Session->setFlash(__('The disponibilidad tbl unidades gst indicator could not be saved. Please, try again.', true));
 	}
 }
 		// NOTE set the response output for an ajax call
-		Configure::write('debug', 1);
+		Configure::write('debug', 0);
 		$this->autoLayout = false;
 	}
 

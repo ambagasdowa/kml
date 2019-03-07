@@ -358,8 +358,11 @@
 																		return intVal(a) + intVal(b);
 																}, 0 );
 														// Update footer
+														var rendCPage = kvpageTotal / kvypageTotal;
+														var rendTPage = kvtotal / kvytotal ;
 														$( api.column( 4 ).footer() ).html(
-																''+ (Math.round(kvmpageTotal * 100) / 100)  +' ( '+ (Math.round(kvmtotal * 100) / 100) +' total)'
+																// ''+ (Math.round(kvmpageTotal * 100) / 100)  +' ( '+ (Math.round(kvmtotal * 100) / 100) +' total)'
+																''+ (Math.round(rendCPage * 100) / 100) +' ( '+ (Math.round(rendTPage * 100) / 100) +' total)'
 														);
 
 
@@ -437,8 +440,12 @@
 																		 return intVal(a) + intVal(b);
 																 }, 0 );
 														 // Update footer
+														 var rendCurrentPage = kpageTotal / dpageTotal;
+														 var rendTotalPage = ktotal / dtotal ;
+
 														 $( api.column( 9 ).footer() ).html(
-																 ''+ (Math.round(rpageTotal * 100) / 100)  +' ( '+ (Math.round(rtotal * 100) / 100) +' total)'
+																 ''+ (Math.round(rendCurrentPage * 100) / 100) +' ( '+ (Math.round(rendTotalPage * 100) / 100) +' total)'
+
 														 );
 												 }
 										 });
