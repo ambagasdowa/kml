@@ -124,6 +124,7 @@ $json_parsing_lv_one = null;
 	} else {
 			$user_mod = false;
 	}
+	$user_mod = false;
 	$this->set(compact(
 											  'disponibilidadViewRptUnidadesGstIndicators'
 											 ,'disponibilidadViewStatusGstIndicators'
