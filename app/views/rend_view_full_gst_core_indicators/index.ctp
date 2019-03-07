@@ -177,11 +177,34 @@
 								                              'title'=>'Puede teclear la fecha en Formato yyyymmdd',
 																							'div'=>FALSE,
 																							'label'=>FALSE,
-																							'options'=>array(1=>'Orizaba',2=>'Guadalajara',3=>'Ramos Arizpe',4=>'Mexicali',5=>'Hermosillo',6=>'La Paz',7=>'Macuspana',8=>'Cuautitlan',9=>'Tultitlan'),
+																							'options'=>$bssus,
 																							'tabindex'=>'2'
 																						)
 																		);
 							echo '</div>';
+
+							echo '<div class="two columns input-group">';
+							echo '<div class="input-group-addon"><i class="fa fa-barcode"></i></div>';
+							echo
+										$this->Form->input
+																			(
+																				'id_tipo_operacion',
+																				 array
+																							(
+																								'type'=>'select',
+																								'class'=>'search_udn u-full-width form-control',
+																								'id'=>'operacion',
+																								'placeholder' => 'Operacion',
+																								'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
+									                              'title'=>'Puede teclear la fecha en Formato yyyymmdd',
+																								'selected'=>1,
+																								'div'=>FALSE,
+																								'label'=>FALSE,
+																								'options'=>$operacion,
+																								'tabindex'=>'2'
+																							)
+																			);
+								echo '</div>';
 
 						?>
 

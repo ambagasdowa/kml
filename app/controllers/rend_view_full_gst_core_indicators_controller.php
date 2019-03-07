@@ -23,7 +23,7 @@ class RendViewFullGstCoreIndicatorsController extends AppController {
 	var $name = 'RendViewFullGstCoreIndicators';
 
 	function get() {
-		// Configure::write('debug',2);
+		Configure::write('debug',2);
 
 		$posted = json_decode(base64_decode($this->params['named']['data']),true);
 		// debug($posted);
@@ -56,6 +56,7 @@ class RendViewFullGstCoreIndicatorsController extends AppController {
 		// exit();
 		$conditionsBl['RendViewFullGstCoreIndicator.periodo'] = $add_conditions['periodo'];
 		$conditionsBl['RendViewFullGstCoreIndicator.id_area'] = $add_conditions['id_area'];
+		$conditionsBl['RendViewFullGstCoreIndicator.id_tipo_operacion'] = $add_conditions['id_tipo_operacion'];
 		// $conditionsBl['RendViewFullGstCoreIndicator.id'] = 10;
 
 		$rendViewFullGstCoreIndicators = $this->RendViewFullGstCoreIndicator->find('all',array('conditions'=>$conditionsBl));
@@ -152,18 +153,16 @@ class RendViewFullGstCoreIndicatorsController extends AppController {
 
 	function index() {
 
-		// $this->LoadModule('ProjectionsViewBussinessUnit');
-		// // DEBUG bugging
-		// // debug($projectionsViewIndicatorsPeriodsFullFleets);
-		// if (!isset($bsu_conditions)){
-		// 	$bsu_conditions = null;
-		// }
-		// $bssus = array_values($this->ProjectionsViewBussinessUnit->find('list',array('conditions'=>$bsu_conditions)));
+		$this->LoadModel('ProjectionsViewBussinessUnit');
+		$this->LoadModel('ProjectionsViewFraction');
+
+		$bssus = $this->ProjectionsViewBussinessUnit->find('list',array('fields'=>array('id','name')));
+		$operacion = $this->ProjectionsViewFraction->find('list',array('fields'=>array('id','desc_producto')));
 		// debug($bssus);
 		//
 		$this->RendViewFullGstCoreIndicator->recursive = 0;
 		$this->set('rendViewFullGstCoreIndicators', $this->paginate());
-		$this->set(compact('bssus'));
+		$this->set(compact('bssus','operacion'));
 
 
 		// viajes despa no documentados

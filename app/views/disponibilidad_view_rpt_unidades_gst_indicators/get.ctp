@@ -194,8 +194,8 @@ echo
 			// code...
 		?>
 		<tr id="<?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['unidad'] ?>">
-			<td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['unidad']; ?>&nbsp;</td>
-			<td><?php
+			<td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['unidad']; ?></td>
+			<td style="width:20%;"><?php
 			 			if ($disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['iseditable'] == true and $user_mod == true ) {
 							echo
 										$this->Form->input
@@ -206,6 +206,7 @@ echo
 																								'type'=>'select',
 																								'class'=>'update_status u-full-width form-control',
 																								'id'=>'myInput',
+																								'style'=>'width:100%;margin:0 auto;overflow:auto;position:relative;overflow:hidden;',
 																								'data-unidad'=>$disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['unidad'],
 																								'data-status'=>$disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['id_status'],
 																								'placeholder' => $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['estatus'],
@@ -225,10 +226,10 @@ echo
 								// echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['tipo_status'];
 					?>
 			</td>
-			<td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['operador']; ?>&nbsp;</td>
-			<td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['remolque']; ?>&nbsp;</td>
+			<td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['operador']; ?></td>
+			<td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['remolque']; ?></td>
 			<!-- <td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['area']; ?>&nbsp;</td> -->
-			<td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['segmento']; ?>&nbsp;</td>
+			<td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['segmento']; ?></td>
 			<td>
 				<?php
 				if ($disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['iseditable'] == true and $user_mod == true ) {
@@ -247,6 +248,7 @@ echo
 																						// 'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
 																						// 'title'=>'Puede teclear la fecha en Formato yyyymmdd',
 																						// 'selected'=>$disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['id_status'],
+																						'style'=>'width:100%;margin:0 auto;overflow:auto;position:relative;overflow:hidden;',
 																						'div'=>FALSE,
 																						'label'=>FALSE
 																						// 'options'=>$disponibilidadViewStatusGstIndicators
@@ -268,7 +270,7 @@ echo
 																		 array
 																					(
 																						'type'=>'text',
-																						'class'=>'u-full-width form-control',
+																						'class'=>'calendar u-full-width form-control',
 																						'id'=>'compromise_'.$disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['unidad'],
 																						// 'data-unidad'=>$disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['unidad'],
 																						// 'data-status'=>$disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['id_status'],
@@ -276,6 +278,7 @@ echo
 																						// 'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
 																						// 'title'=>'Puede teclear la fecha en Formato yyyymmdd',
 																						// 'selected'=>$disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['id_status'],
+																						'style'=>'width:100%;margin:0 auto;overflow:auto;position:relative;overflow:hidden;',
 																						'div'=>FALSE,
 																						'label'=>FALSE
 																						// 'options'=>$disponibilidadViewStatusGstIndicators
@@ -318,7 +321,68 @@ $(document).ready(function(){
 	//     }
 	// }
 
-		$(".update_status").select2();
+
+						// NOTE Datepicker Define the Spanish languaje
+								$.datepicker.regional['es'] = {
+								closeText: 'Cerrar',
+								prevText: '<Ant',
+								nextText: 'Sig>',
+								currentText: 'Hoy',
+								monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+								monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+								dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+								dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+								dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+								weekHeader: 'Sm',
+								dateFormat: 'yy-mm-dd',
+								firstDay: 1,
+				//				numberOfMonths: 2,
+								isRTL: false,
+								showMonthAfterYear: false,
+								yearSuffix: ''
+								};
+								$.datepicker.setDefaults($.datepicker.regional['es']);
+
+						$( function() {
+					    // var dateFormat = "mm/dd/yy",
+					      from = $( ".calendar" )
+					        .datepicker({
+					          // defaultDate: "+1w",
+					          // changeMonth: true,
+					          numberOfMonths: 2,
+										showCurrentAtPos: 1
+					        })
+					        .on( "change", function() {
+					          to.datepicker( "option", "minDate", getDate( this ) );
+					        }).datepicker('widget').wrap('<div class="ll-skin-skeleton"/>'), // NOTE Apparently just need call ones
+					      to = $( "#to" ).datepicker({
+					        // defaultDate: "+1w",
+					        // changeMonth: true,
+					        numberOfMonths: 2,
+									showCurrentAtPos: 1
+					      })
+					      .on( "change", function() {
+					        from.datepicker( "option", "maxDate", getDate( this ) );
+					      });
+
+					    function getDate( element ) {
+					      var date;
+					      try {
+					        date = $.datepicker.parseDate( dateFormat, element.value );
+					      } catch( error ) {
+					        date = null;
+					      }
+
+					      return date;
+					    }
+					  }
+					);
+
+
+
+		$(".update_status").select2(
+			// width: 'resolve' // need to override the changed default
+		);
 		$(".update_status").on('select2:select', function (e) {
 				// e.stopPropagation();
 				// e.preventDefault();
