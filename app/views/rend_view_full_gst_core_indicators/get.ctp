@@ -244,6 +244,33 @@ echo
 
 		$(document).ready(function(){
 
+			$("#print").on('click',function(e){
+
+				$(".row").find(".head_datetime").removeClass("head_datetime").addClass("dash_datetime");
+
+
+				var ids = "#printThis";
+						$( ids ).printThis({
+								debug: false,               // show the iframe for debugging
+								importCSS: false,            // import page CSS
+								importStyle: true,         // import style tags
+								printContainer: true,       // grab outer container as well as the contents of the selector
+								loadCSS: "<?php echo Dispatcher::baseUrl();?>/css/kml/performance_print.css",  // path to additional css file - use an array [] for multiple
+								pageTitle: "&#8203;", // add title to print page
+								removeInline: false,        // remove all inline styles from print elements
+								printDelay: 333,            // variable print delay; depending on complexity a higher value may be necessary
+								header: '<img src="<?php echo Dispatcher::baseUrl();?>/img/logotipos/gst/header_gs.png" width="100%">',               // prefix to html
+								footer: '', // postfix to html <div class="footer_legend">© GST Software Development Department</div>
+								base: false ,               // preserve the BASE tag, or accept a string for the URL
+								formValues: false,           // preserve input/form values
+								canvas: false,              // copy canvas elements (experimental)
+								doctypeString: "",       // enter a different doctype for older markup
+								removeScripts: false,       // remove script tags from print content
+								copyTagClasses: false       // copy classes from the html & body tag
+						});
+			});
+
+
 			Highcharts.chart('the-chart', {
 					chart: {
 							type: 'column',

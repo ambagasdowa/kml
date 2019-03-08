@@ -119,12 +119,16 @@ $json_parsing_lv_one = null;
 		// }
 
 
-	if ($this->Auth->user('group_id') == 7 OR $this->Auth->user('group_id') == 1 ) {
+	if (
+				$this->Auth->user('group_id') == 7
+				// OR
+				// $this->Auth->user('group_id') == 1
+			) {
 			$user_mod = true;
 	} else {
 			$user_mod = false;
 	}
-	$user_mod = false;
+	// $user_mod = false;
 	// $user_mod = true;
 	$this->set(compact(
 											  'disponibilidadViewRptUnidadesGstIndicators'

@@ -348,6 +348,7 @@ $("#print").on('click',function(e){
 
 	$(".row").find(".head_datetime").removeClass("head_datetime").addClass("dash_datetime");
 
+
 	var ids = "#printThis";
 			$( ids ).printThis({
 					debug: false,               // show the iframe for debugging
@@ -392,81 +393,7 @@ $("#print").on('click',function(e){
 								'trapFocus' :	true ,
 								'width' : "90%" ,
 								'height' : "90%" ,
-
 								'fixed' : true
-								// onComplete : function () {
-								// 	// NOTE Datepicker Define the Spanish languaje
-								// 	// 	 $.datepicker.regional['es'] = {
-								// 	// 	 closeText: 'Cerrar',
-								// 	// 	 prevText: '<Ant',
-								// 	// 	 nextText: 'Sig>',
-								// 	// 	 currentText: 'Hoy',
-								// 	// 	 monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
-								// 	// 	 monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
-								// 	// 	 dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
-								// 	// 	 dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
-								// 	// 	 dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
-								// 	// 	 weekHeader: 'Sm',
-								// 	// 	 dateFormat: 'yy/mm/dd',
-								// 	// 	 firstDay: 1,
-								// 	// //				numberOfMonths: 2,
-								// 	// 	 isRTL: false,
-								// 	// 	 showMonthAfterYear: false,
-								// 	// 	 yearSuffix: ''
-								// 	// 	 };
-								// 	// 	 $.datepicker.setDefaults($.datepicker.regional['es']);
-								// 		// $( function() {
-								// 		// 	 $( "input[id^='datepicker_']" ).datepicker({
-								// 		// 		 // onClose: function( selectedDate ) {
-								// 		// 		 // 	jQuery( "#from" ).datepicker( "option", "maxDate", selectedDate );
-								// 		// 		 // }
-								// 		// 		 onClose: function(selectedDate) {
-								// 		// 			 console.log("onCompleteCalling Get Inside Group");
-								// 		// 			 // console.log($(this));
-								// 		// 			 console.log(selectedDate);
-								// 		// 		 }
-								// 		// 	 });
-								// 		// } );
-								// 		// NOTE catch the send
-								// 		// var count = 0;
-								// 		// $("#add_update").on('click',function(){
-								// 		//  event.stopPropagation();
-								// 		//  event.preventDefault();
-								// 		//  console.log($(this));
-								// 		//  count += 1;
-								// 		//  console.log('counts1st => ' + count);
-								// 		//  if (count > 1) {
-								// 		// 	 // $('table tr:odd').removeClass('odd');
-								// 		// 	 $(this).prop('disabled',true);
-								// 		//  } else {
-								// 		//  console.log('countsGroup => ' + count);
-								// 		//
-								// 		// 		 console.log($(this).attr('data-update'));
-								// 		// 		 var print_serial = $("#post_form").serializeArray();
-								// 		// 		 var post_serial = JSON.stringify($("#post_form").serializeArray());
-								// 		// 		 console.log(post_serial);
-								// 		// 		 post_data_code = base64_encode(post_serial);
-								// 		// 		 console.log(post_data_code);
-								// 		//
-								// 		// 		 console.log('current-page');
-								// 		// 		 console.log($('.current').attr('rel'));
-								// 		//
-								// 		// 		 $.post("<?php //echo Dispatcher::baseUrl();?>/PerformanceFacturas/add/save:"+ post_data_code,function(){
-								// 		// 				 // alert('data is : ' + data);
-								// 		// 		 }).done(function(data){
-								// 		// 			 $.colorbox.close();
-								// 		// 			 document.getElementById("send_query").click();
-								// 		// 			 console.log($.parseJSON(data));
-								// 		// 			 dataer = $.parseJSON(data);
-								// 		// 			 console.log('loaded_group');
-								// 		// 		 });
-								// 		//  // $.colorbox();
-								// 		// }
-								// 		//
-								// 		// });
-								//
-								// } // End OnComplete Colorbox
-
 							}); // end calling colorbox
 
 						}); // grouping end
