@@ -87,7 +87,7 @@
 
 			<a id="upd_checkboxes" class="button button-primary" href="#">Guardar</a> -->
 
-			<div id="print" class="pull-right">
+			<div <?php $user_mod ? print 'id="noprint" style="display:none;"' : print 'id="print"' ; ?> class="pull-right">
 				<i class="fa fa-print" aria-hidden="true"></i>
 			</div>
 		</div>
@@ -106,7 +106,7 @@
   </div>
 
 <div class="con">
-<div id="cont" style="height: 10px; margin: 0 auto"></div>
+<div id="cont" style="height: 20px; margin: 0 auto"></div>
 </div>
 
 
@@ -194,7 +194,25 @@ echo
 			// code...
 		?>
 		<tr id="<?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['unidad'] ?>">
-			<td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['unidad']; ?></td>
+			<td>
+						<?php
+									// echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['unidad'];
+									echo
+									$this->Html->link(
+																			$disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['unidad'],
+																			// array('action' => 'get', null),
+																			array('controller' => 'DisponibilidadViewRptUnidadesGstIndicator', 'action' => 'view', $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['unidad']),
+																			array(
+																						'id'=>'historical_'.$disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['unidad'],
+																						'data-unidad'=>$disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['unidad'],
+																						// 'data-reference' => $performanceReference['PerformanceViewFactura']['id'],
+																						// 'data-empresa' => $performanceReference['PerformanceViewFactura']['Empresa'],
+																						// 'data-resume' => $performanceReference['PerformanceViewFactura']['performance_customers_id'],
+																						'div'=>false
+																					)
+																		);
+						?>
+			</td>
 			<td style="width:20%;"><?php
 			 			if ($disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['iseditable'] == true and $user_mod == true ) {
 							echo
@@ -322,6 +340,137 @@ $(document).ready(function(){
 	// }
 
 
+// ================================================================================================================== //
+// Historical view mechanism
+// ================================================================================================================== //
+// NOTE PRINT
+$("#print").on('click',function(e){
+
+	$(".row").find(".head_datetime").removeClass("head_datetime").addClass("dash_datetime");
+
+	var ids = "#printThis";
+			$( ids ).printThis({
+					debug: false,               // show the iframe for debugging
+					importCSS: false,            // import page CSS
+					importStyle: true,         // import style tags
+					printContainer: true,       // grab outer container as well as the contents of the selector
+					loadCSS: "<?php echo Dispatcher::baseUrl();?>/css/kml/performance_print.css",  // path to additional css file - use an array [] for multiple
+					pageTitle: "&#8203;", // add title to print page
+					removeInline: false,        // remove all inline styles from print elements
+					printDelay: 333,            // variable print delay; depending on complexity a higher value may be necessary
+					header: '<img src="<?php echo Dispatcher::baseUrl();?>/img/logotipos/gst/header_gs.png" width="100%">',               // prefix to html
+					footer: '', // postfix to html <div class="footer_legend">© GST Software Development Department</div>
+					base: false ,               // preserve the BASE tag, or accept a string for the URL
+					formValues: false,           // preserve input/form values
+					canvas: false,              // copy canvas elements (experimental)
+					doctypeString: "",       // enter a different doctype for older markup
+					removeScripts: false,       // remove script tags from print content
+					copyTagClasses: false       // copy classes from the html & body tag
+			});
+});
+
+// ================================================================================================================== //
+// Historical view mechanism
+// ================================================================================================================== //
+						// NOTE add group by customer name update
+						$("a[id^='historical_']").on('click',function(event){
+							event.stopPropagation();
+							event.preventDefault();
+							// console.log($(this));
+							console.log( $(this).attr('data-unidad') );
+							var posted_data = {
+																'unidad':$(this).attr('data-unidad')
+															};
+							var string_to_pass = JSON.stringify(posted_data);
+							console.log(string_to_pass);
+							datascode = base64_encode(string_to_pass);
+							var urlStructure = "<?php echo Dispatcher::baseUrl();?>/DisponibilidadViewRptUnidadesGstIndicators/view/data:" + datascode;
+							console.log(urlStructure);
+							$.colorbox({
+								'href' : urlStructure,
+								'scrolling' : true ,
+								'trapFocus' :	true ,
+								'width' : "90%" ,
+								'height' : "90%" ,
+
+								'fixed' : true
+								// onComplete : function () {
+								// 	// NOTE Datepicker Define the Spanish languaje
+								// 	// 	 $.datepicker.regional['es'] = {
+								// 	// 	 closeText: 'Cerrar',
+								// 	// 	 prevText: '<Ant',
+								// 	// 	 nextText: 'Sig>',
+								// 	// 	 currentText: 'Hoy',
+								// 	// 	 monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+								// 	// 	 monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+								// 	// 	 dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+								// 	// 	 dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+								// 	// 	 dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+								// 	// 	 weekHeader: 'Sm',
+								// 	// 	 dateFormat: 'yy/mm/dd',
+								// 	// 	 firstDay: 1,
+								// 	// //				numberOfMonths: 2,
+								// 	// 	 isRTL: false,
+								// 	// 	 showMonthAfterYear: false,
+								// 	// 	 yearSuffix: ''
+								// 	// 	 };
+								// 	// 	 $.datepicker.setDefaults($.datepicker.regional['es']);
+								// 		// $( function() {
+								// 		// 	 $( "input[id^='datepicker_']" ).datepicker({
+								// 		// 		 // onClose: function( selectedDate ) {
+								// 		// 		 // 	jQuery( "#from" ).datepicker( "option", "maxDate", selectedDate );
+								// 		// 		 // }
+								// 		// 		 onClose: function(selectedDate) {
+								// 		// 			 console.log("onCompleteCalling Get Inside Group");
+								// 		// 			 // console.log($(this));
+								// 		// 			 console.log(selectedDate);
+								// 		// 		 }
+								// 		// 	 });
+								// 		// } );
+								// 		// NOTE catch the send
+								// 		// var count = 0;
+								// 		// $("#add_update").on('click',function(){
+								// 		//  event.stopPropagation();
+								// 		//  event.preventDefault();
+								// 		//  console.log($(this));
+								// 		//  count += 1;
+								// 		//  console.log('counts1st => ' + count);
+								// 		//  if (count > 1) {
+								// 		// 	 // $('table tr:odd').removeClass('odd');
+								// 		// 	 $(this).prop('disabled',true);
+								// 		//  } else {
+								// 		//  console.log('countsGroup => ' + count);
+								// 		//
+								// 		// 		 console.log($(this).attr('data-update'));
+								// 		// 		 var print_serial = $("#post_form").serializeArray();
+								// 		// 		 var post_serial = JSON.stringify($("#post_form").serializeArray());
+								// 		// 		 console.log(post_serial);
+								// 		// 		 post_data_code = base64_encode(post_serial);
+								// 		// 		 console.log(post_data_code);
+								// 		//
+								// 		// 		 console.log('current-page');
+								// 		// 		 console.log($('.current').attr('rel'));
+								// 		//
+								// 		// 		 $.post("<?php //echo Dispatcher::baseUrl();?>/PerformanceFacturas/add/save:"+ post_data_code,function(){
+								// 		// 				 // alert('data is : ' + data);
+								// 		// 		 }).done(function(data){
+								// 		// 			 $.colorbox.close();
+								// 		// 			 document.getElementById("send_query").click();
+								// 		// 			 console.log($.parseJSON(data));
+								// 		// 			 dataer = $.parseJSON(data);
+								// 		// 			 console.log('loaded_group');
+								// 		// 		 });
+								// 		//  // $.colorbox();
+								// 		// }
+								// 		//
+								// 		// });
+								//
+								// } // End OnComplete Colorbox
+
+							}); // end calling colorbox
+
+						}); // grouping end
+// ================================================================================================================== //
 						// NOTE Datepicker Define the Spanish languaje
 								$.datepicker.regional['es'] = {
 								closeText: 'Cerrar',

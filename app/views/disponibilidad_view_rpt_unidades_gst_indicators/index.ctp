@@ -172,12 +172,13 @@
 																							'type'=>'select',
 																							'class'=>'search_udn u-full-width form-control',
 																							'id'=>'to',
+																							'style'=>'width:100%;',
 																							'placeholder' => 'Unidad de Negocio',
 																							'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
 								                              'title'=>'Puede teclear la fecha en Formato yyyymmdd',
 																							'div'=>FALSE,
 																							'label'=>FALSE,
-																							'options'=>array(1=>'Orizaba',2=>'Guadalajara',3=>'Ramos Arizpe',4=>'Mexicali',5=>'Hermosillo',6=>'La Paz',7=>'Macuspana',8=>'Cuautitlan',9=>'Tultitlan'),
+																							'options'=>$bssus,
 																							'tabindex'=>'2'
 																						)
 																		);

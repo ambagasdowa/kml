@@ -125,7 +125,7 @@ $json_parsing_lv_one = null;
 			$user_mod = false;
 	}
 	$user_mod = false;
-	$user_mod = true;
+	// $user_mod = true;
 	$this->set(compact(
 											  'disponibilidadViewRptUnidadesGstIndicators'
 											 ,'disponibilidadViewStatusGstIndicators'
@@ -147,17 +147,98 @@ $json_parsing_lv_one = null;
 
 
 	function index() {
-		$this->DisponibilidadViewRptUnidadesGstIndicator->recursive = 0;
-		$this->set('disponibilidadViewRptUnidadesGstIndicators', $this->paginate());
+		$this->LoadModel('ProjectionsViewBussinessUnit');
+		$this->LoadModel('ProjectionsViewFraction');
+
+		$bssus = $this->ProjectionsViewBussinessUnit->find('list',array('fields'=>array('id','name')));
+		$operacion = $this->ProjectionsViewFraction->find('list',array('fields'=>array('id','desc_producto')));
+		// debug($bssus);
+		//
+		$this->RendViewFullGstCoreIndicator->recursive = 0;
+		$this->set('rendViewFullGstCoreIndicators', $this->paginate());
+		$this->set(compact('bssus','operacion'));
+
+		// $this->DisponibilidadViewRptUnidadesGstIndicator->recursive = 0;
+		// $this->set('disponibilidadViewRptUnidadesstIndicators', $this->paginate());
 	}
 
+
+
 	function view($id = null) {
-		if (!$id) {
-			$this->Session->setFlash(__('Invalid disponibilidad view rpt unidades gst indicator', true));
-			$this->redirect(array('action' => 'index'));
-		}
-		$this->set('disponibilidadViewRptUnidadesGstIndicator', $this->DisponibilidadViewRptUnidadesGstIndicator->read(null, $id));
-	}
+		Configure::write('debug',2);
+
+		$this->LoadModel('DisponibilidadViewHistoricalGstIndicator');
+		// debug($this->params);
+		$posted = json_decode(base64_decode($this->params['named']['data']),true);
+		// debug($posted);
+		// $conditions = array();
+		// $add_conditions = array();
+		// foreach ($posted as $keys => $postvalue) {
+		//
+		// 	if ($keys > 0 ) {
+		// 		$content = $postvalue['name'];
+		// 		// debug($postvalue['value']);
+		// 		$chars = preg_split('/\[([^\]]*)\]/i', $content, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
+		// 		// debug($chars);
+		// 		if ( isset($chars[1]) && $chars[1] == 'DisponibilidadViewHistoricalGstIndicator' && $postvalue['value'] != '') {
+		//
+		// 			// if ($chars[2] == 'Funcionario' && $postvalue['value'] != '') {
+		// 			// 	// code...
+		// 			// }
+		//
+		// 			$add_conditions[$chars[2]] = $postvalue['value'];
+		// 			$conditions[$chars[2]] = $postvalue['value'];
+		// 		}
+		// 		// if(isset($chars[2])) {
+		// 		// 	$conditions[$chars[2]] = $postvalue['value'];
+		// 		// }
+		// 	}
+		// }
+
+		$conditions['DisponibilidadViewHistoricalGstIndicator.unidad'] = $posted['unidad'];
+		// debug($conditions);
+		$disponibilidadViewHistoricalGstIndicators = $this->DisponibilidadViewHistoricalGstIndicator->find('all',array('conditions'=>$conditions));
+
+		$json_parsing_lv_one = null;
+				$disp_hist = $disponibilidadViewHistoricalGstIndicators ;
+
+				foreach ($disp_hist as $key => $data) {
+					// code...
+					// debug($data);
+							$json_parsing_lv_one .= json_encode(
+																				array(
+																								 'name'=>$data['DisponibilidadViewHistoricalGstIndicator']['estatus']
+																								,'y'=>round($data['DisponibilidadViewHistoricalGstIndicator']['compromiso'],2)
+																								// ,'drilldown'=>$key_viajes
+																								,'drilldown'=>null
+																						 )
+																								, JSON_PRETTY_PRINT
+													);
+
+				}
+
+				$json_parsing_level_one = implode('},{',explode('}{',$json_parsing_lv_one));
+// DEBUG:
+// debug($json_parsing_level_one);
+		$this->set(compact('disponibilidadViewHistoricalGstIndicators','json_parsing_level_one'));
+
+		// debug($disponibilidadViewHistoricalGstIndicators);
+
+		//
+		// exit();
+		// if (!$id) {
+		// 	$this->Session->setFlash(__('Invalid disponibilidad view rpt unidades gst indicator', true));
+		// 	$this->redirect(array('action' => 'index'));
+		// }
+		// $this->set('disponibilidadViewRptUnidadesGstIndicator', $this->DisponibilidadViewRptUnidadesGstIndicator->read(null, $id));
+
+		// NOTE set the response output for an ajax call
+		Configure::write('debug', 0);
+		$this->autoLayout = false;
+	} //end view
+
+
+
 
 	function add() {
 
