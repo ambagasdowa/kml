@@ -197,6 +197,7 @@
 																								'placeholder' => 'Operacion',
 																								'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
 									                              'title'=>'Puede teclear la fecha en Formato yyyymmdd',
+																								'empty'=>'TODO',
 																								'selected'=>1,
 																								'div'=>FALSE,
 																								'label'=>FALSE,

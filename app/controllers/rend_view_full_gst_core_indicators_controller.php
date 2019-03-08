@@ -53,10 +53,14 @@ class RendViewFullGstCoreIndicatorsController extends AppController {
 		}
 
 		// debug($conditions);
+		// debug(isset($add_conditions['id_tipo_operacion']));
 		// exit();
+		if(isset($add_conditions['id_tipo_operacion'])){
+			$conditionsBl['RendViewFullGstCoreIndicator.id_tipo_operacion'] = $add_conditions['id_tipo_operacion'];
+		}
 		$conditionsBl['RendViewFullGstCoreIndicator.periodo'] = $add_conditions['periodo'];
 		$conditionsBl['RendViewFullGstCoreIndicator.id_area'] = $add_conditions['id_area'];
-		$conditionsBl['RendViewFullGstCoreIndicator.id_tipo_operacion'] = $add_conditions['id_tipo_operacion'];
+
 		// $conditionsBl['RendViewFullGstCoreIndicator.id'] = 10;
 
 		$rendViewFullGstCoreIndicators = $this->RendViewFullGstCoreIndicator->find('all',array('conditions'=>$conditionsBl));
