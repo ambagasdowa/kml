@@ -124,9 +124,9 @@ $json_parsing_lv_one = null;
 				// OR
 				// $this->Auth->user('group_id') == 1
 			) {
-			$user_mod = false;
-	} else {
 			$user_mod = true;
+	} else {
+			$user_mod = false;
 	}
 	// $user_mod = false;
 	// $user_mod = true;
