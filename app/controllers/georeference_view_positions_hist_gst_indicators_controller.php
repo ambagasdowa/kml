@@ -29,7 +29,7 @@ class GeoreferenceViewPositionsHistGstIndicatorsController extends AppController
 			Configure::write('debug',2);
 
 			$posted = json_decode(base64_decode($this->params['named']['data']),true);
-			debug($posted);
+			// debug($posted);
 			// exit();
 
 			$conditions = array();
@@ -62,6 +62,8 @@ class GeoreferenceViewPositionsHistGstIndicatorsController extends AppController
 			// exit();
 
 			$this->LoadModel('GeoreferenceTblPositionsDocumentsGstIndicator');
+
+			$this->LoadModel('GeoreferenceViewPositionsHistGstIndicator');
 			// $conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.periodo'] = $add_conditions['periodo'];
 			$conditionsBl['GeoreferenceTblPositionsDocumentsGstIndicator.id_area'] = $add_conditions['id_area'];
 			// $conditionsTf['DisponibilidadViewRptGroupGstIndicator.id_area'] = $add_conditions['id_area'];
@@ -70,11 +72,7 @@ class GeoreferenceViewPositionsHistGstIndicatorsController extends AppController
 			// debug($conditionsBl);
 			$georeferenceTblPositionsDocumentsGstIndicators = $this->GeoreferenceTblPositionsDocumentsGstIndicator->find('all',array('conditions'=>$conditionsBl));
 
-
-
 // debug($georeferenceTblPositionsDocumentsGstIndicators);
-
-
 // exit();
 
 
@@ -82,28 +80,28 @@ class GeoreferenceViewPositionsHistGstIndicatorsController extends AppController
 
 			$this->LoadModel('DisponibilidadViewRptGroupGstIndicator');
 
-			$disponibilidadViewStatusGstIndicators = $this->DisponibilidadViewStatusGstIndicator->find('list',array('fields'=>array('id_status','nombre')));
-
-			$disponibilidadViewRptGroupGstIndicators = $this->DisponibilidadViewRptGroupGstIndicator->find('all',array('conditions'=>$conditionsTf));
-	$json_parsing_lv_one = null;
-			$disp_grp = $disponibilidadViewRptGroupGstIndicators ;
-
-			foreach ($disp_grp as $key => $data) {
-				// code...
-				// debug($data);
-						$json_parsing_lv_one .= json_encode(
-																			array(
-																							 'name'=>$data['DisponibilidadViewRptGroupGstIndicator']['estatus']
-																							,'y'=>round($data['DisponibilidadViewRptGroupGstIndicator']['unidades'],2)
-																							// ,'drilldown'=>$key_viajes
-																							,'drilldown'=>null
-																					 )
-																							, JSON_PRETTY_PRINT
-												);
-
-			}
-
-			$json_parsing_level_one = implode('},{',explode('}{',$json_parsing_lv_one));
+	// 		$disponibilidadViewStatusGstIndicators = $this->DisponibilidadViewStatusGstIndicator->find('list',array('fields'=>array('id_status','nombre')));
+	//
+	// 		$disponibilidadViewRptGroupGstIndicators = $this->DisponibilidadViewRptGroupGstIndicator->find('all',array('conditions'=>$conditionsTf));
+	// $json_parsing_lv_one = null;
+	// 		$disp_grp = $disponibilidadViewRptGroupGstIndicators ;
+	//
+	// 		foreach ($disp_grp as $key => $data) {
+	// 			// code...
+	// 			// debug($data);
+	// 					$json_parsing_lv_one .= json_encode(
+	// 																		array(
+	// 																						 'name'=>$data['DisponibilidadViewRptGroupGstIndicator']['estatus']
+	// 																						,'y'=>round($data['DisponibilidadViewRptGroupGstIndicator']['unidades'],2)
+	// 																						// ,'drilldown'=>$key_viajes
+	// 																						,'drilldown'=>null
+	// 																				 )
+	// 																						, JSON_PRETTY_PRINT
+	// 											);
+	//
+	// 		}
+	//
+	// 		$json_parsing_level_one = implode('},{',explode('}{',$json_parsing_lv_one));
 
 
 			// 	$json_parsing_level_two[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']][] = json_encode(

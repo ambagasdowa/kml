@@ -97,7 +97,7 @@
 
 	<div class="row">
  	 <div class="twelve columns">
- 		 <div id="chart" class="chart" >
+ 		 <div id="chart" class="chart" style="display:none;">
  					 <div id="the-chart" style="min-width:80%; min-height: 480px; margin: 0 auto">
  						 <!-- graphics -->
  					 </div>
@@ -112,27 +112,29 @@
 
 <div class="row">
 <?php
-echo '<div class="two columns"><i class="fa fa-barcode"></i></div>';
-echo '<div class="two columns"></div>';
-echo
-			$this->Form->input
-												(
-													'searchbox',
-													 array
-																(
-																	'type'=>'text',
-																	'class'=>'search_udn u-full-width form-control',
-																	'id'=>'FilterAll',
-																	'placeholder' => 'Filtro General',
-																	// 'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
-																	// 'title'=>'Puede teclear la fecha en Formato yyyymmdd',
-																	'div'=>FALSE,
-																	'label'=>FALSE,
-																	// 'options'=>array(1=>'ATSA IZUCAR - SIVESA ORIZABA',2=>'ATSA MIXQUI - SIVESA ORIZABA',3=>'CALIZA MIXQUI - FANAL TULTITLAN'),
-																	'tabindex'=>'2'
-																)
-												);
-	echo '</div>';
+//
+// echo '<div class="two columns"><i class="fa fa-barcode"></i></div>';
+// echo '<div class="two columns"></div>';
+// echo
+// 			$this->Form->input
+// 												(
+// 													'searchbox',
+// 													 array
+// 																(
+// 																	'type'=>'text',
+// 																	'class'=>'search_udn u-full-width form-control',
+// 																	'id'=>'FilterAll',
+// 																	'placeholder' => 'Filtro General',
+// 																	// 'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
+// 																	// 'title'=>'Puede teclear la fecha en Formato yyyymmdd',
+// 																	'div'=>FALSE,
+// 																	'label'=>FALSE,
+// 																	// 'options'=>array(1=>'ATSA IZUCAR - SIVESA ORIZABA',2=>'ATSA MIXQUI - SIVESA ORIZABA',3=>'CALIZA MIXQUI - FANAL TULTITLAN'),
+// 																	'tabindex'=>'2'
+// 																)
+// 												);
+// 	echo '</div>';
+//
  ?>
  </div>
 
@@ -141,83 +143,86 @@ echo
 
 		<table id="table_grp" class="display order-table table table-bordered table-hover table-striped responstable">
 			<thead>
-				<th>id</th>
-				<th>AsignacionDesc</th>
-				<th>Seguimiento</th>
-				<th>StatusDescription</th>
-				<th>statdesc</th>
-				<th>enBase</th>
-				<th>inBase</th>
-				<th>DescriptionViaje</th>
-				<th>traceroute</th>
 				<th>Area</th>
 				<th>Unidad</th>
+				<!-- <th>id</th> -->
 				<th>Asignacion</th>
-				<th>status_asignacion</th>
-				<th>seguimiento_actual</th>
-				<th>FechaAsignacion</th>
+				<!-- <th>Seguimiento</th> -->
 				<th>Viaje</th>
 				<th>Despachado</th>
 				<th>Operador</th>
-				<th>Latitud</th>
-				<th>Longitud</th>
+				<th>Descripcion</th>
+				<!-- <th>statdesc</th> -->
+				<!-- <th>EnBase</th> -->
+				<!-- <th>inBase</th> -->
+				<!-- <th>DescriptionViaje</th> -->
+				<!-- <th>traceroute</th> -->
+
+				<!-- <th>Asignacion</th> -->
+				<!-- <th>status_asignacion</th> -->
+				<!-- <th>seguimiento_actual</th> -->
+				<!-- <th>FechaAsignacion</th> -->
+
+				<!-- <th>Latitud</th> -->
+				<!-- <th>Longitud</th> -->
 				<th>FechaPosition</th>
-				<th>id_geocerca</th>
-				<th>base</th>
-				<th>max_latitud</th>
-				<th>min_latitud</th>
-				<th>max_longitud</th>
-				<th>min_longitud</th>
-				<th>control_id</th>
-				<th>created</th>
-				<th>status</th>
+				<!-- <th>id_geocerca</th> -->
+				<!-- <th>base</th> -->
+				<!-- <th>max_latitud</th> -->
+				<!-- <th>min_latitud</th> -->
+				<!-- <th>max_longitud</th> -->
+				<!-- <th>min_longitud</th> -->
+				<!-- <th>control_id</th> -->
+				<!-- <th>created</th> -->
+				<!-- <th>inserted</th> -->
+				<!-- <th>status</th> -->
 			</thead>
 			<tbody>
 				<?php
 					foreach ($georeferenceTblPositionsDocumentsGstIndicators as $key => $georeferenceTblPositionsDocumentsGstIndicator) {
 				?>
 				<tr>
-					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['id']; ?>&nbsp;</td>
-					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['AsignacionDesc']; ?>&nbsp;</td>
-					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['Seguimiento']; ?>&nbsp;</td>
-					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['StatusDescription']; ?>&nbsp;</td>
-					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['statdesc']; ?>&nbsp;</td>
-					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['enBase']; ?>&nbsp;</td>
-					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['inBase']; ?>&nbsp;</td>
-					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['DescriptionViaje']; ?>&nbsp;</td>
-					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['traceroute']; ?>&nbsp;</td>
 					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['Area']; ?>&nbsp;</td>
 					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['Unidad']; ?>&nbsp;</td>
-					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['Asignacion']; ?>&nbsp;</td>
-					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['status_asignacion']; ?>&nbsp;</td>
-					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['seguimiento_actual']; ?>&nbsp;</td>
-					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['FechaAsignacion']; ?>&nbsp;</td>
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['id']; ?>&nbsp;</td> -->
+					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['AsignacionDesc']; ?>&nbsp;</td>
 					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['Viaje']; ?>&nbsp;</td>
 					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['Despachado']; ?>&nbsp;</td>
 					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['Operador']; ?>&nbsp;</td>
-					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['Latitud']; ?>&nbsp;</td>
-					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['Longitud']; ?>&nbsp;</td>
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['Seguimiento']; ?>&nbsp;</td> -->
+					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['StatusDescription']; ?>&nbsp;</td>
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['statdesc']; ?>&nbsp;</td> -->
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['enBase']; ?>&nbsp;</td> -->
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['inBase']; ?>&nbsp;</td> -->
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['DescriptionViaje']; ?>&nbsp;</td> -->
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['traceroute']; ?>&nbsp;</td> -->
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['Asignacion']; ?>&nbsp;</td> -->
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['status_asignacion']; ?>&nbsp;</td> -->
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['seguimiento_actual']; ?>&nbsp;</td> -->
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['FechaAsignacion']; ?>&nbsp;</td> -->
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['Latitud']; ?>&nbsp;</td> -->
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['Longitud']; ?>&nbsp;</td> -->
 					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['FechaPosition']; ?>&nbsp;</td>
-					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['id_geocerca']; ?>&nbsp;</td>
-					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['base']; ?>&nbsp;</td>
-					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['max_latitud']; ?>&nbsp;</td>
-					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['min_latitud']; ?>&nbsp;</td>
-					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['max_longitud']; ?>&nbsp;</td>
-					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['min_longitud']; ?>&nbsp;</td>
-					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['control_id']; ?>&nbsp;</td>
-					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['created']; ?>&nbsp;</td>
-					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['status']; ?>&nbsp;</td>
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['id_geocerca']; ?>&nbsp;</td> -->
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['base']; ?>&nbsp;</td> -->
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['max_latitud']; ?>&nbsp;</td> -->
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['min_latitud']; ?>&nbsp;</td> -->
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['max_longitud']; ?>&nbsp;</td> -->
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['min_longitud']; ?>&nbsp;</td> -->
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['control_id']; ?>&nbsp;</td> -->
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['created']; ?>&nbsp;</td> -->
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['inserted']; ?>&nbsp;</td> -->
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator['GeoreferenceTblPositionsDocumentsGstIndicator']['status']; ?>&nbsp;</td> -->
 				</tr>
 				<?php } ?>
 			</tbody>
 			<!-- <tfoot>
-
 			</tfoot> -->
 		</table>
 
 
 
-		<table id="table_det" class="display order-table table table-bordered table-hover table-striped responstable">
+		<table id="table_det" class="display order-table table table-bordered table-hover table-striped responstable" style="display:none;">
 		<thead>
 			<tr>
 				<th><?php echo 'Unidad';?></th>
