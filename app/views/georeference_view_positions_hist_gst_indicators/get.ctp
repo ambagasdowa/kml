@@ -146,9 +146,9 @@
 				<th>Area</th>
 				<th>Unidad</th>
 				<!-- <th>id</th> -->
-				<th>Asignacion</th>
+				<th>UltimaAsignacion</th>
 				<!-- <th>Seguimiento</th> -->
-				<th>Viaje</th>
+				<th>UltimoViaje</th>
 				<th>Despachado</th>
 				<th>Operador</th>
 				<th>Descripcion</th>
