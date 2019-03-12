@@ -63,7 +63,8 @@ class GeoreferenceViewPositionsHistGstIndicatorsController extends AppController
 
 			$this->LoadModel('GeoreferenceTblPositionsDocumentsGstIndicator');
 
-			$this->LoadModel('GeoreferenceViewPositionsHistGstIndicator');
+			// $this->LoadModel('GeoreferenceViewPositionsHistGstIndicator');
+
 			// $conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.periodo'] = $add_conditions['periodo'];
 			$conditionsBl['GeoreferenceTblPositionsDocumentsGstIndicator.id_area'] = $add_conditions['id_area'];
 			// $conditionsTf['DisponibilidadViewRptGroupGstIndicator.id_area'] = $add_conditions['id_area'];
@@ -83,27 +84,40 @@ class GeoreferenceViewPositionsHistGstIndicatorsController extends AppController
 	// 		$disponibilidadViewStatusGstIndicators = $this->DisponibilidadViewStatusGstIndicator->find('list',array('fields'=>array('id_status','nombre')));
 	//
 	// 		$disponibilidadViewRptGroupGstIndicators = $this->DisponibilidadViewRptGroupGstIndicator->find('all',array('conditions'=>$conditionsTf));
-	// $json_parsing_lv_one = null;
-	// 		$disp_grp = $disponibilidadViewRptGroupGstIndicators ;
+	$json_parsing_lv_one = null;
+		$last_grip = $georeferenceTblPositionsDocumentsGstIndicators ;
 	//
-	// 		foreach ($disp_grp as $key => $data) {
-	// 			// code...
-	// 			// debug($data);
-	// 					$json_parsing_lv_one .= json_encode(
-	// 																		array(
-	// 																						 'name'=>$data['DisponibilidadViewRptGroupGstIndicator']['estatus']
-	// 																						,'y'=>round($data['DisponibilidadViewRptGroupGstIndicator']['unidades'],2)
-	// 																						// ,'drilldown'=>$key_viajes
-	// 																						,'drilldown'=>null
-	// 																				 )
-	// 																						, JSON_PRETTY_PRINT
-	// 											);
-	//
-	// 		}
-	//
-	// 		$json_parsing_level_one = implode('},{',explode('}{',$json_parsing_lv_one));
+			foreach ($last_grip as $keyg => $gvalue) {
+				// code...
+				// debug($gvalue['GeoreferenceTblPositionsDocumentsGstIndicator']['StatusDescription']);
+				$count_units['GeoreferenceTblPositionsDocumentsGstIndicator'][$gvalue['GeoreferenceTblPositionsDocumentsGstIndicator']['StatusDescription']][] = $gvalue['GeoreferenceTblPositionsDocumentsGstIndicator']['Unidad'];
+			}
+// debug($count_units);
 
+			$disp_grp = $count_units;
 
+			foreach ($disp_grp as $key => $data) {
+				// code...
+				foreach ($data as $keydata => $valuedata) {
+					// code...
+				// debug($keydata);
+				// debug($valuedata);
+						$json_parsing_lv_one .= json_encode(
+																			array(
+																							 'name'=>$keydata
+																							// ,'y'=>round(count($valuedata),2)
+																							,'y'=>count($valuedata)
+																							// ,'drilldown'=>$key_viajes
+																							,'drilldown'=>null
+																					 )
+																							, JSON_PRETTY_PRINT
+												);
+				}
+			}
+
+			$json_parsing_level_one = implode('},{',explode('}{',$json_parsing_lv_one));
+
+// debug($json_parsing_level_one);
 			// 	$json_parsing_level_two[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']][] = json_encode(
 			// 																				array(
 			// 																							'name'=>$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']

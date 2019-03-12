@@ -97,7 +97,7 @@
 
 	<div class="row">
  	 <div class="twelve columns">
- 		 <div id="chart" class="chart" style="display:none;">
+ 		 <div id="chart" class="chart">
  					 <div id="the-chart" style="min-width:80%; min-height: 480px; margin: 0 auto">
  						 <!-- graphics -->
  					 </div>
@@ -590,7 +590,7 @@ $("#print").on('click',function(e){
 					},
 					width:1200,
 					title: {
-							text: 'Indicadores de Disponibilidad de Unidades'
+							text: 'Unidades sin Documento'
 					},
 					credits:{enabled:false},
 					// colors: ['#058DC7','#3398d6','#6c99bb','#50B432','#b4c973', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'], // orig
