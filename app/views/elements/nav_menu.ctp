@@ -605,7 +605,7 @@
                             <a tabindex="-1" href="<?php e($this->webroot.'DisponibilidadViewRptUnidadesGstIndicators/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-exchange"></i>&nbsp;<span>Disponibilidad</span></a>
                           </li>
                           <li>
-                            <a tabindex="-1" href="<?php e($this->webroot.'GeoreferenceViewPositionsHistGstIndicators/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-exchange"></i>&nbsp;<span>Disponibilidad</span></a>
+                            <a tabindex="-1" href="<?php e($this->webroot.'GeoreferenceViewPositionsHistGstIndicators/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-exchange"></i>&nbsp;<span>SinDocumentos</span></a>
                           </li>
                         </ul>
                     </li>
