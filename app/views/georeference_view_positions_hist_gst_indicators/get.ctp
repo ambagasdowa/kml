@@ -151,7 +151,7 @@
 				<th>UltimoViaje</th>
 				<th>Despachado</th>
 				<th>Operador</th>
-				<th>Descripcion</th>
+				<th>EstadoActual</th>
 				<!-- <th>statdesc</th> -->
 				<!-- <th>EnBase</th> -->
 				<!-- <th>inBase</th> -->
