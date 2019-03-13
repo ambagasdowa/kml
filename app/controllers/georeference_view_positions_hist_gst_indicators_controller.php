@@ -60,19 +60,32 @@ class GeoreferenceViewPositionsHistGstIndicatorsController extends AppController
 			// debug($add_conditions);
 			//
 			// exit();
+			$models[0] = 'GeoreferenceTblPositionsDocumentsGstIndicator';
+			$models[1] = 'GeoreferenceViewPositionsDocumentsGstIndicator';
 
+				$model_id = 0 ;
+				$modelo = $models[$model_id];
 			$this->LoadModel('GeoreferenceTblPositionsDocumentsGstIndicator');
 
-			// $this->LoadModel('GeoreferenceViewPositionsHistGstIndicator');
+			$this->LoadModel('GeoreferenceViewPositionsDocumentsGstIndicator');
 
 			// $conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.periodo'] = $add_conditions['periodo'];
-			$conditionsBl['GeoreferenceTblPositionsDocumentsGstIndicator.id_area'] = $add_conditions['id_area'];
+			$conditionsBl[$modelo.'.id_area'] = $add_conditions['id_area'];
+			// $conditionsBl[$modelo.'.periodo'] = $add_conditions['periodo'];
+			if(isset($add_conditions['inserted'])){
+				$conditionsBl[$modelo.'.inserted'] = $add_conditions['inserted'];
+			}
 			// $conditionsTf['DisponibilidadViewRptGroupGstIndicator.id_area'] = $add_conditions['id_area'];
 			// $conditionsBl['RendViewFullGstCoreIndicator.id'] = 10;
 
 			// debug($conditionsBl);
-			$georeferenceTblPositionsDocumentsGstIndicators = $this->GeoreferenceTblPositionsDocumentsGstIndicator->find('all',array('conditions'=>$conditionsBl));
+			$georeferenceTblPositionsDocumentsGstIndicators = $this->$modelo->find('all',array('conditions'=>$conditionsBl));
 
+			if (!$georeferenceTblPositionsDocumentsGstIndicators) {
+				// code...
+				echo 'No existen Registros para la fecha '.$add_conditions['inserted'];
+				exit();
+			}
 // debug($georeferenceTblPositionsDocumentsGstIndicators);
 // exit();
 
@@ -90,7 +103,7 @@ class GeoreferenceViewPositionsHistGstIndicatorsController extends AppController
 			foreach ($last_grip as $keyg => $gvalue) {
 				// code...
 				// debug($gvalue['GeoreferenceTblPositionsDocumentsGstIndicator']['StatusDescription']);
-				$count_units['GeoreferenceTblPositionsDocumentsGstIndicator'][$gvalue['GeoreferenceTblPositionsDocumentsGstIndicator']['StatusDescription']][] = $gvalue['GeoreferenceTblPositionsDocumentsGstIndicator']['Unidad'];
+				$count_units[$modelo][$gvalue[$modelo]['StatusDescription']][] = $gvalue[$modelo]['Unidad'];
 			}
 // debug($count_units);
 
@@ -157,6 +170,7 @@ class GeoreferenceViewPositionsHistGstIndicatorsController extends AppController
 												 ,'disponibilidadViewStatusGstIndicators'
 												 ,'disponibilidadViewRptGroupGstIndicators'
 												 ,'user_mod'
+												 ,'modelo'
 												// ,'sums_kms'
 												// ,'sums_diesel'
 												// ,'sums_rendimiento'

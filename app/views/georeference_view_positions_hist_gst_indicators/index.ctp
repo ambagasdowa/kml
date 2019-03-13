@@ -138,6 +138,7 @@
 <!-- ['BalanzaViewUdnsRpt']['Empleado'] -->
 					<div class="row">
 						<?php echo $this->Form->create('GeoreferenceTblPositionsDocumentsGstIndicator',array('enctype' => 'multipart/form-data','class'=>'form','id'=>'pform'));?>
+
 						<?php
 						// echo '<div class="two columns input-group">';
 						// echo '<div class="input-group-addon"><i class="fa fa-user"></i></div>';
@@ -149,12 +150,13 @@
 						// 																(
 						// 																	'type'=>'select',
 						// 																	'class'=>'search_udn u-full-width form-control init-focus',
-						// 																	'id'=>'from',
-						// 																	'placeholder' => 'Periodo',
+						// 																	'id'=>'periodo',
+						// 																	'placeholder' => 'Fecha',
 						// 																	'alt'=>'Puede teclear la fecha en Formato yyyymm',
 						// 		                              'title'=>'Puede teclear la fecha en Formato yyyymm',
 						// 																	'div'=>FALSE,
 						// 																	'label'=>FALSE,
+						// 																	// 'empty'=>'Selecciona Dia',
 						// 																	'options'=> array('201901'=>'Enero','201902'=>'Febrero','201903'=>'Marzo'),
 						// 																	'tabindex'=>'1'
 						// 																)
@@ -184,6 +186,27 @@
 																		);
 							echo '</div>';
 
+							echo '<div class="two columns input-group">';
+							echo '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>';
+							echo
+										$this->Form->input
+																			(
+																				'inserted',
+																				 array
+																							(
+																								'type'=>'text',
+																								// 'class'=>'performance_dateini u-full-width form-control init-focus',
+																								'class'=>'performance_dateend datepicker ll-skin-melon u-full-width form-control',
+																								'id'=>'inserted',
+																								'placeholder' => 'Fecha',
+																								'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
+									                              'title'=>'Puede teclear la fecha en Formato yyyymmdd',
+																								'div'=>FALSE,
+																								'label'=>FALSE,
+																								'tabindex'=>'1'
+																							)
+																			);
+							echo '</div>';
 						?>
 
 						<!-- <div class="row"> -->
@@ -217,6 +240,78 @@
 
 	<script type="text/javascript">
 		  $(document).ready(function () {
+
+
+				// NOTE Datepicker Define the Spanish languaje
+					 $.datepicker.regional['es'] = {
+					 closeText: 'Cerrar',
+					 prevText: '<Ant',
+					 nextText: 'Sig>',
+					 currentText: 'Hoy',
+					 monthNames: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
+					 monthNamesShort: ['Ene','Feb','Mar','Abr', 'May','Jun','Jul','Ago','Sep', 'Oct','Nov','Dic'],
+					 dayNames: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado'],
+					 dayNamesShort: ['Dom','Lun','Mar','Mié','Juv','Vie','Sáb'],
+					 dayNamesMin: ['Do','Lu','Ma','Mi','Ju','Vi','Sá'],
+					 weekHeader: 'Sm',
+					 dateFormat: 'yy-mm-dd',
+					 firstDay: 1,
+	 //				numberOfMonths: 2,
+					 isRTL: false,
+					 showMonthAfterYear: false,
+					 yearSuffix: ''
+					 };
+					 $.datepicker.setDefaults($.datepicker.regional['es']);
+					 $( function() {
+ 				    // var dateFormat = "mm/dd/yy",
+ 				      from = $( "#inserted" )
+ 				        .datepicker({
+ 				          // defaultDate: "+1w",
+ 				          // changeMonth: true,
+									// changeMonth: true,
+			            // changeYear: true,
+ 				          numberOfMonths: 1,
+ 									showCurrentAtPos: 1
+ 				        })
+ 				        .on( "change", function() {
+ 				          to.datepicker( "option", "minDate", getDate( this ) );
+ 				        }).datepicker('widget').wrap('<div class="ll-skin-skeleton"/>')
+							// , // NOTE Apparently just need call ones
+ 				      // to = $( "#to" ).datepicker({
+ 				      //   // defaultDate: "+1w",
+ 				      //   // changeMonth: true,
+ 				      //   numberOfMonths: 2,
+ 							// 	showCurrentAtPos: 1
+ 				      // })
+ 				      // .on( "change", function() {
+ 				      //   from.datepicker( "option", "maxDate", getDate( this ) );
+ 				      // });
+
+ 				    function getDate( element ) {
+ 				      var date;
+ 				      try {
+ 				        date = $.datepicker.parseDate( dateFormat, element.value );
+ 				      } catch( error ) {
+ 				        date = null;
+ 				      }
+
+ 				      return date;
+ 				    }
+ 				  } );
+					// $( function() {
+					// 	 $( "input[id^='inserted']" ).datepicker({
+					// 		 // onClose: function( selectedDate ) {
+					// 		 // 	jQuery( "#from" ).datepicker( "option", "maxDate", selectedDate );
+					// 		 // }
+					// 		 onClose: function(selectedDate) {
+					// 			 console.log("onCompleteCalling Get Inside EasyPagination");
+					// 			 // console.log($(this));
+					// 			 console.log(selectedDate);
+					// 		 }
+					// 	 });
+					// } );
+
+
 
 				$(".search_udn").select2();
 
