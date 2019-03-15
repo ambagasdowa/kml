@@ -78,7 +78,9 @@ class ResumenViewMontofacturadoMensualGstIndicatorsController extends AppControl
 // exit();
 
 		$this->set(compact('resumenViewGrands','resumenViewDetails','model_id'));
-
+		// NOTE set the response output for an ajax call
+		Configure::write('debug', 0);
+		$this->autoLayout = false;
 	} // end get function
 
 
