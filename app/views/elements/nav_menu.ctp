@@ -599,13 +599,16 @@
                       <a tabindex="-1" href="#"><i class="fa fa-line-chart"></i>&nbsp;<span>Rendimiento/Disponibilidad</span></a>
                         <ul class="dropdown-menu">
                           <li>
-                            <a tabindex="-1" href="<?php e($this->webroot.'RendViewFullGstCoreIndicators/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-pencil-square-o"></i>&nbsp;<span> Rendimiento </span></a>
+                            <a tabindex="-1" href="<?php e($this->webroot.'RendViewFullGstCoreIndicators/');?>"><i class="fa fa-pencil-square-o"></i>&nbsp;<span> Rendimiento </span></a>
                           </li>
                           <li>
-                            <a tabindex="-1" href="<?php e($this->webroot.'DisponibilidadViewRptUnidadesGstIndicators/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-exchange"></i>&nbsp;<span>Disponibilidad</span></a>
+                            <a tabindex="-1" href="<?php e($this->webroot.'DisponibilidadViewRptUnidadesGstIndicators/');?>"><i class="fa fa-exchange"></i>&nbsp;<span>Disponibilidad</span></a>
                           </li>
                           <li>
-                            <a tabindex="-1" href="<?php e($this->webroot.'GeoreferenceViewPositionsHistGstIndicators/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-exchange"></i>&nbsp;<span>SinDocumentos</span></a>
+                            <a tabindex="-1" href="<?php e($this->webroot.'GeoreferenceViewPositionsHistGstIndicators/');?>"><i class="fa fa-exchange"></i>&nbsp;<span>SinDocumentos</span></a>
+                          </li>
+                          <li>
+                            <a tabindex="-1" href="<?php e($this->webroot.'ResumenViewMontofacturadoMensualGstIndicators/');?>"><i class="fa fa-exchange"></i>&nbsp;<span>Viajes/MontoFacturado</span></a>
                           </li>
                         </ul>
                     </li>
