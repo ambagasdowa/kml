@@ -276,7 +276,7 @@ $(document).ready(function(){
 				},
 				width:1200,
 				title: {
-						text: 'Unidades sin Documento'
+						text: '.'
 				},
 				credits:{enabled:false},
 				// colors: ['#058DC7','#3398d6','#6c99bb','#50B432','#b4c973', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'], // orig
