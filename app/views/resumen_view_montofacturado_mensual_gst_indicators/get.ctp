@@ -97,7 +97,7 @@
 
 	<div class="row">
  	 <div class="twelve columns">
- 		 <div id="chart" class="chart" style="display:none;" >
+ 		 <div id="chart" class="chart" >
  					 <div id="the-chart" style="min-width:80%; min-height: 480px; margin: 0 auto">
  						 <!-- graphics -->
  					 </div>
@@ -112,27 +112,27 @@
 
 <div class="row">
 <?php
-// echo '<div class="two columns"><i class="fa fa-barcode"></i></div>';
-// echo '<div class="two columns"></div>';
-// echo
-// 			$this->Form->input
-// 												(
-// 													'searchbox',
-// 													 array
-// 																(
-// 																	'type'=>'text',
-// 																	'class'=>'search_udn u-full-width form-control',
-// 																	'id'=>'FilterAll',
-// 																	'placeholder' => 'Filtro General',
-// 																	// 'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
-// 																	// 'title'=>'Puede teclear la fecha en Formato yyyymmdd',
-// 																	'div'=>FALSE,
-// 																	'label'=>FALSE,
-// 																	// 'options'=>array(1=>'ATSA IZUCAR - SIVESA ORIZABA',2=>'ATSA MIXQUI - SIVESA ORIZABA',3=>'CALIZA MIXQUI - FANAL TULTITLAN'),
-// 																	'tabindex'=>'2'
-// 																)
-// 												);
-// 	echo '</div>';
+echo '<div class="two columns"><i class="fa fa-barcode"></i></div>';
+echo '<div class="two columns"></div>';
+echo
+			$this->Form->input
+												(
+													'searchbox',
+													 array
+																(
+																	'type'=>'text',
+																	'class'=>'search_udn u-full-width form-control',
+																	'id'=>'FilterAll',
+																	'placeholder' => 'Filtro General',
+																	// 'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
+																	// 'title'=>'Puede teclear la fecha en Formato yyyymmdd',
+																	'div'=>FALSE,
+																	'label'=>FALSE,
+																	// 'options'=>array(1=>'ATSA IZUCAR - SIVESA ORIZABA',2=>'ATSA MIXQUI - SIVESA ORIZABA',3=>'CALIZA MIXQUI - FANAL TULTITLAN'),
+																	'tabindex'=>'2'
+																)
+												);
+	echo '</div>';
  ?>
  </div>
 
@@ -261,5 +261,66 @@
 <script type="text/javascript">
 $(document).ready(function(){
 
+
+		Highcharts.chart('the-chart', {
+				chart: {
+						// type: 'pie',
+						type: 'column',
+						backgroundColor: {
+												linearGradient: [0, 0, 500, 500],
+												stops: [
+														[0, 'rgb(255, 255, 255)'],
+														[1, 'rgb(240, 240, 255)']
+												]
+						 }
+				},
+				width:1200,
+				title: {
+						text: 'Unidades sin Documento'
+				},
+				credits:{enabled:false},
+				// colors: ['#058DC7','#3398d6','#6c99bb','#50B432','#b4c973', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'], // orig
+				colors: ['#00649f','#01aac1','#00dbe7','#97ecc5','#1fab89','#62d2a2','#9df3c4','#d7fbe8','#f67280','#c06c84','#6c5b7b','#355c7d','#ffb400','#fffbe0','#2994b2','#474744'], // theme colores
+				// colors:['#1a1334','#26294a',' #01545a','#017351','#03c383','#aad962','#fbbf45','#ef6a32','#ed0345','#a12a5e','#710162','#110141'], // darks theme
+				// colors:["#bfb7e6", "#7d86c1", "#403874", "#261c4e", "#1f0937", "#574331", "#9d9121", "#a49959", "#b6b37e", "#91a3f5"], //cold_water
+				// colors:["#043227", "#097168", "#ffcc88", "#fa482e", "#f4a32e"], // oldPapers
+				// theme trover
+				// colors:["#51574a", "#447c69", "#74c493", "#8e8c6d", "#e4bf80", "#e9d78e", "#e2975d", "#f19670", "#e16552", "#c94a53", "#be5168", "#a34974", "#993767", "#65387d", "#4e2472", "#9163b6", "#e279a3", "#e0598b", "#7c9fb0", "#5698c4", "#9abf88"],
+				subtitle: {
+						// text: 'Click en las columnas para ver el detalle del porcentaje por Unidad.'
+				},
+				xAxis: {
+						type: 'category'
+				},
+				yAxis: {
+						title: {
+								text: 'Numero de Unidades'
+						}
+				},
+				legend: {
+						enabled: false
+				},
+				plotOptions: {
+						series: {
+								borderWidth: 0,
+								dataLabels: {
+										enabled: true,
+										format: '{point.y}'
+								}
+						}
+				},
+				tooltip: {
+						headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
+						pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b> Unidades <br/>'
+				},
+				series: [{
+						name: 'Unidades',
+						colorByPoint: true,
+						data: [ <?php print($json_parsing_level_one) ?> ]
+				}] //,
+				// drilldown: {
+				// 		series: [ <?php //print($json_parsing_level_two) ?> ]
+				// }
+		}); // End the chart
 });
 </script>
