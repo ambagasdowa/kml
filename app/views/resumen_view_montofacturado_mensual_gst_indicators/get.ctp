@@ -264,8 +264,8 @@ $(document).ready(function(){
 
 		Highcharts.chart('the-chart', {
 				chart: {
-						// type: 'pie',
-						type: 'column',
+						type: 'pie',
+						// type: 'column',
 						backgroundColor: {
 												linearGradient: [0, 0, 500, 500],
 												stops: [
