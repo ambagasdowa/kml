@@ -281,17 +281,18 @@
 												,{
 															extend: 'excel'
 														, text: '<i class="fa fa-file-excel-o"></i>'
+														// , extension: '.xlsx'
 														, autoFilter: true
 														, messageTop:'Detalle'
 														// , header:false
-														, filename:"<?php print($export)?>"
+														, filename:"ExportData"
 														, title:"<?php print($export)?>"
 													}
 												,{
 															 extend: 'pdf', text: '<i class="fa fa-file-pdf-o"></i>'
 															, messageTop:'Detalle'
 															// , header:false
-															, filename:"<?php print($export)?>"
+															, filename:"ExportData"
 															, title:"<?php print($export)?>"
 												 }
 												,{ extend: 'print', text: '<i class="fa fa-print"></i>' }
@@ -323,17 +324,18 @@
 												,{
 															extend: 'excel'
 														, text: '<i class="fa fa-file-excel-o"></i>'
+														// , extension: '.xlsx'
 														, autoFilter: true
 														, messageTop:'Detalle'
 														// , header:false
-														, filename:"<?php print($export)?>"
+														, filename:"ExportData"
 														, title:"<?php print($export)?>"
 													}
 												,{
 															 extend: 'pdf', text: '<i class="fa fa-file-pdf-o"></i>'
 															, messageTop:'Detalle'
 															// , header:false
-															, filename:"<?php print($export)?>"
+															, filename:'ExportData'
 															, title:"<?php print($export)?>"
 												 }
 												// ,{
