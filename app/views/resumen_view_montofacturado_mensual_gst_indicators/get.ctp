@@ -166,11 +166,11 @@ echo
 				<tr>
 					<?php if ($model_id == 0) { ?>
 						<td><?php echo $resumenViewGrand['ResumenViewMontofacturadoMensualGstIndicator']['area']; ?></td>
-						<td><?php echo $resumenViewGrand['ResumenViewMontofacturadoMensualGstIndicator']['flete']; ?></td>
-						<td><?php echo $resumenViewGrand['ResumenViewMontofacturadoMensualGstIndicator']['subtotal']; ?></td>
-						<td><?php echo $resumenViewGrand['ResumenViewMontofacturadoMensualGstIndicator']['iva']; ?></td>
-						<td><?php echo $resumenViewGrand['ResumenViewMontofacturadoMensualGstIndicator']['retencion']; ?></td>
-						<td><?php echo $resumenViewGrand['ResumenViewMontofacturadoMensualGstIndicator']['total']; ?></td>
+						<td><?php echo '$'.round($resumenViewGrand['ResumenViewMontofacturadoMensualGstIndicator']['flete'],2); ?></td>
+						<td><?php echo '$'.round($resumenViewGrand['ResumenViewMontofacturadoMensualGstIndicator']['subtotal'],2); ?></td>
+						<td><?php echo '$'.round($resumenViewGrand['ResumenViewMontofacturadoMensualGstIndicator']['iva'],2); ?></td>
+						<td><?php echo '$'.round($resumenViewGrand['ResumenViewMontofacturadoMensualGstIndicator']['retencion'],2); ?></td>
+						<td><?php echo '$'.round($resumenViewGrand['ResumenViewMontofacturadoMensualGstIndicator']['total'],2); ?></td>
 						<td><?php echo $resumenViewGrand['ResumenViewMontofacturadoMensualGstIndicator']['periodo']; ?></td>
 					<?php } else if ($model_id == 1) { ?>
 						<!-- <td><?php echo $resumenViewGrand['ResumenViewViajesMensualGstIndicator']['id']; ?></td> -->
@@ -226,11 +226,11 @@ echo
 				<!-- <td><?php echo $resumenViewDetail['ResumenViewMontofacturadoUnidadGstIndicator']['id']; ?></td> -->
 				<!-- <td><?php echo $resumenViewDetail['ResumenViewMontofacturadoUnidadGstIndicator']['id_area']; ?></td> -->
 				<td><?php echo $resumenViewDetail['ResumenViewMontofacturadoUnidadGstIndicator']['area']; ?></td>
-				<td><?php echo $resumenViewDetail['ResumenViewMontofacturadoUnidadGstIndicator']['flete']; ?></td>
-				<td><?php echo $resumenViewDetail['ResumenViewMontofacturadoUnidadGstIndicator']['subtotal']; ?></td>
-				<td><?php echo $resumenViewDetail['ResumenViewMontofacturadoUnidadGstIndicator']['iva']; ?></td>
-				<td><?php echo $resumenViewDetail['ResumenViewMontofacturadoUnidadGstIndicator']['retencion']; ?></td>
-				<td><?php echo $resumenViewDetail['ResumenViewMontofacturadoUnidadGstIndicator']['total']; ?></td>
+				<td><?php echo '$'.round($resumenViewDetail['ResumenViewMontofacturadoUnidadGstIndicator']['flete'],2); ?></td>
+				<td><?php echo '$'.round($resumenViewDetail['ResumenViewMontofacturadoUnidadGstIndicator']['subtotal'],2); ?></td>
+				<td><?php echo '$'.round($resumenViewDetail['ResumenViewMontofacturadoUnidadGstIndicator']['iva'],2); ?></td>
+				<td><?php echo '$'.round($resumenViewDetail['ResumenViewMontofacturadoUnidadGstIndicator']['retencion'],2); ?></td>
+				<td><?php echo '$'.round($resumenViewDetail['ResumenViewMontofacturadoUnidadGstIndicator']['total'],2); ?></td>
 				<td><?php echo $resumenViewDetail['ResumenViewMontofacturadoUnidadGstIndicator']['unidad']; ?></td>
 				<td><?php echo $resumenViewDetail['ResumenViewMontofacturadoUnidadGstIndicator']['periodo']; ?></td>
 			<?php } else if ($model_id == 1) { ?>
@@ -287,7 +287,7 @@ $(document).ready(function(){
 				// theme trover
 				// colors:["#51574a", "#447c69", "#74c493", "#8e8c6d", "#e4bf80", "#e9d78e", "#e2975d", "#f19670", "#e16552", "#c94a53", "#be5168", "#a34974", "#993767", "#65387d", "#4e2472", "#9163b6", "#e279a3", "#e0598b", "#7c9fb0", "#5698c4", "#9abf88"],
 				subtitle: {
-						// text: 'Click en las columnas para ver el detalle del porcentaje por Unidad.'
+						text: 'Click en las columnas para ver el detalle  <?php print( $description ); ?>'
 				},
 				xAxis: {
 						type: 'category'
@@ -317,10 +317,10 @@ $(document).ready(function(){
 						name: 'Unidades',
 						colorByPoint: true,
 						data: [ <?php print($json_parsing_level_one) ?> ]
-				}] //,
-				// drilldown: {
-				// 		series: [ <?php //print($json_parsing_level_two) ?> ]
-				// }
+				}] ,
+				 drilldown: {
+				 		series: [ <?php print($json_parsing_level_two) ?> ]
+				 }
 		}); // End the chart
 });
 </script>

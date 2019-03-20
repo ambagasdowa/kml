@@ -59,17 +59,19 @@ class ResumenViewMontofacturadoMensualGstIndicatorsController extends AppControl
 
 			$fields[0][0][0] = 'area';
 			$fields[0][0][1] = 'total';
+			$fields[0][0][2] = 'area';
 
 			$fields[1][1][0] = 'TipoViaje';
 			$fields[1][1][1] = 'viajes';
+			$fields[1][1][2] = 'area';
 
 			$fieldsdetail[0][0][0] = 'area';
 			$fieldsdetail[0][0][1] = 'unidad';
 			$fieldsdetail[0][0][2] = 'total';
 
-			// $fieldsdetail[1][1][0] = 'area';
-			// $fieldsdetail[1][1][1] = 'TipoViaje';
-			// $fieldsdetail[1][1][2] = 'viajes';
+			$fieldsdetail[1][1][0] = 'area';
+			$fieldsdetail[1][1][1] = 'poblacion';
+			$fieldsdetail[1][1][2] = 'viajes';
 
 
 			$this->LoadModel('ResumenViewMontofacturadoMensualGstIndicator');
@@ -95,7 +97,7 @@ class ResumenViewMontofacturadoMensualGstIndicatorsController extends AppControl
 // debug($fields[$model_id]);
 // debug($fields[$model_id][$model_id][0]);
 // debug($fields[$model_id][$model_id][1]);
-
+// NOTE on LEVEL 2
 		$json_parsing_lv_one = null;
 
 				$disp_grp = $resumenViewGrands ;
@@ -105,7 +107,7 @@ class ResumenViewMontofacturadoMensualGstIndicatorsController extends AppControl
 																								 'name'=>$data[$models[$model_id][0]][$fields[$model_id][$model_id][0]]
 																								,'y'=>round($data[$models[$model_id][0]][$fields[$model_id][$model_id][1]],2)
 																								// ,'drilldown'=>$key_viajes
-																								,'drilldown'=>null
+																								,'drilldown'=>$data[$models[$model_id][0]][$fields[$model_id][$model_id][2]]
 																						 )
 																								, JSON_PRETTY_PRINT
 													);
@@ -114,46 +116,59 @@ class ResumenViewMontofacturadoMensualGstIndicatorsController extends AppControl
 
 			// json_parsing_level_two
 
-			// $disp_detail = $resumenViewDetails ;
-			//
-			// foreach ($disp_detail as $key => $value) {
-			//
-			// 	$getJson[$models[$model_id][1]]['name'] = $value[$models[$model_id][1]][$fieldsdetail[$model_id][$model_id][0]] ;
-			// 	$getJson[$models[$model_id][1]]['id'] = $value[$models[$model_id][1]][$fieldsdetail[$model_id][$model_id][0]] ;
-			// 	// $getJson[$models[$model_id][1]]['data']['unidad'][] = $value[$models[$model_id][1]][$fieldsdetail[$model_id][$model_id][1]] ;
-			// 	// $getJson[$models[$model_id][1]]['data']['total'][] = $value[$models[$model_id][1]][$fieldsdetail[$model_id][$model_id][2]] ;
-			// 	$getJson[$models[$model_id][1]]['data'][] = $value[$models[$model_id][1]][$fieldsdetail[$model_id][$model_id][1]] .','.round($value[$models[$model_id][1]][$fieldsdetail[$model_id][$model_id][2]],2) ;
-			// 	// $getJson[$models[$model_id][1]]['data'][$value[$models[$model_id][1]][$fieldsdetail[$model_id][$model_id][1]]] = round($value[$models[$model_id][1]][$fieldsdetail[$model_id][$model_id][2]],2) ;
-			// 	//
-			// }
+			$disp_detail = $resumenViewDetails ;
 
+			foreach ($disp_detail as $key => $value) {
+
+				$key_a = $value[$models[$model_id][1]][$fieldsdetail[$model_id][$model_id][0]];
+				// if ($model_id == 0) {
+					$getJson[$key_a][$models[$model_id][1]]['name'] = $value[$models[$model_id][1]][$fieldsdetail[$model_id][$model_id][0]] ;
+					$getJson[$key_a][$models[$model_id][1]]['id'] = $value[$models[$model_id][1]][$fieldsdetail[$model_id][$model_id][0]] ;
+					$getJson[$key_a][$models[$model_id][1]]['data'][] = '"'.$value[$models[$model_id][1]][$fieldsdetail[$model_id][$model_id][1]].'"'.','.round($value[$models[$model_id][1]][$fieldsdetail[$model_id][$model_id][2]],2) ;
+				// } elseif($model_id == 1) {
+				// 	$getJson[$key_a][$models[$model_id][1]]['name'] = $value[$models[$model_id][1]][$fieldsdetail[$model_id][$model_id][0]] ;
+				// 	$getJson[$key_a][$models[$model_id][1]]['id'] = $value[$models[$model_id][1]][$fieldsdetail[$model_id][$model_id][0]] ;
+				// 	$getJson[$key_a][$models[$model_id][1]]['data'][] = '"'.$value[$models[$model_id][1]][$fieldsdetail[$model_id][$model_id][1]].'"'.','.round($value[$models[$model_id][1]][$fieldsdetail[$model_id][$model_id][2]],2) ;
+				// }
+			}
 			// debug($getJson);
 
-// 			foreach ($getJson as $jkey => $son) {
-// 				// code...
-// 				// debug($key);
-// 				foreach ($son as $nkey => $data) {
-// 					// code...
-// 					// debug($nkey);
-// 					// debug($data);
-//
-// 					$json_code = json_encode(
-// 														array(
-// 																	 'name'=>$son['name']
-// 																	,'id'=>$son['id']
-// 																	,'data'=>json_encode( implode( '],[' , $son['data'] )  , JSON_PRETTY_PRINT)
-// 																 )
-// 													 // ,JSON_FORCE_OBJECT
-// 													 ,JSON_PRETTY_PRINT
-// 						 );
-// 				}
-// // $json_parsing_level_one = implode('},{',explode('}{',$json_parsing_lv_one));
-// 				// debug($son);
-// 			}
-//
+			foreach ($getJson as $jkey => $son) {
+				// debug($jkey);
+				foreach ($son as $nkey => $data) {
+					// debug($nkey);
+					$code[$jkey]['name'] =  $son[$nkey]['name'];
+					$code[$jkey]['id'] =  $son[$nkey]['id'];
+					$code[$jkey]['data'] =  '['. implode( '],[' , $son[$nkey]['data'] ) .']';
+				}
+			}
 
-			// debug($json_code);
+			foreach ($code as $udn => $detail) {
+				$json_code = json_encode(
+													array(
+																 'name'=>$udn
+																,'id'=>$udn
+																,'data'=>'['.$detail['data'].']'
+															 )
+												 ,JSON_FORCE_OBJECT
+					 );
+			}
 
+//
+			// debug();
+			$json_parsing_level_two = str_replace('\"','"',str_replace(']]"',']]',str_replace('"[[','[[',$json_code)));
+
+
+// NOTE on LEVEL 2
+			// debug(str_replace("\"data\":\"","\"data\":[",$json_code));
+		if ($model_id == 0 ) {
+			// code...
+			$description = 'Click en las columnas para ver el detalle del Monto Facturado';
+			$export = 'Monto Facturado';
+		} else {
+			$description = 'Click en las columnas para ver el detalle de los Viajes';
+			$export = 'Viajes';
+		}
 
 
 
@@ -170,7 +185,7 @@ class ResumenViewMontofacturadoMensualGstIndicatorsController extends AppControl
 
 
 
-		$this->set(compact('resumenViewGrands','resumenViewDetails','json_parsing_level_one','model_id'));
+		$this->set(compact('resumenViewGrands','resumenViewDetails','json_parsing_level_one','json_parsing_level_two','model_id','description','export'));
 		// NOTE set the response output for an ajax call
 		Configure::write('debug', 0);
 		$this->autoLayout = false;
