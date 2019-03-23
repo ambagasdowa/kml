@@ -64,6 +64,9 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 		// $conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.periodo'] = $add_conditions['periodo'];
 		$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.id_area'] = $add_conditions['id_area'];
 		$conditionsTf['DisponibilidadViewRptGroupGstIndicator.id_area'] = $add_conditions['id_area'];
+		// $conditionsBl['DisponibilidadViewRptGroupGstIndicator.id_flota'] = $add_conditions['id_flota'];
+		// $conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.id_tipo_operacion'] = $add_conditions['id_flota'];
+		$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.id_flota'] = $add_conditions['id_flota'];
 		// $conditionsBl['RendViewFullGstCoreIndicator.id'] = 10;
 
 		$disponibilidadViewRptUnidadesGstIndicators = $this->DisponibilidadViewRptUnidadesGstIndicator->find('all',array('conditions'=>$conditionsBl));
@@ -75,9 +78,10 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 		$disponibilidadViewStatusGstIndicators = $this->DisponibilidadViewStatusGstIndicator->find('list',array('fields'=>array('id_status','nombre')));
 
 		$disponibilidadViewRptGroupGstIndicators = $this->DisponibilidadViewRptGroupGstIndicator->find('all',array('conditions'=>$conditionsTf));
-$json_parsing_lv_one = null;
-		$disp_grp = $disponibilidadViewRptGroupGstIndicators ;
 
+		$json_parsing_lv_one = null;
+
+		$disp_grp = $disponibilidadViewRptGroupGstIndicators ;
 		foreach ($disp_grp as $key => $data) {
 			// code...
 			// debug($data);
@@ -130,11 +134,14 @@ $json_parsing_lv_one = null;
 	}
 	// $user_mod = false;
 	// $user_mod = true;
+	$user_id = $this->Auth->user('id');
+	// debug($user_id);
 	$this->set(compact(
 											  'disponibilidadViewRptUnidadesGstIndicators'
 											 ,'disponibilidadViewStatusGstIndicators'
 											 ,'disponibilidadViewRptGroupGstIndicators'
 											 ,'user_mod'
+											 ,'user_id'
 											// ,'sums_kms'
 											// ,'sums_diesel'
 											// ,'sums_rendimiento'

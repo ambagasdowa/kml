@@ -205,7 +205,6 @@ echo
 																			array(
 																						'id'=>'historical_'.$disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['unidad'],
 																						'data-unidad'=>$disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['unidad'],
-																						// 'data-reference' => $performanceReference['PerformanceViewFactura']['id'],
 																						// 'data-empresa' => $performanceReference['PerformanceViewFactura']['Empresa'],
 																						// 'data-resume' => $performanceReference['PerformanceViewFactura']['performance_customers_id'],
 																						'div'=>false
@@ -227,6 +226,7 @@ echo
 																								'style'=>'width:100%;margin:0 auto;overflow:auto;position:relative;overflow:hidden;',
 																								'data-unidad'=>$disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['unidad'],
 																								'data-status'=>$disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['id_status'],
+																								'data-user' => $user_id,
 																								'placeholder' => $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['estatus'],
 																								// 'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
 																								// 'title'=>'Puede teclear la fecha en Formato yyyymmdd',
@@ -470,6 +470,8 @@ $("#print").on('click',function(e){
 
 				var description = "description_"+$(this).attr('data-unidad');
 				var compromise = "compromise_"+$(this).attr('data-unidad');
+				var user_id = $(this).attr('data-user');
+				// alert(user_id);
 // or ajax
 
 				// desc = document.getElementById(description).innerText;
@@ -493,6 +495,7 @@ $("#print").on('click',function(e){
 				var post_data = {
 													'unidad':$(this).attr('data-unidad'),
 													'id_status':$(this).val(),
+													'user_id':user_id,
 													'description':desc,
 													'compromise':comp
 												};
