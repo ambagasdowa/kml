@@ -5,6 +5,7 @@
  options_datepicker = {
          language: 'es-ES'
         ,format: 'yyyy-mm-dd'
+        ,autoHide: true
  };
 
 
