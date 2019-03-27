@@ -149,6 +149,7 @@
 				<!-- <th>UltimaAsignacion</th> -->
 				<!-- <th>Seguimiento</th> -->
 				<!-- <th>UltimoViaje</th> -->
+				<th>Guias</th>
 				<th>Despachado</th>
 				<th>Operador</th>
 				<th>EstadoActual</th>
@@ -187,6 +188,7 @@
 					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['id']; ?>&nbsp;</td> -->
 					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['AsignacionDesc']; ?>&nbsp;</td> -->
 					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['Viaje']; ?>&nbsp;</td> -->
+					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['Guias']; ?></td>
 					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['Despachado']; ?>&nbsp;</td>
 					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['Operador']; ?>&nbsp;</td>
 					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['Seguimiento']; ?>&nbsp;</td> -->

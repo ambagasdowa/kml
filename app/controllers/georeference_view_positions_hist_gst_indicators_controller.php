@@ -189,17 +189,20 @@ class GeoreferenceViewPositionsHistGstIndicatorsController extends AppController
 
 
 	function index() {
-
+// Configure::write('debug', 2);
 		$this->LoadModel('ProjectionsViewBussinessUnit');
 		$this->LoadModel('ProjectionsViewFraction');
+		$this->loadModel('GeoreferenceViewPositionsDashMainGstIndicator');
 
 		$bssus = $this->ProjectionsViewBussinessUnit->find('list',array('fields'=>array('id','name')));
 		$operacion = $this->ProjectionsViewFraction->find('list',array('fields'=>array('id','desc_producto')));
-		// debug($bssus);
+
+		$georeferenceViewPositionsDashMainGstIndicators = $this->GeoreferenceViewPositionsDashMainGstIndicator->find('all');
+		// debug($georeferenceViewPositionsDashMainGstIndicators);
 		//
 		// $this->RendViewFullGstCoreIndicator->recursive = 0;
 		// $this->set('rendViewFullGstCoreIndicators', $this->paginate());
-		$this->set(compact('bssus','operacion'));
+		$this->set(compact('bssus','operacion','georeferenceViewPositionsDashMainGstIndicators'));
 		// $this->GeoreferenceViewPositionsHistGstIndicator->recursive = 0;
 		// $this->set('georeferenceViewPositionsHistGstIndicators', $this->paginate());
 	}
