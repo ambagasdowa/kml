@@ -152,7 +152,7 @@
 				<th>Guias</th>
 				<th>Despachado</th>
 				<th>Operador</th>
-				<th>EstadoActual</th>
+				<th>Estado</th>
 				<!-- <th>statdesc</th> -->
 				<!-- <th>EnBase</th> -->
 				<!-- <th>inBase</th> -->

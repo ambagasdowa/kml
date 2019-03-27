@@ -241,7 +241,7 @@
 						  				<th>id</th>
 						  				<th>Area</th>
 						  				<th>Unidades</th>
-						  				<th>StatusDescription</th>
+						  				<th>Estado</th>
 						  				<th>MesDespacho</th>
 						  				<!-- <th>periodo</th> -->
 						  			</thead>
@@ -398,7 +398,7 @@
 								 }
 								,{ extend: 'print', text: '<i class="fa fa-print"></i>' }
 						]
-						
+
 					});
 
 				$(".search_udn").select2();
