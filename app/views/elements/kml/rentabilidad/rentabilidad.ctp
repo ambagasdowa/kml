@@ -166,6 +166,20 @@ $core = 'core'.DS;
       // e($this->Html->script($theme.'highCharts/stock/themes/skies',false));
       e($this->Html->script($theme.'highCharts/plugin/export-csv',false));
 
+
+
+			// NOTE Datepicker
+
+			e($this->Html->script($theme.'configurations/options',false));
+
+			e($this->Html->script($theme.'datepicker/datepicker.min',false));
+
+			e($this->Html->script($theme.'datepicker/i18n/datepicker.es-ES',false));
+			// NOTE css
+			e($this->Html->css($theme.'datepicker/datepicker.min', 'stylesheet', array('inline'=>false)));
+
+
+
       // NOTE Datatables Pluging
       // @url https://datatables.net/
       // e($this->Html->css($theme.'DataTablesBootstrap/datatables.min', 'stylesheet', array('inline'=>false)));
