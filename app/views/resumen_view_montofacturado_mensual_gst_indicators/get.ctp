@@ -142,21 +142,21 @@ echo
 		<table id="table_grp" class="display order-table table table-bordered table-hover table-striped responstable">
 			<thead>
 				<?php if ($model_id == 0) { ?>
-					<th>area</th>
-					<th>flete</th>
-					<th>subtotal</th>
-					<th>iva</th>
-					<th>retencion</th>
-					<th>total</th>
-					<th>periodo</th>
+					<th>Area</th>
+					<th>Flete</th>
+					<th>Subtotal</th>
+					<th>Iva</th>
+					<th>Retenci&oacute;n</th>
+					<th>Total</th>
+					<th>Periodo</th>
 				<?php } else if ($model_id == 1) { ?>
 					<!-- <th>id</th> -->
 					<!-- <th>id_area</th> -->
-					<th>area</th>
-					<th>viajes</th>
+					<th>Area</th>
+					<th>Viajes</th>
 					<!-- <th>id_seguimiento</th> -->
 					<th>TipoViaje</th>
-					<th>periodo</th>
+					<th>Periodo</th>
 				<?php	}	?>
 			</thead>
 			<tbody>
@@ -166,11 +166,11 @@ echo
 				<tr>
 					<?php if ($model_id == 0) { ?>
 						<td><?php echo $resumenViewGrand['ResumenViewMontofacturadoMensualGstIndicator']['area']; ?></td>
-						<td><?php echo '$'.round($resumenViewGrand['ResumenViewMontofacturadoMensualGstIndicator']['flete'],2); ?></td>
-						<td><?php echo '$'.round($resumenViewGrand['ResumenViewMontofacturadoMensualGstIndicator']['subtotal'],2); ?></td>
-						<td><?php echo '$'.round($resumenViewGrand['ResumenViewMontofacturadoMensualGstIndicator']['iva'],2); ?></td>
-						<td><?php echo '$'.round($resumenViewGrand['ResumenViewMontofacturadoMensualGstIndicator']['retencion'],2); ?></td>
-						<td><?php echo '$'.round($resumenViewGrand['ResumenViewMontofacturadoMensualGstIndicator']['total'],2); ?></td>
+						<td><?php echo '$'.number_format(round($resumenViewGrand['ResumenViewMontofacturadoMensualGstIndicator']['flete'],2)); ?></td>
+						<td><?php echo '$'.number_format(round($resumenViewGrand['ResumenViewMontofacturadoMensualGstIndicator']['subtotal'],2)); ?></td>
+						<td><?php echo '$'.number_format(round($resumenViewGrand['ResumenViewMontofacturadoMensualGstIndicator']['iva'],2)); ?></td>
+						<td><?php echo '$'.number_format(round($resumenViewGrand['ResumenViewMontofacturadoMensualGstIndicator']['retencion'],2)); ?></td>
+						<td><?php echo '$'.number_format(round($resumenViewGrand['ResumenViewMontofacturadoMensualGstIndicator']['total'],2)); ?></td>
 						<td><?php echo $resumenViewGrand['ResumenViewMontofacturadoMensualGstIndicator']['periodo']; ?></td>
 					<?php } else if ($model_id == 1) { ?>
 						<!-- <td><?php echo $resumenViewGrand['ResumenViewViajesMensualGstIndicator']['id']; ?></td> -->
@@ -197,23 +197,23 @@ echo
 				<?php if ($model_id == 0) { ?>
 					<!-- <th>id</th> -->
 					<!-- <th>id_area</th> -->
-					<th>area</th>
-					<th>flete</th>
-					<th>subtotal</th>
-					<th>iva</th>
-					<th>retencion</th>
-					<th>total</th>
-					<th>unidad</th>
-					<th>periodo</th>
+					<th>Area</th>
+					<th>Flete</th>
+					<th>Subtotal</th>
+					<th>Iva</th>
+					<th>Retenci&oacute;n</th>
+					<th>Total</th>
+					<th>Unidad</th>
+					<th>Periodo</th>
 				<?php } else if ($model_id == 1) { ?>
 					<!-- <th>id</th> -->
 					<!-- <th>id_area</th> -->
-					<th>area</th>
-					<th>viajes</th>
+					<th>Area</th>
+					<th>Viajes</th>
 					<th>TipoViaje</th>
-					<th>periodo</th>
+					<th>Periodo</th>
 					<!-- <th>id_destino</th> -->
-					<th>poblacion</th>
+					<th>Poblaci&oacute;n</th>
 				<?php	}	?>
 			</tr>
 		</thead>
@@ -226,11 +226,11 @@ echo
 				<!-- <td><?php echo $resumenViewDetail['ResumenViewMontofacturadoUnidadGstIndicator']['id']; ?></td> -->
 				<!-- <td><?php echo $resumenViewDetail['ResumenViewMontofacturadoUnidadGstIndicator']['id_area']; ?></td> -->
 				<td><?php echo $resumenViewDetail['ResumenViewMontofacturadoUnidadGstIndicator']['area']; ?></td>
-				<td><?php echo '$'.round($resumenViewDetail['ResumenViewMontofacturadoUnidadGstIndicator']['flete'],2); ?></td>
-				<td><?php echo '$'.round($resumenViewDetail['ResumenViewMontofacturadoUnidadGstIndicator']['subtotal'],2); ?></td>
-				<td><?php echo '$'.round($resumenViewDetail['ResumenViewMontofacturadoUnidadGstIndicator']['iva'],2); ?></td>
-				<td><?php echo '$'.round($resumenViewDetail['ResumenViewMontofacturadoUnidadGstIndicator']['retencion'],2); ?></td>
-				<td><?php echo '$'.round($resumenViewDetail['ResumenViewMontofacturadoUnidadGstIndicator']['total'],2); ?></td>
+				<td><?php echo '$'.number_format(round($resumenViewDetail['ResumenViewMontofacturadoUnidadGstIndicator']['flete'],2)); ?></td>
+				<td><?php echo '$'.number_format(round($resumenViewDetail['ResumenViewMontofacturadoUnidadGstIndicator']['subtotal'],2)); ?></td>
+				<td><?php echo '$'.number_format(round($resumenViewDetail['ResumenViewMontofacturadoUnidadGstIndicator']['iva'],2)); ?></td>
+				<td><?php echo '$'.number_format(round($resumenViewDetail['ResumenViewMontofacturadoUnidadGstIndicator']['retencion'],2)); ?></td>
+				<td><?php echo '$'.number_format(round($resumenViewDetail['ResumenViewMontofacturadoUnidadGstIndicator']['total'],2)); ?></td>
 				<td><?php echo $resumenViewDetail['ResumenViewMontofacturadoUnidadGstIndicator']['unidad']; ?></td>
 				<td><?php echo $resumenViewDetail['ResumenViewMontofacturadoUnidadGstIndicator']['periodo']; ?></td>
 			<?php } else if ($model_id == 1) { ?>
