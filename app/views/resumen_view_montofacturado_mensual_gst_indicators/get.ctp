@@ -112,7 +112,7 @@
 
 <div class="row">
 <?php
-echo '<div class="two columns"><i class="fa fa-barcode"></i></div>';
+// echo '<div class="two columns"><i class="fa fa-barcode"></i></div>';
 echo '<div class="two columns"></div>';
 echo
 			$this->Form->input

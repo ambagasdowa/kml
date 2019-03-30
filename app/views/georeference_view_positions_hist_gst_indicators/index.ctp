@@ -240,7 +240,7 @@
 
 						  		<table id="table_dash" class="display order-table table table-bordered table-hover table-striped responstable">
 						  			<thead>
-						  				<th>id</th>
+						  				<!-- <th>id</th> -->
 						  				<th>Area</th>
 						  				<th>Unidades</th>
 						  				<th>Estado</th>
@@ -252,7 +252,7 @@
 						  					foreach ( $georeferenceViewPositionsDashMainGstIndicators as $key => $georeferenceViewPositionsDashMainGstIndicator) {
 						  				?>
 						  				<tr>
-						  					<td><?php echo $georeferenceViewPositionsDashMainGstIndicator['GeoreferenceViewPositionsDashMainGstIndicator']['id']; ?></td>
+						  					<!-- <td><?php echo $georeferenceViewPositionsDashMainGstIndicator['GeoreferenceViewPositionsDashMainGstIndicator']['id']; ?></td> -->
 						  					<td><?php echo $georeferenceViewPositionsDashMainGstIndicator['GeoreferenceViewPositionsDashMainGstIndicator']['Area']; ?></td>
 						  					<td><?php echo $georeferenceViewPositionsDashMainGstIndicator['GeoreferenceViewPositionsDashMainGstIndicator']['unidades']; ?></td>
 						  					<td><?php echo $georeferenceViewPositionsDashMainGstIndicator['GeoreferenceViewPositionsDashMainGstIndicator']['StatusDescription']; ?></td>
@@ -261,8 +261,12 @@
 						  				</tr>
 						  				<?php } ?>
 						  			</tbody>
-						  			<!-- <tfoot>
-						  			</tfoot> -->
+
+						  			<tfoot>
+												<td></td>
+												<td></td>
+												<td colspan="2"></td>
+						  			</tfoot>
 						  		</table>
 
 						    </div>
@@ -299,7 +303,13 @@
 					// 	 });
 					// } );
 
-					var table_a = $('#table_dash').DataTable(options_datatable);
+					var table_a = $('#table_dash').DataTable(
+					 Object.assign(
+								 {}
+								, options_datatable
+								, calculate_row([1])
+							)
+					 );
 
 				$(".search_udn").select2();
 
@@ -322,12 +332,25 @@
 								// $( ".updateSearchResult" ).load(urlStruct);
 								$( ".updateSearchResult" ).load(urlStruct,function(responseText, statusText, xhr) {
 									// Add Table UIX
-									var table_a = $('#table_grp').DataTable(options_datatable);
 
-									$('#FilterAll').on( 'keyup', function () {
-									    table_a.search( this.value ).draw();
-									    table_b.search( this.value ).draw();
-									} );
+									// var table_a = $('#table_grp').DataTable(options_datatable);
+									var table_b = $('#table_grp').DataTable(
+									 Object.assign(
+												 {}
+												, options_datatable
+												// , calculate_row([1])
+											)
+									 );
+									//
+									// var table_b = $('#table_det').DataTable(
+									// 	Object.assign( {}, options_datatable, calculate_row([7,8,9]) )
+									//  );
+
+									// End table
+									// $('#FilterAll').on( 'keyup', function () {
+									//     table_a.search( this.value ).draw();
+									//     table_b.search( this.value ).draw();
+									// } );
 
 									// console.log(statusText);
 									if(statusText == "error"){

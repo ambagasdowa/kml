@@ -162,9 +162,10 @@ echo
 				</tr>
 				<?php } ?>
 			</tbody>
-			<!-- <tfoot>
-
-			</tfoot> -->
+			<tfoot>
+					<td></td>
+					<td></td>
+			</tfoot>
 		</table>
 
 

@@ -261,8 +261,22 @@
 								// $( ".updateSearchResult" ).load(urlStruct);
 								$( ".updateSearchResult" ).load(urlStruct,function(responseText, statusText, xhr) {
 									// Add Table UIX
-									var table_a = $('#table_grp').DataTable(options_datatable);
-									var table_b = $('#table_det').DataTable(options_datatable);
+									//
+									var table_a = $('#table_grp').DataTable(
+										Object.assign( {}, options_datatable
+											, calculate_row([0])
+										 )
+									 );
+
+									var table_b = $('#table_det').DataTable(
+										Object.assign( {}
+											, options_datatable
+											// ,calculate_row[0])
+										)
+									 );
+
+									// var table_a = $('#table_grp').DataTable(options_datatable);
+									// var table_b = $('#table_det').DataTable(options_datatable);
 									// // End table
 									$('#FilterAll').on( 'keyup', function () {
 									    table_a.search( this.value ).draw();

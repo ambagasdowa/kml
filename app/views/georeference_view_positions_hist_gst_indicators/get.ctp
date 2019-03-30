@@ -183,38 +183,38 @@
 					foreach ($georeferenceTblPositionsDocumentsGstIndicators as $key => $georeferenceTblPositionsDocumentsGstIndicator) {
 				?>
 				<tr>
-					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['Area']; ?>&nbsp;</td>
-					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['Unidad']; ?>&nbsp;</td>
-					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['id']; ?>&nbsp;</td> -->
-					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['AsignacionDesc']; ?>&nbsp;</td> -->
-					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['Viaje']; ?>&nbsp;</td> -->
+					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['Area']; ?></td>
+					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['Unidad']; ?></td>
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['id']; ?></td> -->
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['AsignacionDesc']; ?></td> -->
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['Viaje']; ?></td> -->
 					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['Guias']; ?></td>
-					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['Despachado']; ?>&nbsp;</td>
-					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['Operador']; ?>&nbsp;</td>
-					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['Seguimiento']; ?>&nbsp;</td> -->
-					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['StatusDescription']; ?>&nbsp;</td>
-					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['statdesc']; ?>&nbsp;</td> -->
-					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['enBase']; ?>&nbsp;</td> -->
-					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['inBase']; ?>&nbsp;</td> -->
-					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['DescriptionViaje']; ?>&nbsp;</td> -->
-					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['traceroute']; ?>&nbsp;</td> -->
-					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['Asignacion']; ?>&nbsp;</td> -->
-					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['status_asignacion']; ?>&nbsp;</td> -->
-					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['seguimiento_actual']; ?>&nbsp;</td> -->
-					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['FechaAsignacion']; ?>&nbsp;</td> -->
-					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['Latitud']; ?>&nbsp;</td> -->
-					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['Longitud']; ?>&nbsp;</td> -->
-					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['FechaPosition']; ?>&nbsp;</td>
-					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['id_geocerca']; ?>&nbsp;</td> -->
-					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['base']; ?>&nbsp;</td> -->
-					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['max_latitud']; ?>&nbsp;</td> -->
-					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['min_latitud']; ?>&nbsp;</td> -->
-					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['max_longitud']; ?>&nbsp;</td> -->
-					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['min_longitud']; ?>&nbsp;</td> -->
-					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['control_id']; ?>&nbsp;</td> -->
-					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['created']; ?>&nbsp;</td> -->
-					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['inserted']; ?>&nbsp;</td> -->
-					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['status']; ?>&nbsp;</td> -->
+					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['Despachado']; ?></td>
+					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['Operador']; ?></td>
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['Seguimiento']; ?></td> -->
+					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['StatusDescription']; ?></td>
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['statdesc']; ?></td> -->
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['enBase']; ?></td> -->
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['inBase']; ?></td> -->
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['DescriptionViaje']; ?></td> -->
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['traceroute']; ?></td> -->
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['Asignacion']; ?></td> -->
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['status_asignacion']; ?></td> -->
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['seguimiento_actual']; ?></td> -->
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['FechaAsignacion']; ?></td> -->
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['Latitud']; ?></td> -->
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['Longitud']; ?></td> -->
+					<td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['FechaPosition']; ?></td>
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['id_geocerca']; ?></td> -->
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['base']; ?></td> -->
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['max_latitud']; ?></td> -->
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['min_latitud']; ?></td> -->
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['max_longitud']; ?></td> -->
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['min_longitud']; ?></td> -->
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['control_id']; ?></td> -->
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['created']; ?></td> -->
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['inserted']; ?></td> -->
+					<!-- <td><?php echo $georeferenceTblPositionsDocumentsGstIndicator[$modelo]['status']; ?></td> -->
 				</tr>
 				<?php } ?>
 			</tbody>
@@ -301,7 +301,7 @@
 			</td>
 			<td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['operador']; ?></td>
 			<td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['remolque']; ?></td>
-			<!-- <td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['area']; ?>&nbsp;</td> -->
+			<!-- <td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['area']; ?></td> -->
 			<td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['segmento']; ?></td>
 			<td>
 				<?php
@@ -363,11 +363,11 @@
 				}
 				?>
 			</td>
-			<!-- <td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['status_viaje']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['desc_viaje']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['status_taller']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['desc_taller']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['iseditable']; ?>&nbsp;</td> -->
+			<!-- <td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['status_viaje']; ?></td> -->
+			<!-- <td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['desc_viaje']; ?></td> -->
+			<!-- <td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['status_taller']; ?></td> -->
+			<!-- <td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['desc_taller']; ?></td> -->
+			<!-- <td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['iseditable']; ?></td> -->
 		</tr>
 	<?php } //endforeach; ?>
 		</tbody>

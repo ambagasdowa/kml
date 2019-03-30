@@ -14,8 +14,32 @@
 */
 
 options_datatable = {
+
+        initComplete: function () {
+            var api = this.api();
+            api.$('td').click( function () {
+                api.search( this.innerHTML ).draw();
+            } );
+        },
+        // scrollY:        '50vh',
+        // scrollCollapse: true,
+        // scrollX : true,
         dom: 'Bfrtip',
         language: {
+            // decimal: ".",
+            // thousands: ",",
+            // "lengthMenu": "Display _MENU_ records per page",
+            "search":         "Buscar:",
+            "paginate": {
+                "first":      "Primera",
+                "last":       "Ultima",
+                "next":       "Siguiente",
+                "previous":   "Anterior"
+            },
+            "zeroRecords": "No hay registros",
+            "info": "Pagina _PAGE_ de _PAGES_",
+            "infoEmpty": "Sin registros disponibles",
+            "infoFiltered": "(filtrados _MAX_ registros totales)",
             buttons: {
                 pageLength: {
                     _: "Filtra %d lineas",
@@ -39,7 +63,7 @@ options_datatable = {
                 , messageTop:'Detalle'
                 // , header:false
                 , filename:"ExportData"
-                , title:"<?php print($export)?>"
+                , title:"File"
               }
             // ,{
             // 			 extend: 'pdf', text: '<i class="fa fa-file-pdf-o"></i>'
@@ -50,11 +74,11 @@ options_datatable = {
             //  }
             ,{
                   // extend: 'pdfHtml5',
-                extend: 'pdf', text: '<i class="fa fa-file-pdf-o"></i>'
-                      , messageTop:'Detalle'
-                // 			// , header:false
-                      , filename:"<?php print($export)?>"
-                      , title:"<?php print($export)?>"
+              extend: 'pdf', text: '<i class="fa fa-file-pdf-o"></i>'
+                    , messageTop:'Detalle'
+              // 			// , header:false
+                    , filename:"Archivo"
+                    , title:"Titulo"
                 ,customize: function ( doc ) {
                                                 doc.content.splice( 0, 0, {
                                                     margin: [ 0, 0, 0, 12 ],
@@ -73,183 +97,51 @@ options_datatable = {
 // var o3 = { c: 3 };
 // var obj = Object.assign({}, o1, o2, o3);
 // console.log(obj); // { a: 1, b: 2, c: 3 }
+// function myfunc() {
+//    return {"name": "bob", "number": 1};
+// }
+//
+// var myobj = myfunc();
+// console.log(myobj.name, myobj.number); // logs "bob 1"
 
+calculate_row = function (rowset){
+  return {
+          footerCallback: function ( row, data, start, end, display ) {
+              var api = this.api(), data;
+              // Remove the formatting to get integer data for summation
+              var intVal = function ( i ) {
+                // console.log(i);
+                  return typeof i === 'string' ?
+                      i.replace(/[\$,]/g, '')*1 :
+                      typeof i === 'number' ?
+                          i : 0;
+              };
 
-calculate_row_test = {
-        footerCallback: function ( row, data, start, end, display ) {
-            var api = this.api(), data;
-            // Remove the formatting to get integer data for summation
-            var intVal = function ( i ) {
-              // console.log(i);
-                return typeof i === 'string' ?
-                    i.replace(/[\$,]/g, '')*1 :
-                    typeof i === 'number' ?
-                        i : 0;
-            };
+              var row_column = rowset;
 
-            var row_len = {
-                             group_controller : 'Some_id'
-                            ,group_row_columns : [7,8,9]
-                          	,detail_controller : 'ModulesEtc'
-                          	,detail_rows_columns : [1,2,3]
-                          };
-
-const article = document.querySelector('#electric-cars');
-
-  console.log(article);
-  console.log($('#electric-cars').serializeArray());
-  console.log(JSON.stringify($('#electric-cars').serializeArray()))
-
-                      // Create a new object
-                      // var extended = {};
-
-              console.log(row_len['group_row_columns']);
-
-                      // Loop through our object
-                      for (var prop in row_len) {
-                      	if (row_len.hasOwnProperty(prop)) {
-                      		// Push each value from `obj` into `extended`
-                      		// extended[prop] = row_len[prop];
-                          console.log(prop + ' => ' + row_len[prop] );
-                          // console.log(row_len[prop]);
-                      	}
-                      }
-
-            // KMS
-            // Total over all pages
-            ktotal = api
-                .column( 7 )
-                .data()
-                .reduce( function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0 );
-            // Total over this page
-            kpageTotal = api
-                .column( 7, { page: 'current'} )
-                .data()
-                .reduce( function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0 );
-            // Update footer
-            $( api.column( 7 ).footer() ).html(
-                ''+ (Math.round(kpageTotal * 100) / 100)  +' ( '+ (Math.round(ktotal * 100) / 100) +' total)'
-            );
-            // Diesel
-            // Total over all pages
-            dtotal = api
-                .column( 8 )
-                .data()
-                .reduce( function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0 );
-            // Total over this page
-            dpageTotal = api
-                .column( 8, { page: 'current'} )
-                .data()
-                .reduce( function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0 );
-            // Update footer
-            $( api.column( 8 ).footer() ).html(
-                ''+ (Math.round(dpageTotal * 100) / 100)  +' ( '+ (Math.round(dtotal * 100) / 100) +' total)'
-            );
-            // Rendimiento
-            // Total over all pages
-            rtotal = api
-                .column( 9 )
-                .data()
-                .reduce( function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0 );
-            // Total over this page
-            rpageTotal = api
-                .column( 9, { page: 'current'} )
-                .data()
-                .reduce( function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0 );
-            // Update footer
-            var rendCurrentPage = kpageTotal / dpageTotal;
-            var rendTotalPage = ktotal / dtotal ;
-            $( api.column( 9 ).footer() ).html(
-                ''+ (Math.round(rendCurrentPage * 100) / 100) +' ( '+ (Math.round(rendTotalPage * 100) / 100) +' total)'
-            );
-        }
-};
-
-calculate_row = {
-        footerCallback: function ( row, data, start, end, display ) {
-            var api = this.api(), data;
-            // Remove the formatting to get integer data for summation
-            var intVal = function ( i ) {
-              console.log(i);
-                return typeof i === 'string' ?
-                    i.replace(/[\$,]/g, '')*1 :
-                    typeof i === 'number' ?
-                        i : 0;
-            };
-            // KMS
-            // Total over all pages
-            ktotal = api
-                .column( 7 )
-                .data()
-                .reduce( function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0 );
-            // Total over this page
-            kpageTotal = api
-                .column( 7, { page: 'current'} )
-                .data()
-                .reduce( function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0 );
-            // Update footer
-            $( api.column( 7 ).footer() ).html(
-                ''+ (Math.round(kpageTotal * 100) / 100)  +' ( '+ (Math.round(ktotal * 100) / 100) +' total)'
-            );
-            // Diesel
-            // Total over all pages
-            dtotal = api
-                .column( 8 )
-                .data()
-                .reduce( function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0 );
-            // Total over this page
-            dpageTotal = api
-                .column( 8, { page: 'current'} )
-                .data()
-                .reduce( function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0 );
-            // Update footer
-            $( api.column( 8 ).footer() ).html(
-                ''+ (Math.round(dpageTotal * 100) / 100)  +' ( '+ (Math.round(dtotal * 100) / 100) +' total)'
-            );
-            // Rendimiento
-            // Total over all pages
-            rtotal = api
-                .column( 9 )
-                .data()
-                .reduce( function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0 );
-            // Total over this page
-            rpageTotal = api
-                .column( 9, { page: 'current'} )
-                .data()
-                .reduce( function (a, b) {
-                    return intVal(a) + intVal(b);
-                }, 0 );
-            // Update footer
-            var rendCurrentPage = kpageTotal / dpageTotal;
-            var rendTotalPage = ktotal / dtotal ;
-            $( api.column( 9 ).footer() ).html(
-                ''+ (Math.round(rendCurrentPage * 100) / 100) +' ( '+ (Math.round(rendTotalPage * 100) / 100) +' total)'
-            );
-        }
-};
-
+              for (var x = 0; x < row_column.length; x++) {
+                // console.log(row_column[x]);
+                var ktotal = api
+                      .column( row_column[x] )
+                      .data()
+                      .reduce( function (a, b) {
+                          return intVal(a) + intVal(b);
+                      }, 0 );
+                  // Total over this page
+                var kpageTotal = api
+                      .column( row_column[x] , { page: 'current'} )
+                      .data()
+                      .reduce( function (a, b) {
+                          return intVal(a) + intVal(b);
+                      }, 0 );
+                  // Update footer
+                  $( api.column( row_column[x] ).footer() ).html(
+                      ''+ (Math.round(kpageTotal * 100) / 100)  +' / Total : '+ (Math.round(ktotal * 100) / 100) +''
+                  );
+              }
+          }
+  };
+}
 
 
 // var shallowMerge = extend(obj1, obj2);
