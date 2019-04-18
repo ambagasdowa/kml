@@ -23,6 +23,13 @@ class PoliciesSubtypesController extends AppController {
 
 	function add() {
 		if (!empty($this->data)) {
+			$this->data['PoliciesSubtype']['modified'] = date('Y-m-d h:m:s');
+			$this->data['PoliciesSubtype']['create'] = date('Y-m-d h:m:s');
+			// unset($this->data['PoliciesSubtypesDefinition']['create']);
+			// Configure::write('debug',2);
+			// debug($this->data);
+			// exit();
+
 			$this->PoliciesSubtype->create();
 			if ($this->PoliciesSubtype->save($this->data)) {
 				$this->Session->setFlash(__('The policies subtype has been saved', true));
@@ -34,7 +41,7 @@ class PoliciesSubtypesController extends AppController {
 		$conditions['PoliciesType.status'] = 'Active';
 		$policiesTypes = $this->PoliciesSubtype->PoliciesType->find('list',array('conditions'=>$conditions));
 		$this->set(compact('policiesTypes'));
-		
+
 		$this->LoadModel('PoliciesSubtypesDefinition');
 		$conditionsSubDef['PoliciesSubtypesDefinition.status'] = 'Active';
 		$policies_subtypes_definitions = $this->PoliciesSubtypesDefinition->find('list',array('conditions'=>$conditionsSubDef));
@@ -48,6 +55,9 @@ class PoliciesSubtypesController extends AppController {
 			$this->redirect(array('action' => 'index'));
 		}
 		if (!empty($this->data)) {
+			$this->data['PoliciesSubtype']['modified'] = date('Y-m-d h:m:s');
+			// $this->data['PoliciesSubtype']['create'] = date('Y-m-d h:m:s');
+			unset($this->data['PoliciesSubtype']['create']);
 			if ($this->PoliciesSubtype->save($this->data)) {
 				$this->Session->setFlash(__('The policies subtype has been saved', true));
 				$this->redirect(array('action' => 'index'));
@@ -61,7 +71,7 @@ class PoliciesSubtypesController extends AppController {
 		$conditions['PoliciesType.status'] = 'Active';
 		$policiesTypes = $this->PoliciesSubtype->PoliciesType->find('list',array('conditions'=>$conditions));
 		$this->set(compact('policiesTypes'));
-		
+
 		$this->LoadModel('PoliciesSubtypesDefinition');
 		$conditionsSubDef['PoliciesSubtypesDefinition.status'] = 'Active';
 		$policies_subtypes_definitions = $this->PoliciesSubtypesDefinition->find('list',array('conditions'=>$conditionsSubDef));
