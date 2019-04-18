@@ -39,15 +39,19 @@ class PoliciesSubtypesDefinitionsController extends AppController {
 			$this->redirect(array('action' => 'index'));
 		}
 		if (!empty($this->data)) {
+
+			$this->data['PoliciesSubtypesDefinition']['modified'] = date('Y-m-d h:m:s');
+			unset($this->data['PoliciesSubtypesDefinition']['create']);
+
 			// Configure::write('debug',2);
 			// debug($this->data);
 			// exit();
-			$this->data['PoliciesSubtypesDefinition']['modified'] = date('Y-m-d h:m:s');
+
 			if ($this->PoliciesSubtypesDefinition->save($this->data)) {
 				$this->Session->setFlash(__('The policies subtypes definition has been saved', true));
 				$this->redirect(array('action' => 'index'));
 			} else {
-				$this->Session->setFlash(__('The policies subtypes definition could not be saved. Please, try again.', true));
+				$this->Session->setFlash(__('The PoliciesSubtypesDefinition subtypes definition could not be saved. Please, try again.', true));
 			}
 		}
 		if (empty($this->data)) {
