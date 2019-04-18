@@ -288,11 +288,9 @@ class PoliciesController extends AppController {
 	}
 
 	function add() {
-
 // 		var_dump($this->data);
 // // 		debug($this->params);
 // 		exit();
-
 		if (!empty($this->data)) {
 
 			if(end(explode('.',$this->data['Policy']['upload']['name'])) !== 'pdf'){

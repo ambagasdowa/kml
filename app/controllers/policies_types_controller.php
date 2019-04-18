@@ -18,6 +18,8 @@ class PoliciesTypesController extends AppController {
 
 	function add() {
 		if (!empty($this->data)) {
+			// debug($this->data);
+			// exit();
 			$this->PoliciesType->create();
 			if ($this->PoliciesType->save($this->data)) {
 				$this->Session->setFlash(__('The policies type has been saved', true));

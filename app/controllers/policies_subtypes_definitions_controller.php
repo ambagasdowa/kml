@@ -17,7 +17,12 @@ class PoliciesSubtypesDefinitionsController extends AppController {
 	}
 
 	function add() {
+		// Configure::write('debug',2);
 		if (!empty($this->data)) {
+			// debug($this->data);
+			$this->data['PoliciesSubtypesDefinition']['create'] = date('Y-m-d h:m:s');
+			$this->data['PoliciesSubtypesDefinition']['modified'] = date('Y-m-d h:m:s');
+			// exit();
 			$this->PoliciesSubtypesDefinition->create();
 			if ($this->PoliciesSubtypesDefinition->save($this->data)) {
 				$this->Session->setFlash(__('The policies subtypes definition has been saved', true));
