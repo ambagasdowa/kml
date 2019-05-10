@@ -155,7 +155,7 @@
 								                              'title'=>'Puede teclear la fecha en Formato yyyymm',
 																							'div'=>FALSE,
 																							'label'=>FALSE,
-																							'options'=> array('201901'=>'Enero','201902'=>'Febrero','201903'=>'Marzo'),
+																							'options'=> array('201901'=>'Enero','201902'=>'Febrero','201903'=>'Marzo','201904'=>'Abril','201905'=>'Mayo'),
 																							'tabindex'=>'1'
 																						)
 																		);
