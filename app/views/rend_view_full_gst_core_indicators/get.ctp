@@ -75,6 +75,15 @@
 		</div>
 	</div> -->
 
+	<div class="row">
+		<?php $rendViewFullGstCoreIndicators ? : e('<div class="alert alert-success alert-dismissible fade in" role="alert">
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+								<span aria-hidden="true">&times;</span>
+						</button>
+						<strong>No se encontraron Registros </strong>
+				</div>'); ?>
+	</div>
+
 	<div class="row noprint">
 		<?php	echo $this->Session->flash();?>
 	</div>
@@ -100,7 +109,6 @@
 		</div>
 
 	</div>
-
 
 	<div class="row">
  	 <div class="twelve columns">

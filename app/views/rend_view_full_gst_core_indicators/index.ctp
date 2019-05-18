@@ -139,27 +139,74 @@
 					<div class="row">
 						<?php echo $this->Form->create('RendViewFullGstCoreIndicator',array('enctype' => 'multipart/form-data','class'=>'form','id'=>'pform'));?>
 						<?php
+
 						echo '<div class="two columns input-group">';
-						echo '<div class="input-group-addon"><i class="fa fa-user"></i></div>';
+						echo '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>';
 						echo
 									$this->Form->input
 																		(
-																			'periodo',
+																			'dateini',
 																			 array
 																						(
-																							'type'=>'select',
-																							'class'=>'search_udn u-full-width form-control init-focus',
-																							'id'=>'from',
-																							'placeholder' => 'Periodo',
-																							'alt'=>'Puede teclear la fecha en Formato yyyymm',
-								                              'title'=>'Puede teclear la fecha en Formato yyyymm',
+																							'type'=>'text',
+																							// 'class'=>'performance_dateini u-full-width form-control init-focus',
+																							'class'=>'performance_dateini datepicker ll-skin-melon u-full-width form-control',
+																							'id'=>'inserted',
+																							'data-toggle'=>'datepicker',
+																							'placeholder' => 'Fecha',
+																							'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
+																							'title'=>'Puede teclear la fecha en Formato yyyymmdd',
 																							'div'=>FALSE,
 																							'label'=>FALSE,
-																							'options'=> array('201901'=>'Enero','201902'=>'Febrero','201903'=>'Marzo','201904'=>'Abril','201905'=>'Mayo'),
 																							'tabindex'=>'1'
 																						)
 																		);
 						echo '</div>';
+
+						echo '<div class="two columns input-group">';
+						echo '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>';
+						echo
+									$this->Form->input
+																		(
+																			'dateend',
+																			 array
+																						(
+																							'type'=>'text',
+																							// 'class'=>'performance_dateini u-full-width form-control init-focus',
+																							'class'=>'performance_dateend datepicker ll-skin-melon u-full-width form-control',
+																							'id'=>'inserted',
+																							'data-toggle'=>'datepicker',
+																							'placeholder' => 'Fecha',
+																							'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
+																							'title'=>'Puede teclear la fecha en Formato yyyymmdd',
+																							'div'=>FALSE,
+																							'label'=>FALSE,
+																							'tabindex'=>'1'
+																						)
+																		);
+						echo '</div>';
+
+						// echo '<div class="two columns input-group">';
+						// echo '<div class="input-group-addon"><i class="fa fa-user"></i></div>';
+						// echo
+						// 			$this->Form->input
+						// 												(
+						// 													'periodo',
+						// 													 array
+						// 																(
+						// 																	'type'=>'select',
+						// 																	'class'=>'search_udn u-full-width form-control init-focus',
+						// 																	'id'=>'from',
+						// 																	'placeholder' => 'Periodo',
+						// 																	'alt'=>'Puede teclear la fecha en Formato yyyymm',
+						// 		                              'title'=>'Puede teclear la fecha en Formato yyyymm',
+						// 																	'div'=>FALSE,
+						// 																	'label'=>FALSE,
+						// 																	'options'=> array('201901'=>'Enero','201902'=>'Febrero','201903'=>'Marzo','201904'=>'Abril','201905'=>'Mayo'),
+						// 																	'tabindex'=>'1'
+						// 																)
+						// 												);
+						// echo '</div>';
 
 						echo '<div class="two columns input-group">';
 						echo '<div class="input-group-addon"><i class="fa fa-barcode"></i></div>';
@@ -252,6 +299,8 @@
 
 	<script type="text/javascript">
 		  $(document).ready(function () {
+
+				$('[data-toggle="datepicker"]').datepicker(options_datepicker);
 
 				$(".search_udn").select2();
 

@@ -22,8 +22,17 @@ class RendViewFullGstCoreIndicatorsController extends AppController {
 
 	var $name = 'RendViewFullGstCoreIndicators';
 
+
+	function date_convert($date) {
+		//1. Transform request parameters to MySQL datetime format.
+		$date_return = null;
+		$date_init = new DateTime($date);
+		$start =  $date_init->format('Y-m-d');
+		return $start;
+	}
+
 	function get() {
-		Configure::write('debug',2);
+		Configure::write('debug',0);
 
 		$posted = json_decode(base64_decode($this->params['named']['data']),true);
 		// debug($posted);
@@ -55,13 +64,41 @@ class RendViewFullGstCoreIndicatorsController extends AppController {
 		// debug($conditions);
 		// debug(isset($add_conditions['id_tipo_operacion']));
 		// exit();
+
+		// //2. Get the events corresponding to the time range
+		// $conditions = array ('Calendar.start BETWEEN ? AND ?'=> array ($mysqlstart,$mysqlend));
+		// $events = $this->Calendar->find('all', array ('conditions' => $conditions));
+		//
+
+		debug($this->date_convert($add_conditions['dateini']));
+
+		if (isset($add_conditions['dateini']) && isset($add_conditions['dateend'])){
+			// code for both date
+
+			$conditionsBl = array('RendViewFullGstCoreIndicator.fecha BETWEEN ? AND ?'=> array ($this->date_convert($add_conditions['dateini']),$this->date_convert($add_conditions['dateend'])));
+
+		} elseif (isset($add_conditions['dateini']) || isset($add_conditions['dateend'])){
+
+				if( isset($add_conditions['dateini']) ) {
+					$conditionsBl['RendViewFullGstCoreIndicator.fecha'] = $this->date_convert($add_conditions['dateini']);
+				} else {
+					$conditionsBl['RendViewFullGstCoreIndicator.fecha'] = $this->date_convert($add_conditions['dateend']);
+				}
+		} else {
+			$add_conditions['dateini'] = null;
+			$add_conditions['dateend'] = null;
+			$conditionsBl['RendViewFullGstCoreIndicator.fecha'] = $this->date_convert(date('Y-m-d'));
+		}
+
 		if(isset($add_conditions['id_tipo_operacion'])){
 			$conditionsBl['RendViewFullGstCoreIndicator.id_tipo_operacion'] = $add_conditions['id_tipo_operacion'];
 		}
-		$conditionsBl['RendViewFullGstCoreIndicator.periodo'] = $add_conditions['periodo'];
+		// $conditionsBl['RendViewFullGstCoreIndicator.periodo'] = $add_conditions['periodo'];
 		$conditionsBl['RendViewFullGstCoreIndicator.id_area'] = $add_conditions['id_area'];
 
 		// $conditionsBl['RendViewFullGstCoreIndicator.id'] = 10;
+
+		debug($conditionsBl);
 
 		$rendViewFullGstCoreIndicators = $this->RendViewFullGstCoreIndicator->find('all',array('conditions'=>$conditionsBl));
 
