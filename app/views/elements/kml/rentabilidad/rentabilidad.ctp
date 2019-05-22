@@ -169,14 +169,15 @@ $core = 'core'.DS;
 
 
 			// NOTE Datepicker
-
 			e($this->Html->script($theme.'configurations/options',false));
-
 			e($this->Html->script($theme.'datepicker/datepicker.min',false));
-
 			e($this->Html->script($theme.'datepicker/i18n/datepicker.es-ES',false));
 			// NOTE css
 			e($this->Html->css($theme.'datepicker/datepicker.min', 'stylesheet', array('inline'=>false)));
+
+
+			// NOTE siema Carrousel in javascript
+			e($this->Html->script($theme.'siema/siema.min',false));
 
 
 

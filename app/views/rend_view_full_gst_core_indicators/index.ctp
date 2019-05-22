@@ -330,7 +330,7 @@
 									 );
 
 									var table_b = $('#table_det').DataTable(
-										Object.assign( {}, options_datatable, calculate_row([7,8,9]) )
+										Object.assign( {}, options_datatable, calculate_row([9,10,11,12,13]) )
 									 );
 
 									// End table
