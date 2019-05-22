@@ -326,11 +326,11 @@
 									// Add Table UIX
 
 									var table_a = $('#table_res').DataTable(
-										Object.assign( {}, options_datatable, calculate_row([1,2,3,4]) )
+										Object.assign( {}, options_datatable, calculate_row([1,2]) )
 									 );
 
 									var table_b = $('#table_det').DataTable(
-										Object.assign( {}, options_datatable, calculate_row([9,10,11,12]) )
+										Object.assign( {}, options_datatable, calculate_row([9,10,11],[9,10,11]) )
 									 );
 
 									// End table

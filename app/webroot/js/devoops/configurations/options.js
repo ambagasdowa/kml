@@ -109,7 +109,7 @@ options_datatable = {
 // var myobj = myfunc();
 // console.log(myobj.name, myobj.number); // logs "bob 1"
 
-calculate_row = function (rowset){
+calculate_row = function (rowset,rendimiento){
   return {
           footerCallback: function ( row, data, start, end, display ) {
               var api = this.api(), data;
@@ -123,6 +123,13 @@ calculate_row = function (rowset){
               };
 
               var row_column = rowset;
+              denominator = numerator = denominatox = numeratox = 0 ;
+              // console.log(foo === undefined); // true
+              if (rendimiento !== undefined) {
+                set2ndParam = true;
+                row_rend = rendimiento;
+              }
+
 
               for (var x = 0; x < row_column.length; x++) {
                 // console.log(row_column[x]);
@@ -132,6 +139,7 @@ calculate_row = function (rowset){
                       .reduce( function (a, b) {
                           return intVal(a) + intVal(b);
                       }, 0 );
+
                   // Total over this page
                 var kpageTotal = api
                       .column( row_column[x] , { page: 'current'} )
@@ -139,10 +147,33 @@ calculate_row = function (rowset){
                       .reduce( function (a, b) {
                           return intVal(a) + intVal(b);
                       }, 0 );
+
+                      // console.log('set2ndParam = '+set2ndParam);
+                  if (rendimiento !== undefined) {
+                      if ( row_column[x] == row_rend[0] ) {
+                        denominator = kpageTotal;
+                        denominatox = ktotal;
+                      }
+                      if ( row_column[x] == row_rend[1] ) {
+                        // console.log(x + ' => numerator');
+                        // console.log('numerator');
+                        numerator = kpageTotal;
+                        numeratox = ktotal;
+                      }
+
+                      // console.log(denominator/numerator); //175597
+                      if (row_column[x] == row_rend[2]) {
+                          kpageTotal = denominator / numerator ;
+                          ktotal = denominatox / numeratox ;
+                      }
+
+                  }
+                    // console.log(ktotal);
                   // Update footer
                   $( api.column( row_column[x] ).footer() ).html(
                       ''+ (Math.round(kpageTotal * 100) / 100)  +' / Total : '+ (Math.round(ktotal * 100) / 100) +''
                   );
+
               }
           }
   };
