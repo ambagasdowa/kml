@@ -208,7 +208,7 @@ echo
 				<th class="sum" ><?php echo 'Kms';?></th>
 				<th class="sum" ><?php echo 'Diesel';?></th>
 				<th class="sum" ><?php echo 'Rendimiento';?></th>
-				<th class="sum" ><?php echo 'RendimientoReseteo';?></th>
+				<!-- <th class="sum" ><?php echo 'RendimientoReseteo';?></th> -->
 				<th class="sum" ><?php echo 'RendimientoReal';?></th>
 				<!-- <th><?php echo 'Periodo';?></th> -->
 				<!-- <th><?php echo 'cyear';?></th> -->
@@ -237,7 +237,7 @@ echo
 			<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['kms']; ?></td>
 			<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['diesel']; ?></td>
 			<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['rendimiento']; ?></td>
-			<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['rendimiento_reseteo']; ?></td>
+			<!-- <td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['rendimiento_reseteo']; ?></td> -->
 			<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['rendimiento_real']; ?></td>
 			<!-- <td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['periodo']; ?></td> -->
 			<!-- <td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['cyear']; ?></td> -->
@@ -250,7 +250,7 @@ echo
 	                <th></th>
 	                <th></th>
 	                <th></th>
-	                <th></th>
+	                <!-- <th></th> -->
 	                <th></th>
 	            </tr>
 	  </tfoot>
