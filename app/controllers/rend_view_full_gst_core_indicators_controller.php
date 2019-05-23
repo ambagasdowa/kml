@@ -197,8 +197,9 @@ class RendViewFullGstCoreIndicatorsController extends AppController {
 		$this->LoadModel('ProjectionsViewBussinessUnit');
 		$this->LoadModel('ProjectionsViewFraction');
 
+		$op_cond['ProjectionsViewFraction.id_fraccion <>'] = 0;
 		$bssus = $this->ProjectionsViewBussinessUnit->find('list',array('fields'=>array('id','name')));
-		$operacion = $this->ProjectionsViewFraction->find('list',array('fields'=>array('id','desc_producto')));
+		$operacion = $this->ProjectionsViewFraction->find('list',array('fields'=>array('id','desc_producto'),'conditions'=>$op_cond));
 		// debug($bssus);
 		//
 		$this->RendViewFullGstCoreIndicator->recursive = 0;
