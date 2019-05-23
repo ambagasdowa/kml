@@ -102,40 +102,71 @@ class RendViewFullGstCoreIndicatorsController extends AppController {
 
 		$rendViewFullGstCoreIndicators = $this->RendViewFullGstCoreIndicator->find('all',array('conditions'=>$conditionsBl));
 
-
+		$rendViewFullGstCoreIndicatorsx = $rendViewFullGstCoreIndicators;
 		// debug($rendViewFullGstCoreIndicators);
 
 		$sum_kms = $sum_diesel = $sum_viajes = $sum_rendimiento = array();
+		$rsum_kms = $rsum_diesel = $rsum_viajes = $rsum_rendimiento = array();
 
 		foreach ($rendViewFullGstCoreIndicators as $key => $rendViewFullGstCoreIndicator) {
 			// debug($key);
-			if ( !isset($sum_kms[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']]) ) {
-				$sum_kms[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']] = null;
+			if ( !isset($sum_kms[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['tipoOperacion']]) ) {
+				$sum_kms[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['tipoOperacion']] = null;
 			}
-			if ( !isset($sum_kms[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']]) ) {
-				$sum_diesel[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']] = null;
+			if ( !isset($sum_kms[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['tipoOperacion']]) ) {
+				$sum_diesel[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['tipoOperacion']] = null;
 			}
-			if ( !isset($sum_kms[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']]) ) {
-				$sum_rendimiento[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']] = null;
+			if ( !isset($sum_kms[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['tipoOperacion']]) ) {
+				$sum_rendimiento[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['tipoOperacion']] = null;
 			}
-			if ( !isset($sum_kms[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']]) ) {
-				$sum_viajes[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']] = null;
+			if ( !isset($sum_kms[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['tipoOperacion']]) ) {
+				$sum_viajes[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['tipoOperacion']] = null;
 			}
 
-			$sum_kms[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']][] += $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['kms'];
-			$sum_diesel[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']][] += $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['diesel'];
-			$sum_rendimiento[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']][] += $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['rendimiento'];
-			$sum_viajes[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']][] += $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['viajes'];
-			$data[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']] = $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['viaje'].','.$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['rendimiento'];
+
+			$sum_kms[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['tipoOperacion']][] += $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['kms'];
+			$sum_diesel[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['tipoOperacion']][] += $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['diesel'];
+			$sum_rendimiento[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['tipoOperacion']][] += $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['rendimiento'];
+			$sum_viajes[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['tipoOperacion']][] += $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['viajes'];
+			$data[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['tipoOperacion']] = $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['viaje'].','.$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['rendimiento'];
 			// debug($data);
-			$json_parsing_level_two[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']][] = json_encode(
+			$json_parsing_level_two[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['tipoOperacion']][] = json_encode(
 																						array(
-																									'name'=>$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']
-																									,'id'=>$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']
-																									,'data'=>"{$data[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']]}"
+																									'name'=>$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['tipoOperacion']
+																									,'id'=>$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['tipoOperacion']
+																									,'data'=>"{$data[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['tipoOperacion']]}"
 																								 )
 																					 ,JSON_FORCE_OBJECT
 																					);
+
+			//NOTE Start Route table data
+			if ( !isset($rsum_kms[$rendViewFullGstCoreIndicators['RendViewFullGstCoreIndicator']['route']]) ) {
+				$rsum_kms[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']] = null;
+			}
+			if ( !isset($rsum_kms[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']]) ) {
+				$rsum_diesel[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']] = null;
+			}
+			if ( !isset($rsum_kms[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']]) ) {
+				$rsum_rendimiento[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']] = null;
+			}
+			if ( !isset($rsum_kms[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']]) ) {
+				$rsum_viajes[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']] = null;
+			}
+
+			$rsum_kms[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']][] += $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['kms'];
+			$rsum_diesel[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']][] += $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['diesel'];
+			$rsum_rendimiento[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']][] += $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['rendimiento'];
+			$rsum_viajes[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']][] += $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['viajes'];
+			$rdata[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']] = $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['viaje'].','.$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['rendimiento'];
+			// debug($data);
+			// $rjson_parsing_level_two[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']][] = json_encode(
+			// 																			array(
+			// 																						'name'=>$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']
+			// 																						,'id'=>$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']
+			// 																						,'data'=>"{$data[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']]}"
+			// 																					 )
+			// 																		 ,JSON_FORCE_OBJECT
+			// 																		);
 		}
 
 
@@ -156,7 +187,8 @@ class RendViewFullGstCoreIndicatorsController extends AppController {
 				$json_parsing_lv_one .= json_encode(
 																	array(
 																					 'name'=>$key_viajes
-																					,'y'=>round((array_sum($values_viajes)),2)
+																					// ,'y'=>round((array_sum($values_viajes)),2)
+																					,'y'=>round(($sums_kms[$key_viajes] / $sums_diesel[$key_viajes]),2)
 																					// ,'drilldown'=>$key_viajes
 																					,'drilldown'=>null
 																			 )
@@ -169,8 +201,43 @@ class RendViewFullGstCoreIndicatorsController extends AppController {
 		// debug($json_parsing_level_one);
 
 		foreach ($sum_rendimiento as $key_rendimiento => $values_rendimiento) {
-			$sums_rendimiento[$key_rendimiento]= round(array_sum($values_rendimiento) / $sums_viajes[$key_rendimiento],2);
+			// $sums_rendimiento[$key_rendimiento]= round(array_sum($values_rendimiento) /*/ $sums_viajes[$key_rendimiento]*/,2);
+			$sums_rendimiento[$key_rendimiento]= round( $sums_kms[$key_rendimiento] / $sums_diesel[$key_rendimiento],2);
 			$sums_rendimiento_af[$key_rendimiento]= round(array_sum($values_rendimiento),2);
+		}
+
+		// debug($json_parsing_level_two);
+
+		foreach ($rsum_kms as $rkey_kms => $rvalues_kms) {
+				$rsums_kms[$rkey_kms]= array_sum($rvalues_kms);
+		}
+
+		foreach ($rsum_diesel as $rkey_diesel => $rvalues_diesel) {
+				$rsums_diesel[$rkey_diesel]= array_sum($rvalues_diesel);
+		}
+
+		// $json_parsing_lv_one = null;
+		foreach ($rsum_viajes as $rkey_viajes => $rvalues_viajes) {
+				$rsums_viajes[$rkey_viajes]= array_sum($rvalues_viajes);
+
+				$rjson_parsing_lv_one .= json_encode(
+																	array(
+																					 'name'=>$rkey_viajes
+																					,'y'=>round((array_sum($rvalues_viajes)),2)
+																					// ,'drilldown'=>$key_viajes
+																					,'drilldown'=>null
+																			 )
+																					, JSON_PRETTY_PRINT
+										);
+		}
+
+		$rjson_parsing_level_one = implode('},{',explode('}{',$rjson_parsing_lv_one));
+
+		// debug($json_parsing_level_one);
+
+		foreach ($rsum_rendimiento as $rkey_rendimiento => $rvalues_rendimiento) {
+			$rsums_rendimiento[$rkey_rendimiento]= round(array_sum($rvalues_rendimiento) / $rsums_viajes[$rkey_rendimiento],2);
+			$rsums_rendimiento_af[$rkey_rendimiento]= round(array_sum($rvalues_rendimiento),2);
 		}
 
 
@@ -182,6 +249,12 @@ class RendViewFullGstCoreIndicatorsController extends AppController {
 											,'sums_rendimiento'
 											,'sums_viajes'
 											,'json_parsing_level_one'
+											// route data
+											,'rsums_kms'
+											,'rsums_diesel'
+											,'rsums_rendimiento'
+											,'rsums_viajes'
+											,'rjson_parsing_level_one'
 										)
 						);
 

@@ -326,18 +326,22 @@
 									// Add Table UIX
 
 									var table_a = $('#table_res').DataTable(
-										Object.assign( {}, options_datatable, calculate_row([1,2]) )
+										Object.assign( {}, options_datatable, calculate_row([1,2,3,4],[1,3,4]) )
 									 );
 
 									var table_b = $('#table_det').DataTable(
 										Object.assign( {}, options_datatable, calculate_row([9,10,11],[9,10,11]) )
 									 );
 
+									 var table_c = $('#table_route').DataTable(
+ 										Object.assign( {}, options_datatable, calculate_row([1,2]) )
+ 									 );
 									// End table
 
 									$('#myInput').on( 'keyup', function () {
 									    table_a.search( this.value ).draw();
 									    table_b.search( this.value ).draw();
+									    table_c.search( this.value ).draw();
 										}
 									);
 

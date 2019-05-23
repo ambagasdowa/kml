@@ -156,11 +156,12 @@ echo
 
 	<table id="table_res" class="display order-table table table-bordered table-hover table-striped responstable">
 		<thead>
-			<th>Origen / Destino</th>
+			<!-- <th>Origen / Destino</th> -->
+			<th>Tipo Operaci&oacute;n</th>
 			<th>Kms</th>
 			<th>Viajes</th>
-			<!-- <th>Diesel</th> -->
-			<!-- <th>Rendimiento [ x̄ ]</th> -->
+			<th>Diesel</th>
+			<th>Rendimiento [ x̄ ]</th>
 		</thead>
 		<tbody>
 			<?php
@@ -170,8 +171,43 @@ echo
 				<td><?php echo $kkms ?></td>
 				<td><?php echo $vkms ?></td>
 				<td><?php echo $sums_viajes[$kkms] ?></td>
-				<!-- <td><?php echo $sums_diesel[$kkms] ?></td> -->
-				<!-- <td><?php echo $sums_rendimiento[$kkms] ?></td> -->
+				<td><?php echo $sums_diesel[$kkms] ?></td>
+				<td><?php echo $sums_rendimiento[$kkms] ?></td>
+			</tr>
+			<?php
+				}
+			 ?>
+		</tbody>
+		<tfoot>
+			<tr>
+				<th style="text-align:right">Total:</th>
+				<th></th>
+				<th></th>
+				<th></th>
+				<th></th>
+			</tr>
+		</tfoot>
+	</table>
+
+	<table id="table_route" class="display order-table table table-bordered table-hover table-striped responstable">
+		<thead>
+			<th>Origen / Destino</th>
+			<!-- <th>Tipo Operaci&oacute;n</th> -->
+			<th>Kms</th>
+			<th>Viajes</th>
+			<!-- <th>Diesel</th> -->
+			<!-- <th>Rendimiento [ x̄ ]</th> -->
+		</thead>
+		<tbody>
+			<?php
+				foreach ($rsums_kms as $rkkms => $rvkms) {
+			?>
+			<tr>
+				<td><?php echo $rkkms ?></td>
+				<td><?php echo $rvkms ?></td>
+				<td><?php echo $rsums_viajes[$rkkms] ?></td>
+				<!-- <td><?php echo $rsums_diesel[$rkkms] ?></td> -->
+				<!-- <td><?php echo $rsums_rendimiento[$rkkms] ?></td> -->
 			</tr>
 			<?php
 				}
@@ -292,6 +328,7 @@ echo
 			Highcharts.chart('the-chart', {
 					chart: {
 							type: 'column',
+							// type: 'area',
 							backgroundColor: {
 							            linearGradient: [0, 0, 500, 500],
 							            stops: [
@@ -320,7 +357,7 @@ echo
 					},
 					yAxis: {
 							title: {
-									text: 'Numero de Viajes'
+									text: 'Rendimiento'
 							}
 					},
 					legend: {
@@ -337,10 +374,10 @@ echo
 					},
 					tooltip: {
 							headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
-							pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b> viajes <br/>'
+							pointFormat: '<span style="color:{point.color}">{point.name}</span> - Rendimiento : <b>{point.y}</b><br/>'
 					},
 					series: [{
-							name: 'Rutas',
+							name: 'Rendimiento por Operacion',
 							colorByPoint: true,
 							data: [ <?php print($json_parsing_level_one) ?> ]
 					}] //,
