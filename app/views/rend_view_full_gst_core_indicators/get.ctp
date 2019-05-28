@@ -169,10 +169,10 @@ echo
 			?>
 			<tr>
 				<td><?php echo $kkms ?></td>
-				<td><?php echo $vkms ?></td>
-				<td><?php echo $sums_viajes[$kkms] ?></td>
-				<td><?php echo $sums_diesel[$kkms] ?></td>
-				<td><?php echo $sums_rendimiento[$kkms] ?></td>
+				<td><?php echo number_format($vkms) ?></td>
+				<td><?php echo number_format($sums_viajes[$kkms]) ?></td>
+				<td><?php echo number_format($sums_diesel[$kkms]) ?></td>
+				<td><?php echo number_format($sums_rendimiento[$kkms]) ?></td>
 			</tr>
 			<?php
 				}
@@ -191,7 +191,9 @@ echo
 
 	<table id="table_route" class="display order-table table table-bordered table-hover table-striped responstable">
 		<thead>
-			<th>Origen / Destino</th>
+			<!-- <th>Origen / Destino</th> -->
+			<th>Origen</th>
+			<th>Destino</th>
 			<!-- <th>Tipo Operaci&oacute;n</th> -->
 			<th>Kms</th>
 			<th>Viajes</th>
@@ -203,7 +205,9 @@ echo
 				foreach ($rsums_kms as $rkkms => $rvkms) {
 			?>
 			<tr>
-				<td><?php echo $rkkms ?></td>
+				<!-- <td><?php echo $rkkms ?></td> -->
+				<td><?php echo $rsum_origen[$rkkms] ?></td>
+				<td><?php echo $rsum_destino[$rkkms] ?></td>
 				<td><?php echo $rvkms ?></td>
 				<td><?php echo $rsums_viajes[$rkkms] ?></td>
 				<!-- <td><?php echo $rsums_diesel[$rkkms] ?></td> -->
@@ -215,10 +219,10 @@ echo
 		</tbody>
 		<tfoot>
 			<tr>
+				<th></th>
 				<th style="text-align:right">Total:</th>
 				<th></th>
 				<th></th>
-				<!-- <th></th> -->
 				<!-- <th></th> -->
 			</tr>
 		</tfoot>
@@ -237,9 +241,9 @@ echo
 				<th><?php echo 'TipoViaje';?></th>
 				<th><?php echo 'Operacion';?></th>
 				<th><?php echo 'Fecha';?></th>
-				<!-- <th><?php echo 'Origen';?></th> -->
-				<!-- <th><?php echo 'Destino';?></th> -->
-				<th><?php echo 'Origen / Destino';?></th>
+				<th><?php echo 'Origen';?></th>
+				<th><?php echo 'Destino';?></th>
+				<!-- <th><?php echo 'Origen / Destino';?></th> -->
 				<th><?php echo 'Modelo';?></th>
 				<th class="sum" ><?php echo 'Kms';?></th>
 				<th class="sum" ><?php echo 'Diesel';?></th>
@@ -266,9 +270,9 @@ echo
 			<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['TipoViaje']; ?></td>
 			<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['tipoOperacion']; ?></td>
 			<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['fecha']; ?></td>
-			<!-- <td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['origen']; ?></td> -->
-			<!-- <td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['destino']; ?></td> -->
-			<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']; ?></td>
+			<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['origen']; ?></td>
+			<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['destino']; ?></td>
+			<!-- <td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']; ?></td> -->
 			<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['modelo']; ?></td>
 			<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['kms']; ?></td>
 			<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['diesel']; ?></td>

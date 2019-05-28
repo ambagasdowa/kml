@@ -334,7 +334,7 @@
 									 );
 
 									 var table_c = $('#table_route').DataTable(
- 										Object.assign( {}, options_datatable, calculate_row([1,2]) )
+ 										Object.assign( {}, options_datatable, calculate_row([2,3]) )
  									 );
 									// End table
 

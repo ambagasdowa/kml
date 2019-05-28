@@ -106,7 +106,7 @@ class RendViewFullGstCoreIndicatorsController extends AppController {
 		// debug($rendViewFullGstCoreIndicators);
 
 		$sum_kms = $sum_diesel = $sum_viajes = $sum_rendimiento = array();
-		$rsum_kms = $rsum_diesel = $rsum_viajes = $rsum_rendimiento = array();
+		$rsum_origen = $rsum_destino = $rsum_kms = $rsum_diesel = $rsum_viajes = $rsum_rendimiento = array();
 
 		foreach ($rendViewFullGstCoreIndicators as $key => $rendViewFullGstCoreIndicator) {
 			// debug($key);
@@ -141,6 +141,12 @@ class RendViewFullGstCoreIndicatorsController extends AppController {
 
 			//NOTE Start Route table data
 			if ( !isset($rsum_kms[$rendViewFullGstCoreIndicators['RendViewFullGstCoreIndicator']['route']]) ) {
+				$rsum_origen[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']] = null;
+			}
+			if ( !isset($rsum_kms[$rendViewFullGstCoreIndicators['RendViewFullGstCoreIndicator']['route']]) ) {
+				$rsum_destino[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']] = null;
+			}
+			if ( !isset($rsum_kms[$rendViewFullGstCoreIndicators['RendViewFullGstCoreIndicator']['route']]) ) {
 				$rsum_kms[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']] = null;
 			}
 			if ( !isset($rsum_kms[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']]) ) {
@@ -152,6 +158,9 @@ class RendViewFullGstCoreIndicatorsController extends AppController {
 			if ( !isset($rsum_kms[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']]) ) {
 				$rsum_viajes[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']] = null;
 			}
+
+			$rsum_origen[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']] = $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['origen'];
+			$rsum_destino[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']] = $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['destino'];
 
 			$rsum_kms[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']][] += $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['kms'];
 			$rsum_diesel[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']][] += $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['diesel'];
@@ -169,6 +178,8 @@ class RendViewFullGstCoreIndicatorsController extends AppController {
 			// 																		);
 		}
 
+		// debug($rsum_origen);
+		// debug($rsum_destino);
 
 		// debug($json_parsing_level_two);
 
@@ -196,9 +207,26 @@ class RendViewFullGstCoreIndicatorsController extends AppController {
 										);
 		}
 
+		$json_parsing_lv_one .= json_encode(
+																			array(
+																							 'name'=>'GST'
+																							// ,'y'=>round((array_sum($values_viajes)),2)
+																							,'y'=>round(array_sum($sums_kms)/array_sum($sums_diesel),2)
+																							// ,'drilldown'=>$key_viajes
+																							,'drilldown'=>null
+																					 )
+																							, JSON_PRETTY_PRINT
+												);
+
+		// debug();
+
 		$json_parsing_level_one = implode('},{',explode('}{',$json_parsing_lv_one));
 
 		// debug($json_parsing_level_one);
+		// debug(array_sum($sums_kms));
+		// debug(array_sum($sums_diesel));
+
+		// debug();
 
 		foreach ($sum_rendimiento as $key_rendimiento => $values_rendimiento) {
 			// $sums_rendimiento[$key_rendimiento]= round(array_sum($values_rendimiento) /*/ $sums_viajes[$key_rendimiento]*/,2);
@@ -233,7 +261,7 @@ class RendViewFullGstCoreIndicatorsController extends AppController {
 
 		$rjson_parsing_level_one = implode('},{',explode('}{',$rjson_parsing_lv_one));
 
-		// debug($json_parsing_level_one);
+		// debug($rjson_parsing_level_one);
 
 		foreach ($rsum_rendimiento as $rkey_rendimiento => $rvalues_rendimiento) {
 			$rsums_rendimiento[$rkey_rendimiento]= round(array_sum($rvalues_rendimiento) / $rsums_viajes[$rkey_rendimiento],2);
@@ -250,6 +278,8 @@ class RendViewFullGstCoreIndicatorsController extends AppController {
 											,'sums_viajes'
 											,'json_parsing_level_one'
 											// route data
+											,'rsum_origen'
+											,'rsum_destino'
 											,'rsums_kms'
 											,'rsums_diesel'
 											,'rsums_rendimiento'

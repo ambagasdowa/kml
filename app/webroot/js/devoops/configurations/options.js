@@ -170,8 +170,8 @@ calculate_row = function (rowset,rendimiento){
                   }
                     // console.log(ktotal);
                   // Update footer
-                  $( api.column( row_column[x] ).footer() ).html(
-                      ''+ (Math.round(kpageTotal * 100) / 100)  +' / Total : '+ (Math.round(ktotal * 100) / 100) +''
+                $( api.column( row_column[x] ).footer() ).html(
+                 ''+ (Math.round(kpageTotal * 100) / 100).toLocaleString()  +' / Total : '+ (Math.round(ktotal * 100) / 100).toLocaleString() +''
                   );
 
               }

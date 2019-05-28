@@ -4,6 +4,7 @@
 $theme = 'devoops'.DS;
 $default = 'kml'.DS;
 $core = 'core'.DS;
+$root = 'root'.DS;
 
 
 // Datatables
@@ -50,7 +51,9 @@ $core = 'core'.DS;
 			e($this->Html->css($theme.'datatables/Select-1.2.6/css/select.bootstrap', 'stylesheet',array('inline'=>false)));
 
 
-
+ // NOTE add phpjs.org functions
+			e($this->Html->script($root.'php.js/number_format',false));
+			// e($this->Html->script($root.'php.js/money_format',false));
 
 // from blog
 
