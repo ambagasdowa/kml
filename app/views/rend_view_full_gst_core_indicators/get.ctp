@@ -172,7 +172,7 @@ echo
 				<td><?php echo number_format($vkms) ?></td>
 				<td><?php echo number_format($sums_viajes[$kkms]) ?></td>
 				<td><?php echo number_format($sums_diesel[$kkms]) ?></td>
-				<td><?php echo number_format($sums_rendimiento[$kkms]) ?></td>
+				<td><?php echo number_format($sums_rendimiento[$kkms], 2, '.', ' '); ?></td>
 			</tr>
 			<?php
 				}
