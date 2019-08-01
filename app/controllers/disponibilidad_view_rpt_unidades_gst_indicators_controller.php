@@ -67,8 +67,12 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 
 		// $conditionsBl['DisponibilidadViewRptGroupGstIndicator.id_flota'] = $add_conditions['id_flota'];
 		// $conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.id_tipo_operacion'] = $add_conditions['id_flota'];
-		$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.id_flota'] = $add_conditions['id_flota'];
-		$conditionsTf['DisponibilidadViewRptGroupGstIndicator.id_flota'] = $add_conditions['id_flota'];
+
+		if (isset($add_conditions['id_flota'])) {
+			// code...
+			$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.id_flota'] = $add_conditions['id_flota'];
+			$conditionsTf['DisponibilidadViewRptGroupGstIndicator.id_flota'] = $add_conditions['id_flota'];
+		}
 		// $conditionsBl['RendViewFullGstCoreIndicator.id'] = 10;
 
 		$disponibilidadViewRptUnidadesGstIndicators = $this->DisponibilidadViewRptUnidadesGstIndicator->find('all',array('conditions'=>$conditionsBl));

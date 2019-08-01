@@ -201,6 +201,7 @@
 																								'div'=>FALSE,
 																								'label'=>FALSE,
 																								'options'=> array('1'=>'GRANEL','2'=>'TERCEROS'),
+																								'empty' => 'TODO',
 																								// 'options'=> $operacion,
 																								'tabindex'=>'1'
 																							)
