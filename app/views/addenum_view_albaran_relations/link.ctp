@@ -28,7 +28,7 @@
       // header ("Content-type: application/vnd.ms-excel");
       header('Content-type: "text/xml"; charset="utf8"');
       header ("Content-Disposition: attachment; filename=xml_addenda_".$name.".xlm" );
-      header ("Content-Description: Exported as xlm" );
+      header ("Content-Description: Exported as xml" );
       // header('Content-disposition: attachment; filename="example.xml"');
       // echo $xml->asXML();
 
