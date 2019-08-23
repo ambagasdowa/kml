@@ -37,7 +37,10 @@ $root = 'root'.DS;
 			e($this->Html->script($theme.'datatables/Select-1.2.6/js/dataTables.select',false));
 
 			// e($this->Html->script($theme.'datatables/datatables.min',false));
+
 			e($this->Html->css($theme.'datatables/DataTables-1.10.18/css/dataTables.bootstrap', 'stylesheet',array('inline'=>false)));
+			e($this->Html->css($theme.'devoops/datatables_gst', 'stylesheet',array('inline'=>false)));
+
 			e($this->Html->css($theme.'datatables/AutoFill-2.3.2/css/autoFill.bootstrap.min', 'stylesheet',array('inline'=>false)));
 			e($this->Html->css($theme.'datatables/Buttons-1.5.4/css/buttons.bootstrap', 'stylesheet',array('inline'=>false)));
 			e($this->Html->css($theme.'datatables/ColReorder-1.5.0/css/colReorder.bootstrap', 'stylesheet',array('inline'=>false)));

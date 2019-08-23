@@ -25,7 +25,7 @@ options_datatable = {
         // scrollY:        500,
         // scrollCollapse: true,
         // scroller:       true,
-        keys:           true,
+        // keys:           true,
         // scrollY:        '50vh',
         // scrollCollapse: true,
         // scrollX : true,
@@ -175,9 +175,13 @@ calculate_row = function (rowset,rendimiento){
                   );
 
               }
-          }
+
+              //NOTE add addenum
+
+
+        }    //NOTE End footerCallback
   };
-}
+} // NOTE End calculate_row
 
 
 // var shallowMerge = extend(obj1, obj2);
@@ -211,7 +215,7 @@ calculate_row = function (rowset,rendimiento){
       }
 
       return extended;
-}
+    }
 
 
 

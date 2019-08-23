@@ -29,6 +29,7 @@
 		?>
 
 		<!-- temporal style  -->
+
 		<style media="screen">
 
 		.ninja-scroll {
@@ -44,20 +45,6 @@
 		select::-ms-expand {
 			display: none;
 		}
-
-		th {
-			font-family: "Arial", monospace, sans-serif;
-			font-size: 12px;
-			font-weight: bold;
-			white-space:nowrap;
-		}
-		td {
-			font-family: "Arial", monospace, sans-serif;
-			/*font-family: monospace;*/
-			font-size: 10px;
-			white-space:nowrap;
-		}
-
 
 		.detail_header {
 			display: none;
@@ -118,6 +105,7 @@
 		  opacity:1;
 		}
 
+
 		</style>
 
 
@@ -137,9 +125,60 @@
 		<div class="container-mod">
 <!-- ['BalanzaViewUdnsRpt']['Empleado'] -->
 					<div class="row">
-						<?php echo $this->Form->create('RendViewFullGstCoreIndicator',array('enctype' => 'multipart/form-data','class'=>'form','id'=>'pform'));?>
+						<?php echo $this->Form->create('AddenumViewAlbaranRelations',array('enctype' => 'multipart/form-data','class'=>'form','id'=>'pform'));?>
+
 						<?php
 
+						echo '<div class="two columns input-group">';
+						echo '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>';
+						echo
+									$this->Form->input
+																		(
+																			'dateini',
+																			 array
+																						(
+																							'type'=>'text',
+																							// 'class'=>'performance_dateini u-full-width form-control init-focus',
+																							'class'=>'performance_dateini datepicker ll-skin-melon u-full-width form-control',
+																							'id'=>'inserted',
+																							'data-toggle'=>'datepicker',
+																							'placeholder' => 'Fecha',
+																							'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
+																							'title'=>'Puede teclear la fecha en Formato yyyymmdd',
+																							'div'=>FALSE,
+																							'label'=>FALSE,
+																							'tabindex'=>'1'
+																						)
+																		);
+						echo '</div>';
+
+						echo '<div class="two columns input-group">';
+						echo '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>';
+						echo
+									$this->Form->input
+																		(
+																			'dateend',
+																			 array
+																						(
+																							'type'=>'text',
+																							// 'class'=>'performance_dateini u-full-width form-control init-focus',
+																							'class'=>'performance_dateend datepicker ll-skin-melon u-full-width form-control',
+																							'id'=>'inserted',
+																							'data-toggle'=>'datepicker',
+																							'placeholder' => 'Fecha',
+																							'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
+																							'title'=>'Puede teclear la fecha en Formato yyyymmdd',
+																							'div'=>FALSE,
+																							'label'=>FALSE,
+																							'tabindex'=>'1'
+																						)
+																		);
+						echo '</div>';
+
+						?>
+
+
+						<?php
 						echo '<div class="two columns input-group">';
 						echo '<div class="input-group-addon"><i class="fa fa-barcode"></i></div>';
 						echo
@@ -185,34 +224,27 @@
 					&nbsp;
 				</div>
 
-
-				<!-- <div
-				  id="electric-cars"
-				  data-columns="3"
-				  data-index-number="12314"
-				  data-parent="cars">
-				</div>
-
-<form class="" action="index.html" method="post">
-	<input type="radio" name="foo" value="1" checked="checked" />
-	<input type="radio" name="foo" value="0" />
-	<input name="bar" value="xxx" />
-</form> -->
-
-
 				<div id="printThis" class="container-mod ninja-scroll">
 					<div id="updateSearchResult" class="updateSearchResult"></div>
 				</div>
 
 
+				<div id="breakspace" class="">
+					&nbsp;
+				</div>
+
 	<script type="text/javascript">
+
+
 		  $(document).ready(function () {
 
 				$('[data-toggle="datepicker"]').datepicker(options_datepicker);
 
-				$(".search_udn").select2();
+				// $(".search_udn").select2();
 
 					$("#send_query").on('click', function(event) {
+
+								// $('[data-toggle="datepicker"]').datepicker(options_datepicker);
 
 								event.stopPropagation();
 								event.preventDefault();
@@ -231,67 +263,55 @@
 								// $( ".updateSearchResult" ).load(urlStruct);
 								$( ".updateSearchResult" ).load(urlStruct,function(responseText, statusText, xhr) {
 
-									// Add Table UIX
 
+									// Add Table UIX
 									var table_a = $('#table_res').DataTable(
 										Object.assign( {}, options_datatable, calculate_row([],[]) )
 									 );
 									// End table
 
-									$('#myInput').on( 'keyup', function () {
-									    table_a.search( this.value ).draw();
-									    // table_b.search( this.value ).draw();
-									    // table_c.search( this.value ).draw();
-										}
-									);
+									// ALERT check this behavior
+									// NOTE add the file dispatcher inside send_query
+
+									table_a.$("input[id^='update_']").on('keydown', function(e) {
+									// Ensure 'value' binding is fired on enter in IE
+					        if ((e.keyCode || e.which) === 13 || e.which === 9) {
+										console.log('....');
+												var posted_data = {
+																					'batnbr':$(this).attr('data-id'),
+																					'name':$(this).attr('data-name'),
+																					'type':$(this).attr('data-type'),
+																					'RefNbr':$(this).attr('data-refnbr'),
+																					'noguia':$(this).attr('data-noguia'),
+																					'guia':$(this).attr('data-guia'),
+																					'idx':$(this).attr('data-idx'),
+																					'data':$(this).val()
+																				};
+
+												var string_to_pass = JSON.stringify(posted_data);
+												console.log(string_to_pass);
+												data_code = base64_encode(string_to_pass);
+
+												batnbr = $(this).attr('data-id');
+												remision = $(this).attr('data-remision');
+												if ($(this).val()) {
+													$.post("<?php echo Dispatcher::baseUrl();?>/AddenumViewAlbaranRelations/update/data:"+data_code,function(data){
+// NOTE
+													  }).done(function(data){
+																// alert('response is : ' + data );
+															if ( $("#update_pedido_"+batnbr).val() && $("#update_albaran_"+batnbr).val() ) {
+																	$('#link_'+batnbr).html('<a href="<?php echo Dispatcher::baseUrl();?>/AddenumViewAlbaranRelations/link/id:'+batnbr+'" id="get_'+batnbr+'" data-id="'+batnbr+'" data-name="'+batnbr+'_'+remision+'">Descargar</a>');
+															}
+													});
+												} else {
+													console.log('data is null');
+												}
+											} // End key
+										}); //End on keydown
 
 
+		}); //NOTE end file dispatch
 
-									console.log(statusText);
-									if(statusText == "error"){
-												 thisUrl = "<?php echo Dispatcher::baseUrl();?>/users/login";
-													 console.log(thisUrl);
-													 window.location.href(thisUrl);
-									}
-									// $( ".updateSearchResult" ).html('<p>Test</p>');
-								});
-
-
-
-//
-// $('#indTable').DataTable( {
-//
-// 			 "footerCallback": function ( row, data, start, end, display ) {
-// 					 var api = this.api(), data;
-//
-// 					 // Remove the formatting to get integer data for summation
-// 					 var intVal = function ( i ) {
-// 							 return typeof i === 'string' ?
-// 									 i.replace(/[\$,]/g, '')*1 :
-// 									 typeof i === 'number' ?
-// 											 i : 0;
-// 					 };
-// 					 // Total over all pages
-// 					 total = api
-// 							 .column( 9 )
-// 							 .data()
-// 							 .reduce( function (a, b) {
-// 									 return intVal(a) + intVal(b);
-// 							 }, 0 );
-// 					 // Total over this page
-// 					 pageTotal = api
-// 							 .column( 9, { page: 'current'} )
-// 							 .data()
-// 							 .reduce( function (a, b) {
-// 									 return intVal(a) + intVal(b);
-// 							 }, 0 );
-// 					 // Update footer
-// 					 $( api.column( 9 ).footer() ).html(
-// 							 '$'+pageTotal +' ( $'+ total +' total)'
-// 					 );
-// 			 }
-// 	 });
-// End table
 
 					});
 			});

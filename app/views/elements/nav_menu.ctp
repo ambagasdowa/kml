@@ -23,7 +23,7 @@
 									<i class="fa fa-search"></i>
 								</div>
 							</form>-->
-              
+
 			<?php }?>
 
         </div>
@@ -349,6 +349,14 @@
 											<a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>Balanza Udn</span></a>
 												<ul class="dropdown-menu">
 													<li><a tabindex="-1" href="<?php e($this->webroot.'BalanzaViewUdnsRpts');?>"><i class="fa fa-cog"></i>&nbsp;<span>Balanza</span></a></li>
+													<!-- <li><a tabindex="-1" href="<?php e($this->webroot.'Tralixes/add');?>"><i class="fa fa-cog"></i>&nbsp;<span>edition</span></a></li> -->
+												</ul>
+										</li>
+
+										<li class="dropdown-submenu">
+											<a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>Addenum</span></a>
+												<ul class="dropdown-menu">
+													<li><a tabindex="-1" href="<?php e($this->webroot.'AddenumViewAlbaranRelations');?>"><i class="fa fa-cog"></i>&nbsp;<span>Addenum</span></a></li>
 													<!-- <li><a tabindex="-1" href="<?php e($this->webroot.'Tralixes/add');?>"><i class="fa fa-cog"></i>&nbsp;<span>edition</span></a></li> -->
 												</ul>
 										</li>
