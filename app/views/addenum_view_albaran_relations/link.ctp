@@ -27,7 +27,7 @@
       header ("Pragma: no-cache");
       // header ("Content-type: application/vnd.ms-excel");
       header('Content-type: "text/xml"; charset="utf8"');
-      header ("Content-Disposition: attachment; filename=xml_addenda_".$name.".xlm" );
+      header ("Content-Disposition: attachment; filename=xml_addenda_".$name.".xml" );
       header ("Content-Description: Exported as xml" );
       // header('Content-disposition: attachment; filename="example.xml"');
       // echo $xml->asXML();
