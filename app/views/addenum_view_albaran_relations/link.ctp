@@ -20,7 +20,7 @@
       $dom->formatOutput = true;    //can be false
       $dom->loadXML($xml->asXML());
       $xport = $dom->saveXML();
-      // $xport = str_replace("\n",'',$xport); // and can omit
+      $xport = str_replace("\x0A",'',$xport); // and can omit
 
       header("Content-Transfer-Encoding: binary");
       header("Expires: " . gmdate("D,d M YH:i:s") . " GMT");
