@@ -109,8 +109,8 @@ class AddenumViewAlbaranRelationsController extends AppController {
 			Configure::write('debug', 0);
 			// $this->autoRender = false;
 			$this->autoLayout = false;
-			ob_clean(); //Clean (erase) the output buffer
-			flush();
+			// ob_clean(); //Clean (erase) the output buffer
+			// flush();
 		}
 
 
