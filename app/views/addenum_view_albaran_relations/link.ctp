@@ -30,7 +30,7 @@
       header("Last-Modified: " . gmdate("D,d M YH:i:s") . " GMT");
       header("Cache-Control: no-cache, must-revalidate");
       header("Pragma: no-cache");
-      header("Content-type: text/xml");
+      header("Content-type: text/xml; charset=utf-8");
       header("Content-Disposition: attachment; filename=xml_addenda_".$name.".xml" );
       header('Content-Description: Exported as xml');
       echo $xport;
