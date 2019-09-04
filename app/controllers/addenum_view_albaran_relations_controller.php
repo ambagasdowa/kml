@@ -111,6 +111,7 @@ class AddenumViewAlbaranRelationsController extends AppController {
 			$this->autoLayout = false;
 			// ob_flush();
 			ob_clean(); //Clean (erase) the output buffer
+			ini_set("zlib.output_compression", 1); // this issue are from production server that enable ob_gzhandler by defautl
 			// ob_end_clean(); //Clean (erase) the output buffer
 			// flush();
 			// ob_start();
