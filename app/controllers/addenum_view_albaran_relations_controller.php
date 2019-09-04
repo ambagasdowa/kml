@@ -112,8 +112,8 @@ class AddenumViewAlbaranRelationsController extends AppController {
 			// ob_flush();
 
 			ob_clean(); //Clean (erase) the output buffer
-			// apache_getenv ("no-gzip");
-			ini_set("zlib.output_compression", 0); // this issue are from production server that enable ob_gzhandler by defautl
+			apache_getenv("no-gzip");
+			// ini_set("zlib.output_compression", 0); // this issue are from production server that enable ob_gzhandler by defautl
 			// ob_end_clean(); //Clean (erase) the output buffer
 			// flush();
 			// ob_start();
