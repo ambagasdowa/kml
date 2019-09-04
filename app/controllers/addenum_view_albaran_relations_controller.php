@@ -35,7 +35,7 @@ class AddenumViewAlbaranRelationsController extends AppController {
 
 		function link() {
 
-				Configure::write('debug',2);
+				Configure::write('debug',0);
 				$this->loadModel('AddenumViewAlbaranRelation');
 			if(isset($this->params['named']['id'])){
 				$conditionsBl['AddenumViewAlbaranRelation.BatNbr'] = $this->params['named']['id'];
@@ -99,16 +99,17 @@ class AddenumViewAlbaranRelationsController extends AppController {
 
 				$name = $value['AddenumViewAlbaranRelation']['BatNbr'];
 			 }
-
-			 		$this->set(compact('xml','name'));
+			 // $xml = trim($xml,"\n");
+			 $this->set(compact('xml','name'));
 			//NOTE ALERT print xml
 			// print "<pre><textarea style=\"width:1600px;height:1600px;\">";
 						// echo $xml->asXML();
 			// print "</textarea></pre>";
-
 			// NOTE set the response output for an ajax call
 			Configure::write('debug', 0);
+			// $this->autoRender = false;
 			$this->autoLayout = false;
+			ob_clean(); //Clean (erase) the output buffer
 		}
 
 
