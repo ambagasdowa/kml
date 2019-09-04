@@ -33,6 +33,8 @@
       header("Content-type: text/xml; charset=utf-8");
       header("Content-Disposition: attachment; filename=xml_addenda_".$name.".xml" );
       header('Content-Description: Exported as xml');
+      ob_clean();
+      flush();
       echo $xport;
 
 
