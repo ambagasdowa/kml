@@ -25,7 +25,7 @@
       $xport = $xml->asXML();
       $xport = str_replace("\x0A",'',$xport); // and can omit
 
-      header("Content-Transfer-Encoding: binary");
+      // header("Content-Transfer-Encoding: binary");
       header("Expires: " . gmdate("D,d M YH:i:s") . " GMT");
       header("Last-Modified: " . gmdate("D,d M YH:i:s") . " GMT");
       header("Cache-Control: no-cache, must-revalidate");
