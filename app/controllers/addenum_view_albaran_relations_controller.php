@@ -112,6 +112,7 @@ class AddenumViewAlbaranRelationsController extends AppController {
 			ob_clean(); //Clean (erase) the output buffer
 			// ob_end_clean(); //Clean (erase) the output buffer
 			// flush();
+			ob_start();
 		}
 
 
