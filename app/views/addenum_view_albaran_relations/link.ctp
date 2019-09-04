@@ -15,11 +15,14 @@
 		* @since         CakePHP(tm) v 1.2.0.5234
 		* @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
 		*/
-      $dom = new DOMDocument('1.0');
-      $dom->preserveWhiteSpace = false;
-      $dom->formatOutput = true;    //can be false
-      $dom->loadXML($xml->asXML());
-      $xport = $dom->saveXML();
+
+      // $dom = new DOMDocument('1.0');
+      // $dom->preserveWhiteSpace = false;
+      // $dom->formatOutput = true;    //can be false
+      // $dom->loadXML($xml->asXML());
+      // $xport = $dom->saveXML();
+
+      $xport = $xml->asXML();
       $xport = str_replace("\x0A",'',$xport); // and can omit
 
       header("Content-Transfer-Encoding: binary");
