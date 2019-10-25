@@ -1,133 +1,215 @@
 <?php
-	// NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal
-	$evaluate = false;
-	$requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere') );
+		/**
+		*
+		* PHP versions 4 and 5
+		*
+		* kml : Kamila Software
+		* Licensed under The MIT License
+		* Redistributions of files must retain the above copyright notice.
+		*
+		* @copyright     Jesus Baizabal
+		* @link          http://baizabal.xyz
+		* @mail	     baizabal.jesus@gmail.com
+		* @package       PerformanceReferences
+		* @subpackage    Get
+		* @since         CakePHP(tm) v 1.2.0.5234
+		* @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
+		*/
 ?>
-<?php //users?>
-    <div class="container-fluid">
-      <div class="row">
-      
-        <div class="col-md-offset-1 col-sm-11 col-md-11">
-          <ul class="list-group list-inline">
-            <li class="list-group-item">
-				<?php echo $this->Html->link(__('New User', true), array('action' => 'add')); ?>
-			</li>
-            <li class="list-group-item">
-				<?php echo $this->Html->link(__('List Groups', true), array('controller' => 'groups', 'action' => 'index')); ?>
-			</li>
-            <li class="list-group-item">
-				<?php echo $this->Html->link(__('New Group', true), array('controller' => 'groups', 'action' => 'add')); ?>
-			</li>
-            <li class="list-group-item">
-				<?php echo $this->Html->link(__('List Posts', true), array('controller' => 'posts', 'action' => 'index')); ?>
-			</li>
-            <li class="list-group-item">
-				<?php echo $this->Html->link(__('New Post', true), array('controller' => 'posts', 'action' => 'add')); ?>
-			</li>
-			<li >
-				<input type="search" class="light-table-filter form-control " data-table="order-table" placeholder="Filter">
-			</li>
-          </ul>
-        </div>
+		<?php
+		    // NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal.
+		    // $evaluate = false;
+		    // $requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere'));
+		    // blog
+		    $evaluate = true;
+		    // $requiere = $evaluate ? e($this->element('kml/blog/blog')) : e($this->element('requiere/norequiere') );
+				// $requiere = $evaluate ? e($this->element('kml/forms/forms')) : e($this->element('requiere/norequiere') );
+				$requiere = $evaluate ? e($this->element('kml/rentabilidad/rentabilidad')) : e($this->element('requiere/norequiere') );
+				// var_dump($rendViewFullGstCoreIndicators);exit();
 
-        <div class="col-sm-9 col-sm-offset-2 col-md-10 col-md-offset-1 main">
-          <h1 class="page-header"><?php __('Users');?></h1>
-          <div class="table-responsive">
-			<span class="filter-container">
-            <table class="order-table table table-bordered table-hover table-striped responstable">
+		?>
+
+				<!-- temporal style  -->
+
+				<style media="screen">
+
+				.ninja-scroll {
+					scroll-behavior: smooth;
+					overflow-x: auto;
+					/*overflow-y: auto;*/
+				}
+				.avg {
+					font-style: italic;
+					text-decoration: overline;
+				}
+
+				select::-ms-expand {
+					display: none;
+				}
+
+				.detail_header {
+					display: none;
+				}
+
+				.head_datetime{
+					display: none;
+				}
+
+				.container-mod{
+					position: relative;
+					width: 100%;
+					max-width: 95%;
+					margin: 0 auto;
+					padding: 0 20px;
+					box-sizing: border-box;
+				}
+
+				.colorbax {
+					position: relative;
+					width: 100%;
+					min-width: 95%;
+					margin: 0 auto;
+					padding: 0 20px;
+					box-sizing: border-box;
+				}
+
+				.current {
+					display: inline-block;  /* For IE11/ MS Edge bug */
+					pointer-events: none;
+					cursor: default;
+					color:gray !important;
+					text-decoration: none;
+				}
+
+				.current > a {
+				  color: gray !important;
+				  display: inline-block;  /* For IE11/ MS Edge bug */
+				  pointer-events: none;
+				  text-decoration: none;
+				}
+
+				/**PAGINATOR STYLE*/
+				.easyPaginateNav{
+					position: fixed;
+					bottom: 1%;
+					left: 35%;
+					cursor: pointer;
+					z-index:150;
+				}
+
+				.icon{
+				  transition:all 0.5s;
+				  opacity:0;
+				}
+
+				.link_external:hover .icon{
+				  opacity:1;
+				}
+
+
+				</style>
+
+
+				<div class="container-mod">
+
+							<div class="row">
+									<div class="twelve columns ">
+										<h6 class="docs-header">Users</h6>
+								</div>
+							</div>
+
+				</div>
+
+
+<?php //users?>
+
+<div id="breakspace" class="">
+	&nbsp;
+</div>
+
+				<div id="printThis" class="container-mod ninja-scroll">
+
+<div id="first-datatable-output" class="table-responsive">
+
+            <table id="mgmt_users" class="table table-striped table-bordered" >
               <thead>
                 <tr>
-					<th><?php echo $this->Paginator->sort('id');?></th>
-					<th><?php echo $this->Paginator->sort('username');?></th>
-					<th><?php echo $this->Paginator->sort('password');?></th>
-					<th><?php echo $this->Paginator->sort('group_id');?></th>
-					<th><?php echo $this->Paginator->sort('created');?></th>
-					<th><?php echo $this->Paginator->sort('company_id');?></th>
-<!-- 					<th><?php echo $this->Paginator->sort('modified');?></th> -->
-<!-- 					<th><?php echo $this->Paginator->sort('status');?></th> -->
-<!-- 					<th><?php echo $this->Paginator->sort('current_date_time');?></th> -->
-					<?php if (checkAdmin($_SESSION['Auth']['User']['group_id'])) {?>
-						
-						<th><?php echo $this->Paginator->sort('last_access');?></th>
-						<th><?php echo $this->Paginator->sort('last_ip');?></th>
-						<th><?php echo $this->Paginator->sort('last_user_agent');?></th>
-						
-					<?php }?>
-					
-					<th class="actions" colspan="3"><?php __('Actions');?></th>
+										<th>id</th>
+										<th>Username</th>
+										<th>Password</th>
+										<th>group_id</th>
+										<th>created</th>
+										<th>company_id</th>
+					<!-- 					<th>modified</th> -->
+					<!-- 					<th>status</th> -->
+					<!-- 					<th>current_date_time</th> -->
+										<?php if (checkAdmin($_SESSION['Auth']['User']['group_id'])) {?>
+											<th>last_access</th>
+											<th>last_ip</th>
+											<th>last_user_agent</th>
+										<?php }?>
+
+										<!-- <th class="actions" colspan="3">Actions</th> -->
+										<th class="actions" >Ver</th>
+										<th class="actions" >Editar</th>
+										<th class="actions" >Eliminar</th>
                 </tr>
               </thead>
+
               <tbody>
-					<?php
-					$i = 0;
-					foreach ($users as $user):
-						$class = null;
-						if ($i++ % 2 == 0) {
-							$class = ' class="altrow"';
-						}
-					?>
-					<tr<?php echo $class;?>>
-						
-						<td><?php echo $user['User']['id']; ?>&nbsp;</td>
-						<td><?php echo $user['User']['username']; ?>&nbsp;</td>
-						<td><?php echo $user['User']['password']; ?>&nbsp;</td>
-						<td>
-							<?php echo $this->Html->link($user['Group']['name'], array('controller' => 'groups', 'action' => 'view', $user['Group']['id'])); ?>
-						</td>
-						<td>
-							<?php echo $user['User']['created']; ?>&nbsp;
-						</td>
-						
-						<?php if (isset($company[$user['User']['company_id']])) {?>
-							
-						<td>
-							<?php echo $company[$user['User']['company_id']]; ?>&nbsp;
-						</td>
-						
-						<?php } else {?>
-						
-						<td>
-							<?php echo $user['User']['company_id']; ?>&nbsp;
-						</td>
-						
+						<?php
+							foreach ($users as $key => $user){
+						?>
+							<tr>
+									<td><?php echo $user['User']['id']; ?></td>
+									<td><?php echo $user['User']['username']; ?></td>
+									<td><?php //echo $user['User']['password']; ?></td>
+									<td>
+										<?php echo $this->Html->link($user['Group']['name'], array('controller' => 'groups', 'action' => 'view', $user['Group']['id'])); ?>
+									</td>
+									<td>
+										<?php echo $user['User']['created']; ?>
+									</td>
+
+									<td>
+										<?php
+													isset($company[$user['User']['company_id']])?print($company[$user['User']['company_id']]):print($user['User']['company_id']);
+											?>
+									</td>
+
+									<?php if (checkAdmin($_SESSION['Auth']['User']['group_id'])) {?>
+									<td>
+										<?php
+											echo $user['User']['last_access'];
+										?>
+									</td>
+									<td>
+										<?php
+											if (empty($user['User']['last_ip']) or !isset($user['User']['last_ip'])) {
+												echo '';
+											} else {
+												echo $user['User']['last_ip'];
+											}
+										?>
+									</td>
+									<td>
+										<?php
+										$htmlRender = checkBrowser($user['User']['last_user_agent'],true,true);
+										if ($htmlRender !== false) {
+											$motor = array_search($htmlRender,$htmlMotor);
+											if ($motor) {
+
+												echo "<kbd><i class=\"$motor\"></i></kbd>{$htmlRender}";
+											} else {
+												echo "<i class=\"fa fa-cloud\"></i>{$htmlRender}";
+											}
+										}
+										?>
+
+									</td>
+
 						<?php }?>
 
-						<?php if (checkAdmin($_SESSION['Auth']['User']['group_id'])) {?>
-
-						<td>
-							<?php 
-								echo $user['User']['last_access'];
-							?>&nbsp;
-						</td>
-
-						<td>
-							<?php 
-								if (empty($user['User']['last_ip']) or !isset($user['User']['last_ip'])) {
-									echo '';
-								} else {
-									echo $user['User']['last_ip'];
-								}
-							?>&nbsp;
-						</td>
-
-						<td>
-							<?php
-							$htmlRender = checkBrowser($user['User']['last_user_agent'],true,true);
-							if ($htmlRender !== false) {
-								$motor = array_search($htmlRender,$htmlMotor);
-								if ($motor) {
-
-									echo "&nbsp;<kbd><i class=\"$motor\"></i></kbd>&nbsp;{$htmlRender}";
-								} else {
-									echo "&nbsp;<i class=\"fa fa-cloud\"></i>&nbsp;{$htmlRender}";
-								}
-							}
-							?>
-
-						</td>
-						
-						<?php }?>
-						
 						<td class="actions">
 							<?php echo $this->Html->link(__('View', true), array('action' => 'view', $user['User']['id'])); ?>
 						</td>
@@ -139,41 +221,26 @@
 						</td>
 
 					</tr>
-					<?php endforeach; ?>
+				<?php } ?>
               </tbody>
-            </table>
-			</span >
-				<p>
-					<?php
-					echo $this->Paginator->counter(array(
-					'format' => __('Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%', true)
-					));
-					?>	
-				</p>
+    </table>
 
-				<ul class="pagination">
-						<?php 
-							echo $this->Paginator->prev( '«' ,array('tag'=>'li'),null, array('aria-hidden'=>'true','class' => 'disabled','tag'=>'li')); 
-						?>
-						<?php 
-							echo $this->Paginator->numbers(array('separator' => null,'tag'=>'li'));
-						?>
-						<?php 
-							echo $this->Paginator->next( '»' , array('tag'=>'li'), null, array('aria-hidden'=>'true','class' => 'disabled','tag'=>'li'));
-						?>
-				</ul>
-          </div>
-        </div> <!--main-->
-      </div> <!--row-->
     </div> <!--container fluid-->
-    
-    <script>
-	$(document).ready(function () {
-		$(function () {
-			$("table").stickyTableHeaders({fixedOffset: 22,marginTop: 22});
-		});
-		/*! Copyright (c) 2011 by Jonas Mosbech - https://github.com/jmosbech/StickyTableHeaders
-			MIT license info: https://github.com/jmosbech/StickyTableHeaders/blob/master/license.txt */
+	</div>
+		<div id="breakspace" class="">
+			&nbsp;
+		</div>
 
-	});
+		<script type="text/javascript">
+
+		$(document).ready( function() {
+
+
+			console.log($('#mgmt_users'));
+
+		    $('#mgmt_users').DataTable(
+						Object.assign( {}, options_datatable, calculate_row([],[]) )
+				);
+		});
+
     </script>

@@ -25,8 +25,10 @@ class UsersController extends AppController {
 
 	function index() {
 
-		$this->User->recursive = 0;
-		$this->set('users', $this->paginate());
+		// $this->User->recursive = 0;
+		$users = $this->User->find('all');
+		// $this->set('users', $this->paginate());
+		$this->set(compact('users'));
 		$this->LoadModel('Company');
 		$company = $this->Company->find('list',array('fields'=>array('nom_id','name')));
 		$this->set(compact('company'));
