@@ -361,6 +361,14 @@
 												</ul>
 										</li>
 
+                    <li class="dropdown-submenu">
+											<a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>Logistica</span></a>
+												<ul class="dropdown-menu">
+													<li><a tabindex="-1" href="<?php e($this->webroot.'LogisticaViewGstDatesheets');?>"><i class="fa fa-cog"></i>&nbsp;<span>Indicador</span></a></li>
+													<!-- <li><a tabindex="-1" href="<?php e($this->webroot.'Tralixes/add');?>"><i class="fa fa-cog"></i>&nbsp;<span>edition</span></a></li> -->
+												</ul>
+										</li>
+
 										<li class="dropdown-submenu">
 											<a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>Providers Options</span></a>
 												<ul class="dropdown-menu">
