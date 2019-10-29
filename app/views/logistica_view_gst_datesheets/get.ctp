@@ -178,6 +178,12 @@
 												<!-- <th>kms_ruta2</th> -->
 												<th>TipoViaje</th>
 												<th>Area</th>
+												<th>TiempoTotal</th>
+												<th>TiempoCarga</th>
+												<th>TiempoTransito</th>
+												<th>TiempoDescarga</th>
+												<th>TiempoCiclo</th>
+												<th>LlegadaATiempo</th>
 												<!-- <th>TipoOperacion</th> -->
 												<!-- <th>f_despachado</th> -->
 												<!-- <th>mes-despacho</th> -->
@@ -197,12 +203,6 @@
 												<th>Destino</th>
 												<th>kms_viaje</th>
 												<th>kms_real</th>
-												<th>TiempoTotal</th>
-												<th>TiempoCarga</th>
-												<th>TiempoTransito</th>
-												<th>TiempoDescarga</th>
-												<th>TiempoCiclo</th>
-												<th>LlegadaATiempo</th>
 												<!-- <th>INICIO DE VIAJE</th> -->
 												<!-- <th>LLEGADA A CARGA</th> -->
 												<!-- <th>INICIO DE CARGA</th> -->
@@ -247,6 +247,12 @@
 			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['kms_ruta2']; ?>&nbsp;</td> -->
 			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['TipoViaje']; ?>&nbsp;</td>
 			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['area']; ?>&nbsp;</td>
+			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['TiempoTotal']; ?>&nbsp;</td>
+			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['TiempoCarga']; ?>&nbsp;</td>
+			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['TiempoTransito']; ?>&nbsp;</td>
+			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['TiempoDescarga']; ?>&nbsp;</td>
+			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['TiempoCiclo']; ?>&nbsp;</td>
+			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['LlegadaATiempo']; ?>&nbsp;</td>
 			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['tipo_de_operacion']; ?>&nbsp;</td> -->
 			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['f_despachado']; ?>&nbsp;</td> -->
 			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['mes-despacho']; ?>&nbsp;</td> -->
@@ -266,12 +272,6 @@
 			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['Destino']; ?>&nbsp;</td>
 			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['kms_viaje']; ?>&nbsp;</td>
 			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['kms_real']; ?>&nbsp;</td>
-			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['TiempoTotal']; ?>&nbsp;</td>
-			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['TiempoCarga']; ?>&nbsp;</td>
-			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['TiempoTransito']; ?>&nbsp;</td>
-			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['TiempoDescarga']; ?>&nbsp;</td>
-			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['TiempoCiclo']; ?>&nbsp;</td>
-			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['LlegadaATiempo']; ?>&nbsp;</td>
 			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['InicioDeViaje']; ?>&nbsp;</td> -->
 			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['LlegadaACarga']; ?>&nbsp;</td> -->
 			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['InicioDeCarga']; ?>&nbsp;</td> -->
