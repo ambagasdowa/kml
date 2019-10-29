@@ -108,17 +108,14 @@ class LogisticaViewGstDatesheetsController extends AppController {
 
 // exit();
 		$logisticaViewGstDatesheets = $this->LogisticaViewGstDatesheet->find('all',array('conditions'=>$conditions));
-
+// debug(count($logisticaViewGstDatesheets));
 		if ( count($logisticaViewGstDatesheets) > 0 ) {
-			// code...
 			$info = 0;
 		} else {
 			$info = 1;
 		}
-// debug($conditions);
 
-
-	$this->set(compact('logisticaViewGstDatesheets','info'));
+		$this->set(compact('logisticaViewGstDatesheets','info'));
 
 		// NOTE set the response output for an ajax call
 		Configure::write('debug', 0);

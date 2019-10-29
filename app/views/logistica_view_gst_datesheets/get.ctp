@@ -40,7 +40,7 @@
 </div>
 
 	<div class="row head_datetime">
-		<div>&nbsp;</div>
+		<div></div>
 
 			<div class="six columns"></div>
 
@@ -64,7 +64,7 @@
 				Unidad de Negocio <?php echo $dashboard['bsu'] ?>
 			</div>
 
-		<div>&nbsp;</div>
+		<div></div>
 
 	</div>
 
@@ -184,6 +184,7 @@
 												<th>TiempoDescarga</th>
 												<th>TiempoCiclo</th>
 												<th>LlegadaATiempo</th>
+												<th>kms</th>
 												<!-- <th>TipoOperacion</th> -->
 												<!-- <th>f_despachado</th> -->
 												<!-- <th>mes-despacho</th> -->
@@ -201,8 +202,8 @@
 												<th>fecha_guia</th>
 												<th>Origen</th>
 												<th>Destino</th>
-												<th>kms_viaje</th>
-												<th>kms_real</th>
+
+												<!-- <th>kms_real</th> -->
 												<!-- <th>INICIO DE VIAJE</th> -->
 												<!-- <th>LLEGADA A CARGA</th> -->
 												<!-- <th>INICIO DE CARGA</th> -->
@@ -230,66 +231,67 @@
 		?>
 
 		<tr>
-			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['id']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['Guias']; ?>&nbsp;</td> -->
-			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['no_viaje']; ?>&nbsp;</td>
-			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['num_guia']; ?>&nbsp;</td>
-			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['id_area']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['IsEmptyTrip']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['InReembarco']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['TipoViajeReembarco']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['no_liquidacion']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['viaje_no_guia']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['reembarco_no_guia']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['viaje1']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['viaje2']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['kms_ruta1']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['kms_ruta2']; ?>&nbsp;</td> -->
-			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['TipoViaje']; ?>&nbsp;</td>
-			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['area']; ?>&nbsp;</td>
-			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['TiempoTotal']; ?>&nbsp;</td>
-			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['TiempoCarga']; ?>&nbsp;</td>
-			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['TiempoTransito']; ?>&nbsp;</td>
-			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['TiempoDescarga']; ?>&nbsp;</td>
-			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['TiempoCiclo']; ?>&nbsp;</td>
-			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['LlegadaATiempo']; ?>&nbsp;</td>
-			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['tipo_de_operacion']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['f_despachado']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['mes-despacho']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['f_despachado_m']; ?>&nbsp;</td> -->
-			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['projections_rp_definition']; ?>&nbsp;</td>
-			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['fraccion']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['fraction']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['peso-despachado']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['subtotal']; ?>&nbsp;</td> -->
-			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['Operador']; ?>&nbsp;</td>
-			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['cliente']; ?>&nbsp;</td>
-			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['remitente']; ?>&nbsp;</td>
-			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['destinatario']; ?>&nbsp;</td>
-			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['id_unidad']; ?>&nbsp;</td>
-			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['fecha_guia']; ?>&nbsp;</td>
-			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['Origen']; ?>&nbsp;</td>
-			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['Destino']; ?>&nbsp;</td>
-			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['kms_viaje']; ?>&nbsp;</td>
-			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['kms_real']; ?>&nbsp;</td>
-			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['InicioDeViaje']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['LlegadaACarga']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['InicioDeCarga']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['FinDeCarga']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['EnRutaCargado']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['LlegadaADescarga']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['InicioDeDescarga']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['FinDeDescarga']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['FinDeViaje']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['id_seguimiento']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['periodo_despachado']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['status_guia']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['prestamo']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['tipo_doc']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['trip_count']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['FlagIsDisminution']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['FlagIsProvision']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['FlagIsNextMonth']; ?>&nbsp;</td> -->
+			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['id']; ?></td> -->
+			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['Guias']; ?></td> -->
+			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['no_viaje']; ?></td>
+			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['num_guia']; ?></td>
+			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['id_area']; ?></td> -->
+			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['IsEmptyTrip']; ?></td> -->
+			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['InReembarco']; ?></td> -->
+			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['TipoViajeReembarco']; ?></td> -->
+			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['no_liquidacion']; ?></td> -->
+			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['viaje_no_guia']; ?></td> -->
+			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['reembarco_no_guia']; ?></td> -->
+			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['viaje1']; ?></td> -->
+			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['viaje2']; ?></td> -->
+			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['kms_ruta1']; ?></td> -->
+			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['kms_ruta2']; ?></td> -->
+			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['TipoViaje']; ?></td>
+			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['area']; ?></td>
+			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['TiempoTotal']; ?></td>
+			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['TiempoCarga']; ?></td>
+			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['TiempoTransito']; ?></td>
+			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['TiempoDescarga']; ?></td>
+			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['TiempoCiclo']; ?></td>
+			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['LlegadaATiempo']; ?></td>
+			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['kms_viaje']; ?></td>
+			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['tipo_de_operacion']; ?></td> -->
+			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['f_despachado']; ?></td> -->
+			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['mes-despacho']; ?></td> -->
+			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['f_despachado_m']; ?></td> -->
+			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['projections_rp_definition']; ?></td>
+			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['fraccion']; ?></td> -->
+			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['fraction']; ?></td> -->
+			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['peso-despachado']; ?></td> -->
+			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['subtotal']; ?></td> -->
+			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['Operador']; ?></td>
+			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['cliente']; ?></td>
+			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['remitente']; ?></td>
+			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['destinatario']; ?></td>
+			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['id_unidad']; ?></td>
+			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['fecha_guia']; ?></td>
+			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['Origen']; ?></td>
+			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['Destino']; ?></td>
+
+			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['kms_real']; ?></td> -->
+			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['InicioDeViaje']; ?></td> -->
+			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['LlegadaACarga']; ?></td> -->
+			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['InicioDeCarga']; ?></td> -->
+			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['FinDeCarga']; ?></td> -->
+			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['EnRutaCargado']; ?></td> -->
+			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['LlegadaADescarga']; ?></td> -->
+			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['InicioDeDescarga']; ?></td> -->
+			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['FinDeDescarga']; ?></td> -->
+			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['FinDeViaje']; ?></td> -->
+			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['id_seguimiento']; ?></td> -->
+			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['periodo_despachado']; ?></td> -->
+			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['status_guia']; ?></td> -->
+			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['prestamo']; ?></td> -->
+			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['tipo_doc']; ?></td> -->
+			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['trip_count']; ?></td> -->
+			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['FlagIsDisminution']; ?></td> -->
+			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['FlagIsProvision']; ?></td> -->
+			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['FlagIsNextMonth']; ?></td> -->
 		</tr>
 	<?php }//endforeach; ?>
 		</tbody>
