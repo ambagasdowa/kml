@@ -72,7 +72,6 @@ class LogisticaViewGstDatesheetsController extends AppController {
 
 		if (isset($add_conditions['dateini']) && isset($add_conditions['dateend'])){
 			// code for both date
-
 			$conditions = array('LogisticaViewGstDatesheet.f_despachado BETWEEN ? AND ?'=> array ($this->date_convert($add_conditions['dateini']),$this->date_convert($add_conditions['dateend'])));
 
 		} elseif (isset($add_conditions['dateini']) || isset($add_conditions['dateend'])){
@@ -89,6 +88,34 @@ class LogisticaViewGstDatesheetsController extends AppController {
 		}
 
 
+		if (isset($add_conditions['Origen']) && isset($add_conditions['Destino'])){
+			// code for both date
+			$conditions = array('LogisticaViewGstDatesheet.f_despachado BETWEEN ? AND ?' => array ($this->date_convert($add_conditions['dateini']),$this->date_convert($add_conditions['dateend'])));
+
+			$conditions = array(
+			    'AND' => array(
+			        array(
+			            'OR' => array(
+			                array('LogisticaViewGstDatesheet.Origen' => $add_conditions['Origen']),
+			                array('LogisticaViewGstDatesheet.Destino' => $add_conditions['Destino'])
+			            )
+			        )
+			    )
+			);
+
+		} elseif (isset($add_conditions['Origen']) || isset($add_conditions['Destino'])){
+
+			if(isset($add_conditions['Origen'])){
+				$conditions['LogisticaViewGstDatesheet.Origen'] = $add_conditions['Origen'];
+			}
+			if(isset($add_conditions['Destino'])){
+				$conditions['LogisticaViewGstDatesheet.Destino'] = $add_conditions['Destino'];
+			}
+		} else {
+			// $add_conditions['dateini'] = null;
+			// $add_conditions['dateend'] = null;
+			// $conditions['LogisticaViewGstDatesheet.f_despachado'] = $this->date_convert(date('Y-m-d'));
+		}
 
 		if(isset($add_conditions['id_area'])){
 			$conditions['LogisticaViewGstDatesheet.id_area'] = $add_conditions['id_area'];
@@ -104,8 +131,6 @@ class LogisticaViewGstDatesheetsController extends AppController {
 
 //
 		debug($conditions);
-
-
 // exit();
 		$logisticaViewGstDatesheets = $this->LogisticaViewGstDatesheet->find('all',array('conditions'=>$conditions));
 // debug(count($logisticaViewGstDatesheets));
@@ -116,7 +141,6 @@ class LogisticaViewGstDatesheetsController extends AppController {
 		}
 
 		$this->set(compact('logisticaViewGstDatesheets','info'));
-
 		// NOTE set the response output for an ajax call
 		Configure::write('debug', 0);
 		$this->autoLayout = false;
@@ -126,17 +150,21 @@ class LogisticaViewGstDatesheetsController extends AppController {
 
 
 	function index() {
-		// Configure::write('debug', 2);
+		Configure::write('debug', 2);
 		// echo '<textarea height"900" width="600"></textarea>';
 		// $this->LogisticaViewGstDatesheet->recursive = 0;
 		// $this->set('logisticaViewGstDatesheets', $this->paginate());
+
 		$this->LoadModel('ProjectionsViewBussinessUnit');
+		$this->LoadModel('LogisticaViewGstPlaza');
 		$bssus = $this->ProjectionsViewBussinessUnit->find('list',array('fields'=>array('id_area','label')));
-		// debug($bssus);
+		$plazas = $this->LogisticaViewGstPlaza->find('list',array('fields'=>array('desc_plaza','desc_plaza')));
+
+		// debug($plazas);
 		$IsEmptyTrip = array(0=>'Cargado',1=>'Vacio');
 		$projections_rp_definition = array('GRANEL'=>'Granel','OTROS'=>'Otros');
 
-		$this->set(compact('bssus','IsEmptyTrip','projections_rp_definition'));
+		$this->set(compact('bssus','IsEmptyTrip','projections_rp_definition','plazas'));
 
 	}
 

@@ -105,6 +105,14 @@
 		  opacity:1;
 		}
 
+		.twos.columns{
+	 						/* width: 4.66666666667%;  */
+	 						width: 7.66666666667% !important;
+		}
+
+		.two.columns {
+									width: 10.3333333333%; 
+		}
 
 		</style>
 
@@ -127,7 +135,7 @@
 
 						<?php
 
-						echo '<div class="two columns input-group">';
+						echo '<div class="twos columns input-group">';
 						echo '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>';
 						echo
 									$this->Form->input
@@ -150,7 +158,7 @@
 																		);
 						echo '</div>';
 
-						echo '<div class="two columns input-group">';
+						echo '<div class="twos columns input-group">';
 						echo '<div class="input-group-addon"><i class="fa fa-calendar"></i></div>';
 						echo
 									$this->Form->input
@@ -177,7 +185,7 @@
 
 
 						<?php
-						echo '<div class="two columns input-group">';
+						echo '<div class="twos columns input-group">';
 						echo '<div class="input-group-addon"><i class="fa fa-barcode"></i></div>';
 						echo
 									$this->Form->input
@@ -202,7 +210,7 @@
 
 						?>
 						<?php
-						echo '<div class="two columns input-group">';
+						echo '<div class="twos columns input-group">';
 						echo '<div class="input-group-addon"><i class="fa fa-barcode"></i></div>';
 						echo
 									$this->Form->input
@@ -226,8 +234,60 @@
 							echo '</div>';
 
 						?>
+
 						<?php
 						echo '<div class="two columns input-group">';
+						echo '<div class="input-group-addon"><i class="fa fa-barcode"></i></div>';
+						echo
+									$this->Form->input
+																		(
+																			'Origen',
+																			 array
+																						(
+																							'type'=>'select',
+																							'class'=>'search_udn u-full-width form-control',
+																							'id'=>'to',
+																							'placeholder' => 'Origen del Viaje',
+																							// 'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
+								                              // 'title'=>'Puede teclear la fecha en Formato yyyymmdd',
+																							'empty'=>'Origen',
+																							'div'=>FALSE,
+																							'label'=>FALSE,
+																							'options'=>$plazas,
+																							'tabindex'=>'2'
+																						)
+																		);
+							echo '</div>';
+
+						?>
+						<?php
+						echo '<div class="two columns input-group">';
+						echo '<div class="input-group-addon"><i class="fa fa-barcode"></i></div>';
+						echo
+									$this->Form->input
+																		(
+																			'Destino',
+																			 array
+																						(
+																							'type'=>'select',
+																							'class'=>'search_udn u-full-width form-control',
+																							'id'=>'to',
+																							'placeholder' => 'Destino del Viaje',
+																							// 'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
+								                              // 'title'=>'Puede teclear la fecha en Formato yyyymmdd',
+																							'empty'=>'Destino',
+																							'div'=>FALSE,
+																							'label'=>FALSE,
+																							'options'=>$plazas,
+																							'tabindex'=>'2'
+																						)
+																		);
+							echo '</div>';
+
+						?>
+
+						<?php
+						echo '<div class="twos columns input-group">';
 						echo '<div class="input-group-addon"><i class="fa fa-barcode"></i></div>';
 						echo
 									$this->Form->input
