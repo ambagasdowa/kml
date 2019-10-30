@@ -353,21 +353,6 @@
 												</ul>
 										</li>
 
-										<li class="dropdown-submenu">
-											<a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>Addenum</span></a>
-												<ul class="dropdown-menu">
-													<li><a tabindex="-1" href="<?php e($this->webroot.'AddenumViewAlbaranRelations');?>"><i class="fa fa-cog"></i>&nbsp;<span>Addenum</span></a></li>
-													<!-- <li><a tabindex="-1" href="<?php e($this->webroot.'Tralixes/add');?>"><i class="fa fa-cog"></i>&nbsp;<span>edition</span></a></li> -->
-												</ul>
-										</li>
-
-                    <li class="dropdown-submenu">
-											<a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>Logistica</span></a>
-												<ul class="dropdown-menu">
-													<li><a tabindex="-1" href="<?php e($this->webroot.'LogisticaViewGstDatesheets');?>"><i class="fa fa-cog"></i>&nbsp;<span>Indicador</span></a></li>
-													<!-- <li><a tabindex="-1" href="<?php e($this->webroot.'Tralixes/add');?>"><i class="fa fa-cog"></i>&nbsp;<span>edition</span></a></li> -->
-												</ul>
-										</li>
 
 										<li class="dropdown-submenu">
 											<a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>Providers Options</span></a>
@@ -591,6 +576,39 @@
 
                     <?php 	}?>
                     <?php }?>
+
+
+                    <?php if (isset($_SESSION['Auth']['User'])) {?>
+										<?php 	if (checkUser($_SESSION['Auth']['User']['group_id'],'Addenum')) {?>
+
+                      <li class="dropdown-submenu">
+  											<a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>Adenda</span></a>
+  												<ul class="dropdown-menu">
+  													<li><a tabindex="-1" href="<?php e($this->webroot.'AddenumViewAlbaranRelations');?>"><i class="fa fa-cog"></i>&nbsp;<span>Adenda</span></a></li>
+  													<!-- <li><a tabindex="-1" href="<?php e($this->webroot.'Tralixes/add');?>"><i class="fa fa-cog"></i>&nbsp;<span>edition</span></a></li> -->
+  												</ul>
+  										</li>
+
+										<li class="divider"></li>
+										<?php 	}?>
+										<?php }?>
+
+
+                    <?php if (isset($_SESSION['Auth']['User'])) {?>
+										<?php 	if (checkUser($_SESSION['Auth']['User']['group_id'],'Addenum')) {?>
+
+                      <li class="dropdown-submenu">
+  											<a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>Logistica</span></a>
+  												<ul class="dropdown-menu">
+  													<li><a tabindex="-1" href="<?php e($this->webroot.'LogisticaViewGstDatesheets');?>"><i class="fa fa-cog"></i>&nbsp;<span>Indicador</span></a></li>
+  													<!-- <li><a tabindex="-1" href="<?php e($this->webroot.'Tralixes/add');?>"><i class="fa fa-cog"></i>&nbsp;<span>edition</span></a></li> -->
+  												</ul>
+  										</li>
+
+										<li class="divider"></li>
+										<?php 	}?>
+										<?php }?>
+
 
 										<?php if (isset($_SESSION['Auth']['User'])) {?>
 										<?php 	if (checkUser($_SESSION['Auth']['User']['group_id'],'Ingresos') OR checkUser($_SESSION['Auth']['User']['group_id'],'CasetasIngresos') OR checkUser($_SESSION['Auth']['User']['group_id'],'PoliciesIngresos')) {?>

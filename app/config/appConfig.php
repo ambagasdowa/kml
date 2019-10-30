@@ -188,6 +188,10 @@
 			return true;
 		} else if (( (int)$id_group === 13 OR (int)$id_group === 1 OR (int)$id_group === 7) and $group === 'PoliciesIngresos') { //projections & pol
 			return true;
+		} else if (( (int)$id_group === 14 OR (int)$id_group === 1 OR (int)$id_group === 7) and $group === 'Addenum') { //projections & pol
+			return true; //Addenum
+		} else if (( (int)$id_group === 15 OR (int)$id_group === 1 OR (int)$id_group === 7) and $group === 'Logistica') { //projections & pol
+			return true; //Logistica
 		} else {
 			return false;
 		}
