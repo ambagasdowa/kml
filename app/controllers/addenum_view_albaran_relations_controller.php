@@ -235,7 +235,7 @@ class AddenumViewAlbaranRelationsController extends AppController {
 
 		function get() {
 
-			Configure::write('debug',2);
+			// Configure::write('debug',2);
 			// App::uses('Xml', 'Lib');
 
 			$posted = json_decode(base64_decode($this->params['named']['data']),true);
@@ -284,7 +284,7 @@ class AddenumViewAlbaranRelationsController extends AppController {
 			} else {
 				// $add_conditions['dateini'] = null;
 				// $add_conditions['dateend'] = null;
-				// $conditionsBl['AddenumViewAlbaranRelation.FechaMensaje'] = $this->date_convert(date('Y-m-d'));
+				$conditionsBl['AddenumViewAlbaranRelation.FechaMensaje'] = $this->date_convert(date('Y-m-d'));
 			}
 
 

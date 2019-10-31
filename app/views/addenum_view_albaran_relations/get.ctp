@@ -156,8 +156,6 @@
 
 <div id="first-datatable-output" class="table-responsive">
 
-
-		<!-- <table id="table_res" class="display order-table table table-bordered table-hover table-striped responstable"> -->
 		<table id="table_res" class="table table-striped table-bordered">
 		<thead>
 			<tr>
