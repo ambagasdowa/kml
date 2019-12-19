@@ -182,6 +182,9 @@ echo
 				<th><?php echo 'Operacion';?></th>
 				<th>Descripci&oacute;n</th>
 				<th><?php echo 'Fecha Compromiso';?></th>
+				<th><?php echo 'AreaTaller';?></th>
+				<th><?php echo 'NoOrden';?></th>
+				<th><?php echo 'FechaPrometida';?></th>
 				<!-- <th><?php echo 'Status_viaje';?></th> -->
 				<!-- <th><?php echo 'Desc_viaje';?></th> -->
 				<!-- <th><?php echo 'Status_taller';?></th> -->
@@ -314,6 +317,9 @@ echo
 			<!-- <td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['status_taller']; ?>&nbsp;</td> -->
 			<!-- <td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['desc_taller']; ?>&nbsp;</td> -->
 			<!-- <td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['iseditable']; ?>&nbsp;</td> -->
+			<td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['area_taller']; ?></td>
+			<td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['id_orden']; ?></td>
+			<td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['fecha_prometida']; ?></td>
 		</tr>
 	<?php } //endforeach; ?>
 		</tbody>
