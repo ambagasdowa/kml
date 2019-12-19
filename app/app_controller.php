@@ -154,6 +154,95 @@ class AppController extends Controller {
 	}
 	/** NOTE <GST check payroll users >*/
 
+
+// NOTE check Vendor Users
+  function vendorCheck($usr=null) {
+      // check if user exits
+      // vendor load for vendor
+      $this->LoadModel('ProvidersViewVendor','User');
+
+      // if (isset($this->data['User']['username']) and $this->validationRfc($this->data['User']['username'])) {
+        echo 'Call of duty...';
+        debug($usr);
+      // find user in db , then if not exits but in db
+      if(!$this->User->find('all',array('conditions'=>array('User.username'=>$usr)))){
+
+        $nominaUser = $this->ProvidersViewVendor->find('all',array('conditions'=>array('ProvidersViewVendor.vendid'=>$usr)));
+
+debug($nominaUser);
+// debug($this->ProvidersViewVendor->find('all'));
+
+// exit();
+
+				if (empty($nominaUser) or !isset($nominaUser)) {
+					$this->Auth->loginError = "Su <strong>Usuario</strong> no se encuentra en nuestra base de datos, por favor comuniquelo con el departamento de Compras";
+				} else {
+
+					if(count($nominaUser) === 1){ // just a precaution over a not know inconsistence in the system NOM
+
+						foreach ($nominaUser as $idNominaUser => $valueNominaUser) {
+							foreach ($valueNominaUser as $dataNominaUser) {
+
+                $user['User']['username'] = $dataNominaUser['vendid'];
+								$user['User']['name'] = ucwords(strtolower(htmlentities(trim($this->normalizeChars($dataNominaUser['name'])),ENT_XHTML,'ISO-8859-1')));
+								// $user['User']['last_name'] = ucwords(strtolower(htmlentities($dataNominaUser['apepat'],ENT_XHTML,'ISO-8859-1')))."\x20".ucwords(strtolower(htmlentities($dataNominaUser['apemat'],ENT_XHTML,'ISO-8859-1')));
+								$user['User']['gender'] = 'M';
+								$user['User']['password'] = $this->Auth->password(strtolower($dataNominaUser['vendid']));
+                $user['User']['clear_password'] = $dataNominaUser['vendid'];
+								$user['User']['group_id'] = '3'; //this must be the default as user then you can chane this in the panel app
+								$user['User']['created'] = date('Y-m-d H:m:s');
+								$user['User']['modified'] = date('Y-m-d H:m:s');
+								$user['User']['last_access'] = date('Y-m-d H:m:s');
+								$user['User']['status'] = 'Active'; //because it found in nom
+								$user['User']['current_date_time'] = date('Y-m-d H:m:s');
+								$user['User']['languaje'] = 'es'; // we are in gst
+								// $user['User']['number_id'] = $dataNominaUser['id']; // the worker key
+								$user['User']['number_id'] = 2744; // the worker key
+								$user['User']['super_user'] = 0; // the worker key
+								// $user['User']['company_id'] = (int)$dataNominaUser['cvecia']; // where are from ??
+								$user['User']['user_agent'] = $_SERVER['HTTP_USER_AGENT']; // user agent from ??
+								$user['User']['last_user_agent'] = $_SERVER['HTTP_USER_AGENT']; // user agent from ??
+							}
+						}
+
+            debug($user);
+            debug($user['User']['name']);
+            // exit();
+						if(!$this->User->save($user['User'])){
+							$this->Auth->loginError = "Ha ocurrido un error al generar su usuario , por favor comuniquelo con el departamento de Sistemas o intentelo de nuevo mas tarde";
+						} else {
+							/** NOTE <add directory for this user> */
+							$username = $user['User']['username'];
+							if (!empty($username)) {
+              $directory = WWW_ROOT.'vendors'.DS.'RichFilemanager'.DS.'userfiles'.DS.$this->Auth->user('username').DS;
+								if ( !is_dir($directory) ) {
+                  if(!mkdir($directory.DS, 0777, true)) {
+                    die('the dir '.$dir_name.' could not be create');
+                  }
+								}
+							}
+						}
+						/* mkdir for this user */
+					} else if (count($nominaUser) > 1) {
+						$this->Auth->loginError = "No se ha podido generar su usuario favor de comunicarlo a recursos humanos  o enviar un correo a soporte@gsttransportes.com con el codigo de error:0x0000011_vendid_duplicado";
+					} else {
+						$this->Auth->loginError = "No se ha podido generar su usuario favor de comunicarlo al departamento de Sistemas con el codigo de error:0x0000002";
+					}
+				}
+      } // Validate The Rfc firts
+		// } else {
+		// 		// if user exists check in nom2001
+		// }
+
+  }
+
+// NOTE check if user is an RFC
+  function validationRfc ($rfc) {
+  	$regex = '/^[A-Z]{4}([0-9]{2})(1[0-2]|0[1-9])([0-3][0-9])([ -]?)([A-Z0-9]{3})$/';
+  	return preg_match($regex, $rfc);
+  }//fin función
+
+
 	/** NOTE <GST build Menu's' options>*/
 	// conecct to policiesTypes for build the menu of the documents
 	function getDocuments ($menu=null) {
@@ -170,23 +259,27 @@ class AppController extends Controller {
 
 	// build the menus for gst
 	function buildMenu () {
-		$menu = $this->getDocuments(true);
-		$conditionsMenu['PoliciesSubtypesDefinition.status'] = 'Active';
-		$this->LoadModel('PoliciesSubtypesDefinition');
-		$submenu = $this->PoliciesSubtypesDefinition->find('list',array('fields'=>array('id','description'),'conditions'=>$conditionsMenu));
-		foreach ($menu as $id_menu => $PoliciesType) {
-			if (empty($PoliciesType['PoliciesSubtype'])) {
-				$setMenu[$PoliciesType['PoliciesType']['id']][$PoliciesType['PoliciesType']['description']] = null;
-			} else {
-				foreach ($PoliciesType['PoliciesSubtype'] as $id_policies_subtype => $PoliciesSubtype) {
-					$setMenu[$PoliciesType['PoliciesType']['id']][$PoliciesType['PoliciesType']['description']][$PoliciesSubtype['policies_subtypes_definitions_id']] = $submenu[$PoliciesSubtype['policies_subtypes_definitions_id']];
-				}
-			}
-		}
-		$this->set(compact('setMenu'));
-// 		debug($menu);
-// 		debug($submenu);
-// 		debug($setMenu);
+    // if ($check == false) {
+      $menu = $this->getDocuments(true);
+      $conditionsMenu['PoliciesSubtypesDefinition.status'] = 'Active';
+      $this->LoadModel('PoliciesSubtypesDefinition');
+      $submenu = $this->PoliciesSubtypesDefinition->find('list',array('fields'=>array('id','description'),'conditions'=>$conditionsMenu));
+      foreach ($menu as $id_menu => $PoliciesType) {
+        if (empty($PoliciesType['PoliciesSubtype'])) {
+          $setMenu[$PoliciesType['PoliciesType']['id']][$PoliciesType['PoliciesType']['description']] = null;
+        } else {
+          foreach ($PoliciesType['PoliciesSubtype'] as $id_policies_subtype => $PoliciesSubtype) {
+            $setMenu[$PoliciesType['PoliciesType']['id']][$PoliciesType['PoliciesType']['description']][$PoliciesSubtype['policies_subtypes_definitions_id']] = $submenu[$PoliciesSubtype['policies_subtypes_definitions_id']];
+          }
+        }
+      }
+      $this->set(compact('setMenu'));
+      // 		debug($menu);
+      // 		debug($submenu);
+      // 		debug($setMenu);
+    // } else {
+    //   return false;
+    // }
 	}
 
 	/** NOTE <GST build Menu's' options>*/
@@ -364,6 +457,11 @@ class AppController extends Controller {
 			$cpny_id = $this->Company->find('list',array('conditions'=>$conditonsCnpy));
 			$_SESSION['Auth']['User']['casetas_company'] = key($cpny_id);
 		/** NOTE This is gst so you can remove */
+
+        // debug($this->validationRfc($this->Auth->user('username')));
+
+        // debug($this->viewVars['setMenu']);
+
         }
     }
 
@@ -456,12 +554,33 @@ class AppController extends Controller {
 // 			set the documents type and buid the nav menu
 			$documents = $this->getDocuments();
 			$documents ? $this->set('documents',$documents) : $this->set('documents',null);
-
 			if (isset($this->Auth->user()['User']) && $this->Auth->user()['User']['group_id'] == 3) {
 				$this->Auth->loginRedirect = array('controller' => 'Policies', 'action' => 'view','type'=>'1','subtype'=>'1');
 			}
-			$this->buildMenu();
+      // NOTE set from user properties Work on hir
+      // debug($this->data['User']['username']);
+      // debug($this->validationRfc($usr=$this->data['User']['username']));
+      // $this->vendorCheck($usr=$this->data['User']['username']);
+      // debug($this->data['User']['username']);
+      // exit();
 
+      if (isset($this->data['User']['username']) && $this->validationRfc($this->data['User']['username']) == 1) {
+        $this->vendorCheck($usr=$this->data['User']['username']);
+        // $check = true;
+      // } else if ($this->validationRfc($usr=$this->data['User']['username']) == 0){
+      }
+
+      if ($this->validationRfc($this->Auth->user('username')) == 0) {
+        $this->buildMenu();
+      }
+      // echo 'debug validation';
+      // debug($this->validationRfc($this->data['User']['username']));
+      // debug($this->validationRfc($this->Auth->user('username')));
+      // debug($this->Auth->user());
+      // debug($this->data['User']['username']);
+      // echo 'End Debug';
+      // debug($this);
+      // exit();
 		} /** <GST> */ // End gst options
 
     $this->setShares($this->Auth->user()['User']['id']);
@@ -471,10 +590,6 @@ class AppController extends Controller {
     * @packages this module controls the main menu
     * $this->controlModuleUsers($this->Auth->user()['User']['id']);
     */
-
-
-
-
 // 		exit();
 
 // 		$this->extendsUsersMenu();

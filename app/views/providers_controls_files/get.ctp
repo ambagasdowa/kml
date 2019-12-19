@@ -128,7 +128,29 @@
 
 
 <div class="row">
-
+<?php
+// echo '<div class="two columns"><i class="fa fa-barcode"></i></div>';
+// echo '<div class="two columns"></div>';
+// echo
+// 			$this->Form->input
+// 												(
+// 													'searchbox',
+// 													 array
+// 																(
+// 																	'type'=>'text',
+// 																	'class'=>'search_udn u-full-width form-control',
+// 																	'id'=>'myInput',
+// 																	'placeholder' => 'Filtro General',
+// 																	// 'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
+// 																	// 'title'=>'Puede teclear la fecha en Formato yyyymmdd',
+// 																	'div'=>FALSE,
+// 																	'label'=>FALSE,
+// 																	// 'options'=>array(1=>'ATSA IZUCAR - SIVESA ORIZABA',2=>'ATSA MIXQUI - SIVESA ORIZABA',3=>'CALIZA MIXQUI - FANAL TULTITLAN'),
+// 																	'tabindex'=>'2'
+// 																)
+// 												);\
+// 	echo '</div>';
+ ?>
  </div>
 
 

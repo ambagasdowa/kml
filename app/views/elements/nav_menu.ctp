@@ -537,7 +537,8 @@
 										<li class="dropdown-submenu">
 											<a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>Proveedores</span></a>
 												<ul class="dropdown-menu">
-													<li><a tabindex="-1" href="<?php e($this->webroot.'/ProvidersImportedFilesControls/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>Proveedores</span></a></li>
+													<!-- <li><a tabindex="-1" href="<?php //e($this->webroot.'/ProvidersImportedFilesControls/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>Proveedoresx</span></a></li> -->
+													<li><a tabindex="-1" href="<?php e($this->webroot.'/ProvidersControlsFiles/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>Proveedores</span></a></li>
 												</ul>
 										</li>
 

@@ -55,35 +55,56 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 			}
 		}
 
-		// debug($conditions);
-		// debug($add_conditions);
-		//
-		// exit();
-
-
-		// $conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.periodo'] = $add_conditions['periodo'];
-		$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.id_area'] = $add_conditions['id_area'];
-		$conditionsTf['DisponibilidadViewRptGroupGstIndicator.id_area'] = $add_conditions['id_area'];
-
-		// $conditionsBl['DisponibilidadViewRptGroupGstIndicator.id_flota'] = $add_conditions['id_flota'];
-		// $conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.id_tipo_operacion'] = $add_conditions['id_flota'];
-
-		if (isset($add_conditions['id_flota'])) {
-			// code...
-			$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.id_flota'] = $add_conditions['id_flota'];
-			$conditionsTf['DisponibilidadViewRptGroupGstIndicator.id_flota'] = $add_conditions['id_flota'];
-		}
-		// $conditionsBl['RendViewFullGstCoreIndicator.id'] = 10;
-
-		$disponibilidadViewRptUnidadesGstIndicators = $this->DisponibilidadViewRptUnidadesGstIndicator->find('all',array('conditions'=>$conditionsBl));
 
 		$this->LoadModel('DisponibilidadViewStatusGstIndicator');
-
 		$this->LoadModel('DisponibilidadViewRptGroupGstIndicator');
 
 		$disponibilidadViewStatusGstIndicators = $this->DisponibilidadViewStatusGstIndicator->find('list',array('fields'=>array('id_status','nombre')));
 
-		$disponibilidadViewRptGroupGstIndicators = $this->DisponibilidadViewRptGroupGstIndicator->find('all',array('conditions'=>$conditionsTf));
+
+				if (!isset($add_conditions['id_area']) && !isset($add_conditions['id_flota'])) {
+
+					$disponibilidadViewRptGroupGstIndicators = $this->DisponibilidadViewRptGroupGstIndicator->find('all',array(
+										 'fields'=>array(
+																			 'sum(unidades) as [unidades]'
+																			,'id_status'
+																			,'estatus'
+																	  )
+										 ,'group'=>array('id_status','estatus')
+													 )
+					);
+					$disponibilidadViewRptUnidadesGstIndicators = $this->DisponibilidadViewRptUnidadesGstIndicator->find('all');
+				} else {
+
+					if (isset($add_conditions['id_area'])) {
+
+						$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.id_area'] = $add_conditions['id_area'];
+						$conditionsTf['DisponibilidadViewRptGroupGstIndicator.id_area'] = $add_conditions['id_area'];
+					}
+
+					if (isset($add_conditions['id_flota'])) {
+						// code...
+						$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.id_flota'] = $add_conditions['id_flota'];
+						$conditionsTf['DisponibilidadViewRptGroupGstIndicator.id_flota'] = $add_conditions['id_flota'];
+					}
+
+						$disponibilidadViewRptUnidadesGstIndicators = $this->DisponibilidadViewRptUnidadesGstIndicator->find('all',array('conditions'=>$conditionsBl));
+
+						$disponibilidadViewRptGroupGstIndicators = $this->DisponibilidadViewRptGroupGstIndicator->find('all'
+									,array(
+											 'conditions'=>$conditionsTf
+											,'fields'=>array(
+																				'sum(unidades) as [unidades]'
+																			 ,'id_status'
+																			 ,'estatus'
+																		 )
+											,'group'=>array('id_status','estatus')
+									));
+				}
+
+				foreach ($disponibilidadViewRptGroupGstIndicators as $key => $value) {
+					$disponibilidadViewRptGroupGstIndicators[$key]['DisponibilidadViewRptGroupGstIndicator']['unidades'] = $value[0]['unidades'];
+				}
 
 		$json_parsing_lv_one = null;
 

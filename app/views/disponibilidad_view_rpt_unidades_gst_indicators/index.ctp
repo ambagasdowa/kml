@@ -178,6 +178,7 @@
 								                              'title'=>'Puede teclear la fecha en Formato yyyymmdd',
 																							'div'=>FALSE,
 																							'label'=>FALSE,
+																							'empty' => 'TODO',
 																							'options'=>$bssus,
 																							'tabindex'=>'2'
 																						)
