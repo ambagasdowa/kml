@@ -134,7 +134,7 @@
 		<div class="container-mod">
 <!-- ['BalanzaViewUdnsRpt']['Empleado'] -->
 					<div class="row">
-						<?php echo $this->Form->create('AddenumViewAlbaranRelations',array('enctype' => 'multipart/form-data','class'=>'form','id'=>'pform'));?>
+						<?php echo $this->Form->create('ProvidersViewRelations',array('enctype' => 'multipart/form-data','class'=>'form','id'=>'pform'));?>
 
 						<?php
 
@@ -263,7 +263,7 @@
 								console.log(serial);
 								data_code = base64_encode(serial);
 								console.log(data_code);
-								var urlStruct = "<?php echo Dispatcher::baseUrl();?>/AddenumViewAlbaranRelations/get/data:"+data_code;
+								var urlStruct = "<?php echo Dispatcher::baseUrl();?>/ProvidersControlsFiles/get/data:"+data_code;
 								console.log(urlStruct);
 								console.log("loaded...");
 
@@ -280,6 +280,10 @@
 									// End table
 
 									// ALERT check this behavior
+
+// ======================================================================================================== //
+
+									// DONE to HIR
 									// NOTE add the file dispatcher inside send_query
 
 									table_a.$("input[id^='update_']").on('keydown', function(e) {
@@ -304,12 +308,12 @@
 												batnbr = $(this).attr('data-id');
 												remision = $(this).attr('data-remision');
 												if ($(this).val()) {
-													$.post("<?php echo Dispatcher::baseUrl();?>/AddenumViewAlbaranRelations/update/data:"+data_code,function(data){
+													$.post("<?php echo Dispatcher::baseUrl();?>/ProvidersControlsFiles/update/data:"+data_code,function(data){
 // NOTE
 													  }).done(function(data){
 																// alert('response is : ' + data );
 															if ( $("#update_pedido_"+batnbr).val() && $("#update_albaran_"+batnbr).val() ) {
-																	$('#link_'+batnbr).html('<a href="<?php echo Dispatcher::baseUrl();?>/AddenumViewAlbaranRelations/link/id:'+batnbr+'" id="get_'+batnbr+'" data-id="'+batnbr+'" data-name="'+batnbr+'_'+remision+'">Descargar</a>');
+																	$('#link_'+batnbr).html('<a href="<?php echo Dispatcher::baseUrl();?>/ProvidersControlsFiles/link/id:'+batnbr+'" id="get_'+batnbr+'" data-id="'+batnbr+'" data-name="'+batnbr+'_'+remision+'">Descargar</a>');
 															}
 													});
 												} else {
@@ -382,7 +386,7 @@
 <!-- ================================================================================================= -->
 <!-- NOTE build -- view for upload files and update status H to U with insert into report **EE** table -->
 <!-- set table  -->
-
+<!-- Go to Get method  -->
 
 
 

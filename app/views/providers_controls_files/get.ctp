@@ -78,11 +78,11 @@
 	</div> -->
 
 	<div class="row">
-		<?php $addenumViewAlbaranRelations ? : e('<div class="alert alert-success alert-dismissible fade in" role="alert">
+		<?php $providersViewRelations ? : e('<div class="alert alert-success alert-dismissible fade in" role="alert">
 						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 								<span aria-hidden="true">&times;</span>
 						</button>
-						<strong>No se encontraron Registros </strong>
+						<strong>No se encontraron Registros Asociados </strong>
 				</div>'); ?>
 	</div>
 
@@ -159,62 +159,93 @@
 		<table id="table_res" class="table table-striped table-bordered">
 		<thead>
 			<tr>
-				<!-- <th><?php echo 'xml';?></th> -->
-				<!-- <th><?php echo 'pdf';?></th> -->
-				<!-- <th><?php echo 'index';?></th> -->
-				<th><?php echo 'RefNbr';?></th>
-				<th><?php echo 'BatNbr';?></th>
-				<th><?php echo 'no_remision';?></th>
-				<!-- <th><?php echo '@xsi:schemaLocation';?></th> -->
-				<th><?php echo 'IdFactura';?></th>
-				<!-- <th><?php echo 'Version';?></th> -->
-				<th><?php echo 'FechaTimbrado';?></th>
-				<!-- <th><?php echo 'IdTransaccion';?></th> -->
-				<th><?php echo 'Transaccion';?></th>
-				<!-- <th><?php echo 'eu:OrdenesCompra/eu:Secuencia/@consec';?></th> -->
-				<th><?php echo 'IdPedido';?></th>
-				<th><?php echo 'Albaran';?></th>
-				<!-- <th><?php echo 'MonedaCve';?></th> -->
-				<!-- <th><?php echo 'TipoCambio';?></th> -->
-				<th><?php echo 'SubtotalM';?></th>
-				<th><?php echo 'TotalM';?></th>
-				<th><?php echo 'ImpuestoM';?></th>
-				<th><?php echo 'BaseImpuesto';?></th>
-				<!-- <th><?php echo 'CadenaOriginal';?></th> -->
-				<th><?php echo 'Guia';?></th>
-				<!-- <th><?php echo 'no_viaje';?></th> -->
-				<th><?php echo 'subtotal';?></th>
-				<!-- <th><?php echo 'desc_flete';?></th> -->
-				<!-- <th><?php echo 'observacion';?></th> -->
-				<!-- <th><?php echo 'FlagIsDisminution';?></th> -->
-				<!-- <th><?php echo 'FlagIsProvision';?></th> -->
-				<!-- <th><?php echo 'PerPost';?></th> -->
-				<!-- <th><?php echo 'fecha_guia';?></th> -->
-				<th><?php echo 'Addenda';?></th>
-				<th><?php echo 'status_guia';?></th>
+				<th>id</th>
+				<th>BatNbr</th>
+				<th>CpnyID</th>
+				<th>Status</th>
+				<th>Module</th>
+				<th>JrnlType</th>
+				<th>ap_status</th>
+				<th>VendId</th>
+				<th>PerPost</th>
+				<th>PONbr</th>
+				<th>RefNbr</th>
+				<th>DocType</th>
+				<!-- <th>DocDesc</th> -->
+				<th>Crtd_DateTime</th>
+				<th>LUpd_DateTime</th>
+				<th>name</th>
+				<th>xml</th>
+				<th>voucher</th>
+				<th>order</th>
+				<th>Acct</th>
+				<th>totalAmt</th>
+				<th>UUID</th>
 			</tr>
 		</thead>
 		<tbody>
 		<?php
-		foreach ($addenumViewAlbaranRelations as $key => $addenumViewAlbaranRelation) {
+		foreach ($providersViewRelations as $key => $providersViewRelation) {
 			// code...
 		?>
 
 		<tr>
-			<!-- <td data-xml="<?php echo $addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['xml'];?>" >&nbsp;</td> -->
-			<!-- <td data-pdf="<?php echo $addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['pdf'];?>" >&nbsp;</td> -->
-			<!-- <td><?php echo $addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['index']; ?>&nbsp;</td> -->
-			<td><?php echo $addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['RefNbr']; ?>&nbsp;</td>
-			<td><?php echo $addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['BatNbr']; ?>&nbsp;</td>
-			<td><?php echo $addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['no_remision']; ?>&nbsp;</td>
-			<!-- <td><?php echo $addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['@xsi:schemaLocation']; ?>&nbsp;</td> -->
-			<td><?php echo $addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['IdFactura']; ?>&nbsp;</td>
-			<!-- <td><?php echo $addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['Version']; ?>&nbsp;</td> -->
-			<td><?php echo $addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['FechaMensaje']; ?>&nbsp;</td>
-			<!-- <td><?php echo $addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['IdTransaccion']; ?>&nbsp;</td> -->
-			<td><?php echo $addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['Transaccion']; ?>&nbsp;</td>
-			<!-- <td><?php echo $addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['Secuencia']; ?>&nbsp;</td> -->
-			<td id="petition_<?php echo $addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['BatNbr'];?>">
+			<td><?php echo $providersViewRelation['ProvidersViewRelation']['id']; ?>&nbsp;</td>
+			<td><?php echo $providersViewRelation['ProvidersViewRelation']['BatNbr']; ?>&nbsp;</td>
+			<td><?php echo $providersViewRelation['ProvidersViewRelation']['CpnyID']; ?>&nbsp;</td>
+			<td><?php echo $providersViewRelation['ProvidersViewRelation']['Status']; ?>&nbsp;</td>
+			<td><?php echo $providersViewRelation['ProvidersViewRelation']['Module']; ?>&nbsp;</td>
+			<td><?php echo $providersViewRelation['ProvidersViewRelation']['JrnlType']; ?>&nbsp;</td>
+			<td><?php echo $providersViewRelation['ProvidersViewRelation']['ap_status']; ?>&nbsp;</td>
+			<td><?php echo $providersViewRelation['ProvidersViewRelation']['VendId']; ?>&nbsp;</td>
+			<td><?php echo $providersViewRelation['ProvidersViewRelation']['PerPost']; ?>&nbsp;</td>
+			<td><?php echo $providersViewRelation['ProvidersViewRelation']['PONbr']; ?>&nbsp;</td>
+			<td><?php echo $providersViewRelation['ProvidersViewRelation']['RefNbr']; ?>&nbsp;</td>
+			<td><?php echo $providersViewRelation['ProvidersViewRelation']['DocType']; ?>&nbsp;</td>
+			<!-- <td><?php echo $providersViewRelation['ProvidersViewRelation']['DocDesc']; ?>&nbsp;</td> -->
+			<td><?php echo $providersViewRelation['ProvidersViewRelation']['InvDate']; ?>&nbsp;</td>
+			<td><?php echo $providersViewRelation['ProvidersViewRelation']['InvcNbr']; ?>&nbsp;</td>
+			<td><?php echo $providersViewRelation['ProvidersViewRelation']['name']; ?>&nbsp;</td>
+
+			<!-- <td><?php echo $providersViewRelation['ProvidersViewRelation']['xml']; ?>&nbsp;</td> -->
+			<td id="petition_<?php echo $providersViewRelation['ProvidersViewRelation']['BatNbr'];?>">
+				<?php
+					echo
+								$this->Form->input
+																	(
+																		'xml',
+																		 array
+																					(
+																						'type'=>'text',
+																						// 'class'=>'xls u-full-width form-control',
+																						'width'=>'60',
+																						'id'=>'update_pedido_'.$providersViewRelation['ProvidersViewRelation']['BatNbr'],
+																						'data-id'=>$providersViewRelation['ProvidersViewRelation']['BatNbr'],
+																						'data-refnbr'=>$providersViewRelation['ProvidersViewRelation']['RefNbr'],
+																						'data-ponbr'=>$providersViewRelation['ProvidersViewRelation']['PONbr'],
+																						'data-vendid'=>$providersViewRelation['ProvidersViewRelation']['vendid'],
+																						'data-CpnyId'=>$providersViewRelation['ProvidersViewRelation']['CpnyID'],
+																						'data-type'=>'xml',
+																						'data-id'=>$providersViewRelation['ProvidersViewRelation']['id'],
+																						'placeholder' => 'Archivo Xml',
+																						// 'value'=>$providersViewRelation['ProvidersViewRelation']['IdPedido'],
+																						// 'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
+																						// 'title'=>'Puede teclear la fecha en Formato yyyymmdd',
+																						'div'=>FALSE,
+																						'label'=>FALSE
+																						// 'options'=>array(1=>'ATSA IZUCAR - SIVESA ORIZABA',2=>'ATSA MIXQUI - SIVESA ORIZABA',3=>'CALIZA MIXQUI - FANAL TULTITLAN'),
+																						// 'tabindex'=>'2'
+																					)
+																	);
+				?>
+			</td>
+			<td><?php echo $providersViewRelation['ProvidersViewRelation']['voucher']; ?>&nbsp;</td>
+			<td><?php echo $providersViewRelation['ProvidersViewRelation']['order']; ?>&nbsp;</td>
+			<td><?php echo $providersViewRelation['ProvidersViewRelation']['Acct']; ?>&nbsp;</td>
+			<td><?php echo $providersViewRelation['ProvidersViewRelation']['totalAmt']; ?>&nbsp;</td>
+			<td><?php echo $providersViewRelation['ProvidersViewRelation']['UUID']; ?>&nbsp;</td>
+
+			<td id="petition_<?php echo $providersViewRelation['ProvidersViewRelation']['BatNbr'];?>">
 				<?php
 					echo
 								$this->Form->input
@@ -225,17 +256,17 @@
 																						'type'=>'text',
 																						// 'class'=>'xls u-full-width form-control',
 																						'width'=>'60',
-																						'id'=>'update_pedido_'.$addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['BatNbr'],
-																						'data-id'=>$addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['BatNbr'],
-																						'data-refnbr'=>$addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['RefNbr'],
-																						'data-noguia'=>$addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['no_guia'],
-																						'data-guia'=>$addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['num_guia'],
-																						'data-remision'=>$addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['no_remision'],
-																						'data-name' => $addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['BatNbr'].'_'.$addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['no_remision'],
+																						'id'=>'update_pedido_'.$providersViewRelation['ProvidersViewRelation']['BatNbr'],
+																						'data-id'=>$providersViewRelation['ProvidersViewRelation']['BatNbr'],
+																						'data-refnbr'=>$providersViewRelation['ProvidersViewRelation']['RefNbr'],
+																						'data-noguia'=>$providersViewRelation['ProvidersViewRelation']['no_guia'],
+																						'data-guia'=>$providersViewRelation['ProvidersViewRelation']['num_guia'],
+																						'data-remision'=>$providersViewRelation['ProvidersViewRelation']['no_remision'],
+																						'data-name' => $providersViewRelation['ProvidersViewRelation']['BatNbr'].'_'.$providersViewRelation['ProvidersViewRelation']['no_remision'],
 																						'data-type'=>'IdPedido',
-																						'data-idx'=>$addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['idx'],
+																						'data-idx'=>$providersViewRelation['ProvidersViewRelation']['idx'],
 																						'placeholder' => 'Pedido',
-																						'value'=>$addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['IdPedido'],
+																						'value'=>$providersViewRelation['ProvidersViewRelation']['IdPedido'],
 																						// 'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
 																						// 'title'=>'Puede teclear la fecha en Formato yyyymmdd',
 																						'div'=>FALSE,
@@ -246,7 +277,7 @@
 																	);
 				?>
 			</td>
-			<td id="aldebaran_<?php echo $addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['BatNbr'];?>">
+			<td id="aldebaran_<?php echo $providersViewRelation['ProvidersViewRelation']['BatNbr'];?>">
 				<?php
 					echo
 								$this->Form->input
@@ -257,17 +288,17 @@
 																						'type'=>'text',
 																						// 'class'=>'xls u-full-width form-control',
 																						'width'=>'60',
-																						'id'=>'update_albaran_'.$addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['BatNbr'],
-																						'data-id'=>$addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['BatNbr'],
-																						'data-refnbr'=>$addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['RefNbr'],
-																						'data-noguia'=>$addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['no_guia'],
-																						'data-guia'=>$addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['num_guia'],
-																						'data-remision'=>$addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['no_remision'],
-																						'data-name' => $addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['BatNbr'].'_'.$addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['no_remision'],
+																						'id'=>'update_albaran_'.$providersViewRelation['ProvidersViewRelation']['BatNbr'],
+																						'data-id'=>$providersViewRelation['ProvidersViewRelation']['BatNbr'],
+																						'data-refnbr'=>$providersViewRelation['ProvidersViewRelation']['RefNbr'],
+																						'data-noguia'=>$providersViewRelation['ProvidersViewRelation']['no_guia'],
+																						'data-guia'=>$providersViewRelation['ProvidersViewRelation']['num_guia'],
+																						'data-remision'=>$providersViewRelation['ProvidersViewRelation']['no_remision'],
+																						'data-name' => $providersViewRelation['ProvidersViewRelation']['BatNbr'].'_'.$providersViewRelation['ProvidersViewRelation']['no_remision'],
 																						'data-type'=>'Albaran',
-																						'data-idx'=>$addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['idx'],
+																						'data-idx'=>$providersViewRelation['ProvidersViewRelation']['idx'],
 																						'placeholder' => 'Albaran',
-																						'value'=>$addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['Albaran'],
+																						'value'=>$providersViewRelation['ProvidersViewRelation']['Albaran'],
 																						// 'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
 																						// 'title'=>'Puede teclear la fecha en Formato yyyymmdd',
 																						'div'=>FALSE,
@@ -278,26 +309,10 @@
 																	);
 				?>
 			</td>
-			<!-- <td><?php echo $addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['MonedaCve']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['TipoCambio']; ?>&nbsp;</td> -->
-			<td><?php echo $addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['SubtotalM']; ?>&nbsp;</td>
-			<td><?php echo $addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['TotalM']; ?>&nbsp;</td>
-			<td><?php echo $addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['ImpuestoM']; ?>&nbsp;</td>
-			<td><?php echo $addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['BaseImpuesto']; ?>&nbsp;</td>
-			<!-- <td><?php echo $addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['CadenaOriginal']; ?>&nbsp;</td> -->
-			<td><?php echo $addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['num_guia']; ?>&nbsp;</td>
-			<!-- <td><?php echo $addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['no_viaje']; ?>&nbsp;</td> -->
-			<td><?php echo $addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['subtotal']; ?>&nbsp;</td>
-			<!-- <td><?php echo $addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['desc_flete']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['observacion']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['FlagIsDisminution']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['FlagIsProvision']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['PerPost']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['fecha_guia']; ?>&nbsp;</td> -->
-			<!-- <td><?php echo $addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['addenum']; ?>&nbsp;</td> -->
-			<td id="link_<?php echo $addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['BatNbr'];?>">
+
+			<td id="link_<?php echo $providersViewRelation['ProvidersViewRelation']['BatNbr'];?>">
 				<?php
-					if (isset($addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['IdPedido']) && isset($addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['Albaran'])) {
+					if (isset($providersViewRelation['ProvidersViewRelation']['IdPedido']) && isset($providersViewRelation['ProvidersViewRelation']['Albaran'])) {
 						// code...
 
 							echo
@@ -305,18 +320,18 @@
 									,array(
 													 'controller'=>'AddenumViewAlbaranRelations'
 													,'action' => 'link'
-													// ,'xml_string'=>$addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['addenum']
-												  ,'id'=>$addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['BatNbr']
-												  // ,'standings_name'=>$addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['BatNbr'].'_'.$addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['no_remision']
+													// ,'xml_string'=>$providersViewRelation['ProvidersViewRelation']['addenum']
+												  ,'id'=>$providersViewRelation['ProvidersViewRelation']['BatNbr']
+												  // ,'standings_name'=>$providersViewRelation['ProvidersViewRelation']['BatNbr'].'_'.$providersViewRelation['ProvidersViewRelation']['no_remision']
 													// ,'sort'=>'id'
 													// ,'direction'=>'asc'
 												)
 										,array(
 													// 'target'=>'_blank'
-													 'id'=>'get_'.$addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['BatNbr']
-													,'data-id'=>$addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['BatNbr']
-													// ,'data-addenum'=>$addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['addenum']
-													,'data-name' => $addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['BatNbr'].'_'.$addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['no_remision']
+													 'id'=>'get_'.$providersViewRelation['ProvidersViewRelation']['BatNbr']
+													,'data-id'=>$providersViewRelation['ProvidersViewRelation']['BatNbr']
+													// ,'data-addenum'=>$providersViewRelation['ProvidersViewRelation']['addenum']
+													,'data-name' => $providersViewRelation['ProvidersViewRelation']['BatNbr'].'_'.$providersViewRelation['ProvidersViewRelation']['no_remision']
 												)
 						);
 					} else {
@@ -324,7 +339,6 @@
 					}
 				?>
 			</td>
-			<td><?php echo $addenumViewAlbaranRelation['AddenumViewAlbaranRelation']['status_guia']; ?>&nbsp;</td>
 
 		</tr>
 	<?php }//endforeach; ?>
