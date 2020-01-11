@@ -15,9 +15,7 @@
 		* @since         CakePHP(tm) v 1.2.0.5234
 		* @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
 		*/
-		?>
 
-		<?php
 		// NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal.
 		// $evaluate = false;
 		// $requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere'));
@@ -105,6 +103,25 @@
 		  opacity:1;
 		}
 
+/* INPUT FILE */
+		.fileContainer {
+			overflow: hidden;
+			position: relative;
+		}
+
+		.fileContainer [type=file] {
+			cursor: inherit;
+			display: block;
+			font-size: 999px;
+			filter: alpha(opacity=0);
+			min-height: 100%;
+			min-width: 100%;
+			opacity: 0;
+			position: absolute;
+			right: 0;
+			text-align: right;
+			top: 0;
+		}
 
 		</style>
 
@@ -234,7 +251,9 @@
 				</div>
 
 				<div id="printThis" class="container-mod ninja-scroll">
-					<div id="updateSearchResult" class="updateSearchResult"></div>
+
+							<div id="updateSearchResult" class="updateSearchResult"></div>
+
 				</div>
 
 
@@ -244,16 +263,11 @@
 
 	<script type="text/javascript">
 
-
 		  $(document).ready(function () {
 
 				$('[data-toggle="datepicker"]').datepicker(options_datepicker);
 
-				// $(".search_udn").select2();
-
 					$("#send_query").on('click', function(event) {
-
-								// $('[data-toggle="datepicker"]').datepicker(options_datepicker);
 
 								event.stopPropagation();
 								event.preventDefault();
@@ -272,7 +286,6 @@
 								// $( ".updateSearchResult" ).load(urlStruct);
 								$( ".updateSearchResult" ).load(urlStruct,function(responseText, statusText, xhr) {
 
-
 									// Add Table UIX
 									var table_a = $('#table_res').DataTable(
 										Object.assign( {}, options_datatable, calculate_row([],[]) )
@@ -280,50 +293,52 @@
 									// End table
 
 									// ALERT check this behavior
-
 // ======================================================================================================== //
-
 									// DONE to HIR
 									// NOTE add the file dispatcher inside send_query
-
-									table_a.$("input[id^='update_']").on('keydown', function(e) {
-									// Ensure 'value' binding is fired on enter in IE
-					        if ((e.keyCode || e.which) === 13 || e.which === 9) {
-										console.log('....');
-												var posted_data = {
-																					'batnbr':$(this).attr('data-id'),
-																					'name':$(this).attr('data-name'),
-																					'type':$(this).attr('data-type'),
-																					'RefNbr':$(this).attr('data-refnbr'),
-																					'noguia':$(this).attr('data-noguia'),
-																					'guia':$(this).attr('data-guia'),
-																					'idx':$(this).attr('data-idx'),
-																					'data':$(this).val()
-																				};
-
-												var string_to_pass = JSON.stringify(posted_data);
-												console.log(string_to_pass);
-												data_code = base64_encode(string_to_pass);
+									table_a.$("a[id^='upload_']").on('click', function(e) {
+									e.stopPropagation();
+									e.preventDefault();
+												// var posted_data = {
+												// 									'batnbr':$(this).attr('data-id')
+												// 									// 'name':$(this).attr('data-name'),
+												// 									// 'type':$(this).attr('data-type'),
+												// 									// 'RefNbr':$(this).attr('data-refnbr'),
+												// 									// 'noguia':$(this).attr('data-noguia'),
+												// 									// 'guia':$(this).attr('data-guia'),
+												// 									// 'idx':$(this).attr('data-idx'),
+												// 									// 'data':$(this).val()
+												// 								};
+												//
+												// var string_to_pass = JSON.stringify(posted_data);
+												// console.log('string_to pass:');
+												// console.log(string_to_pass);
+												// data_code = base64_encode(string_to_pass);
 
 												batnbr = $(this).attr('data-id');
-												remision = $(this).attr('data-remision');
-												if ($(this).val()) {
-													$.post("<?php echo Dispatcher::baseUrl();?>/ProvidersControlsFiles/update/data:"+data_code,function(data){
-// NOTE
-													  }).done(function(data){
-																// alert('response is : ' + data );
-															if ( $("#update_pedido_"+batnbr).val() && $("#update_albaran_"+batnbr).val() ) {
-																	$('#link_'+batnbr).html('<a href="<?php echo Dispatcher::baseUrl();?>/ProvidersControlsFiles/link/id:'+batnbr+'" id="get_'+batnbr+'" data-id="'+batnbr+'" data-name="'+batnbr+'_'+remision+'">Descargar</a>');
-															}
-													});
-												} else {
-													console.log('data is null');
-												}
-											} // End key
+												var myForm = $("#tform").get(0);
+												formData = new FormData(myForm);
+											$.ajax({
+											    url : "<?php echo Dispatcher::baseUrl();?>/ProvidersControlsFiles/upload/",
+											    type: "POST",
+											    data : formData,
+											    processData: false,
+											    contentType: false,
+													enctype: 'multipart/form-data',
+											    success:function(data, textStatus, jqXHR){
+											        // $("#pro_pix img").last().show();
+											        // $("#pro_pix img").first().hide();
+											        // $("#pro_pix h6").text(data);
+															alert(data);
+											    },
+											    error: function(jqXHR, textStatus, errorThrown){
+											        //if fails
+											    }
+											});
+// NOTE TEST
 										}); //End on keydown
 
-
-		}); //NOTE end file dispatch
+								}); //NOTE end file dispatch
 
 
 					});
@@ -331,184 +346,3 @@
 
 
 	</script>
-
-
-
-
-
-
-<div id="viewForm">
-				<span>
-						<h2><?php __('Add Providers Files Control'); ?></h2>
-				</span>
-
-				<?php echo $this->Form->create('ProvidersControlsFile',array('enctype' => 'multipart/form-data','class'=>'form'));?>
-
-				<div class="providersControlsFile form">
-				<?php
-										e('<span id="fieldActionExample" class="btn btn-default btn-file form_control">Upload');
-												echo $this->Form->file('ProvidersControlsFile.45645.xml', array('type'=>'file','label'=>false));
-										e('</span>');
-										e('<br />');
-										e('<span id="fieldActionExample" class="btn btn-default btn-file form_control">Upload');
-												echo $this->Form->file('ProvidersControlsFile.45645.pdf', array('type'=>'file','data-batnbr'=>'45645','label'=>false));
-										e('</span>');
-										e('<br />');
-										e('<span id="fieldActionExample" class="btn btn-default btn-file form_control">Upload');
-												echo $this->Form->file('ProvidersControlsFile.45645.order', array('type'=>'file','data-batnbr'=>'45645','label'=>false));
-										e('</span>');
-				?>
-
-
-				<?php
-										e('<span id="fieldActionExample" class="btn btn-default btn-file form_control">Upload');
-												echo $this->Form->file('ProvidersControlsFile.34635.xml', array('type'=>'file','label'=>false));
-										e('</span>');
-										e('<br />');
-										e('<span id="fieldActionExample" class="btn btn-default btn-file form_control">Upload');
-												echo $this->Form->file('ProvidersControlsFile.34635.pdf', array('type'=>'file','data-batnbr'=>'45645','label'=>false));
-										e('</span>');
-										e('<br />');
-										e('<span id="fieldActionExample" class="btn btn-default btn-file form_control">Upload');
-												echo $this->Form->file('ProvidersControlsFile.34635.order', array('type'=>'file','data-batnbr'=>'45645','label'=>false));
-										e('</span>');
-				?>
-
-						<div class="form-group pull-right">
-								<?php
-								 echo $this->Form->end( array('div'=>false,'class'=>'btn btn-success'));
-								?>
-						</div>
-				</div>
-
-</div> <!--end viewForm-->
-
-<!-- ================================================================================================= -->
-<!-- NOTE build -- view for upload files and update status H to U with insert into report **EE** table -->
-<!-- set table  -->
-<!-- Go to Get method  -->
-
-
-
-
-
-<!-- ================================================================================================= -->
-
-
-
-    <div class="container-fluid">
-      <div class="row">
-
-        <div class="col-md-offset-1 col-sm-11 col-md-11">
-          <ul class="list-group list-inline">
-			<li class="list-group-item">
-				<?php echo $this->Html->link(__('New Providers Controls File', true), array('action' => 'add')); ?>			</li>
-							<li>
-				<input type="search" class="light-table-filter form-control " data-table="order-table" placeholder="Filter">
-			</li>
-          </ul>
-        </div>
-
-        <div class="col-sm-9 col-sm-offset-2 col-md-10 col-md-offset-1 main">
-          <h1 class="page-header"><?php __('Providers Controls Files');?></h1>
-          <div class="table-responsive">
-			<span class="filter-container">
-				<table class="order-table table table-bordered table-hover table-striped responstable">
-				<thead>
-					<tr>
-													<th><?php echo $this->Paginator->sort('id');?></th>
-													<th><?php echo $this->Paginator->sort('providers_events_id');?></th>
-													<th><?php echo $this->Paginator->sort('user_id');?></th>
-													<th><?php echo $this->Paginator->sort('labelname');?></th>
-													<th><?php echo $this->Paginator->sort('_filename');?></th>
-													<th><?php echo $this->Paginator->sort('_pathname');?></th>
-													<th><?php echo $this->Paginator->sort('_extname');?></th>
-													<th><?php echo $this->Paginator->sort('_md5sum');?></th>
-													<th><?php echo $this->Paginator->sort('_file_size');?></th>
-													<th><?php echo $this->Paginator->sort('_atime');?></th>
-													<th><?php echo $this->Paginator->sort('_mtime');?></th>
-													<th><?php echo $this->Paginator->sort('_ctime');?></th>
-													<th><?php echo $this->Paginator->sort('_username');?></th>
-													<th><?php echo $this->Paginator->sort('_datetime_login');?></th>
-													<th><?php echo $this->Paginator->sort('_ip_remote');?></th>
-													<th><?php echo $this->Paginator->sort('created');?></th>
-													<th><?php echo $this->Paginator->sort('modified');?></th>
-													<th><?php echo $this->Paginator->sort('providers_standings_id');?></th>
-													<th><?php echo $this->Paginator->sort('providers_parents_id');?></th>
-													<th><?php echo $this->Paginator->sort('_status');?></th>
-													<th class="actions" colspan="3"><?php __('Actions');?></th>
-
-					</tr>
-				</thead>
-				<?php
-				$i = 0;
-				foreach ($providersControlsFiles as $providersControlsFile):
-					$class = null;
-					if ($i++ % 2 == 0) {
-						$class = ' class="altrow"';
-					}
-				?>
-	<tr<?php echo $class;?>>
-		<td><?php echo $providersControlsFile['ProvidersControlsFile']['id']; ?>&nbsp;</td>
-		<td><?php echo $providersControlsFile['ProvidersControlsFile']['providers_events_id']; ?>&nbsp;</td>
-		<td><?php echo $providersControlsFile['ProvidersControlsFile']['user_id']; ?>&nbsp;</td>
-		<td><?php echo $providersControlsFile['ProvidersControlsFile']['labelname']; ?>&nbsp;</td>
-		<td><?php echo $providersControlsFile['ProvidersControlsFile']['_filename']; ?>&nbsp;</td>
-		<td><?php echo $providersControlsFile['ProvidersControlsFile']['_pathname']; ?>&nbsp;</td>
-		<td><?php echo $providersControlsFile['ProvidersControlsFile']['_extname']; ?>&nbsp;</td>
-		<td><?php echo $providersControlsFile['ProvidersControlsFile']['_md5sum']; ?>&nbsp;</td>
-		<td><?php echo $providersControlsFile['ProvidersControlsFile']['_file_size']; ?>&nbsp;</td>
-		<td><?php echo $providersControlsFile['ProvidersControlsFile']['_atime']; ?>&nbsp;</td>
-		<td><?php echo $providersControlsFile['ProvidersControlsFile']['_mtime']; ?>&nbsp;</td>
-		<td><?php echo $providersControlsFile['ProvidersControlsFile']['_ctime']; ?>&nbsp;</td>
-		<td><?php echo $providersControlsFile['ProvidersControlsFile']['_username']; ?>&nbsp;</td>
-		<td><?php echo $providersControlsFile['ProvidersControlsFile']['_datetime_login']; ?>&nbsp;</td>
-		<td><?php echo $providersControlsFile['ProvidersControlsFile']['_ip_remote']; ?>&nbsp;</td>
-		<td><?php echo $providersControlsFile['ProvidersControlsFile']['created']; ?>&nbsp;</td>
-		<td><?php echo $providersControlsFile['ProvidersControlsFile']['modified']; ?>&nbsp;</td>
-		<td><?php echo $providersControlsFile['ProvidersControlsFile']['providers_standings_id']; ?>&nbsp;</td>
-		<td><?php echo $providersControlsFile['ProvidersControlsFile']['providers_parents_id']; ?>&nbsp;</td>
-		<td><?php echo $providersControlsFile['ProvidersControlsFile']['_status']; ?>&nbsp;</td>
-		<td class="actions">
-			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $providersControlsFile['ProvidersControlsFile']['id'])); ?>
-		</td>
-		<td class="actions">
-			<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $providersControlsFile['ProvidersControlsFile']['id'])); ?>
-		</td>
-		<td class="actions">
-			<?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $providersControlsFile['ProvidersControlsFile']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $providersControlsFile['ProvidersControlsFile']['id'])); ?>
-		</td>
-	</tr>
-<?php endforeach; ?>
-				</table>
-			</span> <!--class="filter-container"-->
-				<p>
-					<?php
-						echo $this->Paginator->counter(array(
-						'format' => __('Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%', true)
-						));
-						?>				</p>
-
-				<ul class="pagination">
-							<?php
-
-							echo $this->Paginator->prev( '«' ,array('tag'=>'li'),null, array('aria-hidden'=>'true','class' => 'disabled','tag'=>'li'));
-
-	?>							<?php
-
-							echo $this->Paginator->numbers(array('separator' => null,'tag'=>'li'));
-
-	?>						<?php
-
-							echo $this->Paginator->next( '»' , array('tag'=>'li'), null, array('aria-hidden'=>'true','class' => 'disabled','tag'=>'li'));
-	?>				</ul>
-          </div>
-        </div> <!--main-->
-      </div> <!--row-->
-    </div> <!--container fluid-->
-
-    <script>
-			$(document).ready(function () {
-
-			});
-    </script>

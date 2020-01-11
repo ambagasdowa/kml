@@ -40,7 +40,7 @@
 </div>
 
 	<div class="row head_datetime">
-		<div>&nbsp;</div>
+		<div></div>
 
 			<div class="six columns"></div>
 
@@ -64,7 +64,7 @@
 				Unidad de Negocio <?php echo $dashboard['bsu'] ?>
 			</div>
 
-		<div>&nbsp;</div>
+		<div></div>
 
 	</div>
 
@@ -128,31 +128,19 @@
 
 
 <div class="row">
-<?php
-// echo '<div class="two columns"><i class="fa fa-barcode"></i></div>';
-// echo '<div class="two columns"></div>';
-// echo
-// 			$this->Form->input
-// 												(
-// 													'searchbox',
-// 													 array
-// 																(
-// 																	'type'=>'text',
-// 																	'class'=>'search_udn u-full-width form-control',
-// 																	'id'=>'myInput',
-// 																	'placeholder' => 'Filtro General',
-// 																	// 'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
-// 																	// 'title'=>'Puede teclear la fecha en Formato yyyymmdd',
-// 																	'div'=>FALSE,
-// 																	'label'=>FALSE,
-// 																	// 'options'=>array(1=>'ATSA IZUCAR - SIVESA ORIZABA',2=>'ATSA MIXQUI - SIVESA ORIZABA',3=>'CALIZA MIXQUI - FANAL TULTITLAN'),
-// 																	'tabindex'=>'2'
-// 																)
-// 												);\
-// 	echo '</div>';
- ?>
+
  </div>
 
+ <?php
+			 echo $this->Form->create(
+																 'ProvidersControlsFile'
+																 ,array(
+																				 'enctype' => 'multipart/form-data'
+																				 ,'class'=>'form'
+																				 ,'id'=>'tform'
+																			 )
+																 );
+ ?>
 
 <div id="first-datatable-output" class="table-responsive">
 
@@ -163,24 +151,27 @@
 				<th>BatNbr</th>
 				<th>CpnyID</th>
 				<th>Status</th>
-				<th>Module</th>
-				<th>JrnlType</th>
-				<th>ap_status</th>
+				<!-- <th>Module</th> -->
+				<!-- <th>JrnlType</th> -->
+				<!-- <th>ap_status</th> -->
 				<th>VendId</th>
-				<th>PerPost</th>
+				<!-- <th>PerPost</th> -->
 				<th>PONbr</th>
 				<th>RefNbr</th>
-				<th>DocType</th>
+				<!-- <th>DocType</th> -->
 				<!-- <th>DocDesc</th> -->
-				<th>Crtd_DateTime</th>
-				<th>LUpd_DateTime</th>
+				<th>Fecha</th>
+				<th>Factura</th>
 				<th>name</th>
 				<th>xml</th>
 				<th>voucher</th>
 				<th>order</th>
-				<th>Acct</th>
+				<!-- <th>Acct</th> -->
 				<th>totalAmt</th>
 				<th>UUID</th>
+				<!-- <th>a</th> -->
+				<!-- <th>b</th> -->
+				<th>x</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -190,36 +181,43 @@
 		?>
 
 		<tr>
-			<td><?php echo $providersViewRelation['ProvidersViewRelation']['id']; ?>&nbsp;</td>
-			<td><?php echo $providersViewRelation['ProvidersViewRelation']['BatNbr']; ?>&nbsp;</td>
-			<td><?php echo $providersViewRelation['ProvidersViewRelation']['CpnyID']; ?>&nbsp;</td>
-			<td><?php echo $providersViewRelation['ProvidersViewRelation']['Status']; ?>&nbsp;</td>
-			<td><?php echo $providersViewRelation['ProvidersViewRelation']['Module']; ?>&nbsp;</td>
-			<td><?php echo $providersViewRelation['ProvidersViewRelation']['JrnlType']; ?>&nbsp;</td>
-			<td><?php echo $providersViewRelation['ProvidersViewRelation']['ap_status']; ?>&nbsp;</td>
-			<td><?php echo $providersViewRelation['ProvidersViewRelation']['VendId']; ?>&nbsp;</td>
-			<td><?php echo $providersViewRelation['ProvidersViewRelation']['PerPost']; ?>&nbsp;</td>
-			<td><?php echo $providersViewRelation['ProvidersViewRelation']['PONbr']; ?>&nbsp;</td>
-			<td><?php echo $providersViewRelation['ProvidersViewRelation']['RefNbr']; ?>&nbsp;</td>
-			<td><?php echo $providersViewRelation['ProvidersViewRelation']['DocType']; ?>&nbsp;</td>
-			<!-- <td><?php echo $providersViewRelation['ProvidersViewRelation']['DocDesc']; ?>&nbsp;</td> -->
-			<td><?php echo $providersViewRelation['ProvidersViewRelation']['InvDate']; ?>&nbsp;</td>
-			<td><?php echo $providersViewRelation['ProvidersViewRelation']['InvcNbr']; ?>&nbsp;</td>
-			<td><?php echo $providersViewRelation['ProvidersViewRelation']['name']; ?>&nbsp;</td>
+			<td><?php echo $providersViewRelation['ProvidersViewRelation']['id']; ?></td>
+			<td><?php echo $providersViewRelation['ProvidersViewRelation']['BatNbr']; ?></td>
+			<td><?php echo $providersViewRelation['ProvidersViewRelation']['CpnyID']; ?></td>
+			<td><?php echo $providersViewRelation['ProvidersViewRelation']['Status']; ?></td>
+			<!-- <td><?php echo $providersViewRelation['ProvidersViewRelation']['Module']; ?></td> -->
+			<!-- <td><?php echo $providersViewRelation['ProvidersViewRelation']['JrnlType']; ?></td> -->
+			<!-- <td><?php echo $providersViewRelation['ProvidersViewRelation']['ap_status']; ?></td> -->
+			<td><?php echo $providersViewRelation['ProvidersViewRelation']['VendId']; ?></td>
+			<!-- <td><?php echo $providersViewRelation['ProvidersViewRelation']['PerPost']; ?></td> -->
+			<td><?php echo $providersViewRelation['ProvidersViewRelation']['PONbr']; ?></td>
+			<td><?php echo $providersViewRelation['ProvidersViewRelation']['RefNbr']; ?></td>
+			<!-- <td><?php echo $providersViewRelation['ProvidersViewRelation']['DocType']; ?></td> -->
+			<!-- <td><?php echo $providersViewRelation['ProvidersViewRelation']['DocDesc']; ?></td> -->
+			<td><?php echo $providersViewRelation['ProvidersViewRelation']['InvDate']; ?></td>
+			<td><?php echo $providersViewRelation['ProvidersViewRelation']['InvcNbr']; ?></td>
+			<td><?php echo $providersViewRelation['ProvidersViewRelation']['name']; ?></td>
 
-			<!-- <td><?php echo $providersViewRelation['ProvidersViewRelation']['xml']; ?>&nbsp;</td> -->
-			<td id="petition_<?php echo $providersViewRelation['ProvidersViewRelation']['BatNbr'];?>">
+			<!-- <td><?php echo $providersViewRelation['ProvidersViewRelation']['xml']; ?></td> -->
+			<td id="xml_<?php echo $providersViewRelation['ProvidersViewRelation']['BatNbr'];?>">
 				<?php
+					if ($providersViewRelation['ProvidersViewRelation']['xml']) {
+						// code...
+						// echo $providersViewRelation['ProvidersViewRelation']['xml'];
+						echo '<i class="fa fa-file-text"></i>';
+					} else {
+					echo '<label class="fileContainer"><i class="fa fa-upload"></i>';
 					echo
-								$this->Form->input
+								$this->Form->File
 																	(
-																		'xml',
+																		'Providers'.$providersViewRelation['ProvidersViewRelation']['BatNbr'].'xml',
 																		 array
 																					(
-																						'type'=>'text',
+																						'type'=>'file',
 																						// 'class'=>'xls u-full-width form-control',
 																						'width'=>'60',
-																						'id'=>'update_pedido_'.$providersViewRelation['ProvidersViewRelation']['BatNbr'],
+																						'id'=>'upload_xml_'.trim($providersViewRelation['ProvidersViewRelation']['BatNbr']),
+																						'name'=>'xml_'.trim($providersViewRelation['ProvidersViewRelation']['BatNbr']).'_'.trim($providersViewRelation['ProvidersViewRelation']['CpnyID']).'_'.trim($providersViewRelation['ProvidersViewRelation']['RefNbr']).'_'.'1',
 																						'data-id'=>$providersViewRelation['ProvidersViewRelation']['BatNbr'],
 																						'data-refnbr'=>$providersViewRelation['ProvidersViewRelation']['RefNbr'],
 																						'data-ponbr'=>$providersViewRelation['ProvidersViewRelation']['PONbr'],
@@ -237,106 +235,125 @@
 																						// 'tabindex'=>'2'
 																					)
 																	);
+						// echo $this->Form->file('ProvidersControlsFile.45645.xml', array('type'=>'file','label'=>false));
+					}
+					echo '</label>';
+				?>
+				<!-- <input type="submit" value="submit"/> -->
+			</td>
+			<td>
+				<?php
+					if ($providersViewRelation['ProvidersViewRelation']['voucher']) {
+						// code...
+						// echo $providersViewRelation['ProvidersViewRelation']['voucher'];
+						echo '<i class="fa fa-file-pdf-o"></i>';
+					} else {
+						echo '<label class="fileContainer"><i class="fa fa-upload"></i>';
+						echo
+									$this->Form->File
+																		(
+																			'Providers'.$providersViewRelation['ProvidersViewRelation']['BatNbr'].'pdf',
+																			 array
+																						(
+																							'type'=>'file',
+																							// 'class'=>'xls u-full-width form-control',
+																							'width'=>'60',
+																							'id'=>'upload_pdf_'.$providersViewRelation['ProvidersViewRelation']['BatNbr'],
+																							'name'=>'voucher_'.trim($providersViewRelation['ProvidersViewRelation']['BatNbr']).'_'.trim($providersViewRelation['ProvidersViewRelation']['CpnyID']).'_'.trim($providersViewRelation['ProvidersViewRelation']['RefNbr']).'_'.'2',
+																							'data-id'=>'voucher_'.$providersViewRelation['ProvidersViewRelation']['BatNbr'],
+																							'data-refnbr'=>$providersViewRelation['ProvidersViewRelation']['RefNbr'],
+																							'data-ponbr'=>$providersViewRelation['ProvidersViewRelation']['PONbr'],
+																							'data-vendid'=>$providersViewRelation['ProvidersViewRelation']['vendid'],
+																							'data-CpnyId'=>$providersViewRelation['ProvidersViewRelation']['CpnyID'],
+																							'data-type'=>'pdf',
+																							'data-id'=>$providersViewRelation['ProvidersViewRelation']['id'],
+																							'placeholder' => 'Archivo pdf',
+																							// 'value'=>$providersViewRelation['ProvidersViewRelation']['IdPedido'],
+																							// 'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
+																							// 'title'=>'Puede teclear la fecha en Formato yyyymmdd',
+																							'div'=>FALSE,
+																							'label'=>FALSE
+																							// 'options'=>array(1=>'ATSA IZUCAR - SIVESA ORIZABA',2=>'ATSA MIXQUI - SIVESA ORIZABA',3=>'CALIZA MIXQUI - FANAL TULTITLAN'),
+																							// 'tabindex'=>'2'
+																						)
+																		);
+							// echo $this->Form->file('ProvidersControlsFile.45645.xml', array('type'=>'file','label'=>false));
+						}
+						echo '</label>';
 				?>
 			</td>
-			<td><?php echo $providersViewRelation['ProvidersViewRelation']['voucher']; ?>&nbsp;</td>
-			<td><?php echo $providersViewRelation['ProvidersViewRelation']['order']; ?>&nbsp;</td>
-			<td><?php echo $providersViewRelation['ProvidersViewRelation']['Acct']; ?>&nbsp;</td>
-			<td><?php echo $providersViewRelation['ProvidersViewRelation']['totalAmt']; ?>&nbsp;</td>
-			<td><?php echo $providersViewRelation['ProvidersViewRelation']['UUID']; ?>&nbsp;</td>
+			<td>
+				<?php
+					if ($providersViewRelation['ProvidersViewRelation']['order']) {
+						// code...
+						// echo $providersViewRelation['ProvidersViewRelation']['order'];
+						echo '<i class="fa fa-file-pdf-o"></i>';
+					} else {
+						echo '<label class="fileContainer"><i class="fa fa-upload"></i>';
+						echo
+									$this->Form->File
+																		(
+																			'Providers'.$providersViewRelation['ProvidersViewRelation']['BatNbr'].'xml',
+																			 array
+																						(
+																							'type'=>'file',
+																							// 'class'=>'xls u-full-width form-control',
+																							'width'=>'60',
+																							'id'=>'upload_order_'.$providersViewRelation['ProvidersViewRelation']['BatNbr'],
+																							'name'=>'order_'.trim($providersViewRelation['ProvidersViewRelation']['BatNbr']).'_'.trim($providersViewRelation['ProvidersViewRelation']['CpnyID']).'_'.trim($providersViewRelation['ProvidersViewRelation']['RefNbr']).'_'.'3',
+																							'data-id'=>'order_'.$providersViewRelation['ProvidersViewRelation']['BatNbr'],
+																							'data-refnbr'=>$providersViewRelation['ProvidersViewRelation']['RefNbr'],
+																							'data-ponbr'=>$providersViewRelation['ProvidersViewRelation']['PONbr'],
+																							'data-vendid'=>$providersViewRelation['ProvidersViewRelation']['vendid'],
+																							'data-CpnyId'=>$providersViewRelation['ProvidersViewRelation']['CpnyID'],
+																							'data-type'=>'pdf',
+																							'data-id'=>$providersViewRelation['ProvidersViewRelation']['id'],
+																							'placeholder' => 'Archivo Pdf',
+																							// 'value'=>$providersViewRelation['ProvidersViewRelation']['IdPedido'],
+																							// 'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
+																							// 'title'=>'Puede teclear la fecha en Formato yyyymmdd',
+																							'div'=>FALSE,
+																							'label'=>FALSE
+																							// 'options'=>array(1=>'ATSA IZUCAR - SIVESA ORIZABA',2=>'ATSA MIXQUI - SIVESA ORIZABA',3=>'CALIZA MIXQUI - FANAL TULTITLAN'),
+																							// 'tabindex'=>'2'
+																						)
+																		);
+							// echo $this->Form->file('ProvidersControlsFile.45645.xml', array('type'=>'file','label'=>false));
+						}
+						echo '</label>';
+				?>
+			</td>
+			<!-- <td><?php echo $providersViewRelation['ProvidersViewRelation']['Acct']; ?></td> -->
+			<td><?php echo $providersViewRelation['ProvidersViewRelation']['totalAmt']; ?></td>
+			<td><?php echo $providersViewRelation['ProvidersViewRelation']['UUID']; ?></td>
 
-			<td id="petition_<?php echo $providersViewRelation['ProvidersViewRelation']['BatNbr'];?>">
-				<?php
-					echo
-								$this->Form->input
-																	(
-																		'IdPedido',
-																		 array
-																					(
-																						'type'=>'text',
-																						// 'class'=>'xls u-full-width form-control',
-																						'width'=>'60',
-																						'id'=>'update_pedido_'.$providersViewRelation['ProvidersViewRelation']['BatNbr'],
-																						'data-id'=>$providersViewRelation['ProvidersViewRelation']['BatNbr'],
-																						'data-refnbr'=>$providersViewRelation['ProvidersViewRelation']['RefNbr'],
-																						'data-noguia'=>$providersViewRelation['ProvidersViewRelation']['no_guia'],
-																						'data-guia'=>$providersViewRelation['ProvidersViewRelation']['num_guia'],
-																						'data-remision'=>$providersViewRelation['ProvidersViewRelation']['no_remision'],
-																						'data-name' => $providersViewRelation['ProvidersViewRelation']['BatNbr'].'_'.$providersViewRelation['ProvidersViewRelation']['no_remision'],
-																						'data-type'=>'IdPedido',
-																						'data-idx'=>$providersViewRelation['ProvidersViewRelation']['idx'],
-																						'placeholder' => 'Pedido',
-																						'value'=>$providersViewRelation['ProvidersViewRelation']['IdPedido'],
-																						// 'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
-																						// 'title'=>'Puede teclear la fecha en Formato yyyymmdd',
-																						'div'=>FALSE,
-																						'label'=>FALSE
-																						// 'options'=>array(1=>'ATSA IZUCAR - SIVESA ORIZABA',2=>'ATSA MIXQUI - SIVESA ORIZABA',3=>'CALIZA MIXQUI - FANAL TULTITLAN'),
-																						// 'tabindex'=>'2'
-																					)
-																	);
-				?>
-			</td>
-			<td id="aldebaran_<?php echo $providersViewRelation['ProvidersViewRelation']['BatNbr'];?>">
-				<?php
-					echo
-								$this->Form->input
-																	(
-																		'Albaran',
-																		 array
-																					(
-																						'type'=>'text',
-																						// 'class'=>'xls u-full-width form-control',
-																						'width'=>'60',
-																						'id'=>'update_albaran_'.$providersViewRelation['ProvidersViewRelation']['BatNbr'],
-																						'data-id'=>$providersViewRelation['ProvidersViewRelation']['BatNbr'],
-																						'data-refnbr'=>$providersViewRelation['ProvidersViewRelation']['RefNbr'],
-																						'data-noguia'=>$providersViewRelation['ProvidersViewRelation']['no_guia'],
-																						'data-guia'=>$providersViewRelation['ProvidersViewRelation']['num_guia'],
-																						'data-remision'=>$providersViewRelation['ProvidersViewRelation']['no_remision'],
-																						'data-name' => $providersViewRelation['ProvidersViewRelation']['BatNbr'].'_'.$providersViewRelation['ProvidersViewRelation']['no_remision'],
-																						'data-type'=>'Albaran',
-																						'data-idx'=>$providersViewRelation['ProvidersViewRelation']['idx'],
-																						'placeholder' => 'Albaran',
-																						'value'=>$providersViewRelation['ProvidersViewRelation']['Albaran'],
-																						// 'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
-																						// 'title'=>'Puede teclear la fecha en Formato yyyymmdd',
-																						'div'=>FALSE,
-																						'label'=>FALSE
-																						// 'options'=>array(1=>'ATSA IZUCAR - SIVESA ORIZABA',2=>'ATSA MIXQUI - SIVESA ORIZABA',3=>'CALIZA MIXQUI - FANAL TULTITLAN'),
-																						// 'tabindex'=>'2'
-																					)
-																	);
-				?>
-			</td>
 
 			<td id="link_<?php echo $providersViewRelation['ProvidersViewRelation']['BatNbr'];?>">
 				<?php
-					if (isset($providersViewRelation['ProvidersViewRelation']['IdPedido']) && isset($providersViewRelation['ProvidersViewRelation']['Albaran'])) {
+					// if (isset($providersViewRelation['ProvidersViewRelation']['IdPedido']) && isset($providersViewRelation['ProvidersViewRelation']['Albaran'])) {
 						// code...
-
 							echo
-										$this->Html->link('Descargar'
+										$this->Html->link('Subir'
 									,array(
-													 'controller'=>'AddenumViewAlbaranRelations'
-													,'action' => 'link'
+													 'controller'=>'ProvidersControlsFile'
+													,'action' => 'upload'
 													// ,'xml_string'=>$providersViewRelation['ProvidersViewRelation']['addenum']
-												  ,'id'=>$providersViewRelation['ProvidersViewRelation']['BatNbr']
+												  // ,'id'=>$providersViewRelation['ProvidersViewRelation']['BatNbr']
 												  // ,'standings_name'=>$providersViewRelation['ProvidersViewRelation']['BatNbr'].'_'.$providersViewRelation['ProvidersViewRelation']['no_remision']
 													// ,'sort'=>'id'
 													// ,'direction'=>'asc'
 												)
 										,array(
 													// 'target'=>'_blank'
-													 'id'=>'get_'.$providersViewRelation['ProvidersViewRelation']['BatNbr']
-													,'data-id'=>$providersViewRelation['ProvidersViewRelation']['BatNbr']
+													'id'=>'upload_'.$providersViewRelation['ProvidersViewRelation']['BatNbr'],
+													'data-id'=>$providersViewRelation['ProvidersViewRelation']['BatNbr'],
 													// ,'data-addenum'=>$providersViewRelation['ProvidersViewRelation']['addenum']
-													,'data-name' => $providersViewRelation['ProvidersViewRelation']['BatNbr'].'_'.$providersViewRelation['ProvidersViewRelation']['no_remision']
+													'data-name' => $providersViewRelation['ProvidersViewRelation']['BatNbr'].'_'.$providersViewRelation['ProvidersViewRelation']['no_remision'],
 												)
 						);
-					} else {
-						echo '&nbsp;';
-					}
+					// } else {
+					// 	echo '';
+					// }
 				?>
 			</td>
 
@@ -357,3 +374,8 @@
 		*/?>
 		</table>
 </div>
+
+<?php
+			// echo $this->Form->end(__('Submit', true));
+			echo $this->Form->end();
+?>
