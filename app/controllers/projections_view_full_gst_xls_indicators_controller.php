@@ -1,34 +1,19 @@
 <?php
 /**
-
-		* 
-
-		* PHP versions 4 and 5 
-
-		* 
-
-		* kml : Kamila Software 
-
-		* Licensed under The MIT License  
-
-		* Redistributions of files must retain the above copyright notice. 
-
-		* 
-
-		* @copyright     Jesus Baizabal 
-
-		* @link          http://baizabal.xyz 
-
-		* @mail	     baizabal.jesus@gmail.com 
-
-		* @package       cake 
-
-		* @subpackage    cake.cake.console.libs.templates.views 
-
-		* @since         CakePHP(tm) v 1.2.0.5234 
-
-		* @license       MIT License (http://www.opensource.org/licenses/mit-license.php) 
-
+		*
+		* PHP versions 4 and 5
+		*
+		* kml : Kamila Software
+		* Licensed under The MIT License
+	  * Redistributions of files must retain the above copyright notice.
+		*
+		* @copyright     Jesus Baizabal
+		* @link          http://baizabal.xyz
+		* @mail	     baizabal.jesus@gmail.com
+		* @package       cake
+		* @subpackage    cake.cake.console.libs.templates.views
+		* @since         CakePHP(tm) v 1.2.0.5234
+		* @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
 		*/
 ?>
 
@@ -36,12 +21,126 @@
 class ProjectionsViewFullGstXlsIndicatorsController extends AppController {
 
 	var $name = 'ProjectionsViewFullGstXlsIndicators';
+	// var $uses = array('ReporterViewSpXs4zAccount','ReporterTableKey','ProjectionsViewBussinessUnit');
+	// var $components = array('RequestHandler','Session','Search.Prg');
+	// var $helpers = array('Html','Form','Ajax','Javascript','Js');
+
+	function date_convert($date) {
+		//1. Transform request parameters to MySQL datetime format.
+		$date_return = null;
+		$date_init = new DateTime($date);
+		$start =  $date_init->format('Y-m-d');
+		return $start;
+	}
+
+
+	function link () {
+
+	}
+
+
+	function update() {
+
+	}
+
+
+	function get() {
+
+		Configure::write('debug',2);
+		// App::uses('Xml', 'Lib');
+
+		$this->LoadModel('ProjectionsViewBussinessUnit');
+		$this->ProjectionsViewBussinessUnit->query('SET	ANSI_NULLS	ON;SET	ANSI_WARNINGS	ON;');
+		$bssus = $this->ProjectionsViewBussinessUnit->find('all',array('fields'=>array('id_area','name')));
+
+		debug($bssus);
+
+		$posted = json_decode(base64_decode($this->params['named']['data']),true);
+		// debug($posted);
+
+		$conditions = array();
+		$add_conditions = array();
+		foreach ( $posted as $keys => $postvalue ) {
+
+			if ( $keys > 0 ) {
+				$content = $postvalue['name'];
+				// debug($postvalue['value']);
+				$chars = preg_split('/\[([^\]]*)\]/i', $content, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
+				// debug($chars);
+				if ( isset($chars[1]) && $chars[1] == 'ProjectionsViewFullGstXlsIndicators' && $postvalue['value'] != '') {
+
+					// if ($chars[2] == 'Funcionario' && $postvalue['value'] != '') {
+					// 	// code...
+					// }
+
+					$add_conditions[$chars[2]] = $postvalue['value'];
+					$conditions[$chars[2]] = $postvalue['value'];
+				}
+				// if(isset($chars[2])) {
+				// 	$conditions[$chars[2]] = $postvalue['value'];
+				// }
+			}
+		}
+
+		// debug($conditions);
+// exit();
+		// debug($this->date_convert($add_conditions['dateini']));
+
+		if (isset($add_conditions['dateini']) && isset($add_conditions['dateend'])){
+			// code for both date
+
+			$conditionsBl = array('ProjectionsViewFullGstXlsIndicator.fecha BETWEEN ? AND ?'=> array ($this->date_convert($add_conditions['dateini']),$this->date_convert($add_conditions['dateend'])));
+
+		} elseif (isset($add_conditions['dateini']) || isset($add_conditions['dateend'])){
+
+				if( isset($add_conditions['dateini']) ) {
+					$conditionsBl['ProjectionsViewFullGstXlsIndicator.fecha'] = $this->date_convert($add_conditions['dateini']);
+				} else {
+					$conditionsBl['ProjectionsViewFullGstXlsIndicator.fecha'] = $this->date_convert($add_conditions['dateend']);
+				}
+		} else {
+			// $add_conditions['dateini'] = null;
+			// $add_conditions['dateend'] = null;
+			$conditionsBl['ProjectionsViewFullGstXlsIndicator.fecha'] = $this->date_convert(date('Y-m-d'));
+		}
+
+
+		if(isset($add_conditions['id_area'])){
+			$conditionsBl['ProjectionsViewFullGstXlsIndicator.id_area'] = $add_conditions['id_area'];
+		}
+
+		debug($conditionsBl);
+
+// exit();
+		// $projectionsViewFullGstXlsIndicators = $this->ProjectionsViewFullGstXlsIndicators->find('all');
+		// $this->loadModel('ProjectionsViewFullGstXlsIndicator');
+		// $this->ProjectionsViewFullGstXlsIndicator->query('SET	ANSI_NULLS	ON;SET	ANSI_WARNINGS	ON;');
+		$projectionsViewFullGstXlsIndicators = $this->ProjectionsViewFullGstXlsIndicator->find('all',array('conditions'=>$conditionsBl));
+		// $projectionsViewFullGstXlsIndicators = $this->ProjectionsViewFullGstXlsIndicator->find('all');
+
+// debug($conditions);
+		debug($projectionsViewFullGstXlsIndicators);
+
+
+exit();
+
+		$this->set(compact('projectionsViewFullGstXlsIndicators'));
+
+		// NOTE set the response output for an ajax call
+		Configure::write('debug', 0);
+		$this->autoLayout = false;
+
+	}
+
 
 
 	function index() {
-		$this->ProjectionsViewFullGstXlsIndicator->recursive = 0;
-		$this->set('projectionsViewFullGstXlsIndicators', $this->paginate());
+		$this->LoadModel('ProjectionsViewBussinessUnit');
+		$bssus = $this->ProjectionsViewBussinessUnit->find('list',array('fields'=>array('id_area','name')));
+		$this->set(compact('bssus'));
 	}
+
+
 
 	function view($id = null) {
 		if (!$id) {
