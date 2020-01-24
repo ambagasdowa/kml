@@ -51,9 +51,9 @@ class ProjectionsViewFullGstXlsIndicatorsController extends AppController {
 
 		$this->LoadModel('ProjectionsViewBussinessUnit');
 		$this->ProjectionsViewBussinessUnit->query('SET	ANSI_NULLS	ON;SET	ANSI_WARNINGS	ON;');
-		$bssus = $this->ProjectionsViewBussinessUnit->find('all',array('fields'=>array('id_area','name')));
+		// $bssus = $this->ProjectionsViewBussinessUnit->find('all',array('fields'=>array('id_area','name')));
 
-		debug($bssus);
+		// debug($bssus);
 
 		$posted = json_decode(base64_decode($this->params['named']['data']),true);
 		// debug($posted);
@@ -90,39 +90,61 @@ class ProjectionsViewFullGstXlsIndicatorsController extends AppController {
 			// code for both date
 
 			$conditionsBl = array('ProjectionsViewFullGstXlsIndicator.fecha BETWEEN ? AND ?'=> array ($this->date_convert($add_conditions['dateini']),$this->date_convert($add_conditions['dateend'])));
+			$conditions['dateini'] = $this->date_convert($add_conditions['dateini']);
+			$conditions['dateend'] = $this->date_convert($add_conditions['dateend']);
 
 		} elseif (isset($add_conditions['dateini']) || isset($add_conditions['dateend'])){
 
 				if( isset($add_conditions['dateini']) ) {
 					$conditionsBl['ProjectionsViewFullGstXlsIndicator.fecha'] = $this->date_convert($add_conditions['dateini']);
+					$conditions['dateini'] = $this->date_convert($add_conditions['dateini']);
+					$conditions['dateend'] = $this->date_convert($add_conditions['dateini']);
 				} else {
 					$conditionsBl['ProjectionsViewFullGstXlsIndicator.fecha'] = $this->date_convert($add_conditions['dateend']);
+					$conditions['dateini'] = $this->date_convert($add_conditions['dateend']);
+					$conditions['dateend'] = $this->date_convert($add_conditions['dateend']);
 				}
 		} else {
 			// $add_conditions['dateini'] = null;
 			// $add_conditions['dateend'] = null;
 			$conditionsBl['ProjectionsViewFullGstXlsIndicator.fecha'] = $this->date_convert(date('Y-m-d'));
+			// $conditions['dateini'] = $this->date_convert(date('Y-m-d'));
+			$conditions['dateini'] = $this->date_convert(date('Y-m-d', strtotime($this->date_convert(date('Y-m-d')) . ' -1 day')));
+			// $conditions['dateend'] = $this->date_convert(date('Y-m-d', strtotime($this->date_convert(date('Y-m-d')) . ' -1 day')));
+			$conditions['dateend'] = $this->date_convert(date('Y-m-d'));
 		}
 
+// debug($conditions);
 
 		if(isset($add_conditions['id_area'])){
 			$conditionsBl['ProjectionsViewFullGstXlsIndicator.id_area'] = $add_conditions['id_area'];
 		}
 
-		debug($conditionsBl);
+		// debug($conditionsBl);
 
 // exit();
 		// $projectionsViewFullGstXlsIndicators = $this->ProjectionsViewFullGstXlsIndicators->find('all');
-		// $this->loadModel('ProjectionsViewFullGstXlsIndicator');
+		$this->loadModel('ProjectionsViewFullGstXlsIndicator');
 		// $this->ProjectionsViewFullGstXlsIndicator->query('SET	ANSI_NULLS	ON;SET	ANSI_WARNINGS	ON;');
-		$projectionsViewFullGstXlsIndicators = $this->ProjectionsViewFullGstXlsIndicator->find('all',array('conditions'=>$conditionsBl));
+
+		// $projectionsViewFullGstXlsIndicators = $this->ProjectionsViewFullGstXlsIndicator->find('all',array('conditions'=>$conditionsBl));
+
+		// $conditions['dateini'] = $this->date_convert($add_conditions['dateini']);
+		// $conditions['dateend'] = $this->date_convert($add_conditions['dateend']);
+		$conditions['id_area'] = $add_conditions['id_area'];
+		$conditions['id_tipo_operacion'] = $add_conditions['id_tipo_operacion'];
+
+		$projectionsViewFullGstXlsIndicators = $this->ProjectionsViewFullGstXlsIndicator->fetch('compact',$conditions);
 		// $projectionsViewFullGstXlsIndicators = $this->ProjectionsViewFullGstXlsIndicator->find('all');
 
+		// debug($projectionsViewFullGstXlsIndicators);
+
 // debug($conditions);
-		debug($projectionsViewFullGstXlsIndicators);
+		// foreach($projectionsViewFullGstXlsIndicators as $key => $value) {
+		// 	debug($value);
+		// }
 
-
-exit();
+// exit();
 
 		$this->set(compact('projectionsViewFullGstXlsIndicators'));
 

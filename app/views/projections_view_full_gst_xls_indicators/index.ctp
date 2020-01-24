@@ -175,6 +175,30 @@
 																		);
 						echo '</div>';
 
+
+						echo '<div class="two columns input-group">';
+						echo '<div class="input-group-addon"><i class="fa fa-barcode"></i></div>';
+						echo
+									$this->Form->input
+																		(
+																			'id_tipo_operacion',
+																			 array
+																						(
+																							'type'=>'select',
+																							'class'=>'search_udn u-full-width form-control',
+																							'id'=>'to',
+																							'style'=>'width:100%;',
+																							'placeholder' => 'Unidad de Negocio',
+																							'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
+								                              'title'=>'Puede teclear la fecha en Formato yyyymmdd',
+																							'div'=>FALSE,
+																							'label'=>FALSE,
+																							// 'empty' => 'TODO',
+																							'options'=>array('1'=>'Granel','7'=>'Otros'),
+																							'tabindex'=>'2'
+																						)
+																		);
+							echo '</div>';
 						?>
 
 
