@@ -28,8 +28,11 @@ class ControlDeskUserControlsController extends AppController {
 
 	function index() {
 
-		$this->ControlDeskUserControl->recursive = 0;
-		$this->set('controlDeskUserControls', $this->paginate());
+		// $this->ControlDeskUserControl->recursive = 0;
+
+		$controlDeskUserControls = $this->ControlDeskUserControl->find('all');
+
+		$this->set(compact('controlDeskUserControls'));
 	}
 
 	function view($id = null) {

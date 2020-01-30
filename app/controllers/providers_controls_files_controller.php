@@ -461,7 +461,10 @@ class ProvidersControlsFilesController extends AppController {
 						$SaveUUID['ProvidersUuidRequest']['RefNbr'] = $data['RefNbr'];
 						$SaveUUID['ProvidersUuidRequest']['VendId'] = $data['VendId'];
 						$SaveUUID['ProvidersUuidRequest']['PONbr'] = $data['PONbr'];
-
+						$SaveUUID['ProvidersUuidRequest']['TermsId'] = $data['TermsId'];
+						$SaveUUID['ProvidersUuidRequest']['DueIntrv'] = $data['DueIntrv'];
+						$SaveUUID['ProvidersUuidRequest']['InvDate'] = $data['InvDate'];
+						$SaveUUID['ProvidersUuidRequest']['InvcNbr'] = $data['InvcNbr'];
 
 						$SaveUUID['ProvidersUuidRequest']['Sello'] = current($xml['Sello']);
 						$SaveUUID['ProvidersUuidRequest']['Total'] = current($xml['Total']);

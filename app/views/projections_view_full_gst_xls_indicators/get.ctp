@@ -235,30 +235,10 @@ background-color: #269aff;
 		</div>
 
 		<div class="ten colums">
-			<!-- <input type="text" id="kwd_search" value="" placeholder="Buscar"/> -->
 
-			<!-- <a id="details" class="button button-primary" href="#">Totales</a>
-
-			<a id="charting" class="button button-primary" href="#">Graficas</a>
-
-			<a id="upd_checkboxes" class="button button-primary" href="#">Guardar</a> -->
-
-			<!-- <div id="print" class="pull-right"> -->
-				<!-- <i class="fa fa-print" aria-hidden="true"></i> -->
-			<!-- </div> -->
 		</div>
 
 	</div>
-<!--
-	<div class="row">
- 	 <div class="twelve columns">
- 		 <div id="chart" class="chart" >
- 					 <div id="the-chart" style="min-width:80%; min-height: 480px; margin: 0 auto">
-
- 					 </div>
- 		 </div>
- 	 </div>
-  </div> -->
 
 <div class="con">
 <div id="cont" style="height: 10px; margin: 0 auto"></div>

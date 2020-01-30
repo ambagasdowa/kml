@@ -18,56 +18,127 @@
 		?>
 
 		<?php
-		    // NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal.
-		    // $evaluate = false;
-		    // $requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere'));
-		    // blog
-		    $evaluate = true;
-		    $requiere = $evaluate ? e($this->element('kml/blog/blog')) : e($this->element('requiere/norequiere') );
-				$requiere = $evaluate ? e($this->element('kml/forms/forms')) : e($this->element('requiere/norequiere') );
-
+		// NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal.
+		// $evaluate = false;
+		// $requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere'));
+		// blog
+		$evaluate = true;
+		// $requiere = $evaluate ? e($this->element('kml/blog/blog')) : e($this->element('requiere/norequiere') );
+		// $requiere = $evaluate ? e($this->element('kml/forms/forms')) : e($this->element('requiere/norequiere') );
+		$requiere = $evaluate ? e($this->element('kml/rentabilidad/rentabilidad')) : e($this->element('requiere/norequiere') );
 		?>
+
+		<!-- temporal style  -->
+
+		<style media="screen">
+
+		.ninja-scroll {
+			scroll-behavior: smooth;
+			overflow-x: auto;
+			/*overflow-y: auto;*/
+		}
+		.avg {
+			font-style: italic;
+			text-decoration: overline;
+		}
+
+		select::-ms-expand {
+			display: none;
+		}
+
+		.detail_header {
+			display: none;
+		}
+
+		.head_datetime{
+			display: none;
+		}
+
+		.container-mod{
+			position: relative;
+			width: 100%;
+			max-width: 95%;
+			margin: 0 auto;
+			padding: 0 20px;
+			box-sizing: border-box;
+		}
+
+		.colorbax {
+			position: relative;
+			width: 100%;
+			min-width: 95%;
+			margin: 0 auto;
+			padding: 0 20px;
+			box-sizing: border-box;
+		}
+
+		.current {
+			display: inline-block;  /* For IE11/ MS Edge bug */
+			pointer-events: none;
+			cursor: default;
+			color:gray !important;
+			text-decoration: none;
+		}
+
+		.current > a {
+		  color: gray !important;
+		  display: inline-block;  /* For IE11/ MS Edge bug */
+		  pointer-events: none;
+		  text-decoration: none;
+		}
+
+		/**PAGINATOR STYLE*/
+		.easyPaginateNav{
+			position: fixed;
+			bottom: 1%;
+			left: 35%;
+			cursor: pointer;
+			z-index:150;
+		}
+
+		.icon{
+		  transition:all 0.5s;
+		  opacity:0;
+		}
+
+		.link_external:hover .icon{
+		  opacity:1;
+		}
+
+
+		</style>
+
+
+		<div class="container-mod">
+
+					<div class="row">
+							<div class="twelve columns ">
+								<h6 class="docs-header">StorageUsers</h6>
+						</div>
+					</div>
+
+		</div>
+
 <?php 	echo $this->Session->flash();?>
-		    <div class="container-fluid">
-		      <div class="row">
 
-		       <div class="col-md-offset-1 col-sm-11 col-md-11">
-		          <ul class="list-group list-inline">
-					<li class="list-group-item">
-						<?php echo $this->Html->link(__('New Control Desk User Control', true), array('action' => 'add')); ?>
-					</li>
-					<li class="list-group-item">
-						<?php echo $this->Html->link(__('List Users', true), array('controller' => 'users', 'action' => 'index')); ?>
-					</li>
-					<li class="list-group-item">
-						<?php echo $this->Html->link(__('New User', true), array('controller' => 'users', 'action' => 'add')); ?>
-					</li>
-					<li>
-						<input type="search" class="light-table-filter form-control " data-table="order-table" placeholder="Filter">
-					</li>
-		          </ul>
-		        </div>
+<div id="first-datatable-output" class="table-responsive">
 
-		        <div class="col-sm-9 col-sm-offset-2 col-md-10 col-md-offset-1 main">
-		          <h1 class="page-header"><?php __('Control Desk User Controls');?></h1>
-		          <div class="table-responsive">
-					<span class="filter-container">
-						<table class="order-table table table-bordered table-hover table-striped responstable">
-						<thead>
-							<tr>
-															<th><?php echo $this->Paginator->sort('id');?></th>
-															<th><?php echo $this->Paginator->sort('user_id');?></th>
-															<th><?php echo $this->Paginator->sort('username','user_id');?></th>
-															<th><?php echo $this->Paginator->sort('storage');?></th>
-															<th><?php echo $this->Paginator->sort('clear_key');?></th>
-															<th><?php echo $this->Paginator->sort('description');?></th>
-															<th><?php echo $this->Paginator->sort('status');?></th>
-															<th><?php echo $this->Paginator->sort('created');?></th>
-															<th><?php echo $this->Paginator->sort('modified');?></th>
-															<th class="actions" colspan="3"><?php __('Actions');?></th>
+				<table id="table_res" class="table table-striped table-bordered">
+					<thead>
+						<tr>
+								<th>id</th>
+								<th>user_id</th>
+								<th>username</th>
+								<th>storage</th>
+								<th>clear_key</th>
+								<th>description</th>
+								<th>status</th>
+								<th>created</th>
+								<th>modified</th>
+								<th>Actions</th>
 
-							</tr>
-						</thead>
+						</tr>
+					</thead>
 						<?php
 						$i = 0;
 						foreach ($controlDeskUserControls as $controlDeskUserControl):
@@ -90,40 +161,28 @@
 				<td><?php echo $controlDeskUserControl['ControlDeskUserControl']['status']; ?>&nbsp;</td>
 				<td><?php echo $controlDeskUserControl['ControlDeskUserControl']['created']; ?>&nbsp;</td>
 				<td><?php echo $controlDeskUserControl['ControlDeskUserControl']['modified']; ?>&nbsp;</td>
+
+
 				<td class="actions">
-					<?php echo $this->Html->link(__('View', true), array('action' => 'view', $controlDeskUserControl['ControlDeskUserControl']['id'])); ?>
+					<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $controlDeskUserControl['ControlDeskUserControl']['id']),array('div'=>false)); ?>
 				</td>
-				<td class="actions">
-					<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $controlDeskUserControl['ControlDeskUserControl']['id'])); ?>
-				</td>
-				<td class="actions">
-					<?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $controlDeskUserControl['ControlDeskUserControl']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $controlDeskUserControl['ControlDeskUserControl']['id'])); ?>
-				</td>
+
 			</tr>
 		<?php endforeach; ?>
 						</table>
-					</span> <!--class="filter-container"-->
-						<p>
-							<?php
-								echo $this->Paginator->counter(array(
-								'format' => __('Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%', true)
-								));
-								?>				</p>
 
-						<ul class="pagination">
-									<?php
+</div>
 
-									echo $this->Paginator->prev( '«' ,array('tag'=>'li'),null, array('aria-hidden'=>'true','class' => 'disabled','tag'=>'li'));
+<script type="text/javascript">
 
-			?>							<?php
 
-									echo $this->Paginator->numbers(array('separator' => null,'tag'=>'li'));
+		$(document).ready(function () {
 
-			?>						<?php
+			var table_a = $('#table_res').DataTable(
+				Object.assign( {}, options_datatable, calculate_row([],[]) )
+			 );
 
-									echo $this->Paginator->next( '»' , array('tag'=>'li'), null, array('aria-hidden'=>'true','class' => 'disabled','tag'=>'li'));
-			?>				</ul>
-		          </div>
-		        </div> <!--main-->
-		      </div> <!--row-->
-		    </div> <!--container fluid-->
+		});
+
+
+</script>
