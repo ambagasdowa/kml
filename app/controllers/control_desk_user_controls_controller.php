@@ -97,8 +97,31 @@ class ControlDeskUserControlsController extends AppController {
 						// 	// NOTE create user
 						// 	debug("build the user");
 						// }
+						debug($save_this);
 
-						// exit();
+						$command = 'sudo -u www-data php /var/www/nextcloud/public_html/gstcloud/occ --help';
+						// $command = '#!/bin/bash
+            //             echo "TOP: Now start expecting things"
+            //             expect -c \'
+            //                 spawn sudo mount.davfs http://nextcloud/gstcloud/remote.php/webdav '.$mount_point.' -o '.$options.'
+            //                 expect "Password: "
+            //                 send \'"'.$access.'\r"\'
+            //                 expect "$ "
+            //                 send "exit\r"
+            //                 expect "$ "
+            //                 send "pbrun bash\r"
+            //                 expect "$ "
+            //                 send "exit\r"
+            //                  \'
+            //             ';
+
+						exec($command,$response);
+						debug($response);
+						$output = shell_exec($command);
+						debug($output);
+
+						exit();
+
 						$this->ControlDeskUserControl->create();
 						if ($this->ControlDeskUserControl->save($save_this)) {
 							//NOTE create a cloud user

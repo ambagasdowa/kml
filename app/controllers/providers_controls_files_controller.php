@@ -450,7 +450,13 @@ class ProvidersControlsFilesController extends AppController {
 				debug('DATA');
 				debug($data);
 
+				debug($xml);
 
+				debug(current($xml['Total']));
+
+				debug(current($xml['uuid']));
+
+				// exit();
 // WARNING NOTE save xml relation if xml is not empty or type is equal to .xml
 // ----=======
 	// work form hir
@@ -470,7 +476,7 @@ class ProvidersControlsFilesController extends AppController {
 						$SaveUUID['ProvidersUuidRequest']['Total'] = current($xml['Total']);
 						$SaveUUID['ProvidersUuidRequest']['SubTotal'] = current($xml['SubTotal']);
 						$SaveUUID['ProvidersUuidRequest']['Certificado'] = current($xml['Certificado']);
-						$SaveUUID['ProvidersUuidRequest']['FormaDePago'] = current($xml['FormaDePago']);
+						// $SaveUUID['ProvidersUuidRequest']['FormaDePago'] = current($xml['FormaDePago']);
 						$SaveUUID['ProvidersUuidRequest']['MetodoPago'] = current($xml['MetodoPago']);
 						$SaveUUID['ProvidersUuidRequest']['NoCertificado'] = current($xml['NoCertificado']);
 						$SaveUUID['ProvidersUuidRequest']['TipoDeComprobante'] = current($xml['TipoDeComprobante']);
@@ -499,9 +505,14 @@ class ProvidersControlsFilesController extends AppController {
 
 				}
 
+				debug('SAVEUUID');
+				debug($SaveUUID);
+
 				if ($this->ProvidersUuidRequest->save($SaveUUID['ProvidersUuidRequest'])) {
 					debug('Save ProvidersUuidRequest ok');
 					$ProvidersUuidRequestId = $this->ProvidersUuidRequest->getLastInsertId();
+				} else {
+					debug('Save ProvidersUuidRequest has Error!');
 				}
 
 
