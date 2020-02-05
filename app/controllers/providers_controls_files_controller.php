@@ -332,35 +332,33 @@ class ProvidersControlsFilesController extends AppController {
 
 
 				function check_sat($info = array()) {
-
 					debug('INFO INSIDE CHECKSAT');
 					debug($info);
 // exit();
 					debug(current($info['uuid']));
-
 					$curl = curl_init();
-
-					curl_setopt_array($curl, array(
-						CURLOPT_URL => "https://consultaqr.facturaelectronica.sat.gob.mx/ConsultaCFDIService.svc?wsdl=",
-						CURLOPT_RETURNTRANSFER => true,
-						CURLOPT_ENCODING => "",
-						CURLOPT_MAXREDIRS => 10,
-						CURLOPT_TIMEOUT => 30,
-						CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
-						CURLOPT_CUSTOMREQUEST => "POST",
-						CURLOPT_POSTFIELDS => "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:tem=\"http://tempuri.org/\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <tem:Consulta>\n         <tem:expresionImpresa><![CDATA[?re=".current($info['re'])."&rr=".current($info['rr'])."&tt=".current($info['Total'])."&id=".current($info['uuid'])."]]></tem:expresionImpresa> \n      </tem:Consulta>\n   </soapenv:Body>\n</soapenv:Envelope>",
-						CURLOPT_HTTPHEADER => array(
-							"Accept: text/xml",
-							"Accept-Encoding: gzip, deflate",
-							// "Content-Length: 379",
-							"Content-type: text/xml;charset=\"utf-8\"",
-							"Host: consultaqr.facturaelectronica.sat.gob.mx",
-							"Postman-Token: 662e6b92-6fa3-4127-b1fd-e9b3f8c51dce,ef9e2caf-bbee-453e-b7fe-702251b65696",
-							"SOAPAction: http://tempuri.org/IConsultaCFDIService/Consulta",
-							"User-Agent: PostmanRuntime/7.20.1",
-							"cache-control: no-cache,no-cache"
-						)
-					));
+							curl_setopt_array($curl, array(
+								CURLOPT_URL => "https://consultaqr.facturaelectronica.sat.gob.mx/ConsultaCFDIService.svc?wsdl=",
+								CURLOPT_RETURNTRANSFER => true,
+								CURLOPT_ENCODING => "",
+								CURLOPT_MAXREDIRS => 10,
+								CURLOPT_TIMEOUT => 30,
+								CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+								CURLOPT_CUSTOMREQUEST => "POST",
+								CURLOPT_POSTFIELDS => "<soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" xmlns:tem=\"http://tempuri.org/\">\n   <soapenv:Header/>\n   <soapenv:Body>\n      <tem:Consulta>\n         <tem:expresionImpresa><![CDATA[?re=".current($info['re'])."&rr=".current($info['rr'])."&tt=".current($info['Total'])."&id=".current($info['uuid'])."]]></tem:expresionImpresa> \n      </tem:Consulta>\n   </soapenv:Body>\n</soapenv:Envelope>",
+								CURLOPT_HTTPHEADER => array(
+									"Accept: text/xml",
+									"Accept-Encoding: gzip, deflate",
+									// "Content-Length: 379",
+									"Content-type: text/xml;charset=\"utf-8\"",
+									"Host: consultaqr.facturaelectronica.sat.gob.mx",
+									"Postman-Token: 662e6b92-6fa3-4127-b1fd-e9b3f8c51dce,ef9e2caf-bbee-453e-b7fe-702251b65696",
+									"SOAPAction: http://tempuri.org/IConsultaCFDIService/Consulta",
+									"User-Agent: PostmanRuntime/7.20.1",
+									"cache-control: no-cache,no-cache"
+								)
+							)
+					);
 
 					$response = curl_exec($curl);
 					$err = curl_error($curl);
@@ -508,19 +506,30 @@ class ProvidersControlsFilesController extends AppController {
 				debug('SAVEUUID');
 				debug($SaveUUID);
 
-				if ($this->ProvidersUuidRequest->save($SaveUUID['ProvidersUuidRequest'])) {
+// debug($this->ProvidersUuidRequest->saverec('compact',$SaveUUID));
+// debug( $this->ProvidersUuidRequest->crsave( 'compact', $SaveUUID ) );
+
+// exit();
+
+				if ($this->ProvidersUuidRequest->crsave('compact',$SaveUUID)) {
 					debug('Save ProvidersUuidRequest ok');
-					$ProvidersUuidRequestId = $this->ProvidersUuidRequest->getLastInsertId();
+					// $ProvidersUuidRequestId = $this->ProvidersUuidRequest->getLastInsertId();
 				} else {
 					debug('Save ProvidersUuidRequest has Error!');
 				}
-
+				//
+				// if ($this->ProvidersUuidRequest->save($SaveUUID['ProvidersUuidRequest'])) {
+				// 	debug('Save ProvidersUuidRequest ok');
+				// 	$ProvidersUuidRequestId = $this->ProvidersUuidRequest->getLastInsertId();
+				// } else {
+				// 	debug('Save ProvidersUuidRequest has Error!');
+				// }
+				//
 
 // exit();
 					debug('COUNT');
 					// debug(count($this->ProvidersAssocVendor->find('all',array('conditions'=>$fileAssc))));
 
-					// exit();
 					$check_assoc = $this->ProvidersAssocVendor->find('all',array('conditions'=>$fileAssc));
 
 					if (count($check_assoc) == 0 ) {
