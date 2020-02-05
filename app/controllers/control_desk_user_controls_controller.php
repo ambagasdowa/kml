@@ -167,7 +167,7 @@ class ControlDeskUserControlsController extends AppController {
 
 						// curl -X POST http://admin:enumaelish@integradev/gstcloud/ocs/v1.php/cloud/users -d userid="usertest" -d password="password" --header "OCS-APIRequest: true"
 
-						$command = "curl -X POST http://admin:enumaelish@integradev/gstcloud/ocs/v1.php/cloud/users -d userid=\"{$username}\" -d password=\"{$set_pass}\" -d groups[]=\"users_gst\" --header \"OCS-APIRequest: true\"";
+						$command = "curl -X POST http://admin:enumaelish@integradev/gstcloud/ocs/v1.php/cloud/users -d userid=\"{$username}\" -d password=\"{$set_pass}\" --header \"OCS-APIRequest: true\"";
 						exec($command,$response);
 						debug($response);
 						$output = shell_exec($command);
