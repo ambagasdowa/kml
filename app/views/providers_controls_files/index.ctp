@@ -314,20 +314,21 @@
 													enctype: 'multipart/form-data',
 													beforeSend:function (){
 														// $( ".updateSearchResult" ).html('<div class="text-center"><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><span class="sr-only">Loading...</span><div>');
-														alert ('working');
+														// alert ('working');
 													},
 											    success:function(data, textStatus, jqXHR){
 											        // $("#pro_pix img").last().show();
 											        // $("#pro_pix img").first().hide();
 											        // $("#pro_pix h6").text(data);
 															// this must be a modal instead
-															alert(data);
+															// alert(data);
 											    },
 											    error: function(jqXHR, textStatus, errorThrown){
 											        //if fails
 											    }
 											}).done(function ( data,textStatus,jqXHR ){
-															alert('response is : ' + data );
+															// alert('response is : ' + data );
+														alert('response is : all transactions are successfully executed');
 														// if ( $("#update_pedido_"+batnbr).val() && $("#update_albaran_"+batnbr).val() ) {
 														// 		$('#link_'+batnbr).html('<a href="<?php //echo Dispatcher::baseUrl();?>/AddenumViewAlbaranRelations/link/id:'+batnbr+'" id="get_'+batnbr+'" data-id="'+batnbr+'" data-name="'+batnbr+'_'+remision+'">Descargar</a>');
 														// }
