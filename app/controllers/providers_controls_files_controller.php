@@ -506,10 +506,6 @@ class ProvidersControlsFilesController extends AppController {
 				debug('SAVEUUID');
 				debug($SaveUUID);
 
-// debug($this->ProvidersUuidRequest->saverec('compact',$SaveUUID));
-// debug( $this->ProvidersUuidRequest->crsave( 'compact', $SaveUUID ) );
-
-// exit();
 
 				// if ($this->ProvidersUuidRequest->crsave('compact',$SaveUUID)) {
 				if ($this->ProvidersUuidRequest->save($SaveUUID['ProvidersUuidRequest'])) {
@@ -521,16 +517,7 @@ class ProvidersControlsFilesController extends AppController {
 
 				debug($this->ProvidersUuidRequest->validationErrors); //show validationErrors
 				debug($this->ProvidersUuidRequest->getDataSource()->getLog(false, false)); //show last sql query
-				//
-				// if ($this->ProvidersUuidRequest->save($SaveUUID['ProvidersUuidRequest'])) {
-				// 	debug('Save ProvidersUuidRequest ok');
-				// 	$ProvidersUuidRequestId = $this->ProvidersUuidRequest->getLastInsertId();
-				// } else {
-				// 	debug('Save ProvidersUuidRequest has Error!');
-				// }
-				//
 
-// exit();
 					debug('COUNT');
 					// debug(count($this->ProvidersAssocVendor->find('all',array('conditions'=>$fileAssc))));
 
@@ -557,13 +544,9 @@ class ProvidersControlsFilesController extends AppController {
 								$ProvidersAssocVendorId = $this->ProvidersAssocVendor->getLastInsertId();
 //NOTE add xml info
 // providers_uuid_requests
-
 							}
-
 					} else {
-
 							$ProvidersAssocVendorId = current($check_assoc)['ProvidersAssocVendor']['id'];
-
 					}
 
 					debug($ProvidersAssocVendorId);
@@ -726,152 +709,36 @@ class ProvidersControlsFilesController extends AppController {
 
 				Configure::write('debug',2);
 				// App::uses('Xml', 'Lib');
-
-// debug($this->params);
-// debug($this->data);
-// exit();
 							debug('FORM');
 							// debug($this->params['form']);
-							//
 							$forms = $this->params['form'];
 
 								foreach ($forms as $key_code => $data_code) {
 									// code...
-									// debug($key_code);
-									// NOTE split for datacode
-
-										$split_code = explode('_',$key_code);
-
-									// debug($split_code);
-
-									// debug($data_code);
-									// debug($data_code['error']);
-									// move section
-									//
-									if ($data_code['error'] == 0) {
-										// save the file and set storage
-										$this->file_proccess($data_code,$split_code);
-
+									if($key_code == 'batnbr') {
+										debug('KEYCODE => '.$key_code);
+										debug('DATACODE => '.$data_code);
+										$batnbr = $data_code;
 									}
+										// NOTE split for datacode
+											$split_code = explode('_',$key_code);
+
+										if ($data_code['error'] == 0 ) {
+											// debug($split_code);
+											// debug($batnbr);
+											// debug($data_code);
+
+											// save the file and set storage
+											// debug('$this->file_proccess($data_code,$split_code)');
+											$this->file_proccess($data_code,$split_code);
+
+										}
 
 								}
-		exit();
-
-$posted = json_decode(base64_decode($this->params['named']['data']),true);
-				// $posted = json_decode(base64_decode($this->params['named']['data']),true);
-				debug($posted);
-
-
-				$this->loadModel('ProvidersViewRelation');
-				$conditions = array();
-				$add_conditions = array();
-				foreach ( $posted as $keys => $postvalue ) {
-
-					if ( $keys > 0 ) {
-						$content = $postvalue['name'];
-						// debug($postvalue['value']);
-						$chars = preg_split('/\[([^\]]*)\]/i', $content, -1, PREG_SPLIT_NO_EMPTY | PREG_SPLIT_DELIM_CAPTURE);
-						// debug($chars);
-						if ( isset($chars[1]) && $chars[1] == 'ProvidersViewRelations' && $postvalue['value'] != '') {
-
-							// if ($chars[2] == 'Funcionario' && $postvalue['value'] != '') {
-							// 	// code...
-							// }
-
-							$add_conditions[$chars[2]] = $postvalue['value'];
-							$conditions[$chars[2]] = $postvalue['value'];
-						}
-						// if(isset($chars[2])) {
-						// 	$conditions[$chars[2]] = $postvalue['value'];
-						// }
-					}
-				}
-
-
-				debug('POSTED');
-				debug($add_conditions);
-
-				// debug($this->data['ProvidersControlsFile']['upload']);
-
-exit();
-				$this->loadModel('ProvidersViewRelation');
-				$this->loadModel('AddenumTblAlbaranRelation');
-				$conditions = array();
-				$add_conditions = array();
-
-				// NOTE check if record exist
-
-
-				$add_conditions = $posted;
-				debug('ADD_CONDITIONS');
-				debug($add_conditions);
-
-					$save['AddenumTblAlbaranRelation']['created'] = date('Y-m-d H:i:s');
-					$save['AddenumTblAlbaranRelation']['status'] = 1;
-
-				if ($add_conditions['type'] == 'IdPedido') {
-					// code...
-					$save['AddenumTblAlbaranRelation']['IdPedido'] = $add_conditions['data'];
-				} elseif ($add_conditions['type'] == 'Albaran') {
-					$save['AddenumTblAlbaranRelation']['Albaran'] = $add_conditions['data'];
-				}
-
-				// unset($add_conditions['name']);
-				// unset($add_conditions['type']);
-				// unset($add_conditions['data']);
-
-				if(isset($add_conditions['batnbr'])) {
-					$save['AddenumTblAlbaranRelation']['batnbr'] = $add_conditions['batnbr'];
-				}
-				if(isset($add_conditions['RefNbr'])) {
-					$save['AddenumTblAlbaranRelation']['RefNbr'] = $add_conditions['RefNbr'];
-				}
-				if(isset($add_conditions['guia'])) {
-					$save['AddenumTblAlbaranRelation']['num_guias'] = $add_conditions['guia'];
-				}
-				if(isset($add_conditions['noguia'])) {
-					$save['AddenumTblAlbaranRelation']['RefNbr'] = $add_conditions['noguia'];
-				}
-
-
-				// $save['AddenumTblAlbaranRelation'] = $add_conditions;
-				// print_r($save);
-
-
-				if (isset($add_conditions['idx'])) {
-					 //NOTE Create: id isn't set or is null
-						$this->AddenumTblAlbaranRelation->id = $add_conditions['idx'];
-						// unset($add_conditions['idx']);
-				} else {
-					//NOTE Update: id is set to a numerical value
-					// an ultimate validation
-						$response = $this->_check($save['AddenumTblAlbaranRelation']);
-						if ($response) {
-							// code...
-							// NOTE check this
-							$this->AddenumTblAlbaranRelation->id = $response;
-						} else {
-							$this->AddenumTblAlbaranRelation->create();
-						}
-				}
-
-				debug('RESPONSE');
-				debug($response);
-				debug('SAVED VAR');
-				debug($save);
-	// exit();
-				if ( isset($posted['data']) and isset($posted['type']) ) {
-					// code...
-					$this->AddenumTblAlbaranRelation->save($save['AddenumTblAlbaranRelation']);
-				}
-
-
 				//NOTE update table and send data for update download cell
-
 							// NOTE set the response output for an ajax call
 							Configure::write('debug', 0);
 							$this->autoLayout = false;
-
 			} //NOTE end update
 
 

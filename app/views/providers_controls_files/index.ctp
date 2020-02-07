@@ -299,28 +299,12 @@
 									table_a.$("a[id^='upload_']").on('click', function(e) {
 									e.stopPropagation();
 									e.preventDefault();
-												// var posted_data = {
-												// 									'batnbr':$(this).attr('data-id')
-												// 									// 'name':$(this).attr('data-name'),
-												// 									// 'type':$(this).attr('data-type'),
-												// 									// 'RefNbr':$(this).attr('data-refnbr'),
-												// 									// 'noguia':$(this).attr('data-noguia'),
-												// 									// 'guia':$(this).attr('data-guia'),
-												// 									// 'idx':$(this).attr('data-idx'),
-												// 									// 'data':$(this).val()
-												// 								};
-												//
-												// var string_to_pass = JSON.stringify(posted_data);
-												// console.log('string_to pass:');
-												// console.log(string_to_pass);
-												// data_code = base64_encode(string_to_pass);
 
 												batnbr = $(this).attr('data-id');
 												var myForm = $("#tform").get(0);
 												formData = new FormData(myForm);
-
-												// alert($("#tform").get(0));
-
+												// set the append
+												formData.append('batnbr',$(this).attr('data-id'))
 											$.ajax({
 											    url : "<?php echo Dispatcher::baseUrl();?>/ProvidersControlsFiles/upload/",
 											    type: "POST",
@@ -328,15 +312,25 @@
 											    processData: false,
 											    contentType: false,
 													enctype: 'multipart/form-data',
+													beforeSend:function (){
+														// $( ".updateSearchResult" ).html('<div class="text-center"><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><span class="sr-only">Loading...</span><div>');
+														alert ('working');
+													},
 											    success:function(data, textStatus, jqXHR){
 											        // $("#pro_pix img").last().show();
 											        // $("#pro_pix img").first().hide();
 											        // $("#pro_pix h6").text(data);
+															// this must be a modal instead
 															alert(data);
 											    },
 											    error: function(jqXHR, textStatus, errorThrown){
 											        //if fails
 											    }
+											}).done(function ( data,textStatus,jqXHR ){
+															alert('response is : ' + data );
+														// if ( $("#update_pedido_"+batnbr).val() && $("#update_albaran_"+batnbr).val() ) {
+														// 		$('#link_'+batnbr).html('<a href="<?php //echo Dispatcher::baseUrl();?>/AddenumViewAlbaranRelations/link/id:'+batnbr+'" id="get_'+batnbr+'" data-id="'+batnbr+'" data-name="'+batnbr+'_'+remision+'">Descargar</a>');
+														// }
 											});
 // NOTE TEST
 										}); //End on keydown

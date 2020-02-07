@@ -332,6 +332,9 @@
 				<?php
 					// if (isset($providersViewRelation['ProvidersViewRelation']['IdPedido']) && isset($providersViewRelation['ProvidersViewRelation']['Albaran'])) {
 						// code...
+						if ($providersViewRelation['ProvidersViewRelation']['Status'] == 'P') {
+							echo '&nbsp;';
+						} else {
 							echo
 										$this->Html->link('Subir'
 									,array(
@@ -353,7 +356,7 @@
 						);
 					// } else {
 					// 	echo '';
-					// }
+					}
 				?>
 			</td>
 
