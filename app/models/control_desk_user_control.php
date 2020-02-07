@@ -22,7 +22,7 @@ class ControlDeskUserControl extends AppModel {
 	var $useDbConfig = 'portal_apps';
 	var $displayField = 'directory';
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
-
+// 1109 mitchell
 	var $belongsTo = array(
 		'User' => array(
 			'className' => 'User',

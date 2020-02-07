@@ -511,12 +511,16 @@ class ProvidersControlsFilesController extends AppController {
 
 // exit();
 
-				if ($this->ProvidersUuidRequest->crsave('compact',$SaveUUID)) {
+				// if ($this->ProvidersUuidRequest->crsave('compact',$SaveUUID)) {
+				if ($this->ProvidersUuidRequest->save($SaveUUID['ProvidersUuidRequest'])) {
 					debug('Save ProvidersUuidRequest ok');
 					// $ProvidersUuidRequestId = $this->ProvidersUuidRequest->getLastInsertId();
 				} else {
 					debug('Save ProvidersUuidRequest has Error!');
 				}
+
+				debug($this->ProvidersUuidRequest->validationErrors); //show validationErrors
+				debug($this->ProvidersUuidRequest->getDataSource()->getLog(false, false)); //show last sql query
 				//
 				// if ($this->ProvidersUuidRequest->save($SaveUUID['ProvidersUuidRequest'])) {
 				// 	debug('Save ProvidersUuidRequest ok');

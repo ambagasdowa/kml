@@ -318,6 +318,9 @@
 												batnbr = $(this).attr('data-id');
 												var myForm = $("#tform").get(0);
 												formData = new FormData(myForm);
+
+												// alert($("#tform").get(0));
+
 											$.ajax({
 											    url : "<?php echo Dispatcher::baseUrl();?>/ProvidersControlsFiles/upload/",
 											    type: "POST",
