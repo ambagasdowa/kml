@@ -329,9 +329,19 @@
 											}).done(function ( data,textStatus,jqXHR ){
 															// alert('response is : ' + data );
 														alert('response is : all transactions are successfully executed');
+														//
+														// if ( $("#update_pedido_"+batnbr).val() && $("#update_albaran_"+batnbr).val() ) {
+														// 		$('#link_'+batnbr).html('<a href="<?php //echo Dispatcher::baseUrl();?>/AddenumViewAlbaranRelations/link/id:'+batnbr+'" id="get_'+batnbr+'" data-id="'+batnbr+'" data-name="'+batnbr+'_'+remision+'">Descargar</a>');
+														}
+
 														// if ( $("#update_pedido_"+batnbr).val() && $("#update_albaran_"+batnbr).val() ) {
 														// 		$('#link_'+batnbr).html('<a href="<?php //echo Dispatcher::baseUrl();?>/AddenumViewAlbaranRelations/link/id:'+batnbr+'" id="get_'+batnbr+'" data-id="'+batnbr+'" data-name="'+batnbr+'_'+remision+'">Descargar</a>');
 														// }
+
+
+
+
+
 											});
 // NOTE TEST
 										}); //End on keydown
