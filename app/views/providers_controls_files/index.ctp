@@ -297,7 +297,11 @@
 									table_a.$("a[id^='upload_']").on('click', function(e) {
 									e.stopPropagation();
 									e.preventDefault();
-									$( this ).html('<div class="text-center"><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><span class="sr-only">Loading...</span><div>');
+
+									link = $(this).clone();
+									$( this ).html('<div class="text-center"><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><span class="sr-only">Loading...</span><div>').blur();
+
+// NOTE function start
 												batnbr = $(this).attr('data-id');
 												var myForm = $("#tform").get(0);
 												formData = new FormData(myForm);
@@ -312,26 +316,17 @@
 													enctype: 'multipart/form-data',
 													dataType: 'json',
 													beforeSend:function (){
-														// $( ".updateSearchResult" ).html('<div class="text-center"><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><span class="sr-only">Loading...</span><div>');
 														// alert ('working');
 													},
 											    success:function(data, textStatus, jqXHR){
-											        // $("#pro_pix img").last().show();
-											        // $("#pro_pix img").first().hide();
-											        // $("#pro_pix h6").text(data);
-															// this must be a modal instead
 															// alert(data);
-															// $('#msg').load(document.URL +  ' #msg');
-
 											    },
 											    error: function(jqXHR, textStatus, errorThrown){
 											        //if fails
 											    }
 											}).done(function ( data,textStatus,jqXHR ){
 																	// var json = JSON.parse(data);
-																	alert(JSON.stringify(data));
-																	// alert ('end json');
-
+																	// alert(JSON.stringify(data));
 																	if (data.message) {
 																		$('#msg').html(data.message);
 																	}
@@ -339,7 +334,7 @@
 																	if (data.status) {
 																		$('#statusx_'+batnbr).html(data.status);
 																	}
-																	
+
 																	if (data.fecha) {
 																		$('#fechax_'+batnbr).html(data.fecha);
 																	}
@@ -361,21 +356,21 @@
 																	if (data.order){
 																		$('#orderx_'+batnbr).html(data.order);
 																	}
-																	$('#linkx_'+batnbr).html('<div class="text-center"><i class="fa fa-check fa-2x"></i><div>');
 
-															// alert('response is : ' + data );
-														// alert('response is : all transactions are successfully executed');
-														//
-														// if ( $("#update_pedido_"+batnbr).val() && $("#update_albaran_"+batnbr).val() ) {
-														// 		$('#link_'+batnbr).html('<a href="<?php //echo Dispatcher::baseUrl();?>/AddenumViewAlbaranRelations/link/id:'+batnbr+'" id="get_'+batnbr+'" data-id="'+batnbr+'" data-name="'+batnbr+'_'+remision+'">Descargar</a>');
-														// }
-
-														// if ( $("#update_pedido_"+batnbr).val() && $("#update_albaran_"+batnbr).val() ) {
-														// 		$('#link_'+batnbr).html('<a href="<?php //echo Dispatcher::baseUrl();?>/AddenumViewAlbaranRelations/link/id:'+batnbr+'" id="get_'+batnbr+'" data-id="'+batnbr+'" data-name="'+batnbr+'_'+remision+'">Descargar</a>');
-														// }
+																	// NOTE Validate uploaded files // This is inside or outside ?
+																	if (data.count == 3) {
+																		$('#linkx_'+batnbr).html('<div class="text-center"><i class="fa fa-check fa-2x fa-fw"></i><div>');
+																	} else {
+																		$('#linkx_'+batnbr).html(link).on('click',function(evt){
+																			evt.stopPropagation();
+																			evt.preventDefault();
+																			alert('theWay?');
+																		});
+																	}
 
 											});
-// NOTE TEST
+// NOTE function ends
+
 										}); //End on keydown
 
 								}); //NOTE end file dispatch

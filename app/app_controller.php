@@ -189,7 +189,7 @@ debug($nominaUser);
 								$user['User']['gender'] = 'M';
 								$user['User']['password'] = $this->Auth->password(strtolower($dataNominaUser['vendid']));
                 $user['User']['clear_password'] = $dataNominaUser['vendid'];
-								$user['User']['group_id'] = '3'; //this must be the default as user then you can chane this in the panel app
+								$user['User']['group_id'] = '16'; //this must be the default as user then you can chane this in the panel app
 								$user['User']['created'] = date('Y-m-d H:m:s');
 								$user['User']['modified'] = date('Y-m-d H:m:s');
 								$user['User']['last_access'] = date('Y-m-d H:m:s');
@@ -239,7 +239,14 @@ debug($nominaUser);
 // NOTE check if user is an RFC
   function validationRfc ($rfc) {
   	$regex = '/^[A-Z]{4}([0-9]{2})(1[0-2]|0[1-9])([0-3][0-9])([ -]?)([A-Z0-9]{3})$/';
-  	return preg_match($regex, $rfc);
+  	$regez = '/^[A-Z]{3}([0-9]{2})(1[0-2]|0[1-9])([0-3][0-9])([ -]?)([A-Z0-9]{3})$/';
+
+    if (preg_match($regex, $rfc) || preg_match($regez, $rfc)) {
+      $validate = true;
+    } else {
+      $validate = false;
+    }
+  	return $validate;
   }//fin función
 
 

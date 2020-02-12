@@ -530,6 +530,18 @@
 										<?php }?>
 <!-- 										automagic hir -->
 
+  <!-- NOTE login for external users -->
+
+                  <?php if (isset($_SESSION['Auth']['User'])) {?>
+                  <?php 	if (checkUser($_SESSION['Auth']['User']['group_id'],'Providers') || $_SESSION['Auth']['User']['group_id'] == 16) { ?>
+                    <li class="dropdown-submenu">
+                      <a tabindex="-1" href="<?php e($this->webroot.'/ProvidersControlsFiles/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Proveedores</span></a>
+                    </li>
+                    <li class="divider"></li>
+                    <?php 	}?>
+                    <?php }?>
+
+
 <!-- 										Providers -->
 										<?php if (isset($_SESSION['Auth']['User'])) {?>
 										<?php 	if (checkUser($_SESSION['Auth']['User']['group_id'],'Providers')) {?>
@@ -537,8 +549,7 @@
 										<li class="dropdown-submenu">
 											<a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>Projectos</span></a>
 												<ul class="dropdown-menu">
-													<!-- <li><a tabindex="-1" href="<?php //e($this->webroot.'/ProvidersImportedFilesControls/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>Proveedoresx</span></a></li> -->
-													<li><a tabindex="-1" href="<?php e($this->webroot.'/ProvidersControlsFiles/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>Proveedores</span></a></li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'/ProvidersControlsFiles/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Proveedores</span></a></li>
 													<li><a tabindex="-1" href="<?php e($this->webroot.'/ProjectionsViewFullGstXlsIndicators/');?>"><i class="fa fa-cog"></i>&nbsp;<span>XlsPort</span></a></li>
 												</ul>
 										</li>

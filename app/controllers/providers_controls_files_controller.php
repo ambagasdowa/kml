@@ -526,11 +526,17 @@ class ProvidersControlsFilesController extends AppController {
 					$response['status'] = $getUpdated['Status'];
 					$response['fecha'] = $getUpdated['InvcDate'];
 					$response['totalAmt'] = $SaveUUID['ProvidersUuidRequest']['Total'];
-					$response['xml'] = "<a href=\"{$path}{$url}{$getUpdated['xml_src']}\" download=\"{$getUpdated['xml_name']}\"><i class=\"fa fa-file-text\"></i></a>";
+					$response['xml'] = "<a id=\"uptXml_{$getUpdated['BatNbr']}\" href=\"{$path}{$url}{$getUpdated['xml_src']}\" download=\"{$getUpdated['xml_name']}\"><i class=\"fa fa-file-text\"></i></a>";
 				} else {
 					$response['message'] = 'Su documento se envio correctamente';
-					$response['voucher'] = '<i class="fa fa-file-pdf-o"></i>';
-					$response['order'] = '<i class="fa fa-file-pdf-o"></i>';
+					// NOTE: work from hir
+					if ($getUpdated['voucher']) {
+						$response['voucher'] = "<a id=\"uptVoucher_{$getUpdated['BatNbr']}\" href=\"{$path}{$url}{$getUpdated['voucher_src']}\" download=\"{$getUpdated['voucher_name']}\"><i class=\"fa fa-file-text\"></i></a>";
+					}
+
+					if ($getUpdated['order']) {
+						$response['order'] = "<a id=\"uptOrder_{$getUpdated['BatNbr']}\" href=\"{$path}{$url}{$getUpdated['order_src']}\" download=\"{$getUpdated['order_name']}\"><i class=\"fa fa-file-text\"></i></a>";
+					}
 				}
 				return $response;
 			} // End Relation
@@ -732,18 +738,29 @@ class ProvidersControlsFilesController extends AppController {
 										if ($data_code['error'] == 0 ) {
 											// save the file and set storage
 											// debug('$this->file_proccess($data_code,$split_code)');
-											$response = $this->file_proccess($data_code,$split_code);
+											$response[] = $this->file_proccess($data_code,$split_code);
 
 										}
-
 								}
 				//NOTE update table and send data for update download cell
 					// $this->set(compact('response'));
 							// NOTE set the response output for an ajax call
-							// Configure::write('debug', 2);
+						// 	Configure::write('debug', 2);
+					$count = count($response);
+						// debug($response);
 							// $this->autoLayout = false;
-// debug($response);
-// exit();
+					if ($count == 2) {
+						// NOTE if more than one element
+						$response = array_merge($response[0],$response[1]);
+					} elseif ($count == 3) {
+						// NOTE if more than one element
+						$response = array_merge($response[0],$response[2]);
+					} else {
+						$response = current($response);
+					}
+
+					$response = array_merge($response,array('count'=>$count));
+
 							//4. Return as a json array
 							Configure::write('debug', 0);
 							$this->autoRender = false;
