@@ -36,69 +36,8 @@ class ProvidersControlsFilesController extends AppController {
 			function link() {
 
 					Configure::write('debug',0);
-					$this->loadModel('ProvidersViewRelation');
-				if(isset($this->params['named']['id'])){
-					$conditionsBl['ProvidersViewRelation.BatNbr'] = $this->params['named']['id'];
-				} else {
-					break;
-				}
 
-				$ProvidersViewRelations = $this->ProvidersViewRelation->find('all',array('conditions'=>$conditionsBl));
-
-				foreach ($ProvidersViewRelations as $key => $value) {
-					// code...
-					// debug($key);
-					 // debug($value['ProvidersViewRelation']['xml']);
-					 // $xmlm = $value['ProvidersViewRelation']['xml'];
-
-					 // $xml[] = new SimpleXMLElement($value['ProvidersViewRelation']['xml']);
-					 $xml = new SimpleXMLElement($value['ProvidersViewRelation']['xml']);
-					 // $xml = simplexml_load_string($value['ProvidersViewRelation']['xml']);
-					 // $json = json_encode($xml);
-					 // $array = json_decode($json,TRUE);
-
-					 // debug($xml);
-
-					// var_dump($xml->children());
-					// $ns = $xml->getNamespaces(true);
-					// debug($ns);
-					// $xml->registerXPathNamespace('cfdi', $ns['cfdi']);
-					// $xml->registerXPathNamespace('t', $ns['tfd']);
-					// debug($xml->getName());
-
-
-					$addenum = $xml->addChild('Addenda');
-					$addspace = $addenum->addChild('eu:AddendaEU',null,"http://factura.envasesuniversales.com/addenda/eu");
-					$addspace->addAttribute( "xmlns:xsi:schemaLocation", "http://factura.envasesuniversales.com/addenda/eu http://factura.envasesuniversales.com/addenda/eu/EU_Addenda.xsd");
-
-					$tipoFactura = $addspace->addChild('TipoFactura');
-					$tipoFactura->addChild('IdFactura',$value['ProvidersViewRelation']['IdFactura']);
-					$tipoFactura->addChild('Version',$value['ProvidersViewRelation']['Version']);
-					$tipoFactura->addChild('FechaMensaje',$value['ProvidersViewRelation']['FechaMensaje']);
-
-					$tipoTransaction = $addspace->addChild('TipoTransaccion');
-					$tipoTransaction->addChild('IdTransaccion',$value['ProvidersViewRelation']['IdTransaccion']);
-					$tipoTransaction->addChild('Transaccion',$value['ProvidersViewRelation']['Transaccion']);
-
-					$ordenesCompra = $addspace->addChild('OrdenesCompra');
-						$secuencia = $ordenesCompra->addChild('Secuencia');
-							$secuencia->addAttribute("consec","1");
-							$secuencia->addChild('IdPedido', $value['ProvidersViewRelation']['IdPedido'] );
-								$addAlbaran = $secuencia->addChild('EntradaAlmacen');
-								$addAlbaran->addChild('Albaran',$value['ProvidersViewRelation']['Albaran']);
-
-					$addMoneda = $addspace->addChild('Moneda');
-					$addMoneda->addChild('MonedaCve',$value['ProvidersViewRelation']['MonedaCve']);
-					$addMoneda->addChild('TipoCambio',$value['ProvidersViewRelation']['TipoCambio']);
-					$addMoneda->addChild('SubtotalM',$value['ProvidersViewRelation']['SubtotalM']);
-					$addMoneda->addChild('TotalM',$value['ProvidersViewRelation']['TotalM']);
-					$addMoneda->addChild('ImpuestoM',$value['ProvidersViewRelation']['ImpuestoM']);
-
-					$addImpuestosR = $addspace->addChild('ImpuestosR');
-					$addImpuestosR->addChild('BaseImpuesto',$value['ProvidersViewRelation']['BaseImpuesto']);
-
-					$name = $value['ProvidersViewRelation']['BatNbr'];
-				 }
+					debug($this->params);
 				 // $xml = trim($xml,"\n");
 				 $this->set(compact('xml','name'));
 				//NOTE ALERT print xml
@@ -142,7 +81,7 @@ class ProvidersControlsFilesController extends AppController {
 	        $response = array();
 				 // var_dump($xml->children());
 				 $ns = $xml->getNamespaces(true);
-				 debug($ns);
+				 // debug($ns);
 				 foreach ($ns as $key => $value) {
 				 	// code...
 						$xml->registerXPathNamespace($key, $ns[$key]);
@@ -332,10 +271,10 @@ class ProvidersControlsFilesController extends AppController {
 
 
 				function check_sat($info = array()) {
-					debug('INFO INSIDE CHECKSAT');
-					debug($info);
+					// debug('INFO INSIDE CHECKSAT');
+					// debug($info);
 // exit();
-					debug(current($info['uuid']));
+					// debug(current($info['uuid']));
 					$curl = curl_init();
 							curl_setopt_array($curl, array(
 								CURLOPT_URL => "https://consultaqr.facturaelectronica.sat.gob.mx/ConsultaCFDIService.svc?wsdl=",
@@ -364,19 +303,21 @@ class ProvidersControlsFilesController extends AppController {
 					$err = curl_error($curl);
 
 					curl_close($curl);
-
-					debug('SETRESPONSE');
-					print('<pre>');
-					print_r($response);
-					print('</pre>');
+					//
+					// debug('SETRESPONSE');
+					// print('<pre>');
+					// print_r($response);
+					// print('</pre>');
 
 					$xml = simplexml_load_string($response);
 
 					if ($err) {
-						echo "cURL Error #:" . $err;
+						echo
+						$message = "cURL Error #:" . $err;
+						$return_set = false;
 					} else {
 
-							debug('DEBUG-RESPONSE');
+							// debug('DEBUG-RESPONSE');
 							$ns = $xml->getNamespaces(true);
 							$xml->registerXPathNamespace('s', $ns['s']);
 							$xml->registerXPathNamespace('a', $ns['a']);
@@ -400,26 +341,31 @@ class ProvidersControlsFilesController extends AppController {
 												$return_set = false;
 											}
 
-											$this->Session->setFlash(__('<div class="alert alert-danger alert-dismissible fade in" role="alert">
-																<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-																	<span aria-hidden="true">&times;</span>
-																</button>
-																'.$message.' </div>', true));
-											$this->redirect($this->referer());
-										} // NOTE end elseif
+										} else {   // NOTE end elseif
+											$message = 'Comprobante no encontrado';
+											$return_set = false;
+										}
 
 								 } //NOTE end path
 					}
-					return $return_set;
+						$responseCode = array(
+																		'message'=>'<div class="alert alert-danger alert-dismissible fade in" role="alert">
+																									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+																									<span aria-hidden="true">&times;</span>
+																									</button>'.$message.'
+																								</div>',
+																		'status'=>$return_set
+																 );
+					return $responseCode;
 					// add return stat
       } //NOTE END CHECKSAT()
 
 
 			function relation( $file = array() , $fid = null ,$xml = array(),$type = null ) {
-				debug('INSIDE RELATION');
 
-				debug($file);
-				debug($fid);
+				// debug('INSIDE RELATION');
+				// debug($file);
+				// debug($fid);
 
 				// for file $fid relation with $file
 				//
@@ -439,27 +385,20 @@ class ProvidersControlsFilesController extends AppController {
 
 				// $checkFile = $this->ProvidersViewRelation->find('all',array('conditions'=>$filleConditions));
 				$checkFile = $this->ProvidersViewRelation->find('all',array('conditions'=>$fileConditions));
-				debug('CheckFile');
-
-				// debug(current($checkFile)['ProvidersViewRelation']);
-
 				$data = current($checkFile)['ProvidersViewRelation'];
 
-				debug('DATA');
-				debug($data);
-
-				debug($xml);
-
-				debug(current($xml['Total']));
-
-				debug(current($xml['uuid']));
+				// debug('DATA');
+				// debug($data);
+				// debug($xml);
+				// debug(current($xml['Total']));
+				// debug(current($xml['uuid']));
 
 				// exit();
 // WARNING NOTE save xml relation if xml is not empty or type is equal to .xml
 // ----=======
 	// work form hir
 				if ($type == '.xml') {
-
+					$is_xml = true;
 						$SaveUUID['ProvidersUuidRequest']['BatNbr'] = $data['BatNbr'];
 						$SaveUUID['ProvidersUuidRequest']['CpnyId'] = $data['CpnyID'];
 						$SaveUUID['ProvidersUuidRequest']['RefNbr'] = $data['RefNbr'];
@@ -501,24 +440,26 @@ class ProvidersControlsFilesController extends AppController {
 						$SaveUUID['ProvidersUuidRequest']['providers_parents_id'] = '1';
 						$SaveUUID['ProvidersUuidRequest']['_status'] = 1;
 
+				} else {
+					$is_xml = false;
 				}
 
-				debug('SAVEUUID');
-				debug($SaveUUID);
+				// debug('SAVEUUID');
+				// debug($SaveUUID);
 
 
 				// if ($this->ProvidersUuidRequest->crsave('compact',$SaveUUID)) {
 				if ($this->ProvidersUuidRequest->save($SaveUUID['ProvidersUuidRequest'])) {
-					debug('Save ProvidersUuidRequest ok');
+					// debug('Save ProvidersUuidRequest ok');
 					// $ProvidersUuidRequestId = $this->ProvidersUuidRequest->getLastInsertId();
 				} else {
-					debug('Save ProvidersUuidRequest has Error!');
+					// debug('Save ProvidersUuidRequest has Error!');
 				}
 
-				debug($this->ProvidersUuidRequest->validationErrors); //show validationErrors
-				debug($this->ProvidersUuidRequest->getDataSource()->getLog(false, false)); //show last sql query
+				// debug($this->ProvidersUuidRequest->validationErrors); //show validationErrors
+				// debug($this->ProvidersUuidRequest->getDataSource()->getLog(false, false)); //show last sql query
 
-					debug('COUNT');
+					// debug('COUNT');
 					// debug(count($this->ProvidersAssocVendor->find('all',array('conditions'=>$fileAssc))));
 
 					$check_assoc = $this->ProvidersAssocVendor->find('all',array('conditions'=>$fileAssc));
@@ -539,7 +480,7 @@ class ProvidersControlsFilesController extends AppController {
 							$this->ProvidersAssocVendor->create();
 
 							if ($this->ProvidersAssocVendor->save($fileSave['ProvidersAssocVendor'])) {
-								debug('Save ProvidersAssocVendor ok');
+								// debug('Save ProvidersAssocVendor ok');
 
 								$ProvidersAssocVendorId = $this->ProvidersAssocVendor->getLastInsertId();
 //NOTE add xml info
@@ -549,7 +490,7 @@ class ProvidersControlsFilesController extends AppController {
 							$ProvidersAssocVendorId = current($check_assoc)['ProvidersAssocVendor']['id'];
 					}
 
-					debug($ProvidersAssocVendorId);
+					// debug($ProvidersAssocVendorId);
 
 				// $fileCond['ProvidersControlsFile.id'] = $fid;
 				$fileIdUp['ProvidersAssocVendor']['providers_assoc_vendors_id'] = $ProvidersAssocVendorId;
@@ -558,21 +499,52 @@ class ProvidersControlsFilesController extends AppController {
 				$this->ProvidersControlsFile->id = $fid;
 				// if ($this->ProvidersControlsFile->updateAll($fileUp)) {
 				if ($this->ProvidersControlsFile->save($fileIdUp['ProvidersAssocVendor'])) {
-					debug('Update File');
+					// debug('Update File');
 				}
 
+
+
+				// NOTE last query
+				// sistemas.dbo.providers_view_relations
+				// Configure::write('debug', 2);
+				// debug($data);
+
+				$getUpdated = current($this->ProvidersViewRelation->find('all',array('conditions'=>$fileConditions)))['ProvidersViewRelation'];
+				// $data = current($ge)['ProvidersViewRelation'];
+				// debug($getUpdated);
+
+				// $anx = $this->Html->url('/files/anexos/', true);
+
+				$app = basename(ROOT);
+				$path = "{$_SERVER['REQUEST_SCHEME']}://{$_SERVER['HTTP_HOST']}/{$app}/";
+				$url = 'app/webroot/files/providers_sat/';
+
+
+				if ($is_xml == true) {
+					$response['message'] = 'Su documento se valido y libero correctamente';
+					$response['uuid'] = $SaveUUID['ProvidersUuidRequest']['uuid'];
+					$response['status'] = $getUpdated['Status'];
+					$response['fecha'] = $getUpdated['InvcDate'];
+					$response['totalAmt'] = $SaveUUID['ProvidersUuidRequest']['Total'];
+					$response['xml'] = "<a href=\"{$path}{$url}{$getUpdated['xml_src']}\" download=\"{$getUpdated['xml_name']}\"><i class=\"fa fa-file-text\"></i></a>";
+				} else {
+					$response['message'] = 'Su documento se envio correctamente';
+					$response['voucher'] = '<i class="fa fa-file-pdf-o"></i>';
+					$response['order'] = '<i class="fa fa-file-pdf-o"></i>';
+				}
+				return $response;
 			} // End Relation
 
 			function file_proccess( $form_data = array() , $ref_data = array() ) {
 
-				debug('FORM_DATA');
-				debug($form_data);
+				// debug('FORM_DATA');
+				// debug($form_data);
 
 				if (isset($form_data)) {
 						$this->data['ProvidersControlsFile']['upload'] = $form_data;
 				}
 
-				debug($this->data);
+				// debug($this->data);
 
 				$file_providers_name = str_replace('.'.end(explode('.',$this->data['ProvidersControlsFile']['upload']['name'])),'',$this->data['ProvidersControlsFile']['upload']['name']);
 
@@ -587,14 +559,25 @@ class ProvidersControlsFilesController extends AppController {
 
 						//NOTE this must be a very rare case but one never knows
 						if (count($finderFilename) >= 1) {
-							$this->Session->setFlash(__('<div class="alert alert-danger alert-dismissible fade in" role="alert">
+
+							// $this->Session->setFlash(__('<div class="alert alert-danger alert-dismissible fade in" role="alert">
+							// 					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							// 						<span aria-hidden="true">&times;</span>
+							// 					</button>
+							// 					El archivo <strong> '.$file_providers_name.' </strong>
+							// 					ya se encuentra en la base de datos.
+							// 					Por favor elija otro archivo </div>', true));
+
+							$message = '<div class="alert alert-danger alert-dismissible fade in" role="alert">
 												<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 													<span aria-hidden="true">&times;</span>
 												</button>
 												El archivo <strong> '.$file_providers_name.' </strong>
 												ya se encuentra en la base de datos.
-												Por favor elija otro archivo </div>', true));
-							$this->redirect($this->referer());
+												Por favor elija otro archivo </div>';
+							// $this->redirect($this->referer());
+							$response = array('message'=>$message);
+							return $response;
 						}
 				// 				$idx_providers_name = current($finderFilename);
 
@@ -616,26 +599,35 @@ class ProvidersControlsFilesController extends AppController {
 					$data_stat['filesize'] = $_file_size;
 
 
-					$extensions = array('txt', 'xls', 'xlsx', 'csv', 'xml', 'pdf');
+					$extensions = array( 'xml', 'pdf');
 
 					if( in_array(strtolower(end(explode('.',$this->data['ProvidersControlsFile']['upload']['name']))), $extensions ) === FALSE){
 
-						$this->Session->setFlash(__('<div class="alert alert-danger alert-dismissible fade in" role="alert">
+						// $this->Session->setFlash(__('<div class="alert alert-danger alert-dismissible fade in" role="alert">
+						// 								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+						// 									<span aria-hidden="true">&times;</span>
+						// 								</button>
+						// 								<strong> Solo se permiten archivos de texto plano con la extension xml o archivos pdf </strong>
+						// 							</div>', true));
+						$message = '<div class="alert alert-danger alert-dismissible fade in" role="alert">
 														<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 															<span aria-hidden="true">&times;</span>
 														</button>
-														<strong> Solo se permiten archivos de texto plano con la extension txt , csv o archivos excel xls ,xlsx </strong>
-													</div>', true));
-						$this->redirect(array('action' => 'index'));
+														<strong> Solo se permiten archivos de texto plano con la extension xml o archivos pdf </strong>
+													</div>';
+							$response = array('message'=>$message);
+							return $response;
+						// $this->redirect(array('action' => 'index'));
 					} else {
 						$ext = '.' . strtolower(end(explode('.',$this->data['ProvidersControlsFile']['upload']['name'])));
-						debug('miss');
+						// debug('miss');
+
 					}
 
 					$name = basename(md5($this->data['ProvidersControlsFile']['upload']['name'])); // for the long and inconsistent names and drop the basename /tmp
-					debug('NAME IN THIS->DATA');
-					debug($name);
-					debug($this->data['ProvidersControlsFile']['upload']['name']);
+					// debug('NAME IN THIS->DATA');
+					// debug($name);
+					// debug($this->data['ProvidersControlsFile']['upload']['name']);
 
 								$data_stat['name'] = $name;
 								$data_stat['ext'] = strtolower(end(explode('.',$this->data['ProvidersControlsFile']['upload']['name'])));
@@ -647,18 +639,30 @@ class ProvidersControlsFilesController extends AppController {
 						// code...
 						// go to validate in SAT if false go to referrer
 						$info = $this->validate($this->data['ProvidersControlsFile']['upload']['tmp_name']);
-						debug('VARDUMP');
-						echo '<pre>';
-						var_dump($info);
-						echo '</pre>';
+						// debug('VARDUMP');
+						// echo '<pre>';
+						// var_dump($info);
+						// echo '</pre>';
 
+						// debug('CHECKSAT');
 
-						debug('CHECKSAT');
 						$check = $this->check_sat($info);
-						if ($check == false) {
-							exit();
+						// echo '<pre>';
+						// var_dump($check);
+						// echo '</pre>';
+
+						// exit();
+						if ($check['status'] == false) {
+
+							// print_r($check['message']);
+							$response = array('message'=>$check['message']);
+							return $response;
+							// exit();
 							//NOTE set mecjha for alert the status
 						}
+						// print_r($check['message']);
+						// $response = array('message'=>$check['message']);
+						// return $response;
 						// es valido continua
 						// no es valido , salir
 					}
@@ -680,7 +684,7 @@ class ProvidersControlsFilesController extends AppController {
 										$file['ProvidersControlsFile']['providers_parents_id'] = '1';
 										$file['ProvidersControlsFile']['_status'] = '1';
 
-										$this->ProvidersControlsFile->create();
+					$this->ProvidersControlsFile->create();
 
 					if ($this->ProvidersControlsFile->save($file)) {
 
@@ -696,67 +700,61 @@ class ProvidersControlsFilesController extends AppController {
 					// go with refData
 						if (isset($ref_data)) {
 							// code...
-								debug('REF_DATA');
-								$this->relation($ref_data,$providers_controls_files_id,$info,$ext);
+								// debug('REF_DATA');
+								$response = $this->relation($ref_data,$providers_controls_files_id,$info,$ext);
 						}
 					/**=======================================================*/
 					}
 
+					// $response = array('message'=>$message,'uuid'=>'the uid','error'=>'cuack');
+					return $response;
 			} //file_proccess
 
 
 			function upload() {
 
-				Configure::write('debug',2);
+				Configure::write('debug',0);
 				// App::uses('Xml', 'Lib');
-							debug('FORM');
+							// debug('FORM');
 							// debug($this->params['form']);
 							$forms = $this->params['form'];
 
 								foreach ($forms as $key_code => $data_code) {
 									// code...
 									if($key_code == 'batnbr') {
-										debug('KEYCODE => '.$key_code);
-										debug('DATACODE => '.$data_code);
+										// debug('KEYCODE => '.$key_code);
+										// debug('DATACODE => '.$data_code);
 										$batnbr = $data_code;
 									}
 										// NOTE split for datacode
 											$split_code = explode('_',$key_code);
 
 										if ($data_code['error'] == 0 ) {
-											// debug($split_code);
-											// debug($batnbr);
-											// debug($data_code);
-
 											// save the file and set storage
 											// debug('$this->file_proccess($data_code,$split_code)');
-											$this->file_proccess($data_code,$split_code);
+											$response = $this->file_proccess($data_code,$split_code);
 
 										}
 
 								}
 				//NOTE update table and send data for update download cell
+					// $this->set(compact('response'));
 							// NOTE set the response output for an ajax call
+							// Configure::write('debug', 2);
+							// $this->autoLayout = false;
+// debug($response);
+// exit();
+							//4. Return as a json array
 							Configure::write('debug', 0);
+							$this->autoRender = false;
 							$this->autoLayout = false;
+					// 		$this->layout='empty';
+							$this->header('Content-Type: application/json');
+							echo json_encode($response);
 			} //NOTE end update
 
 
 			function _check( $data ) {
-				$this->loadModel('AddenumTblAlbaranRelation');
-				debug('_CHECK');
-				debug($data);
-				$conditions['AddenumTblAlbaranRelation.batnbr'] = $data['batnbr'];
-				$conditions['AddenumTblAlbaranRelation.RefNbr'] = $data['RefNbr'];
-
-				if($data['idx']) {
-					$conditions['AddenumTblAlbaranRelation.id'] = $data['idx'];
-				}
-
-
-				$response = $this->AddenumTblAlbaranRelation->find('all',array('fields'=>array('id'),'conditions'=>$conditions));
-
-				return  current($response)['AddenumTblAlbaranRelation']['id'];
 
 			} // ENd _check
 
@@ -827,7 +825,12 @@ class ProvidersControlsFilesController extends AppController {
 
 				$providersViewRelations = $this->ProvidersViewRelation->find('all',array('conditions'=>$conditionsBl));
 				// debug($providersViewRelations);
-				$this->set(compact('providersViewRelations'));
+				$app = basename(ROOT);
+				$path = "{$_SERVER['REQUEST_SCHEME']}://{$_SERVER['HTTP_HOST']}/{$app}/";
+				$url = 'app/webroot/files/providers_sat/';
+				$route = $path.$url;
+
+				$this->set(compact('providersViewRelations','route'));
 // exit();
 				// NOTE set the response output for an ajax call
 				Configure::write('debug', 0);
@@ -909,8 +912,6 @@ class ProvidersControlsFilesController extends AppController {
 		// }
 
 		if (!empty($this->data)) {
-
-
 
             $file_providers_name = str_replace('.'.end(explode('.',$this->data['ProvidersControlsFile']['upload']['name'])),'',$this->data['ProvidersControlsFile']['upload']['name']);
 

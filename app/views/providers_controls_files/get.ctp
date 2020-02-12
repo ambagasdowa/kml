@@ -182,9 +182,9 @@
 
 		<tr>
 			<td><?php echo $providersViewRelation['ProvidersViewRelation']['id']; ?></td>
-			<td><?php echo $providersViewRelation['ProvidersViewRelation']['BatNbr']; ?></td>
+			<td><?php echo trim($providersViewRelation['ProvidersViewRelation']['BatNbr']); ?></td>
 			<td><?php echo $providersViewRelation['ProvidersViewRelation']['CpnyID']; ?></td>
-			<td><?php echo $providersViewRelation['ProvidersViewRelation']['Status']; ?></td>
+			<td><div id="statusx_<?php echo trim($providersViewRelation['ProvidersViewRelation']['BatNbr']);?>"><?php echo $providersViewRelation['ProvidersViewRelation']['Status'];?></div></td>
 			<!-- <td><?php echo $providersViewRelation['ProvidersViewRelation']['Module']; ?></td> -->
 			<!-- <td><?php echo $providersViewRelation['ProvidersViewRelation']['JrnlType']; ?></td> -->
 			<!-- <td><?php echo $providersViewRelation['ProvidersViewRelation']['ap_status']; ?></td> -->
@@ -194,23 +194,25 @@
 			<td><?php echo $providersViewRelation['ProvidersViewRelation']['RefNbr']; ?></td>
 			<!-- <td><?php echo $providersViewRelation['ProvidersViewRelation']['DocType']; ?></td> -->
 			<!-- <td><?php echo $providersViewRelation['ProvidersViewRelation']['DocDesc']; ?></td> -->
-			<td><?php echo $providersViewRelation['ProvidersViewRelation']['InvDate']; ?></td>
+			<td><div id="fechax_<?php echo trim($providersViewRelation['ProvidersViewRelation']['BatNbr']);?>"><?php echo $providersViewRelation['ProvidersViewRelation']['InvDate'];?></div></td>
 			<td><?php echo $providersViewRelation['ProvidersViewRelation']['InvcNbr']; ?></td>
 			<td><?php echo $providersViewRelation['ProvidersViewRelation']['name']; ?></td>
 
 			<!-- <td><?php echo $providersViewRelation['ProvidersViewRelation']['xml']; ?></td> -->
-			<td id="xml_<?php echo $providersViewRelation['ProvidersViewRelation']['BatNbr'];?>">
+			<td id="xml_<?php echo trim($providersViewRelation['ProvidersViewRelation']['BatNbr']);?>">
+
+				<div id="xmlx_<?php echo trim($providersViewRelation['ProvidersViewRelation']['BatNbr']);?>">
 				<?php
 					if ($providersViewRelation['ProvidersViewRelation']['xml']) {
 						// code...
 						// echo $providersViewRelation['ProvidersViewRelation']['xml'];
-						echo '<i class="fa fa-file-text"></i>';
+						echo "<a href=\"{$route}{$providersViewRelation['ProvidersViewRelation']['xml_src']}\" download=\"{$providersViewRelation['ProvidersViewRelation']['xml_name']}\"><i class=\"fa fa-file-text\"></i></a>";
 					} else {
 					echo '<label class="fileContainer"><i class="fa fa-upload"></i>';
 					echo
 								$this->Form->File
 																	(
-																		'Providers'.$providersViewRelation['ProvidersViewRelation']['BatNbr'].'xml',
+																		'Providers'.trim($providersViewRelation['ProvidersViewRelation']['BatNbr']).'xml',
 																		 array
 																					(
 																						'type'=>'file',
@@ -218,7 +220,7 @@
 																						'width'=>'60',
 																						'id'=>'upload_xml_'.trim($providersViewRelation['ProvidersViewRelation']['BatNbr']),
 																						'name'=>'xml_'.trim($providersViewRelation['ProvidersViewRelation']['BatNbr']).'_'.trim($providersViewRelation['ProvidersViewRelation']['CpnyID']).'_'.trim($providersViewRelation['ProvidersViewRelation']['RefNbr']).'_'.'1',
-																						'data-id'=>$providersViewRelation['ProvidersViewRelation']['BatNbr'],
+																						'data-id'=>trim($providersViewRelation['ProvidersViewRelation']['BatNbr']),
 																						'data-refnbr'=>$providersViewRelation['ProvidersViewRelation']['RefNbr'],
 																						'data-ponbr'=>$providersViewRelation['ProvidersViewRelation']['PONbr'],
 																						'data-vendid'=>$providersViewRelation['ProvidersViewRelation']['vendid'],
@@ -239,28 +241,29 @@
 					}
 					echo '</label>';
 				?>
-				<!-- <input type="submit" value="submit"/> -->
+				</div>
 			</td>
-			<td>
+			<td id="voucher_<?php echo trim($providersViewRelation['ProvidersViewRelation']['BatNbr']);?>">
+				<div id="voucherx_<?php echo trim($providersViewRelation['ProvidersViewRelation']['BatNbr']);?>">
 				<?php
 					if ($providersViewRelation['ProvidersViewRelation']['voucher']) {
 						// code...
 						// echo $providersViewRelation['ProvidersViewRelation']['voucher'];
-						echo '<i class="fa fa-file-pdf-o"></i>';
+						echo "<a href=\"{$route}{$providersViewRelation['ProvidersViewRelation']['voucher_src']}\" download=\"{$providersViewRelation['ProvidersViewRelation']['voucher_name']}\"><i class=\"fa fa-file-text\"></i></a>";
 					} else {
 						echo '<label class="fileContainer"><i class="fa fa-upload"></i>';
 						echo
 									$this->Form->File
 																		(
-																			'Providers'.$providersViewRelation['ProvidersViewRelation']['BatNbr'].'pdf',
+																			'Providers'.trim($providersViewRelation['ProvidersViewRelation']['BatNbr']).'pdf',
 																			 array
 																						(
 																							'type'=>'file',
 																							// 'class'=>'xls u-full-width form-control',
 																							'width'=>'60',
-																							'id'=>'upload_pdf_'.$providersViewRelation['ProvidersViewRelation']['BatNbr'],
+																							'id'=>'upload_pdf_'.trim($providersViewRelation['ProvidersViewRelation']['BatNbr']),
 																							'name'=>'voucher_'.trim($providersViewRelation['ProvidersViewRelation']['BatNbr']).'_'.trim($providersViewRelation['ProvidersViewRelation']['CpnyID']).'_'.trim($providersViewRelation['ProvidersViewRelation']['RefNbr']).'_'.'2',
-																							'data-id'=>'voucher_'.$providersViewRelation['ProvidersViewRelation']['BatNbr'],
+																							'data-id'=>'voucher_'.trim($providersViewRelation['ProvidersViewRelation']['BatNbr']),
 																							'data-refnbr'=>$providersViewRelation['ProvidersViewRelation']['RefNbr'],
 																							'data-ponbr'=>$providersViewRelation['ProvidersViewRelation']['PONbr'],
 																							'data-vendid'=>$providersViewRelation['ProvidersViewRelation']['vendid'],
@@ -281,27 +284,29 @@
 						}
 						echo '</label>';
 				?>
+				</div>
 			</td>
-			<td>
+			<td id="order_<?php echo trim($providersViewRelation['ProvidersViewRelation']['BatNbr']);?>">
+				<div id="orderx_<?php echo trim($providersViewRelation['ProvidersViewRelation']['BatNbr']);?>">
 				<?php
 					if ($providersViewRelation['ProvidersViewRelation']['order']) {
 						// code...
 						// echo $providersViewRelation['ProvidersViewRelation']['order'];
-						echo '<i class="fa fa-file-pdf-o"></i>';
+						echo "<a href=\"{$route}{$providersViewRelation['ProvidersViewRelation']['order_src']}\" download=\"{$providersViewRelation['ProvidersViewRelation']['order_name']}\"><i class=\"fa fa-file-text\"></i></a>";
 					} else {
 						echo '<label class="fileContainer"><i class="fa fa-upload"></i>';
 						echo
 									$this->Form->File
 																		(
-																			'Providers'.$providersViewRelation['ProvidersViewRelation']['BatNbr'].'xml',
+																			'Providers'.trim($providersViewRelation['ProvidersViewRelation']['BatNbr']).'xml',
 																			 array
 																						(
 																							'type'=>'file',
 																							// 'class'=>'xls u-full-width form-control',
 																							'width'=>'60',
-																							'id'=>'upload_order_'.$providersViewRelation['ProvidersViewRelation']['BatNbr'],
+																							'id'=>'upload_order_'.trim($providersViewRelation['ProvidersViewRelation']['BatNbr']),
 																							'name'=>'order_'.trim($providersViewRelation['ProvidersViewRelation']['BatNbr']).'_'.trim($providersViewRelation['ProvidersViewRelation']['CpnyID']).'_'.trim($providersViewRelation['ProvidersViewRelation']['RefNbr']).'_'.'3',
-																							'data-id'=>'order_'.$providersViewRelation['ProvidersViewRelation']['BatNbr'],
+																							'data-id'=>'order_'.trim($providersViewRelation['ProvidersViewRelation']['BatNbr']),
 																							'data-refnbr'=>$providersViewRelation['ProvidersViewRelation']['RefNbr'],
 																							'data-ponbr'=>$providersViewRelation['ProvidersViewRelation']['PONbr'],
 																							'data-vendid'=>$providersViewRelation['ProvidersViewRelation']['vendid'],
@@ -322,13 +327,16 @@
 						}
 						echo '</label>';
 				?>
+				</div>
 			</td>
 			<!-- <td><?php echo $providersViewRelation['ProvidersViewRelation']['Acct']; ?></td> -->
-			<td><?php echo $providersViewRelation['ProvidersViewRelation']['totalAmt']; ?></td>
-			<td><?php echo $providersViewRelation['ProvidersViewRelation']['UUID']; ?></td>
+			<td><div id="totalAmtx_<?php echo trim($providersViewRelation['ProvidersViewRelation']['BatNbr']);?>"><?php echo $providersViewRelation['ProvidersViewRelation']['totalAmt'];?></div></td>
+
+			<td><div id="uuidx_<?php echo trim($providersViewRelation['ProvidersViewRelation']['BatNbr']);?>"><?php echo $providersViewRelation['ProvidersViewRelation']['UUID'];?></div></td>
 
 
-			<td id="link_<?php echo $providersViewRelation['ProvidersViewRelation']['BatNbr'];?>">
+			<td id="link_<?php echo trim($providersViewRelation['ProvidersViewRelation']['BatNbr']);?>">
+				<div id="linkx_<?php echo trim($providersViewRelation['ProvidersViewRelation']['BatNbr']);?>">
 				<?php
 					// if (isset($providersViewRelation['ProvidersViewRelation']['IdPedido']) && isset($providersViewRelation['ProvidersViewRelation']['Albaran'])) {
 						// code...
@@ -341,23 +349,24 @@
 													 'controller'=>'ProvidersControlsFile'
 													,'action' => 'upload'
 													// ,'xml_string'=>$providersViewRelation['ProvidersViewRelation']['addenum']
-												  // ,'id'=>$providersViewRelation['ProvidersViewRelation']['BatNbr']
-												  // ,'standings_name'=>$providersViewRelation['ProvidersViewRelation']['BatNbr'].'_'.$providersViewRelation['ProvidersViewRelation']['no_remision']
+												  // ,'id'=>trim($providersViewRelation['ProvidersViewRelation']['BatNbr'])
+												  // ,'standings_name'=>trim($providersViewRelation['ProvidersViewRelation']['BatNbr']).'_'.$providersViewRelation['ProvidersViewRelation']['no_remision']
 													// ,'sort'=>'id'
 													// ,'direction'=>'asc'
 												)
 										,array(
 													// 'target'=>'_blank'
-													'id'=>'upload_'.$providersViewRelation['ProvidersViewRelation']['BatNbr'],
-													'data-id'=>$providersViewRelation['ProvidersViewRelation']['BatNbr'],
+													'id'=>'upload_'.trim($providersViewRelation['ProvidersViewRelation']['BatNbr']),
+													'data-id'=>trim($providersViewRelation['ProvidersViewRelation']['BatNbr']),
 													// ,'data-addenum'=>$providersViewRelation['ProvidersViewRelation']['addenum']
-													'data-name' => $providersViewRelation['ProvidersViewRelation']['BatNbr'].'_'.$providersViewRelation['ProvidersViewRelation']['no_remision'],
+													'data-name' => trim($providersViewRelation['ProvidersViewRelation']['BatNbr']).'_'.$providersViewRelation['ProvidersViewRelation']['no_remision'],
 												)
 						);
 					// } else {
 					// 	echo '';
 					}
 				?>
+				</div>
 			</td>
 
 		</tr>

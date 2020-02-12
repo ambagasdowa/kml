@@ -130,19 +130,17 @@
 
 <!-- ================================================================================================= -->
 <!-- @NOTE  =====   Get the Files ====  -->
-
-<?php 	echo $this->Session->flash();?>
-
+<div id="msg">
+	<?php echo $this->Session->flash();?>
+</div>
 
 
 		<div class="container-mod">
-
 					<div class="row">
 							<div class="twelve columns ">
 								<h6 class="docs-header">Proveedores</h6>
 						</div>
 					</div>
-
 		</div>
 
 
@@ -299,7 +297,7 @@
 									table_a.$("a[id^='upload_']").on('click', function(e) {
 									e.stopPropagation();
 									e.preventDefault();
-
+									$( this ).html('<div class="text-center"><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><span class="sr-only">Loading...</span><div>');
 												batnbr = $(this).attr('data-id');
 												var myForm = $("#tform").get(0);
 												formData = new FormData(myForm);
@@ -312,6 +310,7 @@
 											    processData: false,
 											    contentType: false,
 													enctype: 'multipart/form-data',
+													dataType: 'json',
 													beforeSend:function (){
 														// $( ".updateSearchResult" ).html('<div class="text-center"><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><span class="sr-only">Loading...</span><div>');
 														// alert ('working');
@@ -322,25 +321,58 @@
 											        // $("#pro_pix h6").text(data);
 															// this must be a modal instead
 															// alert(data);
+															// $('#msg').load(document.URL +  ' #msg');
+
 											    },
 											    error: function(jqXHR, textStatus, errorThrown){
 											        //if fails
 											    }
 											}).done(function ( data,textStatus,jqXHR ){
-															// alert('response is : ' + data );
-														alert('response is : all transactions are successfully executed');
-														//
-														// if ( $("#update_pedido_"+batnbr).val() && $("#update_albaran_"+batnbr).val() ) {
-														// 		$('#link_'+batnbr).html('<a href="<?php //echo Dispatcher::baseUrl();?>/AddenumViewAlbaranRelations/link/id:'+batnbr+'" id="get_'+batnbr+'" data-id="'+batnbr+'" data-name="'+batnbr+'_'+remision+'">Descargar</a>');
-														}
+																	// var json = JSON.parse(data);
+																	alert(JSON.stringify(data));
+																	// alert ('end json');
 
+																	if (data.message) {
+																		$('#msg').html(data.message);
+																	}
+
+																	if (data.status) {
+																		$('#statusx_'+batnbr).html(data.status);
+																	}
+																	
+																	if (data.fecha) {
+																		$('#fechax_'+batnbr).html(data.fecha);
+																	}
+
+																	if (data.totalAmt) {
+																		$('#totalAmtx_'+batnbr).html(data.totalAmt);
+																	}
+
+																	if (data.uuid) {
+																		$('#uuidx_'+batnbr).html(data.uuid);
+																	}
+
+																	if (data.xml){
+																		$('#xmlx_'+batnbr).html(data.xml);
+																	}
+																	if (data.voucher){
+																		$('#voucherx_'+batnbr).html(data.voucher);
+																	}
+																	if (data.order){
+																		$('#orderx_'+batnbr).html(data.order);
+																	}
+																	$('#linkx_'+batnbr).html('<div class="text-center"><i class="fa fa-check fa-2x"></i><div>');
+
+															// alert('response is : ' + data );
+														// alert('response is : all transactions are successfully executed');
+														//
 														// if ( $("#update_pedido_"+batnbr).val() && $("#update_albaran_"+batnbr).val() ) {
 														// 		$('#link_'+batnbr).html('<a href="<?php //echo Dispatcher::baseUrl();?>/AddenumViewAlbaranRelations/link/id:'+batnbr+'" id="get_'+batnbr+'" data-id="'+batnbr+'" data-name="'+batnbr+'_'+remision+'">Descargar</a>');
 														// }
 
-
-
-
+														// if ( $("#update_pedido_"+batnbr).val() && $("#update_albaran_"+batnbr).val() ) {
+														// 		$('#link_'+batnbr).html('<a href="<?php //echo Dispatcher::baseUrl();?>/AddenumViewAlbaranRelations/link/id:'+batnbr+'" id="get_'+batnbr+'" data-id="'+batnbr+'" data-name="'+batnbr+'_'+remision+'">Descargar</a>');
+														// }
 
 											});
 // NOTE TEST
