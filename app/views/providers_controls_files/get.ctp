@@ -29,7 +29,6 @@
 
 		?>
 
-
 <div style="display:none;">
 		<div id="json_one">
 			<?php print($json_parsing_level_one) ?>
@@ -78,12 +77,7 @@
 	</div> -->
 
 	<div class="row">
-		<?php $providersViewRelations ? : e('<div class="alert alert-success alert-dismissible fade in" role="alert">
-						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-								<span aria-hidden="true">&times;</span>
-						</button>
-						<strong>No se encontraron Registros Asociados </strong>
-				</div>'); ?>
+		<?php (!isset($message) || empty($message)) ? : e($message); ?>
 	</div>
 
 	<div class="row noprint">
@@ -147,41 +141,44 @@
 		<table id="table_res" class="table table-striped table-bordered">
 		<thead>
 			<tr>
-				<th>id</th>
-				<th>BatNbr</th>
-				<th>CpnyID</th>
-				<th>Status</th>
+				<!-- <th>id</th> -->
+				<th>Lote</th>
+				<th>UDN</th>
+				<th>Estatus</th>
 				<!-- <th>Module</th> -->
 				<!-- <th>JrnlType</th> -->
 				<!-- <th>ap_status</th> -->
-				<th>VendId</th>
+				<th>RFC</th>
 				<!-- <th>PerPost</th> -->
-				<th>PONbr</th>
-				<th>RefNbr</th>
+				<th>O.C.</th>
+				<th>Referencia</th>
 				<!-- <th>DocType</th> -->
 				<!-- <th>DocDesc</th> -->
-				<th>Fecha</th>
+				<th>F.Validaci&oacute;n</th>
 				<th>Factura</th>
-				<th>name</th>
-				<th>xml</th>
-				<th>voucher</th>
-				<th>order</th>
+				<th>Raz&oacute;n Social</th>
+				<th>Xml</th>
+				<th>Pdf</th>
+				<th>OCPdf</th>
 				<!-- <th>Acct</th> -->
-				<th>totalAmt</th>
+				<th>TotalFac</th>
 				<th>UUID</th>
 				<!-- <th>a</th> -->
 				<!-- <th>b</th> -->
-				<th>x</th>
+				<th>Acci&oacute;n</th>
 			</tr>
 		</thead>
 		<tbody>
 		<?php
+		// if (isset($providersViewRelation)) {
+			// code...
+
 		foreach ($providersViewRelations as $key => $providersViewRelation) {
 			// code...
 		?>
 
 		<tr>
-			<td><?php echo $providersViewRelation['ProvidersViewRelation']['id']; ?></td>
+			<!-- <td><?php echo $providersViewRelation['ProvidersViewRelation']['id']; ?></td> -->
 			<td><?php echo trim($providersViewRelation['ProvidersViewRelation']['BatNbr']); ?></td>
 			<td><?php echo $providersViewRelation['ProvidersViewRelation']['CpnyID']; ?></td>
 			<td><div id="statusx_<?php echo trim($providersViewRelation['ProvidersViewRelation']['BatNbr']);?>"><?php echo $providersViewRelation['ProvidersViewRelation']['Status'];?></div></td>
@@ -340,11 +337,11 @@
 				<?php
 					// if (isset($providersViewRelation['ProvidersViewRelation']['IdPedido']) && isset($providersViewRelation['ProvidersViewRelation']['Albaran'])) {
 						// code...
-						if ($providersViewRelation['ProvidersViewRelation']['Status'] == 'P') {
-							echo '&nbsp;';
+						if ($providersViewRelation['ProvidersViewRelation']['xstatus'] != 'H') {
+							echo '<div class="text-center"><i class="fa fa-check fa-2x fa-fw"></i><div>';
 						} else {
 							echo
-										$this->Html->link('Subir'
+										$this->Html->link('Valida'
 									,array(
 													 'controller'=>'ProvidersControlsFile'
 													,'action' => 'upload'
@@ -371,6 +368,7 @@
 
 		</tr>
 	<?php }//endforeach; ?>
+<?php //}//endIf; ?>
 		</tbody>
 		<?php /*
 		<tfoot>

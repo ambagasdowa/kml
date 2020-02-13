@@ -194,15 +194,37 @@
 																							'title'=>'Puede teclear la fecha en Formato yyyymmdd',
 																							'div'=>FALSE,
 																							'label'=>FALSE,
-																							'tabindex'=>'1'
+																							'tabindex'=>'2'
 																						)
 																		);
 						echo '</div>';
 
 						?>
+						<?php
+						echo '<div class="two columns input-group">';
+						echo '<div class="input-group-addon"><i class="fa fa-barcode"></i></div>';
+						echo
+									$this->Form->input
+																		(
+																			'bsu',
+																			 array
+																						(
+																							'type'=>'select',
+																							'options'=>$bsu,
+																							'class'=>'search_udn search_value u-full-width form-control',
+																							'label'=>false,
+																							'div'=>false,
+																							// 'multiple' => true,
+																							'tabindex'=>'3',
+																							'empty'=>'Unidad de Negocio'
 
+																						)
+																		);
+						echo '</div>';
+					?>
 
 						<?php
+
 						echo '<div class="two columns input-group">';
 						echo '<div class="input-group-addon"><i class="fa fa-barcode"></i></div>';
 						echo
@@ -212,7 +234,7 @@
 																			 array
 																						(
 																							'type'=>'text',
-																							'class'=>'search_udn u-full-width form-control',
+																							'class'=>'u-full-width form-control',
 																							'id'=>'to',
 																							'placeholder' => 'LOTE',
 																							// 'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
@@ -220,7 +242,7 @@
 																							'div'=>FALSE,
 																							'label'=>FALSE,
 																							// 'options'=>$bssus,
-																							'tabindex'=>'2'
+																							'tabindex'=>'4'
 																						)
 																		);
 							echo '</div>';
@@ -234,7 +256,7 @@
 													$this->Html->link(
 																							__('Buscar ...', true),
 																							array('action' => 'get', null),
-																							array('id'=>'send_query','div'=>false,'class'=>'btn btn-primary btn-sm pull-right','tabindex'=>'6')
+																							array('id'=>'send_query','div'=>false,'class'=>'btn btn-primary btn-sm pull-right','tabindex'=>'5')
 																						);
 								?>
 							</div>
@@ -264,6 +286,8 @@
 		  $(document).ready(function () {
 
 				$('[data-toggle="datepicker"]').datepicker(options_datepicker);
+					$(".search_udn").select2();
+
 
 					$("#send_query").on('click', function(event) {
 
@@ -292,6 +316,9 @@
 
 									// ALERT check this behavior
 // ======================================================================================================== //
+// on keydown?
+
+
 									// DONE to HIR
 									// NOTE add the file dispatcher inside send_query
 									table_a.$("a[id^='upload_']").on('click', function(e) {
@@ -306,7 +333,8 @@
 												var myForm = $("#tform").get(0);
 												formData = new FormData(myForm);
 												// set the append
-												formData.append('batnbr',$(this).attr('data-id'))
+												formData.append('batnbr',$(this).attr('data-id'));
+
 											$.ajax({
 											    url : "<?php echo Dispatcher::baseUrl();?>/ProvidersControlsFiles/upload/",
 											    type: "POST",
