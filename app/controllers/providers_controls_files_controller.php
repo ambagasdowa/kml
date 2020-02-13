@@ -840,6 +840,10 @@ class ProvidersControlsFilesController extends AppController {
 					$conditionsBl['ProvidersViewRelation.BatNbr'] = $add_conditions['BatNbr'];
 				}
 
+				if($_SESSION['Auth']['User']['group_id'] == 16){
+					$conditionsBl['ProvidersViewRelation.VendId'] = $_SESSION['Auth']['User']['username'];
+				}
+
 				$providersViewRelations = $this->ProvidersViewRelation->find('all',array('conditions'=>$conditionsBl));
 				// debug($providersViewRelations);
 				$app = basename(ROOT);
