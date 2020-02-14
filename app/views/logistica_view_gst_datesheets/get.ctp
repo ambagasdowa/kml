@@ -191,10 +191,11 @@
 												<!-- <th>peso-despachado</th> -->
 												<!-- <th>subtotal</th> -->
 												<!-- <th>Operador</th> -->
+												<th>Unidad</th>
 												<th>Cliente</th>
 												<!-- <th>Remitente</th> -->
 												<!-- <th>Destinatario</th> -->
-												<th>Unidad</th>
+
 												<!-- <th>fecha_guia</th> -->
 												<th>Origen</th>
 												<th>Destino</th>
@@ -263,10 +264,11 @@
 			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['peso-despachado']; ?></td> -->
 			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['subtotal']; ?></td> -->
 			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['Operador']; ?></td> -->
+			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['id_unidad']; ?></td>
 			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['cliente']; ?></td>
 			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['remitente']; ?></td> -->
 			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['destinatario']; ?></td> -->
-			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['id_unidad']; ?></td>
+
 			<!-- <td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['fecha_guia']; ?></td> -->
 			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['Origen']; ?></td>
 			<td><?php echo $logisticaViewGstDatesheet['LogisticaViewGstDatesheet']['Destino']; ?></td>
