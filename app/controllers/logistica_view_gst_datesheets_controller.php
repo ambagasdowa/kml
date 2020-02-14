@@ -120,10 +120,15 @@ class LogisticaViewGstDatesheetsController extends AppController {
 		if(isset($add_conditions['id_area'])){
 			$conditions['LogisticaViewGstDatesheet.id_area'] = $add_conditions['id_area'];
 		}
-
-		if(isset($add_conditions['IsEmptyTrip'])){
-			$conditions['LogisticaViewGstDatesheet.IsEmptyTrip'] = $add_conditions['IsEmptyTrip'];
+		if(isset($add_conditions['id_cliente'])){
+			$conditions['LogisticaViewGstDatesheet.id_cliente'] = $add_conditions['id_cliente'];
 		}
+
+		// if(isset($add_conditions['IsEmptyTrip'])){
+			// $conditions['LogisticaViewGstDatesheet.IsEmptyTrip'] = $add_conditions['IsEmptyTrip'];
+			// NOTE: remove the parameter is empty so fix to static
+			$conditions['LogisticaViewGstDatesheet.IsEmptyTrip'] = 0;
+		// }
 
 		if(isset($add_conditions['projections_rp_definition'])){
 			$conditions['LogisticaViewGstDatesheet.projections_rp_definition'] = $add_conditions['projections_rp_definition'];
@@ -157,14 +162,16 @@ class LogisticaViewGstDatesheetsController extends AppController {
 
 		$this->LoadModel('ProjectionsViewBussinessUnit');
 		$this->LoadModel('LogisticaViewGstPlaza');
+		$this->LoadModel('LogisticaViewClient');
 		$bssus = $this->ProjectionsViewBussinessUnit->find('list',array('fields'=>array('id_area','label')));
 		$plazas = $this->LogisticaViewGstPlaza->find('list',array('fields'=>array('desc_plaza','desc_plaza')));
 
+		$client = $this->LogisticaViewClient->find('list');
 		// debug($plazas);
 		$IsEmptyTrip = array(0=>'Cargado',1=>'Vacio');
 		$projections_rp_definition = array('GRANEL'=>'Granel','OTROS'=>'Otros');
 
-		$this->set(compact('bssus','IsEmptyTrip','projections_rp_definition','plazas'));
+		$this->set(compact('bssus','IsEmptyTrip','projections_rp_definition','plazas','client'));
 
 	}
 

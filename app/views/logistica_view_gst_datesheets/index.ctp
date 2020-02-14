@@ -111,7 +111,7 @@
 		}
 
 		.two.columns {
-									width: 10.3333333333%; 
+									width: 10.3333333333%;
 		}
 
 		</style>
@@ -183,7 +183,6 @@
 
 						?>
 
-
 						<?php
 						echo '<div class="twos columns input-group">';
 						echo '<div class="input-group-addon"><i class="fa fa-barcode"></i></div>';
@@ -199,7 +198,7 @@
 																							'placeholder' => 'Unidad de Negocio',
 																							// 'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
 								                              // 'title'=>'Puede teclear la fecha en Formato yyyymmdd',
-																							'empty'=>'Areas',
+																							'empty'=>'Unidad de Negocio',
 																							'div'=>FALSE,
 																							'label'=>FALSE,
 																							'options'=>$bssus,
@@ -210,6 +209,7 @@
 
 						?>
 						<?php
+						/*
 						echo '<div class="twos columns input-group">';
 						echo '<div class="input-group-addon"><i class="fa fa-barcode"></i></div>';
 						echo
@@ -232,8 +232,35 @@
 																						)
 																		);
 							echo '</div>';
-
+						*/
 						?>
+
+
+												<?php
+												echo '<div class="twos columns input-group">';
+												echo '<div class="input-group-addon"><i class="fa fa-barcode"></i></div>';
+												echo
+															$this->Form->input
+																								(
+																									'id_cliente',
+																									 array
+																												(
+																													'type'=>'select',
+																													'class'=>'search_udn u-full-width form-control',
+																													'id'=>'to',
+																													'placeholder' => 'Cliente',
+																													// 'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
+														                              // 'title'=>'Puede teclear la fecha en Formato yyyymmdd',
+																													'empty'=>'Clientes',
+																													'div'=>FALSE,
+																													'label'=>FALSE,
+																													'options'=>$client,
+																													'tabindex'=>'2'
+																												)
+																								);
+													echo '</div>';
+
+												?>
 
 						<?php
 						echo '<div class="two columns input-group">';
