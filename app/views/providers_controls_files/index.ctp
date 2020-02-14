@@ -286,8 +286,8 @@
 		  $(document).ready(function () {
 
 				$('[data-toggle="datepicker"]').datepicker(options_datepicker);
-					$(".search_udn").select2();
 
+					$(".search_udn").select2();
 
 					$("#send_query").on('click', function(event) {
 
@@ -317,6 +317,22 @@
 									// ALERT check this behavior
 // ======================================================================================================== //
 // on keydown?
+									// table_a.$("input^[id='upload_xml_']").on('change',function() {
+									//
+									// var val = $(this).val();
+									// 	alert(val);
+									//
+									// 		switch(val.substring(val.lastIndexOf('.') + 1).toLowerCase()){
+									// 		case 'xml': case 'pdf': case 'csv':
+									// 		alert("valid one ");
+									// 		break;
+									// 		default:
+									// 		$(this).val('');
+									// 		// error message here
+									// 				alert("not an image");
+									// 				break;
+									// 		}
+									// });
 
 
 									// DONE to HIR
@@ -334,71 +350,103 @@
 												formData = new FormData(myForm);
 												// set the append
 												formData.append('batnbr',$(this).attr('data-id'));
+												// NOTE : vallida extension val.substring(val.lastIndexOf('.') + 1).toLowerCase()
+												xml = $('#upload_xml_'+batnbr).val();
+												voucher = $('#upload_pdf_'+batnbr).val();
+												order = $('#upload_order_'+batnbr).val();
 
-											$.ajax({
-											    url : "<?php echo Dispatcher::baseUrl();?>/ProvidersControlsFiles/upload/",
-											    type: "POST",
-											    data : formData,
-											    processData: false,
-											    contentType: false,
-													enctype: 'multipart/form-data',
-													dataType: 'json',
-													beforeSend:function (){
-														// alert ('working');
-													},
-											    success:function(data, textStatus, jqXHR){
-															// alert(data);
-											    },
-											    error: function(jqXHR, textStatus, errorThrown){
-											        //if fails
-											    }
-											}).done(function ( data,textStatus,jqXHR ){
-																	// var json = JSON.parse(data);
-																	// alert(JSON.stringify(data));
-																	if (data.message) {
-																		$('#msg').html(data.message);
-																	}
+												console.log(xml , voucher ,order);
 
-																	if (data.status) {
-																		$('#statusx_'+batnbr).html(data.status);
-																	}
+												//
+												// msg = "<div class=\"alert alert-danger alert-dismissible fade in\" role=\"alert\">
+												//  							<button type=\"button\" class=\"close\" data-dismiss=\"alert\" aria-label=\"Close\">
+												//  							<span aria-hidden=\"true\">&times;</span>
+												//  							</button>Se requiere subir archivo xml , factura y orden de compra en formato pdf
+												//  						</div>";
 
-																	if (data.fecha) {
-																		$('#fechax_'+batnbr).html(data.fecha);
-																	}
+// linkx = document.getElementById("linkx_"+batnbr);
 
-																	if (data.totalAmt) {
-																		$('#totalAmtx_'+batnbr).html(data.totalAmt);
-																	}
+											if ( xml != '' && voucher != '' && order != '' ) {
+												document.getElementById("msg").innerHTML = 'all ok to continue';
+												console.log(linkx);
 
-																	if (data.uuid) {
-																		$('#uuidx_'+batnbr).html(data.uuid);
-																	}
+												$('#linkx_'+batnbr).remove();
+												$('#link_'+batnbr).prepend(link);
 
-																	if (data.xml){
-																		$('#xmlx_'+batnbr).html(data.xml);
-																	}
-																	if (data.voucher){
-																		$('#voucherx_'+batnbr).html(data.voucher);
-																	}
-																	if (data.order){
-																		$('#orderx_'+batnbr).html(data.order);
-																	}
+												// linkx.appendChild(link);
+												console.log(linkx);
+												// exit();
+											} else if ( xml == '' || voucher == '' || order == '' ) {
+												document.getElementById("msg").innerHTML = 'wait madafaka ...';
+												exit();
+											}
+exit();
+													$.ajax({
+													    url : "<?php echo Dispatcher::baseUrl();?>/ProvidersControlsFiles/upload/",
+													    type: "POST",
+													    data : formData,
+													    processData: false,
+													    contentType: false,
+															enctype: 'multipart/form-data',
+															dataType: 'json',
+															beforeSend:function (){
+																// alert ('working');
+															},
+													    success:function(data, textStatus, jqXHR){
+																	// alert(data);
+													    },
+													    error: function(jqXHR, textStatus, errorThrown){
+													        //if fails
+													    }
+													}).done(function ( data,textStatus,jqXHR ){
+																			// var json = JSON.parse(data);
+																			// alert(JSON.stringify(data));
+																			if (data.message) {
+																				$('#msg').html(data.message);
+																			}
 
-																	// NOTE Validate uploaded files // This is inside or outside ?
-																	if (data.count == 3) {
-																		$('#linkx_'+batnbr).html('<div class="text-center"><i class="fa fa-check fa-2x fa-fw"></i><div>');
-																	} else {
-																		$('#linkx_'+batnbr).html(link).on('click',function(evt){
-																			evt.stopPropagation();
-																			evt.preventDefault();
-																			alert('theWay?');
-																		});
-																	}
+																			if (data.status) {
+																				$('#statusx_'+batnbr).html(data.status);
+																			}
 
-											});
-// NOTE function ends
+																			if (data.fecha) {
+																				$('#fechax_'+batnbr).html(data.fecha);
+																			}
 
+																			if (data.totalAmt) {
+																				$('#totalAmtx_'+batnbr).html(data.totalAmt);
+																			}
+
+																			if (data.uuid) {
+																				$('#uuidx_'+batnbr).html(data.uuid);
+																			}
+
+																			if (data.xml){
+																				$('#xmlx_'+batnbr).html(data.xml);
+																			}
+																			if (data.voucher){
+																				$('#voucherx_'+batnbr).html(data.voucher);
+																			}
+																			if (data.order){
+																				$('#orderx_'+batnbr).html(data.order);
+																			}
+
+																			// NOTE Validate uploaded files // This is inside or outside ?
+																			if (data.count == 3) {
+																				$('#linkx_'+batnbr).html('<div class="text-center"><i class="fa fa-check fa-2x fa-fw"></i><div>');
+																			} else {
+																				$('#linkx_'+batnbr).html(link).on('click',function(evt){
+																					evt.stopPropagation();
+																					evt.preventDefault();
+																					alert('theWay?');
+																				});
+																			}
+
+													});
+												// NOTE function ends
+											// } else { //Ends if upload documents
+
+											// }
 										}); //End on keydown
 
 								}); //NOTE end file dispatch
