@@ -368,19 +368,13 @@
 
 											if ( xml != '' && voucher != '' && order != '' ) {
 												document.getElementById("msg").innerHTML = 'all ok to continue';
-												console.log(linkx);
-
+											} else if ( xml == '' || voucher == '' || order == '' ) {
+												document.getElementById("msg").innerHTML = 'Se requiere subir archivo xml , factura y orden de compra en formato pdf';
 												$('#linkx_'+batnbr).remove();
 												$('#link_'+batnbr).prepend(link);
-
-												// linkx.appendChild(link);
-												console.log(linkx);
-												// exit();
-											} else if ( xml == '' || voucher == '' || order == '' ) {
-												document.getElementById("msg").innerHTML = 'wait madafaka ...';
 												exit();
 											}
-exit();
+// exit();
 													$.ajax({
 													    url : "<?php echo Dispatcher::baseUrl();?>/ProvidersControlsFiles/upload/",
 													    type: "POST",
