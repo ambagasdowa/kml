@@ -341,7 +341,14 @@
 									e.stopPropagation();
 									e.preventDefault();
 
+									console.log('check $this');
+									console.log($(this));
 									link = $(this).clone();
+									console.log('check link');
+
+									console.log(link);
+
+
 									$( this ).html('<div class="text-center"><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><span class="sr-only">Loading...</span><div>').blur();
 
 // NOTE function start
@@ -366,15 +373,36 @@
 
 // linkx = document.getElementById("linkx_"+batnbr);
 
+											// NOTE: test this block
+											div = document.getElementById('linkx_'+batnbr);
+											clone = div.cloneNode(true); // true means clone all childNodes and all event handlers
+
 											if ( xml != '' && voucher != '' && order != '' ) {
 												document.getElementById("msg").innerHTML = 'all ok to continue';
 											} else if ( xml == '' || voucher == '' || order == '' ) {
+
+												console.log('send_msg');
+
 												document.getElementById("msg").innerHTML = 'Se requiere subir archivo xml , factura y orden de compra en formato pdf';
+
 												$('#linkx_'+batnbr).remove();
-												$('#link_'+batnbr).prepend(link);
+												console.log('isremove?');
+												console.log($('#linkx_'+batnbr));
+
+												$('#link_'+batnbr).prepend(clone);
+												console.log('check');
+												console.log($('#linkx_'+batnbr));
+// WARNING: clone link and prepend into table
+												// clone.id = "some_id";
+												// document.body.appendChild(clone);
+												document.getElementById('link_'+batnbr).appendChild(clone);
+
 												exit();
 											}
+
+// alert('End test');
 // exit();
+
 													$.ajax({
 													    url : "<?php echo Dispatcher::baseUrl();?>/ProvidersControlsFiles/upload/",
 													    type: "POST",
