@@ -283,6 +283,48 @@
 
 	<script type="text/javascript">
 
+			function checkInputs (data) {
+				batnbr = data.attributes[2].value;
+					// $("#upload_"+batnbr).removeAttr("style");
+					xml = $('#upload_xml_'+batnbr).val();
+					voucher = $('#upload_pdf_'+batnbr).val();
+					order = $('#upload_order_'+batnbr).val();
+					console.log(xml , voucher ,order);
+
+					// NOTE: test this block
+					// div = document.getElementById('linkx_'+batnbr);
+					// clone = div.cloneNode(true); // true means clone all childNodes and all event handlers
+
+					if ( xml != '' && voucher != '' && order != '' ) {
+						// $("#upload_"+batnbr).removeAttr("style");
+						document.getElementById("msg").innerHTML = 'all ok to continue';
+
+					} else if ( xml == '' || voucher == '' || order == '' ) {
+
+						document.getElementById("msg").innerHTML = 'Se requiere subir archivo xml , factura y orden de compra en formato pdf.';
+						console.log('remove style');
+						$("#upload_"+batnbr).attr("style", "pointer-events: none;");
+
+						// if ( $("#upload_"+batnbr).is(":visible") ) {
+					  //   $("#upload_"+batnbr).hide();
+					  // } else if ( $("#upload_"+batnbr).is(":hidden") ) {
+					  //   $("#upload_"+batnbr).show();
+					  // }
+
+					}
+			}
+
+			function leftLink(data){
+					batnbr = data.attributes[2].value;
+					// if ( $("#upload_"+batnbr).is(":hidden") ) {
+					// 	$("#upload_"+batnbr).show();
+					// }
+					$("#upload_"+batnbr).removeAttr("style");
+					document.getElementById("msg").innerHTML = 'Se requiere subir archivo xml , factura y orden de compra en formato pdf';
+					console.log('remove style');
+			}
+
+
 		  $(document).ready(function () {
 
 				$('[data-toggle="datepicker"]').datepicker(options_datepicker);
@@ -343,26 +385,20 @@
 
 									console.log('check $this');
 									console.log($(this));
+									batnbr = $(this).attr('data-id');
+
+									// $("#upload_"+batnbr).removeAttr("style");
 									link = $(this).clone();
+
 									console.log('check link');
-
 									console.log(link);
-
-
 									$( this ).html('<div class="text-center"><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><span class="sr-only">Loading...</span><div>').blur();
-
 // NOTE function start
-												batnbr = $(this).attr('data-id');
 												var myForm = $("#tform").get(0);
 												formData = new FormData(myForm);
 												// set the append
 												formData.append('batnbr',$(this).attr('data-id'));
 												// NOTE : vallida extension val.substring(val.lastIndexOf('.') + 1).toLowerCase()
-												xml = $('#upload_xml_'+batnbr).val();
-												voucher = $('#upload_pdf_'+batnbr).val();
-												order = $('#upload_order_'+batnbr).val();
-
-												console.log(xml , voucher ,order);
 
 												//
 												// msg = "<div class=\"alert alert-danger alert-dismissible fade in\" role=\"alert\">
@@ -372,34 +408,34 @@
 												//  						</div>";
 
 // linkx = document.getElementById("linkx_"+batnbr);
-
-											// NOTE: test this block
-											div = document.getElementById('linkx_'+batnbr);
-											clone = div.cloneNode(true); // true means clone all childNodes and all event handlers
-
-											if ( xml != '' && voucher != '' && order != '' ) {
-												document.getElementById("msg").innerHTML = 'all ok to continue';
-											} else if ( xml == '' || voucher == '' || order == '' ) {
-
-												console.log('send_msg');
-
-												document.getElementById("msg").innerHTML = 'Se requiere subir archivo xml , factura y orden de compra en formato pdf';
-
-												$('#linkx_'+batnbr).remove();
-												console.log('isremove?');
-												console.log($('#linkx_'+batnbr));
-
-												$('#link_'+batnbr).prepend(clone);
-												console.log('check');
-												console.log($('#linkx_'+batnbr));
-// WARNING: clone link and prepend into table
-												// clone.id = "some_id";
-												// document.body.appendChild(clone);
-												document.getElementById('link_'+batnbr).appendChild(clone);
-
-												exit();
-											}
-
+//
+// 											// NOTE: test this block
+// 											div = document.getElementById('linkx_'+batnbr);
+// 											clone = div.cloneNode(true); // true means clone all childNodes and all event handlers
+//
+// 											if ( xml != '' && voucher != '' && order != '' ) {
+// 												document.getElementById("msg").innerHTML = 'all ok to continue';
+// 											} else if ( xml == '' || voucher == '' || order == '' ) {
+//
+// 												console.log('send_msg');
+//
+// 												document.getElementById("msg").innerHTML = 'Se requiere subir archivo xml , factura y orden de compra en formato pdf';
+//
+// 												$('#linkx_'+batnbr).remove();
+// 												console.log('isremove?');
+// 												console.log($('#linkx_'+batnbr));
+//
+// 												$('#link_'+batnbr).prepend(clone);
+// 												console.log('check');
+// 												console.log($('#linkx_'+batnbr));
+// // WARNING: clone link and prepend into table
+// 												// clone.id = "some_id";
+// 												// document.body.appendChild(clone);
+// 												document.getElementById('link_'+batnbr).appendChild(clone);
+//
+// 												exit();
+// 											}
+//
 // alert('End test');
 // exit();
 

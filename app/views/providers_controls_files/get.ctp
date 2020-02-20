@@ -355,6 +355,8 @@
 													// 'target'=>'_blank'
 													'id'=>'upload_'.trim($providersViewRelation['ProvidersViewRelation']['BatNbr']),
 													'data-id'=>trim($providersViewRelation['ProvidersViewRelation']['BatNbr']),
+													'onmouseover'=>"checkInputs(this)",
+													'onmouseout'=>"leftLink(this)",
 													// ,'data-addenum'=>$providersViewRelation['ProvidersViewRelation']['addenum']
 													'data-name' => trim($providersViewRelation['ProvidersViewRelation']['BatNbr']).'_'.$providersViewRelation['ProvidersViewRelation']['no_remision'],
 												)
