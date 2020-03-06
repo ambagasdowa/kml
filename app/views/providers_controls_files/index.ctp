@@ -317,7 +317,7 @@
 			function leftLink(data){
 					batnbr = data.attributes[2].value;
 					// if ( $("#upload_"+batnbr).is(":hidden") ) {
-					// 	$("#upload_"+batnbr).show();
+					// 	$("#upload_"+batnbr).show(); 
 					// }
 					$("#upload_"+batnbr).removeAttr("style");
 					document.getElementById("msg").innerHTML = 'Se requiere subir archivo xml , factura y orden de compra en formato pdf';

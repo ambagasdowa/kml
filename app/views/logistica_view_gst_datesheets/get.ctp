@@ -200,11 +200,11 @@
 												<th>Origen</th>
 												<th>Destino</th>
 
-												<th>TiempoCarga</th>
-												<th>TiempoTransito</th>
-												<th>TiempoDescarga</th>
-												<th>TiempoCiclo</th>
-												<th>LlegadaATiempo</th>
+												<th>Tiempo Carga</th>
+												<th>Tiempo Transito</th>
+												<th>Tiempo Descarga</th>
+												<th>Tiempo Ciclo</th>
+												<th>Llegada a Tiempo</th>
 
 												<!-- <th>kms_real</th> -->
 												<!-- <th>INICIO DE VIAJE</th> -->
