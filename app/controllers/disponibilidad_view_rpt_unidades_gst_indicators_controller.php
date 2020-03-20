@@ -158,6 +158,8 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 				$this->Auth->user('id') == 41
 				OR
 				$this->Auth->user('id') == 5
+                                OR
+				$this->Auth->user('id') == 294
 			) {
 			$user_mod = true;
 	} else {
