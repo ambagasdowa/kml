@@ -168,8 +168,9 @@ class AppController extends Controller {
       if(!$this->User->find('all',array('conditions'=>array('User.username'=>$usr)))){
 
         $nominaUser = $this->ProvidersViewVendor->find('all',array('conditions'=>array('ProvidersViewVendor.vendid'=>$usr)));
-
-debug($nominaUser);
+  echo '<pre>';
+print_r($nominaUser);
+  echo '</pre>';
 // debug($this->ProvidersViewVendor->find('all'));
 
 // exit();
@@ -178,6 +179,7 @@ debug($nominaUser);
 					$this->Auth->loginError = "Su <strong>Usuario</strong> no se encuentra en nuestra base de datos, por favor comuniquelo con el departamento de Compras";
 				} else {
 
+          // debug(count($nominaUser));
 					if(count($nominaUser) === 1){ // just a precaution over a not know inconsistence in the system NOM
 
 						foreach ($nominaUser as $idNominaUser => $valueNominaUser) {
@@ -199,14 +201,18 @@ debug($nominaUser);
 								// $user['User']['number_id'] = $dataNominaUser['id']; // the worker key
 								$user['User']['number_id'] = 2744; // the worker key
 								$user['User']['super_user'] = 0; // the worker key
-								// $user['User']['company_id'] = (int)$dataNominaUser['cvecia']; // where are from ??
+								$user['User']['company_id'] = 0; // where are from ??
 								$user['User']['user_agent'] = $_SERVER['HTTP_USER_AGENT']; // user agent from ??
 								$user['User']['last_user_agent'] = $_SERVER['HTTP_USER_AGENT']; // user agent from ??
 							}
 						}
 
-            debug($user);
-            debug($user['User']['name']);
+            // Configure::write('debug',0);
+            echo '<pre>';
+            print_r($user);
+            // exit();
+            // print_r($user['User']['name']);
+            echo '</pre>';
             // exit();
 						if(!$this->User->save($user['User'])){
 							$this->Auth->loginError = "Ha ocurrido un error al generar su usuario , por favor comuniquelo con el departamento de Sistemas o intentelo de nuevo mas tarde";
@@ -233,7 +239,7 @@ debug($nominaUser);
 		// } else {
 		// 		// if user exists check in nom2001
 		// }
-
+// exit();
   }
 
 // NOTE check if user is an RFC

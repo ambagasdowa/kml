@@ -237,6 +237,7 @@ echo
 																								'selected'=>$disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['id_status'],
 																								'div'=>FALSE,
 																								'label'=>FALSE,
+																								'empty'=>$disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['estatus'],
 																								'options'=>$disponibilidadViewStatusGstIndicators
 																								// 'tabindex'=>'2'
 																							)
