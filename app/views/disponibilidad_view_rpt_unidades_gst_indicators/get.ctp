@@ -475,7 +475,7 @@ $("#print").on('click',function(e){
 				console.log(this);
 				console.log($(this).attr('data-unidad'));
 				console.log($(this).val());
-				console.log($(this).text());
+				// console.log($(this).text());
 
 				var description = "description_"+$(this).attr('data-unidad');
 				var compromise = "compromise_"+$(this).attr('data-unidad');
@@ -492,7 +492,7 @@ $("#print").on('click',function(e){
 				console.log(desc);
 				console.log(comp);
 
-				if ( (desc === '' || desc === null || desc === undefined) || (comp === '' || comp === null || comp === undefined) || ($(this).text() != 'DISPONIBLE') ) {
+				if ( (desc === '' || desc === null || desc === undefined) || (comp === '' || comp === null || comp === undefined) || ($(this).val() != 6 || $(this).val() != '') ) {
 						// return true
 						console.log('void');
 						alert('descripcion y compromiso son obligatorios');
