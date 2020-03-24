@@ -488,11 +488,17 @@ $("#print").on('click',function(e){
 
 				desc = document.getElementById(description).value;
 				comp = document.getElementById(compromise).value;
+				isval = $(this).val();
+
+				if (isval == 6 ) {
+					desc = '-';
+					comp = "<?php echo date('Y-m-d H:i:s') ?>";
+				}
 
 				console.log(desc);
 				console.log(comp);
 
-				if ( (desc === '' || desc === null || desc === undefined) || (comp === '' || comp === null || comp === undefined) || ($(this).val() != 6 || $(this).val() != '') ) {
+				if ( (desc === '' || desc === null || desc === undefined) || (comp === '' || comp === null || comp === undefined) ) {
 						// return true
 						console.log('void');
 						alert('descripcion y compromiso son obligatorios');
