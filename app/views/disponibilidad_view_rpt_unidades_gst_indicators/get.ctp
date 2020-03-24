@@ -491,7 +491,7 @@ $("#print").on('click',function(e){
 				console.log(desc);
 				console.log(comp);
 
-				if ( (desc === '' || desc === null || desc === undefined) || (comp === '' || comp === null || comp === undefined) ) {
+				if ( (desc === '' || desc === null || desc === undefined) || (comp === '' || comp === null || comp === undefined) || ($(this).val() != 'DISPONIBLE') ) {			
 						// return true
 						console.log('void');
 						alert('descripcion y compromiso son obligatorios');
