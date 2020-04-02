@@ -162,15 +162,15 @@ class AppController extends Controller {
       $this->LoadModel('ProvidersViewVendor','User');
 
       // if (isset($this->data['User']['username']) and $this->validationRfc($this->data['User']['username'])) {
-        echo 'Call of duty...';
-        debug($usr);
+//         echo 'Call of duty...';
+//         debug($usr);
       // find user in db , then if not exits but in db
       if(!$this->User->find('all',array('conditions'=>array('User.username'=>$usr)))){
 
         $nominaUser = $this->ProvidersViewVendor->find('all',array('conditions'=>array('ProvidersViewVendor.vendid'=>$usr)));
-  echo '<pre>';
-print_r($nominaUser);
-  echo '</pre>';
+//   echo '<pre>';
+// print_r($nominaUser);
+//   echo '</pre>';
 // debug($this->ProvidersViewVendor->find('all'));
 
 // exit();
@@ -208,11 +208,11 @@ print_r($nominaUser);
 						}
 
             // Configure::write('debug',0);
-            echo '<pre>';
-            print_r($user);
+//             echo '<pre>';
+//             print_r($user);
             // exit();
             // print_r($user['User']['name']);
-            echo '</pre>';
+//             echo '</pre>';
             // exit();
 						if(!$this->User->save($user['User'])){
 							$this->Auth->loginError = "Ha ocurrido un error al generar su usuario , por favor comuniquelo con el departamento de Sistemas o intentelo de nuevo mas tarde";
