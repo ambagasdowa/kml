@@ -238,7 +238,7 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 		$_SESSION['Auth']['User']['units_type'] = $this->params['url']['units_type'];
 		// debug($this->Auth->User());
 
-
+// Note add funtions 
 		$units_type = $_SESSION['Auth']['User']['units_type'];
 
 		$this->LoadModel('ProjectionsViewBussinessUnit');
