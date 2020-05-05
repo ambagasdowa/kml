@@ -144,18 +144,19 @@
 						// echo
 						// 			$this->Form->input
 						// 												(
-						// 													'periodo',
+						// 													'units_type',
 						// 													 array
 						// 																(
-						// 																	'type'=>'select',
+						// 																	'type'=>'hidden',
 						// 																	'class'=>'search_udn u-full-width form-control init-focus',
-						// 																	'id'=>'from',
+						// 																	'id'=>'units_type',
 						// 																	'placeholder' => 'Periodo',
 						// 																	'alt'=>'Puede teclear la fecha en Formato yyyymm',
 						// 		                              'title'=>'Puede teclear la fecha en Formato yyyymm',
 						// 																	'div'=>FALSE,
 						// 																	'label'=>FALSE,
-						// 																	'options'=> array('201901'=>'Enero','201902'=>'Febrero','201903'=>'Marzo'),
+						// 																	'value'=>$units_type,
+						// 																	// 'options'=> array('201901'=>'Enero','201902'=>'Febrero','201903'=>'Marzo'),
 						// 																	'tabindex'=>'1'
 						// 																)
 						// 												);

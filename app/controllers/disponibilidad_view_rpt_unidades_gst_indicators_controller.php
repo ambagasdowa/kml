@@ -27,7 +27,7 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 
 	function get() {
 
-		Configure::write('debug',2);
+		// Configure::write('debug',2);
 
 		$posted = json_decode(base64_decode($this->params['named']['data']),true);
 		// debug($posted);
@@ -58,8 +58,30 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 
 		$this->LoadModel('DisponibilidadViewStatusGstIndicator');
 		$this->LoadModel('DisponibilidadViewRptGroupGstIndicator');
+
+// NOTE Work from hir
+
+		$units_type = $_SESSION['Auth']['User']['units_type'];
+		// debug($units_type);
+
+		$units_id = array(
+				 1=>array(1,13)							//Tractocamiones
+				,2=>array(2,3,4,5,6,7,8,9)	//dolly and remolques
+				,3=>array(4)								//remolques
+		);
+
+		debug(var_dump($units_type));
+
 // (4,6,8,15,14,18,11)
 			$conditionsStatus['DisponibilidadViewStatusGstIndicator.id_status'] = array(4,6,8,15,14,18,11);
+
+
+			if (isset($units_type)) {
+				// code...
+				$conditionsStatus['DisponibilidadViewStatusGstIndicator.units_type'] = $units_id[$units_type];
+			}
+
+			debug($conditionsStatus);
 
 		$disponibilidadViewStatusGstIndicators = $this->DisponibilidadViewStatusGstIndicator->find('list',array('fields'=>array('id_status','nombre'),'conditions'=>$conditionsStatus));
 
@@ -209,16 +231,27 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 
 
 	function index() {
+		// Configure::write('debug',2);
+
+		// debug($this->Auth->User());
+		// debug($this->params['url']['units_type']);
+		$_SESSION['Auth']['User']['units_type'] = $this->params['url']['units_type'];
+		// debug($this->Auth->User());
+
+
+		$units_type = $_SESSION['Auth']['User']['units_type'];
+
 		$this->LoadModel('ProjectionsViewBussinessUnit');
 		$this->LoadModel('ProjectionsViewFraction');
 
 		$bssus = $this->ProjectionsViewBussinessUnit->find('list',array('fields'=>array('id','name')));
 		$operacion = $this->ProjectionsViewFraction->find('list',array('fields'=>array('id','desc_producto')));
+
 		// debug($bssus);
 		//
 		$this->RendViewFullGstCoreIndicator->recursive = 0;
 		$this->set('rendViewFullGstCoreIndicators', $this->paginate());
-		$this->set(compact('bssus','operacion'));
+		$this->set(compact('bssus','operacion','units_type'));
 
 		// $this->DisponibilidadViewRptUnidadesGstIndicator->recursive = 0;
 		// $this->set('disponibilidadViewRptUnidadesstIndicators', $this->paginate());
