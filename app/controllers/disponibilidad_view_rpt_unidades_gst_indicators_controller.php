@@ -65,12 +65,14 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 		// debug($units_type);
 
 		$units_id = array(
-				 1=>array(1,13)							//Tractocamiones
-				,2=>array(2,3,4,5,6,7,8,9)	//dolly and remolques
-				,3=>array(4)								//remolques
+				 1=>array('1','13')							//Tractocamiones
+				,2=>array('1','2','3','4','5','6','7','8','9','13')								//ALL
+				,3=>array('2','3','4','5','6','7','8','9')	//dolly and remolques
+				,4=>array('4')								//remolques
 		);
 
 		debug(var_dump($units_type));
+		debug(var_dump($units_id[$units_type]));
 
 // (4,6,8,15,14,18,11)
 			$conditionsStatus['DisponibilidadViewStatusGstIndicator.id_status'] = array(4,6,8,15,14,18,11);
@@ -238,7 +240,7 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 		$_SESSION['Auth']['User']['units_type'] = $this->params['url']['units_type'];
 		// debug($this->Auth->User());
 
-// Note add funtions 
+// Note add funtions
 		$units_type = $_SESSION['Auth']['User']['units_type'];
 
 		$this->LoadModel('ProjectionsViewBussinessUnit');
