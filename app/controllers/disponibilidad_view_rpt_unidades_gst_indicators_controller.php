@@ -27,7 +27,7 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 
 	function get() {
 
-		// Configure::write('debug',2);
+		Configure::write('debug',2);
 
 		$posted = json_decode(base64_decode($this->params['named']['data']),true);
 		// debug($posted);
@@ -71,8 +71,9 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 				,4=>array(4)											//remolques
 		);
 
-		debug(var_dump($units_type));
-		debug(var_dump($units_id[$units_type]));
+		// debug(var_dump($units_type));
+		// debug(var_dump($units_id[$units_type]));
+		// debug($units_id[$units_type]);
 
 // 		(4,6,8,15,14,18,11)
 			$conditionsStatus['DisponibilidadViewStatusGstIndicator.id_status'] = array(4,6,8,15,14,18,11);
@@ -80,7 +81,7 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 
 			if (isset($units_type)) {
 				// code...
-				$conditionsStatus['DisponibilidadViewStatusGstIndicator.units_type'] = current($units_id[$units_type]);
+				$conditionsStatus['DisponibilidadViewStatusGstIndicator.units_type'] = $units_id[$units_type];
 			}
 
 
