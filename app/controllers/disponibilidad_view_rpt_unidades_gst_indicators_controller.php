@@ -80,7 +80,7 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 
 			if (isset($units_type)) {
 				// code...
-				$conditionsStatus['DisponibilidadViewStatusGstIndicator.units_type'] = $units_id[$units_type];
+				$conditionsStatus['DisponibilidadViewStatusGstIndicator.units_type'] = current($units_id[$units_type]);
 			}
 
 
