@@ -27,7 +27,7 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 
 	function get() {
 
-		Configure::write('debug',2);
+		// Configure::write('debug',2);
 
 		$posted = json_decode(base64_decode($this->params['named']['data']),true);
 		// debug($posted);
@@ -71,6 +71,11 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 				,4=>array(4)											//remolques
 		);
 
+		if (isset($units_type)) {
+			$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.units_type'] = $units_id[$units_type];
+			$conditionsTf['DisponibilidadViewRptGroupGstIndicator.units_type'] = $units_id[$units_type];
+		}
+
 		// debug(var_dump($units_type));
 		// debug(var_dump($units_id[$units_type]));
 		// debug($units_id[$units_type]);
@@ -79,13 +84,6 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 			$conditionsStatus['DisponibilidadViewStatusGstIndicator.id_status'] = array(4,6,8,15,14,18,11);
 
 		$disponibilidadViewStatusGstIndicators = $this->DisponibilidadViewStatusGstIndicator->find('list',array('fields'=>array('id_status','nombre'),'conditions'=>$conditionsStatus));
-
-
-				if (isset($units_type)) {
-					$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.units_type'] = $units_id[$units_type];
-				}
-				debug($conditionsStatus);
-
 
 				if (!isset($add_conditions['id_area']) && !isset($add_conditions['id_flota'])) {
 
