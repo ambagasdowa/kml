@@ -78,17 +78,13 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 // 		(4,6,8,15,14,18,11)
 			$conditionsStatus['DisponibilidadViewStatusGstIndicator.id_status'] = array(4,6,8,15,14,18,11);
 
-
-			if (isset($units_type)) {
-				// code...
-				$conditionsStatus['DisponibilidadViewStatusGstIndicator.units_type'] = $units_id[$units_type];
-			}
-
-
-
-			debug($conditionsStatus);
-
 		$disponibilidadViewStatusGstIndicators = $this->DisponibilidadViewStatusGstIndicator->find('list',array('fields'=>array('id_status','nombre'),'conditions'=>$conditionsStatus));
+
+
+				if (isset($units_type)) {
+					$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.units_type'] = $units_id[$units_type];
+				}
+				debug($conditionsStatus);
 
 
 				if (!isset($add_conditions['id_area']) && !isset($add_conditions['id_flota'])) {
