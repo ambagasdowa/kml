@@ -27,7 +27,7 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 
 	function get() {
 
-		Configure::write('debug',2);
+		Configure::write('debug',0);
 
 		$posted = json_decode(base64_decode($this->params['named']['data']),true);
 		// debug($posted);
