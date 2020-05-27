@@ -178,15 +178,24 @@ class DATABASE_CONFIG {
 	var $mssql_payroll = array( // connect to remote mssql server
 		'driver' => 'mssql',
 		'persistent' => true,
-		'host' => '192.168.20.235',
-		'login' => 'zam',
-		'password' => 'lis',
+
+		'host' => '192.168.99.200', /*current in local kvm change in freetds.conf*/
+		'login' => 'sa',
+		'password' => 'effeta',
 		'database' => 'NOM2001',
+		'port' => '1433',
+		//
+		// 'host' => '192.168.20.235',
+		// 'login' => 'zam',
+		// 'password' => 'lis',
+		// 'database' => 'NOM2001',
+		// 'port' => '1433'
+
 		'prefix' => '',
 //  		'encoding' => 'ISO-8859-1',
 // 		'encoding' => 'Latin 1',
 		'encoding' => 'utf8',
-		'port' => '1433'
+
 	);
 
 	//this is and must be non-sessential connection to mssql
@@ -198,17 +207,33 @@ class DATABASE_CONFIG {
 var $mssql_sistemas = array( // connect to remote mssql server
 	'driver' => 'mssql',
 	'persistent' => true,
-	'host' => 'IntegraDb', /*current in local kvm change in freetds.conf*/
+
+	// 'host' => 'IntegraDb', /*current in local kvm change in freetds.conf*/
+	// 'login' => 'zam',
+	// 'password' => 'lis',
+	// 'database' => 'sistemas',
+	// 'port' => '1433',
+
+// NOTE connection to local virtual server
+	// 'host' => 'kvmdb', /*current in local kvm change in freetds.conf*/
 	// 'login' => 'sa',
 	// 'password' => 'effeta',
-	'login' => 'zam',
-	'password' => 'lis',
+	// 'database' => 'sistemas',
+	// 'port' => '1433',
+
+// NOTE connection to local virtual server
+	'host' => 'Homedb', /*current in local kvm change in freetds.conf*/
+	'login' => 'sa',
+	'password' => 'effeta',
 	'database' => 'sistemas',
+	'port' => '1433',
+
+
 	'prefix' => '',
 // 		'encoding' => 'ISO-8859-1',
 // 		'encoding' => 'Latin1',
-	'encoding' => 'utf8',
-	'port' => '1433'
+	'encoding' => 'utf8'
+
 );
 
 	var $mssql_sistemas_larsa = array( // connect to remote mssql server

@@ -270,9 +270,49 @@ class ProvidersControlsFilesController extends AppController {
 
 
 
-				function check_sat($info = array()) {
-					// debug('INFO INSIDE CHECKSAT');
-					// debug($info);
+				function check_sat( $info = array(), $ref_data = array() ) {
+				// debug('INFO INSIDE CHECKSAT');
+				// debug($info);
+
+				// NOTE Firts check after check in sat servers
+				// WARNING several check's beetwen the xml file and solomon records  just add in hir
+				// NOTE Call refData[1] => this is the batnbr ->connect to batch and vallidate
+				// NOTE model => ProvidersViewBatchAmount
+				$this->LoadModel('ProvidersViewBatchAmount');
+				$amount = current($info['Total']);
+				$BatNbr = $ref_data[1];
+				$CpnyId = $ref_data[2];
+
+				$conditionsAmount['ProvidersViewBatchAmount.BatNbr'] = $BatNbr;
+				$conditionsAmount['ProvidersViewBatchAmount.CpnyId'] = $CpnyId;
+				$result = $this->ProvidersViewBatchAmount->find('first',array( 'conditions' => $conditionsAmount));
+				// NOTE amounts
+				$xml_amount = $amount ;
+				$slx_amount = $result['ProvidersViewBatchAmount']['crtot'];
+				$is_exceded = abs($slx_amount - $xml_amount);
+
+				 // debug($is_exceded);
+				// debug($result);
+
+				if ($is_exceded > 10 ) {
+					// code...
+					$message = 'El Monto no Concuerda: Monto Xml ['.number_format($xml_amount, 2, '.', ',').'] , Monto en Sistema ['.number_format($slx_amount, 2, '.', ',').']';
+
+					$responseCode = array(
+																	'message'=>'<div class="alert alert-danger alert-dismissible fade in" role="alert">
+																								<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+																								<span aria-hidden="true">&times;</span>
+																								</button>'.$message.'
+																							</div>',
+																	'status'=>false
+															 );
+					return $responseCode;
+				}
+
+				// debug('go out is ok!');
+				// exit();
+
+				// $batnbr =
 // exit();
 					// debug(current($info['uuid']));
 					$curl = curl_init();
@@ -528,7 +568,7 @@ class ProvidersControlsFilesController extends AppController {
 					$response['totalAmt'] = $SaveUUID['ProvidersUuidRequest']['Total'];
 					$response['xml'] = "<a id=\"uptXml_{$getUpdated['BatNbr']}\" href=\"{$path}{$url}{$getUpdated['xml_src']}\" download=\"{$getUpdated['xml_name']}\"><i class=\"fa fa-file-text\"></i></a>";
 				} else {
-					$response['message'] = 'Su documento se envio correctamente';
+					// $response['message'] = 'Su documento se envio correctamente';
 					// NOTE: work from hir
 					if ($getUpdated['voucher']) {
 						$response['voucher'] = "<a id=\"uptVoucher_{$getUpdated['BatNbr']}\" href=\"{$path}{$url}{$getUpdated['voucher_src']}\" download=\"{$getUpdated['voucher_name']}\"><i class=\"fa fa-file-text\"></i></a>";
@@ -543,8 +583,13 @@ class ProvidersControlsFilesController extends AppController {
 
 			function file_proccess( $form_data = array() , $ref_data = array() ) {
 
-				// debug('FORM_DATA');
-				// debug($form_data);
+Configure::write('debug',0);
+//
+// 				debug('FORM_DATA');
+// 				debug($form_data);
+// 				debug($ref_data);
+// 				// $bat = $ref_data[1];
+// exit();
 
 				if (isset($form_data)) {
 						$this->data['ProvidersControlsFile']['upload'] = $form_data;
@@ -644,7 +689,9 @@ class ProvidersControlsFilesController extends AppController {
 					if ($ext == '.xml') {
 						// code...
 						// go to validate in SAT if false go to referrer
+						//NOTE extract data from xml for analize ,
 						$info = $this->validate($this->data['ProvidersControlsFile']['upload']['tmp_name']);
+
 						// debug('VARDUMP');
 						// echo '<pre>';
 						// var_dump($info);
@@ -652,17 +699,22 @@ class ProvidersControlsFilesController extends AppController {
 
 						// debug('CHECKSAT');
 
-						$check = $this->check_sat($info);
+						$check = $this->check_sat($info,$ref_data);
 						// echo '<pre>';
-						// var_dump($check);
+						debug($check);
 						// echo '</pre>';
 
 						// exit();
+
 						if ($check['status'] == false) {
 
 							// print_r($check['message']);
 							$response = array('message'=>$check['message']);
 							return $response;
+
+							// NOTE change behaivor of the alert againsts response squema
+							// $this->Session->setFlash(__($check['message'], true));
+							// $this->redirect(array('action' => 'index'));
 							// exit();
 							//NOTE set mecjha for alert the status
 						}
@@ -739,6 +791,7 @@ class ProvidersControlsFilesController extends AppController {
 											// save the file and set storage
 											// debug('$this->file_proccess($data_code,$split_code)');
 											$response[] = $this->file_proccess($data_code,$split_code);
+											// debug($response);
 
 										}
 								}
@@ -760,7 +813,8 @@ class ProvidersControlsFilesController extends AppController {
 					}
 
 					$response = array_merge($response,array('count'=>$count));
-
+					// DEBUG:
+					debug($response);
 							//4. Return as a json array
 							Configure::write('debug', 0);
 							$this->autoRender = false;

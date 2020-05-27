@@ -15,6 +15,7 @@
 		* @since         CakePHP(tm) v 1.2.0.5234
 		* @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
 		*/
+		// Per signum Crucis , de inimicis nostris libera nos , Deus noster.
 ?>
 
 <?php

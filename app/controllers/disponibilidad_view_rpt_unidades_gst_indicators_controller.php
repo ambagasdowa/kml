@@ -27,7 +27,7 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 
 	function get() {
 
-		// Configure::write('debug',2);
+		Configure::write('debug',2);
 
 		$posted = json_decode(base64_decode($this->params['named']['data']),true);
 		// debug($posted);
@@ -71,13 +71,15 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 				,4=>array(4)											//only dollys
 		);
 
+		var_dump(isset($units_type));
+
 		if (isset($units_type)) {
 			$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.units_type'] = $units_id[$units_type];
 			$conditionsTf['DisponibilidadViewRptGroupGstIndicator.units_type'] = $units_id[$units_type];
 		}
 
 		// debug(var_dump($units_type));
-		// debug(var_dump($units_id[$units_type]));
+
 		// debug($units_id[$units_type]);
 
 // 		(4,6,8,15,14,18,11)
@@ -87,16 +89,33 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 
 				if (!isset($add_conditions['id_area']) && !isset($add_conditions['id_flota'])) {
 
-					$disponibilidadViewRptGroupGstIndicators = $this->DisponibilidadViewRptGroupGstIndicator->find('all',array(
-										 'fields'=>array(
-																			 'sum(unidades) as [unidades]'
-																			,'id_status'
-																			,'estatus'
-																	  )
-										 ,'group'=>array('id_status','estatus')
-													 )
-					);
-					$disponibilidadViewRptUnidadesGstIndicators = $this->DisponibilidadViewRptUnidadesGstIndicator->find('all');
+							if (isset($units_type)) {
+								$disponibilidadViewRptGroupGstIndicators = $this->DisponibilidadViewRptGroupGstIndicator->find('all',array(
+													 'fields' => array(
+																						 'sum(unidades) as [unidades]'
+																						,'id_status'
+																						,'estatus'
+																					)
+													 ,'group' => array('id_status','estatus')
+													 ,'conditions' => $conditionsTf
+																 )
+
+								);
+								$disponibilidadViewRptUnidadesGstIndicators = $this->DisponibilidadViewRptUnidadesGstIndicator->find('all',array('conditions'=>$conditionsBl));
+
+							} else {
+							$disponibilidadViewRptGroupGstIndicators = $this->DisponibilidadViewRptGroupGstIndicator->find('all',array(
+																 'fields'=>array(
+																									 'sum(unidades) as [unidades]'
+																									,'id_status'
+																									,'estatus'
+																							  )
+																 ,'group'=>array('id_status','estatus')
+															 )
+
+							);
+							$disponibilidadViewRptUnidadesGstIndicators = $this->DisponibilidadViewRptUnidadesGstIndicator->find('all');
+						}
 				} else {
 
 					if (isset($add_conditions['id_area'])) {
@@ -110,6 +129,9 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 						$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.id_flota'] = $add_conditions['id_flota'];
 						$conditionsTf['DisponibilidadViewRptGroupGstIndicator.id_flota'] = $add_conditions['id_flota'];
 					}
+
+// debug($conditionsBl);
+// debug($conditionsTf);
 
 						$disponibilidadViewRptUnidadesGstIndicators = $this->DisponibilidadViewRptUnidadesGstIndicator->find('all',array('conditions'=>$conditionsBl));
 
