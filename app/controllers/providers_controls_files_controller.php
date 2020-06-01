@@ -293,6 +293,14 @@ class ProvidersControlsFilesController extends AppController {
 
 				 // debug($is_exceded);
 				// debug($result);
+				// DEBUG: Save to logs
+				$this->LoadModel('ApiSatHistoricoLog');
+
+				$mss['ApiSatHistoricoLog']['message'] = 'Lote -> '.$BatNbr.' CpnyId -> '.$CpnyId.' xml_amount => '.$xml_amount.'  xls_amount => '.$slx_amount.' exceds? -> '.$is_exceded.' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
+
+				if($this->ApiSatHistoricoLog->save($mss)) {
+						// ....
+				}
 
 				if ($is_exceded > 10 ) {
 					// code...
@@ -306,14 +314,6 @@ class ProvidersControlsFilesController extends AppController {
 																							</div>',
 																	'status'=>false
 															 );
-					// DEBUG: Save to logs
-					$this->LoadModel('ApiSatHistoricoLog');
-
-					$mss['ApiSatHistoricoLog']['message'] = 'Lote -> '.$BatNbr.' CpnyId -> '.$CpnyId.' xml_amount => '.$xml_amount.'  xls_amount => '.$slx_amount.' exceds? -> '.$is_exceded.' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
-
-					if($this->ApiSatHistoricoLog->save($mss)) {
-							// ....
-					}
 					return $responseCode;
 				}
 
