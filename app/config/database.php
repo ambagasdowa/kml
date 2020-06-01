@@ -208,11 +208,11 @@ var $mssql_sistemas = array( // connect to remote mssql server
 	'driver' => 'mssql',
 	'persistent' => true,
 
-	'host' => 'IntegraDb', /*current in local kvm change in freetds.conf*/
-	'login' => 'zam',
-	'password' => 'lis',
-	'database' => 'sistemas',
-	'port' => '1433',
+	// 'host' => 'IntegraDb', /*current in local kvm change in freetds.conf*/
+	// 'login' => 'zam',
+	// 'password' => 'lis',
+	// 'database' => 'sistemas',
+	// 'port' => '1433',
 
 // NOTE connection to local virtual server
 	// 'host' => 'kvmdb', /*current in local kvm change in freetds.conf*/
@@ -222,11 +222,11 @@ var $mssql_sistemas = array( // connect to remote mssql server
 	// 'port' => '1433',
 
 // NOTE connection to local virtual server
-	// 'host' => 'Homedb', /*current in local kvm change in freetds.conf*/
-	// 'login' => 'sa',
-	// 'password' => 'effeta',
-	// 'database' => 'sistemas',
-	// 'port' => '1433',
+	'host' => 'Homedb', /*current in local kvm change in freetds.conf*/
+	'login' => 'sa',
+	'password' => 'effeta',
+	'database' => 'sistemas',
+	'port' => '1433',
 
 
 	'prefix' => '',

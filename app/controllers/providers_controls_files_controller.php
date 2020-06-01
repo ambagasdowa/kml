@@ -296,7 +296,7 @@ class ProvidersControlsFilesController extends AppController {
 
 				if ($is_exceded > 10 ) {
 					// code...
-					$message = 'El Monto no Concuerda: Monto Xml ['.number_format($xml_amount, 2, '.', ',').'] , Monto en Sistema ['.number_format($slx_amount, 2, '.', ',').']';
+					$message = 'El Monto no Concuerda: Monto Xml ['.number_format($xml_amount, 2, '.', ',').'] , Monto en Sistema ['.number_format($slx_amount, 2, '.', ',').'] '.'Excedente -> ['.number_format($is_exceded, 2, '.', ',').']';
 
 					$responseCode = array(
 																	'message'=>'<div class="alert alert-danger alert-dismissible fade in" role="alert">
@@ -306,6 +306,14 @@ class ProvidersControlsFilesController extends AppController {
 																							</div>',
 																	'status'=>false
 															 );
+					// DEBUG: Save to logs
+					$this->LoadModel('ApiSatHistoricoLog');
+
+					$mss['ApiSatHistoricoLog']['message'] = 'Lote -> '.$BatNbr.' CpnyId -> '.$CpnyId.' xml_amount => '.$xml_amount.'  xls_amount => '.$slx_amount.' exceds? -> '.$is_exceded.' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
+
+					if($this->ApiSatHistoricoLog->save($mss)) {
+							// ....
+					}
 					return $responseCode;
 				}
 
@@ -696,12 +704,12 @@ Configure::write('debug',0);
 						// echo '<pre>';
 						// var_dump($info);
 						// echo '</pre>';
-
+						//
 						// debug('CHECKSAT');
-
+						//
 						$check = $this->check_sat($info,$ref_data);
-						// echo '<pre>';
-						debug($check);
+						// // echo '<pre>';
+						// debug($check);
 						// echo '</pre>';
 
 						// exit();
@@ -709,7 +717,7 @@ Configure::write('debug',0);
 						if ($check['status'] == false) {
 
 							// print_r($check['message']);
-							$response = array('message'=>$check['message']);
+							$response = array('message'=>$check['message'],'status'=>false);
 							return $response;
 
 							// NOTE change behaivor of the alert againsts response squema
@@ -791,7 +799,14 @@ Configure::write('debug',0);
 											// save the file and set storage
 											// debug('$this->file_proccess($data_code,$split_code)');
 											$response[] = $this->file_proccess($data_code,$split_code);
+
 											// debug($response);
+											// debug(current($response)['status']);
+											if (current($response)['status'] == false) {
+												// code...
+												// return current($response);
+												// exit();
+											}
 
 										}
 								}
@@ -814,7 +829,7 @@ Configure::write('debug',0);
 
 					$response = array_merge($response,array('count'=>$count));
 					// DEBUG:
-					debug($response);
+					// debug($response);
 							//4. Return as a json array
 							Configure::write('debug', 0);
 							$this->autoRender = false;

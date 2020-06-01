@@ -6,7 +6,7 @@
 
 # cakephp 1.x
 app/tmp/*
+app/config/*
 app/webroot/files/*
 app/config/core.php
 app/config/database.php
-
