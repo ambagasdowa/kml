@@ -296,7 +296,7 @@ class ProvidersControlsFilesController extends AppController {
 				// DEBUG: Save to logs
 				$this->LoadModel('ApiSatHistoricoLog');
 
-				$mss['ApiSatHistoricoLog']['message'] = 'Lote -> '.$BatNbr.' CpnyId -> '.$CpnyId.' xml_amount => '.$xml_amount.'  xls_amount => '.$slx_amount.' exceds? -> '.$is_exceded.' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
+				$mss['ApiSatHistoricoLog']['message'] = 'Lote -> '.$BatNbr.' CpnyId -> '.$CpnyId.' xml_amount => '.$xml_amount.'  xls_amount => '.$slx_amount.' Diferencia -> '.$is_exceded.' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
 
 				if($this->ApiSatHistoricoLog->save($mss)) {
 						// ....
@@ -359,6 +359,16 @@ class ProvidersControlsFilesController extends AppController {
 
 					$xml = simplexml_load_string($response);
 
+
+					// DEBUG: Save to logs
+					// $this->LoadModel('ApiSatHistoricoLog');
+
+					$mss['ApiSatHistoricoLog']['message'] = 'Lote -> '.$BatNbr.' CpnyId -> '.$CpnyId.' XMLResponse -> '.$xml.' CurlError -> '.$err.' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
+
+					if($this->ApiSatHistoricoLog->save($mss)) {
+							// ....Save to log
+					}
+
 					if ($err) {
 						echo
 						$message = "cURL Error #:" . $err;
@@ -375,7 +385,7 @@ class ProvidersControlsFilesController extends AppController {
 										if (substr(current($response),0,1) == 'S') {
 											// save to db Method
 
-											$message = 'El archivo xml se valido <strong> correctamente </strong>';
+											$message = 'El archivo xml se valido <strong> correctamente </strong> en el Portal del SAT y en nuestro Sistema';
 											$return_set = true;
 										} elseif (substr(current($response),0,1) == 'N') {
 
@@ -396,8 +406,20 @@ class ProvidersControlsFilesController extends AppController {
 
 								 } //NOTE end path
 					}
+
+					// DEBUG: Save to logs
+					// $this->LoadModel('ApiSatHistoricoLog');
+
+					$mss['ApiSatHistoricoLog']['message'] = 'Lote -> '.$BatNbr.' CpnyId -> '.$CpnyId.' XMLResponse -> '.$message.' return_set -> '.$return_set.' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
+
+					if($this->ApiSatHistoricoLog->save($mss)) {
+							// ....Save to log
+					}
+
+						$alert = ($return_set?'alert-success':'alert-danger');
+
 						$responseCode = array(
-																		'message'=>'<div class="alert alert-danger alert-dismissible fade in" role="alert">
+																		'message'=>'<div class="alert '.$alert.' alert-dismissible fade in" role="alert">
 																									<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 																									<span aria-hidden="true">&times;</span>
 																									</button>'.$message.'
@@ -409,7 +431,7 @@ class ProvidersControlsFilesController extends AppController {
       } //NOTE END CHECKSAT()
 
 
-			function relation( $file = array() , $fid = null ,$xml = array(),$type = null ) {
+			function relation( $file = array() , $fid = null ,$xml = array(),$type = null ,$message = null ) {
 
 				// debug('INSIDE RELATION');
 				// debug($file);
@@ -569,7 +591,7 @@ class ProvidersControlsFilesController extends AppController {
 
 
 				if ($is_xml == true) {
-					$response['message'] = 'Su documento se valido y libero correctamente';
+					$response['message'] = $message;
 					$response['uuid'] = $SaveUUID['ProvidersUuidRequest']['uuid'];
 					$response['status'] = $getUpdated['Status'];
 					$response['fecha'] = $getUpdated['InvcDate'];
@@ -612,6 +634,8 @@ Configure::write('debug',0);
 				$stat = stat($this->data['ProvidersControlsFile']['upload']['tmp_name']);
 
 				$conditionsFields['ProvidersControlsFile._md5sum'] = $md5;
+
+				$conditionsFields['ProvidersControlsFile._status'] = 1 ;
 
 				$finderFilename = $this->ProvidersControlsFile->find('all',array('conditions'=>$conditionsFields));
 
@@ -767,7 +791,7 @@ Configure::write('debug',0);
 						if (isset($ref_data)) {
 							// code...
 								// debug('REF_DATA');
-								$response = $this->relation($ref_data,$providers_controls_files_id,$info,$ext);
+								$response = $this->relation($ref_data,$providers_controls_files_id,$info,$ext,$check['message']);
 						}
 					/**=======================================================*/
 					}
