@@ -286,7 +286,7 @@ echo
 		</tbody>
 		<tfoot>
 	            <tr>
-	                <th colspan="9" style="text-align:right">Total:</th>
+	                <th colspan="10" style="text-align:right">Total:</th>
 	                <th></th>
 	                <th></th>
 	                <!-- <th></th> -->
@@ -318,7 +318,7 @@ echo
 								removeInline: false,        // remove all inline styles from print elements
 								printDelay: 333,            // variable print delay; depending on complexity a higher value may be necessary
 								header: '<img src="<?php echo Dispatcher::baseUrl();?>/img/logotipos/gst/header_gs.png" width="100%">',               // prefix to html
-								footer: '', // postfix to html <div class="footer_legend">© GST Software Development Department</div>
+								footer: '', // postfix to html <div class="footer_legend">ï¿½ GST Software Development Department</div>
 								base: false ,               // preserve the BASE tag, or accept a string for the URL
 								formValues: false,           // preserve input/form values
 								canvas: false,              // copy canvas elements (experimental)
