@@ -330,9 +330,10 @@
 									 );
 
 									var table_b = $('#table_det').DataTable(
-										Object.assign( {}, options_datatable, calculate_row([9,10,11],[9,10,11]) )
+										Object.assign( {}, options_datatable, calculate_row([11,12,13],[11,12,13]) )
 									 );
 
+									 // this is ok
 									 var table_c = $('#table_route').DataTable(
  										Object.assign( {}, options_datatable, calculate_row([2,3]) )
  									 );
