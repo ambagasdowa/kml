@@ -238,6 +238,9 @@ echo
 				<th><?php echo 'Operador';?></th>
 				<th><?php echo 'Cliente';?></th>
 				<th><?php echo 'Tracto';?></th>
+				<th><?php echo 'Rem1';?></th>
+				<th><?php echo 'Rem2';?></th>
+				<th><?php echo 'Desc';?></th>
 				<th><?php echo 'TipoViaje';?></th>
 				<th><?php echo 'Operacion';?></th>
 				<th><?php echo 'Fecha';?></th>
@@ -267,6 +270,9 @@ echo
 			<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['operador']; ?></td>
 			<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['cliente']; ?></td>
 			<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['tracto']; ?></td>
+			<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['rem1']; ?></td>
+			<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['rem2']; ?></td>
+			<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['Config']; ?></td>
 			<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['TipoViaje']; ?></td>
 			<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['tipoOperacion']; ?></td>
 			<td><?php echo $rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['fecha']; ?></td>
@@ -286,7 +292,7 @@ echo
 		</tbody>
 		<tfoot>
 	            <tr>
-	                <th colspan="10" style="text-align:right">Total:</th>
+	                <th colspan="13" style="text-align:right">Total:</th>
 	                <th></th>
 	                <th></th>
 	                <!-- <th></th> -->

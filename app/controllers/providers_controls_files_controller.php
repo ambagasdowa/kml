@@ -14,6 +14,7 @@
 		* @subpackage    cake.cake.console.libs.templates.views
 		* @since         CakePHP(tm) v 1.2.0.5234
 		* @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
+		* check an xml
 		*/
 ?>
 
@@ -56,6 +57,116 @@ class ProvidersControlsFilesController extends AppController {
 
 			}
 
+// NOTE XML vallidations SECTION
+			function libxml_display_error($error)
+			{
+				// XML_ERR_NONE 			= 0
+				// XML_ERR_WARNING 	= 1 : A simple warning
+				// XML_ERR_ERROR 		= 2 : A recoverable error
+				// XML_ERR_FATAL 		= 3 : A fatal error
+				$return = array();
+			    $return['msj'] = "<br/>\n";
+			    switch ($error->level) {
+			        case LIBXML_ERR_WARNING:
+			            $return['msj'] .= "<strong>Warning $error->code</strong>: ";
+			            $level = 1;
+			            break;
+			        case LIBXML_ERR_ERROR:
+			            $return['msj'] .= "<strong>Error $error->code</strong>: ";
+									$level = 2;
+			            break;
+			        case LIBXML_ERR_FATAL:
+			            $return['msj'] .= "<strong>Fatal Error $error->code</strong>: ";
+									$level = 3;
+			            break;
+			    }
+			    $return['msj'] .= trim($error->message);
+			    if ($error->file) {
+			        $return['msj'] .=    " in <strong>$error->file</strong>";
+			    }
+			    $return['msj'] .= " on line <strong>$error->line</strong>\n";
+					// debug($level);
+					$return['level'] = $level;
+
+			    return $return;
+			}
+
+			function libxml_display_errors() {
+			    $errors = libxml_get_errors();
+					$xml_errors = array();
+			    foreach ($errors as $error) {
+			        $xml_errors['msj'] .= $this->libxml_display_error($error)['msj']."\n";
+			        $xml_errors['level'][] = $this->libxml_display_error($error)['level']."\n";
+			    }
+					// debug($xml_errors);
+			    libxml_clear_errors();
+					// debug($xml_errors);
+					return $xml_errors;
+			}
+
+			function validStructure ($xml_path = null) {
+				// NOTE structure Validation
+						libxml_use_internal_errors(true);
+						$xml = new DOMDocument();
+						//$xml->load('cfdi_validation/factura.xml');
+						$xml->load($xml_path);
+						// $xsd = WWW_ROOT.'files'.DS.'providers_sat'.DS.'TimbreFiscalDigitalv11.xsd';
+						$xsd = WWW_ROOT.'files'.DS.'providers_sat'.DS.'cfdv33.xsd';
+// ????
+						$level_config_max = 2;
+
+						if (!$xml->schemaValidate($xsd)) {
+
+								$xml_response = $this->libxml_display_errors();
+
+								$level = arsort($xml_response['level']);
+								$level_pr = implode(',',$level);
+								// debug($level_pr);
+										// order array values
+								foreach ($level as $key => $value) {
+									if ((int)$value < $level_config_max) {
+										$status = true;
+									} else {
+										$status = false;
+									}
+								}
+
+						    $message = "\n".'<strong>Errores Generados : </strong>'."\n";
+						    $message .= "\n".'<strong>Revise su archivo XML y vuelva a intentarlo</strong>'."\n";
+						    $message .= $xml_response['msj'];
+
+								$responseCode = array(
+																			'message'=>'<div class="alert alert-danger alert-dismissible fade in" role="alert">
+																										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+																										<span aria-hidden="true">&times;</span>
+																										</button>'.$message.'
+																									</div>',
+																			'status'=>$status
+																	 );
+					} else {
+						$responseCode = array('status' => true );
+					}
+					// debug($responseCode);
+					// send to log
+					// DEBUG: Save to logs
+					$this->LoadModel('ApiSatHistoricoLog');
+
+					$mss['ApiSatHistoricoLog']['message'] = 'LevelConfigMax -> '.$level_config_max.' Level -> '.$level_pr.' Status -> '.$responseCode['status'].' Message -> '.$responseCode['message'].' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
+
+					if($this->ApiSatHistoricoLog->save($mss)) {
+							// ....
+					}
+
+					return $responseCode;
+			} // END validations of the structure
+// NOTE XML vallidations SECTION
+
+// DOMDocument::schemaValidate() Generated Errors!
+// Error 1845: Element '{http://www.sat.gob.mx/TimbreFiscalDigital}TimbreFiscalDigital': No matching global element declaration available, but demanded by the strict wildcard. in /tmp/php9ftD2U on line 4
+// Error 1845: Element '{http://www.buzone.com.mx/XSD/Sender30606/A}ElementosExtra': No matching global element declaration available, but demanded by the strict wildcard. in /tmp/php9ftD2U on line 5
+
+
+
 
 			function validate( $xml_path = null, $BatNbr = null , $CpnyId = null ) {
 				// Liberar LOTE
@@ -65,13 +176,10 @@ class ProvidersControlsFilesController extends AppController {
 
 	// print_r();
 
-
 	        // $file = current(file($xml_path));
 
 					// $xml = new SimpleXMLElement($file);
-
 					$xml = simplexml_load_file($xml_path, 'SimpleXMLElement',LIBXML_NOCDATA);
-
 					// $xml = simplexml_load_string($value['AddenumViewAlbaranRelation']['xml']);
 					// $json = json_encode($xml);
 					// $array = json_decode($json,TRUE);
@@ -302,9 +410,9 @@ class ProvidersControlsFilesController extends AppController {
 						// ....
 				}
 
-				if ($is_exceded > 10 ) {
+				if ($is_exceded > 5.70 ) {
 					// code...
-					$message = 'El Monto no Concuerda: Monto Xml ['.number_format($xml_amount, 2, '.', ',').'] , Monto en Sistema ['.number_format($slx_amount, 2, '.', ',').'] '.'Excedente -> ['.number_format($is_exceded, 2, '.', ',').']';
+					$message = 'El Monto no Concuerda: Monto Xml ['.number_format($xml_amount, 2, '.', ',').'] , Monto en Sistema ['.number_format($slx_amount, 2, '.', ',').'] '.'Diferencia -> ['.number_format($is_exceded, 2, '.', ',').']';
 
 					$responseCode = array(
 																	'message'=>'<div class="alert alert-danger alert-dismissible fade in" role="alert">
@@ -359,17 +467,15 @@ class ProvidersControlsFilesController extends AppController {
 
 					$xml = simplexml_load_string($response);
 
-
-					// DEBUG: Save to logs
-					// $this->LoadModel('ApiSatHistoricoLog');
-
-					$mss['ApiSatHistoricoLog']['message'] = 'Lote -> '.$BatNbr.' CpnyId -> '.$CpnyId.' XMLResponse -> '.$xml.' CurlError -> '.$err.' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
-
-					if($this->ApiSatHistoricoLog->save($mss)) {
-							// ....Save to log
-					}
-
 					if ($err) {
+						// DEBUG: Save to logs
+						// $this->LoadModel('ApiSatHistoricoLog');
+						// $mss = null;
+						$mss['ApiSatHistoricoLog']['message'] = 'Error en Conexion SAT -> Lote -> '.$BatNbr.' CpnyId -> '.$CpnyId.' XMLResponse -> '.$xml.' CurlError -> '.$err.' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
+
+						if($this->ApiSatHistoricoLog->save($mss)) {
+								// ....Save to log
+						}
 						echo
 						$message = "cURL Error #:" . $err;
 						$return_set = false;
@@ -385,7 +491,7 @@ class ProvidersControlsFilesController extends AppController {
 										if (substr(current($response),0,1) == 'S') {
 											// save to db Method
 
-											$message = 'El archivo xml se valido <strong> correctamente </strong> en el Portal del SAT y en nuestro Sistema';
+											$message = 'El archivo xml se valido <strong> Correctamente </strong> ';
 											$return_set = true;
 										} elseif (substr(current($response),0,1) == 'N') {
 
@@ -410,7 +516,7 @@ class ProvidersControlsFilesController extends AppController {
 					// DEBUG: Save to logs
 					// $this->LoadModel('ApiSatHistoricoLog');
 
-					$mss['ApiSatHistoricoLog']['message'] = 'Lote -> '.$BatNbr.' CpnyId -> '.$CpnyId.' XMLResponse -> '.$message.' return_set -> '.$return_set.' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
+					$mss['ApiSatHistoricoLog']['message'] = 'Lote -> '.$BatNbr.' CpnyId -> '.$CpnyId.' xml_amount => '.$xml_amount.'  xls_amount => '.$slx_amount.' Diferencia -> '.$is_exceded.' XMLResponse -> '.$message.' return_set -> '.$return_set.' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
 
 					if($this->ApiSatHistoricoLog->save($mss)) {
 							// ....Save to log
@@ -591,7 +697,7 @@ class ProvidersControlsFilesController extends AppController {
 
 
 				if ($is_xml == true) {
-					$response['message'] = $message;
+					$response['message'] = $message.' Igualmente en nuestro Sistema';
 					$response['uuid'] = $SaveUUID['ProvidersUuidRequest']['uuid'];
 					$response['status'] = $getUpdated['Status'];
 					$response['fecha'] = $getUpdated['InvcDate'];
@@ -613,7 +719,7 @@ class ProvidersControlsFilesController extends AppController {
 
 			function file_proccess( $form_data = array() , $ref_data = array() ) {
 
-Configure::write('debug',0);
+				Configure::write('debug',0);
 //
 // 				debug('FORM_DATA');
 // 				debug($form_data);
@@ -722,8 +828,18 @@ Configure::write('debug',0);
 						// code...
 						// go to validate in SAT if false go to referrer
 						//NOTE extract data from xml for analize ,
-						$info = $this->validate($this->data['ProvidersControlsFile']['upload']['tmp_name']);
+						// WARNING: Structure validation
 
+						$struct = $this->validStructure($this->data['ProvidersControlsFile']['upload']['tmp_name']);
+						if ($struct['status'] == false) {
+							// print_r($check['message']);
+							$response = array('message'=>$struct['message'],'status'=>false);
+							return $response;
+						}
+
+
+						$info = $this->validate($this->data['ProvidersControlsFile']['upload']['tmp_name']);
+						//
 						// debug('VARDUMP');
 						// echo '<pre>';
 						// var_dump($info);

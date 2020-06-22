@@ -154,13 +154,15 @@
 				<th>Referencia</th>
 				<!-- <th>DocType</th> -->
 				<!-- <th>DocDesc</th> -->
-				<th>F.Validaci&oacute;n</th>
+				<th>F.Factura</th>
+				<th>F.Validaci&oacute;</th>
 				<th>Factura</th>
 				<th>Raz&oacute;n Social</th>
 				<th>Xml</th>
 				<th>Pdf</th>
 				<th>OCPdf</th>
 				<!-- <th>Acct</th> -->
+				<th>MontoLote</th>
 				<th>TotalFac</th>
 				<th>UUID</th>
 				<!-- <th>a</th> -->
@@ -192,6 +194,7 @@
 			<!-- <td><?php echo $providersViewRelation['ProvidersViewRelation']['DocType']; ?></td> -->
 			<!-- <td><?php echo $providersViewRelation['ProvidersViewRelation']['DocDesc']; ?></td> -->
 			<td><div id="fechax_<?php echo trim($providersViewRelation['ProvidersViewRelation']['BatNbr']);?>"><?php echo $providersViewRelation['ProvidersViewRelation']['InvDate'];?></div></td>
+			<td><div id="fechaf_<?php echo trim($providersViewRelation['ProvidersViewRelation']['BatNbr']);?>"><?php echo $providersViewRelation['ProvidersViewRelation']['FechaValidacion'];?></div></td>
 			<td><?php echo $providersViewRelation['ProvidersViewRelation']['InvcNbr']; ?></td>
 			<td><?php echo $providersViewRelation['ProvidersViewRelation']['name']; ?></td>
 
@@ -327,6 +330,7 @@
 				</div>
 			</td>
 			<!-- <td><?php echo $providersViewRelation['ProvidersViewRelation']['Acct']; ?></td> -->
+			<td><div id="totalAmtx_<?php echo trim($providersViewRelation['ProvidersViewRelation']['BatNbr']);?>"><?php echo $providersViewRelation['ProvidersViewRelation']['CuryCrTot'];?></div></td>
 			<td><div id="totalAmtx_<?php echo trim($providersViewRelation['ProvidersViewRelation']['BatNbr']);?>"><?php echo $providersViewRelation['ProvidersViewRelation']['totalAmt'];?></div></td>
 
 			<td><div id="uuidx_<?php echo trim($providersViewRelation['ProvidersViewRelation']['BatNbr']);?>"><?php echo $providersViewRelation['ProvidersViewRelation']['UUID'];?></div></td>
