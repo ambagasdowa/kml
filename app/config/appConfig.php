@@ -176,7 +176,7 @@
 			return true;
 		} else if (( (int)$id_group === 4 OR (int)$id_group === 1  OR (int)$id_group === 7) and $group === 'Secure') {
 			return true;
-		} else if (((int)$id_group === 9 OR (int)$id_group === 1 OR (int)$id_group === 7) and $group === 'Providers') {
+		} else if (((int)$id_group === 9 OR (int)$id_group === 1 OR (int)$id_group === 7 ) and $group === 'Providers') {
 			return true;
 		} else if (( (int)$id_group === 8 OR (int)$id_group === 10 OR (int)$id_group === 1 OR (int)$id_group === 7) and $group === 'Ingresos') {
 			return true;

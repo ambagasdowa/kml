@@ -526,6 +526,14 @@
 
 										<li class="divider"></li>
 
+                    <li class="dropdown-submenu">
+                      <a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>Projectos</span></a>
+                        <ul class="dropdown-menu">
+                          <li><a tabindex="-1" href="<?php e($this->webroot.'/ProvidersControlsFiles/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Proveedores</span></a></li>
+                          <li><a tabindex="-1" href="<?php e($this->webroot.'/ProjectionsViewFullGstXlsIndicators/');?>"><i class="fa fa-cog"></i>&nbsp;<span>XlsPort</span></a></li>
+                        </ul>
+                    </li>
+
 										<?php 	}?>
 										<?php }?>
 <!-- 										automagic hir -->
@@ -542,22 +550,6 @@
                     <?php }?>
 
 
-<!-- 										Providers -->
-										<?php if (isset($_SESSION['Auth']['User'])) {?>
-										<?php 	if (checkUser($_SESSION['Auth']['User']['group_id'],'Providers')) {?>
-
-										<li class="dropdown-submenu">
-											<a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>Projectos</span></a>
-												<ul class="dropdown-menu">
-													<li><a tabindex="-1" href="<?php e($this->webroot.'/ProvidersControlsFiles/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Proveedores</span></a></li>
-													<li><a tabindex="-1" href="<?php e($this->webroot.'/ProjectionsViewFullGstXlsIndicators/');?>"><i class="fa fa-cog"></i>&nbsp;<span>XlsPort</span></a></li>
-												</ul>
-										</li>
-
-										<li class="divider"></li>
-										<?php 	}?>
-										<?php }?>
-<!-- 										automagic hir -->
 
 
 <!-- 										Providers -->
@@ -577,7 +569,7 @@
 										<?php }?>
 <!-- 										automagic hir -->
                     <?php if (isset($_SESSION['Auth']['User'])) {?>
-                    <?php 	if (checkUser($_SESSION['Auth']['User']['group_id'],'Finanzas') OR checkUser($_SESSION['Auth']['User']['group_id'],'Providers') ) {?>
+                    <?php 	if (checkUser($_SESSION['Auth']['User']['group_id'],'Finanzas') /*OR checkUser($_SESSION['Auth']['User']['group_id'],'Providers')*/ ) {?>
                       <li class="dropdown-submenu">
                         <a tabindex="-1" href="#"><i class="fa fa-university" aria-hidden="true"></i>&nbsp;<span>Finanzas</span></a>
                           <ul class="dropdown-menu">
