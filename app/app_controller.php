@@ -172,7 +172,6 @@ class AppController extends Controller {
 // print_r($nominaUser);
 //   echo '</pre>';
 // debug($this->ProvidersViewVendor->find('all'));
-
 // exit();
 
 				if (empty($nominaUser) or !isset($nominaUser)) {
