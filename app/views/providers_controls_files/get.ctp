@@ -155,7 +155,7 @@
 				<!-- <th>DocType</th> -->
 				<!-- <th>DocDesc</th> -->
 				<th>F.Factura</th>
-				<th>F.Validaci&oacute;</th>
+				<th>F.Validaci&oacute;n</th>
 				<th>Factura</th>
 				<th>Raz&oacute;n Social</th>
 				<th>Xml</th>

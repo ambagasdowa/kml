@@ -132,6 +132,7 @@
 <!-- @NOTE  =====   Get the Files ====  -->
 <div id="msg">
 	<?php echo $this->Session->flash();?>
+	<br />
 </div>
 
 
