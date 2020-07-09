@@ -58,8 +58,18 @@ options_datatable = {
         ],
         buttons: [
              { extend: 'pageLength', text: '<i class="fa fa-filter" aria-hidden="true"></i>' }
-            ,{ extend: 'copy', text: '<i class="fa fa-clipboard" aria-hidden="true"></i>' }
-            ,{ extend: 'csv', text: '<i class="fa fa-file-text"></i>' }
+            ,{
+                extend: 'copy', text: '<i class="fa fa-clipboard" aria-hidden="true"></i>',
+                exportOptions: {
+                    columns: ':visible'
+                }
+             }
+            ,{
+               extend: 'csv', text: '<i class="fa fa-file-text"></i>',
+               exportOptions: {
+                                columns: ':visible'
+               }
+             }
             ,{
                   extend: 'excel'
                 , text: '<i class="fa fa-file-excel-o"></i>'
@@ -69,6 +79,9 @@ options_datatable = {
                 // , header:false
                 , filename:"ExportData"
                 , title:"File"
+                ,exportOptions: {
+                    columns: ':visible'
+                 }
               }
             // ,{
             // 			 extend: 'pdf', text: '<i class="fa fa-file-pdf-o"></i>'
@@ -91,9 +104,39 @@ options_datatable = {
                                                         image: imgeHeader
                                               } );
                                           }
+                    ,exportOptions: {
+                      columns: ':visible'
+                    }
              }
-            ,{ extend: 'print', text: '<i class="fa fa-print"></i>' }
+// NOTE: Active the Column filter :: just uncomment from 112 to 125
+             // ,{
+             //     extend: 'colvis',
+             //     text: '<i class="fa fa-eye-slash"></i>',
+             //     title:'Filtrar Columnas',
+             //     alt:'Filtrar Columnas'
+             //  }
+             //
+             // ,{
+             //     extend: 'colvisGroup',
+             //     text: '<i class="fa fa-eye"></i>',
+             //     title: 'Mostrar Columnas',
+             //     alt: 'Mostrar Columnas',
+             //     show: ':hidden'
+             // }
+
+            ,{
+              extend: 'print', text: '<i class="fa fa-print"></i>' ,
+              exportOptions: {
+                    columns: ':visible'
+                }
+             }
+
         ]
+        // NOTE for hidde columns , in the example the last column is hidden
+        // ,columnDefs: [ {
+        //             targets: -1,
+        //             visible: false
+        // } ]
 };
 
 // // merge obj
