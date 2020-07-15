@@ -396,8 +396,8 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 		// 		}
 		// 	}
 		// }
-debug($conditions);
-// exit();
+	debug($conditions);
+	// exit();
 }
 
 if (!empty($conditions)) {
@@ -406,10 +406,13 @@ if (!empty($conditions)) {
 	if ($this->DisponibilidadTblUnidadesGstIndicator->save($conditions)) {
 		// $this->Session->setFlash(__('The disponibilidad tbl unidades gst indicator has been saved', true));
 		// $this->redirect(array('action' => 'index'));
+		debug('save is successfully');
 	} else {
 		// $this->Session->setFlash(__('The disponibilidad tbl unidades gst indicator could not be saved. Please, try again.', true));
+		debug('something is wrong !!');
 	}
 }
+// exit();
 		// NOTE set the response output for an ajax call
 		Configure::write('debug', 0);
 		$this->autoLayout = false;

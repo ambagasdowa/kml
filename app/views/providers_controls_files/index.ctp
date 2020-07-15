@@ -284,6 +284,32 @@
 
 	<script type="text/javascript">
 
+// NOTE Add extra check for file type upload only admit xml && pdf in his own input 
+
+			function checkFile(data,ext) {
+
+					var fileElement = document.getElementById(data.id);
+					var fileExtension = "";
+					if (fileElement.value.lastIndexOf(".") > 0) {
+							fileExtension = fileElement.value.substring(fileElement.value.lastIndexOf(".") + 1, fileElement.value.length);
+					}
+					if (fileExtension.toLowerCase() == ext) {
+							return true;
+					}
+					else {
+						  var extension = ext.toUpperCase();
+							var message = 	'<div class="alert alert-danger alert-dismissible fade in" role="alert">' +
+															'<button type="button" class="close" data-dismiss="alert" aria-label="Close"> ' +
+															'<span aria-hidden="true">&times;</span>' +
+															'</button> Este Campo solo admite archivos ' + extension + '</div>';
+							document.getElementById("msg").innerHTML = message;
+							document.getElementById(data.id).value = null;
+							// form.reset();
+							return false;
+					}
+			}
+
+
 			function checkInputs (data) {
 				batnbr = data.attributes[2].value;
 					// $("#upload_"+batnbr).removeAttr("style");

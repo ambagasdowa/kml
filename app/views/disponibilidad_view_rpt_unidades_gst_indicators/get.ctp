@@ -467,6 +467,7 @@ $("#print").on('click',function(e){
 		$(".update_status").select2(
 			// width: 'resolve' // need to override the changed default
 		);
+
 		$(".update_status").on('select2:select', function (e) {
 				// e.stopPropagation();
 				// e.preventDefault();
@@ -495,8 +496,9 @@ $("#print").on('click',function(e){
 					comp = "<?php echo date('Y-m-d H:i:s') ?>";
 				}
 
-				console.log(desc);
-				console.log(comp);
+				console.log('desc : ' + desc);
+				console.log('comp : ' + comp);
+				console.log('isval : ' + isval);
 
 				if ( (desc === '' || desc === null || desc === undefined) || (comp === '' || comp === null || comp === undefined) ) {
 						// return true
