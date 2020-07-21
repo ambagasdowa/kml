@@ -543,7 +543,8 @@
                   <?php if (isset($_SESSION['Auth']['User'])) {?>
                   <?php 	if (checkUser($_SESSION['Auth']['User']['group_id'],'Providers') || $_SESSION['Auth']['User']['group_id'] == 16) { ?>
                     <li class="dropdown-submenu">
-                      <a tabindex="-1" href="<?php e($this->webroot.'/ProvidersControlsFiles/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Proveedores</span></a>
+                      <!-- <a tabindex="-1" href="<?php //e($this->webroot.'/ProvidersControlsFiles/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Proveedores</span></a> -->
+                      <a tabindex="-1" href="<?php e($this->webroot.'/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Proveedores</span></a>
                     </li>
                     <li class="divider"></li>
                     <?php 	}?>
