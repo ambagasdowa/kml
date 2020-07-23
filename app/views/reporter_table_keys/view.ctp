@@ -1,4 +1,9 @@
-
+<?php
+// SecureCalendar index
+	// NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal.
+	$evaluate = false;
+	$requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere') );
+?>
 <div class="reporterTableKeys view">
 <h2><?php  __('Reporter Table Key');?></h2>
 	<dl><?php $i = 0; $class = ' class="altrow"';?>

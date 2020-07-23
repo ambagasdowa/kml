@@ -4,35 +4,41 @@
 <?php
 /**
 
-		* 
+		*
 
-		* PHP versions 4 and 5 
+		* PHP versions 4 and 5
 
-		* 
+		*
 
-		* kml : Kamila Software 
+		* kml : Kamila Software
 
-		* Licensed under The MIT License  
+		* Licensed under The MIT License
 
-		* Redistributions of files must retain the above copyright notice. 
+		* Redistributions of files must retain the above copyright notice.
 
-		* 
+		*
 
-		* @copyright     Jesus Baizabal 
+		* @copyright     Jesus Baizabal
 
-		* @link          http://baizabal.xyz 
+		* @link          http://baizabal.xyz
 
-		* @mail	     baizabal.jesus@gmail.com 
+		* @mail	     baizabal.jesus@gmail.com
 
-		* @package       cake 
+		* @package       cake
 
-		* @subpackage    cake.cake.console.libs.templates.views 
+		* @subpackage    cake.cake.console.libs.templates.views
 
-		* @since         CakePHP(tm) v 1.2.0.5234 
+		* @since         CakePHP(tm) v 1.2.0.5234
 
-		* @license       MIT License (http://www.opensource.org/licenses/mit-license.php) 
+		* @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
 
 		*/
+?>
+<?php
+// SecureCalendar index
+  // NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal.
+  $evaluate = false;
+  $requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere') );
 ?>
 
       <?php 	echo $this->Session->flash();?>        <div class="col-md-offset-1 col-sm-11 col-md-11">
@@ -42,7 +48,7 @@
 							<?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $this->Form->value('ReporterTableKey.id')), null, sprintf(__('Are you sure you want to delete # %s?', true), $this->Form->value('ReporterTableKey.id'))); ?>						</li>
 										<li>
 							<?php echo $this->Html->link(__('List Reporter Table Keys', true), array('action' => 'index'),array('class'=>'btn btn-default list-group-item'));?>						</li>
-				
+
 			</ul>
         </div>
 
@@ -54,7 +60,7 @@
 			<span>
 					 <?php __('Edit Reporter Table Key'); ?>			</span>
 		</h2>
-		
+
           <?php echo $this->Form->create('ReporterTableKey',array('enctype' => 'multipart/form-data','class'=>'form'));?>
 			<div class="reporterTableKeys form">
 
@@ -83,10 +89,3 @@
         <!--</div>--> <!--main-->
       <!--</div>--> <!--row-->
     <!--</div>--> <!--container fluid-->
-
-    
-
-
-
-
-

@@ -19,7 +19,7 @@
 <?php
 class ReporterViewsMainSubreport extends AppModel {
 	var $name = 'ReporterViewsMainSubreport';
-	var $useDbConfig = 'mssql_sistemas';
+	var $useDbConfig = 'mssql_systems';
 	var $primaryKey = 'ID';
 
 

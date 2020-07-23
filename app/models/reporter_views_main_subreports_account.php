@@ -19,7 +19,7 @@
 <?php
 class ReporterViewsMainSubreportsAccount extends AppModel {
 	var $name = 'ReporterViewsMainSubreportsAccount';
-	var $useDbConfig = 'mssql_sistemas';
+	var $useDbConfig = 'mssql_systems';
 
 
 } // End Class

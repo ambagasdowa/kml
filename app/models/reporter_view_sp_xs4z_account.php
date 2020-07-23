@@ -19,7 +19,7 @@
 <?php
 class ReporterViewSpXs4zAccount extends AppModel {
 	var $name = 'ReporterViewSpXs4zAccount';
-	var $useDbConfig = 'mssql_sistemas';
+	var $useDbConfig = 'mssql_systems';
 	var $primaryKey = '_key';
 
  	function get_list_accounts () {

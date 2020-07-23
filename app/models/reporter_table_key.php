@@ -19,7 +19,7 @@
 <?php
 class ReporterTableKey extends AppModel {
 	var $name = 'ReporterTableKey';
-	var $useDbConfig = 'mssql_sistemas';
+	var $useDbConfig = 'mssql_systems';
 
 
 	function reporter_list_keys ( $mode=null, $options=array() ) {
