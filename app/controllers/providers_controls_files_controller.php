@@ -988,7 +988,7 @@ class ProvidersControlsFilesController extends AppController {
 
 			function get() {
 
-				Configure::write('debug',2);
+				Configure::write('debug',0);
 				// App::uses('Xml', 'Lib');
 
 				$posted = json_decode(base64_decode($this->params['named']['data']),true);
@@ -996,6 +996,7 @@ class ProvidersControlsFilesController extends AppController {
 				// exit();
 				$this->loadModel('ProvidersViewRelation');
 				$this->LoadModel('ProjectionsViewBussinessUnit');
+				$this->ProjectionsViewBussinessUnit->query('SET	ANSI_NULLS	ON;SET	ANSI_WARNINGS	ON;');
 
 				$conditions = array();
 				$add_conditions = array();
@@ -1106,7 +1107,7 @@ class ProvidersControlsFilesController extends AppController {
 				// if (!isset($message)) {
 				// 	$message = null;
 				// }
-exit();
+// exit();
 				$this->set(compact('providersViewRelations','route','message'));
 // exit();
 				// NOTE set the response output for an ajax call
