@@ -241,7 +241,10 @@ class AddenumViewAlbaranRelationsController extends AppController {
 
 			$posted = json_decode(base64_decode($this->params['named']['data']),true);
 			// debug($posted);
+			$this->LoadModel('ProjectionsViewBussinessUnit');
+			$this->ProjectionsViewBussinessUnit->query('SET	ANSI_NULLS	ON;SET	ANSI_WARNINGS	ON;');
 			$this->loadModel('AddenumViewAlbaranRelation');
+
 			$conditions = array();
 			$add_conditions = array();
 			foreach ( $posted as $keys => $postvalue ) {
