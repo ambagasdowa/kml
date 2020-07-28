@@ -386,6 +386,8 @@ class ProvidersControlsFilesController extends AppController {
 				// WARNING several check's beetwen the xml file and solomon records  just add in hir
 				// NOTE Call refData[1] => this is the batnbr ->connect to batch and vallidate
 				// NOTE model => ProvidersViewBatchAmount
+				$this->LoadModel('ProjectionsViewBussinessUnit');
+				$this->ProjectionsViewBussinessUnit->query('SET	ANSI_NULLS	ON;SET	ANSI_WARNINGS	ON;');
 				$this->LoadModel('ProvidersViewBatchAmount');
 				$amount = current($info['Total']);
 				$BatNbr = $ref_data[1];
@@ -538,7 +540,8 @@ class ProvidersControlsFilesController extends AppController {
 
 
 			function relation( $file = array() , $fid = null ,$xml = array(),$type = null ,$message = null ) {
-
+				$this->LoadModel('ProjectionsViewBussinessUnit');
+				$this->ProjectionsViewBussinessUnit->query('SET	ANSI_NULLS	ON;SET	ANSI_WARNINGS	ON;');
 				// debug('INSIDE RELATION');
 				// debug($file);
 				// debug($fid);
