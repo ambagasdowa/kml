@@ -721,7 +721,8 @@ class ProvidersControlsFilesController extends AppController {
 			} // End Relation
 
 			function file_proccess( $form_data = array() , $ref_data = array() ) {
-
+				$this->LoadModel('ProjectionsViewBussinessUnit');
+				$this->ProjectionsViewBussinessUnit->query('SET	ANSI_NULLS	ON;SET	ANSI_WARNINGS	ON;');
 				Configure::write('debug',0);
 //
 // 				debug('FORM_DATA');
@@ -1126,7 +1127,9 @@ class ProvidersControlsFilesController extends AppController {
 			// $this->ProvidersControlsFile->recursive = 0;
 			// $this->set('providersControlsFiles', $this->paginate());
 		// NOTE File section
+		// $this->LoadModel('ProjectionsViewBussinessUnit');
 		$this->LoadModel('ProjectionsViewBussinessUnit');
+		$this->ProjectionsViewBussinessUnit->query('SET	ANSI_NULLS	ON;SET	ANSI_WARNINGS	ON;');
 		$bsu = $this->ProjectionsViewBussinessUnit->find('list',array('fields'=>array('id_area','tname')));
 		// debug($bsu);
 		$this->set(compact('bsu'));
@@ -1174,7 +1177,9 @@ class ProvidersControlsFilesController extends AppController {
 
 
 	function add($data = null) {
-
+		$this->LoadModel('ProjectionsViewBussinessUnit');
+		$this->ProjectionsViewBussinessUnit->query('SET	ANSI_NULLS	ON;SET	ANSI_WARNINGS	ON;');
+		
     if(isset($data)){
     $this->data = $data;
 
