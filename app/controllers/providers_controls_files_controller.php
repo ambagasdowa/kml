@@ -386,9 +386,9 @@ class ProvidersControlsFilesController extends AppController {
 				// WARNING several check's beetwen the xml file and solomon records  just add in hir
 				// NOTE Call refData[1] => this is the batnbr ->connect to batch and vallidate
 				// NOTE model => ProvidersViewBatchAmount
-				$this->LoadModel('ProjectionsViewBussinessUnit');
-				$this->ProjectionsViewBussinessUnit->query('SET	ANSI_NULLS	ON;SET	ANSI_WARNINGS	ON;');
+
 				$this->LoadModel('ProvidersViewBatchAmount');
+				$this->ProvidersViewBatchAmount->query('SET	ANSI_NULLS	ON;SET	ANSI_WARNINGS	ON;');
 				$amount = current($info['Total']);
 				$BatNbr = $ref_data[1];
 				$CpnyId = $ref_data[2];
@@ -626,13 +626,28 @@ class ProvidersControlsFilesController extends AppController {
 				// debug('SAVEUUID');
 				// debug($SaveUUID);
 
+			 // DEBUG: Save to logs
+			 $this->LoadModel('ApiSatHistoricoLog');
 
 				// if ($this->ProvidersUuidRequest->crsave('compact',$SaveUUID)) {
 				if ($this->ProvidersUuidRequest->save($SaveUUID['ProvidersUuidRequest'])) {
 					// debug('Save ProvidersUuidRequest ok');
 					// $ProvidersUuidRequestId = $this->ProvidersUuidRequest->getLastInsertId();
+					$mss['ApiSatHistoricoLog']['message'] = 'Succesfull save Lote -> '.$data['BatNbr'].' CpnyId -> '.$data['CpnyId'].' xml_amount => '.current($xml['Total']).' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
+
+					if($this->ApiSatHistoricoLog->save($mss)) {
+							// ....
+					}
+
 				} else {
 					// debug('Save ProvidersUuidRequest has Error!');
+
+				 $mss['ApiSatHistoricoLog']['message'] = 'Error al guardar informacion del Lote -> '.$data['BatNbr'].' CpnyId -> '.$data['CpnyId'].' xml_amount => '.current($xml['Total']).' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
+
+				 if($this->ApiSatHistoricoLog->save($mss)) {
+						 // ....
+				 }
+
 				}
 
 				// debug($this->ProvidersUuidRequest->validationErrors); //show validationErrors
@@ -1053,7 +1068,7 @@ class ProvidersControlsFilesController extends AppController {
 										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 											<span aria-hidden="true">&times;</span>
 										</button>
-											Debe indicar una Unidad de Negocio o un Numero de Lote 1
+											Debe indicar una Unidad de Negocio o un Numero de Lote
 										</div>';
 
 					// $conditionsBl = null; //WARNING if choose lote then reset all other conditions
@@ -1179,7 +1194,7 @@ class ProvidersControlsFilesController extends AppController {
 	function add($data = null) {
 		$this->LoadModel('ProjectionsViewBussinessUnit');
 		$this->ProjectionsViewBussinessUnit->query('SET	ANSI_NULLS	ON;SET	ANSI_WARNINGS	ON;');
-		
+
     if(isset($data)){
     $this->data = $data;
 
