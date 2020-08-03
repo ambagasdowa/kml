@@ -19,5 +19,5 @@
 <?php
 class ProvidersViewBatchAmount extends AppModel {
 	var $name = 'ProvidersViewBatchAmount';
-	var $useDbConfig = 'mssql_sistemas';
+	var $useDbConfig = 'mssql_systems';
 }

@@ -19,6 +19,6 @@
 <?php
 class ProvidersAssocVendor extends AppModel {
 	var $name = 'ProvidersAssocVendor';
-	var $useDbConfig = 'mssql_sistemas';
+	var $useDbConfig = 'mssql_systems';
 	// var $displayField = 'BatNbr';
 }

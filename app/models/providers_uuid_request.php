@@ -20,7 +20,7 @@
 
 class ProvidersUuidRequest extends AppModel {
 	var $name = 'ProvidersUuidRequest';
-	var $useDbConfig = 'mssql_sistemas';
+	var $useDbConfig = 'mssql_systems';
 	// var $displayField = 'BatNbr';
 	var $primaryKey = 'id';
 // }
@@ -158,7 +158,7 @@ class ProvidersUuidRequest extends AppModel {
 
 			// return $theQuery;
 			debug($theQuery);
-			
+
 			$this->query($theQuery);
 // exit();
 	} // end function fetch_costos_units
