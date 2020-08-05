@@ -966,7 +966,7 @@ class ProvidersControlsFilesController extends AppController {
 				debug(configure::read('debug'));
 				// App::uses('Xml', 'Lib');
 							// debug('FORM');
-							// debug($this->params['form']);
+							debug($this->params['form']);
 							$forms = $this->params['form'];
 							// DEBUG:
 								foreach ($forms as $key_code => $data_code) {
