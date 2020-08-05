@@ -962,16 +962,18 @@ class ProvidersControlsFilesController extends AppController {
 			function upload() {
 
 				Configure::write('debug',2);
+
+				debug(configure::read('debug'));
 				// App::uses('Xml', 'Lib');
 							// debug('FORM');
-							// debug($this->params['form']);
+							debug($this->params['form']);
 							$forms = $this->params['form'];
 
 								foreach ($forms as $key_code => $data_code) {
 									// code...
 									if($key_code == 'batnbr') {
-										// debug('KEYCODE => '.$key_code);
-										// debug('DATACODE => '.$data_code);
+										debug('KEYCODE => '.$key_code);
+										debug('DATACODE => '.$data_code);
 										$batnbr = $data_code;
 									}
 										// NOTE split for datacode
@@ -982,7 +984,7 @@ class ProvidersControlsFilesController extends AppController {
 											// debug('$this->file_proccess($data_code,$split_code)');
 											$response[] = $this->file_proccess($data_code,$split_code);
 
-											// debug($response);
+											debug($response);
 											// debug(current($response)['status']);
 											if (current($response)['status'] == false) {
 												// code...
