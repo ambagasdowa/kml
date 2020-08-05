@@ -966,26 +966,29 @@ class ProvidersControlsFilesController extends AppController {
 				debug(configure::read('debug'));
 				// App::uses('Xml', 'Lib');
 							// debug('FORM');
-							debug($this->params['form']);
+							// debug($this->params['form']);
 							$forms = $this->params['form'];
-
+							// DEBUG:
 								foreach ($forms as $key_code => $data_code) {
 									// code...
 									if($key_code == 'batnbr') {
-										debug('KEYCODE => '.$key_code);
-										debug('DATACODE => '.$data_code);
+										// debug('KEYCODE => '.$key_code);
+										// debug('DATACODE => '.$data_code);
 										$batnbr = $data_code;
 									}
 										// NOTE split for datacode
 											$split_code = explode('_',$key_code);
+											debug ($split_code);
 
-										if ($data_code['error'] == 0 ) {
+										if (is_array($data_code) && $data_code['error'] == 0 ) {
 											// save the file and set storage
-											// debug('$this->file_proccess($data_code,$split_code)');
+											debug('$this->file_proccess($data_code,$split_code)');
+											exit();
 											$response[] = $this->file_proccess($data_code,$split_code);
 
 											debug($response);
-											// debug(current($response)['status']);
+											debug(current($response)['status']);
+
 											if (current($response)['status'] == false) {
 												// code...
 												// return current($response);
