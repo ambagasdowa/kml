@@ -961,7 +961,7 @@ class ProvidersControlsFilesController extends AppController {
 
 			function upload() {
 
-				Configure::write('debug',0);
+				Configure::write('debug',2);
 				// App::uses('Xml', 'Lib');
 							// debug('FORM');
 							// debug($this->params['form']);
