@@ -973,7 +973,7 @@ class ProvidersControlsFilesController extends AppController {
 									// code...
 									if($key_code == 'batnbr') {
 										// debug('KEYCODE => '.$key_code);
-										// debug('DATACODE => '.$data_code);
+										debug('DATACODE => '.$data_code);
 										$batnbr = $data_code;
 									}
 										// NOTE split for datacode
