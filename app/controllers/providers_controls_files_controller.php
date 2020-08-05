@@ -773,7 +773,7 @@ class ProvidersControlsFilesController extends AppController {
 						$this->data['ProvidersControlsFile']['upload'] = $form_data;
 				}
 
-				// debug($this->data);
+				debug($this->data);exit();
 
 				$file_providers_name = str_replace('.'.end(explode('.',$this->data['ProvidersControlsFile']['upload']['name'])),'',$this->data['ProvidersControlsFile']['upload']['name']);
 
@@ -812,7 +812,7 @@ class ProvidersControlsFilesController extends AppController {
 						}
 				// 				$idx_providers_name = current($finderFilename);
 
-					// debug($finderFilename);
+					debug($finderFilename);
 					// print_r(count($finderFilename));
 				// exit();
 				// exit();
@@ -847,6 +847,9 @@ class ProvidersControlsFilesController extends AppController {
 														<strong> Solo se permiten archivos de texto plano con la extension xml o archivos pdf </strong>
 													</div>';
 							$response = array('message'=>$message);
+
+							debug($message);
+
 							return $response;
 						// $this->redirect(array('action' => 'index'));
 					} else {
@@ -874,7 +877,7 @@ class ProvidersControlsFilesController extends AppController {
 
 						$struct = $this->validStructure($this->data['ProvidersControlsFile']['upload']['tmp_name']);
 						if ($struct['status'] == false) {
-							// print_r($check['message']);
+							debug($check['message']);
 							$response = array('message'=>$struct['message'],'status'=>false);
 							return $response;
 						}
@@ -963,7 +966,7 @@ class ProvidersControlsFilesController extends AppController {
 
 				Configure::write('debug',2);
 
-				debug(configure::read('debug'));
+				// debug(configure::read('debug'));
 				// App::uses('Xml', 'Lib');
 							// debug('FORM');
 							debug($this->params['form']);
