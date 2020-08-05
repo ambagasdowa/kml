@@ -19,5 +19,5 @@
 <?php
 class ApiSatHistoricoLog extends AppModel {
 	var $name = 'ApiSatHistoricoLog';
-	var $useDbConfig = 'mssql_sistemas';
+	var $useDbConfig = 'mssql_systems';
 }

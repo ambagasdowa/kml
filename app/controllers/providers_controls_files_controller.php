@@ -23,7 +23,7 @@ class ProvidersControlsFilesController extends AppController {
 
 	var $name = 'ProvidersControlsFiles';
 	var $helpers = array('Html','Form','Ajax','Javascript','Js');
-
+  var $uses = array('ApiSatHistoricoLog');
 
 			function date_convert($date) {
 				//1. Transform request parameters to MySQL datetime format.
@@ -104,6 +104,7 @@ class ProvidersControlsFilesController extends AppController {
 					return $xml_errors;
 			}
 
+// NOTE valida estructura del xml
 			function validStructure ($xml_path = null) {
 				// NOTE structure Validation
 						libxml_use_internal_errors(true);
@@ -149,9 +150,9 @@ class ProvidersControlsFilesController extends AppController {
 					// debug($responseCode);
 					// send to log
 					// DEBUG: Save to logs
-					$this->LoadModel('ApiSatHistoricoLog');
+					// $this->LoadModel('ApiSatHistoricoLog');
 
-					$mss['ApiSatHistoricoLog']['message'] = 'LevelConfigMax -> '.$level_config_max.' Level -> '.$level_pr.' Status -> '.$responseCode['status'].' Message -> '.$responseCode['message'].' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
+					$mss['ApiSatHistoricoLog']['message'] = 'Line 155 providersControlsFile::validStructure '.'LevelConfigMax -> '.$level_config_max.' Level -> '.$level_pr.' Status -> '.$responseCode['status'].' Message -> '.$responseCode['message'].'$xml_response => '.$xml_response.' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
 					$mss['ApiSatHistoricoLog']['created'] = date('Y-m-d H:i:s');
 					$mss['ApiSatHistoricoLog']['status'] = 2;
 
@@ -374,6 +375,15 @@ class ProvidersControlsFilesController extends AppController {
 
 						}
 
+						$mss['ApiSatHistoricoLog']['message'] = 'Line 378 providersControlsFile::validate '.'Extraction info of xml uuid => '.$response['uuid'].' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
+						$mss['ApiSatHistoricoLog']['created'] = date('Y-m-d H:i:s');
+						$mss['ApiSatHistoricoLog']['status'] = 2;
+
+						if($this->ApiSatHistoricoLog->save($mss)) {
+								// ....
+						}
+
+
 	          return $response;
 
 	      }  //WARNING End of validate
@@ -406,9 +416,9 @@ class ProvidersControlsFilesController extends AppController {
 				 // debug($is_exceded);
 				// debug($result);
 				// DEBUG: Save to logs
-				$this->LoadModel('ApiSatHistoricoLog');
+				// $this->LoadModel('ApiSatHistoricoLog');
 
-				$mss['ApiSatHistoricoLog']['message'] = 'Lote -> '.$BatNbr.' CpnyId -> '.$CpnyId.' xml_amount => '.$xml_amount.'  xls_amount => '.$slx_amount.' Diferencia -> '.$is_exceded.' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
+				$mss['ApiSatHistoricoLog']['message'] = 'line->421 Lote -> '.$BatNbr.' CpnyId -> '.$CpnyId.' xml_amount => '.$xml_amount.'  xls_amount => '.$slx_amount.' Diferencia -> '.$is_exceded.' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
 				$mss['ApiSatHistoricoLog']['created'] = date('Y-m-d H:i:s');
 				$mss['ApiSatHistoricoLog']['status'] = 1;
 
@@ -550,8 +560,8 @@ class ProvidersControlsFilesController extends AppController {
 
 			function relation( $file = array() , $fid = null ,$xml = array(),$type = null ,$message = null ) {
 
-				$this->LoadModel('ProjectionsViewBussinessUnit');
-				$this->ProjectionsViewBussinessUnit->query('SET	ANSI_NULLS	ON;SET	ANSI_WARNINGS	ON;');
+				// $this->LoadModel('ProjectionsViewBussinessUnit');
+				// $this->ProjectionsViewBussinessUnit->query('SET	ANSI_NULLS	ON;SET	ANSI_WARNINGS	ON;');
 				// debug('INSIDE RELATION');
 				// debug($file);
 				// debug($fid);
@@ -637,7 +647,7 @@ class ProvidersControlsFilesController extends AppController {
 				// debug($SaveUUID);
 
 			 // DEBUG: Save to logs
-			 $this->LoadModel('ApiSatHistoricoLog');
+			 // $this->LoadModel('ApiSatHistoricoLog');
 
 				// if ($this->ProvidersUuidRequest->crsave('compact',$SaveUUID)) {
 				if ($this->ProvidersUuidRequest->save($SaveUUID['ProvidersUuidRequest'])) {
@@ -749,8 +759,8 @@ class ProvidersControlsFilesController extends AppController {
 			} // End Relation
 
 			function file_proccess( $form_data = array() , $ref_data = array() ) {
-				$this->LoadModel('ProjectionsViewBussinessUnit');
-				$this->ProjectionsViewBussinessUnit->query('SET	ANSI_NULLS	ON;SET	ANSI_WARNINGS	ON;');
+				// $this->LoadModel('ProjectionsViewBussinessUnit');
+				// $this->ProjectionsViewBussinessUnit->query('SET	ANSI_NULLS	ON;SET	ANSI_WARNINGS	ON;');
 				Configure::write('debug',0);
 //
 // 				debug('FORM_DATA');
@@ -1001,7 +1011,7 @@ class ProvidersControlsFilesController extends AppController {
 
 					$response = array_merge($response,array('count'=>$count));
 					// DEBUG:
-					// debug($response);
+					debug($response);
 							//4. Return as a json array
 							Configure::write('debug', 0);
 							$this->autoRender = false;
