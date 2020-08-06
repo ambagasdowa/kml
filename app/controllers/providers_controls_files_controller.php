@@ -152,7 +152,7 @@ class ProvidersControlsFilesController extends AppController {
 					// DEBUG: Save to logs
 					// $this->LoadModel('ApiSatHistoricoLog');
 
-					$mss['ApiSatHistoricoLog']['message'] = 'Line 155 providersControlsFile::validStructure '.'LevelConfigMax -> '.$level_config_max.' Level -> '.$level_pr.' Status -> '.$responseCode['status'].' Message -> '.$responseCode['message'].'$xml_response => '.$xml_response.' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
+					$mss['ApiSatHistoricoLog']['message'] = 'Line 155 providersControlsFile::validStructure '.'LevelConfigMax -> '.$level_config_max.' Level -> '.$level_pr.' Status -> '.$responseCode['status'].' Message -> '.$responseCode['message'].' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
 					$mss['ApiSatHistoricoLog']['created'] = date('Y-m-d H:i:s');
 					$mss['ApiSatHistoricoLog']['status'] = 2;
 
@@ -586,6 +586,14 @@ class ProvidersControlsFilesController extends AppController {
 				$checkFile = $this->ProvidersViewRelation->find('all',array('conditions'=>$fileConditions));
 				$data = current($checkFile)['ProvidersViewRelation'];
 
+				$mss['ApiSatHistoricoLog']['message'] = 'line 589 entry try save into uuidrequest data -> '.$data.' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
+				$mss['ApiSatHistoricoLog']['created'] = date('Y-m-d H:i:s');
+				$mss['ApiSatHistoricoLog']['status'] = 5;
+
+				if($this->ApiSatHistoricoLog->save($mss)) {
+						// ....Save to log
+				}
+
 				// debug('DATA');
 				// debug($data);
 				// debug($xml);
@@ -761,7 +769,7 @@ class ProvidersControlsFilesController extends AppController {
 			function file_proccess( $form_data = array() , $ref_data = array() ) {
 				// $this->LoadModel('ProjectionsViewBussinessUnit');
 				// $this->ProjectionsViewBussinessUnit->query('SET	ANSI_NULLS	ON;SET	ANSI_WARNINGS	ON;');
-				Configure::write('debug',2);
+				Configure::write('debug',0);
 //
 // 				debug('FORM_DATA');
 // 				debug($form_data);
