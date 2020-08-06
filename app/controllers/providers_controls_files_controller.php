@@ -23,7 +23,7 @@ class ProvidersControlsFilesController extends AppController {
 
 	var $name = 'ProvidersControlsFiles';
 	var $helpers = array('Html','Form','Ajax','Javascript','Js');
-  var $uses = array('ApiSatHistoricoLog');
+  var $uses = array('ProvidersControlsFile','ApiSatHistoricoLog');
 
 			function date_convert($date) {
 				//1. Transform request parameters to MySQL datetime format.
@@ -570,7 +570,7 @@ class ProvidersControlsFilesController extends AppController {
 				//
 				$this->loadModel('ProvidersAssocVendor');
 				$this->loadModel('ProvidersViewRelation');
-				$this->loadModel('ProvidersControlsFile');
+				// $this->loadModel('ProvidersControlsFile');
 				$this->loadModel('ProvidersUuidRequest');
 				//
 				// check if assoc exists
