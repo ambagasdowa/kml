@@ -985,10 +985,11 @@ class ProvidersControlsFilesController extends AppController {
 
 										if (is_array($data_code) && $data_code['error'] == 0 ) {
 											// save the file and set storage
-											debug('$this->file_proccess($data_code,$split_code)');
+											debug('start to $this->file_proccess($data_code,$split_code)');
 											// exit();
 											$response[] = $this->file_proccess($data_code,$split_code);
 
+											debug('safe out ');
 											debug($response);
 											debug(current($response)['status']);
 
