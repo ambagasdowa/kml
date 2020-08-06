@@ -786,7 +786,7 @@ class ProvidersControlsFilesController extends AppController {
 				$conditionsFields['ProvidersControlsFile._status'] = 1 ;
 
 				$finderFilename = $this->ProvidersControlsFile->find('all',array('conditions'=>$conditionsFields));
-
+				var_dump($finderFilename);
 
 						//NOTE this must be a very rare case but one never knows
 						if (count($finderFilename) >= 1) {
