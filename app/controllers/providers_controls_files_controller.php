@@ -761,7 +761,7 @@ class ProvidersControlsFilesController extends AppController {
 			function file_proccess( $form_data = array() , $ref_data = array() ) {
 				// $this->LoadModel('ProjectionsViewBussinessUnit');
 				// $this->ProjectionsViewBussinessUnit->query('SET	ANSI_NULLS	ON;SET	ANSI_WARNINGS	ON;');
-				Configure::write('debug',0);
+				Configure::write('debug',2);
 //
 // 				debug('FORM_DATA');
 // 				debug($form_data);
@@ -773,7 +773,7 @@ class ProvidersControlsFilesController extends AppController {
 						$this->data['ProvidersControlsFile']['upload'] = $form_data;
 				}
 
-				debug($this->data);exit();
+				debug($this->data);
 
 				$file_providers_name = str_replace('.'.end(explode('.',$this->data['ProvidersControlsFile']['upload']['name'])),'',$this->data['ProvidersControlsFile']['upload']['name']);
 
@@ -964,7 +964,7 @@ class ProvidersControlsFilesController extends AppController {
 
 			function upload() {
 
-				Configure::write('debug',2);
+				Configure::write('debug',0);
 
 				// debug(configure::read('debug'));
 				// App::uses('Xml', 'Lib');
@@ -986,10 +986,18 @@ class ProvidersControlsFilesController extends AppController {
 										if (is_array($data_code) && $data_code['error'] == 0 ) {
 											// save the file and set storage
 											debug('start to $this->file_proccess($data_code,$split_code)');
+
+
+											 $mss['ApiSatHistoricoLog']['message'] = 'entry to file_proccess user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
+											 $mss['ApiSatHistoricoLog']['created'] = date('Y-m-d H:i:s');
+											 $mss['ApiSatHistoricoLog']['status'] = 3;
+											 if($this->ApiSatHistoricoLog->save($mss)) {
+													 // ....
+											 }
 											// exit();
 											$response[] = $this->file_proccess($data_code,$split_code);
 
-											debug('safe out ');
+											// debug('safe out ...');
 											debug($response);
 											debug(current($response)['status']);
 
