@@ -820,7 +820,7 @@ class ProvidersControlsFilesController extends AppController {
 				$conditionsFields['ProvidersControlsFile._status'] = 1 ;
 
 				$finderFilename = $this->ProvidersControlsFile->find('all',array('conditions'=>$conditionsFields));
-				var_dump($finderFilename);
+				// var_dump($finderFilename);
 
 						//NOTE this must be a very rare case but one never knows
 						if (count($finderFilename) >= 1) {
@@ -1024,12 +1024,13 @@ class ProvidersControlsFilesController extends AppController {
 											$split_code = explode('_',$key_code);
 											debug ($split_code);
 
-										if (is_array($data_code) && $data_code['error'] == 0 ) {
+										// if (is_array($data_code) && $data_code['error'] == 0 ) {
+										if ($data_code['error'] == 0 ) {
 											// save the file and set storage
-											debug('start to $this->file_proccess($data_code,$split_code)');
+											// debug('start to $this->file_proccess($data_code,$split_code)');
 
 
-											 $mss['ApiSatHistoricoLog']['message'] = 'line 1032 entry to file_proccess in upload user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
+											 $mss['ApiSatHistoricoLog']['message'] = 'Init proccess for '.$batnbr.' line 1032 entry to file_proccess in upload user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
 											 $mss['ApiSatHistoricoLog']['created'] = date('Y-m-d H:i:s');
 											 $mss['ApiSatHistoricoLog']['status'] = 3;
 											 if($this->ApiSatHistoricoLog->save($mss)) {
@@ -1038,8 +1039,8 @@ class ProvidersControlsFilesController extends AppController {
 											// exit();
 											$response[] = $this->file_proccess($data_code,$split_code);
 
-											// debug('safe out ...');
-											debug($response);
+											debug('safe out is an array?...');
+											debug(is_array($response));
 											debug(current($response)['status']);
 
 											if (current($response)['status'] == false) {
