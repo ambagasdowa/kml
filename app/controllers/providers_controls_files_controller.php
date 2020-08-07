@@ -38,7 +38,7 @@ class ProvidersControlsFilesController extends AppController {
 
 					Configure::write('debug',0);
 
-					debug($this->params);
+					// debug($this->params);
 				 // $xml = trim($xml,"\n");
 				 $this->set(compact('xml','name'));
 				//NOTE ALERT print xml
@@ -819,7 +819,7 @@ class ProvidersControlsFilesController extends AppController {
 						$this->data['ProvidersControlsFile']['upload'] = $form_data;
 				}
 
-				debug($this->data);
+				// debug($this->data);
 
 				$file_providers_name = str_replace('.'.end(explode('.',$this->data['ProvidersControlsFile']['upload']['name'])),'',$this->data['ProvidersControlsFile']['upload']['name']);
 
@@ -858,7 +858,7 @@ class ProvidersControlsFilesController extends AppController {
 						}
 				// 				$idx_providers_name = current($finderFilename);
 
-					debug($finderFilename);
+					// debug($finderFilename);
 					// print_r(count($finderFilename));
 				// exit();
 				// exit();
@@ -894,7 +894,7 @@ class ProvidersControlsFilesController extends AppController {
 													</div>';
 							$response = array('message'=>$message);
 
-							debug($message);
+							// debug($message);
 
 							return $response;
 						// $this->redirect(array('action' => 'index'));
@@ -923,7 +923,7 @@ class ProvidersControlsFilesController extends AppController {
 
 						$struct = $this->validStructure($this->data['ProvidersControlsFile']['upload']['tmp_name']);
 						if ($struct['status'] == false) {
-							debug($check['message']);
+							// debug($check['message']);
 							$response = array('message'=>$struct['message'],'status'=>false);
 							return $response;
 						}
@@ -1031,19 +1031,19 @@ class ProvidersControlsFilesController extends AppController {
 				// debug(configure::read('debug'));
 				// App::uses('Xml', 'Lib');
 							// debug('FORM');
-							debug($this->params['form']);
+							// debug($this->params['form']);
 							$forms = $this->params['form'];
 							// DEBUG:
 								foreach ($forms as $key_code => $data_code) {
 									// code...
 									if($key_code == 'batnbr') {
 										// debug('KEYCODE => '.$key_code);
-										debug('DATACODE => '.$data_code);
+										// debug('DATACODE => '.$data_code);
 										$batnbr = $data_code;
 									}
 										// NOTE split for datacode
 											$split_code = explode('_',$key_code);
-											debug ($split_code);
+											// debug ($split_code);
 
 										// if (is_array($data_code) && $data_code['error'] == 0 ) {
 										if ($data_code['error'] == 0 ) {
@@ -1061,9 +1061,9 @@ class ProvidersControlsFilesController extends AppController {
 											// exit();
 											$response[] = $this->file_proccess($data_code,$split_code);
 
-											debug('safe out is an array?...');
-											debug(is_array($response));
-											debug(current($response)['status']);
+											// debug('safe out is an array?...');
+											// debug(is_array($response));
+											// debug(current($response)['status']);
 
 											if (current($response)['status'] == false) {
 												// code...
@@ -1090,7 +1090,11 @@ class ProvidersControlsFilesController extends AppController {
 						$response = current($response);
 					}
 
-					$mss['ApiSatHistoricoLog']['message'] = 'response of the process => '. is_array($response) ? implode('_',$response):$response.' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
+					$response = array_merge($response,array('count'=>$count));
+					// DEBUG:
+					// debug($response);
+					$response_back = $response;
+					$mss['ApiSatHistoricoLog']['message'] = 'response of the process => '. is_array($response_back) ? implode('_',$response_back):$response_back.' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
 					$mss['ApiSatHistoricoLog']['created'] = date('Y-m-d H:i:s');
 					$mss['ApiSatHistoricoLog']['status'] = 3;
 					$mss['ApiSatHistoricoLog']['BatNbr'] = $batnbr;
@@ -1098,9 +1102,6 @@ class ProvidersControlsFilesController extends AppController {
 						 // ....
 					}
 
-					$response = array_merge($response,array('count'=>$count));
-					// DEBUG:
-					debug($response);
 							//4. Return as a json array
 							Configure::write('debug', 0);
 							$this->autoRender = false;
@@ -1125,9 +1126,10 @@ class ProvidersControlsFilesController extends AppController {
 				$posted = json_decode(base64_decode($this->params['named']['data']),true);
 				// debug($posted);
 				// exit();
-				$this->loadModel('ProvidersViewRelation');
+
 				$this->LoadModel('ProjectionsViewBussinessUnit');
 				$this->ProjectionsViewBussinessUnit->query('SET	ANSI_NULLS	ON;SET	ANSI_WARNINGS	ON;');
+				$this->loadModel('ProvidersViewRelation');
 
 				$conditions = array();
 				$add_conditions = array();

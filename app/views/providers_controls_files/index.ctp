@@ -284,7 +284,7 @@
 
 	<script type="text/javascript">
 
-// NOTE Add extra check for file type upload only admit xml && pdf in his own input 
+// NOTE Add extra check for file type upload only admit xml && pdf in his own input module ProvidersPortal::checkFile
 
 			function checkFile(data,ext) {
 
