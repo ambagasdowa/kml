@@ -681,7 +681,7 @@ class ProvidersControlsFilesController extends AppController {
 						} else {
 							// debug('Save ProvidersUuidRequest has Error!');
 
-						 $mss['ApiSatHistoricoLog']['message'] = 'line 675 Error al guardar en ProvidersUuidRequest informacion del Lote -> '.$data['BatNbr'].' CpnyId -> '.$data['CpnyId'].' xml_amount => '.current($xml['Total']).' Errors => '.$this->ModelName->invalidFields();
+						 $mss['ApiSatHistoricoLog']['message'] = 'line 675 Error al guardar en ProvidersUuidRequest informacion del Lote -> '.$data['BatNbr'].' CpnyId -> '.$data['CpnyId'].' xml_amount => '.current($xml['Total']).' Errors => '.$this->ProvidersUuidRequest->invalidFields();
 						 $mss['ApiSatHistoricoLog']['created'] = date('Y-m-d H:i:s');
 						 $mss['ApiSatHistoricoLog']['status'] = 3;
 						 $mss['ApiSatHistoricoLog']['BatNbr'] = $data['BatNbr'];
