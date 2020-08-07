@@ -105,7 +105,7 @@ class ProvidersControlsFilesController extends AppController {
 			}
 
 // NOTE valida estructura del xml
-			function validStructure ($xml_path = null) {
+			function validStructure ($xml_path = null,$batnbr=null) {
 				// NOTE structure Validation
 						libxml_use_internal_errors(true);
 						$xml = new DOMDocument();
@@ -155,6 +155,7 @@ class ProvidersControlsFilesController extends AppController {
 					$mss['ApiSatHistoricoLog']['message'] = 'Line 155 providersControlsFile::validStructure '.'LevelConfigMax -> '.$level_config_max.' Level -> '.$level_pr.' Status -> '.$responseCode['status'].' Message -> '.$responseCode['message'].' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
 					$mss['ApiSatHistoricoLog']['created'] = date('Y-m-d H:i:s');
 					$mss['ApiSatHistoricoLog']['status'] = 2;
+					$mss['ApiSatHistoricoLog']['BatNbr'] = $batnbr;
 
 					if($this->ApiSatHistoricoLog->save($mss)) {
 							// ....
@@ -378,6 +379,7 @@ class ProvidersControlsFilesController extends AppController {
 						$mss['ApiSatHistoricoLog']['message'] = 'Line 378 providersControlsFile::validate '.'Extraction info of xml uuid => '.$response['uuid'].' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
 						$mss['ApiSatHistoricoLog']['created'] = date('Y-m-d H:i:s');
 						$mss['ApiSatHistoricoLog']['status'] = 2;
+						$mss['ApiSatHistoricoLog']['BatNbr'] = $BatNbr;
 
 						if($this->ApiSatHistoricoLog->save($mss)) {
 								// ....
@@ -421,6 +423,7 @@ class ProvidersControlsFilesController extends AppController {
 				$mss['ApiSatHistoricoLog']['message'] = 'line->421 Lote -> '.$BatNbr.' CpnyId -> '.$CpnyId.' xml_amount => '.$xml_amount.'  xls_amount => '.$slx_amount.' Diferencia -> '.$is_exceded.' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
 				$mss['ApiSatHistoricoLog']['created'] = date('Y-m-d H:i:s');
 				$mss['ApiSatHistoricoLog']['status'] = 1;
+				$mss['ApiSatHistoricoLog']['BatNbr'] = $BatNbr;
 
 				if($this->ApiSatHistoricoLog->save($mss)) {
 						// ....
@@ -491,6 +494,7 @@ class ProvidersControlsFilesController extends AppController {
 
 						$mss['ApiSatHistoricoLog']['created'] = date('Y-m-d H:i:s');
 						$mss['ApiSatHistoricoLog']['status'] = 5;
+						$mss['ApiSatHistoricoLog']['BatNbr'] = $BatNbr;
 
 						if($this->ApiSatHistoricoLog->save($mss)) {
 								// ....Save to log
@@ -538,6 +542,7 @@ class ProvidersControlsFilesController extends AppController {
 					$mss['ApiSatHistoricoLog']['message'] = 'line 538 Lote -> '.$BatNbr.' CpnyId -> '.$CpnyId.' xml_amount => '.$xml_amount.'  xls_amount => '.$slx_amount.' Diferencia -> '.$is_exceded.' XMLResponse -> '.$message.' return_set -> '.$return_set.' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
 					$mss['ApiSatHistoricoLog']['created'] = date('Y-m-d H:i:s');
 					$mss['ApiSatHistoricoLog']['status'] = 1;
+					$mss['ApiSatHistoricoLog']['BatNbr'] = $BatNbr;
 
 					if($this->ApiSatHistoricoLog->save($mss)) {
 							// ....Save to log
@@ -589,6 +594,7 @@ class ProvidersControlsFilesController extends AppController {
 				$mss['ApiSatHistoricoLog']['message'] = 'line 589 entry try save into uuidrequest data -> '.$data.' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
 				$mss['ApiSatHistoricoLog']['created'] = date('Y-m-d H:i:s');
 				$mss['ApiSatHistoricoLog']['status'] = 5;
+				$mss['ApiSatHistoricoLog']['BatNbr'] = $file[1];
 
 				if($this->ApiSatHistoricoLog->save($mss)) {
 						// ....Save to log
@@ -664,6 +670,7 @@ class ProvidersControlsFilesController extends AppController {
 					$mss['ApiSatHistoricoLog']['message'] = 'line 664 Succesfull save Lote -> '.$data['BatNbr'].' CpnyId -> '.$data['CpnyId'].' xml_amount => '.current($xml['Total']).' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
 					$mss['ApiSatHistoricoLog']['created'] = date('Y-m-d H:i:s');
 					$mss['ApiSatHistoricoLog']['status'] = 3;
+					$mss['ApiSatHistoricoLog']['BatNbr'] = $data['BatNbr'];
 
 					if($this->ApiSatHistoricoLog->save($mss)) {
 							// ....
@@ -675,6 +682,7 @@ class ProvidersControlsFilesController extends AppController {
 				 $mss['ApiSatHistoricoLog']['message'] = 'line 675 Error al guardar informacion del Lote -> '.$data['BatNbr'].' CpnyId -> '.$data['CpnyId'].' xml_amount => '.current($xml['Total']).' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
 				 $mss['ApiSatHistoricoLog']['created'] = date('Y-m-d H:i:s');
 				 $mss['ApiSatHistoricoLog']['status'] = 3;
+				 $mss['ApiSatHistoricoLog']['BatNbr'] = $data['BatNbr'];
 				 if($this->ApiSatHistoricoLog->save($mss)) {
 						 // ....
 				 }
@@ -709,6 +717,7 @@ class ProvidersControlsFilesController extends AppController {
 									$mss['ApiSatHistoricoLog']['message'] = 'line709 success save ProvidersAssocVendor user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
 				 				 $mss['ApiSatHistoricoLog']['created'] = date('Y-m-d H:i:s');
 				 				 $mss['ApiSatHistoricoLog']['status'] = 3;
+				 				 $mss['ApiSatHistoricoLog']['BatNbr'] = $data['BatNbr'];
 				 				 if($this->ApiSatHistoricoLog->save($mss)) {
 				 						 // ....
 				 				 }
@@ -720,6 +729,7 @@ class ProvidersControlsFilesController extends AppController {
 									$mss['ApiSatHistoricoLog']['message'] = 'line720 error save ProvidersAssocVendor user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
 				 				 $mss['ApiSatHistoricoLog']['created'] = date('Y-m-d H:i:s');
 				 				 $mss['ApiSatHistoricoLog']['status'] = 3;
+				 				 $mss['ApiSatHistoricoLog']['BatNbr'] = $data['BatNbr'];
 				 				 if($this->ApiSatHistoricoLog->save($mss)) {
 				 						 // ....
 				 				 }
@@ -738,9 +748,10 @@ class ProvidersControlsFilesController extends AppController {
 				// if ($this->ProvidersControlsFile->updateAll($fileUp)) {
 				if ($this->ProvidersControlsFile->save($fileIdUp['ProvidersAssocVendor'])) {
 					// debug('Update File');
-						$mss['ApiSatHistoricoLog']['message'] = 'line741 success update ProvidersAssocVendor user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
+						$mss['ApiSatHistoricoLog']['message'] = 'line 741 success update in ProvidersAssocVendor user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
 					 $mss['ApiSatHistoricoLog']['created'] = date('Y-m-d H:i:s');
 					 $mss['ApiSatHistoricoLog']['status'] = 3;
+					 $mss['ApiSatHistoricoLog']['status'] = $data['BatNbr'];
 					 if($this->ApiSatHistoricoLog->save($mss)) {
 							 // ....
 					 }
@@ -748,6 +759,7 @@ class ProvidersControlsFilesController extends AppController {
 						$mss['ApiSatHistoricoLog']['message'] = 'line748 error updating ProvidersAssocVendor user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
 					 $mss['ApiSatHistoricoLog']['created'] = date('Y-m-d H:i:s');
 					 $mss['ApiSatHistoricoLog']['status'] = 3;
+					 $mss['ApiSatHistoricoLog']['BatNbr'] = $data['BatNbr'];
 					 if($this->ApiSatHistoricoLog->save($mss)) {
 							 // ....
 					 }
@@ -988,11 +1000,20 @@ class ProvidersControlsFilesController extends AppController {
 								// debug('REF_DATA');
 								$response = $this->relation($ref_data,$providers_controls_files_id,$info,$ext,$check['message']);
 						}
+
+							$mss['ApiSatHistoricoLog']['message'] = 'line 993 Successfull save on ProvidersControlsFile id => '.$providers_controls_files_id.' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
+						 	$mss['ApiSatHistoricoLog']['created'] = date('Y-m-d H:i:s');
+						 	$mss['ApiSatHistoricoLog']['status'] = 3;
+						 	$mss['ApiSatHistoricoLog']['BatNbr'] = $ref_data[1];
+						 	if($this->ApiSatHistoricoLog->save($mss)) {
+								 // ....
+						 	}
 					/**=======================================================*/
 				} else {
 						$mss['ApiSatHistoricoLog']['message'] = 'line 993 error on save ProvidersControlsFile user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
 						 $mss['ApiSatHistoricoLog']['created'] = date('Y-m-d H:i:s');
 						 $mss['ApiSatHistoricoLog']['status'] = 3;
+						 $mss['ApiSatHistoricoLog']['BatNbr'] = $ref_data[1];
 						 if($this->ApiSatHistoricoLog->save($mss)) {
 								 // ....
 						 }
@@ -1033,6 +1054,7 @@ class ProvidersControlsFilesController extends AppController {
 											 $mss['ApiSatHistoricoLog']['message'] = 'Init proccess for '.$batnbr.' line 1032 entry to file_proccess in upload user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
 											 $mss['ApiSatHistoricoLog']['created'] = date('Y-m-d H:i:s');
 											 $mss['ApiSatHistoricoLog']['status'] = 3;
+											 $mss['ApiSatHistoricoLog']['BatNbr'] = $batnbr;
 											 if($this->ApiSatHistoricoLog->save($mss)) {
 													 // ....
 											 }
@@ -1066,6 +1088,14 @@ class ProvidersControlsFilesController extends AppController {
 						$response = array_merge($response[0],$response[2]);
 					} else {
 						$response = current($response);
+					}
+
+					$mss['ApiSatHistoricoLog']['message'] = 'response of the process => '. is_array($response) ? implode('_',$response):$response.' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
+					$mss['ApiSatHistoricoLog']['created'] = date('Y-m-d H:i:s');
+					$mss['ApiSatHistoricoLog']['status'] = 3;
+					$mss['ApiSatHistoricoLog']['BatNbr'] = $batnbr;
+					if($this->ApiSatHistoricoLog->save($mss)) {
+						 // ....
 					}
 
 					$response = array_merge($response,array('count'=>$count));
