@@ -236,13 +236,13 @@ var $mssql_sistemas = array( // connect to remote mssql server
 
 );
 
-	var $mssql_sistemas_larsa = array( // connect to remote mssql server
+	var $mssql_systems = array( // connect to remote mssql server
 		'driver' => 'mssql',
 		'persistent' => false,
-		'host' => '192.168.20.190',
-		'login' => 'sa',
-		'password' => 'zam',
-		'database' => 'lis',
+		'host' => 'Homedb',
+		'login' => 'enuma',
+		'password' => '@Elish#',
+		'database' => 'sistemas',
 		'prefix' => '',
 // 		'encoding' => 'ISO-8859-1',
 // 		'encoding' => 'Latin1',

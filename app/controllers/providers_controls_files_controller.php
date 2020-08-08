@@ -663,7 +663,7 @@ class ProvidersControlsFilesController extends AppController {
 			 // DEBUG: Save to logs
 			 // $this->LoadModel('ApiSatHistoricoLog');
 
-			 if ($is_xml == true ) {
+			 if (isset($is_xml) && $is_xml == true ) {
 			 	// code...
 				// if ($this->ProvidersUuidRequest->crsave('compact',$SaveUUID)) {
 						if ($this->ProvidersUuidRequest->save($SaveUUID['ProvidersUuidRequest'])) {
@@ -682,6 +682,7 @@ class ProvidersControlsFilesController extends AppController {
 							// debug('Save ProvidersUuidRequest has Error!');
 						Configure::write('debug',2);
 							$this->log(print_r($this->ProvidersUuidRequest->validationErrors, true));
+
 						 $mss['ApiSatHistoricoLog']['message'] = 'line 675 Error al guardar en ProvidersUuidRequest informacion del Lote -> '.$data['BatNbr'].' CpnyId -> '.$data['CpnyId'].' xml_amount => '.current($xml['Total']).'Validations => ' .$this->ProvidersUuidRequest->validationErrors.' Errors => '.implode('_',$this->ProvidersUuidRequest->invalidFields());
 						 $mss['ApiSatHistoricoLog']['created'] = date('Y-m-d H:i:s');
 						 $mss['ApiSatHistoricoLog']['status'] = 3;
