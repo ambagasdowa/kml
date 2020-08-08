@@ -681,7 +681,7 @@ class ProvidersControlsFilesController extends AppController {
 						} else {
 							// debug('Save ProvidersUuidRequest has Error!');
 
-						 $mss['ApiSatHistoricoLog']['message'] = 'line 675 Error al guardar en ProvidersUuidRequest informacion del Lote -> '.$data['BatNbr'].' CpnyId -> '.$data['CpnyId'].' xml_amount => '.current($xml['Total']).' Errors => '.$this->ProvidersUuidRequest->invalidFields();
+						 $mss['ApiSatHistoricoLog']['message'] = 'line 675 Error al guardar en ProvidersUuidRequest informacion del Lote -> '.$data['BatNbr'].' CpnyId -> '.$data['CpnyId'].' xml_amount => '.current($xml['Total']).' Errors => '.implode('_',$this->ProvidersUuidRequest->invalidFields());
 						 $mss['ApiSatHistoricoLog']['created'] = date('Y-m-d H:i:s');
 						 $mss['ApiSatHistoricoLog']['status'] = 3;
 						 $mss['ApiSatHistoricoLog']['BatNbr'] = $data['BatNbr'];
@@ -823,6 +823,7 @@ class ProvidersControlsFilesController extends AppController {
 				}
 
 				// debug($this->data);
+				$ext =
 
 				$file_providers_name = str_replace('.'.end(explode('.',$this->data['ProvidersControlsFile']['upload']['name'])),'',$this->data['ProvidersControlsFile']['upload']['name']);
 
@@ -852,7 +853,7 @@ class ProvidersControlsFilesController extends AppController {
 												<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 													<span aria-hidden="true">&times;</span>
 												</button>
-												El archivo <strong> '.$file_providers_name.' </strong>
+												El archivo <strong> '.$this->data['ProvidersControlsFile']['upload']['name'].' </strong>
 												ya se encuentra en la base de datos.
 												Por favor elija otro archivo </div>';
 							// $this->redirect($this->referer());
