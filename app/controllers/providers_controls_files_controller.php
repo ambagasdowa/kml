@@ -653,11 +653,12 @@ class ProvidersControlsFilesController extends AppController {
 						$SaveUUID['ProvidersUuidRequest']['ImporteTraslado'] = current($xml['ImporteTraslado']);
 						$SaveUUID['ProvidersUuidRequest']['Impuesto'] = current($xml['Impuesto']);
 						$SaveUUID['ProvidersUuidRequest']['uuid'] = current($xml['uuid']);
-						$SaveUUID['ProvidersUuidRequest']['selloCFD'] = isset(current($xml['selloCFD'])) ? current($xml['selloCFD']) : '';
+						// $SaveUUID['ProvidersUuidRequest']['selloCFD'] = isset(current($xml['selloCFD'])) ? current($xml['selloCFD']) : '';
+						$SaveUUID['ProvidersUuidRequest']['selloCFD'] = '';
 						$SaveUUID['ProvidersUuidRequest']['FechaTimbrado'] = current($xml['FechaTimbrado']);
 						$SaveUUID['ProvidersUuidRequest']['NoCertificadoSAT'] = current($xml['NoCertificadoSAT']);
 						$SaveUUID['ProvidersUuidRequest']['Version'] = current($xml['Version']);
-						$SaveUUID['ProvidersUuidRequest']['selloSAT'] = isset(current($xml['selloSAT'])) ? current($xml['selloSAT']) : '';
+						$SaveUUID['ProvidersUuidRequest']['selloSAT'] = '';
 
 						$SaveUUID['ProvidersUuidRequest']['created'] = date('Y-m-d H:i:s');
 						$SaveUUID['ProvidersUuidRequest']['modified'] = date('Y-m-d H:i:s');
@@ -666,7 +667,7 @@ class ProvidersControlsFilesController extends AppController {
 						$SaveUUID['ProvidersUuidRequest']['_status'] = 1;
 
 				// if ($this->ProvidersUuidRequest->crsave('compact',$SaveUUID)) {
-				
+
 						if ($this->ProvidersUuidRequest->save($SaveUUID['ProvidersUuidRequest'])) {
 							// debug('Save ProvidersUuidRequest ok');
 							// $ProvidersUuidRequestId = $this->ProvidersUuidRequest->getLastInsertId();
