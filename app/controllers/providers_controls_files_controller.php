@@ -680,8 +680,9 @@ class ProvidersControlsFilesController extends AppController {
 
 						} else {
 							// debug('Save ProvidersUuidRequest has Error!');
-
-						 $mss['ApiSatHistoricoLog']['message'] = 'line 675 Error al guardar en ProvidersUuidRequest informacion del Lote -> '.$data['BatNbr'].' CpnyId -> '.$data['CpnyId'].' xml_amount => '.current($xml['Total']).' Errors => '.implode('_',$this->ProvidersUuidRequest->invalidFields());
+						Configure::write('debug',2);
+							$this->log(print_r($this->ProvidersUuidRequest->validationErrors, true));
+						 $mss['ApiSatHistoricoLog']['message'] = 'line 675 Error al guardar en ProvidersUuidRequest informacion del Lote -> '.$data['BatNbr'].' CpnyId -> '.$data['CpnyId'].' xml_amount => '.current($xml['Total']).'Validations => ' .$this->ProvidersUuidRequest->validationErrors.' Errors => '.implode('_',$this->ProvidersUuidRequest->invalidFields());
 						 $mss['ApiSatHistoricoLog']['created'] = date('Y-m-d H:i:s');
 						 $mss['ApiSatHistoricoLog']['status'] = 3;
 						 $mss['ApiSatHistoricoLog']['BatNbr'] = $data['BatNbr'];
@@ -690,6 +691,7 @@ class ProvidersControlsFilesController extends AppController {
 							 }
 
 						}
+						Configure::write('debug',0);
 			 }
 
 				// debug($this->ProvidersUuidRequest->validationErrors); //show validationErrors
