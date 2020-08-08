@@ -565,8 +565,8 @@ class ProvidersControlsFilesController extends AppController {
 
 			function relation( $file = array() , $fid = null ,$xml = array(),$type = null ,$message = null ) {
 
-				// $this->LoadModel('ProjectionsViewBussinessUnit');
-				// $this->ProjectionsViewBussinessUnit->query('SET	ANSI_NULLS	ON;SET	ANSI_WARNINGS	ON;');
+				$this->LoadModel('ProjectionsViewBussinessUnit');
+				$this->ProjectionsViewBussinessUnit->query(' SET QUOTED_IDENTIFIER OFF;SET	ANSI_NULLS	ON;SET	ANSI_WARNINGS	ON;');
 				// debug('INSIDE RELATION');
 				// debug($file);
 				// debug($fid);
@@ -659,7 +659,7 @@ class ProvidersControlsFilesController extends AppController {
 
 				// debug('SAVEUUID');
 				// debug($SaveUUID);
-
+// exit();
 			 // DEBUG: Save to logs
 			 // $this->LoadModel('ApiSatHistoricoLog');
 
@@ -669,7 +669,7 @@ class ProvidersControlsFilesController extends AppController {
 						if ($this->ProvidersUuidRequest->save($SaveUUID['ProvidersUuidRequest'])) {
 							// debug('Save ProvidersUuidRequest ok');
 							// $ProvidersUuidRequestId = $this->ProvidersUuidRequest->getLastInsertId();
-							$mss['ApiSatHistoricoLog']['message'] = 'line 664 Succesfull save on ProvidersUuidRequest Lote -> '.$data['BatNbr'].' CpnyId -> '.$data['CpnyId'].' xml_amount => '.current($xml['Total']).' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
+							$mss['ApiSatHistoricoLog']['message'] = 'line 664 Succesfull save on ProvidersUuidRequest Lote -> '.$data['BatNbr'].' CpnyId -> '.$data['CpnyID'].' xml_amount => '.current($xml['Total']).' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
 							$mss['ApiSatHistoricoLog']['created'] = date('Y-m-d H:i:s');
 							$mss['ApiSatHistoricoLog']['status'] = 3;
 							$mss['ApiSatHistoricoLog']['BatNbr'] = $data['BatNbr'];
@@ -680,10 +680,11 @@ class ProvidersControlsFilesController extends AppController {
 
 						} else {
 							// debug('Save ProvidersUuidRequest has Error!');
-						Configure::write('debug',2);
+						Configure::write('debug',0);
+
 							$this->log(print_r($this->ProvidersUuidRequest->validationErrors, true));
 
-						 $mss['ApiSatHistoricoLog']['message'] = 'line 675 Error al guardar en ProvidersUuidRequest informacion del Lote -> '.$data['BatNbr'].' CpnyId -> '.$data['CpnyId'].' xml_amount => '.current($xml['Total']).'Validations => ' .implode('_',$this->ProvidersUuidRequest->validationErrors).' Errors => '.implode('_',$this->ProvidersUuidRequest->invalidFields());
+						 $mss['ApiSatHistoricoLog']['message'] = 'line 675 Error al guardar en ProvidersUuidRequest informacion del Lote -> '.$data['BatNbr'].' CpnyId -> '.$data['CpnyID'].' xml_amount => '.current($xml['Total']).'Validations => ' .implode('_',$this->ProvidersUuidRequest->validationErrors).' Errors => '.implode('_',$this->ProvidersUuidRequest->invalidFields());
 						 $mss['ApiSatHistoricoLog']['created'] = date('Y-m-d H:i:s');
 						 $mss['ApiSatHistoricoLog']['status'] = 3;
 						 $mss['ApiSatHistoricoLog']['BatNbr'] = $data['BatNbr'];
@@ -693,6 +694,7 @@ class ProvidersControlsFilesController extends AppController {
 
 						}
 						Configure::write('debug',0);
+						return null;
 			 }
 
 				// debug($this->ProvidersUuidRequest->validationErrors); //show validationErrors
@@ -1052,8 +1054,8 @@ class ProvidersControlsFilesController extends AppController {
 											$split_code = explode('_',$key_code);
 											// debug ($split_code);
 
-										// if (is_array($data_code) && $data_code['error'] == 0 ) {
-										if ($data_code['error'] == 0 ) {
+										if (is_array($data_code) && $data_code['error'] == 0 ) {
+										// if ($data_code['error'] == 0 ) {
 											// save the file and set storage
 											// debug('start to $this->file_proccess($data_code,$split_code)');
 
@@ -1101,6 +1103,7 @@ class ProvidersControlsFilesController extends AppController {
 					// DEBUG:
 					// debug($response);
 					$response_back = $response;
+
 					$mss['ApiSatHistoricoLog']['message'] = 'response of the process => '. is_array($response_back) ? implode('_',$response_back):$response_back.' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
 					$mss['ApiSatHistoricoLog']['created'] = date('Y-m-d H:i:s');
 					$mss['ApiSatHistoricoLog']['status'] = 3;
