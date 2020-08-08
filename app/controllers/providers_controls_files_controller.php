@@ -566,7 +566,7 @@ class ProvidersControlsFilesController extends AppController {
 			function relation( $file = array() , $fid = null ,$xml = array(),$type = null ,$message = null ) {
 
 				$this->LoadModel('ProjectionsViewBussinessUnit');
-				$this->ProjectionsViewBussinessUnit->query(' SET QUOTED_IDENTIFIER OFF;SET	ANSI_NULLS	ON;SET	ANSI_WARNINGS	ON;');
+				// $this->ProjectionsViewBussinessUnit->query(' SET QUOTED_IDENTIFIER OFF;SET	ANSI_NULLS	ON;SET	ANSI_WARNINGS	ON;');
 				// debug('INSIDE RELATION');
 				// debug($file);
 				// debug($fid);
@@ -612,6 +612,18 @@ class ProvidersControlsFilesController extends AppController {
 	// work form hir
 				if ($type == '.xml') {
 					$is_xml = true;
+				} else {
+					$is_xml = false;
+				}
+
+				// debug('SAVEUUID');
+				// debug($SaveUUID);
+// exit();
+			 // DEBUG: Save to logs
+			 // $this->LoadModel('ApiSatHistoricoLog');
+
+			 if (isset($is_xml) && $is_xml == true ) {
+			 	// code...
 						$SaveUUID['ProvidersUuidRequest']['BatNbr'] = $data['BatNbr'];
 						$SaveUUID['ProvidersUuidRequest']['CpnyId'] = $data['CpnyID'];
 						$SaveUUID['ProvidersUuidRequest']['RefNbr'] = $data['RefNbr'];
@@ -622,10 +634,10 @@ class ProvidersControlsFilesController extends AppController {
 						$SaveUUID['ProvidersUuidRequest']['InvDate'] = $data['InvDate'];
 						$SaveUUID['ProvidersUuidRequest']['InvcNbr'] = $data['InvcNbr'];
 
-						$SaveUUID['ProvidersUuidRequest']['Sello'] = current($xml['Sello']);
+						$SaveUUID['ProvidersUuidRequest']['Sello'] = base64_encode(current($xml['Sello']));
 						$SaveUUID['ProvidersUuidRequest']['Total'] = current($xml['Total']);
 						$SaveUUID['ProvidersUuidRequest']['SubTotal'] = current($xml['SubTotal']);
-						$SaveUUID['ProvidersUuidRequest']['Certificado'] = current($xml['Certificado']);
+						$SaveUUID['ProvidersUuidRequest']['Certificado'] = base64_encode(current($xml['Certificado']));
 						// $SaveUUID['ProvidersUuidRequest']['FormaDePago'] = current($xml['FormaDePago']);
 						$SaveUUID['ProvidersUuidRequest']['MetodoPago'] = current($xml['MetodoPago']);
 						$SaveUUID['ProvidersUuidRequest']['NoCertificado'] = current($xml['NoCertificado']);
@@ -641,11 +653,11 @@ class ProvidersControlsFilesController extends AppController {
 						$SaveUUID['ProvidersUuidRequest']['ImporteTraslado'] = current($xml['ImporteTraslado']);
 						$SaveUUID['ProvidersUuidRequest']['Impuesto'] = current($xml['Impuesto']);
 						$SaveUUID['ProvidersUuidRequest']['uuid'] = current($xml['uuid']);
-						$SaveUUID['ProvidersUuidRequest']['selloCFD'] = current($xml['selloCFD']);
+						$SaveUUID['ProvidersUuidRequest']['selloCFD'] = isset(current($xml['selloCFD'])) ? current($xml['selloCFD']) : '';
 						$SaveUUID['ProvidersUuidRequest']['FechaTimbrado'] = current($xml['FechaTimbrado']);
 						$SaveUUID['ProvidersUuidRequest']['NoCertificadoSAT'] = current($xml['NoCertificadoSAT']);
 						$SaveUUID['ProvidersUuidRequest']['Version'] = current($xml['Version']);
-						$SaveUUID['ProvidersUuidRequest']['selloSAT'] = current($xml['selloSAT']);
+						$SaveUUID['ProvidersUuidRequest']['selloSAT'] = isset(current($xml['selloSAT'])) ? current($xml['selloSAT']) : '';
 
 						$SaveUUID['ProvidersUuidRequest']['created'] = date('Y-m-d H:i:s');
 						$SaveUUID['ProvidersUuidRequest']['modified'] = date('Y-m-d H:i:s');
@@ -653,19 +665,8 @@ class ProvidersControlsFilesController extends AppController {
 						$SaveUUID['ProvidersUuidRequest']['providers_parents_id'] = '1';
 						$SaveUUID['ProvidersUuidRequest']['_status'] = 1;
 
-				} else {
-					$is_xml = false;
-				}
-
-				// debug('SAVEUUID');
-				// debug($SaveUUID);
-// exit();
-			 // DEBUG: Save to logs
-			 // $this->LoadModel('ApiSatHistoricoLog');
-
-			 if (isset($is_xml) && $is_xml == true ) {
-			 	// code...
 				// if ($this->ProvidersUuidRequest->crsave('compact',$SaveUUID)) {
+				
 						if ($this->ProvidersUuidRequest->save($SaveUUID['ProvidersUuidRequest'])) {
 							// debug('Save ProvidersUuidRequest ok');
 							// $ProvidersUuidRequestId = $this->ProvidersUuidRequest->getLastInsertId();
@@ -680,7 +681,7 @@ class ProvidersControlsFilesController extends AppController {
 
 						} else {
 							// debug('Save ProvidersUuidRequest has Error!');
-						Configure::write('debug',0);
+						// Configure::write('debug',0);
 
 							$this->log(print_r($this->ProvidersUuidRequest->validationErrors, true));
 
@@ -693,8 +694,8 @@ class ProvidersControlsFilesController extends AppController {
 							 }
 
 						}
-						Configure::write('debug',0);
-						return null;
+						// Configure::write('debug',0);
+						// return null;
 			 }
 
 				// debug($this->ProvidersUuidRequest->validationErrors); //show validationErrors
