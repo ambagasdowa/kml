@@ -591,7 +591,7 @@ class ProvidersControlsFilesController extends AppController {
 				$checkFile = $this->ProvidersViewRelation->find('all',array('conditions'=>$fileConditions));
 				$data = current($checkFile)['ProvidersViewRelation'];
 
-				$mss['ApiSatHistoricoLog']['message'] = 'line 589 entry into relation for save ProvidersUuidRequest data -> '.$data.' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
+				$mss['ApiSatHistoricoLog']['message'] = 'line 589 entry into relation for save ProvidersUuidRequest data -> '.implode('_',$data).' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
 				$mss['ApiSatHistoricoLog']['created'] = date('Y-m-d H:i:s');
 				$mss['ApiSatHistoricoLog']['status'] = 5;
 				$mss['ApiSatHistoricoLog']['BatNbr'] = $file[1];
