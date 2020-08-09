@@ -591,7 +591,7 @@ class ProvidersControlsFilesController extends AppController {
 				$checkFile = $this->ProvidersViewRelation->find('all',array('conditions'=>$fileConditions));
 				$data = current($checkFile)['ProvidersViewRelation'];
 
-				$mss['ApiSatHistoricoLog']['message'] = 'line 589 entry into relation for save ProvidersUuidRequest data -> '.implode('_',$data).' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
+				$mss['ApiSatHistoricoLog']['message'] = 'line 589 entry into relation for saving in ProvidersUuidRequest data -> '.implode('_',$data).' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
 				$mss['ApiSatHistoricoLog']['created'] = date('Y-m-d H:i:s');
 				$mss['ApiSatHistoricoLog']['status'] = 5;
 				$mss['ApiSatHistoricoLog']['BatNbr'] = $file[1];
@@ -653,21 +653,18 @@ class ProvidersControlsFilesController extends AppController {
 						$SaveUUID['ProvidersUuidRequest']['ImporteTraslado'] = current($xml['ImporteTraslado']);
 						$SaveUUID['ProvidersUuidRequest']['Impuesto'] = current($xml['Impuesto']);
 						$SaveUUID['ProvidersUuidRequest']['uuid'] = current($xml['uuid']);
-						// $SaveUUID['ProvidersUuidRequest']['selloCFD'] = isset(current($xml['selloCFD'])) ? current($xml['selloCFD']) : '';
-						$SaveUUID['ProvidersUuidRequest']['selloCFD'] = '';
+						$SaveUUID['ProvidersUuidRequest']['selloCFD'] = current($xml['selloCFD']);
 						$SaveUUID['ProvidersUuidRequest']['FechaTimbrado'] = current($xml['FechaTimbrado']);
 						$SaveUUID['ProvidersUuidRequest']['NoCertificadoSAT'] = current($xml['NoCertificadoSAT']);
 						$SaveUUID['ProvidersUuidRequest']['Version'] = current($xml['Version']);
-						$SaveUUID['ProvidersUuidRequest']['selloSAT'] = '';
+						$SaveUUID['ProvidersUuidRequest']['selloSAT'] = current($xml['selloSAT']);
 
 						$SaveUUID['ProvidersUuidRequest']['created'] = date('Y-m-d H:i:s');
 						$SaveUUID['ProvidersUuidRequest']['modified'] = date('Y-m-d H:i:s');
 						$SaveUUID['ProvidersUuidRequest']['providers_standings_id'] = '1';
 						$SaveUUID['ProvidersUuidRequest']['providers_parents_id'] = '1';
 						$SaveUUID['ProvidersUuidRequest']['_status'] = 1;
-
 				// if ($this->ProvidersUuidRequest->crsave('compact',$SaveUUID)) {
-
 						if ($this->ProvidersUuidRequest->save($SaveUUID['ProvidersUuidRequest'])) {
 							// debug('Save ProvidersUuidRequest ok');
 							// $ProvidersUuidRequestId = $this->ProvidersUuidRequest->getLastInsertId();
