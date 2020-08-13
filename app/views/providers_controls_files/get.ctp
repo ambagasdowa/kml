@@ -193,8 +193,8 @@
 			<td><?php echo $providersViewRelation['ProvidersViewRelation']['RefNbr']; ?></td>
 			<!-- <td><?php echo $providersViewRelation['ProvidersViewRelation']['DocType']; ?></td> -->
 			<!-- <td><?php echo $providersViewRelation['ProvidersViewRelation']['DocDesc']; ?></td> -->
-			<td><div id="fechax_<?php echo trim($providersViewRelation['ProvidersViewRelation']['BatNbr']);?>"><?php echo $providersViewRelation['ProvidersViewRelation']['InvDate'];?></div></td>
-			<td><div id="fechaf_<?php echo trim($providersViewRelation['ProvidersViewRelation']['BatNbr']);?>"><?php echo $providersViewRelation['ProvidersViewRelation']['FechaValidacion'];?></div></td>
+			<td><div id="fecha_<?php echo trim($providersViewRelation['ProvidersViewRelation']['BatNbr']);?>"><?php echo $providersViewRelation['ProvidersViewRelation']['InvDate'];?></div></td>
+			<td><div id="fechax_<?php echo trim($providersViewRelation['ProvidersViewRelation']['BatNbr']);?>"><?php echo $providersViewRelation['ProvidersViewRelation']['FechaValidacion'];?></div></td>
 			<td><?php echo $providersViewRelation['ProvidersViewRelation']['InvcNbr']; ?></td>
 			<td><?php echo $providersViewRelation['ProvidersViewRelation']['name']; ?></td>
 
@@ -220,7 +220,7 @@
 																						'accept'=>'.xml',
 																						'width'=>'60',
 																						'id'=>'upload_xml_'.trim($providersViewRelation['ProvidersViewRelation']['BatNbr']),
-																						'name'=>'xml_'.trim($providersViewRelation['ProvidersViewRelation']['BatNbr']).'_'.trim($providersViewRelation['ProvidersViewRelation']['CpnyID']).'_'.trim($providersViewRelation['ProvidersViewRelation']['RefNbr']).'_'.'1',
+																						'name'=>'xml_'.trim($providersViewRelation['ProvidersViewRelation']['BatNbr']).'_'.trim($providersViewRelation['ProvidersViewRelation']['CpnyID']).'_'.trim($providersViewRelation['ProvidersViewRelation']['RefNbr']).'_'.'1'.'_'.trim($providersViewRelation['ProvidersViewRelation']['VendId']).'_'.trim($providersViewRelation['ProvidersViewRelation']['PONbr']).'_'.trim($providersViewRelation['ProvidersViewRelation']['DueIntrv']),
 																						'data-id'=>trim($providersViewRelation['ProvidersViewRelation']['BatNbr']),
 																						'data-nbr'=>trim($providersViewRelation['ProvidersViewRelation']['BatNbr']),
 																						'data-refnbr'=>$providersViewRelation['ProvidersViewRelation']['RefNbr'],
@@ -266,7 +266,7 @@
 																							'accept'=>'.pdf',
 																							'width'=>'60',
 																							'id'=>'upload_pdf_'.trim($providersViewRelation['ProvidersViewRelation']['BatNbr']),
-																							'name'=>'voucher_'.trim($providersViewRelation['ProvidersViewRelation']['BatNbr']).'_'.trim($providersViewRelation['ProvidersViewRelation']['CpnyID']).'_'.trim($providersViewRelation['ProvidersViewRelation']['RefNbr']).'_'.'2',
+																							'name'=>'voucher_'.trim($providersViewRelation['ProvidersViewRelation']['BatNbr']).'_'.trim($providersViewRelation['ProvidersViewRelation']['CpnyID']).'_'.trim($providersViewRelation['ProvidersViewRelation']['RefNbr']).'_'.'2'.'_'.trim($providersViewRelation['ProvidersViewRelation']['VendId']).'_'.trim($providersViewRelation['ProvidersViewRelation']['PONbr']).'_'.trim($providersViewRelation['ProvidersViewRelation']['DueIntrv']),
 																							'data-id'=>'voucher_'.trim($providersViewRelation['ProvidersViewRelation']['BatNbr']),
 																							'data-nbr'=>trim($providersViewRelation['ProvidersViewRelation']['BatNbr']),
 																							'data-refnbr'=>$providersViewRelation['ProvidersViewRelation']['RefNbr'],
@@ -312,7 +312,7 @@
 																							'accept'=>'.pdf',
 																							'width'=>'60',
 																							'id'=>'upload_order_'.trim($providersViewRelation['ProvidersViewRelation']['BatNbr']),
-																							'name'=>'order_'.trim($providersViewRelation['ProvidersViewRelation']['BatNbr']).'_'.trim($providersViewRelation['ProvidersViewRelation']['CpnyID']).'_'.trim($providersViewRelation['ProvidersViewRelation']['RefNbr']).'_'.'3',
+																							'name'=>'order_'.trim($providersViewRelation['ProvidersViewRelation']['BatNbr']).'_'.trim($providersViewRelation['ProvidersViewRelation']['CpnyID']).'_'.trim($providersViewRelation['ProvidersViewRelation']['RefNbr']).'_'.'3'.'_'.trim($providersViewRelation['ProvidersViewRelation']['VendId']).'_'.trim($providersViewRelation['ProvidersViewRelation']['PONbr']).'_'.trim($providersViewRelation['ProvidersViewRelation']['DueIntrv']),
 																							'data-id'=>'order_'.trim($providersViewRelation['ProvidersViewRelation']['BatNbr']),
 																							'data-nbr'=>trim($providersViewRelation['ProvidersViewRelation']['BatNbr']),
 																							'data-refnbr'=>$providersViewRelation['ProvidersViewRelation']['RefNbr'],
@@ -339,7 +339,7 @@
 				</div>
 			</td>
 			<!-- <td><?php echo $providersViewRelation['ProvidersViewRelation']['Acct']; ?></td> -->
-			<td><div id="totalAmtx_<?php echo trim($providersViewRelation['ProvidersViewRelation']['BatNbr']);?>"><?php echo $providersViewRelation['ProvidersViewRelation']['CuryCrTot'];?></div></td>
+			<td><div id="totalAmt_<?php echo trim($providersViewRelation['ProvidersViewRelation']['BatNbr']);?>"><?php echo $providersViewRelation['ProvidersViewRelation']['CuryCrTot'];?></div></td>
 			<td><div id="totalAmtx_<?php echo trim($providersViewRelation['ProvidersViewRelation']['BatNbr']);?>"><?php echo $providersViewRelation['ProvidersViewRelation']['totalAmt'];?></div></td>
 
 			<td><div id="uuidx_<?php echo trim($providersViewRelation['ProvidersViewRelation']['BatNbr']);?>"><?php echo $providersViewRelation['ProvidersViewRelation']['UUID'];?></div></td>
@@ -368,6 +368,8 @@
 													// 'target'=>'_blank'
 													'id'=>'upload_'.trim($providersViewRelation['ProvidersViewRelation']['BatNbr']),
 													'data-id'=>trim($providersViewRelation['ProvidersViewRelation']['BatNbr']),
+													'data-vendor'=>trim($providersViewRelation['ProvidersViewRelation']['VendId']),
+													'data-ponbr'=>trim($providersViewRelation['ProvidersViewRelation']['PONbr']),
 													'onmouseover'=>"checkInputs(this)",
 													'onmouseout'=>"leftLink(this)",
 													// ,'data-addenum'=>$providersViewRelation['ProvidersViewRelation']['addenum']

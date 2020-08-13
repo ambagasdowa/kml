@@ -312,6 +312,7 @@
 
 			function checkInputs (data) {
 				batnbr = data.attributes[2].value;
+
 					// $("#upload_"+batnbr).removeAttr("style");
 					xml = $('#upload_xml_'+batnbr).val();
 					voucher = $('#upload_pdf_'+batnbr).val();
@@ -390,6 +391,7 @@
 									console.log('check $this');
 									console.log($(this));
 									batnbr = $(this).attr('data-id');
+									// vendid = $(this).attr('data-vendor');
 									// $("#upload_"+batnbr).removeAttr("style");
 									link = $(this).clone();
 									console.log('check link');
@@ -400,6 +402,12 @@
 												formData = new FormData(myForm);
 												// set the append
 												formData.append('batnbr',$(this).attr('data-id'));
+												formData.append('vendor',$(this).attr('data-vendor'));
+												formData.append('ponbr',$(this).attr('data-ponbr'));
+
+												// console.log('next formdata');
+												// console.log(formData.getAll);
+
 												// NOTE : vallida extension val.substring(val.lastIndexOf('.') + 1).toLowerCase()
 													$.ajax({
 													    url : "<?php echo Dispatcher::baseUrl();?>/ProvidersControlsFiles/upload/",
@@ -432,6 +440,10 @@
 																			if (data.fecha) {
 																				$('#fechax_'+batnbr).html(data.fecha);
 																			}
+
+																			// if (data.fvalidacion) {
+																			// 	$('#fechax_'+batnbr).html(data.fvalidacion);
+																			// }
 
 																			if (data.totalAmt) {
 																				$('#totalAmtx_'+batnbr).html(data.totalAmt);

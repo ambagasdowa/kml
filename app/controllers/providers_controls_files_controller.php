@@ -24,6 +24,7 @@ class ProvidersControlsFilesController extends AppController {
 	var $name = 'ProvidersControlsFiles';
 	var $helpers = array('Html','Form','Ajax','Javascript','Js');
   var $uses = array('ProvidersControlsFile','ApiSatHistoricoLog');
+	// var $components = array('DebugKit.Toolbar');
 
 			function date_convert($date) {
 				//1. Transform request parameters to MySQL datetime format.
@@ -563,9 +564,11 @@ class ProvidersControlsFilesController extends AppController {
       } //NOTE END CHECKSAT()
 
 
-			function relation( $file = array() , $fid = null ,$xml = array(),$type = null ,$message = null ) {
+			function relation( $file = array() , $fid = null ,$xml = array(),$type = null ,$message = null ,$filename = null ) {
 
-				$this->LoadModel('ProjectionsViewBussinessUnit');
+				// Configure::write('debug',2);
+
+				// $this->LoadModel('ProjectionsViewBussinessUnit');
 				// $this->ProjectionsViewBussinessUnit->query(' SET QUOTED_IDENTIFIER OFF;SET	ANSI_NULLS	ON;SET	ANSI_WARNINGS	ON;');
 				// debug('INSIDE RELATION');
 				// debug($file);
@@ -579,19 +582,22 @@ class ProvidersControlsFilesController extends AppController {
 				$this->loadModel('ProvidersUuidRequest');
 				//
 				// check if assoc exists
-				$fileConditions['ProvidersViewRelation.BatNbr'] = $fileAssc['ProvidersAssocVendor.BatNbr'] = $file[1];
-				$fileConditions['ProvidersViewRelation.CpnyID'] = $fileAssc['ProvidersAssocVendor.CpnyID'] = $file[2];
-				$fileConditions['ProvidersViewRelation.RefNbr'] = $fileAssc['ProvidersAssocVendor.RefNbr'] = $file[3];
+				$data['BatNbr'] = $fileConditions['ProvidersViewRelation.BatNbr'] = $fileAssc['ProvidersAssocVendor.BatNbr'] = $file[1];
+				$data['CpnyId'] = $fileConditions['ProvidersViewRelation.CpnyId'] = $fileAssc['ProvidersAssocVendor.CpnyId'] = $file[2];
+				$data['RefNbr'] = $fileConditions['ProvidersViewRelation.RefNbr'] = $fileAssc['ProvidersAssocVendor.RefNbr'] = $file[3];
+				$data['VendId'] = $fileConditions['ProvidersViewRelation.VendId'] = $fileAssc['ProvidersAssocVendor.VendId'] = $file[5];
+				$data['PONbr']  = $fileConditions['ProvidersViewRelation.PONbr']  = $fileAssc['ProvidersAssocVendor.PONbr']  = $file[6];
+				$data['DueIntrv']  = $fileConditions['ProvidersViewRelation.DueIntrv'] = $file[7];
 
 				// $fileConditions['ProvidersViewRelation.BatNbr'] = $file[1];
 				// $fileConditions['ProvidersViewRelation.CpnyID'] = $file[2];
 				// $fileConditions['ProvidersViewRelation.RefNbr'] = $file[3];
 
 				// $checkFile = $this->ProvidersViewRelation->find('all',array('conditions'=>$filleConditions));
-				$checkFile = $this->ProvidersViewRelation->find('all',array('conditions'=>$fileConditions));
-				$data = current($checkFile)['ProvidersViewRelation'];
+				// $checkFile = $this->ProvidersViewRelation->find('all',array('conditions'=>$fileConditions));
+				// $data = current($checkFile)['ProvidersViewRelation'];
 
-				$mss['ApiSatHistoricoLog']['message'] = 'line 589 entry into relation for saving in ProvidersUuidRequest data -> '.implode('_',$data).' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
+				$mss['ApiSatHistoricoLog']['message'] = 'line 589 entry for '.$filename.' into relation for proccess data -> '.implode('_',$data).' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
 				$mss['ApiSatHistoricoLog']['created'] = date('Y-m-d H:i:s');
 				$mss['ApiSatHistoricoLog']['status'] = 5;
 				$mss['ApiSatHistoricoLog']['BatNbr'] = $file[1];
@@ -625,14 +631,16 @@ class ProvidersControlsFilesController extends AppController {
 			 if (isset($is_xml) && $is_xml == true ) {
 			 	// code...
 						$SaveUUID['ProvidersUuidRequest']['BatNbr'] = $data['BatNbr'];
-						$SaveUUID['ProvidersUuidRequest']['CpnyId'] = $data['CpnyID'];
+						$SaveUUID['ProvidersUuidRequest']['CpnyId'] = $data['CpnyId'];
 						$SaveUUID['ProvidersUuidRequest']['RefNbr'] = $data['RefNbr'];
+
 						$SaveUUID['ProvidersUuidRequest']['VendId'] = $data['VendId'];
 						$SaveUUID['ProvidersUuidRequest']['PONbr'] = $data['PONbr'];
-						$SaveUUID['ProvidersUuidRequest']['TermsId'] = $data['TermsId'];
+
+						$SaveUUID['ProvidersUuidRequest']['TermsId'] = ''; //$data['TermsId'];
 						$SaveUUID['ProvidersUuidRequest']['DueIntrv'] = $data['DueIntrv'];
-						$SaveUUID['ProvidersUuidRequest']['InvDate'] = $data['InvDate'];
-						$SaveUUID['ProvidersUuidRequest']['InvcNbr'] = $data['InvcNbr'];
+						$SaveUUID['ProvidersUuidRequest']['InvDate'] = ''; //$data['InvDate'];
+						$SaveUUID['ProvidersUuidRequest']['InvcNbr'] = ''; //$data['InvcNbr'];
 
 						$SaveUUID['ProvidersUuidRequest']['Sello'] = base64_encode(current($xml['Sello']));
 						$SaveUUID['ProvidersUuidRequest']['Total'] = current($xml['Total']);
@@ -664,14 +672,19 @@ class ProvidersControlsFilesController extends AppController {
 						$SaveUUID['ProvidersUuidRequest']['providers_standings_id'] = '1';
 						$SaveUUID['ProvidersUuidRequest']['providers_parents_id'] = '1';
 						$SaveUUID['ProvidersUuidRequest']['_status'] = 1;
+
+						// debug('SaveUUid');
+						// debug($SaveUUID);
+
 				// if ($this->ProvidersUuidRequest->crsave('compact',$SaveUUID)) {
 						if ($this->ProvidersUuidRequest->save($SaveUUID['ProvidersUuidRequest'])) {
 							// debug('Save ProvidersUuidRequest ok');
-							// $ProvidersUuidRequestId = $this->ProvidersUuidRequest->getLastInsertId();
-							$mss['ApiSatHistoricoLog']['message'] = 'line 664 Succesfull save on ProvidersUuidRequest Lote -> '.$data['BatNbr'].' CpnyId -> '.$data['CpnyID'].' xml_amount => '.current($xml['Total']).' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
-							$mss['ApiSatHistoricoLog']['created'] = date('Y-m-d H:i:s');
-							$mss['ApiSatHistoricoLog']['status'] = 3;
-							$mss['ApiSatHistoricoLog']['BatNbr'] = $data['BatNbr'];
+							$ProvidersUuidRequestId = $this->ProvidersUuidRequest->getLastInsertId();
+
+								$mss['ApiSatHistoricoLog']['message'] = 'line 664 Succesfull save on ProvidersUuidRequest Lote -> '.$data['BatNbr'].' CpnyId -> '.$data['CpnyId'].' filename => '.current($xml['Certificado']).' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
+								$mss['ApiSatHistoricoLog']['created'] = date('Y-m-d H:i:s');
+								$mss['ApiSatHistoricoLog']['status'] = 3;
+								$mss['ApiSatHistoricoLog']['BatNbr'] = $data['BatNbr'];
 
 								if($this->ApiSatHistoricoLog->save($mss)) {
 										// ....
@@ -681,9 +694,9 @@ class ProvidersControlsFilesController extends AppController {
 							// debug('Save ProvidersUuidRequest has Error!');
 						// Configure::write('debug',0);
 
-							$this->log(print_r($this->ProvidersUuidRequest->validationErrors, true));
+							// $this->log(print_r($this->ProvidersUuidRequest->validationErrors, true));
 
-						 $mss['ApiSatHistoricoLog']['message'] = 'line 675 Error al guardar en ProvidersUuidRequest informacion del Lote -> '.$data['BatNbr'].' CpnyId -> '.$data['CpnyID'].' xml_amount => '.current($xml['Total']).'Validations => ' .implode('_',$this->ProvidersUuidRequest->validationErrors).' Errors => '.implode('_',$this->ProvidersUuidRequest->invalidFields());
+						 $mss['ApiSatHistoricoLog']['message'] = 'line 675 Error al guardar en ProvidersUuidRequest informacion del Lote -> '.$data['BatNbr'].' CpnyId -> '.$data['CpnyId'].' xml_amount => '.current($xml['Total']).'Validations => ' .implode('_',$this->ProvidersUuidRequest->validationErrors).' Errors => '.implode('_',$this->ProvidersUuidRequest->invalidFields());
 						 $mss['ApiSatHistoricoLog']['created'] = date('Y-m-d H:i:s');
 						 $mss['ApiSatHistoricoLog']['status'] = 3;
 						 $mss['ApiSatHistoricoLog']['BatNbr'] = $data['BatNbr'];
@@ -707,7 +720,7 @@ class ProvidersControlsFilesController extends AppController {
 					if (count($check_assoc) == 0 ) {
 
 							$fileSave['ProvidersAssocVendor']['BatNbr'] = $data['BatNbr'];
-							$fileSave['ProvidersAssocVendor']['CpnyId'] = $data['CpnyID'];
+							$fileSave['ProvidersAssocVendor']['CpnyId'] = $data['CpnyId'];
 							$fileSave['ProvidersAssocVendor']['RefNbr'] = $data['RefNbr'];
 							$fileSave['ProvidersAssocVendor']['VendId'] = $data['VendId'];
 							$fileSave['ProvidersAssocVendor']['PONbr'] = $data['PONbr'];
@@ -733,7 +746,7 @@ class ProvidersControlsFilesController extends AppController {
 //NOTE add xml info
 // providers_uuid_requests
 								} else {
-									$mss['ApiSatHistoricoLog']['message'] = 'line 720 error save ProvidersAssocVendor user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
+								 $mss['ApiSatHistoricoLog']['message'] = 'line 720 error save ProvidersAssocVendor user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
 				 				 $mss['ApiSatHistoricoLog']['created'] = date('Y-m-d H:i:s');
 				 				 $mss['ApiSatHistoricoLog']['status'] = 3;
 				 				 $mss['ApiSatHistoricoLog']['BatNbr'] = $data['BatNbr'];
@@ -752,7 +765,7 @@ class ProvidersControlsFilesController extends AppController {
 				$fileIdUp['ProvidersAssocVendor']['providers_standings_id'] = $file[4];
 
 				$this->ProvidersControlsFile->id = $fid;
-				// if ($this->ProvidersControlsFile->updateAll($fileUp)) {
+
 				if ($this->ProvidersControlsFile->save($fileIdUp['ProvidersAssocVendor'])) {
 					// debug('Update File');
 						$mss['ApiSatHistoricoLog']['message'] = 'line 741 success update in ProvidersAssocVendor user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
@@ -791,10 +804,11 @@ class ProvidersControlsFilesController extends AppController {
 
 
 				if ($is_xml == true) {
-					$response['message'] = $message.' Igualmente en nuestro Sistema';
+					$response['message'] = $message;
 					$response['uuid'] = $SaveUUID['ProvidersUuidRequest']['uuid'];
 					$response['status'] = $getUpdated['Status'];
-					$response['fecha'] = $getUpdated['InvcDate'];
+					// $response['fecha'] = $getUpdated['InvcDate'];
+					$response['fecha'] = $SaveUUID['ProvidersUuidRequest']['created'];
 					$response['totalAmt'] = $SaveUUID['ProvidersUuidRequest']['Total'];
 					$response['xml'] = "<a id=\"uptXml_{$getUpdated['BatNbr']}\" href=\"{$path}{$url}{$getUpdated['xml_src']}\" download=\"{$getUpdated['xml_name']}\"><i class=\"fa fa-file-text\"></i></a>";
 				} else {
@@ -814,11 +828,11 @@ class ProvidersControlsFilesController extends AppController {
 			function file_proccess( $form_data = array() , $ref_data = array() ) {
 				// $this->LoadModel('ProjectionsViewBussinessUnit');
 				// $this->ProjectionsViewBussinessUnit->query('SET	ANSI_NULLS	ON;SET	ANSI_WARNINGS	ON;');
-				Configure::write('debug',0);
+				// Configure::write('debug',2);
 //
 // 				debug('FORM_DATA');
-// 				debug($form_data);
-// 				debug($ref_data);
+				// debug($form_data);
+				// debug($ref_data);
 // 				// $bat = $ref_data[1];
 // exit();
 
@@ -840,18 +854,22 @@ class ProvidersControlsFilesController extends AppController {
 				$conditionsFields['ProvidersControlsFile._status'] = 1 ;
 
 				$finderFilename = $this->ProvidersControlsFile->find('all',array('conditions'=>$conditionsFields));
-				// var_dump($finderFilename);
+				// WARNING: Work from hir
+				// debug($finderFilename);
 
 						//NOTE this must be a very rare case but one never knows
 						if (count($finderFilename) >= 1) {
 
-							// $this->Session->setFlash(__('<div class="alert alert-danger alert-dismissible fade in" role="alert">
-							// 					<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-							// 						<span aria-hidden="true">&times;</span>
-							// 					</button>
-							// 					El archivo <strong> '.$file_providers_name.' </strong>
-							// 					ya se encuentra en la base de datos.
-							// 					Por favor elija otro archivo </div>', true));
+							// DEBUG: WORK FROM HIR
+							// check the most important is xml
+							// now :
+							// check if xml and is a valid file if so , then validate then
+							// check if batnbr is already release
+							// true  then save in providers_uuid_requests
+							// false continue from there the proccess of validation
+
+
+
 
 							$message = '<div class="alert alert-danger alert-dismissible fade in" role="alert">
 												<button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -1006,10 +1024,11 @@ class ProvidersControlsFilesController extends AppController {
 						if (isset($ref_data)) {
 							// code...
 								// debug('REF_DATA');
-								$response = $this->relation($ref_data,$providers_controls_files_id,$info,$ext,$check['message']);
+								$file_name = $name.$ext;
+								$response = $this->relation($ref_data,$providers_controls_files_id,$info,$ext,$check['message'],$file_name);
 						}
 
-							$mss['ApiSatHistoricoLog']['message'] = 'line 993 Successfull save on ProvidersControlsFile id => '.$providers_controls_files_id.' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
+							$mss['ApiSatHistoricoLog']['message'] = 'line 993 Successfull save '.$file_name.' on ProvidersControlsFile id => '.$providers_controls_files_id.' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
 						 	$mss['ApiSatHistoricoLog']['created'] = date('Y-m-d H:i:s');
 						 	$mss['ApiSatHistoricoLog']['status'] = 3;
 						 	$mss['ApiSatHistoricoLog']['BatNbr'] = $ref_data[1];
@@ -1018,7 +1037,7 @@ class ProvidersControlsFilesController extends AppController {
 						 	}
 					/**=======================================================*/
 				} else {
-						$mss['ApiSatHistoricoLog']['message'] = 'line 993 error on save ProvidersControlsFile user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
+						$mss['ApiSatHistoricoLog']['message'] = 'line 993 error on save '.$name.$ext.' ProvidersControlsFile user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
 						 $mss['ApiSatHistoricoLog']['created'] = date('Y-m-d H:i:s');
 						 $mss['ApiSatHistoricoLog']['status'] = 3;
 						 $mss['ApiSatHistoricoLog']['BatNbr'] = $ref_data[1];
@@ -1034,12 +1053,13 @@ class ProvidersControlsFilesController extends AppController {
 
 			function upload() {
 
-				Configure::write('debug',0);
+				// Configure::write('debug',0);
 
 				// debug(configure::read('debug'));
 				// App::uses('Xml', 'Lib');
 							// debug('FORM');
 							// debug($this->params['form']);
+
 							$forms = $this->params['form'];
 							// DEBUG:
 								foreach ($forms as $key_code => $data_code) {
@@ -1103,7 +1123,7 @@ class ProvidersControlsFilesController extends AppController {
 					// debug($response);
 					$response_back = $response;
 
-					$mss['ApiSatHistoricoLog']['message'] = 'response of the process => '. is_array($response_back) ? implode('_',$response_back):$response_back.' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
+					$mss['ApiSatHistoricoLog']['message'] = 'final response of the process => '. is_array($response_back) ? implode('_',$response_back):$response_back.' user ->'.$this->Auth->User('username').' user_id -> '.$this->Auth->User('id');
 					$mss['ApiSatHistoricoLog']['created'] = date('Y-m-d H:i:s');
 					$mss['ApiSatHistoricoLog']['status'] = 3;
 					$mss['ApiSatHistoricoLog']['BatNbr'] = $batnbr;
@@ -1112,7 +1132,7 @@ class ProvidersControlsFilesController extends AppController {
 					}
 
 							//4. Return as a json array
-							Configure::write('debug', 0);
+							// Configure::write('debug', 0);
 							$this->autoRender = false;
 							$this->autoLayout = false;
 					// 		$this->layout='empty';
@@ -1129,7 +1149,7 @@ class ProvidersControlsFilesController extends AppController {
 
 			function get() {
 
-				Configure::write('debug',0);
+				// Configure::write('debug',0);
 				// App::uses('Xml', 'Lib');
 
 				$posted = json_decode(base64_decode($this->params['named']['data']),true);
@@ -1261,7 +1281,7 @@ class ProvidersControlsFilesController extends AppController {
 
 	function index() {
 		// index-section
-		// Configure::write('debug', 2);
+		Configure::write('debug', 2);
 			// $this->ProvidersControlsFile->recursive = 0;
 			// $this->set('providersControlsFiles', $this->paginate());
 		// NOTE File section
