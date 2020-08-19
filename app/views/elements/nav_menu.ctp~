@@ -1,7 +1,7 @@
 <header class="navbar">
     <nav class="navbar navbar-inverse navbar-fixed-top">
 
-	 <div class="container-fluid">
+	 <div class="container-fluid hidden-print">
 
 		<div class="navbar-header">
           <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -10,10 +10,10 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-			<a id="home" class="navbar-brand" href="<?php e($this->webroot)?>" alt="Landing Page" title="<?php e(languaje($languaje)['landingPage']);?>" data-toggle="tooltip" data-placement="bottom">
+			<a id="home" class="navbar-brand" href="<?php e($this->webroot.'../')?>" alt="Landing Page" title="<?php e(languaje($languaje)['landingPage']);?>" data-toggle="tooltip" data-placement="bottom">
 				<i class="fa fa-home"></i>
 			</a>
-			
+
 			<a class="navbar-brand" href="<?php e($this->webroot);?>"><?php e(languaje($languaje)['appName']);?></a>
 
 			<?php if (isset($_SESSION['Auth']['User'])) {?>
@@ -23,6 +23,7 @@
 									<i class="fa fa-search"></i>
 								</div>
 							</form>-->
+
 			<?php }?>
 
         </div>
@@ -36,7 +37,7 @@
 			<?php if (isset($setMenu)) {?>
 			<ul class="nav navbar-nav navbar-left"><?php //debug($setMenu);?>
 					<?php foreach($setMenu as $idRootMenu => $subMenu) {?>
-				
+
 			<!--<ul class="nav navbar-nav">-->
 					<li class="dropdown">
 						<a href="#" class="dropdown-toggle account" data-toggle="dropdown">
@@ -45,7 +46,7 @@
 								<span class="welcome"><i class="fa fa-file-text"></i>&nbsp;<?php e(key($subMenu))?></span>
 							</div>
 						</a>
-						
+
 						<ul class="dropdown-menu">
 							<?php if ( $setMenu[$idRootMenu][key($subMenu)] !== null ) {?>
 								<?php foreach ($subMenu as $id_submenu => $nameSubmenu) {?>
@@ -71,9 +72,18 @@
 			</ul>
 			<?php }?>
 		<?php }?>
-		
+
 		<ul class="nav navbar-nav navbar-right pull-right">
 		<?php if (isset($_SESSION['Auth']['User'])) {?>
+
+      <?php if ($_SESSION['Auth']['User']['storage'] == 1) { ?>
+  			<li>
+  				<a id="browse_server" href="<?php echo 'http://'.$_SERVER['HTTP_HOST'].DS.Dispatcher::baseUrl().DS.'app/webroot/vendors/RichFilemanager?exclusiveFolder='.$_SESSION['Auth']['User']['username']; ?>" class="ajax-link" alt="Archivos" title="Archivos">
+  						<i class="fa fa-hdd-o"></i>
+  				</a>
+  			</li>
+      <?php } ?>
+
 			<li>
 				<a href="<?php e($this->webroot."Users/edit_password/{$_SESSION['Auth']['User']['id']}/");?>" class="ajax-link" alt="Configuracio&oacute;n de Usuario" title="Configuraci&oacute;n de Usuario">
 <!-- 					<span class="badge"> -->
@@ -82,7 +92,7 @@
 <!-- 												<span>Configuraci&oacute;n</span> -->
 				</a>
 			</li>
-		
+
 			<li>
 				<a href="<?php e($this->webroot.'Users/logout');?>" alt="Salir" title="Salir">
 <!-- 					<span class="badge"> -->
@@ -91,7 +101,7 @@
 <!-- 												<span><?php e(languaje($languaje)['navMenuE']);?></span> -->
 				</a>
 			</li>
-			
+
             <li>
               <a class="btn"  data-toggle="collapse" href="#nav-collapse4" aria-expanded="false" aria-controls="nav-collapse4" alt="M&aacute;s Opciones" title="M&aacute;s Opciones">
 <!-- 				<span class="badge"> -->
@@ -99,9 +109,9 @@
 				</span>
               </a>
             </li>
-            
+
 		<?php }?>
-			
+
 			<?php if ( !isset($_SESSION['Auth']['User']) ) {?>
 			<li>
 				<a class="pull-right" href="<?php e($this->webroot.'Users/login');?>">
@@ -124,7 +134,7 @@
 <!-- 										<span class="badge"><i class="fa fa-user-secret"></i></span> -->
 									</a>
 								</li>
-								
+
 <!--								<li class="hidden-xs">
 									<a class="ajax-link" href="<?php e($this->webroot.'admin/acl/acos');?>">
 										<i class="fa fa-calendar"></i>
@@ -177,46 +187,53 @@
 										</div>
 									</a>
 									<ul class="dropdown-menu">
-									
+
 										<?php if (isset($_SESSION['Auth']['User'])) {?>
 										<?php 	if (checkAdmin($_SESSION['Auth']['User']['group_id'])) {?>
-									
+
 										<li>
 											<a href="<?php e($this->webroot.'Users');?>">
 												<i class="fa fa-user"></i>
 												<span><?php e(languaje($languaje)['navMenuA']);?></span>
 											</a>
 										</li>
-										
+
 										<li>
 											<a href="<?php e($this->webroot.'Groups');?>" class="ajax-link">
 												<i class="fa fa-users"></i>
 												<span><?php e(languaje($languaje)['navMenuB']);?></span>
 											</a>
 										</li>
-										
+
 										<li>
 											<a href="<?php e($this->webroot.'Downloads');?>" class="ajax-link">
 												<i class="fa fa-download"></i>
 												<span><?php e(languaje($languaje)['navMenuD']);?></span>
 											</a>
 										</li>
-										
+
+                    <li>
+                      <a id="storage" href="<?php echo 'http://'.$_SERVER['HTTP_HOST'].DS.Dispatcher::baseUrl().DS.'app/webroot/vendors/RichFilemanager'; ?>" class="ajax-link">
+                        <i class="fa fa-database"></i>
+                        <span>Storage</span>
+                      </a>
+                    </li>
+
 										<li class="divider"></li>
-										
+
 										<?php 	}?>
 										<?php }?>
-										
+
 										<?php if (isset($_SESSION['Auth']['User'])) {?>
 										<?php 	if (checkSuperUser($_SESSION['Auth']['User']['group_id'],$_SESSION['Auth']['User']['number_id'],true)) {?>
-											
+
 										<li>
 											<a href="<?php e($this->webroot.'Companies');?>" class="ajax-link">
 												<i class="fa fa-cog"></i>
 												<span>Company</span>
 											</a>
 										</li>
-										
+
 <!-- 										675 tiras de 100 -->
 <!-- 										65 lancetas de 25 -->
 <!-- 										335 tiras de 50 -->
@@ -225,28 +242,28 @@
 <!-- 										975 medidor + 100 tiras + 25 lancetas //120 -->
 
 <!-- 										735 medidor + 100 tiras farmalisto-->
-										
+
 										<li>
 											<a href="<?php e($this->webroot.'BusinessUnits');?>" class="ajax-link">
 												<i class="fa fa-cog"></i>
 												<span>BusinessUnits</span>
 											</a>
 										</li>
-										
+
 										<li>
 											<a href="<?php e($this->webroot.'Posts/');?>" class="ajax-link">
 												<i class="fa fa-cog"></i>
 												<span>Notes</span>
 											</a>
 										</li>
-										
+
 										<li>
 											<a href="<?php e($this->webroot.'FieldDatas'.DS.'');?>" class="ajax-link">
 												<i class="fa fa-list-alt"></i>
 												<span><?php e('Control de Usuario');?></span>
 											</a>
 										</li>
-										
+
 										<li class="dropdown-submenu">
 											<a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>Secure Section</span></a>
 												<ul class="dropdown-menu">
@@ -279,7 +296,7 @@
 													</li>
 													<li><a tabindex="-1" href="<?php e($this->webroot.'Casetas/add');?>"><i class="fa fa-cog"></i>&nbsp;<span>Importar Archivo</span></a>
 													</li>
-													<li><a tabindex="-1" href="<?php e($this->webroot.'Casetas/CasetasControlUsers/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>ControlUser</span></a>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'CasetasControlsUsers/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>ControlUser</span></a>
 													</li>
 													<li><a tabindex="-1" href="<?php e($this->webroot.'Casetas/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>Dashboard</span></a>
 													</li>
@@ -311,11 +328,15 @@
 													</li>
 													<li><a tabindex="-1" href="<?php e($this->webroot.'CasetasLogs');?>"><i class="fa fa-cog"></i>&nbsp;<span>Logs</span></a>
 													</li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'CasetasIavePeriods/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>CasetasIavePeriods</span></a>
+													</li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'CasetasViewNotConciliations/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>CasetasViewNotConciliations</span></a>
+													</li>
 												</ul>
 										</li>
-										
 
-										
+
+
 										<li class="dropdown-submenu">
 											<a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>Tralix Options</span></a>
 												<ul class="dropdown-menu">
@@ -323,50 +344,349 @@
 													<li><a tabindex="-1" href="<?php e($this->webroot.'Tralixes/add');?>"><i class="fa fa-cog"></i>&nbsp;<span>edition</span></a></li>
 												</ul>
 										</li>
-										
+
+										<li class="dropdown-submenu">
+											<a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>Balanza Udn</span></a>
+												<ul class="dropdown-menu">
+													<li><a tabindex="-1" href="<?php e($this->webroot.'BalanzaViewUdnsRpts');?>"><i class="fa fa-cog"></i>&nbsp;<span>Balanza</span></a></li>
+													<!-- <li><a tabindex="-1" href="<?php e($this->webroot.'Tralixes/add');?>"><i class="fa fa-cog"></i>&nbsp;<span>edition</span></a></li> -->
+												</ul>
+										</li>
+
+
+										<li class="dropdown-submenu">
+											<a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>Providers Options</span></a>
+												<ul class="dropdown-menu">
+													<li><a tabindex="-1" href="<?php e($this->webroot.'ProvidersImportedDatabases/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>ImportedDatabases</span></a></li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'ProvidersControlsUsers');?>"><i class="fa fa-cog"></i>&nbsp;<span>ControlsUsers</span></a></li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'ProvidersViewSearchEditions');?>"><i class="fa fa-cog"></i>&nbsp;<span>SearchEdition</span></a></li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'/ProvidersImportedFilesControls/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>Proveedores</span></a></li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'ProvidersViewBussinessUnits');?>"><i class="fa fa-cog"></i>&nbsp;<span>BussinesUnits</span></a></li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'ProvidersViewCompaniesUnits/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>CompaniesUnits</span></a></li>
+												</ul>
+										</li>
+
+                    <li class="dropdown-submenu">
+                      <a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>ModuleUsers Options</span></a>
+                        <ul class="dropdown-menu">
+                          <li  class="dropdown-submenu">
+                              <a tabindex="-1" href="<?php e($this->webroot.'ModuleUserCredentialsMains/index/page:1/sort:id/direction:asc');?>">
+                                <i class="fa fa-cog"></i>&nbsp;<span>CatalogOptions</span>
+                              </a>
+                          </li>
+
+                          <li class="dropdown-submenu pull-left">
+                            <a href="#">MUsrCredentialsMains</a>
+                              <ul class="dropdown-menu">
+                                <li><a href="<?php e($this->webroot.'ModuleUserCredentialsMains/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>Index</span></a></li>
+                                <li><a href="<?php e($this->webroot.'ModuleUserCredentialsMains/add/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Add</span></a></li>
+                                <li><a href="<?php e($this->webroot.'ModuleUserCredentialsMains/edit/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Edit</span></a></li>
+                                <li><a href="<?php e($this->webroot.'ModuleUserCredentialsMains/view/');?>"><i class="fa fa-cog"></i>&nbsp;<span>View</span></a></li>
+                              </ul>
+                          </li>
+
+                          <li class="dropdown-submenu pull-left">
+                            <a href="#">MUsrCredentialsCtrls</a>
+                              <ul class="dropdown-menu">
+                                <li><a href="<?php e($this->webroot.'ModuleUserCredentialsControls/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>Index</span></a></li>
+                                <li><a href="<?php e($this->webroot.'ModuleUserCredentialsControls/add/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Add</span></a></li>
+                                <li><a href="<?php e($this->webroot.'ModuleUserCredentialsControls/edit/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Edit</span></a></li>
+                                <li><a href="<?php e($this->webroot.'ModuleUserCredentialsControls/view/');?>"><i class="fa fa-cog"></i>&nbsp;<span>View</span></a></li>
+                              </ul>
+                          </li>
+
+                        </ul>
+                    </li>
+
+                    <li class="dropdown-submenu">
+                      <a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>ModulePerformance</span></a>
+                        <ul class="dropdown-menu">
+
+                          <li class="dropdown-submenu pull-left">
+                            <a href="#">PerforCustomers</a>
+                              <ul class="dropdown-menu">
+                                <li><a href="<?php e($this->webroot.'PerformanceCustomers/index/page:1/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Index</span></a></li>
+                                <li><a href="<?php e($this->webroot.'PerformanceCustomers/add/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Add</span></a></li>
+                                <li><a href="<?php e($this->webroot.'PerformanceCustomers/edit/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Edit</span></a></li>
+                                <li><a href="<?php e($this->webroot.'PerformanceCustomers/view/');?>"><i class="fa fa-cog"></i>&nbsp;<span>View</span></a></li>
+                              </ul>
+                          </li>
+
+                          <li class="dropdown-submenu pull-left">
+                            <a href="#">PerforReferences</a>
+                              <ul class="dropdown-menu">
+                                <li><a href="<?php e($this->webroot.'PerformanceReferences/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>Index</span></a></li>
+                                <li><a href="<?php e($this->webroot.'PerformanceReferences/add/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Add</span></a></li>
+                                <li><a href="<?php e($this->webroot.'PerformanceReferences/edit/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Edit</span></a></li>
+                                <li><a href="<?php e($this->webroot.'PerformanceReferences/view/');?>"><i class="fa fa-cog"></i>&nbsp;<span>View</span></a></li>
+                              </ul>
+                          </li>
+
+                          <li class="dropdown-submenu pull-left">
+                            <a href="#">PerforFacturas</a>
+                              <ul class="dropdown-menu">
+                                <li><a href="<?php e($this->webroot.'PerformanceFacturas/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>Index</span></a></li>
+                                <li><a href="<?php e($this->webroot.'PerformanceFacturas/add/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Add</span></a></li>
+                                <li><a href="<?php e($this->webroot.'PerformanceFacturas/edit/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Edit</span></a></li>
+                                <li><a href="<?php e($this->webroot.'PerformanceFacturas/view/');?>"><i class="fa fa-cog"></i>&nbsp;<span>View</span></a></li>
+                              </ul>
+                          </li>
+
+                          <li class="dropdown-submenu pull-left">
+                            <a href="#">PerforTrips</a>
+                              <ul class="dropdown-menu">
+                                <li><a href="<?php e($this->webroot.'PerformanceTrips/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>Index</span></a></li>
+                                <li><a href="<?php e($this->webroot.'PerformanceTrips/add/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Add</span></a></li>
+                                <li><a href="<?php e($this->webroot.'PerformanceTrips/edit/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Edit</span></a></li>
+                                <li><a href="<?php e($this->webroot.'PerformanceTrips/view/');?>"><i class="fa fa-cog"></i>&nbsp;<span>View</span></a></li>
+                              </ul>
+                          </li>
+
+                          <li class="dropdown-submenu pull-left">
+                            <a href="#">PerforViajes</a>
+                              <ul class="dropdown-menu">
+                                <li><a href="<?php e($this->webroot.'PerformanceViajes/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>Index</span></a></li>
+                                <li><a href="<?php e($this->webroot.'PerformanceViajes/add/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Add</span></a></li>
+                                <li><a href="<?php e($this->webroot.'PerformanceViajes/edit/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Edit</span></a></li>
+                                <li><a href="<?php e($this->webroot.'PerformanceViajes/view/');?>"><i class="fa fa-cog"></i>&nbsp;<span>View</span></a></li>
+                              </ul>
+                          </li>
+
+                          <li class="dropdown-submenu pull-left">
+                            <a href="#">PerforViewViajes</a>
+                              <ul class="dropdown-menu">
+                                <li><a href="<?php e($this->webroot.'PerformanceViewViajes/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>Index</span></a></li>
+                                <li><a href="<?php e($this->webroot.'PerformanceViewViajes/add/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Add</span></a></li>
+                                <li><a href="<?php e($this->webroot.'PerformanceViewViajes/edit/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Edit</span></a></li>
+                                <li><a href="<?php e($this->webroot.'PerformanceViewViajes/view/');?>"><i class="fa fa-cog"></i>&nbsp;<span>View</span></a></li>
+                              </ul>
+                          </li>
+
+                          <li class="dropdown-submenu pull-left">
+                            <a href="#">SharedStorage</a>
+                              <ul class="dropdown-menu">
+                                <li><a href="<?php e($this->webroot.'ControlDeskUserControls/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Index</span></a></li>
+                                <li><a href="<?php e($this->webroot.'ControlDeskUserControls/add/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Add</span></a></li>
+                                <li><a href="<?php e($this->webroot.'ControlDeskUserControls/edit/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Edit</span></a></li>
+                                <li><a href="<?php e($this->webroot.'ControlDeskUserControls/view/');?>"><i class="fa fa-cog"></i>&nbsp;<span>View</span></a></li>
+                              </ul>
+                          </li>
+
+                        </ul>
+                    </li>
+
+										<li class="dropdown-submenu">
+											<a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>Projections</span></a>
+												<ul class="dropdown-menu">
+													<li><a tabindex="-1" href="<?php e($this->webroot.'ProjectionsGlobalCorps/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>GlobalCorporations</span></a></li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'ProjectionsCorporations/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>Corporations</span></a></li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'ProjectionsViewBussinessUnits/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>ProjectionsViewBussinessUnits</span></a></li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'ProjectionsAccessModules/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>ProjectionsAccessModules</span></a></li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'ProjectionsControlsUsers/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>ProjectionsControlsUsers</span></a></li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'ProjectionsAccesses/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>ProjectionsAccesses</span></a></li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'ProjectionsClosedPeriodControls/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>ProjectionsClosedPeriodControls</span></a></li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'ProjectionsClosedPeriodDatas/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>ProjectionsClosedPeriodDatas</span></a></li>
+<!--													<li><a tabindex="-1" href="<?php e($this->webroot.'ProjectionsPeriods/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>ProjectionsCerrarPeriodos</span></a></li>-->
+													<li><a tabindex="-1" href="<?php e($this->webroot.'ProjectionsViewIndicatorsPeriods/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>ProjectionsViewIndicatorsPeriods</span></a></li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'ProjectionsViewClosedPeriodUnits/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>ProjectionsViewClosedPeriodUnit(for closing period dev)</span></a></li>
+<!-- 													projections_view_indicators_periods_fleets -->
+													<li><a tabindex="-1" href="<?php e($this->webroot.'ProjectionsViewIndicatorsPeriodsFullFleets/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>projections_view_indicators_periods_full_fleets</span></a></li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'ProjectionsBsuPresupuestos/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>projections_bsu_presupuestos</span></a></li>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'ProjectionsViewIndicatorsDispatchPeriodsFullOps/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>Dispacth</span></a></li>
+												</ul>
+										</li>
+
 										<li class="dropdown-submenu">
 											<a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>Financial Reporting</span></a>
 												<ul class="dropdown-menu">
+
 													<li><a tabindex="-1" href="<?php e($this->webroot.'MrSourceMains/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>Reporter Main</span></a></li>
 													<li><a tabindex="-1" href="<?php e($this->webroot.'MrSourceControls');?>"><i class="fa fa-cog"></i>&nbsp;<span>Reporter Configuration</span></a></li>
-													<li><a href="<?php e($this->webroot.'MrSourceKeys/index');?>"><i class="fa fa-cog"></i>&nbsp;<span>Reporter Keys</span></a>
-													</li>
+													<li><a href="<?php e($this->webroot.'MrSourceKeys/index');?>"><i class="fa fa-cog"></i>&nbsp;<span>Reporter Keys</span></a></li>
 													<li><a tabindex="-1" href="<?php e($this->webroot.'MrSourceConfigs');?>"><i class="fa fa-cog"></i>&nbsp;<span>Reporter Periods</span></a></li>
-													
-													<li><a href="<?php e($this->webroot.'MrSourceAccounts/add');?>"><i class="fa fa-cog"></i>&nbsp;<span>Reporter Account</span></a>
-													</li>
-													<li><a href="<?php e($this->webroot.'MrSourceReports/index');?>"><i class="fa fa-cog"></i>&nbsp;<span>Reporter Reports</span></a>
-													</li>
-													<li class="dropdown-submenu">
+													<li><a href="<?php e($this->webroot.'MrSourceAccounts/add');?>"><i class="fa fa-cog"></i>&nbsp;<span>Reporter Account</span></a></li>
+													<li><a href="<?php e($this->webroot.'MrSourceReports/index');?>"><i class="fa fa-cog"></i>&nbsp;<span>Reporter Reports</span></a></li>
+
+                          <li><a tabindex="-1" href="<?php e($this->webroot.'ReporterViewsMainReports/index/page:1/sort:index_id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>Main</span></a></li>
+                          <li><a tabindex="-1" href="<?php e($this->webroot.'ReporterViewsMainSubreports/index/page:1/sort:index_id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>SubMain</span></a></li>
+                          <li><a tabindex="-1" href="<?php e($this->webroot.'ReporterViewsMainSubreportsAccounts/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>SubMainReportsAccounts</span></a></li>
+                          <li><a tabindex="-1" href="<?php e($this->webroot.'ReporterTableKeys/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>ReporterTableKey</span></a></li>
+                          <li><a tabindex="-1" href="<?php e($this->webroot.'ReporterViewSpXs4zAccounts/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-cog"></i>&nbsp;<span>Accounts</span></a></li>
+
+													<li class="dropdown-submenu pull-left">
 														<a href="#">More..</a>
 															<ul class="dropdown-menu">
 																<li><a href="#">3rd level</a></li>
 																<li><a href="#">3rd level</a></li>
 															</ul>
 													</li>
-													
+
 												</ul>
 										</li>
-										
+
 										<li class="divider"></li>
+
+                    <li class="dropdown-submenu">
+                      <a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>Projectos</span></a>
+                        <ul class="dropdown-menu">
+                          <li><a tabindex="-1" href="<?php e($this->webroot.'/ProvidersControlsFiles/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Proveedores</span></a></li>
+                          <li><a tabindex="-1" href="<?php e($this->webroot.'/ProjectionsViewFullGstXlsIndicators/');?>"><i class="fa fa-cog"></i>&nbsp;<span>XlsPort</span></a></li>
+                        </ul>
+                    </li>
 
 										<?php 	}?>
 										<?php }?>
 <!-- 										automagic hir -->
-										
+
+  <!-- NOTE login for external users -->
+
+                  <?php if (isset($_SESSION['Auth']['User'])) {?>
+                  <?php 	if (checkUser($_SESSION['Auth']['User']['group_id'],'Providers') || $_SESSION['Auth']['User']['group_id'] == 16) { ?>
+                    <li class="dropdown-submenu">
+                      <a tabindex="-1" href="<?php e($this->webroot.'/ProvidersControlsFiles/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Proveedores</span></a>
+                      <!-- <a tabindex="-1" href="<?php //e($this->webroot.'/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Proveedores</span></a> -->
+                    </li>
+                    <li class="divider"></li>
+                    <?php 	}?>
+                    <?php }?>
+
+
+
+
+<!-- 										Providers -->
 										<?php if (isset($_SESSION['Auth']['User'])) {?>
-										<?php 	if (checkUser($_SESSION['Auth']['User']['group_id'],'Casetas')) {?>
+										<?php 	if (checkUser($_SESSION['Auth']['User']['group_id'],'Finanzas') OR checkUser($_SESSION['Auth']['User']['group_id'],'Facturacion')) {?>
+
+
+                      <li class="dropdown-submenu">
+  											<a tabindex="-1" href="#"><i class="fa fa-barcode" aria-hidden="true"></i>&nbsp;<span>ModuloFacturas</span></a>
+  												<ul class="dropdown-menu">
+  													<li><a tabindex="-1" href="<?php e($this->webroot.'PerformanceReferences/');?>"><i class="fa fa-files-o" aria-hidden="true"></i>&nbsp;<span>Facturas</span></a></li>
+  													<li><a tabindex="-1" href="<?php e($this->webroot.'PerformanceTrips/');?>"><i class="fa fa-truck" aria-hidden="true"></i>&nbsp;<span>Viajes</span></a></li>
+  												</ul>
+  										</li>
+                      <li class="divider"></li>
+										<?php 	}?>
+										<?php }?>
+<!-- 										automagic hir -->
+                    <?php if (isset($_SESSION['Auth']['User'])) {?>
+                    <?php 	if (checkUser($_SESSION['Auth']['User']['group_id'],'Finanzas') /*OR checkUser($_SESSION['Auth']['User']['group_id'],'Providers')*/ ) {?>
+                      <li class="dropdown-submenu">
+                        <a tabindex="-1" href="#"><i class="fa fa-university" aria-hidden="true"></i>&nbsp;<span>Finanzas</span></a>
+                          <ul class="dropdown-menu">
+                            <li><a tabindex="-1" href="<?php e($this->webroot.'/ReporterViewSpXs4zAccounts/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-pie-chart" aria-hidden="true"></i>&nbsp;<span>Reportes Financieros</span></a></li>
+                          </ul>
+                      </li>
+
+                      <li class="divider"></li>
+
+                    <?php 	}?>
+                    <?php }?>
+
+
+                    <?php if (isset($_SESSION['Auth']['User'])) {?>
+										<?php 	if (checkUser($_SESSION['Auth']['User']['group_id'],'Addenum')) {?>
+
+                      <li class="dropdown-submenu">
+  											<a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>Adenda</span></a>
+  												<ul class="dropdown-menu">
+  													<li><a tabindex="-1" href="<?php e($this->webroot.'AddenumViewAlbaranRelations');?>"><i class="fa fa-cog"></i>&nbsp;<span>Adenda</span></a></li>
+  													<!-- <li><a tabindex="-1" href="<?php e($this->webroot.'Tralixes/add');?>"><i class="fa fa-cog"></i>&nbsp;<span>edition</span></a></li> -->
+  												</ul>
+  										</li>
+
+										<li class="divider"></li>
+										<?php 	}?>
+										<?php }?>
+
+
+                    <?php if (isset($_SESSION['Auth']['User'])) {?>
+										<?php 	if ( checkUser($_SESSION['Auth']['User']['group_id'],'Ingresos') OR checkUser($_SESSION['Auth']['User']['group_id'],'Logistica') OR checkUser($_SESSION['Auth']['User']['group_id'],'CasetasIngresos') ) {?>
+
+                      <li class="dropdown-submenu">
+  											<a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>Logistica</span></a>
+  												<ul class="dropdown-menu">
+  													<li><a tabindex="-1" href="<?php e($this->webroot.'LogisticaViewGstDatesheets');?>"><i class="fa fa-cog"></i>&nbsp;<span>Indicador</span></a></li>
+  													<!-- <li><a tabindex="-1" href="<?php e($this->webroot.'Tralixes/add');?>"><i class="fa fa-cog"></i>&nbsp;<span>edition</span></a></li> -->
+  												</ul>
+  										</li>
+
+										<li class="divider"></li>
+										<?php 	}?>
+										<?php }?>
+
+
+										<?php if (isset($_SESSION['Auth']['User'])) {?>
+										<?php 	if (checkUser($_SESSION['Auth']['User']['group_id'],'Ingresos') OR checkUser($_SESSION['Auth']['User']['group_id'],'CasetasIngresos') OR checkUser($_SESSION['Auth']['User']['group_id'],'PoliciesIngresos')) {?>
+
+										<li class="dropdown-submenu">
+											<a tabindex="-1" href="#"><i class="fa fa-line-chart"></i>&nbsp;<span>Proyecci&oacute;n</span></a>
+												<ul class="dropdown-menu">
+													<li>
+                            <a tabindex="-1" href="<?php e($this->webroot.'ProjectionsViewIndicatorsPeriods/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-pencil-square-o"></i>&nbsp;<span> Aceptado </span></a>
+													</li>
+													<li>
+                            <a tabindex="-1" href="<?php e($this->webroot.'ProjectionsViewIndicatorsDispatchPeriodsFullOps/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-exchange"></i>&nbsp;<span>Despachado</span></a>
+													</li>
+													<!-- <li>
+                            <a tabindex="-1" href="<?php e($this->webroot.'ProjectionsViewIndicatorsPeriodsFullFleets/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-bar-chart"></i>&nbsp;<span>Proyecci&oacute;n</span></a>
+													</li> -->
+												</ul>
+										</li>
+
+                    <li class="divider"></li>
+
+                    <li class="dropdown-submenu">
+                      <a tabindex="-1" href="#"><i class="fa fa-line-chart"></i>&nbsp;<span>Rendimiento/Disponibilidad</span></a>
+                        <ul class="dropdown-menu">
+                          <li>
+                            <a tabindex="-1" href="<?php e($this->webroot.'RendViewFullGstCoreIndicators/');?>"><i class="fa fa-pencil-square-o"></i>&nbsp;<span> Rendimiento </span></a>
+                          </li>
+
+                          <li class="dropdown-submenu pull-left">
+                            <a href="#"><i class="fa fa-pencil-square-o"></i>&nbsp;Disponibilidad</a>
+                              <ul class="dropdown-menu">
+                                <li>
+                                    <a href="<?php e($this->webroot.'DisponibilidadViewRptUnidadesGstIndicators/?units_type=1');?>"><i class="fa fa-exchange"></i>&nbsp;<span>Tractocamiones & Remolques</span></a>
+                                </li>
+                                <li>
+                                    <a href="<?php e($this->webroot.'DisponibilidadViewRptUnidadesGstIndicators/?units_type=2');?>"><i class="fa fa-exchange"></i>&nbsp;<span>Remolques y Dollys</span></a>
+                                </li>
+                                <li>
+                                    <a href="<?php e($this->webroot.'DisponibilidadViewRptUnidadesGstIndicators/');?>"><i class="fa fa-exchange"></i>&nbsp;<span>Todo</span></a>
+                                </li>
+
+                              </ul>
+                          </li>
+
+
+                          <li>
+                            <a tabindex="-1" href="<?php e($this->webroot.'GeoreferenceViewPositionsHistGstIndicators/');?>"><i class="fa fa-exchange"></i>&nbsp;<span>SinDocumentos</span></a>
+                          </li>
+                          <li>
+                            <a tabindex="-1" href="<?php e($this->webroot.'ResumenViewMontofacturadoMensualGstIndicators/');?>"><i class="fa fa-exchange"></i>&nbsp;<span>Viajes/MontoFacturado</span></a>
+                          </li>
+                        </ul>
+                    </li>
+
+
+										<li class="divider"></li>
+										<?php 	}?>
+										<?php }?>
+
+										<?php if (isset($_SESSION['Auth']['User'])) {?>
+										<?php 	if (checkUser($_SESSION['Auth']['User']['group_id'],'Casetas') OR checkUser($_SESSION['Auth']['User']['group_id'],'CasetasIngresos')) {?>
 
 										<li class="dropdown-submenu">
 											<a tabindex="-1" href="#"><i class="fa fa-truck"></i>&nbsp;<span>Casetas</span></a>
 												<ul class="dropdown-menu">
-													<li><a tabindex="-1" href="<?php e($this->webroot.'Casetas/index/page:1/sort:id/direction:asc');?>"><i class="fa fa-list-alt"></i>&nbsp;<span> Inicio </span></a>
+													<li><a tabindex="-1" href="<?php e($this->webroot.'Casetas/index/page:1/sort:id/direction:desc');?>"><i class="fa fa-list-alt"></i>&nbsp;<span> Inicio </span></a>
 													</li>
 													<li><a tabindex="-1" href="<?php e($this->webroot.'Casetas/add');?>"><i class="fa fa-upload"></i>&nbsp;<span> Importar Archivo</span></a>
 													</li>
 												</ul>
 										</li>
-										
+
 										<li class="divider"></li>
 										<?php 	}?>
 										<?php }?>
@@ -381,108 +701,119 @@
 													</li>
 												</ul>
 										</li>
-									
+
 										<li class="divider"></li>
 										<?php 	}?>
 										<?php }?>
 <!-- 										automagic hir -->
-										
+
 										<?php if (isset($_SESSION['Auth']['User'])) {?>
-										<?php 	if (checkUser($_SESSION['Auth']['User']['group_id'],'PoliciesAnexos')) {?>
-											
-											
+										<?php 	if (checkUser($_SESSION['Auth']['User']['group_id'],'PoliciesAnexos') OR checkUser($_SESSION['Auth']['User']['group_id'],'PoliciesIngresos')) {?>
+
+
 										<li class="dropdown-submenu">
-											<a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>Policies</span></a>
+											<a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>Policy Config</span></a>
 												<ul class="dropdown-menu">
 													<li>
 														<a href="<?php e($this->webroot.'Policies');?>" class="ajax-link">
 															<i class="fa fa-cog"></i>
-															<span>Policies</span>
+															<span>Documento</span>
 														</a>
 													</li>
-														
+
 													<li>
 														<a href="<?php e($this->webroot.'PoliciesAnexos');?>" class="ajax-link">
 															<i class="fa fa-cog"></i>
 															<span><?php e(languaje($languaje)['navMenuF']);?></span>
 														</a>
 													</li>
-													
+
+                          <li>
+														<a href="<?php e($this->webroot.'PoliciesSubtypesDefinitions');?>" class="ajax-link">
+															<i class="fa fa-cog"></i>
+															<span>Submenu-Clasifications</span>
+														</a>
+													</li>
+
+                          <li>
+														<a href="<?php e($this->webroot.'PoliciesSubtypes');?>" class="ajax-link">
+															<i class="fa fa-cog"></i>
+															<span>Submenus-Hooks</span>
+														</a>
+													</li>
+                          <?php if (checkAdmin($_SESSION['Auth']['User']['group_id'])){ ?>
 													<li>
 														<a href="<?php e($this->webroot.'PoliciesFilters');?>" class="ajax-link">
 															<i class="fa fa-cog"></i>
 															<span>Policies Filters</span>
 														</a>
 													</li>
-													
+
 													<li>
 														<a href="<?php e($this->webroot.'PoliciesFormats');?>" class="ajax-link">
 															<i class="fa fa-cog"></i>
 															<span>PoliciesFormats</span>
 														</a>
 													</li>
-													
+
 													<li>
 														<a href="<?php e($this->webroot.'PoliciesTypes');?>" class="ajax-link">
 															<i class="fa fa-cog"></i>
-															<span>PoliciesTypes</span>
+															<span>PoliciesMenus</span>
 														</a>
 													</li>
-													
-													<li>
-														<a href="<?php e($this->webroot.'PoliciesSubtypes');?>" class="ajax-link">
-															<i class="fa fa-cog"></i>
-															<span>PoliciesSubTypes</span>
-														</a>
-													</li>
-													
-													<li>
-														<a href="<?php e($this->webroot.'PoliciesSubtypesDefinitions');?>" class="ajax-link">
-															<i class="fa fa-cog"></i>
-															<span>PoliciesSubTypesDefinitions</span>
-														</a>
-													</li>
+                         <?php }?>
 												</ul>
 										</li>
 
-										
+
 										<li class="divider"></li>
-										
+
 										<?php 	}?>
 										<?php }?>
-
 <!-- 										automagic hir -->
-										
-										<?php if(!empty($documents) or isset($documents)){?>
-										<?php	foreach ($documents as $id_document => $document) {?>
-											
-										<li>
-											<a href="<?php e($this->webroot."Policies/view/type:{$id_document}/");?>" class="ajax-link">
-												<i class="fa fa-file-text"></i>
-												<span><?php e($document);?></span>
-											</a>
-										</li>
-									
-										<?php 	}?>
-										<li class="divider"></li>
-										<?php }?>
-<!-- 										automagic hir -->
+                <!-- adding  -->
 
+                    <?php if (isset($setMenu)) {?>
+                        <?php foreach($setMenu as $idRootMenu => $subMenu) {?>
+                        <li class="dropdown-submenu">
+                          <a tabindex="-1" href="#"><i class="fa fa-file-text"></i>&nbsp;<span><?php e(key($subMenu))?></span></a>
+
+                          <ul class="dropdown-menu">
+                            <?php if ( $setMenu[$idRootMenu][key($subMenu)] !== null ) {?>
+                              <?php foreach ($subMenu as $id_submenu => $nameSubmenu) {?>
+                                <?php foreach ($nameSubmenu as $id_nameSubMenu => $namaeSubmenu) {?>
+                            <li>
+                              <a href="<?php e($this->webroot.'Policies/view/type:'.$idRootMenu.DS.'subtype:'.$id_nameSubMenu);?>" class="ajax-link">
+                                <i class="fa fa-download"></i>
+                                <span><?php e($namaeSubmenu);?></span>
+                                <?php //debug($subMenu)?>
+                              </a>
+                            </li>
+                                <?php }?>
+                              <?php }?>
+                            <?php }?>
+                          </ul>
+                        </li>
+                        <?php }?>
+                    <?php }?>
+                    <!-- adding -->
+<!-- 										automagic hir -->
+                    <li class="divider"></li>
 
 <!-- 										login option -->
 										<?php if ( !isset($_SESSION['Auth']['User'])  and isset($portalUrl) and $portalUrl !== 'gst'  ) {?>
-										
+
 										<li>
 											<a href="<?php e($this->webroot.'Users/login');?>">
 												<i class="fa fa-power-off"></i>
 												<span><?php e(languaje($languaje)['loginTitle']);?></span>
 											</a>
 										</li>
-										
+
 										<?php }?>
 <!-- 										login option -->
 										<?php if (isset($_SESSION['Auth']['User'])) {?>
-
 
 										<li>
 											<a href="<?php e($this->webroot."Users/edit_password/{$_SESSION['Auth']['User']['id']}/");?>" class="ajax-link">
@@ -490,16 +821,16 @@
 												<span>Configuraci&oacute;n</span>
 											</a>
 										</li>
-										
+
 										<li>
 											<a href="<?php e($this->webroot.'Users/logout');?>">
 												<i class="fa fa-power-off"></i>
 												<span><?php e(languaje($languaje)['navMenuE']);?></span>
 											</a>
 										</li>
-										
+
 										<?php }?>
-											
+
 									</ul>
 								</li>
 							</ul>
@@ -508,7 +839,7 @@
         </div>
       </div>
     </nav>
-    
+
 
 <!--         <ul class="nav navbar-nav navbar-right">  -->
 <!--         <ul class="collapse nav navbar-nav nav-collapse" role="search" id="nav-collapse4"> -->
@@ -551,4 +882,3 @@
 // 			});
 // 		});
 </script>
-

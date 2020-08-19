@@ -65,8 +65,8 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 		// debug($units_type);
 
 		$units_id = array(
-				 1=>array(1,13,2,3,5,6,7,8,9)			//Tractocamiones && remolques
-				,2=>array(2,3,4,5,6,7,8,9)				//dolly and remolques
+				 1=>array(1,13)			//Tractocamiones
+				,2=>array(2,3,5,6,7,8,9)				//remolques
 				,3=>array(1,2,3,4,5,6,7,8,9,13)		//ALL
 				,4=>array(4)											//only dollys
 		);

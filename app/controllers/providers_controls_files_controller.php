@@ -831,8 +831,8 @@ class ProvidersControlsFilesController extends AppController {
 				// Configure::write('debug',2);
 //
 // 				debug('FORM_DATA');
-				// debug($form_data);
-				// debug($ref_data);
+				debug($form_data);
+				debug($ref_data);
 // 				// $bat = $ref_data[1];
 // exit();
 
@@ -864,6 +864,10 @@ class ProvidersControlsFilesController extends AppController {
 							// check the most important is xml
 							// now :
 							// check if xml and is a valid file if so , then validate then
+					if ($ext = 'xml') {
+
+						// code...
+					}
 							// check if batnbr is already release
 							// true  then save in providers_uuid_requests
 							// false continue from there the proccess of validation
