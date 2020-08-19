@@ -71,7 +71,7 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 				,4=>array(4)											//only dollys
 		);
 
-		var_dump(isset($units_type));
+//		var_dump(isset($units_type));
 
 		if (isset($units_type)) {
 			$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.units_type'] = $units_id[$units_type];
