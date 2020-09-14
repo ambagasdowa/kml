@@ -208,11 +208,11 @@ var $mssql_sistemas = array( // connect to remote mssql server
 	'driver' => 'mssql',
 	'persistent' => true,
 
-	// 'host' => 'IntegraDb', /*current in local kvm change in freetds.conf*/
-	// 'login' => 'zam',
-	// 'password' => 'lis',
-	// 'database' => 'sistemas',
-	// 'port' => '1433',
+	 'host' => 'IntegraDb', /*current in local kvm change in freetds.conf*/
+	 'login' => 'zam',
+	 'password' => 'lis',
+	 'database' => 'sistemas',
+	 'port' => '1433',
 
 // NOTE connection to local virtual server
 	// 'host' => 'kvmdb', /*current in local kvm change in freetds.conf*/
@@ -222,11 +222,11 @@ var $mssql_sistemas = array( // connect to remote mssql server
 	// 'port' => '1433',
 
 // NOTE connection to local virtual server
-	'host' => 'Homedb', /*current in local kvm change in freetds.conf*/
-	'login' => 'sa',
-	'password' => 'effeta',
-	'database' => 'sistemas',
-	'port' => '1433',
+// 'host' => 'Homedb', /*current in local kvm change in freetds.conf*/
+// 'login' => 'sa',
+// 'password' => 'effeta',
+// 'database' => 'sistemas',
+// 'port' => '1433',
 
 
 	'prefix' => '',
@@ -239,15 +239,22 @@ var $mssql_sistemas = array( // connect to remote mssql server
 	var $mssql_systems = array( // connect to remote mssql server
 		'driver' => 'mssql',
 		'persistent' => false,
-		'host' => 'Homedb',
+// NOTE connection to production servers
+		'host' => 'IntegraDb2',
 		'login' => 'enuma',
 		'password' => '@Elish#',
 		'database' => 'sistemas',
+		'port' => '1433',
+
+//		'host' => 'Homedb',
+//		'login' => 'enuma',
+//		'password' => '@Elish#',
+//		'database' => 'sistemas',
 		'prefix' => '',
 // 		'encoding' => 'ISO-8859-1',
 // 		'encoding' => 'Latin1',
 		'encoding' => 'utf8',
-		'port' => '1433'
+//		'port' => '1433'
 	);
 
 }
