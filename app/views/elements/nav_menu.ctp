@@ -531,6 +531,7 @@
                         <ul class="dropdown-menu">
                           <li><a tabindex="-1" href="<?php e($this->webroot.'/ProvidersControlsFiles/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Proveedores</span></a></li>
                           <li><a tabindex="-1" href="<?php e($this->webroot.'/ProjectionsViewFullGstXlsIndicators/');?>"><i class="fa fa-cog"></i>&nbsp;<span>XlsPort</span></a></li>
+                          <li><a tabindex="-1" href="<?php e($this->webroot.'/RentabilidadViewMainLiquidations/');?>"><i class="fa fa-cog"></i>&nbsp;<span>RentabilidadUnidades</span></a></li>
                         </ul>
                     </li>
 

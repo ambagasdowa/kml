@@ -24,8 +24,8 @@ class RentabilidadViewMainLiquidationsController extends AppController {
 
 
 	function beforeFilter() {
-  		parent::beforeFilter();
-  		$this->Auth->allow(array('*'));
+	 parent::beforeFilter();
+	 $this->Auth->allow(array('index','add','*'));
         }
 
 
