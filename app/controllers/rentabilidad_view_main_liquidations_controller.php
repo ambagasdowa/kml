@@ -23,10 +23,10 @@ class RentabilidadViewMainLiquidationsController extends AppController {
 	var $name = 'RentabilidadViewMainLiquidations';
 
 
-	function beforeFilter() {
-	 parent::beforeFilter();
-	 $this->Auth->allow(array('index','add','*'));
-        }
+//	function beforeFilter() {
+//	 parent::beforeFilter();
+//	 $this->Auth->allow(array('index','add','*'));
+//      }
 
 
 
