@@ -235,7 +235,7 @@ var $mssql_sistemas = array( // connect to remote mssql server
 	'encoding' => 'utf8'
 
 );
-
+// NOTE New server for Solomon ERP
 	var $mssql_systems = array( // connect to remote mssql server
 		'driver' => 'mssql',
 		'persistent' => false,
