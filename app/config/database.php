@@ -235,14 +235,17 @@ var $mssql_sistemas = array( // connect to remote mssql server
 	'encoding' => 'utf8'
 
 );
-// NOTE New server for Solomon ERP
+	// NOTE New server for Solomon ERP
+	// enuma:@Elish#
+	// systemadmin:Gst2020#.
+	//
 	var $mssql_systems = array( // connect to remote mssql server
 		'driver' => 'mssql',
 		'persistent' => false,
 // NOTE connection to production servers
 		'host' => 'IntegraDb2',
-		'login' => 'enuma',
-		'password' => '@Elish#',
+		'login' => 'sa',
+		'password' => 'Gst2020#.',
 		'database' => 'sistemas',
 		'port' => '1433',
 
