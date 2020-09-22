@@ -17,9 +17,9 @@
 			<?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['year']; ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('UdN'); ?></dt>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('UnidadNegocio'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['UdN']; ?>
+			<?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['UnidadNegocio']; ?>
 			&nbsp;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Liquidacion'); ?></dt>
@@ -54,7 +54,7 @@
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('CONCEPTOS SUELDO'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['CONCEPTOS SUELDO']; ?>
+			<?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['CONCEPTOS_SUELDO']; ?>
 			&nbsp;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('OTROS'); ?></dt>
@@ -92,6 +92,11 @@
 			<?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['viajes']; ?>
 			&nbsp;
 		</dd>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Rendimiento Reseteo'); ?></dt>
+		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
+			<?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['rendimiento_reseteo']; ?>
+			&nbsp;
+		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Del'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
 			<?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['del']; ?>
@@ -102,14 +107,14 @@
 			<?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['al']; ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Kms Camion Lleno'); ?></dt>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('KmsCaminoLleno'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['kms_camion_lleno']; ?>
+			<?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['KmsCaminoLleno']; ?>
 			&nbsp;
 		</dd>
-		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('Kms Camion Vacio'); ?></dt>
+		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('KmsCamionVacio'); ?></dt>
 		<dd<?php if ($i++ % 2 == 0) echo $class;?>>
-			<?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['kms_camion_vacio']; ?>
+			<?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['KmsCamionVacio']; ?>
 			&nbsp;
 		</dd>
 		<dt<?php if ($i % 2 == 0) echo $class;?>><?php __('DuracionViaje'); ?></dt>

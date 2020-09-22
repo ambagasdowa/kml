@@ -62,14 +62,14 @@
 							<?php
 		echo $this->Form->input('id_area',array('placeholder'=>'id_area','class'=>'input'));
 		echo $this->Form->input('year',array('placeholder'=>'year','class'=>'input'));
-		echo $this->Form->input('UdN',array('placeholder'=>'UdN','class'=>'input'));
+		echo $this->Form->input('UnidadNegocio',array('placeholder'=>'UnidadNegocio','class'=>'input'));
 		echo $this->Form->input('liquidacion',array('placeholder'=>'liquidacion','class'=>'input'));
 		echo $this->Form->input('fecha_liquidacion',array('placeholder'=>'fecha_liquidacion','class'=>'input'));
 		echo $this->Form->input('Mes',array('placeholder'=>'Mes','class'=>'input'));
 		echo $this->Form->input('Unidad',array('placeholder'=>'Unidad','class'=>'input'));
 		echo $this->Form->input('COMBUSTIBLE',array('placeholder'=>'COMBUSTIBLE','class'=>'input'));
 		echo $this->Form->input('CASETAS',array('placeholder'=>'CASETAS','class'=>'input'));
-		echo $this->Form->input('CONCEPTOS SUELDO',array('placeholder'=>'CONCEPTOS SUELDO','class'=>'input'));
+		echo $this->Form->input('CONCEPTOS_SUELDO',array('placeholder'=>'CONCEPTOS_SUELDO','class'=>'input'));
 		echo $this->Form->input('OTROS',array('placeholder'=>'OTROS','class'=>'input'));
 		echo $this->Form->input('qtyCombustible',array('placeholder'=>'qtyCombustible','class'=>'input'));
 		echo $this->Form->input('qtyCasetas',array('placeholder'=>'qtyCasetas','class'=>'input'));
@@ -77,10 +77,11 @@
 		echo $this->Form->input('qtyOtros',array('placeholder'=>'qtyOtros','class'=>'input'));
 		echo $this->Form->input('IngresoTotalRuta',array('placeholder'=>'IngresoTotalRuta','class'=>'input'));
 		echo $this->Form->input('viajes',array('placeholder'=>'viajes','class'=>'input'));
+		echo $this->Form->input('rendimiento_reseteo',array('placeholder'=>'rendimiento_reseteo','class'=>'input'));
 		echo $this->Form->input('del',array('placeholder'=>'del','class'=>'input'));
 		echo $this->Form->input('al',array('placeholder'=>'al','class'=>'input'));
-		echo $this->Form->input('kms_camion_lleno',array('placeholder'=>'kms_camion_lleno','class'=>'input'));
-		echo $this->Form->input('kms_camion_vacio',array('placeholder'=>'kms_camion_vacio','class'=>'input'));
+		echo $this->Form->input('KmsCaminoLleno',array('placeholder'=>'KmsCaminoLleno','class'=>'input'));
+		echo $this->Form->input('KmsCamionVacio',array('placeholder'=>'KmsCamionVacio','class'=>'input'));
 		echo $this->Form->input('DuracionViaje',array('placeholder'=>'DuracionViaje','class'=>'input'));
 	?>
 						<?php 	echo $this->Form->input('name',array('type'=>'text','label'=>false,'placeholder'=>'Nombre de la politica'));
