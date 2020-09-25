@@ -231,13 +231,13 @@
 						echo
 									$this->Form->input
 																		(
-																			'BatNbr',
+																			'liquidacion',
 																			 array
 																						(
 																							'type'=>'text',
 																							'class'=>'u-full-width form-control',
 																							'id'=>'to',
-																							'placeholder' => 'LOTE',
+																							'placeholder' => 'No de Liquidacion',
 																							// 'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
 								                              // 'title'=>'Puede teclear la fecha en Formato yyyymmdd',
 																							'div'=>FALSE,
@@ -246,7 +246,30 @@
 																							'tabindex'=>'4'
 																						)
 																		);
+						echo '</div>';
+
+						echo '<div class="two columns input-group">';
+						echo '<div class="input-group-addon"><i class="fa fa-barcode"></i></div>';
+						echo
+									$this->Form->input
+																		(
+																			'Unidad',
+																			 array
+																						(
+																							'type'=>'text',
+																							'class'=>'u-full-width form-control',
+																							'id'=>'to',
+																							'placeholder' => 'TractoCamion',
+																							// 'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
+								                              // 'title'=>'Puede teclear la fecha en Formato yyyymmdd',
+																							'div'=>FALSE,
+																							'label'=>FALSE,
+																							// 'options'=>$bssus,
+																							'tabindex'=>'5'
+																						)
+																		);
 							echo '</div>';
+
 
 						?>
 
@@ -257,7 +280,7 @@
 													$this->Html->link(
 																							__('Buscar ...', true),
 																							array('action' => 'get', null),
-																							array('id'=>'send_query','div'=>false,'class'=>'btn btn-primary btn-sm pull-right','tabindex'=>'5')
+																							array('id'=>'send_query','div'=>false,'class'=>'btn btn-primary btn-sm pull-right','tabindex'=>'6')
 																						);
 								?>
 							</div>
