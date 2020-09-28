@@ -139,7 +139,7 @@ class RentabilidadViewMainLiquidationsController extends AppController {
 
 					$rentabilidadViewMainLiquidation = $this->RentabilidadViewMainLiquidation->find('all',array('conditions'=>$conditionsBl));
 					$rentabilidadViewMainLiquidations = null;
-//					debug($conditionsBl);
+					debug($conditionsBl);
 //					debug($rentabilidadViewMainLiquidations);
 			// NOTE || WARNING
 	//		exit();
