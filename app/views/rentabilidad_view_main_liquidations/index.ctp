@@ -200,8 +200,30 @@
 																		);
 						echo '</div>';
 
-						?>
-						<?php
+						echo '<div class="two columns input-group">';
+						echo '<div class="input-group-addon"><i class="fa fa-barcode"></i></div>';
+						echo
+									$this->Form->input
+																		(
+																			'Unidad',
+																			 array
+																						(
+																							'type'=>'text',
+																							'class'=>'u-full-width form-control',
+																							'id'=>'to',
+																							'placeholder' => 'TractoCamion',
+																							// 'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
+								                              // 'title'=>'Puede teclear la fecha en Formato yyyymmdd',
+																							'div'=>FALSE,
+																							'label'=>FALSE,
+																							// 'options'=>$bssus,
+																							'tabindex'=>'3'
+																						)
+																		);
+							echo '</div>';
+
+
+					
 						echo '<div class="two columns input-group">';
 						echo '<div class="input-group-addon"><i class="fa fa-barcode"></i></div>';
 						echo
@@ -216,16 +238,16 @@
 																							'label'=>false,
 																							'div'=>false,
 																							// 'multiple' => true,
-																							'tabindex'=>'3',
+																							'tabindex'=>'4',
 																							'empty'=>'Unidad de Negocio'
 
 																						)
-																		);
+									);
 						echo '</div>';
 					?>
 
-						<?php
-
+					<?php
+					/*
 						echo '<div class="two columns input-group">';
 						echo '<div class="input-group-addon"><i class="fa fa-barcode"></i></div>';
 						echo
@@ -247,31 +269,8 @@
 																						)
 																		);
 						echo '</div>';
-
-						echo '<div class="two columns input-group">';
-						echo '<div class="input-group-addon"><i class="fa fa-barcode"></i></div>';
-						echo
-									$this->Form->input
-																		(
-																			'Unidad',
-																			 array
-																						(
-																							'type'=>'text',
-																							'class'=>'u-full-width form-control',
-																							'id'=>'to',
-																							'placeholder' => 'TractoCamion',
-																							// 'alt'=>'Puede teclear la fecha en Formato yyyymmdd',
-								                              // 'title'=>'Puede teclear la fecha en Formato yyyymmdd',
-																							'div'=>FALSE,
-																							'label'=>FALSE,
-																							// 'options'=>$bssus,
-																							'tabindex'=>'5'
-																						)
-																		);
-							echo '</div>';
-
-
-						?>
+					*/
+					 ?>
 
 						<!-- <div class="row"> -->
 							<div class="label one columns input-group">
@@ -280,7 +279,7 @@
 													$this->Html->link(
 																							__('Buscar ...', true),
 																							array('action' => 'get', null),
-																							array('id'=>'send_query','div'=>false,'class'=>'btn btn-primary btn-sm pull-right','tabindex'=>'6')
+																							array('id'=>'send_query','div'=>false,'class'=>'btn btn-primary btn-sm pull-right','tabindex'=>'5')
 																						);
 								?>
 							</div>
