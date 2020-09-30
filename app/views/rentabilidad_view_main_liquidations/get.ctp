@@ -167,6 +167,7 @@ table {
 <!--insert by Bsu-->
 					<td>
 						<table id="left_menu">
+							<tr><td>Unidad de Negocio</td></tr>
 							<tr><td>Liquidacion</td></tr>
 							<tr><td>Viajes</td></tr>
 							<tr><td>Dias de Viaje</td></tr>
@@ -182,7 +183,6 @@ table {
 							<tr><td>Otros</td></tr>
 							<tr><td>Costo Directo del Viaje</td></tr>
 						
-							<!-- <tr><td>Unidad de Negocio</td></tr> -->
 							<!-- <tr><td>Fecha de Liquidacion</td></tr> -->
 							<!-- <tr><td>Mes</td></tr> -->
 							<!-- <tr><td>Unidad</td></tr> -->
@@ -198,6 +198,7 @@ table {
 		<?php foreach ($liquidacion as $no_liquidacion => $rentabilidadViewMainLiquidation): ?>
 					<td id="main_content_<?php echo $no_liquidacion ?>">
 					<table id="<?php echo $no_liquidacion?>">
+							<tr><td><?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['UnidadNegocio']; ?>&nbsp;</td></tr>
 							<tr><td><?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['liquidacion']; ?>&nbsp;</td></tr>
 							<tr><td><?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['viajes']; ?>&nbsp;</td></tr>
 							<tr><td><?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['del']; ?>&nbsp;<?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['al'];?> </td></tr>
@@ -208,15 +209,14 @@ table {
 							<tr><td><?php echo number_format(round($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['qtyCombustible'])); ?>&nbsp;</td></tr>
 							<tr><td><?php echo number_format(round($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['rendimiento_reseteo'])); ?>&nbsp;</td></tr>
 							<tr><td><?php echo number_format(round($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['IngresoTotalRuta'])); ?>&nbsp;</td></tr>
-							<tr><td><?php echo number_format(round($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['COMBUSTIBLE'])); ?>&nbsp;</td></tr>
-							<tr><td><?php echo number_format(round($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['CASETAS'])); ?>&nbsp;</td></tr>
-							<tr><td><?php echo number_format(round($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['qtySueldoLiquidacion'])); ?>&nbsp;</td></tr>
-							<tr><td><?php echo number_format(round($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['OTROS'])); ?>&nbsp;</td></tr>
-							<tr><td><?php echo number_format(round($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['CostoDirectoViaje'])); ?>&nbsp;</td></tr>
+							<tr><td><?php echo number_format($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['COMBUSTIBLE'],2,'.',','); ?>&nbsp;<?php echo ' % '.number_format($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['percent_combustible'],2,'.',','); ?></td></tr>
+							<tr><td><?php echo number_format($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['CASETAS'],2,'.',','); ?>&nbsp;<?php echo ' % '.number_format($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['percent_casetas'],2,'.',','); ?></td></tr>
+							<tr><td><?php echo number_format($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['qtySueldoLiquidacion'],2,'.',','); ?>&nbsp;<?php echo ' % '.number_format($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['percent_conceptos_sueldo'],2,'.',','); ?></td></tr>
+							<tr><td><?php echo number_format($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['OTROS'],2,'.',','); ?>&nbsp;<?php echo ' % '.number_format($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['percent_otros'],2,'.',','); ?></td></tr>
+							<tr><td><?php echo number_format($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['CostoDirectoViaje'],2,'.',','); ?>&nbsp;</td></tr>
 
 <!-- Until hir is the work -->
 
-							<!-- <tr><td><?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['UnidadNegocio']; ?>&nbsp;</td></tr> -->
 							<!-- <tr><td><?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['fecha_liquidacion']; ?>&nbsp;</td></tr> -->
 							<!-- <tr><td><?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['Mes']; ?>&nbsp;</td></tr> -->
 							<!-- <tr><td><?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['Unidad']; ?>&nbsp;</td></tr> -->
