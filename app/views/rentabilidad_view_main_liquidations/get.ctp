@@ -40,6 +40,14 @@
 table {
 /*  border: 1px solid #555;*/
 }
+
+
+#innerbox {
+   width:250px; /* or whatever width you want. */
+   max-width:250px; /* or whatever width you want. */
+   display: inline-block;
+}
+
 </style>
 
 <div style="display:none;">
@@ -177,9 +185,11 @@ table {
 							<tr><td>QtyCombustible</td></tr>
 							<tr><td>Rendimiento Reseteo</td></tr>
 							<tr><td>Ingreso Total Ruta</td></tr>
+							<tr><td>Rendimiento Calculado</td></tr>
+						
 							<tr><td>Combustible</td></tr>
 							<tr><td>Casetas</td></tr>
-							<tr><td>QtySueldoLiquidacion</td></tr>
+							<tr><td>ConceptosSueldo</td></tr>
 							<tr><td>Otros</td></tr>
 							<tr><td>Costo Directo del Viaje</td></tr>
 						
@@ -207,11 +217,13 @@ table {
 							<tr><td><?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['KmsCaminoLleno']; ?>&nbsp;</td></tr>
 							<tr><td><?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['KmsCamionVacio']; ?>&nbsp;</td></tr>
 							<tr><td><?php echo number_format(round($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['qtyCombustible'])); ?>&nbsp;</td></tr>
-							<tr><td><?php echo number_format(round($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['rendimiento_reseteo'])); ?>&nbsp;</td></tr>
+							<tr><td><?php echo number_format($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['rendimiento_reseteo'],2,'.',','); ?>&nbsp;</td></tr>
 							<tr><td><?php echo number_format(round($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['IngresoTotalRuta'])); ?>&nbsp;</td></tr>
+							<tr><td><?php echo number_format(round($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['RendViaje'])); ?>&nbsp;</td></tr>
+
 							<tr><td><?php echo number_format($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['COMBUSTIBLE'],2,'.',','); ?>&nbsp;<?php echo ' % '.number_format($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['percent_combustible'],2,'.',','); ?></td></tr>
 							<tr><td><?php echo number_format($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['CASETAS'],2,'.',','); ?>&nbsp;<?php echo ' % '.number_format($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['percent_casetas'],2,'.',','); ?></td></tr>
-							<tr><td><?php echo number_format($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['qtySueldoLiquidacion'],2,'.',','); ?>&nbsp;<?php echo ' % '.number_format($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['percent_conceptos_sueldo'],2,'.',','); ?></td></tr>
+							<tr><td><?php echo number_format($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['CONCEPTOS_SUELDO'],2,'.',','); ?>&nbsp;<?php echo ' % '.number_format($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['percent_conceptos_sueldo'],2,'.',','); ?></td></tr>
 							<tr><td><?php echo number_format($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['OTROS'],2,'.',','); ?>&nbsp;<?php echo ' % '.number_format($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['percent_otros'],2,'.',','); ?></td></tr>
 							<tr><td><?php echo number_format($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['CostoDirectoViaje'],2,'.',','); ?>&nbsp;</td></tr>
 
