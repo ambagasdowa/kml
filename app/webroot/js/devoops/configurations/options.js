@@ -15,11 +15,73 @@
 
 
 // NOTE Disponibilidad Options Module
+// unset searchable in column 1 
+// rebuild buttons for exporting options
 options_disponibilidad = {
   "columnDefs": [
     { "searchable": false, "targets": 1 }
-  ]
+  ],
+  buttons: [
+       { extend: 'pageLength', text: '<i class="fa fa-filter" aria-hidden="true"></i>' }
+      ,{
+          extend: 'copy', text: '<i class="fa fa-clipboard" aria-hidden="true"></i>',
+          exportOptions: {
+          //   columns: ':visible'
+             columns:[0,2,3,4,5,6,7,8,9,10]
+          }
+       }
+      ,{
+         extend: 'csv', text: '<i class="fa fa-file-text"></i>',
+         exportOptions: {
+         //     columns: ':visible'
+             columns:[0,2,3,4,5,6,7,8,9,10]
+         }
+       }
+      ,{
+            extend: 'excel'
+          , text: '<i class="fa fa-file-excel-o"></i>'
+          // , extension: '.xlsx'
+          , autoFilter: true
+          , messageTop:'Detalle'
+          // , header:false
+          , filename:"ExportData"
+          , title:"File"
+          ,exportOptions: {
+            //  columns: ':visible'
+            columns:[0,2,3,4,5,6,7,8,9,10]
+           }
+        }
+
+      ,{
+            // extend: 'pdfHtml5',
+        extend: 'pdf', text: '<i class="fa fa-file-pdf-o"></i>'
+              , messageTop:'Detalle'
+        // 			// , header:false
+              , filename:"export_file"
+              , title:""
+              ,customize: function ( doc ) {
+                                              doc.content.splice( 0, 0, {
+                                                  margin: [ 0, 0, 0, 12 ],
+                                                  alignment: 'left',
+                                                  image: imgeHeader
+                                        } );
+                                    }
+              ,exportOptions: {
+               // columns: ':visible'
+               columns:[0,2,3,4,5,6,7,8,9,10]
+              }
+       }
+
+      ,{
+        extend: 'print', text: '<i class="fa fa-print"></i>' ,
+        exportOptions: {
+              columns: ':visible'
+          }
+       }
+// NOTE end updates 
+  ]                                                                                                                                      
 };
+
 
 options_datatable = {
 
@@ -139,7 +201,8 @@ options_datatable = {
                 }
              }
 
-        ]
+        ]                                                                                                                                      
+
         // NOTE for hidde columns , in the example the last column is hidden
         // ,columnDefs: [ {
         //             targets: -1,
