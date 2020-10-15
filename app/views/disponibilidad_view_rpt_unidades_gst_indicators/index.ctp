@@ -265,6 +265,11 @@
 								$( ".updateSearchResult" ).load(urlStruct,function(responseText, statusText, xhr) {
 									// Add Table UIX
 									//
+									//NOTE merge global options with unique datatable options for disponibilidad 
+
+									options_module = {...options_datatable,...options_disponibilidad}	;	
+									
+
 									var table_a = $('#table_grp').DataTable(
 										Object.assign( {}, options_datatable
 											, calculate_row([0])
@@ -273,7 +278,7 @@
 
 									var table_b = $('#table_det').DataTable(
 										Object.assign( {}
-											, options_datatable
+											, options_module
 											// ,calculate_row[0])
 										)
 									 );

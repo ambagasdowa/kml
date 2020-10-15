@@ -13,6 +13,14 @@
 // NOTE Datatable Options
 */
 
+
+// NOTE Disponibilidad Options Module
+options_disponibilidad = {
+  "columnDefs": [
+    { "searchable": false, "targets": 1 }
+  ]
+};
+
 options_datatable = {
 
         // initComplete: function () {

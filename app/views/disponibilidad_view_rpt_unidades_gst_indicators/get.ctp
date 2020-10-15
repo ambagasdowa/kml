@@ -29,6 +29,14 @@
 
 		?>
 
+<style>
+	.xts{
+		/*visibility:hidden;*/
+		display:none; 
+	}
+</style>
+
+
 <div style="display:none;">
 		<div id="json_one">
 			<?php print($json_parsing_level_one) ?>
@@ -175,6 +183,7 @@ echo
 			<tr>
 				<th><?php echo 'Unidad';?></th>
 				<th><?php echo 'Estatus';?></th>
+		    <th class="xts">Status</th>
 				<!-- <th><?php echo 'Tipo_status';?></th> -->
 				<th><?php echo 'Operador';?></th>
 				<th><?php echo 'Remolque';?></th>
@@ -249,6 +258,7 @@ echo
 								// echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['tipo_status'];
 					?>
 			</td>
+			<td class="xts"><?php	echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['estatus']; ?></td>
 			<td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['operador']; ?></td>
 			<td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['remolque']; ?></td>
 			<!-- <td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['area']; ?>&nbsp;</td> -->

@@ -31,7 +31,8 @@
 
 <style>
 .wrap {
-  display: flex;
+	display: flex;
+	/*display:inline-block;*/
   align-items: center;
 /*  justify-content: center;*/
 	overflow:auto;
@@ -161,53 +162,49 @@ table {
 
 <!-- NOTE  Start the Dashboard -->
 
-
 	<?php foreach ($rentabilidadViewMainLiquidations as $unidad => $liquidacion): ?>
  
 <table id="main_container_<?php echo $unidad ?>" width="100%">
 
-			<tr>	
-					<th colspan="10">
+		 	<tr>	
+					<td colspan="10">
 						<b><?php echo $unidad; ?></b>
-					</th>
-
-			 </tr>
-<!--insert by Bsu-->
-					<td>
-						<table id="left_menu">
-							<tr><td>Unidad de Negocio</td></tr>
-							<tr><td>Liquidacion</td></tr>
-							<tr><td>Viajes</td></tr>
-							<tr><td>Dias de Viaje</td></tr>
-							<tr><td>Duracion en d&iacute;as</td></tr>
-							<tr><td>Kms Camion Lleno</td></tr>
-							<tr><td>Kms Camion Vacio</td></tr>
-							<tr><td>QtyCombustible</td></tr>
-							<tr><td>Rendimiento Reseteo</td></tr>
-							<tr><td>Ingreso Total Ruta</td></tr>
-							<tr><td>Rendimiento Calculado</td></tr>
-						
-							<tr><td>Combustible</td></tr>
-							<tr><td>Casetas</td></tr>
-							<tr><td>ConceptosSueldo</td></tr>
-							<tr><td>Otros</td></tr>
-							<tr><td>Costo Directo del Viaje</td></tr>
-						
-							<!-- <tr><td>Fecha de Liquidacion</td></tr> -->
-							<!-- <tr><td>Mes</td></tr> -->
-							<!-- <tr><td>Unidad</td></tr> -->
-							<!-- <tr><td>Conceptos Sueldo</td></tr> -->
-							<!-- <tr><td>QtyCasetas</td></tr> -->
-							<!-- <tr><td>QtyOtros</td></tr> -->
-							<!-- <tr><td>Al</td></tr> -->
-							<!-- <tr><td>Duracion del Viaje</td></tr> -->
-
-
-						</table>
 					</td>
+			 </tr> 
+<!--insert by Bsu-->
+		<td>
+				<table id="left_menu">
+				<!--	<tr><td>Unidad</td></tr> -->
+					<tr><td>Unidad de Negocio</td></tr>
+					<tr><td>Liquidacion</td></tr>
+					<tr><td>Viajes</td></tr>
+					<tr><td>Dias de Viaje</td></tr>
+					<tr><td>Duracion en d&iacute;as</td></tr>
+					<tr><td>Kms Camion Lleno</td></tr>
+					<tr><td>Kms Camion Vacio</td></tr>
+					<tr><td>QtyCombustible</td></tr>
+					<tr><td>Rendimiento Reseteo</td></tr>
+					<tr><td>Ingreso Total Ruta</td></tr>
+					<tr><td>Rendimiento Calculado</td></tr>
+				
+					<tr><td>Combustible</td></tr>
+					<tr><td>Casetas</td></tr>
+					<tr><td>ConceptosSueldo</td></tr>
+					<tr><td>Otros</td></tr>
+					<tr><td>Costo Directo del Viaje</td></tr>			
+				</table>
+		</td>
+
+
+
 		<?php foreach ($liquidacion as $no_liquidacion => $rentabilidadViewMainLiquidation): ?>
-					<td id="main_content_<?php echo $no_liquidacion ?>">
-					<table id="<?php echo $no_liquidacion?>">
+
+
+
+				<td id="main_content_<?php echo $no_liquidacion ?>">
+					<table id="<?php echo $no_liquidacion?>" width="100%">
+
+				<!--			<tr><td><?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['Unidad']; ?>&nbsp;</td></tr> -->
 							<tr><td><?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['UnidadNegocio']; ?>&nbsp;</td></tr>
 							<tr><td><?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['liquidacion']; ?>&nbsp;</td></tr>
 							<tr><td><?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['viajes']; ?>&nbsp;</td></tr>
@@ -228,17 +225,6 @@ table {
 							<tr><td><?php echo number_format($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['CostoDirectoViaje'],2,'.',','); ?>&nbsp;</td></tr>
 
 <!-- Until hir is the work -->
-
-							<!-- <tr><td><?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['fecha_liquidacion']; ?>&nbsp;</td></tr> -->
-							<!-- <tr><td><?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['Mes']; ?>&nbsp;</td></tr> -->
-							<!-- <tr><td><?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['Unidad']; ?>&nbsp;</td></tr> -->
-							<!-- <tr><td><?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['CONCEPTOS_SUELDO']; ?>&nbsp;</td></tr> -->
-							<!-- <tr><td><?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['qtyCasetas']; ?>&nbsp;</td></tr> -->
-							<!-- <tr><td><?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['qtyOtros']; ?>&nbsp;</td></tr> -->
-							<!-- <tr><td><?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['al']; ?>&nbsp;</td></tr> -->
-							<!-- <tr><td><?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['DuracionViaje']; ?>&nbsp;</td></tr> --> 
-
-
 						</table>
 				  </td>
 
@@ -246,6 +232,5 @@ table {
 
 </table>
 	<?php endforeach; ?>
-
 
 
