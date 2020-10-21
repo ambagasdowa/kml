@@ -145,12 +145,26 @@ class RentabilidadViewMainLiquidationsController extends AppController {
 	//		exit();
 				foreach ($rentabilidadViewMainLiquidation as $main => $liquidation) {
 //					debug($main);
-//					debug($liquidation);
+					//					debug($liquidation);
 					$rentabilidadViewMainLiquidations[ $liquidation['RentabilidadViewMainLiquidation']['Unidad'] ][ $liquidation['RentabilidadViewMainLiquidation']['liquidacion'] ] = $liquidation;
+//					$counting_len[ $liquidation['RentabilidadViewMainLiquidation']['Unidad'] ][] = $liquidation['RentabilidadViewMainLiquidation']['liquidacion'];
+					$counting[ $liquidation['RentabilidadViewMainLiquidation']['Unidad'] ] += 1;
 					
 				}
 
+				$tds = max($counting);
+
+				//NOTE from hir work
 //					debug($rentabilidadViewMainLiquidations);
+				//	debug($counting);
+//					debug($counting_test);
+				//	debug(max($counting));
+		/*			
+			foreach ($counting as unit => $counts) {
+				
+			}	
+		 */
+
 
 					if (!isset($rentabilidadViewMainLiquidations) || count($rentabilidadViewMainLiquidations) == 0) {
 						$message = '<div class="alert alert-success alert-dismissible fade in" role="alert">
@@ -174,7 +188,7 @@ class RentabilidadViewMainLiquidationsController extends AppController {
 					// 	$message = null;
 					// }
 	// exit();
-					$this->set(compact('rentabilidadViewMainLiquidations','route','message'));
+					$this->set(compact('rentabilidadViewMainLiquidations','route','message','tds','counting'));
 	// exit();
 					// NOTE set the response output for an ajax call
 					Configure::write('debug', 0);
