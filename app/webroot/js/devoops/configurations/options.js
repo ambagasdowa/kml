@@ -59,6 +59,7 @@ options_disponibilidad = {
         // 			// , header:false
               , filename:"export_file"
               , title:""
+              , orientation: 'landscape'
               ,customize: function ( doc ) {
                                               doc.content.splice( 0, 0, {
                                                   margin: [ 0, 0, 0, 12 ],
