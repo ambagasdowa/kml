@@ -147,7 +147,29 @@ class RentabilidadViewMainLiquidationsController extends AppController {
 //					debug($main);
 					//					debug($liquidation);
 					$rentabilidadViewMainLiquidations[ $liquidation['RentabilidadViewMainLiquidation']['Unidad'] ][ $liquidation['RentabilidadViewMainLiquidation']['liquidacion'] ] = $liquidation;
-//					$counting_len[ $liquidation['RentabilidadViewMainLiquidation']['Unidad'] ][] = $liquidation['RentabilidadViewMainLiquidation']['liquidacion'];
+					
+					$sum_data[ $liquidation['RentabilidadViewMainLiquidation']['Unidad'] ]['viajes'] += $liquidation['RentabilidadViewMainLiquidation']['viajes'];
+					$sum_data[ $liquidation['RentabilidadViewMainLiquidation']['Unidad'] ]['DuracionViaje'] += $liquidation['RentabilidadViewMainLiquidation']['DuracionViaje'];
+					$sum_data[ $liquidation['RentabilidadViewMainLiquidation']['Unidad'] ]['KmsCaminoLleno'] += $liquidation['RentabilidadViewMainLiquidation']['KmsCaminoLleno'];
+					$sum_data[ $liquidation['RentabilidadViewMainLiquidation']['Unidad'] ]['KmsCamionVacio'] += $liquidation['RentabilidadViewMainLiquidation']['KmsCamionVacio'];
+
+					$sum_data[ $liquidation['RentabilidadViewMainLiquidation']['Unidad'] ]['IngresoTotalRuta'] += $liquidation['RentabilidadViewMainLiquidation']['IngresoTotalRuta'];
+					$sum_data[ $liquidation['RentabilidadViewMainLiquidation']['Unidad'] ]['Combustible'] += $liquidation['RentabilidadViewMainLiquidation']['COMBUSTIBLE'];
+					$sum_data[ $liquidation['RentabilidadViewMainLiquidation']['Unidad'] ]['Casetas'] += $liquidation['RentabilidadViewMainLiquidation']['CASETAS'];
+					$sum_data[ $liquidation['RentabilidadViewMainLiquidation']['Unidad'] ]['ConceptosSueldo'] += $liquidation['RentabilidadViewMainLiquidation']['CONCEPTOS_SUELDO'];
+					$sum_data[ $liquidation['RentabilidadViewMainLiquidation']['Unidad'] ]['Otros'] += $liquidation['RentabilidadViewMainLiquidation']['OTROS'];
+
+					
+					$sum_data[ $liquidation['RentabilidadViewMainLiquidation']['Unidad'] ]['CostoDirectoViaje'] += $liquidation['RentabilidadViewMainLiquidation']['CostoDirectoViaje'];			
+					$sum_data[ $liquidation['RentabilidadViewMainLiquidation']['Unidad'] ]['IngresoTotalRuta'] += $liquidation['RentabilidadViewMainLiquidation']['IngresoTotalRuta'];
+					
+					$sum_data[ $liquidation['RentabilidadViewMainLiquidation']['Unidad'] ]['qtyCombustible'] += $liquidation['RentabilidadViewMainLiquidation']['qtyCombustible'];
+					$sum_data[ $liquidation['RentabilidadViewMainLiquidation']['Unidad'] ]['rendimiento_reseteo'] += $liquidation['RentabilidadViewMainLiquidation']['rendimiento_reseteo'];
+					$sum_data[ $liquidation['RentabilidadViewMainLiquidation']['Unidad'] ]['RendViaje'] += $liquidation['RentabilidadViewMainLiquidation']['RendViaje'];
+		 
+
+
+
 					$counting[ $liquidation['RentabilidadViewMainLiquidation']['Unidad'] ] += 1;
 					
 				}
@@ -157,7 +179,7 @@ class RentabilidadViewMainLiquidationsController extends AppController {
 				//NOTE from hir work
 //					debug($rentabilidadViewMainLiquidations);
 				//	debug($counting);
-//					debug($counting_test);
+					debug($sum_data);
 				//	debug(max($counting));
 		/*			
 			foreach ($counting as unit => $counts) {
@@ -188,7 +210,7 @@ class RentabilidadViewMainLiquidationsController extends AppController {
 					// 	$message = null;
 					// }
 	// exit();
-					$this->set(compact('rentabilidadViewMainLiquidations','route','message','tds','counting'));
+					$this->set(compact('rentabilidadViewMainLiquidations','route','message','tds','counting','sum_data'));
 	// exit();
 					// NOTE set the response output for an ajax call
 					Configure::write('debug', 0);
