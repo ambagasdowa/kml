@@ -10,127 +10,83 @@
 		* @copyright     Jesus Baizabal
 		* @link          http://baizabal.xyz
 		* @mail	     baizabal.jesus@gmail.com
-		* @package       PerformanceReferences
-		* @subpackage    Get
+		* @package       cake
+		* @subpackage    cake.cake.console.libs.templates.views
 		* @since         CakePHP(tm) v 1.2.0.5234
 		* @license       MIT License (http://www.opensource.org/licenses/mit-license.php)
 		*/
 ?>
-		<?php
-		    // NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal.
-		    // $evaluate = false;
-		    // $requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere'));
-		    // blog
-		    $evaluate = true;
-		    // $requiere = $evaluate ? e($this->element('kml/blog/blog')) : e($this->element('requiere/norequiere') );
-				// $requiere = $evaluate ? e($this->element('kml/forms/forms')) : e($this->element('requiere/norequiere') );
-				$requiere = $evaluate ? e($this->element('kml/rentabilidad/rentabilidad')) : e($this->element('requiere/norequiere') );
-				// var_dump($rendViewFullGstCoreIndicators);exit();
 
-		?>
-
-<style>
-.wrap {
-	display: flex;
-/*	display:inline-block; */
-  align-items: center;
-/*  justify-content: center;*/
-	overflow:auto;
-}
-
-.main_table {
-/*  border: 1px solid #555;*/
-		border: 1px solid #000;
-		display:flex;
-}
-
-.sum {
-	width:90px;
-	
-}
+<?php
+//warning
+// pr($warning);
 
 
+// exit();
+	header ("Expires: " . gmdate("D,d M YH:i:s") . " GMT");
+	header ("Last-Modified: " . gmdate("D,d M YH:i:s") . " GMT");
+	header ("Cache-Control: no-cache, must-revalidate");
+	header ("Pragma: no-cache");
+	header ("Content-type: application/vnd.ms-excel");
+	header ("Content-Disposition: attachment; filename=".$standings_name.".xls" );
+	header ("Content-Description: Exported as XLS" );
 
-#innerbox {
-   width:250px; /* or whatever width you want. */
-   max-width:250px; /* or whatever width you want. */
-   display: inline-block;
-}
+// pr($warning);exit();
+?>
 
-</style>
+	<div class="bg-danger visible-print-block">
+		<div class="text-justified">
 
-<div style="display:none;">
-		<div id="json_one">
-			<?php print($json_parsing_level_one) ?>
-		</div>
-		<div id="json_two">
-			<?php print($json_parsing_level_two) ?>
-		</div>
-</div>
+                <?php
+                // SecureCalendar index
+                    // NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal.
+        // 			$evaluate = false;
+        // 			$requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere') );
+                ?>
 
-	<div class="row">
-		<?php (!isset($message) || empty($message)) ? : e($message); ?>
-	</div>
+                <style>
+                    /* unvisited link */
+                    .modded-link:link {
+                        display:block !important;
+                        background-color:#999;
+                        color: #444;
+                    }
+                    /* mouse over link */
+                    .modded-link:hover {
+                        font-weight: bold;
+                    }
+                    .panel-default {
+                        background-color: rgba(255, 255, 255, 0.3); /* Color white with alpha 0.9*/
+                    }
 
-	<div class="row noprint">
-		<?php	echo $this->Session->flash();?>
-	</div>
+                    .go_back:hover{
+                        background-color: rgba(82, 124, 143, 0.3); /* Color white with alpha 0.9*/
+                        border-radius:80%;
+                        color:#66BFFF;
+                    }
 
-	<div class="row noprint">
+                    .searchlink {
+                        position: fixed;
+        /* 				bottom: 15px; */
+                        top:13%;
+                        left: 5%;
+                        cursor: pointer;
+                        z-index:150;
+                    }
+                    .center{
+                        text-align:center !important;
+                    }
+                    .lis{
+                        background-color: rgba(185, 186, 164, 0.3);
+                    }
+                    .iave{
+                        background-color: rgba(160, 182, 186, 0.3);
+                    }
+                    .edit{
+                        background-color: rgba(161, 76, 27, 0.3);
+                    }
+                </style>
 
-		<div class="two colums">
-
-		</div>
-
-		<div class="ten colums">
-			<!-- <input type="text" id="kwd_search" value="" placeholder="Buscar"/> -->
-
-			<!-- <a id="details" class="button button-primary" href="#">Totales</a>
-
-			<a id="charting" class="button button-primary" href="#">Graficas</a>
-
-			<a id="upd_checkboxes" class="button button-primary" href="#">Guardar</a> -->
-
-			<!-- <div id="print" class="pull-right"> -->
-				<!-- <i class="fa fa-print" aria-hidden="true"></i> -->
-			<!-- </div> -->
-		</div>
-
-	</div>
-<!--
-	<div class="row">
- 	 <div class="twelve columns">
- 		 <div id="chart" class="chart" >
- 					 <div id="the-chart" style="min-width:80%; min-height: 480px; margin: 0 auto">
-
- 					 </div>
- 		 </div>
- 	 </div>
-  </div> -->
-
-<div class="con">
-<div id="cont" style="height: 10px; margin: 0 auto"></div>
-</div>
-
-
-<div class="row">
-
- </div>
-
- <?php
-			 echo $this->Form->create(
-																 'ProvidersControlsFile'
-																 ,array(
-																				 'enctype' => 'multipart/form-data'
-																				 ,'class'=>'form'
-																				 ,'id'=>'tform'
-																			 )
-																 );
- ?>
-
-<div id="first-datatable-output" class="wrap">
-
-<!-- NOTE  Start the Dashboard -->
 
 	<?php foreach ($rentabilidadViewMainLiquidations as $unidad => $liquidacion): ?>
  
@@ -303,5 +259,3 @@
 <p>&nbsp;</p>
 
 <?php endforeach; ?>
-
-</div>

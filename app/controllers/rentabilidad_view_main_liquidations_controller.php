@@ -179,7 +179,7 @@ class RentabilidadViewMainLiquidationsController extends AppController {
 				//NOTE from hir work
 //					debug($rentabilidadViewMainLiquidations);
 				//	debug($counting);
-					debug($sum_data);
+//					debug($sum_data);
 				//	debug(max($counting));
 		/*			
 			foreach ($counting as unit => $counts) {
@@ -217,6 +217,17 @@ class RentabilidadViewMainLiquidationsController extends AppController {
 					$this->autoLayout = false;
 
 				}
+
+
+
+	function export($rentabilidadViewMainLiquidations=null,$route=null,$message=null,$tds=null,$counting=null,$sum_data=null) {
+
+
+
+					$this->set(compact('rentabilidadViewMainLiquidations','route','message','tds','counting','sum_data'));
+					// End fucntion pass_xls
+		$this->autoLayout=false;
+	}
 
 
 	function index() {
