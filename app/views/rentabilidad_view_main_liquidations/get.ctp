@@ -128,6 +128,19 @@
 																 );
  ?>
 
+		<div class="label one columns input-group">
+		<p>
+			<?php
+						echo
+								$this->Html->link(
+																		__('ExportIcon', true),
+																		array('action' => 'export', null),
+																		array('id'=>'export','div'=>false,'class'=>'btn btn-primary btn-sm pull-right','tabindex'=>'6')
+																	);
+			?>
+		</p>
+		</div>
+
 <div id="first-datatable-output" class="wrap">
 
 <!-- NOTE  Start the Dashboard -->
@@ -305,3 +318,72 @@
 <?php endforeach; ?>
 
 </div>
+
+
+				<script type="text/javascript">
+
+/*
+		  $(document).ready(function () {
+
+			//	$(".search_udn").select2();
+
+					$("#export").on('click', function(event) {
+
+								event.stoppropagation();
+								event.preventdefault();
+
+								var data_code = $(this).attr('id');
+
+								var serial = json.stringify($("#pform").serializearray());
+								console.log(serial);
+								data_code = base64_encode(serial);
+								console.log(data_code);
+								var urlstruct = "<?php echo dispatcher::baseurl();?>/RentabilidadViewMainLiquidations/export/data:"+data_code;
+								console.log(urlstruct);
+								console.log("loaded...");
+
+								$( ".updatesearchresult" ).html('<div class="text-center"><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><span class="sr-only">loading...</span><div>');
+
+								// $( ".updatesearchresult" ).load(urlstruct);
+								$( ".updatesearchresult" ).load(urlstruct,function(responsetext, statustext, xhr) {
+									// add table uix
+									//
+									//note merge global options with unique datatable options for disponibilidad 
+
+									options_module = {...options_datatable,...options_disponibilidad}	;	
+									
+
+									var table_a = $('#table_grp').datatable(
+										object.assign( {}, options_datatable
+											, calculate_row([0])
+										 )
+									 );
+
+									var table_b = $('#table_det').datatable(
+										object.assign( {}
+											, options_module
+											// ,calculate_row[0])
+										)
+									 );
+
+									// var table_a = $('#table_grp').datatable(options_datatable);
+									// var table_b = $('#table_det').datatable(options_datatable);
+									// // end table
+									$('#filterall').on( 'keyup', function () {
+									    table_a.search( this.value ).draw();
+									    table_b.search( this.value ).draw();
+									} );
+
+									// console.log(statustext);
+									if(statustext == "error"){
+												 thisurl = "<?php echo dispatcher::baseurl();?>/users/login";
+													 console.log(thisurl);
+													 window.location.href(thisurl);
+									}
+
+								});
+					});
+			});
+
+*/
+	</script>

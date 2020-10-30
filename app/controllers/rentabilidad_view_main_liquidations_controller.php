@@ -209,7 +209,22 @@ class RentabilidadViewMainLiquidationsController extends AppController {
 					// if (!isset($message)) {
 					// 	$message = null;
 					// }
-	// exit();
+				// exit();
+
+// NOTE this goes to $_SESSION variable
+
+//				debug($_SESSION);
+//				debug($_SERVER);
+
+				$this_session['session']['rentabilidadViewMainLiquidations'] = $rentabilidadViewMainLiquidations;
+				$this_session['session']['route'] = $route;
+				$this_session['session']['message'] = $message;
+				$this_session['session']['tds'] = $tds;
+				$this_session['session']['counting'] = $counting;
+				$this_session['session']['sum_data'] = $sum_data;
+
+				$_SESSION['Gerencial'] = $this_session['session'];
+
 					$this->set(compact('rentabilidadViewMainLiquidations','route','message','tds','counting','sum_data'));
 	// exit();
 					// NOTE set the response output for an ajax call
@@ -221,10 +236,17 @@ class RentabilidadViewMainLiquidationsController extends AppController {
 
 
 	function export($rentabilidadViewMainLiquidations=null,$route=null,$message=null,$tds=null,$counting=null,$sum_data=null) {
+		
+		//debug($_SESSION);
+		$rentabilidadViewMainLiquidations = $_SESSION['Gerencial']['rentabilidadViewMainLiquidations'];
+		$route = $_SESSION['Gerencial']['route'];
+		$message = $_SESSION['Gerencial']['message'];
+		$tds = $_SESSION['Gerencial']['tds'];
+		$counting = $_SESSION['Gerencial']['counting'];
+		$sum_data = $_SESSION['Gerencial']['sum_data'];
 
 
-
-					$this->set(compact('rentabilidadViewMainLiquidations','route','message','tds','counting','sum_data'));
+		$this->set(compact('rentabilidadViewMainLiquidations','route','message','tds','counting','sum_data'));
 					// End fucntion pass_xls
 		$this->autoLayout=false;
 	}
