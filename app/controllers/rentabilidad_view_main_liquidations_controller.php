@@ -177,9 +177,9 @@ class RentabilidadViewMainLiquidationsController extends AppController {
 				$tds = max($counting);
 
 				//NOTE from hir work
-//					debug($rentabilidadViewMainLiquidations);
-				//	debug($counting);
-//					debug($sum_data);
+					debug($rentabilidadViewMainLiquidations);
+					debug($counting);
+					debug($sum_data);
 				//	debug(max($counting));
 		/*			
 			foreach ($counting as unit => $counts) {
@@ -228,7 +228,7 @@ class RentabilidadViewMainLiquidationsController extends AppController {
 					$this->set(compact('rentabilidadViewMainLiquidations','route','message','tds','counting','sum_data'));
 	// exit();
 					// NOTE set the response output for an ajax call
-					Configure::write('debug', 0);
+					Configure::write('debug', 2);
 					$this->autoLayout = false;
 
 				}

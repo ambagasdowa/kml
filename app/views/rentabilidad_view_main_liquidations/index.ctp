@@ -308,72 +308,6 @@
 
 // NOTE Add extra check for file type upload only admit xml && pdf in his own input module ProvidersPortal::checkFile
 
-			function checkFile(data,ext) {
-
-					var fileElement = document.getElementById(data.id);
-					var fileExtension = "";
-					if (fileElement.value.lastIndexOf(".") > 0) {
-							fileExtension = fileElement.value.substring(fileElement.value.lastIndexOf(".") + 1, fileElement.value.length);
-					}
-					if (fileExtension.toLowerCase() == ext) {
-							return true;
-					}
-					else {
-						  var extension = ext.toUpperCase();
-							var message = 	'<div class="alert alert-danger alert-dismissible fade in" role="alert">' +
-															'<button type="button" class="close" data-dismiss="alert" aria-label="Close"> ' +
-															'<span aria-hidden="true">&times;</span>' +
-															'</button> Este Campo solo admite archivos ' + extension + '</div>';
-							document.getElementById("msg").innerHTML = message;
-							document.getElementById(data.id).value = null;
-							// form.reset();
-							return false;
-					}
-			}
-
-
-			function checkInputs (data) {
-				batnbr = data.attributes[2].value;
-
-					// $("#upload_"+batnbr).removeAttr("style");
-					xml = $('#upload_xml_'+batnbr).val();
-					voucher = $('#upload_pdf_'+batnbr).val();
-					order = $('#upload_order_'+batnbr).val();
-					console.log(xml , voucher ,order);
-
-					// NOTE: test this block
-					// div = document.getElementById('linkx_'+batnbr);
-					// clone = div.cloneNode(true); // true means clone all childNodes and all event handlers
-
-					if ( xml != '' && voucher != '' && order != '' ) {
-						// $("#upload_"+batnbr).removeAttr("style");
-						document.getElementById("msg").innerHTML = 'all ok to continue';
-
-					} else if ( xml == '' || voucher == '' || order == '' ) {
-
-						document.getElementById("msg").innerHTML = 'Se requiere subir archivo xml , factura y orden de compra en formato pdf.';
-						console.log('remove style');
-						$("#upload_"+batnbr).attr("style", "pointer-events: none;");
-
-						// if ( $("#upload_"+batnbr).is(":visible") ) {
-					  //   $("#upload_"+batnbr).hide();
-					  // } else if ( $("#upload_"+batnbr).is(":hidden") ) {
-					  //   $("#upload_"+batnbr).show();
-					  // }
-
-					}
-			}
-
-			function leftLink(data){
-					batnbr = data.attributes[2].value;
-					// if ( $("#upload_"+batnbr).is(":hidden") ) {
-					// 	$("#upload_"+batnbr).show();
-					// }
-					$("#upload_"+batnbr).removeAttr("style");
-					document.getElementById("msg").innerHTML = 'Se requiere subir archivo xml , factura y orden de compra en formato pdf';
-					console.log('remove style');
-			}
-
 
 		  $(document).ready(function () {
 
@@ -401,111 +335,18 @@
 								$( ".updateSearchResult" ).load(urlStruct,function(responseText, statusText, xhr) {
 
 									// Add Table UIX
-									var table_a = $('#table_res').DataTable(
-										Object.assign( {}, options_datatable, calculate_row([],[]) )
+						//			var table_a = $('#table_res').DataTable(
+						//				Object.assign( {}, options_datatable, calculate_row([],[]) )
+						//			 );
+
+								  $('#static_frame').DataTable(
+									//	object.assign( {}, options_datatable
+									//		, calculate_row([0])
+									//	 )
 									 );
-									// End table
-									// DONE to HIR
-									// NOTE add the file dispatcher inside send_query
-									table_a.$("a[id^='upload_']").on('click', function(e) {
-									e.stopPropagation();
-									e.preventDefault();
-									console.log('check $this');
-									console.log($(this));
-									batnbr = $(this).attr('data-id');
-									// vendid = $(this).attr('data-vendor');
-									// $("#upload_"+batnbr).removeAttr("style");
-									link = $(this).clone();
-									console.log('check link');
-									console.log(link);
-									$( this ).html('<div class="text-center"><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><span class="sr-only">Loading...</span><div>').blur();
-// NOTE function start
-												var myForm = $("#tform").get(0);
-												formData = new FormData(myForm);
-												// set the append
-												formData.append('batnbr',$(this).attr('data-id'));
-												formData.append('vendor',$(this).attr('data-vendor'));
-												formData.append('ponbr',$(this).attr('data-ponbr'));
 
-												// console.log('next formdata');
-												// console.log(formData.getAll);
-
-												// NOTE : vallida extension val.substring(val.lastIndexOf('.') + 1).toLowerCase()
-													$.ajax({
-													    url : "<?php echo Dispatcher::baseUrl();?>/RentabilidadViewMainLiquidations/upload/",
-													    type: "POST",
-													    data : formData,
-													    processData: false,
-													    contentType: false,
-															enctype: 'multipart/form-data',
-															dataType: 'json',
-															beforeSend:function (){
-																// alert ('working');
-															},
-													    success:function(data, textStatus, jqXHR){
-																	// alert(data);
-													    },
-													    error: function(jqXHR, textStatus, errorThrown){
-													        //if fails
-													    }
-													}).done(function ( data,textStatus,jqXHR ){
-																			// var json = JSON.parse(data);
-																			// alert(JSON.stringify(data));
-																			if (data.message) {
-																				$('#msg').html(data.message);
-																			}
-
-																			if (data.status) {
-																				$('#statusx_'+batnbr).html(data.status);
-																			}
-
-																			if (data.fecha) {
-																				$('#fechax_'+batnbr).html(data.fecha);
-																			}
-
-																			// if (data.fvalidacion) {
-																			// 	$('#fechax_'+batnbr).html(data.fvalidacion);
-																			// }
-
-																			if (data.totalAmt) {
-																				$('#totalAmtx_'+batnbr).html(data.totalAmt);
-																			}
-
-																			if (data.uuid) {
-																				$('#uuidx_'+batnbr).html(data.uuid);
-																			}
-
-																			if (data.xml){
-																				$('#xmlx_'+batnbr).html(data.xml);
-																			}
-																			if (data.voucher){
-																				$('#voucherx_'+batnbr).html(data.voucher);
-																			}
-																			if (data.order){
-																				$('#orderx_'+batnbr).html(data.order);
-																			}
-
-																			// NOTE Validate uploaded files // This is inside or outside ?
-																			if (data.count == 3) {
-																				$('#linkx_'+batnbr).html('<div class="text-center"><i class="fa fa-check fa-2x fa-fw"></i><div>');
-																			} else {
-																				document.getElementById("send_query").click();
-																				// $('#linkx_'+batnbr).html(link).on('click',function(evt){
-																				// 	evt.stopPropagation();
-																				// 	evt.preventDefault();
-																			 // // WARNING:  send a push in "buscar " btn
-																			 // // hir is nothing to update so we can update entire table
-																			 //
-																				//  console.log('theWay?');
-																				// });
-																			}
-
-													});
-												// NOTE function ends
-										}); //End on keydown
 								}); //NOTE end file dispatch
 					});
-			});
-
+}); // End Document
 
 	</script>

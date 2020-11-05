@@ -34,62 +34,39 @@
 // pr($warning);exit();
 ?>
 
-	<div class="bg-danger visible-print-block">
-		<div class="text-justified">
+								<style>
+                  /* NOTE tabular section */
+										.wrap {
+											display: flex;
+										/*	display:inline-block; */
+											align-items: center;
+										/*  justify-content: center;*/
+											overflow:auto;
+										}
 
-                <?php
-                // SecureCalendar index
-                    // NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal.
-        // 			$evaluate = false;
-        // 			$requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere') );
-                ?>
+										.main_table {
+										/*  border: 1px solid #555;*/
+												border: 1px solid #000;
+											/*	display:flex;*/
+										}
 
-                <style>
-                    /* unvisited link */
-                    .modded-link:link {
-                        display:block !important;
-                        background-color:#999;
-                        color: #444;
-                    }
-                    /* mouse over link */
-                    .modded-link:hover {
-                        font-weight: bold;
-                    }
-                    .panel-default {
-                        background-color: rgba(255, 255, 255, 0.3); /* Color white with alpha 0.9*/
-                    }
+										.main{
+											white-space: nowrap;
+										}
 
-                    .go_back:hover{
-                        background-color: rgba(82, 124, 143, 0.3); /* Color white with alpha 0.9*/
-                        border-radius:80%;
-                        color:#66BFFF;
-                    }
-
-                    .searchlink {
-                        position: fixed;
-        /* 				bottom: 15px; */
-                        top:13%;
-                        left: 5%;
-                        cursor: pointer;
-                        z-index:150;
-                    }
-                    .center{
-                        text-align:center !important;
-                    }
-                    .lis{
-                        background-color: rgba(185, 186, 164, 0.3);
-                    }
-                    .iave{
-                        background-color: rgba(160, 182, 186, 0.3);
-                    }
-                    .edit{
-                        background-color: rgba(161, 76, 27, 0.3);
-                    }
+										.sum {
+											width:90px;
+											
+										}
                 </style>
 
 
+
+<table class="main">
+	
+
 	<?php foreach ($rentabilidadViewMainLiquidations as $unidad => $liquidacion): ?>
- 
+<td> 
 <table id="main_container_<?php echo $unidad ?>" class="main_table">
 
 				<tr>	
@@ -257,5 +234,8 @@
 </table>
 
 <p>&nbsp;</p>
-
+</td>
 <?php endforeach; ?>
+
+
+</table>

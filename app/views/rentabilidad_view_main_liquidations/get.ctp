@@ -30,6 +30,7 @@
 		?>
 
 <style>
+
 .wrap {
 	display: flex;
 /*	display:inline-block; */
@@ -44,12 +45,25 @@
 		display:flex;
 }
 
+.main{
+	white-space:nowrap;
+}
+
 .sum {
 	width:90px;
 	
 }
 
 
+/*
+table{
+		border-collapse: collapse; 
+}
+*/
+
+.test{
+	border: 1px solid #000;
+}
 
 #innerbox {
    width:250px; /* or whatever width you want. */
@@ -59,57 +73,25 @@
 
 </style>
 
-<div style="display:none;">
-		<div id="json_one">
-			<?php print($json_parsing_level_one) ?>
-		</div>
-		<div id="json_two">
-			<?php print($json_parsing_level_two) ?>
-		</div>
-</div>
 
-	<div class="row">
-		<?php (!isset($message) || empty($message)) ? : e($message); ?>
-	</div>
-
-	<div class="row noprint">
-		<?php	echo $this->Session->flash();?>
-	</div>
-
-	<div class="row noprint">
-
-		<div class="two colums">
-
-		</div>
-
-		<div class="ten colums">
-			<!-- <input type="text" id="kwd_search" value="" placeholder="Buscar"/> -->
-
-			<!-- <a id="details" class="button button-primary" href="#">Totales</a>
-
-			<a id="charting" class="button button-primary" href="#">Graficas</a>
-
-			<a id="upd_checkboxes" class="button button-primary" href="#">Guardar</a> -->
-
-			<!-- <div id="print" class="pull-right"> -->
-				<!-- <i class="fa fa-print" aria-hidden="true"></i> -->
-			<!-- </div> -->
-		</div>
-
-	</div>
-<!--
-	<div class="row">
- 	 <div class="twelve columns">
- 		 <div id="chart" class="chart" >
- 					 <div id="the-chart" style="min-width:80%; min-height: 480px; margin: 0 auto">
-
- 					 </div>
- 		 </div>
- 	 </div>
-  </div> -->
 
 <div class="con">
-<div id="cont" style="height: 10px; margin: 0 auto"></div>
+<div id="cont" style="height: 10px; margin: 0 auto">
+
+		<div class="nobreak">
+		<p>
+			<?php
+						echo
+								$this->Html->link(
+																		__('Exportar', true),
+																		array('action' => 'export', null),
+																		array('id'=>'export','div'=>false,'class'=>'btn btn-primary btn-sm pull-right','tabindex'=>'6')
+																	);
+			?>
+		</p>
+		</div>
+
+</div>
 </div>
 
 
@@ -118,28 +100,18 @@
  </div>
 
  <?php
-			 echo $this->Form->create(
+/* 
+				echo $this->Form->create(
 																 'ProvidersControlsFile'
 																 ,array(
 																				 'enctype' => 'multipart/form-data'
 																				 ,'class'=>'form'
 																				 ,'id'=>'tform'
 																			 )
-																 );
+				);
+ */				
  ?>
 
-		<div class="label one columns input-group">
-		<p>
-			<?php
-						echo
-								$this->Html->link(
-																		__('ExportIcon', true),
-																		array('action' => 'export', null),
-																		array('id'=>'export','div'=>false,'class'=>'btn btn-primary btn-sm pull-right','tabindex'=>'6')
-																	);
-			?>
-		</p>
-		</div>
 
 <div id="first-datatable-output" class="wrap">
 
@@ -314,76 +286,9 @@
 </table>
 
 <p>&nbsp;</p>
-
 <?php endforeach; ?>
+<!--end container-->
+<!--end table static_frame-->
 
 </div>
 
-
-				<script type="text/javascript">
-
-/*
-		  $(document).ready(function () {
-
-			//	$(".search_udn").select2();
-
-					$("#export").on('click', function(event) {
-
-								event.stoppropagation();
-								event.preventdefault();
-
-								var data_code = $(this).attr('id');
-
-								var serial = json.stringify($("#pform").serializearray());
-								console.log(serial);
-								data_code = base64_encode(serial);
-								console.log(data_code);
-								var urlstruct = "<?php echo dispatcher::baseurl();?>/RentabilidadViewMainLiquidations/export/data:"+data_code;
-								console.log(urlstruct);
-								console.log("loaded...");
-
-								$( ".updatesearchresult" ).html('<div class="text-center"><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><span class="sr-only">loading...</span><div>');
-
-								// $( ".updatesearchresult" ).load(urlstruct);
-								$( ".updatesearchresult" ).load(urlstruct,function(responsetext, statustext, xhr) {
-									// add table uix
-									//
-									//note merge global options with unique datatable options for disponibilidad 
-
-									options_module = {...options_datatable,...options_disponibilidad}	;	
-									
-
-									var table_a = $('#table_grp').datatable(
-										object.assign( {}, options_datatable
-											, calculate_row([0])
-										 )
-									 );
-
-									var table_b = $('#table_det').datatable(
-										object.assign( {}
-											, options_module
-											// ,calculate_row[0])
-										)
-									 );
-
-									// var table_a = $('#table_grp').datatable(options_datatable);
-									// var table_b = $('#table_det').datatable(options_datatable);
-									// // end table
-									$('#filterall').on( 'keyup', function () {
-									    table_a.search( this.value ).draw();
-									    table_b.search( this.value ).draw();
-									} );
-
-									// console.log(statustext);
-									if(statustext == "error"){
-												 thisurl = "<?php echo dispatcher::baseurl();?>/users/login";
-													 console.log(thisurl);
-													 window.location.href(thisurl);
-									}
-
-								});
-					});
-			});
-
-*/
-	</script>
