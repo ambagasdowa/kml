@@ -600,6 +600,22 @@
 										<?php 	}?>
 										<?php }?>
 
+                    <?php if (isset($_SESSION['Auth']['User'])) {?>
+										<?php 	if (checkUser($_SESSION['Auth']['User']['group_id'],'Addenum')) {?>
+
+                      <li class="dropdown-submenu">
+  											<a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>Gerencial</span></a>
+  												<ul class="dropdown-menu">
+  													<li><a tabindex="-1" href="<?php e($this->webroot.'RentabilidadViewMainLiquidations');?>"><i class="fa fa-cog"></i>&nbsp;<span>Rentabilidad</span></a></li>
+  													<!-- <li><a tabindex="-1" href="<?php e($this->webroot.'Tralixes/add');?>"><i class="fa fa-cog"></i>&nbsp;<span>edition</span></a></li> -->
+  												</ul>
+  										</li>
+
+										<li class="divider"></li>
+										<?php 	}?>
+										<?php }?>
+
+
 
                     <?php if (isset($_SESSION['Auth']['User'])) {?>
 										<?php 	if ( checkUser($_SESSION['Auth']['User']['group_id'],'Ingresos') OR checkUser($_SESSION['Auth']['User']['group_id'],'Logistica') OR checkUser($_SESSION['Auth']['User']['group_id'],'CasetasIngresos') ) {?>

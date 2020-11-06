@@ -192,6 +192,8 @@
 			return true; //Addenum
 		} else if (( (int)$id_group === 15 OR (int)$id_group === 1 OR (int)$id_group === 7) and $group === 'Logistica') { //projections & pol
 			return true; //Logistica
+		} else if (( (int)$id_group === 18 OR (int)$id_group === 1 OR (int)$id_group === 7) and $group === 'Contraloria') { //politicas & contraloria
+			return true; //Contraloria
 		} else {
 			return false;
 		}
