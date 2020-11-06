@@ -601,7 +601,7 @@
 										<?php }?>
 
                     <?php if (isset($_SESSION['Auth']['User'])) {?>
-										<?php 	if (checkUser($_SESSION['Auth']['User']['group_id'],'Addenum')) {?>
+										<?php 	if (checkUser($_SESSION['Auth']['User']['group_id'],'Contraloria')) {?>
 
                       <li class="dropdown-submenu">
   											<a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>Gerencial</span></a>
