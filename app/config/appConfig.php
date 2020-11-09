@@ -182,6 +182,8 @@
 			return true;
 		} else if (( (int)$id_group === 8 OR (int)$id_group === 1 OR (int)$id_group === 7) and $group === 'Finanzas') {
 			return true;
+		} else if (( (int)$id_group === 8 OR (int)$id_group === 1 OR (int)$id_group === 7) and $group === 'Contraloria') {
+			return true;
 		} else if (( (int)$id_group === 11 OR (int)$id_group === 1 OR (int)$id_group === 7) and $group === 'Facturacion') {
 			return true;
 		} else if (( (int)$id_group === 12 OR (int)$id_group === 1 OR (int)$id_group === 7) and $group === 'CasetasIngresos') { //group for projections and casetas
