@@ -571,7 +571,7 @@
 										<?php }?>
 <!-- 										automagic hir -->
                     <?php if (isset($_SESSION['Auth']['User'])) {?>
-                    <?php 	if (checkUser($_SESSION['Auth']['User']['group_id'],'Finanzas') /*OR checkUser($_SESSION['Auth']['User']['group_id'],'Providers')*/ ) {?>
+                    <?php 	if (checkUser($_SESSION['Auth']['User']['group_id'],'Finanzas') OR checkUser($_SESSION['Auth']['User']['group_id'],'Contraloria') ) {?>
                       <li class="dropdown-submenu">
                         <a tabindex="-1" href="#"><i class="fa fa-university" aria-hidden="true"></i>&nbsp;<span>Finanzas</span></a>
                           <ul class="dropdown-menu">
@@ -634,7 +634,7 @@
 
 
 										<?php if (isset($_SESSION['Auth']['User'])) {?>
-										<?php 	if (checkUser($_SESSION['Auth']['User']['group_id'],'Ingresos') OR checkUser($_SESSION['Auth']['User']['group_id'],'CasetasIngresos') OR checkUser($_SESSION['Auth']['User']['group_id'],'PoliciesIngresos')) {?>
+										<?php 	if (checkUser($_SESSION['Auth']['User']['group_id'],'Ingresos') OR checkUser($_SESSION['Auth']['User']['group_id'],'CasetasIngresos') OR checkUser($_SESSION['Auth']['User']['group_id'],'PoliciesIngresos') OR checkUser( $_SESSION['Auth']['User']['group_id'],'Contraloria' ) ) {?>
 
 										<li class="dropdown-submenu">
 											<a tabindex="-1" href="#"><i class="fa fa-line-chart"></i>&nbsp;<span>Proyecci&oacute;n</span></a>
