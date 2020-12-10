@@ -28,7 +28,7 @@
 	header ("Cache-Control: no-cache, must-revalidate");
 	header ("Pragma: no-cache");
 	header ("Content-type: application/vnd.ms-excel");
-	header ("Content-Disposition: attachment; filename=".$standings_name.".xls" );
+	header ("Content-Disposition: attachment; filename=Rentabilidad".$standings_name.".xls" );
 	header ("Content-Description: Exported as XLS" );
 
 // pr($warning);exit();
