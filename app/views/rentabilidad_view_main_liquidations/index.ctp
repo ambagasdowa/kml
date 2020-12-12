@@ -123,6 +123,115 @@
 			top: 0;
 		}
 
+.wrap {
+	display: flex;
+/*	display:inline-block; */
+  align-items: center;
+/*  justify-content: center;*/
+	overflow:auto;
+}
+
+.main_table {
+/*  border: 1px solid #555;*/
+		border: 1px solid #000;
+		display:flex;
+}
+
+.main{
+	white-space:nowrap;
+}
+
+.sum {
+	width:90px;
+}
+
+
+/*
+table{
+		border-collapse: collapse; 
+}
+*/
+
+.test{
+	border: 1px solid #000;
+}
+
+#innerbox {
+   width:250px; /* or whatever width you want. */
+   max-width:250px; /* or whatever width you want. */
+   display: inline-block;
+}
+
+
+/*style excel*/
+.excel_cell{
+	border: 1px solid #CCC;
+	color: #222;
+	text-align: center;
+	/*font-size: 13px;*/
+	font-weight:  normal;
+	/*padding: 4px;*/
+/*	white-space: pre-line;*/
+	white-space: nowrap;
+	min-width: 130px !important;
+}
+
+._xls_cell {
+	empty-cells: show;
+	white-space: nowrap;
+  min-width: 130px;
+	padding: 1px 0.5em;
+}
+
+._cell_header{
+	border: 1px solid #CCC;
+	color: #222;
+	text-align: center;
+	font-weight:  normal;
+	background-color: #EEE;
+}
+
+._celll_first_row{
+	text-align:left!important;
+}
+
+._cell_fix_lenght{ 
+	width:20px !important;
+  min-width:5px !important;
+ }
+
+._cell_Default{
+	background-color: #FFF;
+	/*text-align: left;*/
+}
+
+._cell_view {
+	font-weight:bold;
+}
+
+.firts_column {
+	border: 1px solid #CCC;
+	color: #222;
+	text-align: center;
+	font-weight:  normal;
+	background-color: #EEE;
+	min-width: 325px;
+	text-align: left !important;
+}
+._table {
+  display: table                /* <table>     */;
+	border-collapse:	collapse									   ;
+	width : 100%;
+}
+._row {
+  display: table-row            /* <tr>        */;
+	width : 100%;
+}
+._cell {
+  display: table-cell           /* <td>        */;
+	/*width: 100%;*/
+}
+
 		</style>
 
 
