@@ -135,6 +135,7 @@
 /*  border: 1px solid #555;*/
 		border: 1px solid #000;
 		display:flex;
+    font-size:10pt;
 }
 
 .main{
