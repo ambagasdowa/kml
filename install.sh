@@ -32,10 +32,10 @@ cd $basedir
 pwd
 # change the owner to apache
 # echo myPassword | sudo -S command
-echo "we need the credential for change the owner of tmp dir"
+#echo "we need the credential for change the owner of tmp dir"
 
-sudo chown -R www-data:www-data $basedir"/app/tmp"
-sudo chown -R www-data:www-data $basedir"/app/webroot/files/"
-sudo chmod -R 755 $basedir"/app/tmp"
-sudo chmod -R 755 $basedir"/app/webroot/files/"
+#sudo chown -R www-data:www-data $basedir"/app/tmp"
+#sudo chown -R www-data:www-data $basedir"/app/webroot/files/"
+#sudo chmod -R 755 $basedir"/app/tmp"
+#sudo chmod -R 755 $basedir"/app/webroot/files/"
 echo "done"
