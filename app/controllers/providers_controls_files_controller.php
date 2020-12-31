@@ -230,6 +230,7 @@ class ProvidersControlsFilesController extends AppController {
 		 				    //   echo "<br />";
 		 				    //   echo $cfdiComprobante['TipoDeComprobante'];
 		 				    //   echo "<br />";
+								$response['Fecha'] = $cfdiComprobante['Fecha'];
 								$response['Sello'] = $cfdiComprobante['Sello'];
 								$response['Total'] = $cfdiComprobante['Total'];
 								$response['SubTotal'] = $cfdiComprobante['SubTotal'];
@@ -405,6 +406,7 @@ class ProvidersControlsFilesController extends AppController {
 				$this->LoadModel('ProvidersViewBatchAmount');
 				$this->ProvidersViewBatchAmount->query('SET	ANSI_NULLS	ON;SET	ANSI_WARNINGS	ON;');
 				$amount = current($info['Total']);
+				$fechaFactura = current($info['Fecha']);
 				$BatNbr = $ref_data[1];
 				$CpnyId = $ref_data[2];
 
@@ -429,7 +431,7 @@ class ProvidersControlsFilesController extends AppController {
 				if($this->ApiSatHistoricoLog->save($mss)) {
 						// ....
 				}
-
+// Validation of Quantity
 				if ($is_exceded > 5.70 ) {
 					// code...
 					$message = 'El Monto no Concuerda: Monto Xml ['.number_format($xml_amount, 2, '.', ',').'] , Monto en Sistema ['.number_format($slx_amount, 2, '.', ',').'] '.'Diferencia -> ['.number_format($is_exceded, 2, '.', ',').']';
@@ -444,6 +446,27 @@ class ProvidersControlsFilesController extends AppController {
 															 );
 					return $responseCode;
 				}
+// Validations of current Year
+
+				if (date('Y') >= 2021){
+								if(date("Y", strtotime($fechaFactura)) <= '2020') {
+
+									$message = 'Solo se permite el ingreso de facturas 2021';
+
+									$responseCode = array(
+																					'message'=>'<div class="alert alert-danger alert-dismissible fade in" role="alert">
+																												<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+																												<span aria-hidden="true">&times;</span>
+																												</button>'.$message.'
+																											</div>',
+																					'status'=>false
+																			 );
+									return $responseCode;
+								}  
+				}
+
+
+
 
 				// debug('go out is ok!');
 				// exit();
