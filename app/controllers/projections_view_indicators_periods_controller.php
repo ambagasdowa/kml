@@ -49,7 +49,7 @@ class ProjectionsViewIndicatorsPeriodsController extends AppController {
 // 		$this->ProjectionsViewIndicatorsPeriod->recursive = 0;
 // 		$this->set('projectionsViewIndicatorsPeriods', $this->paginate());
 
-        $cyear = '2020'; //NOTE fix this to be dynamic set as IA
+        $cyear = '2021'; //NOTE fix this to be dynamic set as IA
 
 				// echo "<pre>";
 				// print_r($cyear);
