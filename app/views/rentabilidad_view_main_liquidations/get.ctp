@@ -26,7 +26,7 @@
 				// $requiere = $evaluate ? e($this->element('kml/forms/forms')) : e($this->element('requiere/norequiere') );
 				$requiere = $evaluate ? e($this->element('kml/rentabilidad/rentabilidad')) : e($this->element('requiere/norequiere') );
 				// var_dump($rendViewFullGstCoreIndicators);exit();
-
+				$xds = $tds ;
 		?>
 
 
@@ -63,7 +63,7 @@
 
 				<tr>	
 					<td colspan="<?php echo $tds+4 ?>">
-							<b><?php echo $unidad; ?></b>
+							<b><?php echo $unidad.' '.$tds; ?> </b>
 					</td>
 				</tr>
 
@@ -119,8 +119,8 @@
 							<tr><td colspan="2" class="_cell_header _xls_cell"><?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['KmsCaminoLleno']; ?>&nbsp;</td></tr>
 							<tr><td colspan="2" class="_cell_header _xls_cell"><?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['KmsCamionVacio']; ?>&nbsp;</td></tr>
 							<tr><td colspan="2" class="_cell_header _xls_cell"><?php echo number_format($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['qtyCombustible'] ); ?>&nbsp;</td></tr>
-							<tr><td colspan="2" class="_cell_header _xls_cell"><?php echo number_format($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['rendimiento_reseteo'] ); ?>&nbsp;</td></tr>
-							<tr><td colspan="2" class="_cell_header _xls_cell"><?php echo number_format($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['RendViaje'] ); ?>&nbsp;</td></tr>
+							<tr><td colspan="2" class="_cell_header _xls_cell"><?php echo number_format($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['rendimiento_reseteo'] ,2, '.', ',' ); ?>&nbsp;</td></tr>
+							<tr><td colspan="2" class="_cell_header _xls_cell"><?php echo number_format($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['RendViaje'] ,2, '.', ',' ); ?>&nbsp;</td></tr>
 							<tr><td colspan="2" class="_cell_header _xls_cell">&nbsp;</td></tr>
 							<tr><td colspan="2" class="_cell_header _xls_cell _cell_view"><?php echo number_format($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['IngresoTotalRuta'] ); ?>&nbsp;</td></tr>
 							<tr><td colspan="2" class="_cell_header _xls_cell">&nbsp;</td></tr>
@@ -181,13 +181,14 @@
 							<tr><td colspan="2" class="_cell_header _xls_cell"> <?php echo $sum_data[$unidad]['KmsCaminoLleno'] ?> </td></tr>
 							<tr><td colspan="2" class="_cell_header _xls_cell"> <?php echo $sum_data[$unidad]['KmsCamionVacio'] ?> </td></tr>
 							<tr><td colspan="2" class="_cell_header _xls_cell"> <?php echo number_format ($sum_data[$unidad]['qtyCombustible']) ?> </td></tr>
-							<tr><td colspan="2" class="_cell_header _xls_cell"> <?php echo number_format ($sum_data[$unidad]['rendimiento_reseteo']) ?> </td></tr>
-							<tr><td colspan="2" class="_cell_header _xls_cell"> <?php echo number_format ($sum_data[$unidad]['RendViaje']) ?> </td></tr>
+							<tr><td colspan="2" class="_cell_header _xls_cell"> <?php echo number_format ($sum_data[$unidad]['rendimiento_reseteo']/($xds) ,2,'.',',') ?> </td></tr>
+							<tr><td colspan="2" class="_cell_header _xls_cell"> <?php echo number_format (($sum_data[$unidad]['KmsCaminoLleno'] + $sum_data[$unidad]['KmsCamionVacio'])/$sum_data[$unidad]['qtyCombustible'] ,2,'.',',') ?> </td></tr>
 							<tr><td colspan="2" class="_cell_header _xls_cell">&nbsp;</td></tr>
 							<tr><td colspan="2" class="_cell_header _xls_cell _cell_view"> <?php echo number_format ($sum_data[$unidad]['IngresoTotalRuta']) ?></td></tr>
 							<tr><td colspan="2" class="_cell_header _xls_cell">&nbsp;</td></tr>
 							<tr>
 								<td class="_cell_header _xls_cell">
+
 										<?php echo number_format($sum_data[$unidad]['Combustible']) ?></td>
 								<td class="sum _cell_header _xls_cell">
 										<?php echo number_format( ( ($sum_data[$unidad]['Combustible'] / $sum_data[$unidad]['IngresoTotalRuta']) * 100 )) . ' %'; ?> &nbsp;

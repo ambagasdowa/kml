@@ -37,7 +37,7 @@ class RentabilidadViewMainLiquidationsController extends AppController {
 
 		function get() {
 
-			// Configure::write('debug',0);
+			// Configure::write('debug',2);
 			// App::uses('Xml', 'Lib');
 
 			$posted = json_decode(base64_decode($this->params['named']['data']),true);
@@ -139,13 +139,16 @@ class RentabilidadViewMainLiquidationsController extends AppController {
 
 					$rentabilidadViewMainLiquidation = $this->RentabilidadViewMainLiquidation->find('all',array('conditions'=>$conditionsBl));
 					$rentabilidadViewMainLiquidations = null;
-					debug($conditionsBl);
+//					debug($conditionsBl);
 //					debug($rentabilidadViewMainLiquidations);
 			// NOTE || WARNING
 	//		exit();
 				foreach ($rentabilidadViewMainLiquidation as $main => $liquidation) {
-//					debug($main);
-					//					debug($liquidation);
+
+//					if ($liquidation['RentabilidadViewMainLiquidation']['Unidad'] = 'TT1235') {
+//						debug($liquidation['RentabilidadViewMainLiquidation']['IngresoTotalRuta']);
+//					}
+	//									debug($liquidation);
 					$rentabilidadViewMainLiquidations[ $liquidation['RentabilidadViewMainLiquidation']['Unidad'] ][ $liquidation['RentabilidadViewMainLiquidation']['liquidacion'] ] = $liquidation;
 					
 					$sum_data[ $liquidation['RentabilidadViewMainLiquidation']['Unidad'] ]['viajes'] += $liquidation['RentabilidadViewMainLiquidation']['viajes'];
@@ -153,7 +156,7 @@ class RentabilidadViewMainLiquidationsController extends AppController {
 					$sum_data[ $liquidation['RentabilidadViewMainLiquidation']['Unidad'] ]['KmsCaminoLleno'] += $liquidation['RentabilidadViewMainLiquidation']['KmsCaminoLleno'];
 					$sum_data[ $liquidation['RentabilidadViewMainLiquidation']['Unidad'] ]['KmsCamionVacio'] += $liquidation['RentabilidadViewMainLiquidation']['KmsCamionVacio'];
 
-					$sum_data[ $liquidation['RentabilidadViewMainLiquidation']['Unidad'] ]['IngresoTotalRuta'] += $liquidation['RentabilidadViewMainLiquidation']['IngresoTotalRuta'];
+//					$sum_data[ $liquidation['RentabilidadViewMainLiquidation']['Unidad'] ]['IngresoTotalRuta'][] += $liquidation['RentabilidadViewMainLiquidation']['IngresoTotalRuta'];
 					$sum_data[ $liquidation['RentabilidadViewMainLiquidation']['Unidad'] ]['Combustible'] += $liquidation['RentabilidadViewMainLiquidation']['COMBUSTIBLE'];
 					$sum_data[ $liquidation['RentabilidadViewMainLiquidation']['Unidad'] ]['Casetas'] += $liquidation['RentabilidadViewMainLiquidation']['CASETAS'];
 					$sum_data[ $liquidation['RentabilidadViewMainLiquidation']['Unidad'] ]['ConceptosSueldo'] += $liquidation['RentabilidadViewMainLiquidation']['CONCEPTOS_SUELDO'];
@@ -177,16 +180,16 @@ class RentabilidadViewMainLiquidationsController extends AppController {
 				$tds = max($counting);
 
 				//NOTE from hir work
-					debug($rentabilidadViewMainLiquidations);
-					debug($counting);
-					debug($sum_data);
+//					debug($rentabilidadViewMainLiquidations);
+//					debug($counting);
+//					debug($sum_data['TT1235']);
 				//	debug(max($counting));
 		/*			
 			foreach ($counting as unit => $counts) {
 				
 			}	
 		 */
-
+//exit();
 
 					if (!isset($rentabilidadViewMainLiquidations) || count($rentabilidadViewMainLiquidations) == 0) {
 						$message = '<div class="alert alert-success alert-dismissible fade in" role="alert">

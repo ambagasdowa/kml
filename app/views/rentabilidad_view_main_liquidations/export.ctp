@@ -58,6 +58,9 @@
 											width:90px;
 											
 										}
+										.left{
+											align-items:left;
+										}
                 </style>
 
 
@@ -119,14 +122,13 @@
 									</td>
 							</tr>
 
-							<tr><td colspan="2"><?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['DuracionViaje']; ?>&nbsp;</td></tr> 
-
-							<tr><td colspan="2"><?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['KmsCaminoLleno']; ?>&nbsp;</td></tr>
-							<tr><td colspan="2"><?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['KmsCamionVacio']; ?>&nbsp;</td></tr>
-							<tr><td colspan="2"><?php echo number_format($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['qtyCombustible'] ,2 ,'.' ,',' ); ?>&nbsp;</td></tr>
-							<tr><td colspan="2"><?php echo number_format($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['rendimiento_reseteo'] ,2 ,'.' ,',' ); ?>&nbsp;</td></tr>
-							<tr><td colspan="2"><?php echo number_format($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['RendViaje'] ,2 ,'.' ,',' ); ?>&nbsp;</td></tr>
-							<tr><td colspan="2"><?php echo number_format($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['IngresoTotalRuta'] ,2 ,'.' ,',' ); ?>&nbsp;</td></tr>
+							<tr><td><?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['DuracionViaje']; ?>&nbsp;</td><td>&nbsp;</td></tr> 
+							<tr><td><?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['KmsCaminoLleno']; ?>&nbsp;</td><td>&nbsp;</td></tr>
+							<tr><td><?php echo $rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['KmsCamionVacio']; ?>&nbsp;</td><td>&nbsp;</td></tr>
+							<tr><td><?php echo number_format($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['qtyCombustible'] ,2 ,'.' ,',' ); ?>&nbsp;</td><td>&nbsp;</td></tr>
+							<tr><td><?php echo number_format($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['rendimiento_reseteo'] ,2 ,'.' ,',' ); ?>&nbsp;</td><td>&nbsp;</td></tr>
+							<tr><td><?php echo number_format($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['RendViaje'] ,2 ,'.' ,',' ); ?>&nbsp;</td><td>&nbsp;</td></tr>
+							<tr><td><?php echo number_format($rentabilidadViewMainLiquidation['RentabilidadViewMainLiquidation']['IngresoTotalRuta'] ,2 ,'.' ,',' ); ?>&nbsp;</td><td>&nbsp;</td></tr>
 
 							<tr>
 								<td>
@@ -180,13 +182,13 @@
 							<tr><td colspan="2">&nbsp;</td></tr>
 							<tr><td colspan="2"><?php echo $sum_data[$unidad]['viajes'] ?> </td></tr>
 							<tr><td colspan="2">&nbsp;</td></tr>
-							<tr><td colspan="2"> <?php echo $sum_data[$unidad]['DuracionViaje'] ?>   </td></tr>
-							<tr><td colspan="2"> <?php echo $sum_data[$unidad]['KmsCaminoLleno'] ?> </td></tr>
-							<tr><td colspan="2"> <?php echo $sum_data[$unidad]['KmsCamionVacio'] ?> </td></tr>
-							<tr><td colspan="2"> <?php echo number_format ($sum_data[$unidad]['qtyCombustible'],2,'.',',') ?> </td></tr>
-							<tr><td colspan="2"> <?php echo number_format ($sum_data[$unidad]['rendimiento_reseteo'],2,'.',',') ?> </td></tr>
-							<tr><td colspan="2"> <?php echo number_format ($sum_data[$unidad]['RendViaje'],2,'.',',') ?> </td></tr>
-							<tr><td colspan="2"> <?php echo number_format ($sum_data[$unidad]['IngresoTotalRuta'],2,'.',',') ?></td></tr>
+							<tr><td class="left"> <?php echo $sum_data[$unidad]['DuracionViaje'] ?></td><td>&nbsp;</td></tr>
+							<tr><td class="left"> <?php echo $sum_data[$unidad]['KmsCaminoLleno'] ?></td><td>&nbsp;</td></tr>
+							<tr><td class="left"> <?php echo $sum_data[$unidad]['KmsCamionVacio'] ?></td><td>&nbsp;</td></tr>
+							<tr><td class="left"> <?php echo number_format ($sum_data[$unidad]['qtyCombustible'],2,'.',',') ?> </td><td>&nbsp;</td></tr>
+							<tr><td class="left"> <?php echo number_format ($sum_data[$unidad]['rendimiento_reseteo']/$tds,2,'.',',') ?> </td><td>&nbsp;</td></tr>
+							<tr><td class="left"> <?php echo number_format (($sum_data[$unidad]['KmsCaminoLleno']+$sum_data[$unidad]['KmsCamionVacio'])/$sum_data[$unidad]['qtyCombustible'],2,'.',',') ?> </td><td>&nbsp;</td></tr>
+							<tr><td class="left"> <?php echo number_format ($sum_data[$unidad]['IngresoTotalRuta'],2,'.',',') ?></td><td>&nbsp;</td></tr>
 							<tr>
 								<td>
 										<?php echo number_format($sum_data[$unidad]['Combustible'],2,'.',',') ?></td>
