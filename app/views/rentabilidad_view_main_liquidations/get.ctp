@@ -63,7 +63,7 @@
 
 				<tr>	
 					<td colspan="<?php echo $tds+4 ?>">
-							<b><?php echo $unidad.' '.$tds; ?> </b>
+							<b><?php echo $unidad ?> </b>
 					</td>
 				</tr>
 
@@ -181,7 +181,7 @@
 							<tr><td colspan="2" class="_cell_header _xls_cell"> <?php echo $sum_data[$unidad]['KmsCaminoLleno'] ?> </td></tr>
 							<tr><td colspan="2" class="_cell_header _xls_cell"> <?php echo $sum_data[$unidad]['KmsCamionVacio'] ?> </td></tr>
 							<tr><td colspan="2" class="_cell_header _xls_cell"> <?php echo number_format ($sum_data[$unidad]['qtyCombustible']) ?> </td></tr>
-							<tr><td colspan="2" class="_cell_header _xls_cell"> <?php echo number_format ($sum_data[$unidad]['rendimiento_reseteo']/($xds) ,2,'.',',') ?> </td></tr>
+							<tr><td colspan="2" class="_cell_header _xls_cell"> <?php echo number_format ($sum_data[$unidad]['rendimiento_reseteo']/($counting[$unidad]) ,2,'.',',') ?> </td></tr>
 							<tr><td colspan="2" class="_cell_header _xls_cell"> <?php echo number_format (($sum_data[$unidad]['KmsCaminoLleno'] + $sum_data[$unidad]['KmsCamionVacio'])/$sum_data[$unidad]['qtyCombustible'] ,2,'.',',') ?> </td></tr>
 							<tr><td colspan="2" class="_cell_header _xls_cell">&nbsp;</td></tr>
 							<tr><td colspan="2" class="_cell_header _xls_cell _cell_view"> <?php echo number_format ($sum_data[$unidad]['IngresoTotalRuta']) ?></td></tr>

@@ -186,7 +186,7 @@
 							<tr><td class="left"> <?php echo $sum_data[$unidad]['KmsCaminoLleno'] ?></td><td>&nbsp;</td></tr>
 							<tr><td class="left"> <?php echo $sum_data[$unidad]['KmsCamionVacio'] ?></td><td>&nbsp;</td></tr>
 							<tr><td class="left"> <?php echo number_format ($sum_data[$unidad]['qtyCombustible'],2,'.',',') ?> </td><td>&nbsp;</td></tr>
-							<tr><td class="left"> <?php echo number_format ($sum_data[$unidad]['rendimiento_reseteo']/$tds,2,'.',',') ?> </td><td>&nbsp;</td></tr>
+							<tr><td class="left"> <?php echo number_format ($sum_data[$unidad]['rendimiento_reseteo']/$counting[$unidad],2,'.',',') ?> </td><td>&nbsp;</td></tr>
 							<tr><td class="left"> <?php echo number_format (($sum_data[$unidad]['KmsCaminoLleno']+$sum_data[$unidad]['KmsCamionVacio'])/$sum_data[$unidad]['qtyCombustible'],2,'.',',') ?> </td><td>&nbsp;</td></tr>
 							<tr><td class="left"> <?php echo number_format ($sum_data[$unidad]['IngresoTotalRuta'],2,'.',',') ?></td><td>&nbsp;</td></tr>
 							<tr>
