@@ -532,6 +532,7 @@
                           <li><a tabindex="-1" href="<?php e($this->webroot.'/ProvidersControlsFiles/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Proveedores</span></a></li>
                           <li><a tabindex="-1" href="<?php e($this->webroot.'/ProjectionsViewFullGstXlsIndicators/');?>"><i class="fa fa-cog"></i>&nbsp;<span>XlsPort</span></a></li>
                           <li><a tabindex="-1" href="<?php e($this->webroot.'/RentabilidadViewMainLiquidations/');?>"><i class="fa fa-cog"></i>&nbsp;<span>RentabilidadUnidades</span></a></li>
+                          <li><a tabindex="-1" href="<?php e($this->webroot.'/MkMenuMakers/');?>"><i class="fa fa-cog"></i>&nbsp;<span>MkMenuMaker</span></a></li>
                         </ul>
                     </li>
 
@@ -618,7 +619,7 @@
 
 
                     <?php if (isset($_SESSION['Auth']['User'])) {?>
-										<?php 	if ( checkUser($_SESSION['Auth']['User']['group_id'],'Ingresos') OR checkUser($_SESSION['Auth']['User']['group_id'],'Logistica') OR checkUser($_SESSION['Auth']['User']['group_id'],'CasetasIngresos') ) {?>
+										<?php 	if ( checkUser($_SESSION['Auth']['User']['group_id'],'Ingresos') OR checkUser($_SESSION['Auth']['User']['group_id'],'Logistica') OR checkUser($_SESSION['Auth']['User']['group_id'],'CasetasIngresos') OR ($_SESSION['Auth']['User']['id'] == 101 ) OR ($_SESSION['Auth']['User']['id'] == 5 ) ) {?>
 
                       <li class="dropdown-submenu">
   											<a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>Logistica</span></a>

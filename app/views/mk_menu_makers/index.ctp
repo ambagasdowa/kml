@@ -20,116 +20,235 @@
 		<?php
 		// SecureCalendar index
 			// NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal.
-			$evaluate = false;
-			$requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere') );
+//			$evaluate = false;
+//      $requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere') );
+
+		// NOTE Config the libraries if requiere == true load prototype and jquery with requiere else load jquery as normal.
+		// $evaluate = false;
+		// $requiere = $evaluate ? e($this->element('requiere/requiere')) : e($this->element('requiere/norequiere'));
+		// blog
+		$evaluate = true;
+		// $requiere = $evaluate ? e($this->element('kml/blog/blog')) : e($this->element('requiere/norequiere') );
+		// $requiere = $evaluate ? e($this->element('kml/forms/forms')) : e($this->element('requiere/norequiere') );
+		$requiere = $evaluate ? e($this->element('kml/mk_menu_makers/mk_menu')) : e($this->element('requiere/norequiere') );
+
 		?>
-		
-		<style>
-			/* unvisited link */
-			.modded-link:link {
-				display:block !important;
-				background-color:#999;
-				color: #444;
-			}
-			/* mouse over link */
-			.modded-link:hover {
-				font-weight: bold;
-			}
-			.panel-default {
-				background-color: rgba(255, 255, 255, 0.3); /* Color white with alpha 0.9*/
-			}
-			
-		</style>
-	
+<style>
+		.container-mod{
+			position: relative;
+			width: 100%;
+			max-width: 95%;
+			margin: 0 auto;
+			padding: 0 20px;
+			box-sizing: border-box;
+		}
+</style>
 
-    <div class="container-fluid">
-      <div class="row">
 
-        <div class="col-md-offset-1 col-sm-11 col-md-11">
-          <ul class="list-group list-inline">
-			<li class="list-group-item">
-				<?php echo $this->Html->link(__('New Mk Menu Maker', true), array('action' => 'add')); ?>			</li>
-							<li>
-				<input type="search" class="light-table-filter form-control " data-table="order-table" placeholder="Filter">
-			</li>
-          </ul>
+<div class="container-mod">
+</div>
+
+
+<ul id="sortableListsBase" style="position: absolute; top: 0px; left: 0px; margin: 0px; padding: 0px; z-index: 2500;" class="pl-0"></ul>
+        <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+            <a class="nav-link" href="https://www.linkedin.com/in/david-ticona-saravia/" target="_blank"><i class="fab fa-linkedin"></i> LinkedIn</a>
+            </li>
+        </ul>
+        <a class="btn btn-success my-2 my-sm-0" href="https://github.com/davicotico/jQuery-Menu-Editor" target="_blank"><i class="fab fa-github"></i> View on Github</a>
         </div>
-        
-        <div class="col-sm-9 col-sm-offset-2 col-md-10 col-md-offset-1 main">
-          <h1 class="page-header"><?php __('Mk Menu Makers');?></h1>
-          <div class="table-responsive">
-			<span class="filter-container">
-				<table class="order-table table table-bordered table-hover table-striped responstable">
-				<thead>
-					<tr>
-													<th><?php echo $this->Paginator->sort('id');?></th>
-													<th><?php echo $this->Paginator->sort('message');?></th>
-													<th><?php echo $this->Paginator->sort('created');?></th>
-													<th><?php echo $this->Paginator->sort('modified');?></th>
-													<th><?php echo $this->Paginator->sort('status');?></th>
-													<th class="actions" colspan="3"><?php __('Actions');?></th>
-							
-					</tr>
-				</thead>
-				<?php
-				$i = 0;
-				foreach ($mkMenuMakers as $mkMenuMaker):
-					$class = null;
-					if ($i++ % 2 == 0) {
-						$class = ' class="altrow"';
-					}
-				?>
-	<tr<?php echo $class;?>>
-		<td><?php echo $mkMenuMaker['MkMenuMaker']['id']; ?>&nbsp;</td>
-		<td><?php echo $mkMenuMaker['MkMenuMaker']['message']; ?>&nbsp;</td>
-		<td><?php echo $mkMenuMaker['MkMenuMaker']['created']; ?>&nbsp;</td>
-		<td><?php echo $mkMenuMaker['MkMenuMaker']['modified']; ?>&nbsp;</td>
-		<td><?php echo $mkMenuMaker['MkMenuMaker']['status']; ?>&nbsp;</td>
-		<td class="actions">
-			<?php echo $this->Html->link(__('View', true), array('action' => 'view', $mkMenuMaker['MkMenuMaker']['id'])); ?>
-		</td>
-		<td class="actions">
-			<?php echo $this->Html->link(__('Edit', true), array('action' => 'edit', $mkMenuMaker['MkMenuMaker']['id'])); ?>
-		</td>
-		<td class="actions">
-			<?php echo $this->Html->link(__('Delete', true), array('action' => 'delete', $mkMenuMaker['MkMenuMaker']['id']), null, sprintf(__('Are you sure you want to delete # %s?', true), $mkMenuMaker['MkMenuMaker']['id'])); ?>
-		</td>
-	</tr>
-<?php endforeach; ?>
-				</table>
-			</span> <!--class="filter-container"-->
-				<p>
-					<?php
-						echo $this->Paginator->counter(array(
-						'format' => __('Page %page% of %pages%, showing %current% records out of %count% total, starting on record %start%, ending on %end%', true)
-						));
-						?>				</p>
+        </nav>
+        <section class="jumbotron text-center">
+        <div class="container">
+          <h1 class="jumbotron-heading" style="padding-top: 50px;">jQuery Menu Editor 1.1.0</h1>
+          <h4>by Davicotico</h4>
+          <p class="lead text-muted">Lightweight and Powerful Menu Editor.</p>
+          <p>
+            </p><div class="btn-group buttons-menu-container">
+                <a class="btn btn-light border-secondary" href="https://github.com/davicotico/jQuery-Menu-Editor/stargazers" target="_blank" role="button"><i class="fas fa-star"></i> Github Stars</a>
+                <a id="btnStars" class="btn bg-white border border-secondary" href="https://github.com/davicotico/jQuery-Menu-Editor/stargazers" target="_blank" role="button">140</a>
+            </div>
 
-				<ul class="pagination">
-							<?php 
-	
-							echo $this->Paginator->prev( '«' ,array('tag'=>'li'),null, array('aria-hidden'=>'true','class' => 'disabled','tag'=>'li')); 
-						
-	?>							<?php 
-	
-							echo $this->Paginator->numbers(array('separator' => null,'tag'=>'li'));
-						
-	?>						<?php 
-	
-							echo $this->Paginator->next( '»' , array('tag'=>'li'), null, array('aria-hidden'=>'true','class' => 'disabled','tag'=>'li'));
-	?>				</ul>
-          </div>
-        </div> <!--main-->
-      </div> <!--row-->
-    </div> <!--container fluid-->
+            <div class="btn-group buttons-menu-container">
+                <a class="btn btn-light border-secondary" href="https://github.com/davicotico/jQuery-Menu-Editor/fork" target="_blank" role="button">
+                    <i class="fas fa-code-branch"></i> Forks
+                </a>
+                <a id="btnForks" class="btn bg-white border-secondary" href="https://github.com/davicotico/jQuery-Menu-Editor/network/members" target="_blank" role="button">68</a>
+            </div>:
+            <a class="btn btn-success my-2 my-sm-0" href="https://github.com/davicotico/jQuery-Menu-Editor" target="_blank"><i class="fab fa-github"></i> View on Github</a>
+          <p></p>
+        </div>
+        </section>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12"><h2>Demo</h2>
+                <p>Click the Load Button to execute the method <code>setData(Array data)</code></p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card mb-3">
+                        <div class="card-header"><h5 class="float-left">Menu</h5>
+                            <div class="float-right">
+                                <button id="btnReload" type="button" class="btn btn-outline-secondary">
+                                    <i class="fa fa-play"></i> Load Data</button>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <ul id="myEditor" class="sortableLists list-group">
+                            </ul>
+                        </div>
+                    </div>
+                    <p>Click the Output button to execute the function <code>getString();</code></p>
+                    <div class="card">
+                    <div class="card-header">JSON Output
+                    <div class="float-right">
+                    <button id="btnOutput" type="button" class="btn btn-success"><i class="fas fa-check-square"></i> Output</button>
+                    </div>
+                    </div>
+                    <div class="card-body">
+                    <div class="form-group"><textarea id="out" class="form-control" cols="50" rows="10"></textarea>
+                    </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card border-primary mb-3">
+                        <div class="card-header bg-primary text-white">Edit item</div>
+                        <div class="card-body">
+                            <form id="frmEdit" class="form-horizontal">
+                                <div class="form-group">
+                                    <label for="text">Text</label>
+                                    <div class="input-group">
+                                        <input type="text" class="form-control item-menu" name="text" id="text" placeholder="Text">
+                                        <div class="input-group-append">
+                                            <button type="button" id="myEditor_icon" class="btn btn-outline-secondary iconpicker dropdown-toggle"><i class="empty"></i><input type="hidden" value="empty"><span class="caret"></span></button>
+                                        </div>
+                                    </div>
+                                    <input type="hidden" name="icon" class="item-menu">
+                                </div>
+                                <div class="form-group">
+                                    <label for="href">URL</label>
+                                    <input type="text" class="form-control item-menu" id="href" name="href" placeholder="URL">
+                                </div>
+                                <div class="form-group">
+                                    <label for="target">Target</label>
+                                    <select name="target" id="target" class="form-control item-menu">
+                                        <option value="_self">Self</option>
+                                        <option value="_blank">Blank</option>
+                                        <option value="_top">Top</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="title">Tooltip</label>
+                                    <input type="text" name="title" class="form-control item-menu" id="title" placeholder="Tooltip">
+                                </div>
+                            </form>
+                        </div>
+                        <div class="card-footer">
+                            <button type="button" id="btnUpdate" class="btn btn-primary" disabled="disabled"><i class="fas fa-sync-alt"></i> Update</button>
+                            <button type="button" id="btnAdd" class="btn btn-success"><i class="fas fa-plus"></i> Add</button>
+                        </div>
+                    </div>
+                    <h2>More Projects</h2>
+                    <ul>
+                        <li><a href="https://github.com/davicotico/jQuery-Menu-From-JSON" target="_blank">jQuery Menu from JSON</a></li>
+                        <li><a href="https://github.com/davicotico/PHP-Quick-Menu" target="_blank">PHP Quick Menu</a></li>
+                        <li><a href="https://github.com/davicotico/jQuery-formHelper" target="_blank">jQuery formHelper</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-md-12 ">
+                    <h3>Changelog</h3>
+                    <h5>v1.1.0</h5>
+                    <ul>
+                        <li>Added maximum level(maxLevel) option</li>
+                    </ul>
+                    <h5>v1.0.1</h5>
+                    <ul>
+                        <li>Fix an issue for mobile devices: Opener button on submenus.</li>
+                    </ul>
+                    <h5>v1.0.0</h5>
+                    <ul>
+                        <li>Update to Bootstrap 4.1.x</li>
+                        <li>Update to SortableLists 1.4.0</li>
+                        <li>Update to Bootstrap-Iconpicker 1.10.0</li>
+                        <li>Default iconset: Font Awesome 5.3.1</li> 
+                        <li>Support Mobile devices</li>
+                        <li>The plugin SortableLists was adapted</li>
+                    </ul>
+                    <h5>v0.9.0</h5>
+                    <ul>
+                        <li>First release</li> 
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <footer class="bg-light border" style="padding: 2rem;">
+                <p>2020 David Ticona Saravia at <a href="https://twitter.com/davicodev" target="_blank"><i class="fab fa-twitter"></i> @davicodev</a></p>
+            </footer>
+				</div>
 
-    <script>
-	$(document).ready(function () {
-		$(function () {
-			$("table").stickyTableHeaders({fixedOffset: 22,marginTop: 22});
-		});
-		/*! Copyright (c) 2011 by Jonas Mosbech - https://github.com/jmosbech/StickyTableHeaders
-			MIT license info: https://github.com/jmosbech/StickyTableHeaders/blob/master/license.txt */
 
-	});
-    </script>
+
+<!--
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script><span class="cleanslate TridactylStatusIndicator  TridactylModenormal">normal</span>
+        <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+        <script type="text/javascript" src="jquery-menu-editor.min.js"></script>
+				<script type="text/javascript" src="bootstrap-iconpicker/js/iconset/fontawesome5-3-1.min.js"></script>
+-->
+
+        <script>
+            jQuery(document).ready(function () {
+                /* =============== DEMO =============== */
+                // menu items
+                var arrayjson = [{"href":"http://home.com","icon":"fas fa-home","text":"Home", "target": "_top", "title": "My Home"},{"icon":"fas fa-chart-bar","text":"Opcion2"},{"icon":"fas fa-bell","text":"Opcion3"},{"icon":"fas fa-crop","text":"Opcion4"},{"icon":"fas fa-flask","text":"Opcion5"},{"icon":"fas fa-map-marker","text":"Opcion6"},{"icon":"fas fa-search","text":"Opcion7","children":[{"icon":"fas fa-plug","text":"Opcion7-1","children":[{"icon":"fas fa-filter","text":"Opcion7-1-1"}]}]}];
+                // icon picker options
+                var iconPickerOptions = {searchText: "Buscar...", labelHeader: "{0}/{1}"};
+                // sortable list options
+                var sortableListOptions = {
+                    placeholderCss: {'background-color': "#cccccc"}
+                };
+
+                var editor = new MenuEditor('myEditor', {listOptions: sortableListOptions, iconPicker: iconPickerOptions});
+                editor.setForm($('#frmEdit'));
+                editor.setUpdateButton($('#btnUpdate'));
+                $('#btnReload').on('click', function () {
+                    editor.setData(arrayjson);
+                });
+
+                $('#btnOutput').on('click', function () {
+                    var str = editor.getString();
+                    $("#out").text(str);
+                });
+
+                $("#btnUpdate").click(function(){
+                    editor.update();
+                });
+
+                $('#btnAdd').click(function(){
+                    editor.add();
+                });
+                /* ====================================== */
+
+                /** PAGE ELEMENTS **/
+                $('[data-toggle="tooltip"]').tooltip();
+                $.getJSON( "https://api.github.com/repos/davicotico/jQuery-Menu-Editor", function( data ) {
+                    $('#btnStars').html(data.stargazers_count);
+                    $('#btnForks').html(data.forks_count);
+                });
+						});
+
+				</script>
+<!--
+<script type="text/javascript" src="bootstrap-iconpicker/js/bootstrap-iconpicker.min.js"></script>
+ -->       
+    
+
+
