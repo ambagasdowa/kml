@@ -27,10 +27,10 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 
 	function get() {
 
-		// Configure::write('debug',0);
+		 Configure::write('debug',2);
 
 		$posted = json_decode(base64_decode($this->params['named']['data']),true);
-		// debug($posted);
+	//	 debug($posted);
 		$conditions = array();
 		$add_conditions = array();
 		foreach ($posted as $keys => $postvalue) {
@@ -46,8 +46,14 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 					// 	// code...
 					// }
 
-					$add_conditions[$chars[2]] = $postvalue['value'];
-					$conditions[$chars[2]] = $postvalue['value'];
+
+					if ( $chars[2] == 'id_tipo_operacion' ) {
+						$condition[$chars[2]][] = $postvalue['value'];
+					} else {
+						$add_conditions[$chars[2]] = $postvalue['value'];
+						$conditions[$chars[2]] = $postvalue['value'];
+					}
+
 				}
 				// if(isset($chars[2])) {
 				// 	$conditions[$chars[2]] = $postvalue['value'];
@@ -55,6 +61,16 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 			}
 		}
 
+
+		debug($add_conditions);
+		debug($conditions);
+		debug($condition);
+// NOTE 
+		// Search the highest value
+		if (isset($condition)) {
+			$is_hight = in_array('A',$condition['id_tipo_operacion'],TRUE); 
+			var_dump($is_hight);
+		}
 
 		$this->LoadModel('DisponibilidadViewStatusGstIndicator');
 		$this->LoadModel('DisponibilidadViewRptGroupGstIndicator');
@@ -87,7 +103,9 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 
 		$disponibilidadViewStatusGstIndicators = $this->DisponibilidadViewStatusGstIndicator->find('list',array('fields'=>array('id_status','nombre'),'conditions'=>$conditionsStatus));
 
-				if (!isset($add_conditions['id_area']) && !isset($add_conditions['id_flota'])) {
+		if ( (!isset($add_conditions['id_area']) && !isset($add_conditions['id_flota']) && !isset($condition) ) /*OR (isset($is_hight) && $is_hight == true)*/ )  {
+					
+					debug('inside hight');
 
 							if (isset($units_type)) {
 								$disponibilidadViewRptGroupGstIndicators = $this->DisponibilidadViewRptGroupGstIndicator->find('all',array(
@@ -128,6 +146,19 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 						// code...
 						$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.id_flota'] = $add_conditions['id_flota'];
 						$conditionsTf['DisponibilidadViewRptGroupGstIndicator.id_flota'] = $add_conditions['id_flota'];
+					}
+
+					if (isset($condition['id_tipo_operacion'])) {
+
+// TODO NOTE WARNING Work from hir 
+
+						if (in_array('A',$condition['id_tipo_operacion'],TRUE))	{
+
+						}							
+//NOTE					  when is a letter and can be 3 
+//			firts check the most hightest card and is A or Empty then G and last O
+//      after check if is numeric and omit letters 
+						
 					}
 
 // debug($conditionsBl);
@@ -254,7 +285,8 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 
 
 	function index() {
-		// Configure::write('debug',2);
+		 Configure::write('debug',2);
+		 
 
 		// debug($this->Auth->User());
 		// debug($this->params['url']['units_type']);
@@ -266,15 +298,25 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 
 		$this->LoadModel('ProjectionsViewBussinessUnit');
 		$this->LoadModel('ProjectionsViewFraction');
+		$this->LoadModel('DisponibilidadViewMenuOperation');
 
 		$bssus = $this->ProjectionsViewBussinessUnit->find('list',array('fields'=>array('id','name')));
 		$operacion = $this->ProjectionsViewFraction->find('list',array('fields'=>array('id','desc_producto')));
+		$tipoOp = $this->DisponibilidadViewMenuOperation->find('list'
+																																		,array(
+																																			 'fields'=>array('id_tipo_operacion','tipoOperacion','operation')
+																																			,'order' => array('operation' => 'ASC')
+																																		)
+		);
 
-		// debug($bssus);
+//debug($tipoOp);
+		$addop = array('Operacion'=>array('A'=>'TODO','G'=>'GRANEL','O'=>'OTROS.'));
+  
+		$tipoOperacion = array_merge($addop,$tipoOp);
 		//
-		$this->RendViewFullGstCoreIndicator->recursive = 0;
-		$this->set('rendViewFullGstCoreIndicators', $this->paginate());
-		$this->set(compact('bssus','operacion','units_type'));
+//		$this->RendViewFullGstCoreIndicator->recursive = 0;
+//		$this->set('rendViewFullGstCoreIndicators', $this->paginate());
+		$this->set(compact('bssus','operacion','units_type','tipoOperacion'));
 
 		// $this->DisponibilidadViewRptUnidadesGstIndicator->recursive = 0;
 		// $this->set('disponibilidadViewRptUnidadesstIndicators', $this->paginate());

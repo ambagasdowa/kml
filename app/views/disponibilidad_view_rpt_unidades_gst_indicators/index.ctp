@@ -209,7 +209,7 @@
 																							)
 																			);
 							echo '</div>';
-/*
+
 							echo '<div class="two columns input-group">';
 							echo '<div class="input-group-addon"><i class="fa fa-object-ungroup" aria-hidden="true"></i></div>';
 							echo
@@ -227,28 +227,15 @@
 																								'div'=>FALSE,
 																								'label'=>FALSE,
 																								'multiple'=>'multiple',
-																						//		'style'=>'width:45%',
-																								'options'=> array(
-																												'G'=>'GRANEL'
-																												,'T'=>'TERCEROS'
-																												,'Granel'=>array(
-																																					 1=>'granel'
-																																					,2=>'sacos'
-																																					,3=>'clinker'
-																													)
-																												,'Terceros'=>array(
-																																					 4=>'planas'
-																																					,5=>'enlonadas'
-																																					,6=>'planas'
-																													)
-																								),
-																								'empty' => 'TODO',
-																								// 'options'=> $operacion,
+																						//	'style'=>'width:45%',
+																								//
+																								'options'=>$tipoOperacion,
+																							//	'empty' => 'TODO',
 																								'tabindex'=>'1'
 																							)
 																			);
  						echo '</div>';
- */
+ 
 						?>
 						<!-- <div class="row"> -->
 							<div class="label one columns input-group">
@@ -294,7 +281,7 @@
 	<script type="text/javascript">
 		  $(document).ready(function () {
 
-/*
+
 					var multiSelect = $(".search_udn").select2();
 //					$(".search_udn").select2();
 					//NOTE ADD clearing method 			
@@ -303,7 +290,7 @@
 							evt.preventDefault();
 							multiSelect.val(null).trigger("change");
 					});
-*/
+
 
 					$("#send_query").on('click', function(event) {
 
