@@ -673,7 +673,7 @@ Highcharts.chart('the-chart', {
     text: 'Indicadores de Disponibilidad de Unidades'
   },
 	subtitle: {
-   text: 'Source: GST'
+   text: 'GST'
 	},
   xAxis: {
 		categories: ['Unidades'],
@@ -689,14 +689,39 @@ Highcharts.chart('the-chart', {
     min:0,
     title: {
       text: 'Porcentaje'
-    }
+		},
+		plotLines: [{
+				color: 'red',
+				width: 0.5,
+				value: 90,
+				label: {
+						text: 'Limit',
+						style: {
+								color: 'blue',
+								fontWeight: 'bold'
+						}
+				}
+		}]
   },
   tooltip: {
     pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.percentage:.1f}%</b> ({point.y:,.0f} Unidades)<br/>',
     split: true
-  },
+	},
   plotOptions: {
 		column: {
+      dataLabels: {
+            enabled: true,
+//            rotation: -90,
+            color: '#FFFFFF',
+            align: 'right',
+            format: '{point.percentage:.1f} % ({point.y:,.0f} {series.name})', // one decimal
+						y: 10, // 10 pixels down from the top
+//            shape: 'callout',
+            style: {
+                fontSize: '13px',
+                fontFamily: 'Verdana, sans-serif'
+            }
+      },
 			pointWidth: 50,
 			borderRadius: 5,
       stacking: 'percent',
