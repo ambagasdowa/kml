@@ -551,7 +551,7 @@ $("#print").on('click',function(e){
 				}
 		});
 
-
+/*
 			Highcharts.chart('the-chart', {
 					chart: {
 							type: 'column',
@@ -579,8 +579,19 @@ $("#print").on('click',function(e){
 					subtitle: {
 							// text: 'Click en las columnas para ver el detalle del porcentaje por Unidad.'
 					},
-					xAxis: {
-							type: 'category'
+//					xAxis: {
+//							type: 'category'
+//					},
+				  xAxis: {
+							allowDecimals: false,
+							labels: {
+									formatter: function () {
+											return this.value; // clean, unformatted number for year
+									}
+							},
+							accessibility: {
+									rangeDescription: 'Range: 1940 to 2017.'
+							}
 					},
 					yAxis: {
 							title: {
@@ -590,12 +601,30 @@ $("#print").on('click',function(e){
 					legend: {
 							enabled: false
 					},
+
+
+//				plotOptions: {
+//						series: {
+//								borderWidth: 0,
+//								dataLabels: {
+//										enabled: true,
+//										format: '{point.y}'
+//								}
+//						}
+//				},
+
 					plotOptions: {
-							series: {
-									borderWidth: 0,
-									dataLabels: {
-											enabled: true,
-											format: '{point.y}'
+							area: {
+									pointStart: 1940,
+									marker: {
+											enabled: false,
+											symbol: 'circle',
+											radius: 2,
+											states: {
+													hover: {
+															enabled: true
+													}
+											}
 									}
 							}
 					},
@@ -606,15 +635,92 @@ $("#print").on('click',function(e){
 
 					series: [ <?php print($json_parsing_level_one) ?> ]
 // NOTE PIE CHART
-/*					series: [{
+					series: [{
 							name: 'Unidades',
 							colorByPoint: true,
 							data: [ <?php print($json_parsing_level_one) ?> ]
-					}] */ //,
+					}]  //,
 					// drilldown: {
 					// 		series: [ <?php //print($json_parsing_level_two) ?> ]
 					// }
 			}); // End the chart
+			//NOTE A New Chart Approach 
 			//
+*/
+
+Highcharts.chart('the-chart', {
+
+	credits:{enabled:false},
+  // colors: ['#00649f','#01aac1','#00dbe7','#97ecc5','#1fab89','#62d2a2','#9df3c4','#d7fbe8','#f67280','#c06c84','#6c5b7b','#355c7d','#ffb400','#fffbe0','#2994b2','#474744'], // theme colores
+ 	//colors: ['#058DC7','#3398d6','#6c99bb','#50B432','#b4c973', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263', '#6AF9C4'], // orig
+ //	colors: ['#00649f','#01aac1','#00dbe7','#97ecc5','#1fab89','#62d2a2','#9df3c4','#d7fbe8','#f67280','#c06c84','#6c5b7b','#355c7d','#ffb400','#fffbe0','#2994b2','#474744'], // theme colores
+ 	 colors:['#1a1334','#26294a',' #01545a','#017351','#03c383','#aad962','#fbbf45','#ef6a32','#ed0345','#a12a5e','#710162','#110141'], // darks theme
+ //	 colors:["#bfb7e6", "#7d86c1", "#403874", "#261c4e", "#1f0937", "#574331", "#9d9121", "#a49959", "#b6b37e", "#91a3f5"], //cold_water
+ //	 colors:["#043227", "#097168", "#ffcc88", "#fa482e", "#f4a32e"], // oldPapers
+ 	// theme trover
+ //	 colors:["#51574a", "#447c69", "#74c493", "#8e8c6d", "#e4bf80", "#e9d78e", "#e2975d", "#f19670", "#e16552", "#c94a53", "#be5168", "#a34974", "#993767", "#65387d", "#4e2472", "#9163b6", "#e279a3", "#e0598b", "#7c9fb0", "#5698c4", "#9abf88"],
+
+  chart: {
+				type: 'column',
+        zoomType: 'x',
+        panning: true,
+        panKey: 'shift',
+        scrollablePlotArea: {
+            minWidth: 600
+        }
+  },
+  title: {
+    text: 'Indicadores de Disponibilidad de Unidades'
+  },
+	subtitle: {
+   text: 'Source: GST'
+	},
+  xAxis: {
+		categories: ['Unidades'],
+    tickmarkPlacement: 'on',
+    title: {
+      enabled: false
+    }
+  },
+  yAxis: {
+    labels: {
+      format: '{value}%'
+    },
+    min:0,
+    title: {
+      text: 'Porcentaje'
+    }
+  },
+  tooltip: {
+    pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.percentage:.1f}%</b> ({point.y:,.0f} Unidades)<br/>',
+    split: true
+  },
+  plotOptions: {
+		column: {
+			pointWidth: 50,
+			borderRadius: 5,
+      stacking: 'percent',
+      lineColor: '#ffffff',
+      lineWidth: 1,
+      marker: {
+        lineWidth: 1,
+        lineColor: '#ffffff'
+      },
+      accessibility: {
+        pointDescriptionFormatter: function (point) {
+          function round(x) {
+            return Math.round(x * 100) / 100;
+          }
+          return (point.index + 1) + ', ' + point.category + ', ' +
+            point.y + ' unidades, ' + round(point.percentage) + '%, ' +
+            point.series.name;
+        }
+      }
+    }
+  },
+  series: [ <?php print($json_parsing_level_one) ?> ]
 });
+
+
+}); //NOTE End Of the Document
 </script>
