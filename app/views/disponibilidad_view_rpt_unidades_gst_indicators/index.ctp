@@ -185,7 +185,7 @@
 																						)
 																		);
 							echo '</div>';
-
+/*
 							echo '<div class="two columns input-group">';
 							echo '<div class="input-group-addon"><i class="fa fa-object-ungroup" aria-hidden="true"></i></div>';
 							echo
@@ -209,7 +209,7 @@
 																							)
 																			);
 							echo '</div>';
-
+ */
 							echo '<div class="two columns input-group">';
 							echo '<div class="input-group-addon"><i class="fa fa-object-ungroup" aria-hidden="true"></i></div>';
 							echo
@@ -220,13 +220,13 @@
 																							(
 																								'type'=>'select',
 																								'class'=>'search_udn u-full-width form-control init-focus',
-																								'id'=>'from',
+																								'id'=>'operation',
 																								'placeholder' => 'Operacion',
 																								// 'alt'=>'Puede teclear la fecha en Formato yyyymm',
 									                              // 'title'=>'Puede teclear la fecha en Formato yyyymm',
-																								'div'=>FALSE,
-																								'label'=>FALSE,
-																								'multiple'=>'multiple',
+																								'div'=>false,
+																								'label'=>false,
+																							//	'multiple'=>'multiple',
 																						//	'style'=>'width:45%',
 																								//
 																								'options'=>$tipoOperacion,
@@ -237,17 +237,6 @@
  						echo '</div>';
  
 						?>
-						<!-- <div class="row"> -->
-							<div class="label one columns input-group">
-								<?php
-											echo
-													$this->Html->link(
-																							__('Clear', true),
-																							array('action' => 'get', null),
-																							array('id'=>'clear','div'=>false,'class'=>'btn btn-primary btn-sm pull-right','tabindex'=>'6')
-																						);
-								?>
-							</div>
 
 						<!-- <div class="row"> -->
 							<div class="label one columns input-group">
@@ -282,20 +271,110 @@
 		  $(document).ready(function () {
 
 
-					var multiSelect = $(".search_udn").select2();
-//					$(".search_udn").select2();
+//		var multiSelect = $(".search_udn").select2();
+		
+				$(".search_udn").select2();			
+			
+
+/*				function formatState (state) {
+					if (!state.id) {
+						console.log('state.text initialize ...')
+						console.log(state.text)
+						return state.text;
+					}
+					var baseUrl = "/user/pages/images/flags";
+					var $state = $(
+						'<span><img class="img-flag" /> <span></span></span>'
+					);
+
+				function set_all () {
+						var ms = $("#operation").select2();
+						ms.val(null).trigger("change");
+						ms.val('A'); // Select the option with a value of '1'
+						ms.trigger('change'); // Notify any JS components that the value changed
+				}
+				
+				function search_all () {
+//					var find_all = $("#operation").find(':selected');
+					console.log( $("#operation").find(':selected').val() )
+					console.log( $("#operation option[value='A']").attr('selected',true) )
+//					console.log(find_all)
+				}
+
+					// Use .text() instead of HTML string concatenation to avoid script injection issues
+					console.log('Who is $state ?')
+					console.log($state)
+					console.log('... and state.element ? ')
+					console.log(state.element.value.toLowerCase()) // NOTE in value : element from options in select ex: G:GRANEL then to lowercase
+*/
+
+/*
+					if (typeof state.element.value != 'number') {
+
+										var alpha = state.element.value.toLowerCase();
+										// NOTE check if the user as already select the ALL option
+										if( alpha == 'a') {
+											console.log('The user check all option then must clear the resti and set only All')
+											set_all();
+
+										} else {
+									// NOTE after all check if all exits. 
+											console.log('is not all ...')
+											search_all();
+											// FIRST check if All exists 
+											if ( alpha == 'a' ) {
+												
+											}
+									
+											if ( alpha == 'g' ) {
+													// NOTE search if exists the other granel and All options
+											}
+											
+										} // NOTE end else ...
+          }
+
+					$state.find("span").text(state.text);
+					$state.find("img").attr("src", baseUrl + "/" + state.element.value.toLowerCase() + ".png");
+
+					console.log('find ... ?')
+					console.log($state)
+
+					return $state;
+				};
+
+				var operations = $("#operation").select2({
+	//				  templateSelection: formatState
+				});
+*/
+
+//console.log(operations);
+
 					//NOTE ADD clearing method 			
+/*
 					$("#clear").on("click", function (evt) {
 							evt.stopPropagation();
 							evt.preventDefault();
 							multiSelect.val(null).trigger("change");
 					});
+*/
+
+
+//					console.log(multiSelect);
+
 
 
 					$("#send_query").on('click', function(event) {
 
 								event.stopPropagation();
 								event.preventDefault();
+
+// First than nothing check if the option all exists
+//
+/*								var is_all = $("#operation").select2();
+								if () {
+										
+								}								
+*/
 
 								var data_code = $(this).attr('id');
 								var serial = JSON.stringify($("#pform").serializeArray());

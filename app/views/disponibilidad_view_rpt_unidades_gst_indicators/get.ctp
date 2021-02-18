@@ -552,10 +552,9 @@ $("#print").on('click',function(e){
 		});
 
 
-		//
 			Highcharts.chart('the-chart', {
 					chart: {
-							type: 'pie',
+							type: 'column',
 							// type: 'column',
 							backgroundColor: {
 							            linearGradient: [0, 0, 500, 500],
@@ -604,11 +603,14 @@ $("#print").on('click',function(e){
 							headerFormat: '<span style="font-size:11px">{series.name}</span><br>',
 							pointFormat: '<span style="color:{point.color}">{point.name}</span>: <b>{point.y}</b> Unidades <br/>'
 					},
-					series: [{
+
+					series: [ <?php print($json_parsing_level_one) ?> ]
+// NOTE PIE CHART
+/*					series: [{
 							name: 'Unidades',
 							colorByPoint: true,
 							data: [ <?php print($json_parsing_level_one) ?> ]
-					}] //,
+					}] */ //,
 					// drilldown: {
 					// 		series: [ <?php //print($json_parsing_level_two) ?> ]
 					// }

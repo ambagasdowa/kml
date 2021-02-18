@@ -27,7 +27,7 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 
 	function get() {
 
-		 Configure::write('debug',2);
+		 Configure::write('debug',0);
 
 		$posted = json_decode(base64_decode($this->params['named']['data']),true);
 	//	 debug($posted);
@@ -61,15 +61,16 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 			}
 		}
 
-
+/*
 		debug($add_conditions);
 		debug($conditions);
 		debug($condition);
+*/
 // NOTE 
 		// Search the highest value
 		if (isset($condition)) {
 			$is_hight = in_array('A',$condition['id_tipo_operacion'],TRUE); 
-			var_dump($is_hight);
+	//		var_dump($is_hight);
 		}
 
 		$this->LoadModel('DisponibilidadViewStatusGstIndicator');
@@ -142,27 +143,42 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 						$conditionsTf['DisponibilidadViewRptGroupGstIndicator.id_area'] = $add_conditions['id_area'];
 					}
 
-					if (isset($add_conditions['id_flota'])) {
+//					if (isset($add_conditions['id_flota'])) {
 						// code...
-						$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.id_flota'] = $add_conditions['id_flota'];
-						$conditionsTf['DisponibilidadViewRptGroupGstIndicator.id_flota'] = $add_conditions['id_flota'];
-					}
+//						$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.id_flota'] = $add_conditions['id_flota'];
+//						$conditionsTf['DisponibilidadViewRptGroupGstIndicator.id_flota'] = $add_conditions['id_flota'];
+//					}
 
 					if (isset($condition['id_tipo_operacion'])) {
 
-// TODO NOTE WARNING Work from hir 
-
-						if (in_array('A',$condition['id_tipo_operacion'],TRUE))	{
-
-						}							
+						// TODO NOTE WARNING Work from hir 
+								if (in_array('A',$condition['id_tipo_operacion'],TRUE)) {
+										debug('IN ALL');
+								} else {
+									if (in_array('G',$condition['id_tipo_operacion'],TRUE) OR in_array('O',$condition['id_tipo_operacion'],TRUE)) {
+										if (in_array('G',$condition['id_tipo_operacion'],TRUE))	{
+											debug('Granell');
+											$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.id_flota'] = 1;
+											$conditionsTf['DisponibilidadViewRptGroupGstIndicator.id_flota'] = 1;
+										}							
+										if (in_array('O',$condition['id_tipo_operacion'],TRUE))	{
+											debug('Otherss');
+											$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.id_flota'] = 2;
+											$conditionsTf['DisponibilidadViewRptGroupGstIndicator.id_flota'] = 2;
+										}
+									} else {
+										debug($condition['id_tipo_operacion']);
+											$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.id_tipo_operacion'] = $condition['id_tipo_operacion'];
+											$conditionsTf['DisponibilidadViewRptGroupGstIndicator.id_tipo_operacion'] = $condition['id_tipo_operacion'];   												
+									}
+								}
 //NOTE					  when is a letter and can be 3 
 //			firts check the most hightest card and is A or Empty then G and last O
 //      after check if is numeric and omit letters 
-						
 					}
 
-// debug($conditionsBl);
-// debug($conditionsTf);
+ //debug($conditionsBl);
+ //debug($conditionsTf);
 
 						$disponibilidadViewRptUnidadesGstIndicators = $this->DisponibilidadViewRptUnidadesGstIndicator->find('all',array('conditions'=>$conditionsBl));
 
@@ -178,6 +194,9 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 									));
 				}
 
+//debug($disponibilidadViewRptGroupGstIndicators);
+
+
 				foreach ($disponibilidadViewRptGroupGstIndicators as $key => $value) {
 					$disponibilidadViewRptGroupGstIndicators[$key]['DisponibilidadViewRptGroupGstIndicator']['unidades'] = $value[0]['unidades'];
 				}
@@ -187,8 +206,8 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 		$disp_grp = $disponibilidadViewRptGroupGstIndicators ;
 		foreach ($disp_grp as $key => $data) {
 			// code...
-			// debug($data);
-					$json_parsing_lv_one .= json_encode(
+			//NOTE data for PIE;
+/*					$json_parsing_lv_one .= json_encode(
 																		array(
 																						 'name'=>$data['DisponibilidadViewRptGroupGstIndicator']['estatus']
 																						,'y'=>round($data['DisponibilidadViewRptGroupGstIndicator']['unidades'],2)
@@ -196,12 +215,26 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 																						,'drilldown'=>null
 																				 )
 																						, JSON_PRETTY_PRINT
+						);
+ */
+// NOTE data for columns 
+					$json_parsing_lv_one .= json_encode(
+																		array(
+																						 'name'=>$data['DisponibilidadViewRptGroupGstIndicator']['estatus']
+																						,'data'=>'['.round($data['DisponibilidadViewRptGroupGstIndicator']['unidades'],2).']'
+																				 )
+																						, JSON_PRETTY_PRINT
 											);
+
 
 		}
 
-		$json_parsing_level_one = implode('},{',explode('}{',$json_parsing_lv_one));
 
+//		debug(str_replace ('"[','[', str_replace(']"',']',$json_parsing_lv_one) ) );
+
+		$json_parsing_level_one = implode('},{',explode('}{', str_replace ('"[','[', str_replace(']"',']',$json_parsing_lv_one) ) ));
+   
+//		debug($json_parsing_level_one);
 
 		// 	$json_parsing_level_two[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']][] = json_encode(
 		// 																				array(
