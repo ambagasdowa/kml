@@ -405,7 +405,7 @@
 									var table_b = $('#table_det').DataTable(
 										Object.assign( {}
 											, options_module
-											// ,calculate_row[0])
+//											,calculate_row([13])
 										)
 									 );
 

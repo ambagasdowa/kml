@@ -211,10 +211,13 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 
 
 // NOTE The graphics section
+					//			NOTE add condition for not nulls tuples :: This Become a Global Parameter
+					$conditionsTf['DisponibilidadViewRptGroupGstIndicator.group_name !='] = null ;
+
+
 								$disponibilidadViewRptGraphGstIndicators = $this->DisponibilidadViewRptGroupGstIndicator->find('all',array(
 													 'fields' => array(
 																						 'sum(unidades) as [unidades]'
-																				//		,'id_status'
 																						,'group_name'
 																					)
 													 ,'group' => array('group_name')
@@ -229,21 +232,23 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 											 'conditions'=>$conditionsTf
 											,'fields'=>array(
 																				'sum(unidades) as [unidades]'
-																			 ,'id_status'
-																			 ,'estatus'
+//																			 ,'id_status'
+																			 ,'clasification_name'
 																		 )
-											,'group'=>array('id_status','estatus')
+											,'group'=>array('clasification_name')
 									));
 
 //NOTE 2nd Table Section
 						$disponibilidadViewRptUnidadesGstIndicators = $this->DisponibilidadViewRptUnidadesGstIndicator->find('all',array('conditions'=>$conditionsBl));
 				}
 
+				debug($conditionsTf);
+				debug($conditionsBl);
 
 //debug( $disponibilidadViewRptGraphGstIndicators );
 //debug($disponibilidadViewRptGroupGstIndicators);
 
-				foreach ($disponibilidadViewRptGroupGstIndicators as $key => $value) {
+		    foreach ($disponibilidadViewRptGroupGstIndicators as $key => $value) {
 					$disponibilidadViewRptGroupGstIndicators[$key]['DisponibilidadViewRptGroupGstIndicator']['unidades'] = $value[0]['unidades'];
 				}
 

@@ -164,7 +164,7 @@ echo
 					<!-- <td><?php echo $disponibilidadViewRptGroupGstIndicator['DisponibilidadViewRptGroupGstIndicator']['id']; ?></td> -->
 					<td><?php echo $disponibilidadViewRptGroupGstIndicator['DisponibilidadViewRptGroupGstIndicator']['unidades']; ?></td>
 					<!-- <td><?php echo $disponibilidadViewRptGroupGstIndicator['DisponibilidadViewRptGroupGstIndicator']['id_status']; ?></td> -->
-					<td><?php echo $disponibilidadViewRptGroupGstIndicator['DisponibilidadViewRptGroupGstIndicator']['estatus']; ?></td>
+					<td><?php echo $disponibilidadViewRptGroupGstIndicator['DisponibilidadViewRptGroupGstIndicator']['clasification_name']; ?></td>
 					<!-- <td><?php echo $disponibilidadViewRptGroupGstIndicator['DisponibilidadViewRptGroupGstIndicator']['id_area']; ?></td> -->
 					<!-- <td><?php echo $disponibilidadViewRptGroupGstIndicator['DisponibilidadViewRptGroupGstIndicator']['area']; ?></td> -->
 				</tr>
@@ -184,6 +184,8 @@ echo
 				<th><?php echo 'Unidad';?></th>
 				<th><?php echo 'Estatus';?></th>
 		    <th class="xts">Status</th>
+		    <th class="xts">Clasification</th>
+		    <th class="xts">Group</th>
 				<!-- <th><?php echo 'Tipo_status';?></th> -->
 				<th><?php echo 'Operador';?></th>
 				<th><?php echo 'Remolque';?></th>
@@ -199,6 +201,7 @@ echo
 				<!-- <th><?php echo 'Status_taller';?></th> -->
 				<!-- <th><?php echo 'Desc_taller';?></th> -->
 				<!-- <th><?php echo 'Iseditable';?></th> -->
+				<th class="xts">Count</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -258,7 +261,11 @@ echo
 								// echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['tipo_status'];
 					?>
 			</td>
+
 			<td class="xts"><?php	echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['estatus']; ?></td>
+			<td class="xts"><?php	echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['clasification_name']; ?></td>
+			<td class="xts"><?php	echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['group_name']; ?></td>
+
 			<td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['operador']; ?></td>
 			<td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['remolque']; ?></td>
 			<!-- <td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['area']; ?>&nbsp;</td> -->
@@ -331,17 +338,19 @@ echo
 			<td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['area_taller']; ?></td>
 			<td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['id_orden']; ?></td>
 			<td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['fecha_prometida']; ?></td>
+			<th class="xts">1</th>
 		</tr>
 	<?php } //endforeach; ?>
 		</tbody>
-		<!-- <tfoot>
-	            <tr>
-	                <th colspan="11" style="text-align:right">Total:</th>
-	                <th></th>
-	                <th></th>
-	                <th></th>
+<!--		<tfoot>
+							<tr>
+									<th colspan="2"></th>
+									<th colspan="3" class="xts">&nbsp;</th>
+									<th colspan="7" style="text-align:right">Total Unidades:</th>
+									<th id="sum_result"></th>
+									<th class="xtss"></th>
 	            </tr>
-	  </tfoot> -->
+	  </tfoot>-->
 		</table>
 </div>
 
