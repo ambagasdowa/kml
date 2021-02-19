@@ -108,7 +108,21 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 					
 					debug('inside hight');
 
-							if (isset($units_type)) {
+					if (isset($units_type)) {
+
+// NOTE The graphics section
+								$disponibilidadViewRptGraphGstIndicators = $this->DisponibilidadViewRptGroupGstIndicator->find('all',array(
+													 'fields' => array(
+																						 'sum(unidades) as [unidades]'
+																				//		,'id_status'
+																						,'group_name'
+																					)
+													 ,'group' => array('group_name')
+													 ,'conditions' => $conditionsTf
+																 )
+								);
+//								debug($disponibilidadViewRptGraphGstIndicators);
+//NOTE 1st Table Section						
 								$disponibilidadViewRptGroupGstIndicators = $this->DisponibilidadViewRptGroupGstIndicator->find('all',array(
 													 'fields' => array(
 																						 'sum(unidades) as [unidades]'
@@ -120,9 +134,23 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 																 )
 
 								);
+// NOTE 2nd Table section
 								$disponibilidadViewRptUnidadesGstIndicators = $this->DisponibilidadViewRptUnidadesGstIndicator->find('all',array('conditions'=>$conditionsBl));
 
-							} else {
+					} else {
+
+// NOTE The graphics section
+								$disponibilidadViewRptGraphGstIndicators = $this->DisponibilidadViewRptGroupGstIndicator->find('all',array(
+													 'fields' => array(
+																						 'sum(unidades) as [unidades]'
+																				//		,'id_status'
+																						,'group_name'
+																					)
+													 ,'group' => array('group_name')
+													 )
+
+								);
+
 							$disponibilidadViewRptGroupGstIndicators = $this->DisponibilidadViewRptGroupGstIndicator->find('all',array(
 																 'fields'=>array(
 																									 'sum(unidades) as [unidades]'
@@ -180,8 +208,22 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
  //debug($conditionsBl);
  //debug($conditionsTf);
 
-						$disponibilidadViewRptUnidadesGstIndicators = $this->DisponibilidadViewRptUnidadesGstIndicator->find('all',array('conditions'=>$conditionsBl));
 
+
+// NOTE The graphics section
+								$disponibilidadViewRptGraphGstIndicators = $this->DisponibilidadViewRptGroupGstIndicator->find('all',array(
+													 'fields' => array(
+																						 'sum(unidades) as [unidades]'
+																				//		,'id_status'
+																						,'group_name'
+																					)
+													 ,'group' => array('group_name')
+													 ,'conditions' => $conditionsTf
+													 ,'order' => 'group_name DESC'
+																 )
+								);
+
+//NOTE 1st Table Section
 						$disponibilidadViewRptGroupGstIndicators = $this->DisponibilidadViewRptGroupGstIndicator->find('all'
 									,array(
 											 'conditions'=>$conditionsTf
@@ -192,18 +234,27 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 																		 )
 											,'group'=>array('id_status','estatus')
 									));
+
+//NOTE 2nd Table Section
+						$disponibilidadViewRptUnidadesGstIndicators = $this->DisponibilidadViewRptUnidadesGstIndicator->find('all',array('conditions'=>$conditionsBl));
 				}
 
-//debug($disponibilidadViewRptGroupGstIndicators);
 
+//debug( $disponibilidadViewRptGraphGstIndicators );
+//debug($disponibilidadViewRptGroupGstIndicators);
 
 				foreach ($disponibilidadViewRptGroupGstIndicators as $key => $value) {
 					$disponibilidadViewRptGroupGstIndicators[$key]['DisponibilidadViewRptGroupGstIndicator']['unidades'] = $value[0]['unidades'];
 				}
 
+				foreach (	$disponibilidadViewRptGraphGstIndicators  as $key => $value) {
+					$disponibilidadViewRptGraphGstIndicators[$key]['DisponibilidadViewRptGroupGstIndicator']['unidades'] = $value[0]['unidades'];
+				}
+
+
 		$json_parsing_lv_one = null;
 
-		$disp_grp = $disponibilidadViewRptGroupGstIndicators ;
+		$disp_grp = $disponibilidadViewRptGraphGstIndicators ;
 		foreach ($disp_grp as $key => $data) {
 			// code...
 			//NOTE data for PIE;
@@ -220,7 +271,7 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 // NOTE data for columns 
 					$json_parsing_lv_one .= json_encode(
 																		array(
-																						 'name'=>$data['DisponibilidadViewRptGroupGstIndicator']['estatus']
+																						 'name'=>$data['DisponibilidadViewRptGroupGstIndicator']['group_name']
 																						,'data'=>'['.round($data['DisponibilidadViewRptGroupGstIndicator']['unidades'],2).']'
 																				 )
 																						, JSON_PRETTY_PRINT
@@ -234,7 +285,7 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 
 		$json_parsing_level_one = implode('},{',explode('}{', str_replace ('"[','[', str_replace(']"',']',$json_parsing_lv_one) ) ));
    
-//		debug($json_parsing_level_one);
+		debug($json_parsing_level_one);
 
 		// 	$json_parsing_level_two[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']][] = json_encode(
 		// 																				array(
