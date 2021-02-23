@@ -374,7 +374,7 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 
 
 	function index() {
-		 Configure::write('debug',2);
+		 Configure::write('debug',0);
 		 
 
 		// debug($this->Auth->User());
@@ -402,14 +402,140 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 		$addop = array('Operacion'=>array('A'=>'TODO','G'=>'GRANEL','O'=>'OTROS.'));
   
 		$tipoOperacion = array_merge($addop,$tipoOp);
-		//
-//		$this->RendViewFullGstCoreIndicator->recursive = 0;
-//		$this->set('rendViewFullGstCoreIndicators', $this->paginate());
-		$this->set(compact('bssus','operacion','units_type','tipoOperacion'));
 
-		// $this->DisponibilidadViewRptUnidadesGstIndicator->recursive = 0;
-		// $this->set('disponibilidadViewRptUnidadesstIndicators', $this->paginate());
-	}
+// NOTE start the view main
+
+
+
+//////////////////////////////////////////////////// NOTE START CODE  ////////////////////////////////////////////
+		// Search the highest value
+		$units_type = $_SESSION['Auth']['User']['units_type'];
+		$this->LoadModel('DisponibilidadViewStatusGstIndicator');
+		$this->LoadModel('DisponibilidadViewRptGroupGstIndicator');
+		$this->LoadModel('DisponibilidadViewAreaUnit');
+
+// NOTE Work from hir
+		$units_type = $_SESSION['Auth']['User']['units_type'];
+
+		$units_id = array(
+				 1=>array(1,13)			//Tractocamiones
+				,2=>array(2,3,5,6,7,8,9)				//remolques
+				,3=>array(1,2,3,4,5,6,7,8,9,13)		//ALL
+				,4=>array(4)											//only dollys
+		);
+
+
+		if (isset($units_type)) {
+			$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.units_type'] = $units_id[$units_type];
+			$conditionsTf['DisponibilidadViewRptGroupGstIndicator.units_type'] = $units_id[$units_type];
+			$conditionsAr['DisponibilidadViewAreaUnit.units_type'] = $units_id[$units_type];
+
+		}
+
+		$conditionsStatus['DisponibilidadViewStatusGstIndicator.id_status'] = array(4,6,8,15,14,18,11);
+
+		$disponibilidadViewStatusGstIndicators = $this->DisponibilidadViewStatusGstIndicator->find('list',array('fields'=>array('id_status','nombre'),'conditions'=>$conditionsStatus));
+
+// NOTE The graphics section
+					//			NOTE add condition for not nulls tuples :: This Become a Global Parameter
+					$conditionsTf['DisponibilidadViewRptGroupGstIndicator.group_name !='] = null ;
+
+								$disponibilidadViewRptGraphGstIndicators = $this->DisponibilidadViewRptGroupGstIndicator->find('all',array(
+													 'fields' => array(
+																						 'sum(unidades) as [unidades]'
+																						,'group_name'
+																					)
+													 ,'group' => array('group_name')
+													 ,'conditions' => $conditionsTf
+													 ,'order' => 'group_name DESC'
+																 )
+								);
+
+//NOTE 1st Table Section
+						$disponibilidadViewRptGroupGstIndicators = $this->DisponibilidadViewRptGroupGstIndicator->find('all'
+									,array(
+											 'conditions'=>$conditionsTf
+											,'fields'=>array(
+																				'sum(unidades) as [unidades]'
+																			 ,'clasification_name'
+																		 )
+											,'group'=>array('clasification_name')
+									));
+
+//debug($conditionsAr);
+
+		$disponibilidadViewAreaUnits = $this->DisponibilidadViewAreaUnit->find('all'
+									,array(
+//											'conditions'=>$conditionsAr
+											'fields'=>array(
+																					 'sum(unidades) as [unidades]'
+																					,'label'
+																					,'id_area'
+																					,'group_name'											
+												)
+											,'group'=>array('group_name','label','id_area')																	
+											,'order'=>'id_area'														
+									)
+ 		);
+
+
+//debug($conditionsTf);
+//debug($conditionsBl);
+//debug( $disponibilidadViewRptGraphGstIndicators );
+debug($disponibilidadViewAreaUnits);
+
+
+		    foreach ($disponibilidadViewRptGroupGstIndicators as $key => $value) {
+					$disponibilidadViewRptGroupGstIndicators[$key]['DisponibilidadViewRptGroupGstIndicator']['unidades'] = $value[0]['unidades'];
+				}
+
+				foreach (	$disponibilidadViewRptGraphGstIndicators  as $key => $value) {
+					$disponibilidadViewRptGraphGstIndicators[$key]['DisponibilidadViewRptGroupGstIndicator']['unidades'] = $value[0]['unidades'];
+				}
+
+//				foreach (	$disponibilidadViewAreaUnits  as $key => $value) {
+//					$disponibilidadViewRptGraphGstIndicators[$key]['DisponibilidadViewAreaUnits']['unidades'] = $value[0]['unidades'];
+//				}
+
+
+				$json_parsing_lv_one = null;
+
+
+				foreach ($disponibilidadViewAreaUnits as $key => $data_value) {
+				//				debug($key);
+				//				debug($datavalue);
+							 $dispArea[$data_value['DisponibilidadViewAreaUnit']['group_name']][$data_value['DisponibilidadViewAreaUnit']['label']] = $data_value[0]['unidades']?$data_value[0]['unidades']:0;	
+				}
+	
+			krsort($dispArea);
+			debug($dispArea);
+
+		foreach ($dispArea as $key => $data) {
+			// NOTE data for columns 
+			//
+					$json_parsing_lv_one .= json_encode(
+																		array(
+																						 'name'=>$key
+																						,'data'=>'['.implode(',',$data).']'
+																				 )
+																						, JSON_PRETTY_PRINT
+											);
+		}
+
+		$json_parsing_level_index = implode('},{',explode('}{', str_replace ('"[','[', str_replace(']"',']',$json_parsing_lv_one) ) ));
+		debug($json_parsing_level_index);
+ 
+//		debug(	$disponibilidadViewAreaUnits );
+
+
+	debug("'".implode("','",$bssus)."'");
+//////////////////////////////////////////////// NOTE END CODE /////////////////////////////////////////////////
+
+
+// NOTE add the new vars
+		$this->set(compact('bssus','operacion','units_type','tipoOperacion','disponibilidadViewRptGroupGstIndicators','json_parsing_level_index'));
+// NOTE End the main 
+	} // NOTE End index
 
 
 

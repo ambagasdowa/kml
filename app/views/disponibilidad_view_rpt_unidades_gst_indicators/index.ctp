@@ -260,15 +260,121 @@
 				</div>
 
 				<div id="printThis" class="container-mod ninja-scroll">
-					<div id="updateSearchResult" class="updateSearchResult"></div>
+					<div id="updateSearchResult" class="updateSearchResult">
+
+							<div class="row">
+							 <div class="twelve columns">
+								 <div id="chart" class="chart" >
+											 <div id="index_chart" style="min-width:80%; min-height: 480px; margin: 0 auto">
+												 <!-- graphics -->
+											 </div>
+								 </div>
+							 </div>
+
+					</div>
 				</div>
 
 				<div id="breakspace" class="">
 					&nbsp;
 				</div>
 
+
+
 	<script type="text/javascript">
 		  $(document).ready(function () {
+
+
+Highcharts.chart('index_chart', {
+
+	credits:{enabled:false},
+ 	 colors:['#1a1334','#26294a',' #01545a','#017351','#03c383','#aad962','#fbbf45','#ef6a32','#ed0345','#a12a5e','#710162','#110141'], // darks theme
+
+  chart: {
+				type: 'column',
+        zoomType: 'x',
+        panning: true,
+        panKey: 'shift',
+        scrollablePlotArea: {
+            minWidth: 600
+        }
+  },
+  title: {
+    text: 'Indicadores de Disponibilidad de Unidades'
+  },
+	subtitle: {
+   text: 'GST'
+	},
+  xAxis: {
+	categories: [<?php print("'".implode("','",$bssus)."'") ?>],
+    tickmarkPlacement: 'on',
+    title: {
+      enabled: false
+    }
+  },
+  yAxis: {
+    labels: {
+      format: '{value}%'
+    },
+    min:0,
+    title: {
+      text: 'Porcentaje'
+		},
+		plotLines: [{
+				color: 'red',
+				width: 0.5,
+				value: 90,
+				label: {
+						text: 'Limit',
+						style: {
+								color: 'blue',
+								fontWeight: 'bold'
+						}
+				}
+		}]
+  },
+  tooltip: {
+    pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.percentage:.1f}%</b> ({point.y:,.0f} Unidades)<br/>',
+    split: true
+	},
+  plotOptions: {
+		column: {
+      dataLabels: {
+            enabled: true,
+//            rotation: -90,
+            color: '#FFFFFF',
+            align: 'right',
+            format: '{point.percentage:.1f} % ({point.y:,.0f} {series.name})', // one decimal
+						y: 10, // 10 pixels down from the top
+//            shape: 'callout',
+            style: {
+                fontSize: '13px',
+                fontFamily: 'Verdana, sans-serif'
+            }
+      },
+			pointWidth: 50,
+			borderRadius: 5,
+      stacking: 'percent',
+      lineColor: '#ffffff',
+      lineWidth: 1,
+      marker: {
+        lineWidth: 1,
+        lineColor: '#ffffff'
+      },
+      accessibility: {
+        pointDescriptionFormatter: function (point) {
+          function round(x) {
+            return Math.round(x * 100) / 100;
+          }
+          return (point.index + 1) + ', ' + point.category + ', ' +
+            point.y + ' unidades, ' + round(point.percentage) + '%, ' +
+            point.series.name;
+        }
+      }
+    }
+  },
+  series: [ <?php print($json_parsing_level_index) ?> ]
+});
+
 
 
 //		var multiSelect = $(".search_udn").select2();
