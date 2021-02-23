@@ -283,7 +283,7 @@
 	<script type="text/javascript">
 		  $(document).ready(function () {
 
-
+/*
 Highcharts.chart('index_chart', {
 
 	credits:{enabled:false},
@@ -375,7 +375,7 @@ Highcharts.chart('index_chart', {
   series: [ <?php print($json_parsing_level_index) ?> ]
 });
 
-
+*/
 
 //		var multiSelect = $(".search_udn").select2();
 		
