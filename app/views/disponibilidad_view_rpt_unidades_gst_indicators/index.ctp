@@ -25,7 +25,7 @@
 		$evaluate = true;
 		// $requiere = $evaluate ? e($this->element('kml/blog/blog')) : e($this->element('requiere/norequiere') );
 		// $requiere = $evaluate ? e($this->element('kml/forms/forms')) : e($this->element('requiere/norequiere') );
-		$requiere = $evaluate ? e($this->element('kml/rentabilidad/rentabilidad')) : e($this->element('requiere/norequiere') );
+		$requiere = $evaluate ? e($this->element('kml/Disponibilidad/disponibilidad')) : e($this->element('requiere/norequiere') );
 		?>
 
 		<!-- temporal style  -->
@@ -235,7 +235,35 @@
 																							)
 																			);
  						echo '</div>';
- 
+
+
+							echo '<div class="two columns input-group">';
+							echo '<div class="input-group-addon"><i class="fa fa-object-ungroup" aria-hidden="true"></i></div>';
+							echo
+										$this->Form->input
+																			(
+																				'units_types',
+																				 array
+																							(
+																								'type'=>'select',
+																								'class'=>'search_udn u-full-width form-control init-focus',
+																								'id'=>'unit_type',
+																								'placeholder' => 'Tipo de Unidad',
+																								// 'alt'=>'Puede teclear la fecha en Formato yyyymm',
+									                              // 'title'=>'Puede teclear la fecha en Formato yyyymm',
+																								'div'=>false,
+																								'label'=>false,
+																							//	'multiple'=>'multiple',
+																						//	'style'=>'width:45%',
+																								//
+																								'options'=>array(1=>'TRATOCAMIONES',2=>'REMOLQUES',4=>'DOLLYS'),
+																								'empty' => 'TODO',
+																								'tabindex'=>'1'
+																							)
+																			);
+ 						echo '</div>';
+
+
 						?>
 
 						<!-- <div class="row"> -->
@@ -259,20 +287,24 @@
 					&nbsp;
 				</div>
 
-				<div id="printThis" class="container-mod ninja-scroll">
+				<div id="printThis" class="container-mod ninja-scroll"> 
 					<div id="updateSearchResult" class="updateSearchResult">
 
-							<div class="row">
-							 <div class="twelve columns">
-								 <div id="chart" class="chart" >
-											 <div id="index_chart" style="min-width:80%; min-height: 480px; margin: 0 auto">
-												 <!-- graphics -->
-											 </div>
-								 </div>
-							 </div>
+<!--							<div class="row"> -->
+<!--							 <div class="twelve columns">-->
+
+										<!-- NOTE Start Carrousell -->
+<!--									  <div style="margin:25px;"> -->
+													<?php echo $this->element('kml/Disponibilidad/carrousel');?>
+										<!-- NOTE End Of the Carrousell -->
+<!--										</div> -->
+<!--								 </div>-->
+<!--							 </div> -->
 
 					</div>
 				</div>
+
+
 
 				<div id="breakspace" class="">
 					&nbsp;
@@ -283,8 +315,300 @@
 	<script type="text/javascript">
 		  $(document).ready(function () {
 
+// NOTE Tractocamiones
+Highcharts.chart('lineChart1', {
 
-Highcharts.chart('index_chart', {
+	credits:{enabled:false},
+ 	 colors:['#1a1334','#26294a',' #01545a','#017351','#03c383','#aad962','#fbbf45','#ef6a32','#ed0345','#a12a5e','#710162','#110141'], // darks theme
+
+  chart: {
+				type: 'column',
+        zoomType: 'x',
+        panning: true,
+        panKey: 'shift',
+        scrollablePlotArea: {
+            minWidth: 600
+        }
+  },
+  title: {
+    text: 'Indicadores de Disponibilidad de Unidades'
+  },
+	subtitle: {
+   text: 'Tractocamiones'
+	},
+  xAxis: {
+	categories: [<?php print("'".implode("','",$bssus)."'") ?>],
+    tickmarkPlacement: 'on',
+    title: {
+      enabled: false
+    }
+  },
+  yAxis: {
+    labels: {
+      format: '{value}%'
+    },
+    min:0,
+    title: {
+      text: 'Porcentaje'
+		},
+		plotLines: [{
+				color: 'red',
+				width: 0.5,
+				value: 90,
+				label: {
+						text: 'Limit',
+						style: {
+								color: 'blue',
+								fontWeight: 'bold'
+						}
+				}
+		}]
+  },
+  tooltip: {
+    pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.percentage:.1f}%</b> ({point.y:,.0f} Unidades)<br/>',
+    split: true
+	},
+  plotOptions: {
+		column: {
+      dataLabels: {
+            enabled: true,
+//            rotation: -30,
+            color: '#FFFFFF',
+            align: 'right',
+//            format: '{point.percentage:.1f} % ({point.y:,.0f} {series.name})', // one decimal
+            format: '{point.percentage:.1f} % ({point.y:,.0f} U)', // one decimal
+						y: 10, // 10 pixels down from the top
+//            shape: 'callout',
+            style: {
+                fontSize: '13px',
+                fontFamily: 'Verdana, sans-serif'
+            }
+      },
+			pointWidth: 50,
+			borderRadius: 5 ,
+      stacking: 'percent',
+			lineColor: '#ffffff',
+// Add to try points
+/*			states: {
+								hover: {
+											  lineWidthPlus: 0
+											 }
+							},
+*/
+      lineWidth: 1,
+			marker: {
+/*				enabled: true,
+				radius: 2
+*/
+        lineWidth: 1,
+				lineColor: '#ffffff'
+      },
+      accessibility: {
+        pointDescriptionFormatter: function (point) {
+          function round(x) {
+            return Math.round(x * 100) / 100;
+          }
+          return (point.index + 1) + ', ' + point.category + ', ' +
+            point.y + ' unidades, ' + round(point.percentage) + '%, ' +
+            point.series.name;
+        }
+      }
+    }
+  },
+  series: [ <?php print($json_parsing_level_index[1]) ?> ]
+});
+
+// NOTE next block Remolques
+Highcharts.chart('lineChart2', {
+
+	credits:{enabled:false},
+ 	 colors:['#1a1334','#26294a',' #01545a','#017351','#03c383','#aad962','#fbbf45','#ef6a32','#ed0345','#a12a5e','#710162','#110141'], // darks theme
+
+  chart: {
+				type: 'column',
+        zoomType: 'x',
+        panning: true,
+        panKey: 'shift',
+        scrollablePlotArea: {
+            minWidth: 600
+        }
+  },
+  title: {
+    text: 'Indicadores de Disponibilidad de Unidades'
+  },
+	subtitle: {
+   text: 'Remolques'
+	},
+  xAxis: {
+	categories: [<?php print("'".implode("','",$bssus)."'") ?>],
+    tickmarkPlacement: 'on',
+    title: {
+      enabled: false
+    }
+  },
+  yAxis: {
+    labels: {
+      format: '{value}%'
+    },
+    min:0,
+    title: {
+      text: 'Porcentaje'
+		},
+		plotLines: [{
+				color: 'red',
+				width: 0.5,
+				value: 90,
+				label: {
+						text: 'Limit',
+						style: {
+								color: 'blue',
+								fontWeight: 'bold'
+						}
+				}
+		}]
+  },
+  tooltip: {
+    pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.percentage:.1f}%</b> ({point.y:,.0f} Unidades)<br/>',
+    split: true
+	},
+  plotOptions: {
+		column: {
+      dataLabels: {
+            enabled: true,
+//            rotation: -30,
+            color: '#FFFFFF',
+            align: 'right',
+//            format: '{point.percentage:.1f} % ({point.y:,.0f} {series.name})', // one decimal
+            format: '{point.percentage:.1f} % ({point.y:,.0f} U)', // one decimal
+						y: 10, // 10 pixels down from the top
+//            shape: 'callout',
+            style: {
+                fontSize: '13px',
+                fontFamily: 'Verdana, sans-serif'
+            }
+      },
+			pointWidth: 50,
+			borderRadius: 5,
+      stacking: 'percent',
+      lineColor: '#ffffff',
+      lineWidth: 1,
+      marker: {
+        lineWidth: 1,
+        lineColor: '#ffffff'
+      },
+      accessibility: {
+        pointDescriptionFormatter: function (point) {
+          function round(x) {
+            return Math.round(x * 100) / 100;
+          }
+          return (point.index + 1) + ', ' + point.category + ', ' +
+            point.y + ' unidades, ' + round(point.percentage) + '%, ' +
+            point.series.name;
+        }
+      }
+    }
+  },
+  series: [ <?php print($json_parsing_level_index[2]) ?> ]
+});
+
+
+// NOTE Next Dollys
+Highcharts.chart('lineChart3', {
+
+	credits:{enabled:false},
+ 	 colors:['#1a1334','#26294a',' #01545a','#017351','#03c383','#aad962','#fbbf45','#ef6a32','#ed0345','#a12a5e','#710162','#110141'], // darks theme
+
+  chart: {
+				type: 'column',
+        zoomType: 'x',
+        panning: true,
+        panKey: 'shift',
+        scrollablePlotArea: {
+            minWidth: 600
+        }
+  },
+  title: {
+    text: 'Indicadores de Disponibilidad de Unidades'
+  },
+	subtitle: {
+   text: 'Dollys'
+	},
+  xAxis: {
+	categories: [<?php print("'".implode("','",$bssus)."'") ?>],
+    tickmarkPlacement: 'on',
+    title: {
+      enabled: false
+    }
+  },
+  yAxis: {
+    labels: {
+      format: '{value}%'
+    },
+    min:0,
+    title: {
+      text: 'Porcentaje'
+		},
+		plotLines: [{
+				color: 'red',
+				width: 0.5,
+				value: 90,
+				label: {
+						text: 'Limit',
+						style: {
+								color: 'blue',
+								fontWeight: 'bold'
+						}
+				}
+		}]
+  },
+  tooltip: {
+    pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.percentage:.1f}%</b> ({point.y:,.0f} Unidades)<br/>',
+    split: true
+	},
+  plotOptions: {
+		column: {
+      dataLabels: {
+            enabled: true,
+//            rotation: -30,
+            color: '#FFFFFF',
+            align: 'right',
+//            format: '{point.percentage:.1f} % ({point.y:,.0f} {series.name})', // one decimal
+            format: '{point.percentage:.1f} % ({point.y:,.0f} U)', // one decimal
+						y: 10, // 10 pixels down from the top
+//            shape: 'callout',
+            style: {
+                fontSize: '13px',
+                fontFamily: 'Verdana, sans-serif'
+            }
+      },
+			pointWidth: 50,
+			borderRadius: 5,
+      stacking: 'percent',
+      lineColor: '#ffffff',
+      lineWidth: 1,
+      marker: {
+        lineWidth: 1,
+        lineColor: '#ffffff'
+      },
+      accessibility: {
+        pointDescriptionFormatter: function (point) {
+          function round(x) {
+            return Math.round(x * 100) / 100;
+          }
+          return (point.index + 1) + ', ' + point.category + ', ' +
+            point.y + ' unidades, ' + round(point.percentage) + '%, ' +
+            point.series.name;
+        }
+      }
+    }
+  },
+  series: [ <?php print($json_parsing_level_index[4]) ?> ]
+});
+
+
+
+// NOTE All
+Highcharts.chart('lineChart4', {
 
 	credits:{enabled:false},
  	 colors:['#1a1334','#26294a',' #01545a','#017351','#03c383','#aad962','#fbbf45','#ef6a32','#ed0345','#a12a5e','#710162','#110141'], // darks theme
@@ -340,10 +664,11 @@ Highcharts.chart('index_chart', {
 		column: {
       dataLabels: {
             enabled: true,
-//            rotation: -90,
+//            rotation: -30,
             color: '#FFFFFF',
             align: 'right',
-            format: '{point.percentage:.1f} % ({point.y:,.0f} {series.name})', // one decimal
+//            format: '{point.percentage:.1f} % ({point.y:,.0f} {series.name})', // one decimal
+            format: '{point.percentage:.1f} % ({point.y:,.0f} U)', // one decimal
 						y: 10, // 10 pixels down from the top
 //            shape: 'callout',
             style: {
@@ -372,10 +697,10 @@ Highcharts.chart('index_chart', {
       }
     }
   },
-  series: [ <?php print($json_parsing_level_index) ?> ]
+  series: [ <?php print($json_parsing_level_index[1]) ?> ]
 });
 
-
+// NOTE End Charts
 
 //		var multiSelect = $(".search_udn").select2();
 		

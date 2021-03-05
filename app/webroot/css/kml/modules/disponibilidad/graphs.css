@@ -1,0 +1,40 @@
+.carousel {
+    background: #fff;
+    margin-top: 5px;
+    padding: 3px 30px;
+}
+.carousel-inner >.item {
+/*    height: 275px;*/
+/*    height:60%;*/
+}
+
+.paymentdetails {
+    min-width:85%;
+/*    min-height: 480px;*/
+    margin: 0 auto;
+    min-height:60%;
+    float: left;
+/*
+    height: 265px;
+    border: 1px #434348 solid;
+    margin-right: 2px;
+    padding: 5px;
+    width: 32.5%;
+    float: left;
+*/
+}
+
+#highcharts-0 .linechart1{
+    width:100% !important;
+    height:90% !important;
+}
+
+.carousel-control {
+    width: 0px !important;
+}
+.controls {
+    background-color: #7070db;
+    padding: 5px;
+    border-radius: 15px;
+    font-size: 18px !important;
+}

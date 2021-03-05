@@ -60,15 +60,15 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 				// }
 			}
 		}
-
 /*
 		debug($add_conditions);
 		debug($conditions);
 		debug($condition);
-*/
+ */
+
 // NOTE 
 		// Search the highest value
-		if (isset($condition)) {
+		if (isset($condition) && !isset($conditions['units_types'])) {
 			$is_hight = in_array('A',$condition['id_tipo_operacion'],TRUE); 
 	//		var_dump($is_hight);
 		}
@@ -78,8 +78,10 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 
 // NOTE Work from hir
 
-		$units_type = $_SESSION['Auth']['User']['units_type'];
+//		$units_type = $_SESSION['Auth']['User']['units_type'];
+		
 		// debug($units_type);
+		debug($conditions['units_types']);
 
 		$units_id = array(
 				 1=>array(1,13)			//Tractocamiones
@@ -90,10 +92,19 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 
 //		var_dump(isset($units_type));
 
-		if (isset($units_type)) {
+		if (isset($conditions['units_types'])) {
+			$units_type = $conditions['units_types'];
 			$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.units_type'] = $units_id[$units_type];
 			$conditionsTf['DisponibilidadViewRptGroupGstIndicator.units_type'] = $units_id[$units_type];
+		}/* else {
+			$units_type = 3;
+//			$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.units_type'] = $units_id[$units_type];
+//			$conditionsTf['DisponibilidadViewRptGroupGstIndicator.units_type'] = $units_id[$units_type];
 		}
+		 */
+//		$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.units_type'] = $units_id[$units_type];
+//		$conditionsTf['DisponibilidadViewRptGroupGstIndicator.units_type'] = $units_id[$units_type];
+
 
 		// debug(var_dump($units_type));
 
@@ -104,7 +115,7 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 
 		$disponibilidadViewStatusGstIndicators = $this->DisponibilidadViewStatusGstIndicator->find('list',array('fields'=>array('id_status','nombre'),'conditions'=>$conditionsStatus));
 
-		if ( (!isset($add_conditions['id_area']) && !isset($add_conditions['id_flota']) && !isset($condition) ) /*OR (isset($is_hight) && $is_hight == true)*/ )  {
+		if ( (!isset($add_conditions['id_area']) && !isset($add_conditions['id_flota']) && !isset($add_conditions['units_type']) && !isset($condition) ) /*OR (isset($is_hight) && $is_hight == true)*/ )  {
 					
 					debug('inside hight');
 
@@ -170,18 +181,18 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 						$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.id_area'] = $add_conditions['id_area'];
 						$conditionsTf['DisponibilidadViewRptGroupGstIndicator.id_area'] = $add_conditions['id_area'];
 					}
-
-//					if (isset($add_conditions['id_flota'])) {
-						// code...
-//						$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.id_flota'] = $add_conditions['id_flota'];
-//						$conditionsTf['DisponibilidadViewRptGroupGstIndicator.id_flota'] = $add_conditions['id_flota'];
-//					}
-
+/*
+					if (isset($add_conditions['units_type'])) {
+					// code...
+						$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.units_type'] =  $units_id[$units_type];
+						$conditionsTf['DisponibilidadViewRptGroupGstIndicator.units_type'] =  $units_id[$units_type];
+					}
+ */
 					if (isset($condition['id_tipo_operacion'])) {
 
 						// TODO NOTE WARNING Work from hir 
 								if (in_array('A',$condition['id_tipo_operacion'],TRUE)) {
-										debug('IN ALL');
+									debug('IN ALL');
 								} else {
 									if (in_array('G',$condition['id_tipo_operacion'],TRUE) OR in_array('O',$condition['id_tipo_operacion'],TRUE)) {
 										if (in_array('G',$condition['id_tipo_operacion'],TRUE))	{
@@ -205,8 +216,8 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 //      after check if is numeric and omit letters 
 					}
 
- //debug($conditionsBl);
- //debug($conditionsTf);
+ debug($conditionsBl);
+ debug($conditionsTf);
 
 
 
@@ -374,7 +385,7 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 
 
 	function index() {
-		 Configure::write('debug',0);
+//		 Configure::write('debug',2);
 		 
 
 		// debug($this->Auth->User());
@@ -413,6 +424,7 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 		$this->LoadModel('DisponibilidadViewStatusGstIndicator');
 		$this->LoadModel('DisponibilidadViewRptGroupGstIndicator');
 		$this->LoadModel('DisponibilidadViewAreaUnit');
+		$this->LoadModel('DisponibilidadViewCrossUnit');
 
 // NOTE Work from hir
 		$units_type = $_SESSION['Auth']['User']['units_type'];
@@ -429,7 +441,6 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 			$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.units_type'] = $units_id[$units_type];
 			$conditionsTf['DisponibilidadViewRptGroupGstIndicator.units_type'] = $units_id[$units_type];
 			$conditionsAr['DisponibilidadViewAreaUnit.units_type'] = $units_id[$units_type];
-
 		}
 
 		$conditionsStatus['DisponibilidadViewStatusGstIndicator.id_status'] = array(4,6,8,15,14,18,11);
@@ -464,9 +475,9 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 
 //debug($conditionsAr);
 
-		$disponibilidadViewAreaUnits = $this->DisponibilidadViewAreaUnit->find('all'
+/*		$disponibilidadViewAreaUnits = $this->DisponibilidadViewAreaUnit->find('all'
 									,array(
-//											'conditions'=>$conditionsAr
+											'conditions'=>$conditionsAr
 											'fields'=>array(
 																					 'sum(unidades) as [unidades]'
 																					,'label'
@@ -477,12 +488,35 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 											,'order'=>'id_area'														
 									)
  		);
+ */
 
+	$squema  = $this->DisponibilidadViewCrossUnit->find('all');
+
+	$disponibilidadViewCrossUnits = $this->DisponibilidadViewCrossUnit->find('all'
+								,array(
+//										'conditions'=>$conditionsAr
+										'fields'=>array(
+																				 'sum(unidades) as [unidades]'
+																				,'label'
+																				,'id_area'
+																				,'group_name'
+																				,'[DisponibilidadViewAreaUnit].types'											
+											)
+										,'joins'=>array(
+														 'table'=>'left join disponibilidad_view_area_units'
+														,'alias'=>' as [DisponibilidadViewAreaUnit]'
+//														,'type'=>'left join'
+														,'conditions'=> 'on [DisponibilidadViewAreaUnit].id_area = [DisponibilidadViewCrossUnit].id_area and [DisponibilidadViewAreaUnit].group_name = [DisponibilidadViewCrossUnit].group_name '//' and '."[DisponibilidadViewAreaUnit].units_type in  (".implode(',',$units_id[$units_type]).")"																						
+										)
+										,'group'=>array('[DisponibilidadViewCrossunit].group_name','[DisponibilidadViewCrossUnit].label','[DisponibilidadViewCrossUnit].id_area','[DisponibilidadViewAreaUnit].types')																	
+										,'order'=>'[DisponibilidadViewCrossUnit].id_area'														
+								)
+	);
 
 //debug($conditionsTf);
 //debug($conditionsBl);
 //debug( $disponibilidadViewRptGraphGstIndicators );
-debug($disponibilidadViewAreaUnits);
+//debug($disponibilidadViewCrossUnits);
 
 
 		    foreach ($disponibilidadViewRptGroupGstIndicators as $key => $value) {
@@ -500,35 +534,72 @@ debug($disponibilidadViewAreaUnits);
 
 				$json_parsing_lv_one = null;
 
-
-				foreach ($disponibilidadViewAreaUnits as $key => $data_value) {
-				//				debug($key);
-				//				debug($datavalue);
-							 $dispArea[$data_value['DisponibilidadViewAreaUnit']['group_name']][$data_value['DisponibilidadViewAreaUnit']['label']] = $data_value[0]['unidades']?$data_value[0]['unidades']:0;	
+				foreach ($squema as $idx => $data_value) {
+					$dispSquema[$data_value['DisponibilidadViewCrossUnit']['group_name']][$data_value['DisponibilidadViewCrossUnit']['label']] = $data_value[0]['unidades']?$data_value[0]['unidades']:0;	 
 				}
+
+//				debug($dispSquema);
+
+				foreach ($disponibilidadViewCrossUnits as $key => $data_value) {
+//					if ($key) {
+//						$dispCross[$data_value[0]['DisponibilidadViewAreaUnit__3']][$data_value['DisponibilidadViewCrossUnit']['group_name']][$data_value['DisponibilidadViewCrossUnit']['label']] = $data_value[0]['unidades']?$data_value[0]['unidades']:0;	 
+					
+					$dispCross[$data_value[0]['DisponibilidadViewAreaUnit__3']][$data_value['DisponibilidadViewCrossUnit']['group_name']][$data_value['DisponibilidadViewCrossUnit']['label']] = $data_value[0]['unidades'];	
+//					}
+				}	
 	
-			krsort($dispArea);
-			debug($dispArea);
+//				krsort($dispCross[1]);
 
-		foreach ($dispArea as $key => $data) {
-			// NOTE data for columns 
-			//
-					$json_parsing_lv_one .= json_encode(
-																		array(
-																						 'name'=>$key
-																						,'data'=>'['.implode(',',$data).']'
-																				 )
-																						, JSON_PRETTY_PRINT
-											);
-		}
+//				debug($dispCross[1]);
+				//				debug($squema);
+				//
+//debug(array_merge($dispCross[1],$dispSquema));
+				$disp[1] = $disp[2] = $disp[4] = $dispSquema;
 
-		$json_parsing_level_index = implode('},{',explode('}{', str_replace ('"[','[', str_replace(']"',']',$json_parsing_lv_one) ) ));
-		debug($json_parsing_level_index);
+				foreach ($dispSquema as $skey => $sdata) {
+					if($dispCross[1][$skey]){
+							$disp[1][$skey] = array_replace($dispSquema[$skey],$dispCross[1][$skey]);
+					}
+					if($dispCross[2][$skey]){
+							$disp[2][$skey] = array_replace($dispSquema[$skey],$dispCross[2][$skey]);
+					}
+					if($dispCross[4][$skey]){
+							$disp[4][$skey] = array_replace($dispSquema[$skey],$dispCross[4][$skey]);
+					}
+				}
+
+		//		debug($disp);
+
+			//	debug(array_replace($dispSquema,$dispCross[1]));
+
+			foreach($disp as $k => $v) {
+				krsort($v);				
+					foreach ($v as $key => $data) {
+					// NOTE data for columns 
+					//
+							$json_parsing_lv_one[$k] .= json_encode(
+																				array(
+																								 'name'=>$key
+																								,'data'=>'['.implode(',',$data).']'
+																						 )
+																								, JSON_PRETTY_PRINT
+							);	
+					}
+			}
+
+//		debug($json_parsing_lv_one);
+
+		$json_parsing_level_index[1] = implode('},{',explode('}{', str_replace ('"[','[', str_replace(']"',']',$json_parsing_lv_one[1]) ) ));
+		$json_parsing_level_index[2] = implode('},{',explode('}{', str_replace ('"[','[', str_replace(']"',']',$json_parsing_lv_one[2]) ) ));
+		$json_parsing_level_index[4] = implode('},{',explode('}{', str_replace ('"[','[', str_replace(']"',']',$json_parsing_lv_one[4]) ) ));
+
+//		debug($json_parsing_level_index[1]);
+
  
 //		debug(	$disponibilidadViewAreaUnits );
 
 
-	debug("'".implode("','",$bssus)."'");
+	//debug("'".implode("','",$bssus)."'");
 //////////////////////////////////////////////// NOTE END CODE /////////////////////////////////////////////////
 
 
