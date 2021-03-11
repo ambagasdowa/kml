@@ -662,19 +662,9 @@
                           </li>
 
                           <li class="dropdown-submenu pull-left">
-                            <a href="#"><i class="fa fa-pencil-square-o"></i>&nbsp;Disponibilidad</a>
-                              <ul class="dropdown-menu">
-                                <li>
-                                    <a href="<?php e($this->webroot.'DisponibilidadViewRptUnidadesGstIndicators/?units_type=1');?>"><i class="fa fa-exchange"></i>&nbsp;<span>Tractocamiones</span></a>
-                                </li>
-                                <li>
-                                    <a href="<?php e($this->webroot.'DisponibilidadViewRptUnidadesGstIndicators/?units_type=2');?>"><i class="fa fa-exchange"></i>&nbsp;<span>Remolques</span></a>
-                                </li>
-                                <li>
-                                    <a href="<?php e($this->webroot.'DisponibilidadViewRptUnidadesGstIndicators/');?>"><i class="fa fa-exchange"></i>&nbsp;<span>Todo</span></a>
-                                </li>
-
-                              </ul>
+															 <a href="<?php e($this->webroot.'DisponibilidadViewRptUnidadesGstIndicators/');?>">
+																		<i class="fa fa-pencil-square-o"></i>&nbsp;<span>Disponibilidad</span>
+															 </a>
                           </li>
 
 

@@ -319,8 +319,7 @@
 Highcharts.chart('lineChart1', {
 
 	credits:{enabled:false},
- 	 colors:['#1a1334','#26294a',' #01545a','#017351','#03c383','#aad962','#fbbf45','#ef6a32','#ed0345','#a12a5e','#710162','#110141'], // darks theme
-
+ 	colors:['#1a1334','#26294a',' #01545a','#017351','#03c383','#aad962','#fbbf45','#ef6a32','#ed0345','#a12a5e','#710162','#110141'], // darks theme
   chart: {
 				type: 'column',
         zoomType: 'x',
@@ -516,8 +515,7 @@ Highcharts.chart('lineChart2', {
 Highcharts.chart('lineChart3', {
 
 	credits:{enabled:false},
- 	 colors:['#1a1334','#26294a',' #01545a','#017351','#03c383','#aad962','#fbbf45','#ef6a32','#ed0345','#a12a5e','#710162','#110141'], // darks theme
-
+ 	colors:['#1a1334','#26294a',' #01545a','#017351','#03c383','#aad962','#fbbf45','#ef6a32','#ed0345','#a12a5e','#710162','#110141'], // darks theme
   chart: {
 				type: 'column',
         zoomType: 'x',
@@ -611,8 +609,7 @@ Highcharts.chart('lineChart3', {
 Highcharts.chart('lineChart4', {
 
 	credits:{enabled:false},
- 	 colors:['#1a1334','#26294a',' #01545a','#017351','#03c383','#aad962','#fbbf45','#ef6a32','#ed0345','#a12a5e','#710162','#110141'], // darks theme
-
+ 	colors:['#1a1334','#26294a',' #01545a','#017351','#03c383','#aad962','#fbbf45','#ef6a32','#ed0345','#a12a5e','#710162','#110141'], // darks theme
   chart: {
 				type: 'column',
         zoomType: 'x',
