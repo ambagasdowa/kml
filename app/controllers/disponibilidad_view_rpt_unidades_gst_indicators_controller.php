@@ -384,9 +384,12 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 	}
 
 
+// fiddle
+// https://jsfiddle.net/ambagasdowa/qp0ur9dk/
+// https://jsfiddle.net/ambagasdowa/b3y8297x/1/
 
 	function index() {
-//		 Configure::write('debug',2);
+		 Configure::write('debug',0);
 		 
 
 		// debug($this->Auth->User());
@@ -544,17 +547,25 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 				foreach ($disponibilidadViewCrossUnits as $key => $data_value) {
 //					if ($key) {
 //						$dispCross[$data_value[0]['DisponibilidadViewAreaUnit__3']][$data_value['DisponibilidadViewCrossUnit']['group_name']][$data_value['DisponibilidadViewCrossUnit']['label']] = $data_value[0]['unidades']?$data_value[0]['unidades']:0;	 
-					
-					$dispCross[$data_value[0]['DisponibilidadViewAreaUnit__3']][$data_value['DisponibilidadViewCrossUnit']['group_name']][$data_value['DisponibilidadViewCrossUnit']['label']] = $data_value[0]['unidades'];	
-//					}
+					if (isset($data_value[0]['DisponibilidadViewAreaUnit__3'])){	
+							$dispCross[$data_value[0]['DisponibilidadViewAreaUnit__3']][$data_value['DisponibilidadViewCrossUnit']['group_name']][$data_value['DisponibilidadViewCrossUnit']['label']] = $data_value[0]['unidades'];
+
+
+//							$unitsCross[$data_value[0]['DisponibilidadViewAreaUnit__3']][$data_value['DisponibilidadViewCrossUnit']['label']][$data_value['DisponibilidadViewCrossUnit']['group_name']] = $data_value[0]['unidades'];
+							$totalCross[$data_value[0]['DisponibilidadViewAreaUnit__3']][$data_value['DisponibilidadViewCrossUnit']['label']] += $data_value[0]['unidades'];
+					}
 				}	
 	
 //				krsort($dispCross[1]);
 
-//				debug($dispCross[1]);
+//				debug($dispCross);
+//				debug($unitsCross);
+//				debug($totalCross);
+
 				//				debug($squema);
 				//
-//debug(array_merge($dispCross[1],$dispSquema));
+				//debug(array_merge($dispCross[1],$dispSquema));
+				//
 				$disp[1] = $disp[2] = $disp[4] = $dispSquema;
 
 				foreach ($dispSquema as $skey => $sdata) {
@@ -569,11 +580,30 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 					}
 				}
 
-		//		debug($disp);
+//				debug($disp);
 
-			//	debug(array_replace($dispSquema,$dispCross[1]));
+				$percents = $disp ;
+//				debug($percents);
+// NOTE NOTE DEBUG WORK from HIR
+				foreach ( $percents as $idOp => $concept ){
+				//	debug($idOp);debug($concept);
+					foreach( $concept as $group_name => $areas_units ){
+//						debug($areas_units);
+						foreach ($areas_units as $area => $units) {
+//							debug($area); debug($units);
+							$percents[$idOp][$group_name][$area] =round( ($units*100)/($totalCross[$idOp][$area]),2 );
+						}
+//						debug($areas_units);
+//						debug(		$percents[$idOp][$concept][$area]    );
+//						debug(  ($units*100)/($totalCross[$idOp][$area])  );
 
-			foreach($disp as $k => $v) {
+					}
+ 				}
+
+				//	debug(array_replace($dispSquema,$dispCross[1]));
+//				debug($percents);
+
+			foreach($percents as $k => $v) {
 				krsort($v);				
 					foreach ($v as $key => $data) {
 					// NOTE data for columns 

@@ -319,7 +319,7 @@
 Highcharts.chart('lineChart1', {
 
 	credits:{enabled:false},
- 	colors:['#1a1334','#26294a',' #01545a','#017351','#03c383','#aad962','#fbbf45','#ef6a32','#ed0345','#a12a5e','#710162','#110141'], // darks theme
+ //	colors:['#1a1334','#26294a',' #01545a','#017351','#03c383','#aad962','#fbbf45','#ef6a32','#ed0345','#a12a5e','#710162','#110141'], // darks theme
   chart: {
 				type: 'column',
         zoomType: 'x',
@@ -347,15 +347,16 @@ Highcharts.chart('lineChart1', {
       format: '{value}%'
     },
     min:0,
+		max:100,
     title: {
       text: 'Porcentaje'
 		},
 		plotLines: [{
 				color: 'red',
-				width: 0.5,
+				width: 2.5,
 				value: 90,
 				label: {
-						text: 'Limit',
+						text: 'Limite',
 						style: {
 								color: 'blue',
 								fontWeight: 'bold'
@@ -364,7 +365,7 @@ Highcharts.chart('lineChart1', {
 		}]
   },
   tooltip: {
-    pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.percentage:.1f}%</b> ({point.y:,.0f} Unidades)<br/>',
+    pointFormat: '<span style="color:black;">{series.name}</span>: ({point.y:,.0f}%)<br/>',
     split: true
 	},
   plotOptions: {
@@ -375,9 +376,9 @@ Highcharts.chart('lineChart1', {
             color: '#FFFFFF',
             align: 'right',
 //            format: '{point.percentage:.1f} % ({point.y:,.0f} {series.name})', // one decimal
-            format: '{point.percentage:.1f} % ({point.y:,.0f} U)', // one decimal
+            format: '{point.y:,.0f} %', // one decimal
 						y: 10, // 10 pixels down from the top
-//            shape: 'callout',
+            shape: 'callout',
             style: {
                 fontSize: '13px',
                 fontFamily: 'Verdana, sans-serif'
@@ -385,7 +386,7 @@ Highcharts.chart('lineChart1', {
       },
 			pointWidth: 50,
 			borderRadius: 5 ,
-      stacking: 'percent',
+      stacking: 'normal',
 			lineColor: '#ffffff',
 // Add to try points
 /*			states: {
@@ -417,12 +418,12 @@ Highcharts.chart('lineChart1', {
   series: [ <?php print($json_parsing_level_index[1]) ?> ]
 });
 
-// NOTE next block Remolques
+
+// NOTE Remolques
 Highcharts.chart('lineChart2', {
 
 	credits:{enabled:false},
- 	 colors:['#1a1334','#26294a',' #01545a','#017351','#03c383','#aad962','#fbbf45','#ef6a32','#ed0345','#a12a5e','#710162','#110141'], // darks theme
-
+ //	colors:['#1a1334','#26294a',' #01545a','#017351','#03c383','#aad962','#fbbf45','#ef6a32','#ed0345','#a12a5e','#710162','#110141'], // darks theme
   chart: {
 				type: 'column',
         zoomType: 'x',
@@ -450,15 +451,16 @@ Highcharts.chart('lineChart2', {
       format: '{value}%'
     },
     min:0,
+		max:100,
     title: {
       text: 'Porcentaje'
 		},
 		plotLines: [{
 				color: 'red',
-				width: 0.5,
+				width: 2.5,
 				value: 90,
 				label: {
-						text: 'Limit',
+						text: 'Limite',
 						style: {
 								color: 'blue',
 								fontWeight: 'bold'
@@ -467,7 +469,7 @@ Highcharts.chart('lineChart2', {
 		}]
   },
   tooltip: {
-    pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.percentage:.1f}%</b> ({point.y:,.0f} Unidades)<br/>',
+    pointFormat: '<span style="color:black;">{series.name}</span>: ({point.y:,.0f}%)<br/>',
     split: true
 	},
   plotOptions: {
@@ -478,22 +480,32 @@ Highcharts.chart('lineChart2', {
             color: '#FFFFFF',
             align: 'right',
 //            format: '{point.percentage:.1f} % ({point.y:,.0f} {series.name})', // one decimal
-            format: '{point.percentage:.1f} % ({point.y:,.0f} U)', // one decimal
+            format: '{point.y:,.0f} %', // one decimal
 						y: 10, // 10 pixels down from the top
-//            shape: 'callout',
+            shape: 'callout',
             style: {
                 fontSize: '13px',
                 fontFamily: 'Verdana, sans-serif'
             }
       },
 			pointWidth: 50,
-			borderRadius: 5,
-      stacking: 'percent',
-      lineColor: '#ffffff',
+			borderRadius: 5 ,
+      stacking: 'normal',
+			lineColor: '#ffffff',
+// Add to try points
+/*			states: {
+								hover: {
+											  lineWidthPlus: 0
+											 }
+							},
+*/
       lineWidth: 1,
-      marker: {
+			marker: {
+/*				enabled: true,
+				radius: 2
+*/
         lineWidth: 1,
-        lineColor: '#ffffff'
+				lineColor: '#ffffff'
       },
       accessibility: {
         pointDescriptionFormatter: function (point) {
@@ -510,12 +522,11 @@ Highcharts.chart('lineChart2', {
   series: [ <?php print($json_parsing_level_index[2]) ?> ]
 });
 
-
-// NOTE Next Dollys
+// NOTE Dollys
 Highcharts.chart('lineChart3', {
 
 	credits:{enabled:false},
- 	colors:['#1a1334','#26294a',' #01545a','#017351','#03c383','#aad962','#fbbf45','#ef6a32','#ed0345','#a12a5e','#710162','#110141'], // darks theme
+ //	colors:['#1a1334','#26294a',' #01545a','#017351','#03c383','#aad962','#fbbf45','#ef6a32','#ed0345','#a12a5e','#710162','#110141'], // darks theme
   chart: {
 				type: 'column',
         zoomType: 'x',
@@ -543,15 +554,16 @@ Highcharts.chart('lineChart3', {
       format: '{value}%'
     },
     min:0,
+		max:100,
     title: {
       text: 'Porcentaje'
 		},
 		plotLines: [{
 				color: 'red',
-				width: 0.5,
+				width: 2.5,
 				value: 90,
 				label: {
-						text: 'Limit',
+						text: 'Limite',
 						style: {
 								color: 'blue',
 								fontWeight: 'bold'
@@ -560,7 +572,7 @@ Highcharts.chart('lineChart3', {
 		}]
   },
   tooltip: {
-    pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.percentage:.1f}%</b> ({point.y:,.0f} Unidades)<br/>',
+    pointFormat: '<span style="color:black;">{series.name}</span>: ({point.y:,.0f}%)<br/>',
     split: true
 	},
   plotOptions: {
@@ -571,22 +583,32 @@ Highcharts.chart('lineChart3', {
             color: '#FFFFFF',
             align: 'right',
 //            format: '{point.percentage:.1f} % ({point.y:,.0f} {series.name})', // one decimal
-            format: '{point.percentage:.1f} % ({point.y:,.0f} U)', // one decimal
+            format: '{point.y:,.0f} %', // one decimal
 						y: 10, // 10 pixels down from the top
-//            shape: 'callout',
+            shape: 'callout',
             style: {
                 fontSize: '13px',
                 fontFamily: 'Verdana, sans-serif'
             }
       },
 			pointWidth: 50,
-			borderRadius: 5,
-      stacking: 'percent',
-      lineColor: '#ffffff',
+			borderRadius: 5 ,
+      stacking: 'normal',
+			lineColor: '#ffffff',
+// Add to try points
+/*			states: {
+								hover: {
+											  lineWidthPlus: 0
+											 }
+							},
+*/
       lineWidth: 1,
-      marker: {
+			marker: {
+/*				enabled: true,
+				radius: 2
+*/
         lineWidth: 1,
-        lineColor: '#ffffff'
+				lineColor: '#ffffff'
       },
       accessibility: {
         pointDescriptionFormatter: function (point) {
@@ -604,12 +626,11 @@ Highcharts.chart('lineChart3', {
 });
 
 
-
-// NOTE All
+// NOTE ALL
 Highcharts.chart('lineChart4', {
 
 	credits:{enabled:false},
- 	colors:['#1a1334','#26294a',' #01545a','#017351','#03c383','#aad962','#fbbf45','#ef6a32','#ed0345','#a12a5e','#710162','#110141'], // darks theme
+ //	colors:['#1a1334','#26294a',' #01545a','#017351','#03c383','#aad962','#fbbf45','#ef6a32','#ed0345','#a12a5e','#710162','#110141'], // darks theme
   chart: {
 				type: 'column',
         zoomType: 'x',
@@ -623,7 +644,7 @@ Highcharts.chart('lineChart4', {
     text: 'Indicadores de Disponibilidad de Unidades'
   },
 	subtitle: {
-   text: 'GST'
+   text: 'Todo'
 	},
   xAxis: {
 	categories: [<?php print("'".implode("','",$bssus)."'") ?>],
@@ -637,15 +658,16 @@ Highcharts.chart('lineChart4', {
       format: '{value}%'
     },
     min:0,
+		max:100,
     title: {
       text: 'Porcentaje'
 		},
 		plotLines: [{
 				color: 'red',
-				width: 0.5,
+				width: 2.5,
 				value: 90,
 				label: {
-						text: 'Limit',
+						text: 'Limite',
 						style: {
 								color: 'blue',
 								fontWeight: 'bold'
@@ -654,7 +676,7 @@ Highcharts.chart('lineChart4', {
 		}]
   },
   tooltip: {
-    pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.percentage:.1f}%</b> ({point.y:,.0f} Unidades)<br/>',
+    pointFormat: '<span style="color:black;">{series.name}</span>: ({point.y:,.0f}%)<br/>',
     split: true
 	},
   plotOptions: {
@@ -665,22 +687,32 @@ Highcharts.chart('lineChart4', {
             color: '#FFFFFF',
             align: 'right',
 //            format: '{point.percentage:.1f} % ({point.y:,.0f} {series.name})', // one decimal
-            format: '{point.percentage:.1f} % ({point.y:,.0f} U)', // one decimal
+            format: '{point.y:,.0f} %', // one decimal
 						y: 10, // 10 pixels down from the top
-//            shape: 'callout',
+            shape: 'callout',
             style: {
                 fontSize: '13px',
                 fontFamily: 'Verdana, sans-serif'
             }
       },
 			pointWidth: 50,
-			borderRadius: 5,
-      stacking: 'percent',
-      lineColor: '#ffffff',
+			borderRadius: 5 ,
+      stacking: 'normal',
+			lineColor: '#ffffff',
+// Add to try points
+/*			states: {
+								hover: {
+											  lineWidthPlus: 0
+											 }
+							},
+*/
       lineWidth: 1,
-      marker: {
+			marker: {
+/*				enabled: true,
+				radius: 2
+*/
         lineWidth: 1,
-        lineColor: '#ffffff'
+				lineColor: '#ffffff'
       },
       accessibility: {
         pointDescriptionFormatter: function (point) {
