@@ -394,7 +394,7 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 
 		// debug($this->Auth->User());
 		// debug($this->params['url']['units_type']);
-		$_SESSION['Auth']['User']['units_type'] = $this->params['url']['units_type'];
+//		$_SESSION['Auth']['User']['units_type'] = $this->params['url']['units_type'];
 		// debug($this->Auth->User());
 
 // Note add funtions
@@ -424,14 +424,14 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 
 //////////////////////////////////////////////////// NOTE START CODE  ////////////////////////////////////////////
 		// Search the highest value
-		$units_type = $_SESSION['Auth']['User']['units_type'];
+//		$units_type = $_SESSION['Auth']['User']['units_type'];
 		$this->LoadModel('DisponibilidadViewStatusGstIndicator');
 		$this->LoadModel('DisponibilidadViewRptGroupGstIndicator');
 		$this->LoadModel('DisponibilidadViewAreaUnit');
 		$this->LoadModel('DisponibilidadViewCrossUnit');
-
+		$this->LoadModel('DisponibilidadTblUnidadesGroup');
 // NOTE Work from hir
-		$units_type = $_SESSION['Auth']['User']['units_type'];
+//		$units_type = $_SESSION['Auth']['User']['units_type'];
 
 		$units_id = array(
 				 1=>array(1,13)			//Tractocamiones
@@ -535,6 +535,11 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 //					$disponibilidadViewRptGraphGstIndicators[$key]['DisponibilidadViewAreaUnits']['unidades'] = $value[0]['unidades'];
 //				}
 
+				$groups = $this->DisponibilidadTblUnidadesGroup->find('list',array('fields'=>array('id','group_name')));
+//				disponibilidad_tbl_unidades_groups
+
+//	debug($groups);
+
 
 				$json_parsing_lv_one = null;
 
@@ -557,8 +562,8 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 				}	
 	
 //				krsort($dispCross[1]);
-
-//				debug($dispCross);
+//				debug($disponibilidadViewCrossUnits);
+				debug($dispCross);
 //				debug($unitsCross);
 //				debug($totalCross);
 
@@ -580,7 +585,7 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 					}
 				}
 
-//				debug($disp);
+				debug($disp);
 
 				$percents = $disp ;
 //				debug($percents);
@@ -593,10 +598,6 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 //							debug($area); debug($units);
 							$percents[$idOp][$group_name][$area] =round( ($units*100)/($totalCross[$idOp][$area]),2 );
 						}
-//						debug($areas_units);
-//						debug(		$percents[$idOp][$concept][$area]    );
-//						debug(  ($units*100)/($totalCross[$idOp][$area])  );
-
 					}
  				}
 
@@ -635,7 +636,7 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 
 
 // NOTE add the new vars
-		$this->set(compact('bssus','operacion','units_type','tipoOperacion','disponibilidadViewRptGroupGstIndicators','json_parsing_level_index'));
+		$this->set(compact('bssus','operacion','units_type','tipoOperacion','disponibilidadViewRptGroupGstIndicators','json_parsing_level_index','disp','groups','percents'));
 // NOTE End the main 
 	} // NOTE End index
 

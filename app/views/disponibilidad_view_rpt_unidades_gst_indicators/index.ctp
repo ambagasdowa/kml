@@ -277,6 +277,30 @@
 																						);
 								?>
 							</div>
+
+
+							<div class="label one columns input-group">
+								<?php
+											echo
+													$this->Html->link(
+																							__('  ', true),
+																							array('action' => 'index', null),
+																							array('id'=>'GoBack','div'=>false,'class'=>'btn btn-primary btn-lg pull-right fa fa-arrow-left','tabindex'=>'7')
+																						);
+								?>
+							</div>
+
+
+
+
+
+
+
+
+
+
+
+
 						<!-- </div> -->
 					</div>
 

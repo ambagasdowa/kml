@@ -4,21 +4,30 @@
             <div class="item active">
                 <div class="details">
                    <div id="lineChart1"></div>
+                   <div>
+													<?php echo $this->element('kml/Disponibilidad/tables',array('tipoUnidad'=>1));?>
+                   </div>
                 </div>
             </div>
             <div class="item">
                 <div class="paymentdetails">
-                    <div id="lineChart2" style="width:90%; height:60%;"></div>
+                    <div id="lineChart2" style="width:90%; height:40%;"></div>
+                   <div>
+													<?php echo $this->element('kml/Disponibilidad/tables',array('tipoUnidad'=>2));?>
+                   </div>
                 </div>
             </div>
             <div class="item">
                 <div class="paymentdetails">
-                    <div id="lineChart3" style="width:90%; height:60%;"></div>
+                    <div id="lineChart3" style="width:90%; height:40%;"></div>
+                   <div>
+													<?php echo $this->element('kml/Disponibilidad/tables',array('tipoUnidad'=>4));?>
+                   </div>
                 </div>
             </div>
             <div class="item">
                 <div class="paymentdetails">
-                    <div id="lineChart4" style="width:90%; height:60%;"></div>
+                    <div id="lineChart4" style="width:90%; height:40%;"></div>
                 </div>
             </div>
         </div>
