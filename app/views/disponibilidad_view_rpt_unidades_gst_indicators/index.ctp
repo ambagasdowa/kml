@@ -118,6 +118,45 @@
 		  opacity:1;
 		}
 
+
+
+/*Carrousel And Tabs Fix */
+/*
+.tab-content > .tab-pane,
+.pill-content > .pill-pane {
+    position: absolute;
+    opacity: 0;
+    z-index:0;
+}
+.tab-content > .active,
+.pill-content > .active {
+    opacity: 1;
+    z-index:1;
+}
+*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		</style>
 
 
@@ -338,6 +377,76 @@
 
 	<script type="text/javascript">
 		  $(document).ready(function () {
+
+	/*		 $('a[data-toggle="tab"]').on( 'shown.bs.tab', function (x) {
+					alert('Firsts att');
+					console.log($(this));
+					 $.fn.dataTable.tables( {visible: true, api: true} ).columns.adjust();
+			 });
+*/
+console.log($('#a_table_1'));
+				$('#myCarousel').on('slid.bs.carousel', function () {
+					// do something...
+					
+				
+					$('#dispTabs li').removeClass('active');
+					$(this).tab('show');
+
+/*
+			  	$('#myTab a').on('click', function (e) {
+						e.preventDefault()
+						$(this).tab('show')
+					})
+*/
+
+//NOTE Remenber for fix this maybe is because you need check a multitab example NOTE //					alert('going to ...') ;
+//					
+					 $('a[data-toggle="tab"]').on( 'shown.bs.tab', function (e) {
+							alert('eh');
+							console.log($(this));
+				
+				//			$('.nav li').removeClass('active').eq(to).addClass('active');
+				
+				//			$(this).tab('show');				
+				//			console.log(	$('#b_table_2') );
+//					console.log( e.target );// newly activated tab
+//					console.log( e.relatedTarget ); // previous active tab
+
+/*				var from = $('.nav li.active').index();
+		      var next = $(e.relatedTarget);
+			    var to =  next.index();
+
+        // This could interest you
+*/
+//							 $.fn.dataTable.tables( {visible: true, api: true} ).columns.adjust();
+					 });
+				});
+
+//				$(".owl-carousel").owlCarousel();
+//						$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+						//e.target // newly activated tab
+						//e.relatedTarget // previous active tab
+						//$(".owl-carousel").trigger('refresh.owl.carousel');
+//				});
+
+
+/*			 $('table.table').DataTable( {
+			//     ajax:           '../ajax/data/arrays.txt',
+		 //      "data":         testdata.data,
+					 scrollY:        200,
+					 scrollCollapse: true,
+					 paging:         false
+			 } );
+*/
+    // Apply a search to the second table for the demo
+//    $('#myTable2').DataTable().search( 'New York' ).draw();
+
+/*				var table_a = $('#xtable').DataTable(
+					Object.assign( {}, options_datatable
+						, calculate_row([0])
+					 )
+				 );
+*/
 
 // NOTE Tractocamiones
 Highcharts.chart('lineChart1', {

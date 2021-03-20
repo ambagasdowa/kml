@@ -389,7 +389,7 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 // https://jsfiddle.net/ambagasdowa/b3y8297x/1/
 
 	function index() {
-		 Configure::write('debug',0);
+		 Configure::write('debug',2);
 		 
 
 		// debug($this->Auth->User());
@@ -398,7 +398,7 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 		// debug($this->Auth->User());
 
 // Note add funtions
-		$units_type = $_SESSION['Auth']['User']['units_type'];
+//		$units_type = $_SESSION['Auth']['User']['units_type'];
 
 		$this->LoadModel('ProjectionsViewBussinessUnit');
 		$this->LoadModel('ProjectionsViewFraction');

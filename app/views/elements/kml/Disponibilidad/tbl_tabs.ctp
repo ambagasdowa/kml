@@ -1,13 +1,18 @@
-
-<!-- Table -->
-<?php //var_dump($tipoUnidad); ?>
-<div id="first-datatable-output" class="table-responsive">
-<table width="100%">
-    <th>
-        <?php if ($tipoUnidad > 0 ) {?>
-            <table id="table_<?php echo $tipoUnidad ?>" class="display order-table table table-bordered table-hover table-striped responstable">
+<div>
+        <ul class="nav nav-tabs" id="dispTabs" role="tablist">
+            <li class="active">
+                <a href="#tab-table1" data-toggle="tab">Detalle A<?php echo "_$tipoUnidad" ?></a>
+            </li>
+            <li>
+                <a href="#tab-table2" data-toggle="tab">Detalle B<?php echo "_$tipoUnidad" ?></a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            <div class="tab-pane active" id="tab-table1">
+<!--            <table id="myTable1" class="table table-striped table-bordered" width="100%" cellspacing="0"> -->
+            <table id="a_table_<?php echo $tipoUnidad ?>" class="display order-table table table-bordered table-hover table-striped responstable">
               <thead>
-                  <th>Estatus</th>
+              <th>Estatus<?php echo "_$tipoUnidad" ?></th>
                         <?php foreach ($bssus as $id_area => $area) { ?> 
                                          <th colspan="2"><?php echo $area;?></th>
                         <?php } ?>
@@ -34,15 +39,11 @@
               </tfoot>
             </table>
 
-<?php } ?>
+            </div>
 
-    </th>
+            <div class="tab-pane" id="tab-table2">
 
-
-
-    <th>
-<?php if ($tipoUnidad == 0) {  ?>
-            <table id="table_grp" class="display order-table table table-bordered table-hover table-striped responstable">
+            <table id="b_table_<?php echo $tipoUnidad ?>" class="display order-table table table-bordered table-hover table-striped responstable">
               <thead>
                   <th><?php echo 'Unidades';?></th>
                   <th><?php echo 'Estatus';?></th>
@@ -62,8 +63,8 @@
                   <td></td>
               </tfoot>
             </table>
- <?php } ?>
-    </th>
 
-</table>
-</div>
+            </div>
+        </div>
+    </div>
+

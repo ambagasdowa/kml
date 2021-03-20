@@ -5,7 +5,8 @@
                 <div class="details">
                    <div id="lineChart1"></div>
                    <div>
-													<?php echo $this->element('kml/Disponibilidad/tables',array('tipoUnidad'=>1));?>
+													<?php //echo $this->element('kml/Disponibilidad/tables',array('tipoUnidad'=>1));?>
+													<?php echo $this->element('kml/Disponibilidad/tbl_tabs',array('tipoUnidad'=>1));?>
                    </div>
                 </div>
             </div>
@@ -13,7 +14,7 @@
                 <div class="paymentdetails">
                     <div id="lineChart2" style="width:90%; height:40%;"></div>
                    <div>
-													<?php echo $this->element('kml/Disponibilidad/tables',array('tipoUnidad'=>2));?>
+													<?php echo $this->element('kml/Disponibilidad/tbl_tabs',array('tipoUnidad'=>2));?>
                    </div>
                 </div>
             </div>
@@ -21,13 +22,16 @@
                 <div class="paymentdetails">
                     <div id="lineChart3" style="width:90%; height:40%;"></div>
                    <div>
-													<?php echo $this->element('kml/Disponibilidad/tables',array('tipoUnidad'=>4));?>
+													<?php echo $this->element('kml/Disponibilidad/tbl_tabs',array('tipoUnidad'=>4));?>
                    </div>
                 </div>
             </div>
             <div class="item">
                 <div class="paymentdetails">
                     <div id="lineChart4" style="width:90%; height:40%;"></div>
+                    <div>
+													<?php echo $this->element('kml/Disponibilidad/tables',array('tipoUnidad'=>0));?>
+                    </div>
                 </div>
             </div>
         </div>
