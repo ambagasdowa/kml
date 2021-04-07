@@ -382,44 +382,56 @@
 					alert('Firsts att');
 					console.log($(this));
 					 $.fn.dataTable.tables( {visible: true, api: true} ).columns.adjust();
-			 });
+				 });
 */
-console.log($('#a_table_1'));
-				$('#myCarousel').on('slid.bs.carousel', function () {
+//       console.log($('#a_table_1'));
+//NOTE before enter in the next [inside carousel]
+				$('#myCarousel').on('slide.bs.carousel', function () {
 					// do something...
-					
-				
-					$('#dispTabs li').removeClass('active');
-					$(this).tab('show');
+		//				alert ('remove active ...');
+		//				alert( $('#dispTabs li.active').index() );			
+		//			$('#dispTabs li').removeClass('active');
+		//			$('.tab-content .tab-pane').removeClass('active');
 
+			//			alert( $('#dispTabs li.active').index() );			
+// NOTE after the next inside event in carousel
+						$('#myCarousel').on('slid.bs.carousel', function() {	
+
+						alert ('remove active ... after');
+						alert( $('#dispTabs li.active').index() );			
+//					$('#dispTabs li').removeClass('active');
+//					$('.tab-content .tab-pane').removeClass('active');
+						alert( $('#dispTabs li.active').index() );			
+
+
+							console.log('arrive on slide');
+						//	$(this).tab('show');
+	//						$('#dispTabs li:first-child a').tab('show');	
 /*
 			  	$('#myTab a').on('click', function (e) {
 						e.preventDefault()
 						$(this).tab('show')
 					})
 */
+//NOTE Remenber for fix this maybe is because you need check a multitab example NOTE //					alert('going to ...') ;	
+										$('a[data-toggle="tab"]').on( 'shown.bs.tab', function (e) {
+													alert('eh');
+													console.log($(this));
+										//			$('.nav li').removeClass('active').eq(to).addClass('active');				
+										//			$(this).tab('show');				
+										//
+						//					console.log( e.target );// newly activated tab
+						//					console.log( e.relatedTarget ); // previous active tab
+						//
+						/*				var from = $('.nav li.active').index();
+											var next = $(e.relatedTarget);
+											var to =  next.index();
+										// This could interest you
+						*/
+						//							 $.fn.dataTable.tables( {visible: true, api: true} ).columns.adjust();
+										 }); //NOTE End data-toggle
+						});
 
-//NOTE Remenber for fix this maybe is because you need check a multitab example NOTE //					alert('going to ...') ;
-//					
-					 $('a[data-toggle="tab"]').on( 'shown.bs.tab', function (e) {
-							alert('eh');
-							console.log($(this));
-				
-				//			$('.nav li').removeClass('active').eq(to).addClass('active');
-				
-				//			$(this).tab('show');				
-				//			console.log(	$('#b_table_2') );
-//					console.log( e.target );// newly activated tab
-//					console.log( e.relatedTarget ); // previous active tab
-
-/*				var from = $('.nav li.active').index();
-		      var next = $(e.relatedTarget);
-			    var to =  next.index();
-
-        // This could interest you
-*/
-//							 $.fn.dataTable.tables( {visible: true, api: true} ).columns.adjust();
-					 });
 				});
 
 //				$(".owl-carousel").owlCarousel();
@@ -438,15 +450,10 @@ console.log($('#a_table_1'));
 					 paging:         false
 			 } );
 */
+
     // Apply a search to the second table for the demo
 //    $('#myTable2').DataTable().search( 'New York' ).draw();
 
-/*				var table_a = $('#xtable').DataTable(
-					Object.assign( {}, options_datatable
-						, calculate_row([0])
-					 )
-				 );
-*/
 
 // NOTE Tractocamiones
 Highcharts.chart('lineChart1', {

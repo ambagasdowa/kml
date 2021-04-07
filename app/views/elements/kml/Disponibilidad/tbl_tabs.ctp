@@ -1,19 +1,20 @@
 <div>
         <ul class="nav nav-tabs" id="dispTabs" role="tablist">
-            <li class="active">
-                <a href="#tab-table1" data-toggle="tab">Detalle A<?php echo "_$tipoUnidad" ?></a>
+     <!--  <li class="<?php // ($tipoUnidad == 1) ? print('active') : print ('') ; ?>"> -->
+        <li class="active">
+                <a href="#tab-table1<?php echo "_".$tipoUnidad ?>" data-toggle="tab">Detalle A</a>
             </li>
             <li>
-                <a href="#tab-table2" data-toggle="tab">Detalle B<?php echo "_$tipoUnidad" ?></a>
+                <a href="#tab-table2<?php echo "_".$tipoUnidad ?>" data-toggle="tab">Detalle B</a>
             </li>
         </ul>
         <div class="tab-content">
-            <div class="tab-pane active" id="tab-table1">
-<!--            <table id="myTable1" class="table table-striped table-bordered" width="100%" cellspacing="0"> -->
+        <!-- <div class="tab-pane <?php // ($tipoUnidad == 1) ? print('active') : print('') ; ?>" id="tab-table1"> -->
+        <div class="tab-pane active" id="tab-table1">
             <table id="a_table_<?php echo $tipoUnidad ?>" class="display order-table table table-bordered table-hover table-striped responstable">
               <thead>
               <th>Estatus<?php echo "_$tipoUnidad" ?></th>
-                        <?php foreach ($bssus as $id_area => $area) { ?> 
+                         <?php foreach ($bssus as $id_area => $area) { ?> 
                                          <th colspan="2"><?php echo $area;?></th>
                         <?php } ?>
               </thead>
