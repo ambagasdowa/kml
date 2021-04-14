@@ -399,11 +399,11 @@
 // NOTE after the next inside event in carousel
 						$('#myCarousel').on('slid.bs.carousel', function() {	
 
-						alert ('remove active ... after');
-						alert( $('#dispTabs li.active').index() );			
+//						alert ('remove active ... after');
+//						alert( $('#dispTabs li.active').index() );			
 //					$('#dispTabs li').removeClass('active');
 //					$('.tab-content .tab-pane').removeClass('active');
-						alert( $('#dispTabs li.active').index() );			
+//						alert( $('#dispTabs li.active').index() );			
 
 
 							console.log('arrive on slide');
@@ -417,7 +417,7 @@
 */
 //NOTE Remenber for fix this maybe is because you need check a multitab example NOTE //					alert('going to ...') ;	
 										$('a[data-toggle="tab"]').on( 'shown.bs.tab', function (e) {
-													alert('eh');
+								//					alert('eh');
 													console.log($(this));
 										//			$('.nav li').removeClass('active').eq(to).addClass('active');				
 										//			$(this).tab('show');				
@@ -1000,7 +1000,7 @@ Highcharts.chart('lineChart4', {
 
 									var table_a = $('#table_grp').DataTable(
 										Object.assign( {}, options_datatable
-//											, calculate_row([0])
+											, calculate_row([0])
 										 )
 									 );
 
