@@ -75,6 +75,26 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 
 		$this->LoadModel('DisponibilidadViewStatusGstIndicator');
 		$this->LoadModel('DisponibilidadViewRptGroupGstIndicator');
+		$this->LoadModel('DisponibilidadViewCrossName');
+		$this->LoadModel('DisponibilidadTblUnidadesClasification');
+
+		$this->LoadModel('ProjectionsViewBussinessUnit');
+		$this->LoadModel('ProjectionsViewFraction');
+		$this->LoadModel('DisponibilidadViewMenuOperation');
+
+		$bssus = $this->ProjectionsViewBussinessUnit->find('list',array('fields'=>array('id','name')));
+		$operacion = $this->ProjectionsViewFraction->find('list',array('fields'=>array('id','desc_producto'),'conditions'=>array('ProjectionsViewFraction.id <>'=>0)));
+		$tipoOp = $this->DisponibilidadViewMenuOperation->find('list'
+																																		,array(
+																																			 'fields'=>array('id_tipo_operacion','tipoOperacion','operation')
+																																			,'order' => array('operation' => 'ASC')
+																																		)
+		);
+
+		$addop = array('Operacion'=>array('A'=>'TODO','G'=>'GRANEL','O'=>'OTROS.'));
+  
+		$tipoOperacion = array_merge($addop,$tipoOp);
+
 
 // NOTE Work from hir
 
@@ -96,6 +116,7 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 			$units_type = $conditions['units_types'];
 			$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.units_type'] = $units_id[$units_type];
 			$conditionsTf['DisponibilidadViewRptGroupGstIndicator.units_type'] = $units_id[$units_type];
+//			$conditionsXt['DisponibilidadViewCrossName.units_type'] = $units_id[$units_type];
 		}/* else {
 			$units_type = 3;
 //			$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.units_type'] = $units_id[$units_type];
@@ -180,6 +201,7 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 
 						$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.id_area'] = $add_conditions['id_area'];
 						$conditionsTf['DisponibilidadViewRptGroupGstIndicator.id_area'] = $add_conditions['id_area'];
+						$conditionsXt['DisponibilidadViewCrossName.id_area'] = $add_conditions['id_area']; // NOTE we need to know which area is in 
 					}
 /*
 					if (isset($add_conditions['units_type'])) {
@@ -206,7 +228,7 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 											$conditionsTf['DisponibilidadViewRptGroupGstIndicator.id_flota'] = 2;
 										}
 									} else {
-										debug($condition['id_tipo_operacion']);
+										debug('BY_Tipo de Operacion');
 											$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.id_tipo_operacion'] = $condition['id_tipo_operacion'];
 											$conditionsTf['DisponibilidadViewRptGroupGstIndicator.id_tipo_operacion'] = $condition['id_tipo_operacion'];   												
 									}
@@ -216,9 +238,9 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 //      after check if is numeric and omit letters 
 					}
 
- debug($conditionsBl);
- debug($conditionsTf);
-
+// debug($conditionsBl);
+// debug($conditionsTf);
+					// NOTE The table new approach 
 
 
 // NOTE The graphics section
@@ -237,6 +259,36 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 																 )
 								);
 
+
+					//NOTE Zero Table Section
+					
+//	debug($conditionsBl);
+	debug($conditionsTf);
+
+						$disponibilidadViewCrossNames = $this->DisponibilidadViewRptGroupGstIndicator->find('all'
+									,array(
+											 'conditions'=>$conditionsTf
+											 ,'fields'=>array(
+//																			 'id_area'
+																			 'area'
+//																			 ,'id_flota'
+																			 ,'id_tipo_operacion'
+//																			 ,'units_type'
+																			 ,'sum(unidades) as [unidades]'
+//																			 ,'unidades'
+																			 ,'clasification_name'
+																		 )
+												 ,'group'=>array(
+//																			'id_area'
+																			'area'
+//																			,'id_flota'
+																			,'id_tipo_operacion'
+//																			,'units_type'
+																			,'clasification_name'
+												 )
+									));
+
+ 
 //NOTE 1st Table Section
 						$disponibilidadViewRptGroupGstIndicators = $this->DisponibilidadViewRptGroupGstIndicator->find('all'
 									,array(
@@ -256,8 +308,55 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 				debug($conditionsTf);
 				debug($conditionsBl);
 
+//debug($disponibilidadViewCrossNames);
 //debug( $disponibilidadViewRptGraphGstIndicators );
 //debug($disponibilidadViewRptGroupGstIndicators);
+
+				$tableSquema = $this->DisponibilidadViewCrossName->find( 'all',array('conditions'=>$conditionsXt) );
+			                                                                                                                                	
+					foreach ($tableSquema as $idx => $value) {
+						$Squema[$value['DisponibilidadViewCrossName']['clasification_name']][$value['DisponibilidadViewCrossName']['label']] = 0;
+
+					}
+//				debug($tableSquema);
+//				debug($Squema);
+// NOTE Define total of the flota 
+
+				$flotaFirst = $this->DisponibilidadTblUnidadesClasification->find('list',array('fields'=>array('id','clasification_name'),'conditions'=>array('DisponibilidadTblUnidadesClasification.is_sum'=>1)));
+
+				$fleet = $this->DisponibilidadTblUnidadesClasification->find('list',array('fields'=>array('id','clasification_name')));
+				
+			//	debug($flotaFirst);
+
+				$counting = 0 ;
+
+				foreach($disponibilidadViewCrossNames as $key => $v){
+					$dta[$v['DisponibilidadViewRptGroupGstIndicator']['clasification_name']][$v['DisponibilidadViewRptGroupGstIndicator']['area']] += $v[0]['unidades'];
+					
+					// NOTE check according of the definition of total flota for this issue 
+					
+					if (in_array($v['DisponibilidadViewRptGroupGstIndicator']['clasification_name'],$flotaFirst)) {
+						$units[$v['DisponibilidadViewRptGroupGstIndicator']['clasification_name']] += $v[0]['unidades'];
+					}
+					
+					// NOTE 
+					$areas[$v['DisponibilidadViewRptGroupGstIndicator']['area']] = $counting + 1;
+					$counting++;
+				}
+
+//				debug($dta);
+				debug($units);
+				$totalUnits = array_sum($units)	;
+
+			 $dispCross = $Squema;
+				foreach ( $Squema as $skey => $dtav  ) {
+					if ($dta[$skey]){
+						$dispCross[$skey] =	array_replace($Squema[$skey],$dta[$skey]);
+					}
+				}
+//				$dispCross = array_replace($Squema,$dta);
+
+
 
 		    foreach ($disponibilidadViewRptGroupGstIndicators as $key => $value) {
 					$disponibilidadViewRptGroupGstIndicators[$key]['DisponibilidadViewRptGroupGstIndicator']['unidades'] = $value[0]['unidades'];
@@ -266,7 +365,6 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 				foreach (	$disponibilidadViewRptGraphGstIndicators  as $key => $value) {
 					$disponibilidadViewRptGraphGstIndicators[$key]['DisponibilidadViewRptGroupGstIndicator']['unidades'] = $value[0]['unidades'];
 				}
-
 
 		$json_parsing_lv_one = null;
 
@@ -363,7 +461,17 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 	// $user_mod = false;
 	// $user_mod = true;
 	$user_id = $this->Auth->user('id');
-	// debug($user_id);
+	debug($Squema);
+	debug($tipoOp);
+	debug($dispCross);
+	debug($units);
+
+debug($areas);
+
+	$xareas =	array_flip($areas);
+	
+	debug($xareas);
+
 	$this->set(compact(
 											  'disponibilidadViewRptUnidadesGstIndicators'
 											 ,'disponibilidadViewStatusGstIndicators'
@@ -374,7 +482,8 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 											// ,'sums_diesel'
 											// ,'sums_rendimiento'
 											// ,'sums_viajes'
-											,'json_parsing_level_one'
+											 ,'json_parsing_level_one'
+											 ,'Squema','dispCross','units','totalUnits','xareas','bssus','operacion','fleet','flotaFirst'
 										)
 						);
 
@@ -389,7 +498,7 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 // https://jsfiddle.net/ambagasdowa/b3y8297x/1/
 
 	function index() {
-		 Configure::write('debug',2);
+		 Configure::write('debug',0);
 		 
 
 		// debug($this->Auth->User());
@@ -494,7 +603,7 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
  		);
  */
 
-	$squema  = $this->DisponibilidadViewCrossUnit->find('all');
+		$squema  = $this->DisponibilidadViewCrossUnit->find('all');
 
 	$disponibilidadViewCrossUnits = $this->DisponibilidadViewCrossUnit->find('all'
 								,array(
