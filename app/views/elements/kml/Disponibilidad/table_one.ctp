@@ -6,13 +6,13 @@
             <th>&nbsp;</th>
             <?php foreach ($bssus as $areas){ ?> 
 
-            <th colspan="2" <?php echo in_array($areas,$xareas)?' style="background-color: #1a1334;" ':''; ?>>
+            <th colspan="2" <?php echo in_array($areas,$xareas)?' style="background-color: #1a1334;" ':'style="display:none;"'; ?>>
 
             <?php
                 if (in_array($areas,$xareas)){
                     echo '<span style="color: white;">'.$areas.'</span>';
                 } else {
-                    echo $areas; 
+                   // echo $areas; 
                 }
             ?> 
 
@@ -24,8 +24,14 @@
         <tr>
             <th>&nbsp;</th>
             <?php foreach ($bssus as $areas){ ?> 
-                <th>U</th>
-                <th>%</th>
+            <?php
+                if (in_array($areas,$xareas)){
+                    echo '<th>U</th>';
+                    echo '<th>%</th>';
+                } else {
+//                    echo $areas; 
+                }
+            ?>  
             <?php } ?>
         </tr>
     </thead>
@@ -34,13 +40,16 @@
         <?php foreach ($fleet as $OperationType) { ?>
         <tr>
             <td><?php echo $OperationType ?></td>
-                <?php foreach ($bssus as $xareas) { ?>
-            <td><?php echo $dispCross[$OperationType][$xareas]; ?></td>
+    <?php foreach ($bssus as $areas) { ?>
+
+        <?php if (in_array($areas,$xareas)) { ?>
+
+            <td><?php echo $dispCross[$OperationType][$areas]; ?></td>
 
             <td>
                 <?php 
                     if(in_array($OperationType,$flotaFirst)){
-                        $percentage = round(($dispCross[$OperationType][$xareas])*100/$totalUnits,2); 
+                        $percentage = round(($dispCross[$OperationType][$areas])*100/$totalUnits,2); 
                         if ($OperationType == 'Taller' && $percentage > 10.0) {
                             echo '<span style="color:red">' . $percentage . '%</span>'; 
                         } else {
@@ -53,7 +62,9 @@
                 ?>
             </td>
 
-            <?php } ?>
+        <?php }?>
+
+    <?php } ?>
         </tr>
         <?php } ?>
 
