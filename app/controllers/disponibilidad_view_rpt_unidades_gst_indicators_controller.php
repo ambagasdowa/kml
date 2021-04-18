@@ -309,7 +309,8 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 
 						$disponibilidadViewClasifications = $this->DisponibilidadViewRptGroupClasificationsIndicator->find('all'
 									,array(
-											 'conditions'=>$conditionsClass
+										 'conditions'=>$conditionsClass
+										,'order'=>array('Flota'=>'desc','TipoVehiculo'=>'asc')
 									 )
 						);
 
