@@ -75,6 +75,7 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 
 		$this->LoadModel('DisponibilidadViewStatusGstIndicator');
 		$this->LoadModel('DisponibilidadViewRptGroupGstIndicator');
+		$this->LoadModel('DisponibilidadViewRptGroupClasificationsIndicator');
 		$this->LoadModel('DisponibilidadViewCrossName');
 		$this->LoadModel('DisponibilidadTblUnidadesClasification');
 
@@ -110,12 +111,23 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 				,4=>array(4)											//only dollys
 		);
 
+
+
+
+		$units_def = 
+			array(
+				 1=>'Tractocamiones'
+				,2=>'Remolques'
+				,4=>'Dollys'
+			);
+
 //		var_dump(isset($units_type));
 
 		if (isset($conditions['units_types'])) {
 			$units_type = $conditions['units_types'];
 			$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.units_type'] = $units_id[$units_type];
 			$conditionsTf['DisponibilidadViewRptGroupGstIndicator.units_type'] = $units_id[$units_type];
+			$conditionsClass['DisponibilidadViewRptGroupClasificationsIndicator.TipoVehiculo'] = $units_def[$units_type];
 //			$conditionsXt['DisponibilidadViewCrossName.units_type'] = $units_id[$units_type];
 		}/* else {
 			$units_type = 3;
@@ -202,6 +214,7 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 						$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.id_area'] = $add_conditions['id_area'];
 						$conditionsTf['DisponibilidadViewRptGroupGstIndicator.id_area'] = $add_conditions['id_area'];
 						$conditionsXt['DisponibilidadViewCrossName.id_area'] = $add_conditions['id_area']; // NOTE we need to know which area is in 
+						$conditionsClass['DisponibilidadViewRptGroupClasificationsIndicator.id_area'] = $add_conditions['id_area']; // NOTE we need to know which area is in 
 					}
 /*
 					if (isset($add_conditions['units_type'])) {
@@ -221,16 +234,19 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 											debug('Granell');
 											$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.id_flota'] = 1;
 											$conditionsTf['DisponibilidadViewRptGroupGstIndicator.id_flota'] = 1;
+											$conditionsClass['DisponibilidadViewRptGroupClasificationsIndicator.id_flota'] = 1;
 										}							
 										if (in_array('O',$condition['id_tipo_operacion'],TRUE))	{
 											debug('Otherss');
 											$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.id_flota'] = 2;
 											$conditionsTf['DisponibilidadViewRptGroupGstIndicator.id_flota'] = 2;
+											$conditionsClass['DisponibilidadViewRptGroupClasificationsIndicator.id_flota'] = 2;
 										}
 									} else {
 										debug('BY_Tipo de Operacion');
 											$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.id_tipo_operacion'] = $condition['id_tipo_operacion'];
 											$conditionsTf['DisponibilidadViewRptGroupGstIndicator.id_tipo_operacion'] = $condition['id_tipo_operacion'];   												
+											$conditionsClass['DisponibilidadViewRptGroupClasificationsIndicator.id_tipo_operacion'] = $condition['id_tipo_operacion'];   												
 									}
 								}
 //NOTE					  when is a letter and can be 3 
@@ -273,6 +289,7 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 																			 'area'
 //																			 ,'id_flota'
 																			 ,'id_tipo_operacion'
+																			 ,'segmento'
 //																			 ,'units_type'
 																			 ,'sum(unidades) as [unidades]'
 //																			 ,'unidades'
@@ -283,12 +300,20 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 																			'area'
 //																			,'id_flota'
 																			,'id_tipo_operacion'
+																			,'segmento'
 //																			,'units_type'
 																			,'clasification_name'
 												 )
 									));
+//'DisponibilidadViewRptGroupClasificationsIndicator'
 
- 
+						$disponibilidadViewClasifications = $this->DisponibilidadViewRptGroupClasificationsIndicator->find('all'
+									,array(
+											 'conditions'=>$conditionsClass
+									 )
+						);
+
+
 //NOTE 1st Table Section
 						$disponibilidadViewRptGroupGstIndicators = $this->DisponibilidadViewRptGroupGstIndicator->find('all'
 									,array(
@@ -309,8 +334,9 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 				debug($conditionsBl);
 
 //debug($disponibilidadViewCrossNames);
-//debug( $disponibilidadViewRptGraphGstIndicators );
 //debug($disponibilidadViewRptGroupGstIndicators);
+//debug( $disponibilidadViewRptGraphGstIndicators );
+//debug( $disponibilidadViewRptUnidadesGstIndicators );
 
 				$tableSquema = $this->DisponibilidadViewCrossName->find( 'all',array('conditions'=>$conditionsXt) );
 			                                                                                                                                	
@@ -464,6 +490,7 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 	debug($Squema);
 	debug($tipoOp);
 	debug($dispCross);
+	debug($disponibilidadViewCrossNames);
 	debug($units);
 
 debug($areas);
@@ -481,8 +508,10 @@ debug($areas);
 											// ,'sums_kms'
 											// ,'sums_diesel'
 											// ,'sums_rendimiento'
-											// ,'sums_viajes'
+											 // ,'sums_viajes'
+											 ,'disponibilidadViewCrossNames'
 											 ,'json_parsing_level_one'
+											 ,'disponibilidadViewClasifications'
 											 ,'Squema','dispCross','units','totalUnits','xareas','bssus','operacion','fleet','flotaFirst'
 										)
 						);
@@ -745,7 +774,13 @@ debug($areas);
 
 
 // NOTE add the new vars
-		$this->set(compact('bssus','operacion','units_type','tipoOperacion','disponibilidadViewRptGroupGstIndicators','json_parsing_level_index','disp','groups','percents'));
+		$this->set(compact(
+						'bssus','operacion','units_type','tipoOperacion'
+						,'disponibilidadViewRptGroupGstIndicators'
+	//					,'disponibilidadView'
+						,'json_parsing_level_index','disp','groups','percents'
+					)
+		);
 // NOTE End the main 
 	} // NOTE End index
 

@@ -998,9 +998,9 @@ Highcharts.chart('lineChart4', {
 									options_module = {...options_datatable,...options_disponibilidad}	;	
 
 
-									var table_a = $('#table_grp').DataTable(
+									var table_a = $('#table_2nd_section').DataTable(
 										Object.assign( {}, options_datatable
-											, calculate_row([0])
+										, calculate_row([1])
 										 )
 									 );
 
@@ -1015,7 +1015,7 @@ Highcharts.chart('lineChart4', {
 									var table_c = $('#table_xone').DataTable(
 										Object.assign( {}
 											, options_datatable
-//										, calculate_row([1])
+										, calculate_row([1])
 										)
 									 );
 

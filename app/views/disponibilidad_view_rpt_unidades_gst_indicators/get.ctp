@@ -153,7 +153,7 @@ echo
 
 		<?php echo $this->element('kml/Disponibilidad/table_one');?>
 
-		<?php //echo $this->element('kml/Disponibilidad/table_two');?>
+		<?php echo $this->element('kml/Disponibilidad/table_2nd_section');?>
 
 		<?php echo $this->element('kml/Disponibilidad/table_three');?>
 
