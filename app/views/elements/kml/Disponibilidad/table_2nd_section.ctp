@@ -4,23 +4,24 @@
 		<thead>
 			<tr>
 				<th>Area</th>
-				<th>Flota</th>
-				<th>Vehiculo</th>
-				<th>Disponible</th>
+				<th>Operacion</th>
+				<th>Tipo</th>
 				<th>Operando</th>
+				<th>Disponible</th>
 				<th>Taller</th>
 				<th>Gestoria</th>
 				<th>Siniestrado</th>
 				<th>Robo</th>
-				<th>Exhibicion</th>
-				<th>Venta</th>
+<!--				<th>Exhibicion</th>  -->
+<!--				<th>Venta</th> -->
 				<th>TotalDisp</th>
 				<th>TotalFlota</th>
-				<th>DispFlota</th>
-				<th>FlotaOperando</th>
-				<th>Disp.S/Viaje</th>
-				<th>Op.FlotaGestoria/Sin.</th>
-				<th>FlotaMtto</th>
+				<th>%Operando</th>
+				<th>%Disp.</th>
+				<th>%Mtto</th>
+				<th>%Gest/Sin.</th>
+				<th>%DispFlota</th>
+				<th>Venta</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -29,22 +30,22 @@
 			// code...
 		?>
 		<tr> 
-			<td>
+			<td class="black">
 						<?php
 									echo $disponibilidadViewClass['DisponibilidadViewRptGroupClasificationsIndicator']['area'];
 						?>
 			</td>
-			<td style="width:20%;">
+			<td class="black" style="width:20%;">
 					<?php
 							echo $disponibilidadViewClass['DisponibilidadViewRptGroupClasificationsIndicator']['Flota'];
 					?>
 			</td>
 
-			<td><?php echo $disponibilidadViewClass['DisponibilidadViewRptGroupClasificationsIndicator']['TipoVehiculo']; ?></td>
-			<td><?php echo $disponibilidadViewClass['DisponibilidadViewRptGroupClasificationsIndicator']['Disponible']; ?></td>
+			<td class="black"><?php echo $disponibilidadViewClass['DisponibilidadViewRptGroupClasificationsIndicator']['TipoVehiculo']; ?></td>
+			<td><?php echo $disponibilidadViewClass['DisponibilidadViewRptGroupClasificationsIndicator']['Operando']; ?></td>
 			<td>
 				<?php
-							echo $disponibilidadViewClass['DisponibilidadViewRptGroupClasificationsIndicator']['Operando'];
+							echo $disponibilidadViewClass['DisponibilidadViewRptGroupClasificationsIndicator']['Disponible'];
 				?>
 			</td>
 			<td>
@@ -54,15 +55,21 @@
 			</td>
 			<td><?php echo $disponibilidadViewClass['DisponibilidadViewRptGroupClasificationsIndicator']['Gestoria']; ?></td>
 			<td><?php echo $disponibilidadViewClass['DisponibilidadViewRptGroupClasificationsIndicator']['Siniestrado']; ?></td>
-			<td><?php echo $disponibilidadViewClass['DisponibilidadViewRptGroupClasificationsIndicator']['Robo']; ?></td>
-			<td><?php echo $disponibilidadViewClass['DisponibilidadViewRptGroupClasificationsIndicator']['Exhibicion']; ?></td>
-			<td><?php echo $disponibilidadViewClass['DisponibilidadViewRptGroupClasificationsIndicator']['Venta']; ?></td>
+			<td><?php echo $disponibilidadViewClass['DisponibilidadViewRptGroupClasificationsIndicator']['Robo']; ?></td> 
+<!--			<td><?php echo $disponibilidadViewClass['DisponibilidadViewRptGroupClasificationsIndicator']['Exhibicion']; ?></td> -->
+	<!--		<td><?php echo $disponibilidadViewClass['DisponibilidadViewRptGroupClasificationsIndicator']['Venta']; ?></td> -->
 			<td><?php echo $disponibilidadViewClass['DisponibilidadViewRptGroupClasificationsIndicator']['TotalDisponibilidad']; ?></td>
 			<td><?php echo $disponibilidadViewClass['DisponibilidadViewRptGroupClasificationsIndicator']['TotalFlota']; ?></td>
-			<td><?php echo $disponibilidadViewClass['DisponibilidadViewRptGroupClasificationsIndicator']['DisponibilidadFlota'].' %'; ?></td>
-			<td><?php echo $disponibilidadViewClass['DisponibilidadViewRptGroupClasificationsIndicator']['FlotaOperando'].' %'; ?></td>
+<!--			<td><?php echo $disponibilidadViewClass['DisponibilidadViewRptGroupClasificationsIndicator']['DisponibilidadFlota'].' %'; ?></td> -->
+			<td>
+				<?php
+						 
+							$fleet = $disponibilidadViewClass['DisponibilidadViewRptGroupClasificationsIndicator']['FlotaOperando'];
+							echo $fleet < 90 ? '<span style="color:red"> ':'<span>';
+						echo $disponibilidadViewClass['DisponibilidadViewRptGroupClasificationsIndicator']['FlotaOperando'].' % </span>'; ?>
+			</td>
 			<td><?php echo $disponibilidadViewClass['DisponibilidadViewRptGroupClasificationsIndicator']['Disp_S_Viaje'].' %'; ?></td>
-			<td><?php echo $disponibilidadViewClass['DisponibilidadViewRptGroupClasificationsIndicator']['Op_FlotaGestoria_Siniestro'].' %'; ?></td>
+<!--			<td><?php echo $disponibilidadViewClass['DisponibilidadViewRptGroupClasificationsIndicator']['Op_FlotaGestoria_Siniestro'].' %'; ?></td> -->
 			<td>
 				<?php 
 							$mtto = $disponibilidadViewClass['DisponibilidadViewRptGroupClasificationsIndicator']['FlotaMtto'];
@@ -70,6 +77,17 @@
 							echo $disponibilidadViewClass['DisponibilidadViewRptGroupClasificationsIndicator']['FlotaMtto'].' % </span>'; 
 				?>
 			</td>
+			<td><?php echo $disponibilidadViewClass['DisponibilidadViewRptGroupClasificationsIndicator']['Op_FlotaGestoria_Siniestro'].' %'; ?></td>
+
+			<td><?php echo $disponibilidadViewClass['DisponibilidadViewRptGroupClasificationsIndicator']['DisponibilidadFlota'].' %'; ?></td>
+
+			<td><?php echo $disponibilidadViewClass['DisponibilidadViewRptGroupClasificationsIndicator']['Venta']; ?></td>
+
+
+
+
+
+
 		</tr>
 	<?php } //endforeach; ?>
 		</tbody>

@@ -58,6 +58,19 @@
 			white-space:nowrap;
 		}
 
+		.black{
+      font-weight:bold;
+		}
+
+		#table_2nd_section > td {
+      text-align:center;
+		}
+		#table_2nd_section > th {
+      text-align:center;
+		}
+
+
+
 
 		.detail_header {
 			display: none;
