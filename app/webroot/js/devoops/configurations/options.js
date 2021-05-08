@@ -84,6 +84,84 @@ options_disponibilidad = {
 };
 
 
+// NOTE Disponibilidad Options Module for table 2nd
+// unset searchable in column 1 
+// rebuild buttons for exporting options
+options_disponibilidad_second_table = {
+  "columnDefs": [
+    { "searchable": false, "targets": 1 }
+  ],
+  buttons: [
+       { extend: 'pageLength', text: '<i class="fa fa-filter" aria-hidden="true"></i>' }
+      ,{
+          extend: 'copy', text: '<i class="fa fa-clipboard" aria-hidden="true"></i>',
+          exportOptions: {
+             columns: ':visible'
+          //   columns:[0,2,3,4,5,6,7,8,9,10]
+          }
+       }
+      ,{
+         extend: 'csv', text: '<i class="fa fa-file-text"></i>',
+         exportOptions: {
+              columns: ':visible'
+         //    columns:[0,2,3,4,5,6,7,8,9,10]
+         }
+       }
+      ,{
+            extend: 'excel'
+          , text: '<i class="fa fa-file-excel-o"></i>'
+          // , extension: '.xlsx'
+          , autoFilter: true
+          , messageTop:'Detalle'
+          // , header:false
+          , filename:"ExportData"
+          , title:"File"
+          ,exportOptions: {
+              columns: ':visible'
+//            columns:[0,2,3,4,5,6,7,8,9,10]
+           }
+        }
+
+      ,{
+            // extend: 'pdfHtml5',
+        extend: 'pdf', text: '<i class="fa fa-file-pdf-o"></i>'
+              , messageTop:'Detalle'
+        // 			// , header:false
+              , filename:"export_file"
+              , title:"Detalle Tabla"
+              , orientation: 'landscape'
+              ,customize: function ( doc ) {
+                                              doc.content.splice( 0, 0, {
+                                                  margin: [ 0, 0, 0, 12 ],
+                                                  alignment: 'left',
+                                                  image: imgeHeader
+                                              });
+                                              doc.defaultStyle.fontSize = 10;
+//                                              doc.styles.tableHeader.fontSize = 12;
+                          }
+// NOTE  add customize field 
+
+              ,exportOptions: {
+//               columns: ':visible'
+              columns:[0,1,2,3,4,5,9,10,11,12,13,14,15,16]
+              }
+       }
+
+      ,{
+        extend: 'print', text: '<i class="fa fa-print"></i>' ,
+        exportOptions: {
+              columns: ':visible'
+          }
+       }
+// NOTE end updates 
+  ]                                                                                                                                      
+};
+
+
+
+
+
+
 options_datatable = {
 
         // initComplete: function () {

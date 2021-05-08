@@ -1007,10 +1007,12 @@ Highcharts.chart('lineChart4', {
 
 									options_module = {...options_datatable,...options_disponibilidad}	;	
 
+									options_nd_table = {...options_datatable,...options_disponibilidad_second_table};
 
 									var table_a = $('#table_2nd_section').DataTable(
-										Object.assign( {}, options_datatable
-										, calculate_row([1])
+										Object.assign( {}
+											, options_nd_table
+											, calculate_row([1])
 										 )
 									 );
 
