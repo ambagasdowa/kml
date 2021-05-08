@@ -83,7 +83,12 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 		$this->LoadModel('ProjectionsViewFraction');
 		$this->LoadModel('DisponibilidadViewMenuOperation');
 
-		$bssus = $this->ProjectionsViewBussinessUnit->find('list',array('fields'=>array('id','name')));
+
+		$cond_bssus['ProjectionsViewBussinessUnit.id_area <>'] = 7;
+//		$cond_bssus['ProjectionsViewBussinessUnit.id_area <>'] = null;
+
+		$bssus = $this->ProjectionsViewBussinessUnit->find('list',array('fields'=>array('id','name'),'conditions'=>$cond_bssus));
+//		$bssus = $this->ProjectionsViewBussinessUnit->find('list',array('fields'=>array('id','name')));
 		$operacion = $this->ProjectionsViewFraction->find('list',array('fields'=>array('id','desc_producto'),'conditions'=>array('ProjectionsViewFraction.id <>'=>0)));
 		$tipoOp = $this->DisponibilidadViewMenuOperation->find('list'
 																																		,array(
@@ -353,7 +358,7 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 
 				$fleet = $this->DisponibilidadTblUnidadesClasification->find('list',array('fields'=>array('id','clasification_name')));
 				
-			//	debug($flotaFirst);
+			debug($flotaFirst);
 
 				$counting = 0 ;
 
@@ -529,7 +534,6 @@ debug($areas);
 
 	function index() {
 		 Configure::write('debug',0);
-		 
 
 		// debug($this->Auth->User());
 		// debug($this->params['url']['units_type']);
@@ -543,7 +547,10 @@ debug($areas);
 		$this->LoadModel('ProjectionsViewFraction');
 		$this->LoadModel('DisponibilidadViewMenuOperation');
 
-		$bssus = $this->ProjectionsViewBussinessUnit->find('list',array('fields'=>array('id','name')));
+		$cond_bssus['ProjectionsViewBussinessUnit.id_area <>'] = 7;
+//		$cond_bssus['ProjectionsViewBussinessUnit.id_area <>'] = null;
+
+		$bssus = $this->ProjectionsViewBussinessUnit->find('list',array('fields'=>array('id','name'),'conditions'=>$cond_bssus));
 		$operacion = $this->ProjectionsViewFraction->find('list',array('fields'=>array('id','desc_producto')));
 		$tipoOp = $this->DisponibilidadViewMenuOperation->find('list'
 																																		,array(
@@ -592,7 +599,7 @@ debug($areas);
 
 // NOTE The graphics section
 					//			NOTE add condition for not nulls tuples :: This Become a Global Parameter
-					$conditionsTf['DisponibilidadViewRptGroupGstIndicator.group_name !='] = null ;
+		$conditionsTf['DisponibilidadViewRptGroupGstIndicator.group_name !='] = null ;
 
 								$disponibilidadViewRptGraphGstIndicators = $this->DisponibilidadViewRptGroupGstIndicator->find('all',array(
 													 'fields' => array(

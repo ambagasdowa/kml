@@ -69,12 +69,20 @@
         <?php } ?>
 
     </tbody>
-
-<!--    <tfoot>
+<!--
+    <tfoot>
       <tr>
         <td>Total</td>
-        <td>&nbsp;</td>
-        <td colspan="17"></td>
+            <?php foreach ($bssus as $areas){ ?> 
+            <?php
+                if (in_array($areas,$xareas)){
+                    echo '<th>U</th>';
+                    echo '<th>%</th>';
+                } else {
+//                    echo $areas; 
+                }
+            ?>  
+            <?php } ?>    
       </tr>
     </tfoot>
 -->

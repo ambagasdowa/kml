@@ -62,15 +62,12 @@
       font-weight:bold;
 		}
 
-		#table_2nd_section > td {
+		.second td {
       text-align:center;
 		}
-		#table_2nd_section > th {
+		.second th {
       text-align:center;
 		}
-
-
-
 
 		.detail_header {
 			display: none;

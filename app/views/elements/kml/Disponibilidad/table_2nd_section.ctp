@@ -1,6 +1,6 @@
 <!-- disponibilidad_view_rpt_group_clasifications_indicators -->
 
-		<table id="table_2nd_section" class="display order-table table table-bordered table-hover table-striped responstable">
+		<table id="table_2nd_section" class="display order-table table table-bordered table-hover table-striped responstable second">
 		<thead>
 			<tr>
 				<th>Area</th>
@@ -14,8 +14,8 @@
 				<th>Robo</th>
 <!--				<th>Exhibicion</th>  -->
 <!--				<th>Venta</th> -->
-				<th>TotalDisp</th>
 				<th>TotalFlota</th>
+				<th>TotalDisp</th>
 				<th>%Operando</th>
 				<th>%Disp.</th>
 				<th>%Mtto</th>
@@ -35,7 +35,7 @@
 									echo $disponibilidadViewClass['DisponibilidadViewRptGroupClasificationsIndicator']['area'];
 						?>
 			</td>
-			<td class="black" style="width:20%;">
+			<td class="black" style="width:10%;">
 					<?php
 							echo $disponibilidadViewClass['DisponibilidadViewRptGroupClasificationsIndicator']['Flota'];
 					?>
@@ -58,8 +58,8 @@
 			<td><?php echo $disponibilidadViewClass['DisponibilidadViewRptGroupClasificationsIndicator']['Robo']; ?></td> 
 <!--			<td><?php echo $disponibilidadViewClass['DisponibilidadViewRptGroupClasificationsIndicator']['Exhibicion']; ?></td> -->
 	<!--		<td><?php echo $disponibilidadViewClass['DisponibilidadViewRptGroupClasificationsIndicator']['Venta']; ?></td> -->
-			<td><?php echo $disponibilidadViewClass['DisponibilidadViewRptGroupClasificationsIndicator']['TotalDisponibilidad']; ?></td>
 			<td><?php echo $disponibilidadViewClass['DisponibilidadViewRptGroupClasificationsIndicator']['TotalFlota']; ?></td>
+			<td><?php echo $disponibilidadViewClass['DisponibilidadViewRptGroupClasificationsIndicator']['TotalDisponibilidad']; ?></td>
 <!--			<td><?php echo $disponibilidadViewClass['DisponibilidadViewRptGroupClasificationsIndicator']['DisponibilidadFlota'].' %'; ?></td> -->
 			<td>
 				<?php
