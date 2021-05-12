@@ -33,6 +33,7 @@
 
 
 <!-- dinamyc menu for gst -->
+
 		<?php if (isset($_SESSION['Auth']['User'])) {?>
 			<?php if (isset($setMenu)) {?>
 			<ul class="nav navbar-nav navbar-left"><?php //debug($setMenu);?>
@@ -72,6 +73,9 @@
 			</ul>
 			<?php }?>
 		<?php }?>
+<!-- dinamyc menu for gst -->
+
+
 
 		<ul class="nav navbar-nav navbar-right pull-right">
 		<?php if (isset($_SESSION['Auth']['User'])) {?>
