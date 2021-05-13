@@ -32,6 +32,13 @@
         <div class="collapse navbar-collapse" id="navbar-collapse-4">
 
 
+
+<!-- NOTE IA Automagic menu -->
+		<div style="">
+      <ul id="mk_menu"></ul>
+		<\div>
+<!-- NOTE IA Automagic menu -->
+
 <!-- dinamyc menu for gst -->
 
 		<?php if (isset($_SESSION['Auth']['User'])) {?>

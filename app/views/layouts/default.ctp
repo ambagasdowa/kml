@@ -62,6 +62,18 @@ $theme = 'devoops'.DS;
 $default = 'kml'.DS;
 $core = 'core'.DS;
 
+
+
+/* NOTE Add menu_editor libs
+ * @begin css  for menu_editor
+ */
+
+//e($this->Html->css($theme.'justified-gallery/justifiedGallery', 'stylesheet'));
+
+
+
+
+
 // e($this->Html->css($theme.'fancybox/jquery.fancybox', 'stylesheet'));
 e($this->Html->css($theme.'justified-gallery/justifiedGallery', 'stylesheet'));
 // e($this->Html->css($theme.'xcharts/xcharts.min', 'stylesheet'));
