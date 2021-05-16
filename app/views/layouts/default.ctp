@@ -68,8 +68,17 @@ $core = 'core'.DS;
  * @begin css  for menu_editor
  */
 
-//e($this->Html->css($theme.'justified-gallery/justifiedGallery', 'stylesheet'));
 
+//e($this->Html->css($theme.'menuEditor/lib/smartmenus/css/sm-blue/sm-blue', 'stylesheet'));
+//e($this->Html->css($theme.'menuEditor/lib/smartmenus/css/sm-clean/sm-clean', 'stylesheet'));
+//e($this->Html->css($theme.'menuEditor/lib/smartmenus/css/sm-core-css', 'stylesheet'));
+e($this->Html->css($theme.'menuEditor/lib/smartmenus/addons/bootstrap/jquery.smartmenus.bootstrap', 'stylesheet'));
+
+		// NOTE Add branch menu_editor
+		// MENU EDITOR
+e($this->Html->script($theme.'menuEditor/lib/smartmenus/jquery.smartmenus.min'));		
+e($this->Html->script($theme.'menuEditor/lib/smartmenus/addons/bootstrap/jquery.smartmenus.bootstrap'));		
+e($this->Html->script($theme.'menuEditor/lib/smartmenus/renderMenu'));	
 
 
 
@@ -308,4 +317,57 @@ e($this->Html->css($theme.'devoops/font-awesome.min.css', 'stylesheet'));//font-
 			});
 		});
 // &#93;&#93;>
+
+//		 $(document).ready(function () {
+
+					var itemsa = [
+						//		{"href": "https://github.com/davicotico", "text": "Home", "icon": "fa fa-home"}
+              {
+                 "href": "#"
+                ,"text": "Products"
+                ,"icon": "fa fa-book"
+                ,"children": [
+                                 { 
+                                     "href": "//github.com"
+                                    ,"text": "Books"
+                                    ,"children": [{ "href": "#", "text": "Jquery"  }, { "href": "#", "text": "Codeigniter"  }, { "href": "#", "text": "Wordpress"  }]  
+                                 }
+                                ,{ "href": "#", "text": "Software"  }  
+                              ] 
+              }
+					];
+
+
+          var items =
+[{"text":"Politicas","href":"http://home.com","icon":"fa fa-book","target":"_top","title":"My Home","children":[{"text":"Formatos","href":"","icon":"fa fa-book-open","target":"_self","title":"","children":[{"text":"for-demo-1","href":"","icon":"far fa-bookmark","target":"_self","title":""},{"text":"for-demo2","href":"","icon":"far fa-bookmark","target":"_self","title":""}]},{"text":"Procedimientos","href":"","icon":"fa fa-book-open","target":"_self","title":"","children":[{"text":"proc-demo1","href":"","icon":"far fa-bookmark","target":"_self","title":""},{"text":"proc-demo2","href":"","icon":"far fa-bookmark","target":"_self","title":""},{"text":"proc-demo3","href":"","icon":"far fa-bookmark","target":"_self","title":""}]}]}]
+ ;
+
+
+
+                $('#mk_menu').renderizeMenu(items, {
+                        active: 'http://codeigniterturoriales.com',
+                        rootClass: "nav navbar-nav",
+                        menuClass: "dropdown-menu",
+                        submenuClass: "dropdown-menu",
+                        dropdownIcon: '<span class="caret"></span>' 
+                });
+                 jQuery.SmartMenus.Bootstrap.init();
+
+		</script>
+
+<script>
+/*
+					var $topMenu = $('#mk_menu').renderizeMenu(items, {rootClass: "sm sm-clean"});
+					    $topMenu.smartmenus();
+*/
+//              $('#mk_menu').smartmenus();
+
+
+//          var $menu = $('#mk_menu_nd').renderizeMenu(items, {rootClass: "sm sm-blue sm-vertical"});
+//              $menu.smartmenus();
+
+//	 alert($topMenu);         
+
+//});
+
 </script>

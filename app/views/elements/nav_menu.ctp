@@ -34,9 +34,12 @@
 
 
 <!-- NOTE IA Automagic menu -->
-		<div style="">
+
+<!--       <ul id="mk_menu" class="nav navbar-nav navbar-left"></ul>   -->
       <ul id="mk_menu"></ul>
-		<\div>
+
+<!--			<ul id="mk_menu_nd" class="nav navbar-nav navbar-left"></ul>  -->
+
 <!-- NOTE IA Automagic menu -->
 
 <!-- dinamyc menu for gst -->

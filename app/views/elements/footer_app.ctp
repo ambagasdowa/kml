@@ -151,6 +151,4 @@
 			}
 
 
-    // NOTE Add branch menu_editor
-		
 		</script>
