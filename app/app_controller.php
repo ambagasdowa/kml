@@ -294,6 +294,22 @@ class AppController extends Controller {
     // }
 	}
 
+ 	function buildMainMenu () {
+     // if ($check == false) {
+//       $menu = $this->getDocuments(true);
+//       $conditionsMenu['PortalAppsMenuMaker.id'] = 'Active';
+			$this->LoadModel('PortalAppsMenuMaker');
+			$last_id = $this->PortalAppsMenuMaker->find('first',array('fields'=>array("MAX([PortalAppsMenuMaker].id) as 'id'")));
+			//	debug($last_id[0]['id']);
+			$conditionsMenu['PortalAppsMenuMaker.id'] = $last_id[0]['id'];
+			$json_menux = $this->PortalAppsMenuMaker->find('list',array('fields'=>array('id','json_menu_string'),'conditions'=>$conditionsMenu));
+			//debug($json_menuix);
+			$menux = base64_decode(current($json_menux));
+//		debug($json_menu);
+			$this->set(compact('menux'));
+//       $this->set(compact('setMenu'));
+ 	}
+
 	/** NOTE <GST build Menu's' options>*/
 
 	/** NOTE <GST build M-r's report>*/
@@ -583,7 +599,8 @@ class AppController extends Controller {
       }
 
       if ($this->validationRfc($this->Auth->user('username')) == 0) {
-        $this->buildMenu();
+				$this->buildMenu();
+				$this->buildMainMenu();
       }
       // echo 'debug validation';
       // debug($this->validationRfc($this->data['User']['username']));

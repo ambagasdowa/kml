@@ -40,8 +40,9 @@ $root = 'root'.DS;
 			// e($this->Html->script($theme.'datatables/datatables.min',false));
 
 			e($this->Html->css($theme.'datatables/DataTables-1.10.18/css/dataTables.bootstrap', 'stylesheet',array('inline'=>false)));
-			e($this->Html->css($theme.'devoops/datatables_gst', 'stylesheet',array('inline'=>false)));
-
+	*/
+//			e($this->Html->css($theme.'devoops/datatables_gst', 'stylesheet',array('inline'=>false)));
+/*
 			e($this->Html->css($theme.'datatables/AutoFill-2.3.2/css/autoFill.bootstrap.min', 'stylesheet',array('inline'=>false)));
 			e($this->Html->css($theme.'datatables/Buttons-1.5.4/css/buttons.bootstrap', 'stylesheet',array('inline'=>false)));
 			e($this->Html->css($theme.'datatables/ColReorder-1.5.0/css/colReorder.bootstrap', 'stylesheet',array('inline'=>false)));
@@ -71,14 +72,16 @@ $root = 'root'.DS;
 			 */
 			/** @css */
 
-			// e($this->Html->css($theme.'jquery/jquery-ui', 'stylesheet',array('inline'=>false)));
-//			e($this->Html->css($theme.'bootstrap/bootstrap', 'stylesheet',array('inline'=>false)));
-// e($this->Html->css($core.'bootstrap_addons', 'stylesheet',array('inline'=>false)));
-/*
+
+// NOTE NAV BAR
+// /*
+			e($this->Html->css($theme.'jquery/jquery-ui', 'stylesheet',array('inline'=>false)));
+			e($this->Html->css($theme.'bootstrap/bootstrap', 'stylesheet',array('inline'=>false)));
+			e($this->Html->css($core.'bootstrap_addons', 'stylesheet',array('inline'=>false)));
 			e($this->Html->css($core.'bootstrap_switch', 'stylesheet',array('inline'=>false)));
 			e($this->Html->css($core.'bootstrap_navbar', 'stylesheet',array('inline'=>false)));
 			e($this->Html->css($core.'bootstrap_addon_navbar', 'stylesheet',array('inline'=>false)));
-*/
+//*/
 /*
 			// e($this->Html->css($core.'bootstrap_reset', 'stylesheet',array('inline'=>false)));
 			e($this->Html->css($theme.'skeleton/normalize', 'stylesheet',array('inline'=>false)));
@@ -92,8 +95,8 @@ $root = 'root'.DS;
  */
       /** @js */
 			// e($this->Html->script($theme.'jquery/jquery.min',false));
-		// e($this->Html->script($theme.'skeleton/site',false));
-			// e($this->Html->script($theme.'jquery-ui/jquery-ui.min',false));
+//		e($this->Html->script($theme.'skeleton/site',false));
+//		e($this->Html->script($theme.'jquery-ui/jquery-ui.min',false));
 
 			// NOTE What this is for ?
 //			e($this->Html->script($theme.'bootstrap/bootstrap',false));
@@ -160,9 +163,9 @@ $root = 'root'.DS;
 
       // NOTE adding support for multiselection form
       /** @package css */
-  //    e($this->Html->css($theme.'bootstrap-multiselect/bootstrap-multiselect', 'stylesheet', array('inline'=>false)));
+//      e($this->Html->css($theme.'bootstrap-multiselect/bootstrap-multiselect', 'stylesheet', array('inline'=>false)));
       /** @package js*/
-  //    e($this->Html->script($theme.'bootstrap-multiselect/bootstrap-multiselect',false));
+//      e($this->Html->script($theme.'bootstrap-multiselect/bootstrap-multiselect',false));
 	 
 
       // NOTE highCharts
@@ -195,10 +198,9 @@ $root = 'root'.DS;
 			// NOTE css
 			e($this->Html->css($theme.'datepicker/datepicker.min', 'stylesheet', array('inline'=>false)));
 
-
-			// NOTE siema Carrousel in javascript
-			e($this->Html->script($theme.'siema/siema.min',false));
 			 */
+			// NOTE siema Carrousel in javascript
+//			e($this->Html->script($theme.'siema/siema.min',false));
 
 
       // NOTE Datatables Pluging
@@ -210,7 +212,7 @@ $root = 'root'.DS;
 
 	// NOTE Add Menu Maker Libs
 			//
-			e($this->Html->css($theme.'menuEditor/css/bootstrap.min', 'stylesheet', array('inline'=>false)));
+//			e($this->Html->css($theme.'menuEditor/css/bootstrap.min', 'stylesheet', array('inline'=>false)));
 			e($this->Html->css($theme.'menuEditor/css/all', 'stylesheet', array('inline'=>false)));
 			e($this->Html->css($theme.'menuEditor/bootstrap-iconpicker/css/bootstrap-iconpicker', 'stylesheet', array('inline'=>false)));
 						

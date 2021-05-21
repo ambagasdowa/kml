@@ -32,8 +32,8 @@
 		*/
 ?>
 <?php
-class MkMenuMaker extends AppModel {
-	var $name = 'MkMenuMaker';
+class PortalAppsMenuMaker extends AppModel {
+	var $name = 'PortalAppsMenuMaker';
 	var $useDbConfig = 'mssql_sistemas';
-	var $displayField = 'message';
+	var $displayField = 'description';
 }

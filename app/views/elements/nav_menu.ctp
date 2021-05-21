@@ -36,7 +36,6 @@
 <!-- NOTE IA Automagic menu -->
 
 <!--       <ul id="mk_menu" class="nav navbar-nav navbar-left"></ul>   -->
-      <ul id="mk_menu"></ul>
 
 <!--			<ul id="mk_menu_nd" class="nav navbar-nav navbar-left"></ul>  -->
 
@@ -46,6 +45,11 @@
 
 		<?php if (isset($_SESSION['Auth']['User'])) {?>
 			<?php if (isset($setMenu)) {?>
+
+
+      <ul id="mk_menu"></ul>
+
+<?php /* 
 			<ul class="nav navbar-nav navbar-left"><?php //debug($setMenu);?>
 					<?php foreach($setMenu as $idRootMenu => $subMenu) {?>
 
@@ -80,7 +84,8 @@
 			<!--</ul>-->
 					<?php }?>
 
-			</ul>
+					</ul>
+ */ ?>
 			<?php }?>
 		<?php }?>
 <!-- dinamyc menu for gst -->
@@ -546,7 +551,7 @@
                           <li><a tabindex="-1" href="<?php e($this->webroot.'/ProvidersControlsFiles/');?>"><i class="fa fa-cog"></i>&nbsp;<span>Proveedores</span></a></li>
                           <li><a tabindex="-1" href="<?php e($this->webroot.'/ProjectionsViewFullGstXlsIndicators/');?>"><i class="fa fa-cog"></i>&nbsp;<span>XlsPort</span></a></li>
                           <li><a tabindex="-1" href="<?php e($this->webroot.'/RentabilidadViewMainLiquidations/');?>"><i class="fa fa-cog"></i>&nbsp;<span>RentabilidadUnidades</span></a></li>
-                          <li><a tabindex="-1" href="<?php e($this->webroot.'/MkMenuMakers/');?>"><i class="fa fa-cog"></i>&nbsp;<span>MkMenuMaker</span></a></li>
+                          <li><a tabindex="-1" href="<?php e($this->webroot.'PortalAppsMenuMakers/');?>"><i class="fa fa-cog"></i>&nbsp;<span>MenuMaker</span></a></li>
                         </ul>
                     </li>
 

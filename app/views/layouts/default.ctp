@@ -320,29 +320,8 @@ e($this->Html->css($theme.'devoops/font-awesome.min.css', 'stylesheet'));//font-
 
 //		 $(document).ready(function () {
 
-					var itemsa = [
-						//		{"href": "https://github.com/davicotico", "text": "Home", "icon": "fa fa-home"}
-              {
-                 "href": "#"
-                ,"text": "Products"
-                ,"icon": "fa fa-book"
-                ,"children": [
-                                 { 
-                                     "href": "//github.com"
-                                    ,"text": "Books"
-                                    ,"children": [{ "href": "#", "text": "Jquery"  }, { "href": "#", "text": "Codeigniter"  }, { "href": "#", "text": "Wordpress"  }]  
-                                 }
-                                ,{ "href": "#", "text": "Software"  }  
-                              ] 
-              }
-					];
 
-
-          var items =
-[{"text":"Politicas","href":"http://home.com","icon":"fa fa-book","target":"_top","title":"My Home","children":[{"text":"Formatos","href":"","icon":"fa fa-book-open","target":"_self","title":"","children":[{"text":"for-demo-1","href":"","icon":"far fa-bookmark","target":"_self","title":""},{"text":"for-demo2","href":"","icon":"far fa-bookmark","target":"_self","title":""}]},{"text":"Procedimientos","href":"","icon":"fa fa-book-open","target":"_self","title":"","children":[{"text":"proc-demo1","href":"","icon":"far fa-bookmark","target":"_self","title":""},{"text":"proc-demo2","href":"","icon":"far fa-bookmark","target":"_self","title":""},{"text":"proc-demo3","href":"","icon":"far fa-bookmark","target":"_self","title":""}]}]}]
- ;
-
-
+                var items = <?php echo $menux; ?>
 
                 $('#mk_menu').renderizeMenu(items, {
                         active: 'http://codeigniterturoriales.com',
@@ -355,19 +334,3 @@ e($this->Html->css($theme.'devoops/font-awesome.min.css', 'stylesheet'));//font-
 
 		</script>
 
-<script>
-/*
-					var $topMenu = $('#mk_menu').renderizeMenu(items, {rootClass: "sm sm-clean"});
-					    $topMenu.smartmenus();
-*/
-//              $('#mk_menu').smartmenus();
-
-
-//          var $menu = $('#mk_menu_nd').renderizeMenu(items, {rootClass: "sm sm-blue sm-vertical"});
-//              $menu.smartmenus();
-
-//	 alert($topMenu);         
-
-//});
-
-</script>

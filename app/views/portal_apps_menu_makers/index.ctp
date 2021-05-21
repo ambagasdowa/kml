@@ -32,24 +32,16 @@
 		// $requiere = $evaluate ? e($this->element('kml/forms/forms')) : e($this->element('requiere/norequiere') );
 		$requiere = $evaluate ? e($this->element('kml/mk_menu_makers/mk_menu')) : e($this->element('requiere/norequiere') );
 
-		?>
-<style>
-		.container-mod{
-			position: relative;
-			width: 100%;
-			max-width: 95%;
-			margin: 0 auto;
-			padding: 0 20px;
-			box-sizing: border-box;
-		}
-</style>
+?>
 
-
+<!--
 <div class="container-mod">
 </div>
+-->
 
-
+<!--
 <ul id="sortableListsBase" style="position: absolute; top: 0px; left: 0px; margin: 0px; padding: 0px; z-index: 2500;" class="pl-0"></ul>
+
         <nav class="navbar navbar-expand-lg fixed-top navbar-light bg-light">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -63,6 +55,7 @@
         <a class="btn btn-success my-2 my-sm-0" href="https://github.com/davicotico/jQuery-Menu-Editor" target="_blank"><i class="fab fa-github"></i> View on Github</a>
         </div>
         </nav>
+
         <section class="jumbotron text-center">
         <div class="container">
           <h1 class="jumbotron-heading" style="padding-top: 50px;">jQuery Menu Editor 1.1.0</h1>
@@ -84,9 +77,13 @@
           <p></p>
         </div>
         </section>
+-->
+
+
+
         <div class="container">
             <div class="row">
-                <div class="col-md-12"><h2>Demo</h2>
+                <div class="col-md-12"><h2>GST Menu Editor</h2>
                 <p>Click the Load Button to execute the method <code>setData(Array data)</code></p>
                 </div>
             </div>
@@ -155,14 +152,22 @@
                             <button type="button" id="btnAdd" class="btn btn-success"><i class="fas fa-plus"></i> Add</button>
                         </div>
                     </div>
+<!--
                     <h2>More Projects</h2>
                     <ul>
                         <li><a href="https://github.com/davicotico/jQuery-Menu-From-JSON" target="_blank">jQuery Menu from JSON</a></li>
                         <li><a href="https://github.com/davicotico/PHP-Quick-Menu" target="_blank">PHP Quick Menu</a></li>
                         <li><a href="https://github.com/davicotico/jQuery-formHelper" target="_blank">jQuery formHelper</a></li>
                     </ul>
+-->
                 </div>
             </div>
+
+
+
+
+
+<!--
             <div class="row mt-3">
                 <div class="col-md-12 ">
                     <h3>Changelog</h3>
@@ -182,7 +187,7 @@
                         <li>Default iconset: Font Awesome 5.3.1</li> 
                         <li>Support Mobile devices</li>
                         <li>The plugin SortableLists was adapted</li>
-                    </ul>
+                    </ulg
                     <h5>v0.9.0</h5>
                     <ul>
                         <li>First release</li> 
@@ -194,7 +199,7 @@
                 <p>2020 David Ticona Saravia at <a href="https://twitter.com/davicodev" target="_blank"><i class="fab fa-twitter"></i> @davicodev</a></p>
             </footer>
 				</div>
-
+-->
 
 
 <!--
@@ -208,8 +213,15 @@
             jQuery(document).ready(function () {
                 /* =============== DEMO =============== */
                 // menu items
-                var arrayjson = [{"href":"http://home.com","icon":"fas fa-home","text":"Home", "target": "_top", "title": "My Home"},{"icon":"fas fa-chart-bar","text":"Opcion2"},{"icon":"fas fa-bell","text":"Opcion3"},{"icon":"fas fa-crop","text":"Opcion4"},{"icon":"fas fa-flask","text":"Opcion5"},{"icon":"fas fa-map-marker","text":"Opcion6"},{"icon":"fas fa-search","text":"Opcion7","children":[{"icon":"fas fa-plug","text":"Opcion7-1","children":[{"icon":"fas fa-filter","text":"Opcion7-1-1"}]}]}];
-                // icon picker options
+console.log(window.location.hostname);
+console.log(window.location.pathname);
+console.log(window.location.href);
+str = window.location.href;
+console.log( str.substr(0,str.lastIndexOf('/'))  );
+
+                var arrayjson = <?php echo $json_menu ?>
+
+                // icon picker optionsi
                 var iconPickerOptions = {searchText: "Buscar...", labelHeader: "{0}/{1}"};
                 // sortable list options
                 var sortableListOptions = {
@@ -219,17 +231,33 @@
                 var editor = new MenuEditor('myEditor', {listOptions: sortableListOptions, iconPicker: iconPickerOptions});
                 editor.setForm($('#frmEdit'));
                 editor.setUpdateButton($('#btnUpdate'));
-                $('#btnReload').on('click', function () {
-                    editor.setData(arrayjson);
-                });
 
-                $('#btnOutput').on('click', function () {
+//                $('#btnReload').on('click', function () {
+//                NOTE set the current menu
+                    editor.setData(arrayjson);
+//                });
+
+                $('#btnOutput').on('click', function (event) {
+                    event.stopPropagation();
+                    event.preventDefault();
+
                     var str = editor.getString();
                     $("#out").text(str);
+                    encode_str = base64_encode(str);
+                        
+                    alert(encode_str);
+
+                    $.post("<?php echo Dispatcher::baseUrl();?>/PortalAppsMenuMakers/add/data:" + encode_str + "/",function(data){
+                        alert(encode_str);
+                    }).done(function(data){ 
+                        alert('done');
+                    });
+                  
                 });
 
                 $("#btnUpdate").click(function(){
                     editor.update();
+
                 });
 
                 $('#btnAdd').click(function(){
