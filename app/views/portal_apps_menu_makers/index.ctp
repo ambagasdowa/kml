@@ -84,7 +84,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-12"><h2>GST Menu Editor</h2>
-                <p>Click the Load Button to execute the method <code>setData(Array data)</code></p>
+        <!--        <p>Click the Load Button to execute the method <code>setData(Array data)</code></p>   -->
                 </div>
             </div>
             <div class="row">
@@ -92,8 +92,8 @@
                     <div class="card mb-3">
                         <div class="card-header"><h5 class="float-left">Menu</h5>
                             <div class="float-right">
-                                <button id="btnReload" type="button" class="btn btn-outline-secondary">
-                                    <i class="fa fa-play"></i> Load Data</button>
+          <!--                      <button id="btnReload" type="button" class="btn btn-outline-secondary">
+                                    <i class="fa fa-play"></i> Load Data</button> -->
                             </div>
                         </div>
                         <div class="card-body">
@@ -101,15 +101,15 @@
                             </ul>
                         </div>
                     </div>
-                    <p>Click the Output button to execute the function <code>getString();</code></p>
+<!--                    <p>Click the Output button to execute the function <code>getString();</code></p> -->
                     <div class="card">
-                    <div class="card-header">JSON Output
+                    <div class="card-header"> <!-- Guardar Menu -->
                     <div class="float-right">
-                    <button id="btnOutput" type="button" class="btn btn-success"><i class="fas fa-check-square"></i> Output</button>
+                    <button id="btnOutput" type="button" class="btn btn-success"><i class="fas fa-check-square"></i> Guardar</button>
                     </div>
                     </div>
                     <div class="card-body">
-                    <div class="form-group"><textarea id="out" class="form-control" cols="50" rows="10"></textarea>
+                    <div class="form-group"> <!--<textarea id="out" class="form-control" cols="50" rows="10"></textarea>-->
                     </div>
                     </div>
                     </div>
@@ -120,7 +120,7 @@
                         <div class="card-body">
                             <form id="frmEdit" class="form-horizontal">
                                 <div class="form-group">
-                                    <label for="text">Text</label>
+                                    <label for="text">Texto</label>
                                     <div class="input-group">
                                         <input type="text" class="form-control item-menu" name="text" id="text" placeholder="Text">
                                         <div class="input-group-append">
@@ -148,8 +148,8 @@
                             </form>
                         </div>
                         <div class="card-footer">
-                            <button type="button" id="btnUpdate" class="btn btn-primary" disabled="disabled"><i class="fas fa-sync-alt"></i> Update</button>
-                            <button type="button" id="btnAdd" class="btn btn-success"><i class="fas fa-plus"></i> Add</button>
+                            <button type="button" id="btnUpdate" class="btn btn-primary" disabled="disabled"><i class="fas fa-sync-alt"></i> Actualizar</button>
+                            <button type="button" id="btnAdd" class="btn btn-success"><i class="fas fa-plus"></i> Agregar</button>
                         </div>
                     </div>
 <!--
@@ -213,11 +213,11 @@
             jQuery(document).ready(function () {
                 /* =============== DEMO =============== */
                 // menu items
-console.log(window.location.hostname);
-console.log(window.location.pathname);
-console.log(window.location.href);
-str = window.location.href;
-console.log( str.substr(0,str.lastIndexOf('/'))  );
+//console.log(window.location.hostname);
+//console.log(window.location.pathname);
+//console.log(window.location.href);
+//str = window.location.href;
+///console.log( str.substr(0,str.lastIndexOf('/'))  );
 
                 var arrayjson = <?php echo $json_menu ?>
 
@@ -240,19 +240,15 @@ console.log( str.substr(0,str.lastIndexOf('/'))  );
                 $('#btnOutput').on('click', function (event) {
                     event.stopPropagation();
                     event.preventDefault();
-
                     var str = editor.getString();
-                    $("#out").text(str);
-                    encode_str = base64_encode(str);
-                        
-                    alert(encode_str);
-
+                 //   $("#out").text(str);
+                    encode_str = base64_encode(str); 
+//                    alert(encode_str);
                     $.post("<?php echo Dispatcher::baseUrl();?>/PortalAppsMenuMakers/add/data:" + encode_str + "/",function(data){
-                        alert(encode_str);
+  //                      alert(encode_str);
                     }).done(function(data){ 
-                        alert('done');
+                        alert('Su Menu ha sido Guardado correctamente');
                     });
-                  
                 });
 
                 $("#btnUpdate").click(function(){
@@ -266,11 +262,12 @@ console.log( str.substr(0,str.lastIndexOf('/'))  );
                 /* ====================================== */
 
                 /** PAGE ELEMENTS **/
-                $('[data-toggle="tooltip"]').tooltip();
+/*                $('[data-toggle="tooltip"]').tooltip();
                 $.getJSON( "https://api.github.com/repos/davicotico/jQuery-Menu-Editor", function( data ) {
                     $('#btnStars').html(data.stargazers_count);
                     $('#btnForks').html(data.forks_count);
                 });
+*/
 						});
 
 				</script>
