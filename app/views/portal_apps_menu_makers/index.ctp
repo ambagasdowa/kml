@@ -131,7 +131,24 @@
                                 </div>
                                 <div class="form-group">
                                     <label for="href">URL</label>
-                                    <input type="text" class="form-control item-menu" id="href" name="href" placeholder="URL">
+                                   <!-- <input type="text" class="form-control item-menu" id="href" name="href" placeholder="URL"> -->
+
+<?php
+            echo 
+                $this->Form->input(
+                                    'href',
+                                    array(
+                                         'type'=>'select'
+                                         ,'class'=>'search_udn u-full-width form-controli item-menu'
+                                         ,'placeholder'=> 'Url'
+                                         ,'div'=>FALSE
+                                         ,'label'=>FALSE
+                                         ,'options'=>array('Policies/view/id:60/type:1'=>'polxxxxxx','Policies/view/id:128/type:5'=>'procyyyyyy')
+                                         ,'tabindex'=>'5'
+                                    )
+                );
+?>
+
                                 </div>
                                 <div class="form-group">
                                     <label for="target">Target</label>
@@ -218,6 +235,10 @@
 //console.log(window.location.href);
 //str = window.location.href;
 ///console.log( str.substr(0,str.lastIndexOf('/'))  );
+
+                // NOTE Initialize the select menu 
+
+                $(".search_udn").select2();
 
                 var arrayjson = <?php echo $json_menu ?>
 

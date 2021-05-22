@@ -96,7 +96,7 @@ $root = 'root'.DS;
       /** @js */
 			// e($this->Html->script($theme.'jquery/jquery.min',false));
 //		e($this->Html->script($theme.'skeleton/site',false));
-//		e($this->Html->script($theme.'jquery-ui/jquery-ui.min',false));
+		e($this->Html->script($theme.'jquery-ui/jquery-ui.min',false));
 
 			// NOTE What this is for ?
 //			e($this->Html->script($theme.'bootstrap/bootstrap',false));
@@ -115,9 +115,11 @@ $root = 'root'.DS;
 
 // NOTE Bootstrap
 			/** @css */
-/*
+///*
       e($this->Html->css($theme.'select2/select2', 'stylesheet', array('inline'=>false)));
-      e($this->Html->css($theme.'select2/select2-skeleton', 'stylesheet', array('inline'=>false)));
+			e($this->Html->css($theme.'select2/select2-skeleton', 'stylesheet', array('inline'=>false)));
+/*
+
       e($this->Html->css($theme.'jquery-ui/jquery-ui', 'stylesheet', array('inline'=>false)));
       e($this->Html->css($theme.'jquery_datepicker_skins/css/nigran.datepicker', 'stylesheet', array('inline'=>false)));
       e($this->Html->css($theme.'jquery_datepicker_skins/css/lugo.datepicker', 'stylesheet', array('inline'=>false)));
@@ -130,10 +132,11 @@ $root = 'root'.DS;
       // e($this->Html->css($theme.'table_filter/tablefilter', 'stylesheet', array('inline'=>false)));
 
 			/** @js */
-/*			
-      e($this->Html->script($theme.'jquery-ui/jquery-ui.min',false));
+///*			
+   // 	e($this->Html->script($theme.'jquery-ui/jquery-ui.min',false));
+
       e($this->Html->script($theme.'select2/select2.min',false));
- */
+ //*/
 
       //NOTE datatable hol
       // e($this->Html->css($theme.'datatable/css/datatable-bootstrap', 'stylesheet', array('inline'=>false)));
