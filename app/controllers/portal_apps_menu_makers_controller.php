@@ -58,11 +58,14 @@ class PortalAppsMenuMakersController extends AppController {
 
 		$json_menu = base64_decode(current($json_menuix));
 
-//		debug($json_menu);
+		//NOTE Call to policias 
+		$this->LoadModel('Policy');
+		$conditionsPol['Policy.status'] = 'Active';
+		$docs = $this->Policy->find('list',array('fields'=>array('link','name'),'conditions'=>$conditionsPol));
 
+//		debug($docs);
 
-
-		$this->set(compact('json_menu'));
+		$this->set(compact('json_menu','docs'));
 
 	}
 

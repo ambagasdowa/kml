@@ -75,14 +75,16 @@ $root = 'root'.DS;
 
 // NOTE NAV BAR
 // /*
+
 			e($this->Html->css($theme.'jquery/jquery-ui', 'stylesheet',array('inline'=>false)));
 			e($this->Html->css($theme.'bootstrap/bootstrap', 'stylesheet',array('inline'=>false)));
 			e($this->Html->css($core.'bootstrap_addons', 'stylesheet',array('inline'=>false)));
 			e($this->Html->css($core.'bootstrap_switch', 'stylesheet',array('inline'=>false)));
 			e($this->Html->css($core.'bootstrap_navbar', 'stylesheet',array('inline'=>false)));
 			e($this->Html->css($core.'bootstrap_addon_navbar', 'stylesheet',array('inline'=>false)));
+
 //*/
-/*
+///*
 			// e($this->Html->css($core.'bootstrap_reset', 'stylesheet',array('inline'=>false)));
 			e($this->Html->css($theme.'skeleton/normalize', 'stylesheet',array('inline'=>false)));
 			e($this->Html->css($theme.'skeleton/skeleton', 'stylesheet',array('inline'=>false)));
@@ -92,11 +94,11 @@ $root = 'root'.DS;
 			e($this->Html->css($theme.'skeleton/white', 'stylesheet',array('inline'=>false)));
 			e($this->Html->css($theme.'skeleton/skeleton-checkboxes', 'stylesheet',array('inline'=>false)));
 			e($this->Html->css($theme.'skeleton/skeleton-checkboxes-small', 'stylesheet',array('inline'=>false)));
- */
+// */
       /** @js */
 			// e($this->Html->script($theme.'jquery/jquery.min',false));
 //		e($this->Html->script($theme.'skeleton/site',false));
-		e($this->Html->script($theme.'jquery-ui/jquery-ui.min',false));
+//		e($this->Html->script($theme.'jquery-ui/jquery-ui.min',false));
 
 			// NOTE What this is for ?
 //			e($this->Html->script($theme.'bootstrap/bootstrap',false));
@@ -114,10 +116,12 @@ $root = 'root'.DS;
 // from form
 
 // NOTE Bootstrap
-			/** @css */
-///*
+/** @css */
+/*			
       e($this->Html->css($theme.'select2/select2', 'stylesheet', array('inline'=>false)));
 			e($this->Html->css($theme.'select2/select2-skeleton', 'stylesheet', array('inline'=>false)));
+ */
+
 /*
 
       e($this->Html->css($theme.'jquery-ui/jquery-ui', 'stylesheet', array('inline'=>false)));
@@ -135,7 +139,7 @@ $root = 'root'.DS;
 ///*			
    // 	e($this->Html->script($theme.'jquery-ui/jquery-ui.min',false));
 
-      e($this->Html->script($theme.'select2/select2.min',false));
+//      e($this->Html->script($theme.'select2/select2.min',false));
  //*/
 
       //NOTE datatable hol
@@ -227,5 +231,9 @@ $root = 'root'.DS;
 			e($this->Html->script($theme.'menuEditor/bootstrap-iconpicker/js/bootstrap-iconpicker.min',false));
 			e($this->Html->script($theme.'menuEditor/jquery-menu-editor',false));
 
+// SELECT2 LIBS
+			e($this->Html->css($theme.'select2/select2', 'stylesheet', array('inline'=>false)));
+			e($this->Html->css($theme.'select2/select2-skeleton', 'stylesheet', array('inline'=>false)));
+			e($this->Html->script($theme.'select2/select2.min',false));
 
 ?>

@@ -4,6 +4,11 @@ class Policy extends AppModel {
 	var $useDbConfig = 'policie';
 	var $useTable = 'policies';
 	var $primaryKey = 'id';
+
+	var $virtualFields = array(
+		    'link' => "CONCAT('Policies/view/id:',Policy.id,'/type:', Policy.policies_type)"
+	);
+
 	var $validate = array(
 		'user_id' => array(
 			'numeric' => array(

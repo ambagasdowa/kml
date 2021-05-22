@@ -132,27 +132,31 @@
                                 <div class="form-group">
                                     <label for="href">URL</label>
                                    <!-- <input type="text" class="form-control item-menu" id="href" name="href" placeholder="URL"> -->
-
 <?php
-            echo 
+
+    echo 
                 $this->Form->input(
                                     'href',
                                     array(
                                          'type'=>'select'
                                          ,'class'=>'search_udn u-full-width form-controli item-menu'
                                          ,'placeholder'=> 'Url'
+                                         ,'id'=>'href'
+                                         ,'name'=>'href'
                                          ,'div'=>FALSE
                                          ,'label'=>FALSE
-                                         ,'options'=>array('Policies/view/id:60/type:1'=>'polxxxxxx','Policies/view/id:128/type:5'=>'procyyyyyy')
+                                         ,'empty'=>'Selecionar Documento'
+                                         ,'options'=>$docs
                                          ,'tabindex'=>'5'
                                     )
                 );
+
 ?>
 
                                 </div>
                                 <div class="form-group">
                                     <label for="target">Target</label>
-                                    <select name="target" id="target" class="form-control item-menu">
+                                    <select name="target" id="target" class="form-control item-menu search_udn">
                                         <option value="_self">Self</option>
                                         <option value="_blank">Blank</option>
                                         <option value="_top">Top</option>
@@ -234,7 +238,14 @@
 //console.log(window.location.pathname);
 //console.log(window.location.href);
 //str = window.location.href;
-///console.log( str.substr(0,str.lastIndexOf('/'))  );
+//              
+//            alert('hey');      
+//            console.log( str.substr(0,str.lastIndexOf('/'))  );
+//            alert( window.location.href.substr(0,window.location.href.lastIndexOf('/')) );
+
+
+//          alert(  str.slice(0,-21) )
+
 
                 // NOTE Initialize the select menu 
 
@@ -262,13 +273,16 @@
                     event.stopPropagation();
                     event.preventDefault();
                     var str = editor.getString();
-                 //   $("#out").text(str);
+                    // NOTE pull str data[href]
+ //                   $("#out").text(str);
+                 //   alert(text(str));
                     encode_str = base64_encode(str); 
 //                    alert(encode_str);
                     $.post("<?php echo Dispatcher::baseUrl();?>/PortalAppsMenuMakers/add/data:" + encode_str + "/",function(data){
   //                      alert(encode_str);
-                    }).done(function(data){ 
-                        alert('Su Menu ha sido Guardado correctamente');
+                    }).done(function(data){
+                        location.reload(); 
+                       // alert('Su Menu ha sido Guardado correctamente');
                     });
                 });
 

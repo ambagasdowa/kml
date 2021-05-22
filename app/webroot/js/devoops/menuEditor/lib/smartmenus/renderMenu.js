@@ -12,7 +12,7 @@
     };
     $.fn.renderizeMenu = function (data, options) {
         var settings = $.extend({
-            active: window.location.href.substr(0,window.location.href.lastIndexOf('/')) ,
+            active: window.location.href.slice(0,-21),
             activeClass: 'active',
             rootClass: '',
             itemClass: null,
