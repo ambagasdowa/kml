@@ -116,13 +116,14 @@
                 </div>
                 <div class="col-md-6">
                     <div class="card border-primary mb-3">
-                        <div class="card-header bg-primary text-white">Edit item</div>
+<!--                        <div class="card-header bg-primary text-white">Edit item</div>   -->
                         <div class="card-body">
                             <form id="frmEdit" class="form-horizontal">
                                 <div class="form-group">
                                     <label for="text">Texto</label>
-                                    <div class="input-group">
+                                    <div class="input-group left" >
                                         <input type="text" class="form-control item-menu" name="text" id="text" placeholder="Text">
+                                    <label>Imagen</label>
                                         <div class="input-group-append">
                                             <button type="button" id="myEditor_icon" class="btn btn-outline-secondary iconpicker dropdown-toggle"><i class="empty"></i><input type="hidden" value="empty"><span class="caret"></span></button>
                                         </div>
