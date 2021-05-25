@@ -188,7 +188,7 @@
 			return true;
 		} else if (( (int)$id_group === 12 OR (int)$id_group === 1 OR (int)$id_group === 7) and $group === 'CasetasIngresos') { //group for projections and casetas
 			return true;
-		} else if (( (int)$id_group === 13 OR (int)$id_group === 1 OR (int)$id_group === 7) and $group === 'PoliciesIngresos') { //projections & pol
+		} else if (( (int)$id_group === 13 OR (int)$id_group === 1 OR (int)$id_group === 7) and ($group === 'PoliciesIngresos' OR $group === 'Policies')) { //projections & pol
 			return true;
 		} else if (( (int)$id_group === 14 OR (int)$id_group === 1 OR (int)$id_group === 7) and $group === 'Addenum') { //projections & pol
 			return true; //Addenum

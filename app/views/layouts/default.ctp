@@ -90,6 +90,12 @@ e($this->Html->css($theme.'justified-gallery/justifiedGallery', 'stylesheet'));
 // e($this->Html->css($theme.'devoops/righteous', 'stylesheet'));
 e($this->Html->css($theme.'devoops/font-awesome.min.css', 'stylesheet'));//font-awesome
 
+e($this->Html->script($theme.'menuEditor/bootstrap-iconpicker/js/iconset/fontawesome5-3-1.min',false));
+e($this->Html->script($theme.'menuEditor/bootstrap-iconpicker/js/iconset/ionicon2-0-1',false));
+e($this->Html->script($theme.'menuEditor/bootstrap-iconpicker/js/iconset/materialdesign2-2-0',false));
+e($this->Html->script($theme.'menuEditor/bootstrap-iconpicker/js/bootstrap-iconpicker.min',false));
+
+
 //NOTE jquery colorbox pluging
 //NOTE colorbox in favor to fancybox
 // e($this->Html->css($theme.'colorbox/colorbox', 'stylesheet', array('inline'=>false)));

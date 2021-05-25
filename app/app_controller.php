@@ -497,8 +497,20 @@ class AppController extends Controller {
 
   // NOTE core php config
     ini_set('memory_limit','-1');
-    ini_set('max_execution_time', '1200');
-
+		ini_set('max_execution_time', '1200');
+/*
+		ini_set('output_buffering','4096');
+		ini_set('max_execution_time','22000');
+		ini_set('max_input_time','22000');
+		ini_set('memory_limit','8192M');
+		ini_set('post_max_size','100000M');
+		ini_set('upload_max_filesize','8192M');
+		ini_set('max_file_uploads','80');
+		ini_set('default_socket_timeout','120');
+		ini_set('pdo_mysql.cache_size','2000');
+//		ini_set('mysql.cache_size','2000');
+		ini_set('mssql.timeout','320000');
+ */
         //Configure AuthComponent
 		$this->Auth->authorize = 'actions';
 		$this->Auth->loginAction = array('controller' => 'users', 'action' => 'login');

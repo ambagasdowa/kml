@@ -25,7 +25,7 @@ class PortalAppsMenuMakersController extends AppController {
 
 	function beforeFilter () {
 		parent::beforeFilter();
-		$this->Auth->allow(array('index','add'));
+//		$this->Auth->allow(array('index','add'));
 //		$this->Auth->allowedActions(array('index'));
 	}
 
