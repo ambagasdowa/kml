@@ -24,11 +24,11 @@ class PoliciesController extends AppController {
 	function index(){
 		$this->Prg->commonProcess();
 
-		if(checkAdmin($_SESSION['Auth']['User']['group_id']) !== TRUE) {
+//		if(checkAdmin($_SESSION['Auth']['User']['group_id']) !== TRUE) {
 			$this->paginate['conditions'] = array_merge($this->Policy->parseCriteria($this->passedArgs),array('Policy.status'=>'Active'));
-		} else {
-			$this->paginate['conditions'] = $this->Policy->parseCriteria($this->passedArgs);
-		}
+//		} else {
+//			$this->paginate['conditions'] = $this->Policy->parseCriteria($this->passedArgs);
+//		}
 
 		$this->LoadModel('PoliciesType');
 		$policies_type = $this->PoliciesType->find('list');

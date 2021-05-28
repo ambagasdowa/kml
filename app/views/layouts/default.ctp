@@ -90,10 +90,29 @@ e($this->Html->css($theme.'justified-gallery/justifiedGallery', 'stylesheet'));
 // e($this->Html->css($theme.'devoops/righteous', 'stylesheet'));
 e($this->Html->css($theme.'devoops/font-awesome.min.css', 'stylesheet'));//font-awesome
 
-e($this->Html->script($theme.'menuEditor/bootstrap-iconpicker/js/iconset/fontawesome5-3-1.min',false));
-e($this->Html->script($theme.'menuEditor/bootstrap-iconpicker/js/iconset/ionicon2-0-1',false));
-e($this->Html->script($theme.'menuEditor/bootstrap-iconpicker/js/iconset/materialdesign2-2-0',false));
-e($this->Html->script($theme.'menuEditor/bootstrap-iconpicker/js/bootstrap-iconpicker.min',false));
+	// NOTE Add Menu Maker Libs
+			//
+//			e($this->Html->css($theme.'menuEditor/css/bootstrap.min', 'stylesheet', array('inline'=>false)));
+e($this->Html->css($theme.'menuEditor/css/all', 'stylesheet', array('inline'=>false)));
+			e($this->Html->css($theme.'menuEditor/bootstrap-iconpicker/css/bootstrap-iconpicker', 'stylesheet', array('inline'=>false)));
+						
+			e($this->Html->script($theme.'menuEditor/js/jquery.min',false));
+			e($this->Html->script($theme.'menuEditor/js/bootstrap.bundle.min',false));
+			e($this->Html->script($theme.'menuEditor/bootstrap-iconpicker/js/iconset/fontawesome5-3-1.min',false));
+			e($this->Html->script($theme.'menuEditor/bootstrap-iconpicker/js/iconset/ionicon2-0-1',false));
+			e($this->Html->script($theme.'menuEditor/bootstrap-iconpicker/js/iconset/materialdesign2-2-0',false));
+			e($this->Html->script($theme.'menuEditor/bootstrap-iconpicker/js/bootstrap-iconpicker.min',false));
+			e($this->Html->script($theme.'menuEditor/jquery-menu-editor',false));
+
+
+
+
+
+
+
+
+
+
 
 
 //NOTE jquery colorbox pluging
