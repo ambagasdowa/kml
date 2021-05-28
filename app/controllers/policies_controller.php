@@ -89,7 +89,7 @@ class PoliciesController extends AppController {
 		if (empty($conditions) OR !isset($conditions)) {
 // 			$conditions = null;
 			$this->Prg->commonProcess();
-			$conditions = $this->Policy->parseCriteria($this->passedArgs);
+			$conditions = $this->Policy->parseCriteria($this->passedArgs,array('Policy.status'=>'Active'));
 		}
 		$this->paginate = array(
 			'conditions' => $conditions,
