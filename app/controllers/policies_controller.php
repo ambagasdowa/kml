@@ -22,6 +22,9 @@ class PoliciesController extends AppController {
 // 	}
 
 	function index(){
+
+		Configure::write('debug',2);
+
 		$this->Prg->commonProcess();
 
 //		if(checkAdmin($_SESSION['Auth']['User']['group_id']) !== TRUE) {
@@ -30,11 +33,17 @@ class PoliciesController extends AppController {
 //			$this->paginate['conditions'] = $this->Policy->parseCriteria($this->passedArgs);
 //		}
 
+
+			
+
 		$this->LoadModel('PoliciesType');
 		$policies_type = $this->PoliciesType->find('list');
 		$this->set(compact('policies_type'));
 
 		$this->Policy->recursive = 0;
+
+		debug($this->paginate);
+
 		$this->set('policies', $this->paginate());
 	}
 

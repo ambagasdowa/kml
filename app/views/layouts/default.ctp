@@ -69,9 +69,9 @@ $core = 'core'.DS;
  */
 
 
-//e($this->Html->css($theme.'menuEditor/lib/smartmenus/css/sm-blue/sm-blue', 'stylesheet'));
-//e($this->Html->css($theme.'menuEditor/lib/smartmenus/css/sm-clean/sm-clean', 'stylesheet'));
-//e($this->Html->css($theme.'menuEditor/lib/smartmenus/css/sm-core-css', 'stylesheet'));
+e($this->Html->css($theme.'menuEditor/lib/smartmenus/css/sm-blue/sm-blue', 'stylesheet'));
+e($this->Html->css($theme.'menuEditor/lib/smartmenus/css/sm-clean/sm-clean', 'stylesheet'));
+e($this->Html->css($theme.'menuEditor/lib/smartmenus/css/sm-core-css', 'stylesheet'));
 e($this->Html->css($theme.'menuEditor/lib/smartmenus/addons/bootstrap/jquery.smartmenus.bootstrap', 'stylesheet'));
 
 		// NOTE Add branch menu_editor
@@ -93,6 +93,7 @@ e($this->Html->css($theme.'devoops/font-awesome.min.css', 'stylesheet'));//font-
 	// NOTE Add Menu Maker Libs
 			//
 //			e($this->Html->css($theme.'menuEditor/css/bootstrap.min', 'stylesheet', array('inline'=>false)));
+/* 
 e($this->Html->css($theme.'menuEditor/css/all', 'stylesheet', array('inline'=>false)));
 			e($this->Html->css($theme.'menuEditor/bootstrap-iconpicker/css/bootstrap-iconpicker', 'stylesheet', array('inline'=>false)));
 						
@@ -103,7 +104,7 @@ e($this->Html->css($theme.'menuEditor/css/all', 'stylesheet', array('inline'=>fa
 			e($this->Html->script($theme.'menuEditor/bootstrap-iconpicker/js/iconset/materialdesign2-2-0',false));
 			e($this->Html->script($theme.'menuEditor/bootstrap-iconpicker/js/bootstrap-iconpicker.min',false));
 			e($this->Html->script($theme.'menuEditor/jquery-menu-editor',false));
-
+ */
 
 
 
