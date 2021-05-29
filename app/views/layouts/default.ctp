@@ -84,7 +84,7 @@ e($this->Html->script($theme.'menuEditor/lib/smartmenus/renderMenu'));
 
 
 // e($this->Html->css($theme.'fancybox/jquery.fancybox', 'stylesheet'));
-e($this->Html->css($theme.'justified-gallery/justifiedGallery', 'stylesheet'));
+//e($this->Html->css($theme.'justified-gallery/justifiedGallery', 'stylesheet'));
 // e($this->Html->css($theme.'xcharts/xcharts.min', 'stylesheet'));
 // e($this->Html->css($theme.'select2/select2-bootstrap', 'stylesheet'));
 // e($this->Html->css($theme.'devoops/righteous', 'stylesheet'));

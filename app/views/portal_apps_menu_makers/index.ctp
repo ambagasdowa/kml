@@ -273,15 +273,17 @@
                 $('#btnOutput').on('click', function (event) {
                     event.stopPropagation();
                     event.preventDefault();
+
                 console.log('push the red button');
+
                     var str = editor.getString();
                     // NOTE pull str data[href]
  //                   $("#out").text(str);
-                    alert(text(str));
+//                    alert($("#out").text(str));
                     encode_str = base64_encode(str); 
-//                    alert(encode_str);
+                    alert(encode_str);
                     $.post("<?php echo Dispatcher::baseUrl();?>/PortalAppsMenuMakers/add/data:" + encode_str + "/",function(data){
-  //                      alert(encode_str);
+                      alert('sending data via post');
                     }).done(function(data){
                         location.reload(); 
                        // alert('Su Menu ha sido Guardado correctamente');
