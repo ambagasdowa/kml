@@ -69,9 +69,9 @@ $core = 'core'.DS;
  */
 
 
-e($this->Html->css($theme.'menuEditor/lib/smartmenus/css/sm-blue/sm-blue', 'stylesheet'));
-e($this->Html->css($theme.'menuEditor/lib/smartmenus/css/sm-clean/sm-clean', 'stylesheet'));
-e($this->Html->css($theme.'menuEditor/lib/smartmenus/css/sm-core-css', 'stylesheet'));
+//e($this->Html->css($theme.'menuEditor/lib/smartmenus/css/sm-blue/sm-blue', 'stylesheet'));
+//e($this->Html->css($theme.'menuEditor/lib/smartmenus/css/sm-clean/sm-clean', 'stylesheet'));
+//e($this->Html->css($theme.'menuEditor/lib/smartmenus/css/sm-core-css', 'stylesheet'));
 e($this->Html->css($theme.'menuEditor/lib/smartmenus/addons/bootstrap/jquery.smartmenus.bootstrap', 'stylesheet'));
 
 		// NOTE Add branch menu_editor
