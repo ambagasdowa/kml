@@ -109,7 +109,7 @@
                     </div>
                     </div>
                     <div class="card-body">
-                    <div class="form-group"> <!--<textarea id="out" class="form-control" cols="50" rows="10"></textarea>-->
+                    <div class="form-group"> <textarea id="out" class="form-control" cols="50" rows="10"></textarea>
                     </div>
                     </div>
                     </div>
@@ -230,7 +230,6 @@
         <script type="text/javascript" src="jquery-menu-editor.min.js"></script>
 				<script type="text/javascript" src="bootstrap-iconpicker/js/iconset/fontawesome5-3-1.min.js"></script>
 -->
-
         <script>
             jQuery(document).ready(function () {
                 /* =============== DEMO =============== */
@@ -265,6 +264,8 @@
                 editor.setForm($('#frmEdit'));
                 editor.setUpdateButton($('#btnUpdate'));
 
+//alert(arrayjson);
+
 //                $('#btnReload').on('click', function () {
 //                NOTE set the current menu
                     editor.setData(arrayjson);
@@ -273,19 +274,23 @@
                 $('#btnOutput').on('click', function (event) {
                     event.stopPropagation();
                     event.preventDefault();
-                console.log('push the red button');
+//                console.log('push the red button');
                     var str = editor.getString();
                     // NOTE pull str data[href]
- //                   $("#out").text(str);
-                //    alert(text(str));
-                    encode_str = base64_encode(str); 
-//                    alert(encode_str);
-                    $.post("<?php echo Dispatcher::baseUrl();?>/PortalAppsMenuMakers/add/data:" + encode_str + "/",function(data){
+                      
+//                    $("#out").text(str); // Put into textbox
+    //                   alert(str.length);
+                    encode_str = base64_encode(str);
+                    $("#out").text(encode_str);
+    //                   alert(encode_str.length);
+/*
+                     $.post("<?php echo Dispatcher::baseUrl();?>/PortalAppsMenuMakers/add/data:" + encode_str + "/",function(data){
   //                      alert(encode_str);
-                    }).done(function(data){
-                        location.reload(); 
-                       // alert('Su Menu ha sido Guardado correctamente');
-                    });
+                        }).done(function(data){
+//                        location.reload(); 
+ //                       alert('Su Menu ha sido Guardado correctamente');
+                        });
+*/
                 });
 
                 $("#btnUpdate").click(function(){

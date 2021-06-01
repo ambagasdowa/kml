@@ -35,5 +35,6 @@
 class PortalAppsMenuMaker extends AppModel {
 	var $name = 'PortalAppsMenuMaker';
 	var $useDbConfig = 'mssql_sistemas';
+//	var $useDbConfig = 'mssql_systems';
 	var $displayField = 'description';
 }

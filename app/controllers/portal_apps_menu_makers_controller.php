@@ -44,7 +44,8 @@ class PortalAppsMenuMakersController extends AppController {
 			}
 
 
-	function index() {		
+	function index() {	
+//		Configure::write('debug',2);	
 //		debug($this->PortalAppsMenuMaker->find('all'));
 		//    $conditionsMenu['PortalAppsMenuMaker'] = 	'max(current)';
 		//
@@ -57,7 +58,7 @@ class PortalAppsMenuMakersController extends AppController {
 //		debug($json_menuix);
 
 		$json_menu = base64_decode(current($json_menuix));
-
+//   debug($json_menu);
 		//NOTE Call to policias 
 		$this->LoadModel('Policy');
 		$conditionsPol['Policy.status'] = 'Active';
