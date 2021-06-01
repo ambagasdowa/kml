@@ -12,7 +12,8 @@
     };
     $.fn.renderizeMenu = function (data, options) {
         var settings = $.extend({
-            active: window.location.href.slice(0,-21),
+            active: window.location.href,
+//            active: window.location.origin +'/'+ window.location.pathname.split('/')[1],
             activeClass: 'active',
             rootClass: '',
             itemClass: null,
@@ -46,10 +47,14 @@
             itemHasMenuClass: settings.itemHasMenuClass,
             linkHasMenuClass: settings.linkHasMenuClass
         };
+//        console.log('rootClass');
+//        console.log(_settings);
         buildList(this, arrJson, settings.active, 0);
         return this;
         
         function buildList($container, arrayItem, active, depth) {
+            console.log($container);
+            console.log(options);
             var level = (typeof (depth) === 'undefined') ? 0 : depth;
             var $elem;
             if (level === 0) {
@@ -57,7 +62,10 @@
             } else {
                 $elem = $('<ul>').setClass(options.menuClass);
             }
+//            console.log($elem);
+//            console.log(arrayItem);
             $.each(arrayItem, function (k, v) {
+                console.log(v);
                 var isParent = (typeof (v.children) !== "undefined") && ($.isArray(v.children));
                 _settings = {
                     menuClass: settings.menuClass,
@@ -76,10 +84,16 @@
                     };
                 }
                 var $li = $('<li>').setClass(_settings.itemClass);
+//                alert(v.href);
                 if ((v.href === '#') || (isParent)) {
-                    v.href = 'javascript:void(0)';
+                  //  v.href = 'javascript:void(0)';  // NOTE Original
+                    v.href = '#';
                 }
-                var $a = $('<a>').attr('href', v.href).setClass(_settings.linkClass);
+               
+                var complement = window.location.origin +'/'+ window.location.pathname.split('/')[1] + '/' ;
+
+                var $a = $('<a>').attr('href', complement + v.href).setClass(_settings.linkClass);
+                
                 if (v.hasOwnProperty('target'))
                     $a.attr('target', v.target);
                 if (v.hasOwnProperty('title'))
@@ -87,6 +101,8 @@
                 if (active === v.href) {
                     $a.addClass(settings.activeClass);
                 }
+
+
                 var $i = $('<i>').addClass(v.icon);
                 $a.append($i).append("&nbsp;").append(v.text);
                 if ((isParent) && (settings.dropdownIcon !== null)) {
@@ -123,8 +139,11 @@
     }
     
     $.fn.nestedSelect = function (data, options) {
+       
         var settings = $.extend({
             active: window.location.href,
+//            active: window.location.origin +'/'+ window.location.pathname.split('/')[1],
+//            active: window.location.protocol + "//" + location.host.split(":")[0],
             title: '',
             group: false,
             bullet: '- ',

@@ -350,7 +350,7 @@ e($this->Html->css($theme.'menuEditor/css/all', 'stylesheet', array('inline'=>fa
                 var items = <?php echo $menux; ?>
 
                 $('#mk_menu').renderizeMenu(items, {
-                        active: 'http://codeigniterturoriales.com',
+                        active: '',
                         rootClass: "nav navbar-nav",
                         menuClass: "dropdown-menu",
                         submenuClass: "dropdown-menu",

@@ -234,18 +234,31 @@
             jQuery(document).ready(function () {
                 /* =============== DEMO =============== */
                 // menu items
-//console.log(window.location.hostname);
-//console.log(window.location.pathname);
-//console.log(window.location.href);
+/*
+alert(window.location.hostname);
+alert(window.location.pathname);        // /kml/PortalAppsMenuMakers/
+alert(window.location.href);            // http://merkato.xyz/kml/PortalAppsMenuMakers/
 //str = window.location.href;
+alert(window.location.origin);          // http://merkato.xyz
+*/
+//alert( window.location.origin + '/' + window.location.pathname.split('/')[1] );
+/*
+
+var url = window.location.protocol + "//" + location.host.split(":")[0];
+
+alert(url);
+*/
+/*
+var loc = window.location;
+var baseUrl = loc.protocol + "//" + loc.hostname + (loc.port? ":"+loc.port : "") + "/" + phpBaseUrl;
+
+console.log(loc);
+console.log(baseUrl);
+*/
 //              
 //            alert('hey');      
 //            console.log( str.substr(0,str.lastIndexOf('/'))  );
 //            alert( window.location.href.substr(0,window.location.href.lastIndexOf('/')) );
-
-
-//          alert(  str.slice(0,-21) )
-
 
                 // NOTE Initialize the select menu 
 
