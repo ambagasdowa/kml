@@ -208,11 +208,20 @@ var $mssql_sistemas = array( // connect to remote mssql server
 	'driver' => 'mssql',
 	'persistent' => true,
 
+// NOTE Default connection as productive server 	
 	 'host' => 'IntegraDb', /*current in local kvm change in freetds.conf*/
 	 'login' => 'zam',
 	 'password' => 'lis',
 	 'database' => 'sistemas',
 	 'port' => '1433',
+
+// NOTE connection to remote testing server
+	// 'host' => 'GstLaboratory', /*Server in Gst througt vpn tunnel as 10.8.0.222 virtual id 109 */
+	// 'login' => 'sa',
+	// 'password' => 'sa',
+	// 'database' => 'sistemas',
+	// 'port' => '1433',
+
 
 // NOTE connection to local virtual server
 	// 'host' => 'kvmdb', /*current in local kvm change in freetds.conf*/
