@@ -638,7 +638,17 @@
 
 
                     <?php if (isset($_SESSION['Auth']['User'])) {?>
-										<?php 	if ( checkUser($_SESSION['Auth']['User']['group_id'],'Ingresos') OR checkUser($_SESSION['Auth']['User']['group_id'],'Logistica') OR checkUser($_SESSION['Auth']['User']['group_id'],'CasetasIngresos') OR ($_SESSION['Auth']['User']['id'] == 101 ) OR ($_SESSION['Auth']['User']['id'] == 5 ) ) {?>
+										<?php 	if (
+															//	 checkUser($_SESSION['Auth']['User']['group_id'],'Ingresos')
+															// OR
+																 checkUser($_SESSION['Auth']['User']['group_id'],'Logistica')
+															 OR
+																 checkUser($_SESSION['Auth']['User']['group_id'],'CasetasIngresos')
+															 OR
+																 ($_SESSION['Auth']['User']['id'] == 101 ) 
+															// OR
+															//	 ($_SESSION['Auth']['User']['id'] == 5 )
+														 ) {?>
 
                       <li class="dropdown-submenu">
   											<a tabindex="-1" href="#"><i class="fa fa-cog"></i>&nbsp;<span>Logistica</span></a>
@@ -672,6 +682,13 @@
 										</li>
 
                     <li class="divider"></li>
+
+										<?php } ?>
+
+										<?php 	if ( checkUser($_SESSION['Auth']['User']['group_id'],'CasetasIngresos') OR checkUser($_SESSION['Auth']['User']['group_id'],'PoliciesIngresos') OR checkUser( $_SESSION['Auth']['User']['group_id'],'Contraloria' ) ) {?>
+
+
+										<li class="divider"></li>
 
                     <li class="dropdown-submenu">
                       <a tabindex="-1" href="#"><i class="fa fa-line-chart"></i>&nbsp;<span>Rendimiento/Disponibilidad</span></a>
