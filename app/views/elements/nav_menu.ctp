@@ -685,7 +685,7 @@
 
 										<?php } ?>
 
-										<?php 	if ( checkUser($_SESSION['Auth']['User']['group_id'],'CasetasIngresos') OR checkUser($_SESSION['Auth']['User']['group_id'],'PoliciesIngresos') OR checkUser( $_SESSION['Auth']['User']['group_id'],'Contraloria' ) ) {?>
+										<?php 	if ( checkUser($_SESSION['Auth']['User']['group_id'],'Ingresos') OR checkUser($_SESSION['Auth']['User']['group_id'],'CasetasIngresos') OR checkUser($_SESSION['Auth']['User']['group_id'],'PoliciesIngresos') OR checkUser( $_SESSION['Auth']['User']['group_id'],'Contraloria' ) ) {?>
 
 
 										<li class="divider"></li>
