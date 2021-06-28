@@ -23,7 +23,7 @@ class PoliciesController extends AppController {
 
 	function index(){
 
-		Configure::write('debug',2);
+//		Configure::write('debug',2);
 
 		$this->Prg->commonProcess();
 
