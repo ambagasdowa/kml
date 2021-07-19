@@ -415,7 +415,9 @@ class ProvidersControlsFilesController extends AppController {
 				$result = $this->ProvidersViewBatchAmount->find('first',array( 'conditions' => $conditionsAmount));
 				// NOTE amounts
 				$xml_amount = $amount ;
-				$slx_amount = $result['ProvidersViewBatchAmount']['crtot'];
+				/* NOTE old param				$slx_amount = $result['ProvidersViewBatchAmount']['crtot']; */
+				// NOTE change to CuryCrTot client request , invoce number 194 with date 21-06-2021
+				$slx_amount = $result['ProvidersViewBatchAmount']['CuryCrTot'];
 				$is_exceded = abs($slx_amount - $xml_amount);
 
 				 // debug($is_exceded);
