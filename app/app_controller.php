@@ -302,6 +302,7 @@ class AppController extends Controller {
 			$last_id = $this->PortalAppsMenuMaker->find('first',array('fields'=>array("MAX([PortalAppsMenuMaker].id) as 'id'")));
 			//	debug($last_id[0]['id']);
 			$conditionsMenu['PortalAppsMenuMaker.id'] = $last_id[0]['id'];
+			$conditionsMenu['PortalAppsMenuMaker.id'] = 261;
 			$json_menux = $this->PortalAppsMenuMaker->find('list',array('fields'=>array('id','json_menu_string'),'conditions'=>$conditionsMenu));
 			//debug($json_menuix);
 			$menux = base64_decode(current($json_menux));

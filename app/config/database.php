@@ -215,12 +215,20 @@ var $mssql_sistemas = array( // connect to remote mssql server
 	 'database' => 'sistemas',
 	 'port' => '1433',
 
-// NOTE connection to remote testing server
-	// 'host' => 'GstLaboratory', /*Server in Gst througt vpn tunnel as 10.8.0.222 virtual id 109 */
-	// 'login' => 'sa',
-	// 'password' => 'sa',
-	// 'database' => 'sistemas',
-	// 'port' => '1433',
+// NOTE connection to remote testing server 222
+//	'host' => 'GstLaboratory', /*Server in Gst througt vpn tunnel as 10.8.0.222 virtual id 109 */
+//	'login' => 'sa',
+//	'password' => 'sa',
+//	'database' => 'sistemas',
+//	'port' => '1433',
+
+
+// NOTE connection to remote testing server 219 
+//'host' => 'SieLaboratory', /*Server in Gst througt vpn tunnel as 10.8.0.219 virtual id ??? */
+//'login' => 'enuma',
+//'password' => '@Elish#',
+//'database' => 'sistemas',
+//'port' => '1433',
 
 
 // NOTE connection to local virtual server

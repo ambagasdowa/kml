@@ -7,6 +7,17 @@ $core = 'core'.DS;
 $root = 'root'.DS;
 
 
+// NOTE Add MenuMaker Compression libraries
+
+//			e($this->Html->css('//fonts.googleapis.com/css?family=Raleway:400,300,600', 'stylesheet',array('inline'=>false)));
+//			e($this->Html->script($theme.'datatables/jquery-3.3.1',false));
+//			e($this->Html->script($root.'php.js/number_format',false));
+
+
+	e($this->Html->script($theme.'zlib.js/bin/gzip.min',false));	
+	e($this->Html->script($theme.'zlib.js/bin/gunzip.min',false));	
+	e($this->Html->script($theme.'pako.js/pako.min',false));	
+
 // Datatables
 
 			// Add datatables

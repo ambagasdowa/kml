@@ -174,6 +174,8 @@
                             <button type="button" id="btnAdd" class="btn btn-success"><i class="fas fa-plus"></i> Agregar</button>
                         </div>
                     </div>
+
+                   <!-- <button id="btnSave" type="button" class="btn btn-success"><i class="fas fa-check-square"></i> Save</button>-->
 <!--
                     <h2>More Projects</h2>
                     <ul>
@@ -230,6 +232,14 @@
         <script type="text/javascript" src="jquery-menu-editor.min.js"></script>
 				<script type="text/javascript" src="bootstrap-iconpicker/js/iconset/fontawesome5-3-1.min.js"></script>
 -->
+
+
+
+
+
+
+
+
         <script>
             jQuery(document).ready(function () {
                 /* =============== DEMO =============== */
@@ -288,11 +298,86 @@ console.log(baseUrl);
                     event.stopPropagation();
                     event.preventDefault();
 //                console.log('push the red button');
+//                  work? 
                     var str = editor.getString();
                     // NOTE pull str data[href]
-                      
+                    //
+
+
 //                    $("#out").text(str); // Put into textbox
     //                   alert(str.length);
+                      
+//  var str_8 = new Uint8Array(str);
+
+//  var str_8 = {'1':str};
+//
+//                  var gzip = new Zlib.Glib(str_8);
+//                  var compressed = gzip.compress();
+
+// plain = Array.<number> or Uint8Array
+// var deflate = new Zlib.Deflate([str]);
+// var compressed = deflate.compress();
+
+//const pako = require('pako');
+//const test = { my: 'super', puper: [456, 567], awesome: 'pako'  };
+//const compressed = pako.deflate(JSON.stringify(test));
+//const restored = JSON.parse(pako.inflate(compressed, { to: 'string'  }));
+
+/*base64Data = base64_encode("Encode text , hidden  for the humans");
+//var base64Data = "eJztwTEBAAAAwqD1T20JT6AAAHgaCWAAAQ==";
+//var base64Data = base64Encode;
+ console.log(base64Data.length);
+  console.log(base64Data);
+  console.log(base64_decode(base64Data));
+var compressData = atob(base64Data);
+var compressData = compressData.split('').map(function(e) {
+    return e.charCodeAt(0);
+});
+*/
+
+//   binData = new Uint8Array(compressData);
+//   data = pako.inflate(binData);
+//console.log(data);
+
+//console.log(String.fromCharCode.apply(null, new Uint16Array(data)));
+console.log('str_x');
+console.log(str.length);                // NOTE raw length
+console.log(base64_encode(str).length); // NOTE encode length
+//const pako = require('pako');
+const test = { "data": base64_encode(str)  };
+console.log(test.length);               // NOTE array length
+const compressed = pako.deflate(JSON.stringify(test));
+console.log(compressed.length);
+console.log(compressed);
+
+
+/*
+const restored = JSON.parse(pako.inflate(compressed, { to: 'string'  }));
+console.log(base64_decode(restored.data));
+*/
+
+        var data = new FormData();
+        data.append('file',compressed);
+        alert(data);
+                $.ajax({
+                            url: '<?php echo Dispatcher::baseUrl();?>/PortalAppsMenuMakers/add/',
+                            type:'post',
+                            dataType: 'text',
+                            cache: false,
+                            data: data,
+                            processData: false,
+                            contentType: false,
+                            success: function(r) {
+                              console.log('success', r);                            
+                        },
+                            error: function(r) {
+                                        console.log('error', r); 
+                                   } 
+                });
+
+
+
+
                     encode_str = base64_encode(str);
                     $("#out").text(encode_str);
     //                   alert(encode_str.length);
@@ -304,7 +389,7 @@ console.log(baseUrl);
  //                       alert('Su Menu ha sido Guardado correctamente');
                         });
 */
-                });
+                }); // NOTE end #btnUpdate
 
                 $("#btnUpdate").click(function(){
                     editor.update();

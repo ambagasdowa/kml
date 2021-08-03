@@ -52,8 +52,13 @@ class PortalAppsMenuMakersController extends AppController {
  
 		$last_id = $this->PortalAppsMenuMaker->find('first',array('fields'=>array("MAX([PortalAppsMenuMaker].id) as 'id'")));
 
-			//	debug($last_id[0]['id']);
+//		debug($last_id[0]['id']);
+
+
 		$conditionsMenu['PortalAppsMenuMaker.id'] = $last_id[0]['id'];
+
+		$conditionsMenu['PortalAppsMenuMaker.id'] = 261; //NOTE fix to static id temporary
+
 		$json_menuix = $this->PortalAppsMenuMaker->find('list',array('fields'=>array('id','json_menu_string'),'conditions'=>$conditionsMenu));
 //		debug($json_menuix);
 
@@ -68,7 +73,7 @@ class PortalAppsMenuMakersController extends AppController {
 
 		$this->set(compact('json_menu','docs'));
 
-	}
+	} // NOTE end function index()
 
 	
 
@@ -83,6 +88,7 @@ class PortalAppsMenuMakersController extends AppController {
 
 	function add() {
 
+    Configure::write('debug',2);
 		//NOTE This will clear all cached data, excluding cached view files
 		Cache::clear();
 		//NOTE if we need clear the then 
@@ -90,8 +96,7 @@ class PortalAppsMenuMakersController extends AppController {
 
 		debug($this->params);
 
-            // Configure::write('debug',2);
-             // App::uses('Xml', 'Lib');
+        // App::uses('Xml', 'Lib');
    
    // $posted = base64_decode($this->params['named']['data']);
     $posted = $this->params['named']['data'];
@@ -101,7 +106,13 @@ class PortalAppsMenuMakersController extends AppController {
 //    $this->LoadModel('ProjectionsViewBussinessUni');
 		$this->PortalAppsMenuMaker->query('SET ANSI_NULLS  ON;SET  ANSI_WARNINGS   ON;');
 		
-		debug($this->Auth->User('id'));	
+//		debug($this->Auth->User('id'));	
+
+// NOTE Intercepting data 
+  $posted = $this->params['form']['file'];
+//		exit();
+// NOTE Intercepting saving data 
+
 
 		$save['PortalAppsMenuMaker']['user_id'] = $this->Auth->User('id');
 		$save['PortalAppsMenuMaker']['json_menu_string'] = $posted;
