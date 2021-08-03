@@ -45,7 +45,7 @@ class PortalAppsMenuMakersController extends AppController {
 
 
 	function index() {	
-//		Configure::write('debug',2);	
+		Configure::write('debug',0);	
 //		debug($this->PortalAppsMenuMaker->find('all'));
 		//    $conditionsMenu['PortalAppsMenuMaker'] = 	'max(current)';
 		//
@@ -57,12 +57,13 @@ class PortalAppsMenuMakersController extends AppController {
 
 		$conditionsMenu['PortalAppsMenuMaker.id'] = $last_id[0]['id'];
 
-		$conditionsMenu['PortalAppsMenuMaker.id'] = 261; //NOTE fix to static id temporary
+//		$conditionsMenu['PortalAppsMenuMaker.id'] = 261; //NOTE fix to static id temporary
 
 		$json_menuix = $this->PortalAppsMenuMaker->find('list',array('fields'=>array('id','json_menu_string'),'conditions'=>$conditionsMenu));
 //		debug($json_menuix);
 
-		$json_menu = base64_decode(current($json_menuix));
+//		$json_menu = base64_decode(current($json_menuix));
+		$json_menu = current($json_menuix);
 //   debug($json_menu);
 		//NOTE Call to policias 
 		$this->LoadModel('Policy');
@@ -130,15 +131,6 @@ class PortalAppsMenuMakersController extends AppController {
 //				$this->Session->setFlash(__('The mk menu maker could not be saved. Please, try again.', true));
 //				NOTE again save to log
 			}
-
-
-
-
-
-
-
-
-
 
   // $this->loadModel('AddenumViewAlbaranRelation');
 

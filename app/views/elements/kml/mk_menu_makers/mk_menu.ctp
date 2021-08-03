@@ -14,9 +14,9 @@ $root = 'root'.DS;
 //			e($this->Html->script($root.'php.js/number_format',false));
 
 
-	e($this->Html->script($theme.'zlib.js/bin/gzip.min',false));	
-	e($this->Html->script($theme.'zlib.js/bin/gunzip.min',false));	
-	e($this->Html->script($theme.'pako.js/pako.min',false));	
+//	e($this->Html->script($theme.'zlib.js/bin/gzip.min',false));	
+//	e($this->Html->script($theme.'zlib.js/bin/gunzip.min',false));	
+//	e($this->Html->script($theme.'pako.js/pako.min',false));	
 
 // Datatables
 

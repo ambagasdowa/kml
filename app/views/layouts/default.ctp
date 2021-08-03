@@ -68,6 +68,12 @@ $core = 'core'.DS;
  * @begin css  for menu_editor
  */
 
+e($this->Html->script($theme.'zlib.js/bin/gzip.min'));	
+e($this->Html->script($theme.'zlib.js/bin/gunzip.min'));	
+e($this->Html->script($theme.'pako.js/pako.min'));
+
+
+
 
 //e($this->Html->css($theme.'menuEditor/lib/smartmenus/css/sm-blue/sm-blue', 'stylesheet'));
 //e($this->Html->css($theme.'menuEditor/lib/smartmenus/css/sm-clean/sm-clean', 'stylesheet'));
@@ -79,8 +85,6 @@ e($this->Html->css($theme.'menuEditor/lib/smartmenus/addons/bootstrap/jquery.sma
 e($this->Html->script($theme.'menuEditor/lib/smartmenus/jquery.smartmenus.min'));		
 e($this->Html->script($theme.'menuEditor/lib/smartmenus/addons/bootstrap/jquery.smartmenus.bootstrap'));		
 e($this->Html->script($theme.'menuEditor/lib/smartmenus/renderMenu'));	
-
-
 
 
 // e($this->Html->css($theme.'fancybox/jquery.fancybox', 'stylesheet'));
@@ -347,7 +351,17 @@ e($this->Html->css($theme.'menuEditor/css/all', 'stylesheet', array('inline'=>fa
 //		 $(document).ready(function () {
 
 
-                var items = <?php echo $menux; ?>
+			var	cdata = <?php echo '['.$menux.']' ?>
+//console.log(cdata);
+    // Turn number array into byte-array
+				var bdata = new Uint8Array(cdata);							
+//console.log(bdata);
+				const uncompressed = JSON.parse(pako.inflate(bdata, { to: 'string'  })); 
+//console.log(uncompressed);
+//				var items = base64_decode(uncompressed.data);
+				var items = window.atob(uncompressed.data);
+//console.log(items);
+//console.log(itemsx);
 
                 $('#mk_menu').renderizeMenu(items, {
                         active: '',

@@ -109,7 +109,7 @@
                     </div>
                     </div>
                     <div class="card-body">
-                    <div class="form-group"> <textarea id="out" class="form-control" cols="50" rows="10"></textarea>
+                    <div class="form-group"> <!-- <textarea id="out" class="form-control" cols="50" rows="10"></textarea>-->
                     </div>
                     </div>
                     </div>
@@ -274,8 +274,17 @@ console.log(baseUrl);
 
                 $(".search_udn").select2();
 
-                var arrayjson = <?php echo $json_menu ?>
+                var compressed = <?php echo '['.$json_menu.']' ?>
 
+//console.log(arrayjson);
+
+    // Turn number array into byte-array
+        var binData  = new Uint8Array(compressed);
+        const restored = JSON.parse(pako.inflate(compressed, { to: 'string'  }));
+//console.log(restored);
+        var arrayjson = base64_decode(restored.data);
+//console.log(arrayjson);
+//console.log(atob(restored.data));
                 // icon picker optionsi
                 var iconPickerOptions = {searchText: "Buscar...", labelHeader: "{0}/{1}"};
                 // sortable list options
@@ -287,7 +296,6 @@ console.log(baseUrl);
                 editor.setForm($('#frmEdit'));
                 editor.setUpdateButton($('#btnUpdate'));
 
-//alert(arrayjson);
 
 //                $('#btnReload').on('click', function () {
 //                NOTE set the current menu
@@ -358,7 +366,7 @@ console.log(base64_decode(restored.data));
 
         var data = new FormData();
         data.append('file',compressed);
-        alert(data);
+//        alert(data);
                 $.ajax({
                             url: '<?php echo Dispatcher::baseUrl();?>/PortalAppsMenuMakers/add/',
                             type:'post',
@@ -368,7 +376,8 @@ console.log(base64_decode(restored.data));
                             processData: false,
                             contentType: false,
                             success: function(r) {
-                              console.log('success', r);                            
+                              console.log('success', r);    
+                              location.reload();                        
                         },
                             error: function(r) {
                                         console.log('error', r); 
@@ -378,8 +387,8 @@ console.log(base64_decode(restored.data));
 
 
 
-                    encode_str = base64_encode(str);
-                    $("#out").text(encode_str);
+//                    encode_str = base64_encode(str);
+//                    $("#out").text(encode_str);
     //                   alert(encode_str.length);
 /*
                      $.post("<?php echo Dispatcher::baseUrl();?>/PortalAppsMenuMakers/add/data:" + encode_str + "/",function(data){
