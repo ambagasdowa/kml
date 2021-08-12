@@ -262,13 +262,13 @@ var $mssql_sistemas = array( // connect to remote mssql server
 // NOTE connection to production servers
 		'host' => 'IntegraDb2',
 		'login' => 'sa',
-		'password' => 'Gst2020#.',
-		'database' => 'sistemas',
+//		'password' => 'Gst2020#.',
+//		'database' => 'sistemas',
 		'port' => '1433',
 
 //		'host' => 'Homedb',
-//		'login' => 'enuma',
-//		'password' => '@Elish#',
+		'login' => 'enuma',
+		'password' => '@Elish#',
 //		'database' => 'sistemas',
 		'prefix' => '',
 // 		'encoding' => 'ISO-8859-1',

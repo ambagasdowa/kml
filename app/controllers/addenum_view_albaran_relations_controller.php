@@ -36,8 +36,11 @@ class AddenumViewAlbaranRelationsController extends AppController {
 
 		function link() {
 
-				Configure::write('debug',0);
-				$this->loadModel('AddenumViewAlbaranRelation');
+			Configure::write('debug',0);
+//			$this->loadModel(array('AddenumViewAlbaranRelation','AddenumTblAlbaranRelation'));
+			$this->LoadModel('AddenumViewAlbaranRelation');
+			$this->LoadModel('AddenumTblAlbaranRelation');
+				$this->AddenumTblAlbaranRelation->query('SET ANSI_NULLS ON; SET ANSI_WARNINGS ON;');
 			if(isset($this->params['named']['id'])){
 				$conditionsBl['AddenumViewAlbaranRelation.BatNbr'] = $this->params['named']['id'];
 			} else {
@@ -45,6 +48,8 @@ class AddenumViewAlbaranRelationsController extends AppController {
 			}
 
 			$addenumViewAlbaranRelations = $this->AddenumViewAlbaranRelation->find('all',array('conditions'=>$conditionsBl));
+
+			//debug($addenumViewAlbaranRelations);
 
 			foreach ($addenumViewAlbaranRelations as $key => $value) {
 				// code...
