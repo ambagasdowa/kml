@@ -261,9 +261,9 @@ var $mssql_sistemas = array( // connect to remote mssql server
 		'persistent' => false,
 // NOTE connection to production servers
 		'host' => 'IntegraDb2',
-		'login' => 'sa',
+//		'login' => 'sa',
 //		'password' => 'Gst2020#.',
-//		'database' => 'sistemas',
+		'database' => 'sistemas',
 		'port' => '1433',
 
 //		'host' => 'Homedb',
