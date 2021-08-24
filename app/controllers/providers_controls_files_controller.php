@@ -1310,7 +1310,7 @@ class ProvidersControlsFilesController extends AppController {
 
 	function index() {
 		// index-section
-		Configure::write('debug', 2);
+		Configure::write('debug', 0);
 			// $this->ProvidersControlsFile->recursive = 0;
 			// $this->set('providersControlsFiles', $this->paginate());
 		// NOTE File section

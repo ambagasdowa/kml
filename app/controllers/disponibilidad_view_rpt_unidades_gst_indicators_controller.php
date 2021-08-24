@@ -25,6 +25,15 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 
 
 
+	function date_convert($date) {
+		//1. Transform request parameters to MySQL datetime format.
+		$date_return = null;
+		$date_init = new DateTime($date);
+		$start =  $date_init->format('Y-m-d');
+		return $start;
+	}
+
+
 	function get() {
 
 		 Configure::write('debug',0);
@@ -60,9 +69,9 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 				// }
 			}
 		}
-/*
+
 		debug($add_conditions);
-		debug($conditions);
+/*		debug($conditions);
 		debug($condition);
  */
 
@@ -72,6 +81,37 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 			$is_hight = in_array('A',$condition['id_tipo_operacion'],TRUE); 
 	//		var_dump($is_hight);
 		}
+
+//======================================================================================================================
+
+			if (isset($add_conditions['dateini']) && isset($add_conditions['dateend'])){
+				// code for both date
+
+				$conditionsBl = array('DisponibilidadViewRptUnidadesGstIndicator.created BETWEEN ? AND ?'=> array($this->date_convert($add_conditions['dateini']),$this->date_convert($add_conditions['dateend'])));
+
+				$conditionsTf = array('DisponibilidadViewRptGroupGstIndicator.created BETWEEN ? AND ?' =>  array($this->date_convert($add_conditions['dateini']),$this->date_convert($add_conditions['dateend'])));
+
+				$conditionsClass = array('DisponibilidadViewRptGroupClasificationsIndicator.created BEETWEN ? AND ?' =>  array($this->date_convert($add_conditions['dateini']),$this->date_convert($add_conditions['dateend']))); 
+
+			} elseif (isset($add_conditions['dateini']) || isset($add_conditions['dateend'])){
+
+					if( isset($add_conditions['dateini']) ) {
+						$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.created'] = $this->date_convert($add_conditions['dateini']);
+						$conditionsTf['DisponibilidadViewRptGroupGstIndicator.created'] = $this->date_convert($add_conditions['dateini']);
+						$conditionsClass['DisponibilidadViewRptGroupClasificationsIndicator.created'] = $this->date_convert($add_conditions['dateini']);
+					} else {
+						$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.created'] = $this->date_convert($add_conditions['dateend']);
+						$conditionsTf['DisponibilidadViewRptGroupGstIndicator.created'] = $this->date_convert($add_conditions['dateend']);
+						$conditionsClass['DisponibilidadViewRptGroupClasificationsIndicator.created'] = $this->date_convert($add_conditions['dateend']);
+					}
+			} else {
+				// $add_conditions['dateini'] = null;
+				// $add_conditions['dateend'] = null;
+				$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.created'] = $this->date_convert(date('Y-m-d'));
+				$conditionsTf['DisponibilidadViewRptGroupGstIndicator.created'] = $this->date_convert(date('Y-m-d'));
+			  $conditionsClass['DisponibilidadViewRptGroupClasificationsIndicator.created'] = $this->date_convert(date('Y-m-d'));
+			}
+//=====================================================================================================================//
 
 		$this->LoadModel('DisponibilidadViewStatusGstIndicator');
 		$this->LoadModel('DisponibilidadViewRptGroupGstIndicator');
@@ -588,7 +628,7 @@ debug($areas);
 
 
 		if (isset($units_type)) {
-			$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.units_type'] = $units_id[$units_type];
+//			$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.units_type'] = $units_id[$units_type];
 			$conditionsTf['DisponibilidadViewRptGroupGstIndicator.units_type'] = $units_id[$units_type];
 			$conditionsAr['DisponibilidadViewAreaUnit.units_type'] = $units_id[$units_type];
 		}

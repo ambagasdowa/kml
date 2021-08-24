@@ -33,6 +33,6 @@
 ?>
 <?php
 class DisponibilidadViewRptGroupGstIndicator extends AppModel {
-	var $name = 'DisponibilidadViewRptGroupGstIndicator';
+	var $name = 'DisponibilidadMainViewRptGroupGstIndicator';
 	var $useDbConfig = 'mssql_sistemas';
 }
