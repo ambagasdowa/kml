@@ -19,7 +19,7 @@
 // rebuild buttons for exporting options
 options_disponibilidad = {
   "columnDefs": [
-    { "searchable": false, "targets": 1 }
+    { "searchable": false, "targets": [2,14] } // Disable search on columns 
   ],
   buttons: [
        { extend: 'pageLength', text: '<i class="fa fa-filter" aria-hidden="true"></i>' }
@@ -27,14 +27,27 @@ options_disponibilidad = {
           extend: 'copy', text: '<i class="fa fa-clipboard" aria-hidden="true"></i>',
           exportOptions: {
           //   columns: ':visible'
-             columns:[0,2,3,4,5,6,7,8,9,10]
+             columns:[
+                         0    // Area
+                        ,1    // Unidad
+                        ,3    // Status
+                        ,4    // Clasification 
+                        ,5    // Group
+                        ,6    // Operador
+                        ,7    // Remolque
+                        ,8    // Operacion
+                        ,9    // Descripcion
+                        ,10    // FechaCompromiso
+                        ,11   // AreaTaller
+                        ,12,13,14,15
+                     ]
           }
        }
       ,{
          extend: 'csv', text: '<i class="fa fa-file-text"></i>',
          exportOptions: {
          //     columns: ':visible'
-             columns:[0,2,3,4,5,6,7,8,9,10]
+             columns:[0,1,3,4,5,6,7,8,9,10,11,12,13,14,15]
          }
        }
       ,{
@@ -48,7 +61,7 @@ options_disponibilidad = {
           , title:"File"
           ,exportOptions: {
             //  columns: ':visible'
-            columns:[0,2,3,4,5,6,7,8,9,10]
+            columns:[0,1,3,4,5,6,7,8,9,10,11,12,13,14,15]
            }
         }
 
@@ -60,23 +73,25 @@ options_disponibilidad = {
               , filename:"export_file"
               , title:""
               , orientation: 'landscape'
-              ,customize: function ( doc ) {
+              , customize: function ( doc ) {
                                               doc.content.splice( 0, 0, {
                                                   margin: [ 0, 0, 0, 12 ],
                                                   alignment: 'left',
+                                                  fontSize: 9,
                                                   image: imgeHeader
-                                        } );
-                                    }
+                                              });
+                }
               ,exportOptions: {
                // columns: ':visible'
-               columns:[0,2,3,4,5,6,7,8,9,10]
+               columns:[0,1,3,4,6,7,8,9,11,13,15]
               }
        }
 
       ,{
         extend: 'print', text: '<i class="fa fa-print"></i>' ,
         exportOptions: {
-              columns: ':visible'
+             // columns: ':visible'
+              columns:[0,1,3,4,5,6,7,8,9,10,11,12,13,14,15]
           }
        }
 // NOTE end updates 

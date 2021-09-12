@@ -20,4 +20,6 @@
 class DisponibilidadViewRptGroupClasificationsIndicator extends AppModel {
 	var $name = 'DisponibilidadMainViewRptGroupClasificationsIndicator';
 	var $useDbConfig = 'mssql_sistemas';
-}
+	
+
+} // NOTE End Class

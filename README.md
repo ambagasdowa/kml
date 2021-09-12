@@ -1,6 +1,10 @@
 # KML acl_manager
 by Ambagasdowa
 ![Intro Menu](./manual/intro.gif)
+Login in
+![Login](.manual/begin_kml.gif)
+
+
 ### CakePHP version
 CakePHP 1.3.20
 
@@ -10,6 +14,7 @@ CakePHP 1.3.20
 	https://github.com/sams/alaxos_acl/tree/master
 
 CakePHP is a rapid development framework for PHP which uses commonly known design patterns like Active Record, Association Data Mapping, Front Controller and MVC. Our primary goal is to provide a structured framework that enables PHP users at all levels to rapidly develop robust web applications, without any loss to flexibility.
+
 
 ### TODO of KML acl_manager
 

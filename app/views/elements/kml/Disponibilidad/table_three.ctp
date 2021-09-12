@@ -2,20 +2,24 @@
 		<table id="table_det" class="display order-table table table-bordered table-hover table-striped responstable">
 		<thead>
 			<tr>
+				<th><?php echo 'UdN';?></th>
 				<th><?php echo 'Unidad';?></th>
 				<th><?php echo 'Estatus';?></th>
 		    <th class="xts">Status</th>
 		    <th class="xts">Clasification</th>
 		    <th class="xts">Group</th>
 				<!-- <th><?php echo 'Tipo_status';?></th> -->
-				<th><?php echo 'Operador';?></th>
+			<!--	<th><?php echo 'Operador';?></th> -->
 				<th><?php echo 'Remolque';?></th>
 				<!-- <th><?php echo 'Area';?></th> -->
 				<th><?php echo 'Operacion';?></th>
-				<th>Descripci&oacute;n</th>
-				<th><?php echo 'Fecha Compromiso';?></th>
+				<th>Raz&oacute;nRep</th>
 				<th><?php echo 'AreaTaller';?></th>
+				<th>Descripci&oacute;n</th>
+				<th>FechaIngreso</th>
+				<th><?php echo 'Fecha Compromiso';?></th>
 				<th><?php echo 'NoOrden';?></th>
+				<th>DiasEstatus</th>
 				<th><?php echo 'FechaPrometida';?></th>
 				<!-- <th><?php echo 'Status_viaje';?></th> -->
 				<!-- <th><?php echo 'Desc_viaje';?></th> -->
@@ -32,8 +36,10 @@
 		?>
 		<tr id="<?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['unidad'] ?>">
 			<td>
+					<?php	echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['area']; ?>
+			</td>
+			<td>
 						<?php
-									// echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['unidad'];
 									echo
 									$this->Html->link(
 																			$disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['unidad'],
@@ -87,10 +93,11 @@
 			<td class="xts"><?php	echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['clasification_name']; ?></td>
 			<td class="xts"><?php	echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['group_name']; ?></td>
 
-			<td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['operador']; ?></td>
 			<td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['remolque']; ?></td>
 			<!-- <td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['area']; ?>&nbsp;</td> -->
 			<td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['segmento']; ?></td>
+			<td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['desc_taller']; ?></td>
+			<td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['area_taller']; ?></td>
 			<td>
 				<?php
 				if ($disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['iseditable'] == true and $user_mod == true ) {
@@ -119,6 +126,11 @@
 				} else {
 							echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['description'];
 				}
+				?>
+			</td>
+			<td>
+				<?php
+					echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['fecha_ingreso'];
 				?>
 			</td>
 			<td>
@@ -156,8 +168,8 @@
 			<!-- <td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['status_taller']; ?>&nbsp;</td> -->
 			<!-- <td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['desc_taller']; ?>&nbsp;</td> -->
 			<!-- <td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['iseditable']; ?>&nbsp;</td> -->
-			<td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['area_taller']; ?></td>
 			<td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['id_orden']; ?></td>
+			<td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['StatusDays']; ?></td>
 			<td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['fecha_prometida']; ?></td>
 			<th class="xts">1</th>
 		</tr>

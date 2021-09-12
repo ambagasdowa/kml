@@ -38,6 +38,8 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 
 		 Configure::write('debug',0);
 
+	  $this->loadModel('DisponibilidadMainViewCalculateDay');
+
 		$posted = json_decode(base64_decode($this->params['named']['data']),true);
 	//	 debug($posted);
 		$conditions = array();
@@ -87,31 +89,54 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 			if (isset($add_conditions['dateini']) && isset($add_conditions['dateend'])){
 				// code for both date
 
-				$conditionsBl = array('DisponibilidadViewRptUnidadesGstIndicator.created BETWEEN ? AND ?'=> array($this->date_convert($add_conditions['dateini']),$this->date_convert($add_conditions['dateend'])));
-
 				$conditionsTf = array('DisponibilidadViewRptGroupGstIndicator.created BETWEEN ? AND ?' =>  array($this->date_convert($add_conditions['dateini']),$this->date_convert($add_conditions['dateend'])));
 
-				$conditionsClass = array('DisponibilidadViewRptGroupClasificationsIndicator.created BEETWEN ? AND ?' =>  array($this->date_convert($add_conditions['dateini']),$this->date_convert($add_conditions['dateend']))); 
+
+				$conditionsClass = array('DisponibilidadViewRptGroupClasificationsIndicator.created BETWEEN ? AND ?' =>  array($this->date_convert($add_conditions['dateini']),$this->date_convert($add_conditions['dateend'])));
+
+	// NOTE remove this is just for test 
+				$conditionsDisp = array('Disponibilidad.created BETWEEN ? AND ?' =>  array($this->date_convert($add_conditions['dateini']),$this->date_convert($add_conditions['dateend']))); 
+				// NOTE calculate the inner days
+/*
+				$datetime_one = new DateTime($add_conditions['dateini']);
+				$datetime_two = new DateTime($add_conditions['dateend']);
+				$betweendays = $datetime_one -> diff($datetime_two);
+
+				$days = $betweendays->days;
+ */
+				$conditionsDays = array('DisponibilidadMainViewCalculateDay.created BETWEEN ? AND ?' =>  array($this->date_convert($add_conditions['dateini']),$this->date_convert($add_conditions['dateend'])));
+	
+				$cdays = $this->DisponibilidadMainViewCalculateDay->find('all',array('conditions'=>$conditionsDays));
+				$days = count($cdays);
 
 			} elseif (isset($add_conditions['dateini']) || isset($add_conditions['dateend'])){
 
 					if( isset($add_conditions['dateini']) ) {
-						$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.created'] = $this->date_convert($add_conditions['dateini']);
+	//					$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.created'] = $this->date_convert($add_conditions['dateini']);
 						$conditionsTf['DisponibilidadViewRptGroupGstIndicator.created'] = $this->date_convert($add_conditions['dateini']);
 						$conditionsClass['DisponibilidadViewRptGroupClasificationsIndicator.created'] = $this->date_convert($add_conditions['dateini']);
+						$conditionsDisp['Disponibilidad.created'] = $this->date_convert($add_conditions['dateini']);
+						$days = 1;
 					} else {
-						$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.created'] = $this->date_convert($add_conditions['dateend']);
+	//					$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.created'] = $this->date_convert($add_conditions['dateend']);
 						$conditionsTf['DisponibilidadViewRptGroupGstIndicator.created'] = $this->date_convert($add_conditions['dateend']);
 						$conditionsClass['DisponibilidadViewRptGroupClasificationsIndicator.created'] = $this->date_convert($add_conditions['dateend']);
+						$conditionsDisp['Disponibilidad.created'] = $this->date_convert($add_conditions['dateend']);
+						$days = 1;
 					}
 			} else {
 				// $add_conditions['dateini'] = null;
 				// $add_conditions['dateend'] = null;
-				$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.created'] = $this->date_convert(date('Y-m-d'));
+	//			$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.created'] = $this->date_convert(date('Y-m-d'));
 				$conditionsTf['DisponibilidadViewRptGroupGstIndicator.created'] = $this->date_convert(date('Y-m-d'));
-			  $conditionsClass['DisponibilidadViewRptGroupClasificationsIndicator.created'] = $this->date_convert(date('Y-m-d'));
+				$conditionsClass['DisponibilidadViewRptGroupClasificationsIndicator.created'] = $this->date_convert(date('Y-m-d'));
+				$conditionsDisp['Disponibilidad.created'] = $this->date_convert(date('Y-m-d'));
+				$days =1;
 			}
 //=====================================================================================================================//
+
+		$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.created'] = $this->date_convert(date('Y-m-d')); //NOTE the 3rd table is not afected by a hist date range
+
 
 		$this->LoadModel('DisponibilidadViewStatusGstIndicator');
 		$this->LoadModel('DisponibilidadViewRptGroupGstIndicator');
@@ -173,6 +198,7 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 			$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.units_type'] = $units_id[$units_type];
 			$conditionsTf['DisponibilidadViewRptGroupGstIndicator.units_type'] = $units_id[$units_type];
 			$conditionsClass['DisponibilidadViewRptGroupClasificationsIndicator.TipoVehiculo'] = $units_def[$units_type];
+			$conditionsDisp['Disponibilidad.TipoVehiculo'] = $units_def[$units_type]; //NOTE Drop this when finish
 //			$conditionsXt['DisponibilidadViewCrossName.units_type'] = $units_id[$units_type];
 		}/* else {
 			$units_type = 3;
@@ -260,6 +286,7 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 						$conditionsTf['DisponibilidadViewRptGroupGstIndicator.id_area'] = $add_conditions['id_area'];
 						$conditionsXt['DisponibilidadViewCrossName.id_area'] = $add_conditions['id_area']; // NOTE we need to know which area is in 
 						$conditionsClass['DisponibilidadViewRptGroupClasificationsIndicator.id_area'] = $add_conditions['id_area']; // NOTE we need to know which area is in 
+						$conditionsDisp['Disponibilidad.id_area'] = $add_conditions['id_area']; // NOTE we need to know which area is in 
 					}
 /*
 					if (isset($add_conditions['units_type'])) {
@@ -280,18 +307,21 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 											$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.id_flota'] = 1;
 											$conditionsTf['DisponibilidadViewRptGroupGstIndicator.id_flota'] = 1;
 											$conditionsClass['DisponibilidadViewRptGroupClasificationsIndicator.id_flota'] = 1;
+											$conditionsDisp['Disponibilidad.id_flota'] = 1;
 										}							
 										if (in_array('O',$condition['id_tipo_operacion'],TRUE))	{
 											debug('Otherss');
 											$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.id_flota'] = 2;
 											$conditionsTf['DisponibilidadViewRptGroupGstIndicator.id_flota'] = 2;
 											$conditionsClass['DisponibilidadViewRptGroupClasificationsIndicator.id_flota'] = 2;
+											$conditionsDisp['Disponibilidad.id_flota'] = 2;
 										}
 									} else {
 										debug('BY_Tipo de Operacion');
 											$conditionsBl['DisponibilidadViewRptUnidadesGstIndicator.id_tipo_operacion'] = $condition['id_tipo_operacion'];
 											$conditionsTf['DisponibilidadViewRptGroupGstIndicator.id_tipo_operacion'] = $condition['id_tipo_operacion'];   												
 											$conditionsClass['DisponibilidadViewRptGroupClasificationsIndicator.id_tipo_operacion'] = $condition['id_tipo_operacion'];   												
+											$conditionsDisp['Disponibilidad.id_tipo_operacion'] = $condition['id_tipo_operacion'];   												
 									}
 								}
 //NOTE					  when is a letter and can be 3 
@@ -324,7 +354,7 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 					//NOTE Zero Table Section
 					
 //	debug($conditionsBl);
-	debug($conditionsTf);
+//	debug($conditionsTf);
 
 						$disponibilidadViewCrossNames = $this->DisponibilidadViewRptGroupGstIndicator->find('all'
 									,array(
@@ -350,14 +380,86 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 																			,'clasification_name'
 												 )
 									));
-//'DisponibilidadViewRptGroupClasificationsIndicator'
+					//'DisponibilidadViewRptGroupClasificationsIndicator'
+//		debug($conditionsClass);
 
 						$disponibilidadViewClasifications = $this->DisponibilidadViewRptGroupClasificationsIndicator->find('all'
 									,array(
-										 'conditions'=>$conditionsClass
+										'conditions'=>$conditionsClass
+										,'fields'=>array(
+																			 'id_area'
+																			,'area' 
+																			,'id_flota' 
+																			,'id_tipo_operacion'
+																			,'Flota' 
+																			,'TipoVehiculo' 
+																			,'Disponible' 
+																			,'Operando' 
+																			,'Taller' 
+																			,'Gestoria' 
+																			,'Siniestrado' 
+																			,'Robo' 
+																			,'Exhibicion' 
+																			,'Venta' 
+																			,'TotalDisponibilidad'
+																			,'TotalFlota' 
+																			,'DisponibilidadFlota' 
+																			,'FlotaOperando' 
+																			,'Disp_S_Viaje' 
+																			,'Op_FlotaGestoria_Siniestro' 
+																			,'FlotaMtto' 
+//																			,'created' 
+										)
+										 ,'order'=>array('Flota'=>'desc','TipoVehiculo'=>'asc')
+										 ,'group'=>array(
+																			 'id_area'
+																			,'area' 
+																			,'id_flota' 
+																			,'id_tipo_operacion'
+																			,'Flota' 
+																			,'TipoVehiculo' 
+																			,'Disponible' 
+																			,'Operando' 
+																			,'Taller' 
+																			,'Gestoria' 
+																			,'Siniestrado' 
+																			,'Robo' 
+																			,'Exhibicion' 
+																			,'Venta' 
+																			,'TotalDisponibilidad'
+																			,'TotalFlota' 
+																			,'DisponibilidadFlota' 
+																			,'FlotaOperando' 
+																			,'Disp_S_Viaje' 
+																			,'Op_FlotaGestoria_Siniestro' 
+																			,'FlotaMtto' 
+										 )
+									 )
+						);
+
+					$this->loadModel('Disponibilidad');
+
+					debug($conditionsClass);
+
+					debug('days => '.$days);
+
+						$disponibilidad = $this->Disponibilidad->find('all'
+									,array(
+										 'conditions'=>$conditionsDisp
 										,'order'=>array('Flota'=>'desc','TipoVehiculo'=>'asc')
 									 )
 						);
+
+					debug($disponibilidad);
+					
+					
+//	$this->loadModel('DisponibilidadViewRxptGroupClasificationsIndicator');
+
+//	$disponibilidadViewXClasifications = $this->DisponibilidadViewRptGroupClasificationsIndicator->groupClass($conditionsClass);
+
+//  debug($disponibilidadXViewClasifications);
+
+//					debug($this->DisponibilidadViewRptGroupClasificationsIndicator->groupClass($conditionsClass));
 
 
 //NOTE 1st Table Section
@@ -376,8 +478,8 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 						$disponibilidadViewRptUnidadesGstIndicators = $this->DisponibilidadViewRptUnidadesGstIndicator->find('all',array('conditions'=>$conditionsBl));
 				}
 
-				debug($conditionsTf);
-				debug($conditionsBl);
+//				debug($conditionsTf);
+//				debug($conditionsBl);
 
 //debug($disponibilidadViewCrossNames);
 //debug($disponibilidadViewRptGroupGstIndicators);
@@ -398,7 +500,7 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 
 				$fleet = $this->DisponibilidadTblUnidadesClasification->find('list',array('fields'=>array('id','clasification_name')));
 				
-			debug($flotaFirst);
+//			debug($flotaFirst);
 
 				$counting = 0 ;
 
@@ -417,7 +519,7 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 				}
 
 //				debug($dta);
-				debug($units);
+//				debug($units);
 				$totalUnits = array_sum($units)	;
 
 			 $dispCross = $Squema;
@@ -437,6 +539,8 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 				foreach (	$disponibilidadViewRptGraphGstIndicators  as $key => $value) {
 					$disponibilidadViewRptGraphGstIndicators[$key]['DisponibilidadViewRptGroupGstIndicator']['unidades'] = $value[0]['unidades'];
 				}
+
+//debug($disponibilidadViewRptGroupGstIndicators);
 
 		$json_parsing_lv_one = null;
 
@@ -471,7 +575,7 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 
 		$json_parsing_level_one = implode('},{',explode('}{', str_replace ('"[','[', str_replace(']"',']',$json_parsing_lv_one) ) ));
    
-		debug($json_parsing_level_one);
+//		debug($json_parsing_level_one);
 
 		// 	$json_parsing_level_two[$rendViewFullGstCoreIndicator['RendViewFullGstCoreIndicator']['route']][] = json_encode(
 		// 																				array(
@@ -532,7 +636,8 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 	}
 	// $user_mod = false;
 	// $user_mod = true;
-	$user_id = $this->Auth->user('id');
+		$user_id = $this->Auth->user('id');
+/*
 	debug($Squema);
 	debug($tipoOp);
 	debug($dispCross);
@@ -540,10 +645,11 @@ class DisponibilidadViewRptUnidadesGstIndicatorsController extends AppController
 	debug($units);
 
 debug($areas);
-
+ */
+//		debug($disponibilidadViewClasifications);
 	$xareas =	array_flip($areas);
 	
-	debug($xareas);
+//	debug($xareas);
 
 	$this->set(compact(
 											  'disponibilidadViewRptUnidadesGstIndicators'
@@ -559,6 +665,7 @@ debug($areas);
 											 ,'json_parsing_level_one'
 											 ,'disponibilidadViewClasifications'
 											 ,'Squema','dispCross','units','totalUnits','xareas','bssus','operacion','fleet','flotaFirst'
+											 ,'days'
 										)
 						);
 
