@@ -1,6 +1,9 @@
 # KML acl_manager
 by Ambagasdowa
 ![Intro Menu](./manual/intro.gif)
+
+![Login Kml](./manual/begin_kml.gif)
+
 ### CakePHP version
 CakePHP 1.3.20
 
