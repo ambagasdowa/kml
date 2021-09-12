@@ -36,6 +36,13 @@ ribbon menu   **done**
 
   **DONE**
 
+
+###### Units Availability Module
+
+![Availability](./manual/disponibilidad.gif)
+
+
+
 * TODO
 
   > build totalizations
