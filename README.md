@@ -24,7 +24,7 @@ ribbon menu   **done**
 
 #### Projections Module
 
-![Indicadores](./manual/Indicadores.gif)
+![Indicadores](./manual/indicadores.gif)
 
   **DONE**
 
