@@ -38,6 +38,13 @@ ribbon menu   **done**
 
   **DONE**
 
+##### Conciliacion de Casetas IAVE
+
+![Casetas](./manual/booths.gif)
+
+  **DONE**
+
+
 #### Proveedores App
 
 ![Proveedores](./manual/providers.git)
