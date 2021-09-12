@@ -38,6 +38,11 @@ ribbon menu   **done**
 
   **DONE**
 
+#### Proveedores App
+
+![Proveedores](./manual/providers.git)
+**DONE**
+
 
 ###### Units Availability Module
 
