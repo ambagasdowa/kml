@@ -24,6 +24,8 @@ ribbon menu   **done**
 
 #### Projections Module
 
+![Indicadores](./manual/Indicadores.gif)
+
   **DONE**
 
 #### Finances Module
