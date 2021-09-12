@@ -28,7 +28,7 @@ ribbon menu   **done**
 
 #### Finances Module
 
-![Alt Text](./manual/firts.gif)
+![Alt Text](./manual/first.gif)
 
 ###### Pretty Print
 
