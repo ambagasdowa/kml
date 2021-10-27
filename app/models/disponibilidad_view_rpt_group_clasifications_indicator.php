@@ -18,6 +18,8 @@
 ?>
 <?php
 class DisponibilidadViewRptGroupClasificationsIndicator extends AppModel {
-	var $name = 'DisponibilidadViewRptGroupClasificationsIndicator';
+	var $name = 'DisponibilidadMainViewRptGroupClasificationsIndicator';
 	var $useDbConfig = 'mssql_sistemas';
-}
+	
+
+} // NOTE End Class

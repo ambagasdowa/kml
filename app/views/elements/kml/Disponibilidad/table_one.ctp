@@ -44,12 +44,12 @@
 
         <?php if (in_array($areas,$xareas)) { ?>
 
-            <td><?php echo $dispCross[$OperationType][$areas]; ?></td>
+            <td><?php echo $dispCross[$OperationType][$areas]/$days; ?></td>
 
             <td>
                 <?php 
                     if(in_array($OperationType,$flotaFirst)){
-                        $percentage = round(($dispCross[$OperationType][$areas])*100/$totalUnits,2); 
+                        $percentage = round(($dispCross[$OperationType][$areas]/$days)*100/($totalUnits/$days),2); 
                         if ($OperationType == 'Taller' && $percentage > 10.0) {
                             echo '<span style="color:red">' . $percentage . '%</span>'; 
                         } else {

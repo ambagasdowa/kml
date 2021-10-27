@@ -315,6 +315,57 @@
  						echo '</div>';
 
 
+							echo '<div class="two columns input-group">';
+							echo '<div class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></div>';
+							echo
+										$this->Form->input
+																			(
+																				'dateini',
+																				 array
+																							(
+																								'type'=>'text',
+																								'class'=>'datepicker_data u-full-width form-control init-focus',
+																								'id'=>'from',
+																								'placeholder' => 'Flota',
+																								'data-toggle'=> 'datepicker',
+																								'alt'=>'Puede teclear la fecha en Formato yyyymm',
+									                              'title'=>'Puede teclear la fecha en Formato yyyymm',
+																								'div'=>FALSE,
+																								'label'=>FALSE,
+																							//	'options'=> array('1'=>'GRANEL','2'=>'TERCEROS'),
+																							//	'empty' => 'TODO',
+																								// 'options'=> $operacion,
+																								'tabindex'=>'1'
+																							)
+																			);
+							echo '</div>';
+
+							echo '<div class="two columns input-group">';
+							echo '<div class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></div>';
+							echo
+										$this->Form->input
+																			(
+																				'dateend',
+																				 array
+																							(
+																								'type'=>'text',
+																								'class'=>'datepicker_data u-full-width form-control init-focus',
+																								'id'=>'from',
+																								'placeholder' => 'Flota',
+																								'data-toggle'=> 'datepicker',
+																								'alt'=>'Puede teclear la fecha en Formato yyyymm',
+									                              'title'=>'Puede teclear la fecha en Formato yyyymm',
+																								'div'=>FALSE,
+																								'label'=>FALSE,
+																							//	'options'=> array('1'=>'GRANEL','2'=>'TERCEROS'),
+																							//	'empty' => 'TODO',
+																								// 'options'=> $operacion,
+																								'tabindex'=>'1'
+																							)
+																			);
+							echo '</div>';
+
+
 						?>
 
 						<!-- <div class="row"> -->
@@ -389,6 +440,11 @@
 
 	<script type="text/javascript">
 		  $(document).ready(function () {
+
+// NOTE Initialize The calendar
+$('[data-toggle="datepicker"]').datepicker(options_datepicker);
+
+
 
 	/*		 $('a[data-toggle="tab"]').on( 'shown.bs.tab', function (x) {
 					alert('Firsts att');

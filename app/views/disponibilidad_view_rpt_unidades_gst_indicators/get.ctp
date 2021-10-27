@@ -492,7 +492,7 @@ Highcharts.chart('the-chart', {
    text: 'GST'
 	},
   xAxis: {
-		categories: ['Unidades'],
+	categories:  <?php print($json_categories) ?> ,
     tickmarkPlacement: 'on',
     title: {
       enabled: false

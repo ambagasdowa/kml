@@ -17,13 +17,7 @@
 		*/
 ?>
 <?php
-/*
- * NOTE use table with timeline in rpt of units , replacing old view with current data and add new one with current data + historical data , and field created 
- */
-
-
-class DisponibilidadViewRptUnidadesGstIndicator extends AppModel {
-	var $name = 'DisponibilidadMainViewRptUnidadesGstIndicator';
+class DisponibilidadMainViewRptGroupClasificationsIndicator extends AppModel {
+	var $name = 'DisponibilidadMainViewRptGroupClasificationsIndicator';
 	var $useDbConfig = 'mssql_sistemas';
-	var $primaryKey = 'unidad';
 }
