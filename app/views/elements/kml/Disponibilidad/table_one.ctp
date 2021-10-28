@@ -43,13 +43,13 @@
     <?php foreach ($bssus as $areas) { ?>
 
         <?php if (in_array($areas,$xareas)) { ?>
-
-            <td><?php echo $dispCross[$OperationType][$areas]/$days; ?></td>
+            <?php $ndays = round($dispCross[$OperationType][$areas]/$days,0,PHP_ROUND_HALF_UP); ?>
+            <td><?php echo $ndays; ?></td>
 
             <td>
                 <?php 
                     if(in_array($OperationType,$flotaFirst)){
-                        $percentage = round(($dispCross[$OperationType][$areas]/$days)*100/($totalUnits/$days),2); 
+                        $percentage = round(($dispCross[$OperationType][$areas]/$days)*100/($totalUnits/$days),0,PHP_ROUND_HALF_UP); 
                         if ($OperationType == 'Taller' && $percentage > 10.0) {
                             echo '<span style="color:red">' . $percentage . '%</span>'; 
                         } else {
