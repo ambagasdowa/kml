@@ -722,7 +722,29 @@ debug($areas);
 //		debug($disponibilidadViewClasifications);
 	$xareas =	array_flip($areas);
 	
-//	debug($xareas);
+		debug($xareas);
+
+		debug(count($xareas));
+
+ 		 define("LOW",1);
+		 define("MEDIUM", 4);
+		 define("HIGH", 8);
+
+		$level = count($xareas);
+
+
+	  if ( $level > 0 and $level < 2 ) {
+			$stripe = 30;
+			debug('SMALL');
+		} else if ( $level < 4 ) {
+			$stripe = 50;
+			debug('MEDIUM');
+		} else {
+			$stripe = 100;
+			debug('FULL');
+		}
+
+
 		//	NOTE what we need ? an array with all dates , an object with the name clasifications and data with an value for each datetime
 			
 		//	json_categories = [20210801,20210802,20210803]
@@ -745,7 +767,8 @@ debug($areas);
 											 ,'json_categories'
 											 ,'disponibilidadViewClasifications'
 											 ,'Squema','dispCross','units','totalUnits','xareas','bssus','operacion','fleet','flotaFirst'
-											 ,'days'
+											 ,'days'  // counting days
+											 ,'stripe' // width of table_one
 										)
 						);
 

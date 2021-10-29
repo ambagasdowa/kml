@@ -1,5 +1,5 @@
 
-<table id="table_xone" class="display order-table table table-bordered table-hover table-striped responstable" >
+<table id="table_xone" class="display order-table table table-bordered table-hover table-striped responstable" width="<?php echo $stripe ?>%" >
 
     <thead>
         <tr>

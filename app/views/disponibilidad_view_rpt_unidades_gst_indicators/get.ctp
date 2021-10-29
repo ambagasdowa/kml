@@ -151,8 +151,9 @@ echo
 
 <div id="first-datatable-output" class="table-responsive">
 
+	<div style="width: <?php echo $stripe ?>%">
 		<?php echo $this->element('kml/Disponibilidad/table_one');?>
-
+	</div>
 		<?php echo $this->element('kml/Disponibilidad/table_2nd_section');?>
 
 		<?php echo $this->element('kml/Disponibilidad/table_three');?>
