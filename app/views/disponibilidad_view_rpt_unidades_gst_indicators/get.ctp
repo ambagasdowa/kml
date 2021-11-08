@@ -539,7 +539,7 @@ Highcharts.chart('the-chart', {
                 fontFamily: 'Verdana, sans-serif'
             }
       },
-			pointWidth: 50,
+			pointWidth: <?php print($pointWidth) ?>,
 			borderRadius: 5,
       stacking: 'percent',
       lineColor: '#ffffff',

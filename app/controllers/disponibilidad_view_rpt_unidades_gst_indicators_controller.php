@@ -142,7 +142,7 @@ debug($xdateLenght);
 						$conditionsTf['DisponibilidadViewRptGroupGstIndicator.created'] = $this->date_convert($add_conditions['dateend']);
 	//					$conditionsClass['DisponibilidadViewRptGroupClasificationsIndicator.created'] = $this->date_convert($add_conditions['dateend']);
 						$conditionsDisp['Disponibilidad.created'] = $this->date_convert($add_conditions['dateend']);
-						$days = 1;
+						$bdays = $days = 1;
 						$xdateLenght[] =  $this->date_convert($add_conditions['dateend']);
 						$dateLenght = $xdateLenght;
 debug($xdateLenght);
@@ -154,7 +154,7 @@ debug($xdateLenght);
 				$conditionsTf['DisponibilidadViewRptGroupGstIndicator.created'] = $this->date_convert(date('Y-m-d'));
 	//			$conditionsClass['DisponibilidadViewRptGroupClasificationsIndicator.created'] = $this->date_convert(date('Y-m-d'));
 				$conditionsDisp['Disponibilidad.created'] = $this->date_convert(date('Y-m-d'));
-				$days =1;
+				$bdays = $days =1;
 				$xdateLenght[] =  $this->date_convert(date('Y-m-d'));
 				$dateLenght =  $xdateLenght;
 debug($xdateLenght);
@@ -745,6 +745,28 @@ debug($areas);
 		}
 
 
+		$pointWidth = null ;
+
+		if ($bdays > 50 ) {
+			$pointWidth = 5;
+		} else if( $bdays > 40 ) {
+			$pointWidth = 10;
+		} else if ( $bdays > 30 ) {
+			// NOTE from hir we need rotate the labels in the bars 
+			$pointWidth = 20;
+		} else if ( $bdays > 20 ) {
+			$pointWidth = 30 ;
+		} else if ($bdays > 10) {
+			$pointWidth = 40;
+		} else if ( $bdays <= 10 ) {
+			$pointWidth = 50 ; 
+		}
+
+
+
+
+
+
 		//	NOTE what we need ? an array with all dates , an object with the name clasifications and data with an value for each datetime
 			
 		//	json_categories = [20210801,20210802,20210803]
@@ -769,6 +791,7 @@ debug($areas);
 											 ,'Squema','dispCross','units','totalUnits','xareas','bssus','operacion','fleet','flotaFirst'
 											 ,'days'  // counting days
 											 ,'stripe' // width of table_one
+											 ,'pointWidth' // width of graphics bars
 										)
 						);
 
