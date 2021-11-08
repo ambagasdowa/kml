@@ -1,6 +1,7 @@
 
 #ip=192.168.20.235
 ip=10.8.0.235
+odbc_srv='IntegraDb'
 usr='zam'
 pass='lis'
 database='gstdb'
@@ -11,7 +12,7 @@ database='gstdb'
 
 # Define table variable
 
-sqsh -S $ip -U $usr -P $pass -D $database -L bcp_colsep=' ' -m bcp -C " insert into 
+sqsh -S $odbc_srv -U $usr -P $pass -D $database -L bcp_colsep=' ' -m bcp -C " insert into 
                                                                         	sistemas.dbo.disponibilidad_tbl_hist_unidades_gst_indicators
                                                                         	select
                                                                         				 unidad, id_flota, flota, xid_status, xestatus, id_status, estatus, tipo_status, clasification_name
