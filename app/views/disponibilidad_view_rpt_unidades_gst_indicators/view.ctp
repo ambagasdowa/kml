@@ -133,8 +133,9 @@ echo
 		<!-- <div id="chart" class="chart" style="display:none;" > -->
 		<div id="chart" class="chart" >
 					<!-- <div id="the-chart" style="min-width:80%; min-height: 480px; margin: 0 auto"> -->
-					<div id="the-charting" style="display:none; min-width:87%; margin: 0 auto">
+					<div>
 						<!-- graphics -->
+						<h1>Historico de la  Unidad <?php print($hist_unit)?></h1>
 					</div>
 		</div>
 	</div>
@@ -185,7 +186,7 @@ echo
 				<th>Unidad</th>
 				<th>Estatus</th>
 				<th>Descripcion</th>
-				<th>Fecha Compromiso</th>
+				<th>Fecha Cambio</th>
 				<th>Fecha de Creacion</th>
 			</tr>
 		</thead>
@@ -199,7 +200,7 @@ echo
 			<td><?php echo $disponibilidadViewHistoricalGstIndicator['DisponibilidadViewHistoricalGstIndicator']['unidad']; ?></td>
 			<td><?php echo $disponibilidadViewHistoricalGstIndicator['DisponibilidadViewHistoricalGstIndicator']['estatus']; ?></td>
 			<td><?php echo $disponibilidadViewHistoricalGstIndicator['DisponibilidadViewHistoricalGstIndicator']['descripcion']; ?></td>
-			<td><?php echo $disponibilidadViewHistoricalGstIndicator['DisponibilidadViewHistoricalGstIndicator']['compromiso']; ?></td>
+			<td><?php echo $disponibilidadViewHistoricalGstIndicator['DisponibilidadViewHistoricalGstIndicator']['creacion']; ?></td>
 			<td><?php echo $disponibilidadViewHistoricalGstIndicator['DisponibilidadViewHistoricalGstIndicator']['creacion']; ?></td>
 		<?php /*
 			<td>
@@ -383,7 +384,17 @@ $(document).ready(function(){
 	// Historical view mechanism
 	// ================================================================================================================== //
 
-var table_x = $('#table_hist').DataTable();
+//    var table_x = $('#table_hist').DataTable();
+
+			var table_x = $('#table_hist').DataTable(
+				Object.assign( {}
+					, options_datatable
+//				  , calculate_row([1])
+				)
+			 );
+
+
+
 
 // ================================================================================================================== //
 // Historical view mechanism

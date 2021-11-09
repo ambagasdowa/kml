@@ -1069,7 +1069,7 @@ debug($areas);
 
 
 	function view($id = null) {
-		Configure::write('debug',2);
+		Configure::write('debug',0);
 
 		$this->LoadModel('DisponibilidadViewHistoricalGstIndicator');
 		// debug($this->params);
@@ -1100,6 +1100,8 @@ debug($areas);
 		// }
 
 		$conditions['DisponibilidadViewHistoricalGstIndicator.unidad'] = $posted['unidad'];
+
+		$hist_unit = $posted['unidad'];
 		// debug($conditions);
 		$disponibilidadViewHistoricalGstIndicators = $this->DisponibilidadViewHistoricalGstIndicator->find('all',array('conditions'=>$conditions));
 
@@ -1124,7 +1126,7 @@ debug($areas);
 				$json_parsing_level_one = implode('},{',explode('}{',$json_parsing_lv_one));
 // DEBUG:
 // debug($json_parsing_level_one);
-		$this->set(compact('disponibilidadViewHistoricalGstIndicators','json_parsing_level_one'));
+		$this->set(compact('disponibilidadViewHistoricalGstIndicators','json_parsing_level_one','hist_unit'));
 
 		// debug($disponibilidadViewHistoricalGstIndicators);
 
