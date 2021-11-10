@@ -17,7 +17,7 @@
 				<th><?php echo 'AreaTaller';?></th>
 				<th>Descripci&oacute;n</th>
 				<th>FechaIngreso</th>
-				<th><?php echo 'Fecha Compromiso';?></th>
+<!--				<th><?php echo 'Fecha Compromiso';?></th> -->
 				<th><?php echo 'NoOrden';?></th>
 				<th>DiasEstatus</th>
 				<th><?php echo 'FechaPrometida';?></th>
@@ -133,6 +133,8 @@
 					echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['fecha_ingreso'];
 				?>
 			</td>
+
+<!--
 			<td>
 				<?php
 				if ($disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['iseditable'] == true and $user_mod == true ) {
@@ -163,6 +165,8 @@
 				}
 				?>
 			</td>
+-->
+
 			<!-- <td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['status_viaje']; ?>&nbsp;</td> -->
 			<!-- <td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['desc_viaje']; ?>&nbsp;</td> -->
 			<!-- <td><?php echo $disponibilidadViewRptUnidadesGstIndicator['DisponibilidadViewRptUnidadesGstIndicator']['status_taller']; ?>&nbsp;</td> -->

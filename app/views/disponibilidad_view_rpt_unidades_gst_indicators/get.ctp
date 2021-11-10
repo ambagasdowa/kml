@@ -326,10 +326,12 @@ $("#print").on('click',function(e){
 				console.log('comp : ' + comp);
 				console.log('isval : ' + isval);
 
-				if ( (desc === '' || desc === null || desc === undefined) || (comp === '' || comp === null || comp === undefined) ) {
+//				if ( (desc === '' || desc === null || desc === undefined) || (comp === '' || comp === null || comp === undefined) ) {
+				if ( desc === '' || desc === null || desc === undefined )  {
 						// return true
 						console.log('void');
-						alert('descripcion y compromiso son obligatorios');
+//						alert('descripcion y compromiso son obligatorios');
+						alert('el campo descripcion es obligatorios');
 						save = true
 				} else {
 						// return false
